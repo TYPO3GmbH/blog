@@ -13,6 +13,7 @@ namespace TYPO3\CMS\Blog\Domain\Repository;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Blog\Constants;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -21,10 +22,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class PostRepository
 {
-    /**
-     * Named constants for "magic numbers" of the field doktype
-     */
-    const DOKTYPE_BLOG_POST = 137;
 
     /**
      * @var string name of the database table
@@ -46,7 +43,7 @@ class PostRepository
             ->select(['*'])
             ->from($this->table)
             ->where(
-                $queryBuilder->expr()->eq('doktype', PostRepository::DOKTYPE_BLOG_POST)
+                $queryBuilder->expr()->eq('doktype', Constants::DOKTYPE_BLOG_POST)
             )
             ->orderBy('pages.crdate', 'DESC')
             ->setMaxResults($limit)
