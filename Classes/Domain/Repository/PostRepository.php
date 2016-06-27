@@ -14,9 +14,7 @@ namespace TYPO3\CMS\Blog\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Blog\Constants;
-use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -38,7 +36,7 @@ class PostRepository
      *
      * @return array
      */
-    public function findAll(int $limit = 10, int $offset = 0) : array
+    public function findAll($limit = 10, $offset = 0)
     {
         $queryBuilder = $this->getQueryBuilder($this->table);
         return $queryBuilder
@@ -57,9 +55,9 @@ class PostRepository
     /**
      * @param string $table
      *
-     * @return Connection
+     * @return \TYPO3\CMS\Core\Database\Connection
      */
-    protected function getDatabaseConnection(string $table) : Connection
+    protected function getDatabaseConnection($table)
     {
         return GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($table);
     }
@@ -67,9 +65,9 @@ class PostRepository
     /**
      * @param string $table
      *
-     * @return QueryBuilder
+     * @return \TYPO3\CMS\Core\Database\Query\QueryBuilder
      */
-    protected function getQueryBuilder($table) : QueryBuilder
+    protected function getQueryBuilder($table)
     {
         return GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($table);
     }
