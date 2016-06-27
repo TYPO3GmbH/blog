@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-06-27T17:14:25Z" product-name="blog">
+		<header/>
+		<body>
+			<trans-unit id="tx_blog_domain_model_tag" xml:space="preserve">
+				<source>Blog: Tag</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_tag.title" xml:space="preserve">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_tag.description" xml:space="preserve">
+				<source>Description (meta description)</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_tag.content" xml:space="preserve">
+				<source>Content</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_tag.tabs.seo" xml:space="preserve">
+				<source>SEO</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

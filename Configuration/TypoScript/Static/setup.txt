@@ -1,1 +1,8 @@
 # Setup: TYPO3 Blog
+config.tx_extbase.persistence.classes {
+    T3G\AgencyPack\Blog\Domain\Model\Content {
+        mapping {
+            tableName = tt_content
+        }
+    }
+}

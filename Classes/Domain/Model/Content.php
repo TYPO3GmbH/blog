@@ -1,5 +1,5 @@
 <?php
-namespace T3G\AgencyPack\Blog;
+namespace T3G\AgencyPack\Blog\Domain\Model;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -13,14 +13,16 @@ namespace T3G\AgencyPack\Blog;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
- * Class Constants
+ * Class Content
+ *
+ * The additional content for tags and categories.
+ * This model is a representation of the tt_content table and
+ * used to enrich the SEO rating of tag and category pages.
+ * Content can be assigned to blog tags and blog categories.
  */
-class Constants
+class Content extends AbstractEntity
 {
-    /**
-     * Named constants for "magic numbers" of the field doktype
-     */
-    const DOKTYPE_BLOG_POST = 137;
 }
