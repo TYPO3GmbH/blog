@@ -18,6 +18,7 @@ use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
