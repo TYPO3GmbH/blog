@@ -14,61 +14,57 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Constants;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use T3G\AgencyPack\Blog\Domain\Model\Category;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * Class PostRepository
  */
-class PostRepository
+class PostRepository extends Repository
 {
+    /**
+     * @var array
+     */
+    protected $defaultContraints = array();
 
     /**
-     * @var string name of the database table
+     *
      */
-    protected $table = 'pages';
+    public function initializeObject() {
+        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        // don't add the pid constraint
+        $querySettings->setRespectStoragePage(FALSE);
+        $this->setDefaultQuerySettings($querySettings);
 
-    /**
-     * Find all blog posts
-     *
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return array
-     */
-    public function findAll($limit = 10, $offset = 0)
-    {
-        $queryBuilder = $this->getQueryBuilder($this->table);
-        return $queryBuilder
-            ->select(['*'])
-            ->from($this->table)
-            ->where(
-                $queryBuilder->expr()->eq('doktype', Constants::DOKTYPE_BLOG_POST)
-            )
-            ->orderBy('pages.crdate', 'DESC')
-            ->setMaxResults($limit)
-            ->setFirstResult($offset)
-            ->execute()
-            ->fetchAll();
+        $query = $this->createQuery();
+        $this->defaultContraints[] = $query->equals('doktype', Constants::DOKTYPE_BLOG_POST);
+
+        $this->defaultOrderings = array(
+            'crdate' => QueryInterface::ORDER_DESCENDING,
+        );
     }
 
     /**
-     * @param string $table
-     *
-     * @return \TYPO3\CMS\Core\Database\Connection
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    protected function getDatabaseConnection($table)
+    public function findAll()
     {
-        return GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($table);
+        $query = $this->createQuery();
+        return $query->matching($query->logicalAnd($this->defaultContraints))->execute();
     }
 
     /**
-     * @param string $table
+     * @param Category $category
      *
-     * @return \TYPO3\CMS\Core\Database\Query\QueryBuilder
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    protected function getQueryBuilder($table)
+    public function findAllByCategory(Category $category)
     {
-        return GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($table);
+        $query = $this->createQuery();
+        $contraints = $this->defaultContraints;
+        $contraints[] = $query->contains('categories', $category);
+        return $query->matching($query->logicalAnd($contraints))->execute();
     }
 }

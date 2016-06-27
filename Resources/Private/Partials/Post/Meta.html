@@ -1,0 +1,14 @@
+<div class="meta">
+    <f:if condition="{post.categories}">
+        <p>Categories:
+            <f:for each="{post.categories}" as="postCategory">
+                <f:link.action action="listPostsByCategory" arguments="{category: postCategory}">{postCategory.title}</f:link.action>
+            </f:for></p>
+    </f:if>
+    <f:if condition="{post.tags}">
+        <p>Tags:
+            <f:for each="{post.tags}" as="tag">
+                <f:link.action action="listPostsByTag" arguments="{tag: tag}">{tag.title}</f:link.action>
+            </f:for></p>
+    </f:if>
+</div>

@@ -1,0 +1,8 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+    <h1><f:link.action action="show" arguments="{post: post}">{post.title}</f:link.action></h1>
+    <f:render partial="Post/Meta" arguments="{_all}" />
+
+    <!-- CONTENT HERE -->
+</f:section>
