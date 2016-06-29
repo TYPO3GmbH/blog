@@ -29,8 +29,16 @@ CREATE TABLE tx_blog_domain_model_tag (
 );
 
 #
+# Table structure for table 'sys_category'
+#
+CREATE TABLE sys_category (
+  content text
+);
+
+#
 # Table structure for table 'tt_content'
 #
 CREATE TABLE tt_content (
   tx_blog_tag_content int(11) DEFAULT '0' NOT NULL,
+  tx_blog_category_content int(11) DEFAULT '0' NOT NULL,
 );
