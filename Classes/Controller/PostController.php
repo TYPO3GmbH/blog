@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\CMS\Blog\Controller;
+namespace T3G\AgencyPack\Blog\Controller;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -14,6 +14,7 @@ namespace TYPO3\CMS\Blog\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -33,9 +34,9 @@ class PostController extends ActionController
     /**
      * Show a list of posts by given tag
      *
-     * @param $tag
+     * @param \T3G\AgencyPack\Blog\Domain\Model\Tag $tag
      */
-    public function listPostsByTag($tag)
+    public function listPostsByTag(Tag $tag)
     {
     }
 

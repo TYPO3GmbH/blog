@@ -5,7 +5,7 @@ call_user_func(
     function ($extKey, $table) {
         $extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($extKey);
         $customPageIcon = $extRelPath . 'Resources/Public/Icons/apps-pagetree-blog-post.svg';
-        $blogDocType = \TYPO3\CMS\Blog\Constants::DOKTYPE_BLOG_POST;
+        $blogDocType = \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST;
 
         // Add new page type as possible select item:
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(

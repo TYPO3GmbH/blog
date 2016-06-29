@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\CMS\Blog\Domain\Repository;
+namespace T3G\AgencyPack\Blog\Domain\Repository;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -13,7 +13,7 @@ namespace TYPO3\CMS\Blog\Domain\Repository;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Blog\Constants;
+use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

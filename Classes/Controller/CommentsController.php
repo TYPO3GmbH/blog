@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\CMS\Blog\Controller;
+namespace T3G\AgencyPack\Blog\Controller;
 
 /*
  * This file is part of the TYPO3 CMS project.

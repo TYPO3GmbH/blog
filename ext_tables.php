@@ -2,7 +2,7 @@
 
 call_user_func(
     function () {
-        $blogDocType = \TYPO3\CMS\Blog\Constants::DOKTYPE_BLOG_POST;
+        $blogDocType = \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST;
 
         // Add new page type:
         $GLOBALS['PAGES_TYPES'][$blogDocType] = [
