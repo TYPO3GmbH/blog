@@ -42,3 +42,24 @@ CREATE TABLE tt_content (
   tx_blog_tag_content int(11) DEFAULT '0' NOT NULL,
   tx_blog_category_content int(11) DEFAULT '0' NOT NULL,
 );
+
+#
+# Table structure for table 'tx_blog_domain_model_comment'
+#
+CREATE TABLE tx_blog_domain_model_comment (
+  uid int(11) NOT NULL auto_increment,
+  pid int(11) DEFAULT '0' NOT NULL,
+  tstamp int(11) DEFAULT '0' NOT NULL,
+  crdate int(11) DEFAULT '0' NOT NULL,
+  cruser_id int(11) DEFAULT '0' NOT NULL,
+  sorting int(11) DEFAULT '0' NOT NULL,
+  deleted tinyint(4) DEFAULT '0' NOT NULL,
+  hidden tinyint(4) DEFAULT '0' NOT NULL,
+  author int(11) DEFAULT '0' NOT NULL,
+  name varchar(100) DEFAULT '' NOT NULL,
+  email varchar(255) DEFAULT '' NOT NULL,
+  comment text,
+
+  PRIMARY KEY (uid),
+  KEY parent (pid)
+);
