@@ -18,6 +18,12 @@
 			<trans-unit id="tx_blog_domain_model_tag.tabs.seo" xml:space="preserve">
 				<source>SEO</source>
 			</trans-unit>
+			<trans-unit id="sys_category.content" xml:space="preserve">
+				<source>Content</source>
+			</trans-unit>
+			<trans-unit id="sys_category.tabs.seo" xml:space="preserve">
+				<source>SEO</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
