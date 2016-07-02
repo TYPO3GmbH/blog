@@ -3,6 +3,21 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2016-06-27T17:14:25Z" product-name="blog">
 		<header/>
 		<body>
+			<trans-unit id="tx_blog_domain_model_comment" xml:space="preserve">
+				<source>Blog: Comment</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.author" xml:space="preserve">
+				<source>Author (FE-User)</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.email" xml:space="preserve">
+				<source>E-Mail</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.comment" xml:space="preserve">
+				<source>Comment</source>
+			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_tag" xml:space="preserve">
 				<source>Blog: Tag</source>
 			</trans-unit>
