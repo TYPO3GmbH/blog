@@ -15,6 +15,8 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
  */
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
+use T3G\AgencyPack\Blog\Domain\Model\Post;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -67,5 +69,14 @@ class PostRepository extends Repository
         $contraints = $this->defaultContraints;
         $contraints[] = $query->contains('categories', $category);
         return $query->matching($query->logicalAnd($contraints))->execute();
+    }
+
+    /**
+     * @return Post
+     */
+    public function findCurrentPost()
+    {
+        $pageId = (int)GeneralUtility::_GP('id');
+        return $this->findByUid($pageId);
     }
 }

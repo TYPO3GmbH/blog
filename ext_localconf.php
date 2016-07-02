@@ -22,6 +22,17 @@ if (!defined('TYPO3_MODE')) {
     )
 );
 
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'T3G.AgencyPack.Blog',
+    'Meta',
+    array(
+        'Post' => 'metadata',
+    ),
+    array(
+    )
+);
+
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'T3G.AgencyPack.Blog',
     'RecentPostsWidget',

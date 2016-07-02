@@ -30,10 +30,15 @@ call_user_func(
             'Posts',
             'Blog: List of posts'
         );
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-            'T3G.AgencyPack.Blog',
-            'Sidebar',
-            'Blog: Sidebar'
-        );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
+        'Sidebar',
+        'Blog: Sidebar'
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
+        'Metadata',
+        'Blog: Metadata'
+    );
     }
 );

@@ -69,8 +69,19 @@ class PostController extends ActionController
         $this->view->assign('category', $category);
     }
 
+    /**
+     * Sidebar action
+     */
     public function sidebarAction()
     {
+    }
+
+    /**
+     * Metadata action: output meta information of blog post
+     */
+    public function metadataAction()
+    {
+        $this->view->assign('post', $this->postRepository->findCurrentPost());
     }
 
     /**
