@@ -1,0 +1,27 @@
+{
+  "name": "T3G/blog",
+  "description": "blog extension",
+  "minimum-stability": "dev",
+  "type": "typo3-cms-extension",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "TYPO3 GmbH",
+      "role": "Developer",
+      "homepage": "http://typo3.com/"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "T3G\\AgencyPack\\Blog\\": "Classes/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "T3G\\AgencyPack\\Blog\\Tests\\": "Tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.4.6"
+  }
+}
