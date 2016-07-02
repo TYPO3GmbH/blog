@@ -15,7 +15,9 @@ namespace T3G\AgencyPack\Blog\Controller;
  */
 
 use T3G\AgencyPack\Blog\Domain\Model\Category;
+use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
+use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -25,10 +27,24 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class PostController extends ActionController
 {
     /**
+     * @var PostRepository
+     */
+    protected $postRepository;
+
+    /**
+     * @param PostRepository $postRepository
+     */
+    public function injectPostRepository(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
+    /**
      * Show a list of recent posts
      */
     public function listRecentPostsAction()
     {
+        $this->view->assign('posts', $this->postRepository->findAll());
     }
 
     /**
@@ -36,7 +52,7 @@ class PostController extends ActionController
      *
      * @param \T3G\AgencyPack\Blog\Domain\Model\Tag $tag
      */
-    public function listPostsByTag(Tag $tag)
+    public function listPostsByTagAction(Tag $tag)
     {
     }
 
@@ -44,17 +60,34 @@ class PostController extends ActionController
      * Show a list of posts by given category
      *
      * @param Category $category
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPostsByCategory(Category $category)
+    public function listPostsByCategoryAction(Category $category)
+    {
+        $this->view->assign('posts', $this->postRepository->findAllByCategory($category));
+        $this->view->assign('category', $category);
+    }
+
+    public function sidebarAction()
     {
     }
 
     /**
-     * Search for posts
      *
-     * @param Object $demand
      */
-    public function searchAction($demand = null)
+    public function widgetRecentPostsAction()
     {
+        $this->view->assign('posts', $this->postRepository->findAll());
+    }
+
+    /**
+     * Show single post
+     *
+     * @param Post $post
+     */
+    public function showAction(Post $post)
+    {
+        $this->view->assign('post', $post);
     }
 }

@@ -24,5 +24,16 @@ call_user_func(
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
             'options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . $blogDocType . ')'
         );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'T3G.AgencyPack.Blog',
+            'Posts',
+            'Blog: List of posts'
+        );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'T3G.AgencyPack.Blog',
+            'Sidebar',
+            'Blog: Sidebar'
+        );
     }
 );

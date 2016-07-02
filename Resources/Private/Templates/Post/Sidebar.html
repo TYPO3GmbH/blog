@@ -1,0 +1,8 @@
+<f:layout name="Default" xmlns:f="http://www.w3.org/1999/html"/>
+
+<f:section name="content">
+    <h2>Sidebar</h2>
+    <f:for each="{settings.sidebarWidgets}" as="widget">
+        <f:cObject typoscriptObjectPath="{widget}" />
+    </f:for>
+</f:section>

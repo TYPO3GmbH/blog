@@ -1,8 +1,10 @@
 # Setup: TYPO3 Blog
-config.tx_extbase.persistence.classes {
-    T3G\AgencyPack\Blog\Domain\Model\Content {
-        mapping {
-            tableName = tt_content
+plugin.tx_blog {
+    settings {
+        sidebarWidgets {
+            10 = tt_content.list.20.blog_recentpostswidget
+            #20 = tt_content.list.20.blog_recentcommentswidget
+            #30 = tt_content.list.20.blog_tagswidget
         }
     }
 }
