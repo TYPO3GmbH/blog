@@ -18,7 +18,6 @@ use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
-use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -61,6 +60,8 @@ class PostController extends ActionController
      * Show a list of posts by given category
      *
      * @param Category $category
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function listPostsByCategoryAction(Category $category)
     {
@@ -68,6 +69,13 @@ class PostController extends ActionController
         $this->view->assign('category', $category);
     }
 
+    public function sidebarAction()
+    {
+    }
+
+    /**
+     *
+     */
     public function widgetRecentPostsAction()
     {
         $this->view->assign('posts', $this->postRepository->findAll());

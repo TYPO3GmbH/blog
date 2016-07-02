@@ -1,5 +1,5 @@
 <div class="post">
-    <h2><f:link.action action="show" arguments="{post: post}">{post.title}</f:link.action></h2>
+    <h2><f:link.page pageUid="{post.uid}">{post.title}</f:link.page></h2>
     <f:render partial="Post/Meta" arguments="{_all}" />
     <f:if condition="{post.abstract}">
         <f:then>

@@ -59,6 +59,7 @@ class PostRepository extends Repository
      * @param Category $category
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function findAllByCategory(Category $category)
     {
