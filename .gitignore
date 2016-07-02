@@ -1,2 +1,6 @@
 # PHPStorm
 .idea
+
+# OSX
+*.DS_Store
+
