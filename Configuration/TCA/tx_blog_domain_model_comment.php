@@ -16,7 +16,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog/Resources/Public/Icons/tx_blog_domain_model_comment.png',
+        'iconfile' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment.svg',
         'searchFields' => 'uid,comment,name,email',
     ],
     'interface' => [
