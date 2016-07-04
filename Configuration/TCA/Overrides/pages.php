@@ -29,7 +29,34 @@ call_user_func(
                         $blogDocType => 'apps-pagetree-blog-post',
                     ],
                 ],
+                'types' => [
+                    (string)\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
+                    => $GLOBALS['TCA']['pages']['types'][\TYPO3\CMS\Frontend\Page\PageRepository::DOKTYPE_DEFAULT]
+                ]
             ]
+        );
+
+
+        $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
+        $temporaryColumns = array (
+            'comments_active' => [
+                'exclude' => 1,
+                'label' => $ll . 'pages.comments_active',
+                'config' => [
+                    'type' => 'check',
+                    'default' => '1',
+                ]
+            ],
+        );
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
+            'pages',
+            $temporaryColumns
+        );
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+            'pages',
+            '--div--;' . $ll . 'pages.tabs.blog, comments_active',
+            (string)\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
     },
     'blog',
