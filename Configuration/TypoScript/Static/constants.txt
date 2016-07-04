@@ -1,1 +1,2 @@
 # Constants: TYPO3 Blog
+plugin.tx_blog.settings.blogUid = 0
