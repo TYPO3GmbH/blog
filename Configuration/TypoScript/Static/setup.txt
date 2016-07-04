@@ -11,6 +11,12 @@ plugin.tx_blog {
             #20 = tt_content.list.20.blog_recentcommentswidget
             #30 = tt_content.list.20.blog_tagswidget
         }
+        comments {
+            # comments active in general or not
+            active = 1
+            # comments moderation mode, 0 = no moderation, 1 = moderation active
+            moderation = 0
+        }
     }
     pageInfo.title = TEXT
     pageInfo.title {

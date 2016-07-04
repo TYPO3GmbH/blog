@@ -22,29 +22,46 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class Post extends AbstractEntity
 {
     /**
+     * The blog post title
+     *
      * @var string
      */
     protected $title;
 
     /**
+     * The blog post abstract (SEO, list if not empty)
+     *
      * @var string
      */
     protected $abstract;
 
     /**
+     * The blog post description (SEO, list if not empty)
+     *
      * @var string
      */
     protected $description;
 
     /**
+     * The blog post creation date
+     *
      * @var \DateTime
      */
     protected $crdate;
 
     /**
+     * The blog post categories
+     *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Category>
      */
     protected $categories;
+
+    /**
+     * Comments active flag for this blog post
+     *
+     * @var bool
+     */
+    protected $commentsActive;
 
     /**
      * Post constructor.
@@ -168,5 +185,21 @@ class Post extends AbstractEntity
     {
         $this->crdate = $crdate;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCommentsActive()
+    {
+        return $this->commentsActive;
+    }
+
+    /**
+     * @param bool $commentsActive
+     */
+    public function setCommentsActive($commentsActive)
+    {
+        $this->commentsActive = $commentsActive;
     }
 }

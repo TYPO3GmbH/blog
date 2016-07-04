@@ -3,6 +3,12 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2016-06-27T17:14:25Z" product-name="blog">
 		<header/>
 		<body>
+			<trans-unit id="pages.comments_active" xml:space="preserve">
+				<source>Comments enabled</source>
+			</trans-unit>
+			<trans-unit id="pages.tabs.blog" xml:space="preserve">
+				<source>Blog</source>
+			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_comment" xml:space="preserve">
 				<source>Blog: Comment</source>
 			</trans-unit>

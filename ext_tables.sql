@@ -63,3 +63,18 @@ CREATE TABLE tx_blog_domain_model_comment (
   PRIMARY KEY (uid),
   KEY parent (pid)
 );
+
+#
+# Table structure for table 'pages'
+#
+CREATE TABLE pages (
+  comments_active tinyint(4) DEFAULT '1' NOT NULL,
+);
+
+#
+# Table structure for table 'pages_language_overlay'
+#
+CREATE TABLE pages_language_overlay (
+  comments_active tinyint(4) DEFAULT '1' NOT NULL,
+);
+
