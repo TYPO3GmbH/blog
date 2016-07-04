@@ -1,0 +1,20 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+
+<div class="media comment comment-wrap">
+    <div class="media-left">
+        <div class="comment-avatar">
+            <blog:gravatar email="{comment.email}" />
+        </div>
+    </div>
+    <div class="media-body">
+        <f:if condition="{comment.url}">
+            <f:then>
+                <cite class="fn"><f:link.external uri="{comment.url}" target="_blank" rel="external nofollow" class="url">{comment.name}</f:link.external></cite>
+            </f:then>
+            <f:else>
+                <cite class="fn">{comment.name}</cite>
+            </f:else>
+        </f:if>
+        <p>{comment.comment}</p>
+    </div>
+</div>

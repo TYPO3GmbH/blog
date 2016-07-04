@@ -103,7 +103,7 @@ class Tag extends AbstractEntity
      */
     public function getContentElementUidList()
     {
-        $uidList = array();
+        $uidList = [];
         $contentElements = $this->getContent();
         if ($contentElements) {
             foreach ($contentElements as $contentElement) {

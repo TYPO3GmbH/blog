@@ -1,0 +1,13 @@
+<f:if condition="{post}">
+    <h3 class="comment-title"><f:translate key="headline.comments" /></h3>
+    <f:if condition="{post.comments}">
+        <f:then>
+            <f:for each="{post.comments}" as="comment">
+                <f:render partial="Comments/Comment" arguments="{comment: comment}" />
+            </f:for>
+        </f:then>
+        <f:else>
+            <p><f:translate key="message.no_comments" /></p>
+        </f:else>
+    </f:if>
+</f:if>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-04T17:14:25Z" product-name="blog">
+		<header/>
+		<body>
+			<trans-unit id="headline.commentform" xml:space="preserve">
+				<source>Write comment</source>
+			</trans-unit>
+			<trans-unit id="headline.comments" xml:space="preserve">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="form.comment.name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="form.comment.email" xml:space="preserve">
+				<source>E-Mail</source>
+			</trans-unit>
+			<trans-unit id="form.comment.comment" xml:space="preserve">
+				<source>Comment</source>
+			</trans-unit>
+			<trans-unit id="form.comment.submit" xml:space="preserve">
+				<source>Submit</source>
+			</trans-unit>
+			<trans-unit id="message.no_comments" xml:space="preserve">
+				<source>no comments</source>
+			</trans-unit>
+			<trans-unit id="message.comments_closed" xml:space="preserve">
+				<source>comments closed</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.error.title" xml:space="preserve">
+				<source>Comments not active</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.error.text" xml:space="preserve">
+				<source>The comment function is disabled.</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.success.title" xml:space="preserve">
+				<source>Comment added</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.success.text" xml:space="preserve">
+				<source>Your comment was added successfully.</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.moderation.title" xml:space="preserve">
+				<source>Comment added</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.moderation.text" xml:space="preserve">
+				<source>Your comment was added successfully and is now waiting for approval.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

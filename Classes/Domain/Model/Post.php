@@ -64,19 +64,19 @@ class Post extends AbstractEntity
     protected $commentsActive;
 
     /**
+     * Comments of the blog post
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Comment>
+     */
+    protected $comments;
+
+    /**
      * Post constructor.
      */
     public function __construct()
     {
-        $this->initObjectStorage();
-    }
-
-    /**
-     * init object storages
-     */
-    public function initObjectStorage()
-    {
         $this->categories = new ObjectStorage();
+        $this->comments = new ObjectStorage();
     }
 
     /**
@@ -201,5 +201,43 @@ class Post extends AbstractEntity
     public function setCommentsActive($commentsActive)
     {
         $this->commentsActive = $commentsActive;
+    }
+
+    /**
+     * @return ObjectStorage
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param ObjectStorage $comments
+     * @return $this
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+        return $this;
+    }
+
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments->attach($comment);
+        return $this;
+    }
+
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->detach($comment);
+        return $this;
     }
 }

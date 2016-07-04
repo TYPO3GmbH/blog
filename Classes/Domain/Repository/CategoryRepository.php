@@ -43,8 +43,8 @@ class CategoryRepository extends Repository
         $querySettings->setStoragePageIds(GeneralUtility::trimExplode(',', $settings['storagePid']));
 
         $this->setDefaultQuerySettings($querySettings);
-        $this->defaultOrderings = array(
+        $this->defaultOrderings = [
             'title' => QueryInterface::ORDER_ASCENDING,
-        );
+        ];
     }
 }

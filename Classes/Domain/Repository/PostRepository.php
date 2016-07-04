@@ -29,23 +29,24 @@ class PostRepository extends Repository
     /**
      * @var array
      */
-    protected $defaultContraints = array();
+    protected $defaultContraints = [];
 
     /**
      *
      */
-    public function initializeObject() {
+    public function initializeObject()
+    {
         $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
         // don't add the pid constraint
-        $querySettings->setRespectStoragePage(FALSE);
+        $querySettings->setRespectStoragePage(false);
         $this->setDefaultQuerySettings($querySettings);
 
         $query = $this->createQuery();
         $this->defaultContraints[] = $query->equals('doktype', Constants::DOKTYPE_BLOG_POST);
 
-        $this->defaultOrderings = array(
+        $this->defaultOrderings = [
             'crdate' => QueryInterface::ORDER_DESCENDING,
-        );
+        ];
     }
 
     /**
@@ -77,6 +78,9 @@ class PostRepository extends Repository
     public function findCurrentPost()
     {
         $pageId = (int)GeneralUtility::_GP('id');
-        return $this->findByUid($pageId);
+        $query = $this->createQuery();
+        $contraints = $this->defaultContraints;
+        $contraints[] = $query->equals('uid', $pageId);
+        return $query->matching($query->logicalAnd($contraints))->execute()->getFirst();
     }
 }

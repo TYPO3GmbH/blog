@@ -1,5 +1,5 @@
 <?php
-namespace T3G\AgencyPack\Blog\Controller;
+namespace T3G\AgencyPack\Blog\Domain\Repository;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -13,26 +13,21 @@ namespace T3G\AgencyPack\Blog\Controller;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * Comments frontend
- *
+ * Class CommentRepository
  */
-class CommentsController extends ActionController
+class CommentRepository extends Repository
 {
     /**
-     * Show a list of blog comments
+     *
      */
-    public function listCommentsAction()
+    public function initializeObject()
     {
-    }
-
-    /**
-     * Show a list of post comments
-     */
-    public function postCommentsAction()
-    {
+        $this->defaultOrderings = [
+            'crdate' => QueryInterface::ORDER_DESCENDING,
+        ];
     }
 }

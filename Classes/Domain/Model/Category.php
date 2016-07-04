@@ -14,6 +14,7 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
 /**
  * Class Category
@@ -129,7 +130,7 @@ class Category extends AbstractEntity
      */
     public function getParent()
     {
-        if ($this->parent instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
+        if ($this->parent instanceof LazyLoadingProxy) {
             $this->parent->_loadRealInstance();
         }
         return $this->parent;
@@ -138,11 +139,11 @@ class Category extends AbstractEntity
     /**
      * Sets the parent category.
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $parent the parent category
+     * @param \T3G\AgencyPack\Blog\Domain\Model\Category $parent the parent category
      * @return void
      * @api
      */
-    public function setParent(\TYPO3\CMS\Extbase\Domain\Model\Category $parent)
+    public function setParent(Category $parent)
     {
         $this->parent = $parent;
     }
@@ -170,7 +171,7 @@ class Category extends AbstractEntity
      */
     public function getContentElementUidList()
     {
-        $uidList = array();
+        $uidList = [];
         $contentElements = $this->getContent();
         if ($contentElements) {
             foreach ($contentElements as $contentElement) {

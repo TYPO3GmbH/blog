@@ -22,12 +22,12 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  * This model is a representation of the comment table.
  * Comments can be assigned to blog posts.
  */
-class Comments extends AbstractEntity
+class Comment extends AbstractEntity
 {
     /**
      * The author of the comment
      *
-     * @var FrontendUser
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
     protected $author;
 
@@ -46,11 +46,28 @@ class Comments extends AbstractEntity
     protected $email;
 
     /**
+     * The url of the comment author
+     *
+     * @var string
+     */
+    protected $url;
+
+    /**
      * The comment text
      *
      * @var string
      */
     protected $comment;
+
+    /**
+     * @var int
+     */
+    protected $hidden;
+
+    /**
+     * @var \T3G\AgencyPack\Blog\Domain\Model\Post
+     */
+    protected $post;
 
     /**
      * @return FrontendUser
@@ -62,10 +79,12 @@ class Comments extends AbstractEntity
 
     /**
      * @param FrontendUser $author
+     * @return Comment
      */
     public function setAuthor($author)
     {
         $this->author = $author;
+        return $this;
     }
 
     /**
@@ -78,10 +97,12 @@ class Comments extends AbstractEntity
 
     /**
      * @param string $name
+     * @return Comment
      */
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
@@ -94,10 +115,12 @@ class Comments extends AbstractEntity
 
     /**
      * @param string $email
+     * @return Comment
      */
     public function setEmail($email)
     {
         $this->email = $email;
+        return $this;
     }
 
     /**
@@ -110,9 +133,65 @@ class Comments extends AbstractEntity
 
     /**
      * @param string $comment
+     * @return Comment
      */
     public function setComment($comment)
     {
         $this->comment = $comment;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHidden()
+    {
+        return $this->hidden;
+    }
+
+    /**
+     * @param int $hidden
+     * @return Comment
+     */
+    public function setHidden($hidden)
+    {
+        $this->hidden = $hidden;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     * @return Comment
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+        return $this;
+    }
+
+    /**
+     * @return Post
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    /**
+     * @param Post $post
+     * @return Comment
+     */
+    public function setPost(Post $post)
+    {
+        $this->post = $post;
+        return $this;
     }
 }

@@ -49,6 +49,7 @@ return [
                 'default' => 0
             ]
         ],
+        // author not implemented yet
         'author' => [
             'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_comment.author',
@@ -60,11 +61,11 @@ return [
                 'maxitems' => '1',
                 'minitems' => '0',
                 'show_thumbs' => '0',
-                'wizards' => array(
-                    'suggest' => array(
+                'wizards' => [
+                    'suggest' => [
                         'type' => 'suggest',
-                    ),
-                ),
+                    ],
+                ],
             ]
         ],
         'name' => [
@@ -74,6 +75,15 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => '',
+            ]
+        ],
+        'url' => [
+            'exclude' => 0,
+            'label' => $ll . 'tx_blog_domain_model_comment.url',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'www',
             ]
         ],
         'email' => [
@@ -94,10 +104,20 @@ return [
                 'eval' => '',
             ]
         ],
+        'parentid' => [
+            'config' => [
+                'type' => 'passthrough',
+            ]
+        ],
+        'parenttable' => [
+            'config' => [
+                'type' => 'passthrough',
+            ]
+        ],
     ],
     'types' => [
         0 => [
-            'showitem' => 'author,name,email,comment'
+            'showitem' => 'name,url,email,comment'
         ]
     ],
     'palettes' => [

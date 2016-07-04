@@ -6,6 +6,9 @@
 			<trans-unit id="pages.comments_active" xml:space="preserve">
 				<source>Comments enabled</source>
 			</trans-unit>
+			<trans-unit id="pages.comments" xml:space="preserve">
+				<source>Comments</source>
+			</trans-unit>
 			<trans-unit id="pages.tabs.blog" xml:space="preserve">
 				<source>Blog</source>
 			</trans-unit>
@@ -17,6 +20,9 @@
 			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_comment.name" xml:space="preserve">
 				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.url" xml:space="preserve">
+				<source>URL</source>
 			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_comment.email" xml:space="preserve">
 				<source>E-Mail</source>
