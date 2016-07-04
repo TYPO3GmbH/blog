@@ -17,6 +17,7 @@ namespace T3G\AgencyPack\Blog\Controller;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
+use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -27,9 +28,22 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class PostController extends ActionController
 {
     /**
+     * @var CategoryRepository
+     */
+    protected $categoryRepository;
+
+    /**
      * @var PostRepository
      */
     protected $postRepository;
+
+    /**
+     * @param CategoryRepository $categoryRepository
+     */
+    public function injectCategoryRepository(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
     /**
      * @param PostRepository $postRepository
@@ -82,6 +96,14 @@ class PostController extends ActionController
     public function metadataAction()
     {
         $this->view->assign('post', $this->postRepository->findCurrentPost());
+    }
+
+    /**
+     *
+     */
+    public function widgetCategoriesAction()
+    {
+        $this->view->assign('categories', $this->categoryRepository->findAll());
     }
 
     /**

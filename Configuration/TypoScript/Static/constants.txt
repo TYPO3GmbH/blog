@@ -1,2 +1,4 @@
-# Constants: TYPO3 Blog
+# Constants: TYPO3 Blog uid
 plugin.tx_blog.settings.blogUid = 0
+# Constants: TYPO3 Blog storage pid
+plugin.tx_blog.persistence.storagePid = 0

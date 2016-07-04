@@ -1,7 +1,7 @@
 <f:layout name="Widget" />
 
 <f:section name="content">
-    <h3>Recent Posts</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <f:for each="{posts}" as="post">
         <h4><f:link.page pageUid="{post.uid}">{post.title}</f:link.page></h4>
         <p><f:format.date format="d.m.Y - H:i:s">{post.crdate}</f:format.date></p>
