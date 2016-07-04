@@ -33,11 +33,22 @@ if (!defined('TYPO3_MODE')) {
     )
 );
 
+// Widgets
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'T3G.AgencyPack.Blog',
     'RecentPostsWidget',
     array(
         'Post' => 'widgetRecentPosts',
+    ),
+    array(
+    )
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'T3G.AgencyPack.Blog',
+    'CategoryWidget',
+    array(
+        'Post' => 'widgetCategories',
     ),
     array(
     )

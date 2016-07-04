@@ -1,19 +1,22 @@
-config.tx_extbase.persistence.classes {
-    T3G\AgencyPack\Blog\Domain\Model\Content {
-        mapping {
-            tableName = tt_content
+config.tx_extbase.persistence {
+    storagePid = {$plugin.tx_blog.persistence.storagePid}
+    classes {
+        T3G\AgencyPack\Blog\Domain\Model\Content {
+            mapping {
+                tableName = tt_content
+            }
         }
-    }
-    T3G\AgencyPack\Blog\Domain\Model\Post {
-        mapping {
-            tableName = pages
-            dokype = 137
-            columns.crdate.mapOnProperty = crdate
+        T3G\AgencyPack\Blog\Domain\Model\Post {
+            mapping {
+                tableName = pages
+                dokype = 137
+                columns.crdate.mapOnProperty = crdate
+            }
         }
-    }
-    T3G\AgencyPack\Blog\Domain\Model\Category {
-        mapping {
-            tableName = sys_category
+        T3G\AgencyPack\Blog\Domain\Model\Category {
+            mapping {
+                tableName = sys_category
+            }
         }
     }
 }
