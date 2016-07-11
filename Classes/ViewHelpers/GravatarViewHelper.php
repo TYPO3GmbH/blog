@@ -49,7 +49,7 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
     public function render()
     {
         $size = (int) $this->arguments['size'];
-        $url = 'http://www.gravatar.com/avatar/'.md5($this->arguments['email']).'?s='.$size;
+        $url = 'http://www.gravatar.com/avatar/' . md5($this->arguments['email']) . '?s=' . $size;
         $this->tag->addAttribute('src', $url);
         $this->tag->addAttribute('width', $size);
         $this->tag->addAttribute('height', $size);

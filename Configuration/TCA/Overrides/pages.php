@@ -5,7 +5,7 @@ defined('TYPO3_MODE') or die();
 call_user_func(
     function ($extKey, $table) {
         $extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($extKey);
-        $customPageIcon = $extRelPath.'Resources/Public/Icons/apps-pagetree-blog-post.svg';
+        $customPageIcon = $extRelPath . 'Resources/Public/Icons/apps-pagetree-blog-post.svg';
         $blogDocType = \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST;
 
         // Add new page type as possible select item:
@@ -13,7 +13,7 @@ call_user_func(
             $table,
             'doktype',
             [
-                'LLL:EXT:'.$extKey.'/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
+                'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
                 $blogDocType,
                 $customPageIcon,
             ],
@@ -40,7 +40,7 @@ call_user_func(
         $temporaryColumns = [
             'comments_active' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.comments_active',
+                'label' => $ll . 'pages.comments_active',
                 'config' => [
                     'type' => 'check',
                     'default' => '1',
@@ -48,7 +48,7 @@ call_user_func(
             ],
             'comments' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.comments',
+                'label' => $ll . 'pages.comments',
                 'config' => [
                     'type' => 'inline',
                     'foreign_table' => 'tx_blog_domain_model_comment',
@@ -75,7 +75,7 @@ call_user_func(
         );
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             'pages',
-            '--div--;'.$ll.'pages.tabs.blog, comments_active, comments',
+            '--div--;' . $ll . 'pages.tabs.blog, comments_active, comments',
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
     },
