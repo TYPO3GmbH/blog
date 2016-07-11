@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
 /*
@@ -17,54 +18,54 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
- * Class Post
+ * Class Post.
  */
 class Post extends AbstractEntity
 {
     /**
-     * The blog post title
+     * The blog post title.
      *
      * @var string
      */
     protected $title;
 
     /**
-     * The blog post abstract (SEO, list if not empty)
+     * The blog post abstract (SEO, list if not empty).
      *
      * @var string
      */
     protected $abstract;
 
     /**
-     * The blog post description (SEO, list if not empty)
+     * The blog post description (SEO, list if not empty).
      *
      * @var string
      */
     protected $description;
 
     /**
-     * The blog post creation date
+     * The blog post creation date.
      *
      * @var \DateTime
      */
     protected $crdate;
 
     /**
-     * The blog post categories
+     * The blog post categories.
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Category>
      */
     protected $categories;
 
     /**
-     * Comments active flag for this blog post
+     * Comments active flag for this blog post.
      *
      * @var bool
      */
     protected $commentsActive;
 
     /**
-     * Comments of the blog post
+     * Comments of the blog post.
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Comment>
      */
@@ -89,11 +90,13 @@ class Post extends AbstractEntity
 
     /**
      * @param string $title
+     *
      * @return $this
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -107,11 +110,13 @@ class Post extends AbstractEntity
 
     /**
      * @param string $abstract
+     *
      * @return $this
      */
     public function setAbstract($abstract)
     {
         $this->abstract = $abstract;
+
         return $this;
     }
 
@@ -125,11 +130,13 @@ class Post extends AbstractEntity
 
     /**
      * @param string $description
+     *
      * @return $this
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -151,21 +158,25 @@ class Post extends AbstractEntity
 
     /**
      * @param Category $category
+     *
      * @return $this
      */
     public function addCategory(Category $category)
     {
         $this->categories->attach($category);
+
         return $this;
     }
 
     /**
      * @param Category $category
+     *
      * @return $this
      */
     public function removeCategory(Category $category)
     {
         $this->categories->detach($category);
+
         return $this;
     }
 
@@ -179,11 +190,13 @@ class Post extends AbstractEntity
 
     /**
      * @param \DateTime $crdate
+     *
      * @return $this
      */
     public function setCrdate($crdate)
     {
         $this->crdate = $crdate;
+
         return $this;
     }
 
@@ -213,31 +226,37 @@ class Post extends AbstractEntity
 
     /**
      * @param ObjectStorage $comments
+     *
      * @return $this
      */
     public function setComments($comments)
     {
         $this->comments = $comments;
+
         return $this;
     }
 
     /**
      * @param Comment $comment
+     *
      * @return $this
      */
     public function addComment(Comment $comment)
     {
         $this->comments->attach($comment);
+
         return $this;
     }
 
     /**
      * @param Comment $comment
+     *
      * @return $this
      */
     public function removeComment(Comment $comment)
     {
         $this->comments->detach($comment);
+
         return $this;
     }
 }

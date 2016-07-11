@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Tests\Unit\Controller;
 
 /*
@@ -13,19 +14,10 @@ namespace T3G\AgencyPack\Blog\Tests\Unit\Controller;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use Prophecy\Argument;
-use T3G\AgencyPack\Blog\Controller\CommentController;
-use T3G\AgencyPack\Blog\Domain\Model\Comment;
-use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Form\Mvc\Controller\ControllerContext;
-use TYPO3\CMS\Lang\LanguageService;
 
 /**
- * Test case
- *
+ * Test case.
  */
 class CommentControllerTest extends UnitTestCase
 {

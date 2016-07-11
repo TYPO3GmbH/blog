@@ -32,7 +32,7 @@ call_user_func(
 
         // Allow backend users to drag and drop the new page type:
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
-            'options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . $blogDocType . ')'
+            'options.pageTree.doktypesToShowInNewPageDragArea := addToList('.$blogDocType.')'
         );
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');

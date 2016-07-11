@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
 /*
@@ -17,7 +18,7 @@ use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
- * Class Comment
+ * Class Comment.
  *
  * This model is a representation of the comment table.
  * Comments can be assigned to blog posts.
@@ -25,7 +26,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Comment extends AbstractEntity
 {
     /**
-     * The author of the comment
+     * The author of the comment.
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
@@ -39,21 +40,21 @@ class Comment extends AbstractEntity
     protected $name;
 
     /**
-     * The email of the comment author
+     * The email of the comment author.
      *
      * @var string
      */
     protected $email;
 
     /**
-     * The url of the comment author
+     * The url of the comment author.
      *
      * @var string
      */
     protected $url;
 
     /**
-     * The comment text
+     * The comment text.
      *
      * @var string
      */
@@ -79,11 +80,13 @@ class Comment extends AbstractEntity
 
     /**
      * @param FrontendUser $author
+     *
      * @return Comment
      */
     public function setAuthor($author)
     {
         $this->author = $author;
+
         return $this;
     }
 
@@ -97,11 +100,13 @@ class Comment extends AbstractEntity
 
     /**
      * @param string $name
+     *
      * @return Comment
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -115,11 +120,13 @@ class Comment extends AbstractEntity
 
     /**
      * @param string $email
+     *
      * @return Comment
      */
     public function setEmail($email)
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -133,11 +140,13 @@ class Comment extends AbstractEntity
 
     /**
      * @param string $comment
+     *
      * @return Comment
      */
     public function setComment($comment)
     {
         $this->comment = $comment;
+
         return $this;
     }
 
@@ -151,11 +160,13 @@ class Comment extends AbstractEntity
 
     /**
      * @param int $hidden
+     *
      * @return Comment
      */
     public function setHidden($hidden)
     {
         $this->hidden = $hidden;
+
         return $this;
     }
 
@@ -169,11 +180,13 @@ class Comment extends AbstractEntity
 
     /**
      * @param string $url
+     *
      * @return Comment
      */
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -187,11 +200,13 @@ class Comment extends AbstractEntity
 
     /**
      * @param Post $post
+     *
      * @return Comment
      */
     public function setPost(Post $post)
     {
         $this->post = $post;
+
         return $this;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Controller;
 
 /*
@@ -16,7 +17,6 @@ namespace T3G\AgencyPack\Blog\Controller;
 
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
-use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\CommentService;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
@@ -27,33 +27,30 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
- * Comment frontend
- *
+ * Comment frontend.
  */
 class CommentController extends ActionController
 {
-
     /**
-     * @todo maybe use constants for error|moderation|success
      * @var array
      */
     protected static $messages = [
-            'error' => [
-                'title' => 'message.addComment.error.title',
-                'text' => 'message.addComment.error.text',
-                'severity' => FlashMessage::ERROR
-            ],
-            'moderation' => [
-                'title' => 'message.addComment.moderation.title',
-                'text' => 'message.addComment.moderation.title',
-                'severity' => FlashMessage::INFO
-            ],
-            'success' => [
-                'title' => 'message.addComment.success.title',
-                'text' => 'message.addComment.success.text',
-                'severity' => FlashMessage::OK
-            ]
-        ];
+        CommentService::STATE_ERROR => [
+            'title' => 'message.addComment.error.title',
+            'text' => 'message.addComment.error.text',
+            'severity' => FlashMessage::ERROR,
+        ],
+        CommentService::STATE_MODERATION => [
+            'title' => 'message.addComment.moderation.title',
+            'text' => 'message.addComment.moderation.text',
+            'severity' => FlashMessage::INFO,
+        ],
+        CommentService::STATE_SUCCESS => [
+            'title' => 'message.addComment.success.title',
+            'text' => 'message.addComment.success.text',
+            'severity' => FlashMessage::OK,
+        ],
+    ];
 
     /**
      * @var PostRepository
@@ -74,19 +71,6 @@ class CommentController extends ActionController
     }
 
     /**
-     * @var CommentRepository
-     */
-    protected $commentRepository;
-
-    /**
-     * @param CommentRepository $commentRepository
-     */
-    public function injectCommentRepository(CommentRepository $commentRepository)
-    {
-        $this->commentRepository = $commentRepository;
-    }
-
-    /**
      * @param \T3G\AgencyPack\Blog\Service\CommentService $commentService
      */
     public function injectCommentService(CommentService $commentService)
@@ -96,6 +80,9 @@ class CommentController extends ActionController
 
     /**
      * CommentController constructor.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function __construct()
     {
@@ -112,9 +99,9 @@ class CommentController extends ActionController
     }
 
     /**
-     * Show comment form
+     * Show comment form.
      *
-     * @param Post|null $post
+     * @param Post|null    $post
      * @param Comment|null $comment
      */
     public function formAction(Post $post = null, Comment $comment = null)
@@ -127,9 +114,9 @@ class CommentController extends ActionController
     }
 
     /**
-     * Add comment to blog post
+     * Add comment to blog post.
      *
-     * @param Post $post
+     * @param Post    $post
      * @param Comment $comment
      *
      * @throws \InvalidArgumentException
@@ -137,6 +124,7 @@ class CommentController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \RuntimeException
      */
     public function addCommentAction(Post $post, Comment $comment)
     {
@@ -182,14 +170,23 @@ class CommentController extends ActionController
 
     /**
      * @return LanguageService
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     protected function getLanguageService()
     {
+        if ($GLOBALS['LANG'] === null) {
+            $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageService::class);
+            $GLOBALS['LANG']->init($GLOBALS['TSFE']->tmpl->setup['config.']['language']);
+        }
+
         return $GLOBALS['LANG'];
     }
 
     /**
      * @return PersistenceManager
+     *
      * @throws \InvalidArgumentException
      */
     protected function getPersistenceManager()

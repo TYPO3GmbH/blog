@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
 /*
@@ -22,7 +23,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * Class PostRepository
+ * Class PostRepository.
  */
 class PostRepository extends Repository
 {
@@ -55,6 +56,7 @@ class PostRepository extends Repository
     public function findAll()
     {
         $query = $this->createQuery();
+
         return $query->matching($query->logicalAnd($this->defaultContraints))->execute();
     }
 
@@ -62,6 +64,7 @@ class PostRepository extends Repository
      * @param Category $category
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     *
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function findAllByCategory(Category $category)
@@ -69,6 +72,7 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         $contraints = $this->defaultContraints;
         $contraints[] = $query->contains('categories', $category);
+
         return $query->matching($query->logicalAnd($contraints))->execute();
     }
 
@@ -77,10 +81,11 @@ class PostRepository extends Repository
      */
     public function findCurrentPost()
     {
-        $pageId = (int)GeneralUtility::_GP('id');
+        $pageId = (int) GeneralUtility::_GP('id');
         $query = $this->createQuery();
         $contraints = $this->defaultContraints;
         $contraints[] = $query->equals('uid', $pageId);
+
         return $query->matching($query->logicalAnd($contraints))->execute()->getFirst();
     }
 }

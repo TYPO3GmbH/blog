@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
 /*
@@ -17,7 +18,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * Class CommentRepository
+ * Class CommentRepository.
  */
 class CommentRepository extends Repository
 {

@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Controller;
 
 /*
@@ -17,20 +18,19 @@ namespace T3G\AgencyPack\Blog\Controller;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
- * Comments frontend
- *
+ * Comments frontend.
  */
 class TagsController extends ActionController
 {
     /**
-     * Show a list of blog tags
+     * Show a list of blog tags.
      */
     public function listTagsAction()
     {
     }
 
     /**
-     * Show a list of post tags
+     * Show a list of post tags.
      */
     public function postTagsAction()
     {

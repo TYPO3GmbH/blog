@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\ViewHelpers;
 
 /*
@@ -16,8 +17,7 @@ namespace T3G\AgencyPack\Blog\ViewHelpers;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
- * Class GravatarViewHelper
- *
+ * Class GravatarViewHelper.
  */
 class GravatarViewHelper extends AbstractTagBasedViewHelper
 {
@@ -31,7 +31,7 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * Arguments Initialization
+     * Arguments Initialization.
      *
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
@@ -48,11 +48,12 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
      */
     public function render()
     {
-        $size = (int)$this->arguments['size'];
-        $url = 'http://www.gravatar.com/avatar/' . md5($this->arguments['email']) . '?s=' . $size;
+        $size = (int) $this->arguments['size'];
+        $url = 'http://www.gravatar.com/avatar/'.md5($this->arguments['email']).'?s='.$size;
         $this->tag->addAttribute('src', $url);
         $this->tag->addAttribute('width', $size);
         $this->tag->addAttribute('height', $size);
+
         return $this->tag->render();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Domain\Validator;
 
 /*
@@ -17,15 +18,14 @@ use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 /**
- * Validator for comments
+ * Validator for comments.
  */
 class CommentValidator extends AbstractValidator
 {
     /**
-     * Checks if the given comment is valid
+     * Checks if the given comment is valid.
      *
      * @param mixed $value The comment model
-     * @return void
      */
     public function isValid($value)
     {

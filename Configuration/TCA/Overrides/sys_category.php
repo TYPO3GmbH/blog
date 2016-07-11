@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
@@ -7,7 +8,7 @@ $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
 $temporaryColumns = [
     'content' => [
         'exclude' => 1,
-        'label' => $ll . 'sys_category.content',
+        'label' => $ll.'sys_category.content',
         'config' => [
             'type' => 'inline',
             'allowed' => 'tt_content',
@@ -27,8 +28,8 @@ $temporaryColumns = [
                 'showSynchronizationLink' => 1,
                 'enabledControls' => [
                     'info' => false,
-                ]
-            ]
+                ],
+            ],
         ],
         'defaultExtras' => 'richtext:rte_transform',
     ],
@@ -40,5 +41,5 @@ $temporaryColumns = [
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'sys_category',
-    '--div--;' . $ll . 'sys_category.tabs.seo, content'
+    '--div--;'.$ll.'sys_category.tabs.seo, content'
 );

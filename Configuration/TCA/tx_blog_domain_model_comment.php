@@ -1,11 +1,12 @@
 <?php
+
 defined('TYPO3_MODE') or die();
 
 $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
 
 return [
     'ctrl' => [
-        'title' => $ll . 'tx_blog_domain_model_comment',
+        'title' => $ll.'tx_blog_domain_model_comment',
         'label' => 'comment',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -20,39 +21,39 @@ return [
         'searchFields' => 'uid,comment,name,email',
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden,author,name,email,comment'
+        'showRecordFieldList' => 'hidden,author,name,email,comment',
     ],
     'columns' => [
         'pid' => [
             'label' => 'pid',
             'config' => [
-                'type' => 'passthrough'
-            ]
+                'type' => 'passthrough',
+            ],
         ],
         'crdate' => [
             'label' => 'crdate',
             'config' => [
                 'type' => 'passthrough',
-            ]
+            ],
         ],
         'tstamp' => [
             'label' => 'tstamp',
             'config' => [
                 'type' => 'passthrough',
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
-                'default' => 0
-            ]
+                'default' => 0,
+            ],
         ],
         // author not implemented yet
         'author' => [
             'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_comment.author',
+            'label' => $ll.'tx_blog_domain_model_comment.author',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -66,64 +67,64 @@ return [
                         'type' => 'suggest',
                     ],
                 ],
-            ]
+            ],
         ],
         'name' => [
             'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_comment.name',
+            'label' => $ll.'tx_blog_domain_model_comment.name',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => '',
-            ]
+            ],
         ],
         'url' => [
             'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_comment.url',
+            'label' => $ll.'tx_blog_domain_model_comment.url',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'www',
-            ]
+            ],
         ],
         'email' => [
             'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_comment.email',
+            'label' => $ll.'tx_blog_domain_model_comment.email',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'email',
-            ]
+            ],
         ],
         'comment' => [
             'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_comment.comment',
+            'label' => $ll.'tx_blog_domain_model_comment.comment',
             'config' => [
                 'type' => 'text',
                 'size' => 30,
                 'eval' => '',
-            ]
+            ],
         ],
         'parentid' => [
             'config' => [
                 'type' => 'passthrough',
-            ]
+            ],
         ],
         'parenttable' => [
             'config' => [
                 'type' => 'passthrough',
-            ]
+            ],
         ],
     ],
     'types' => [
         0 => [
-            'showitem' => 'name,url,email,comment'
-        ]
+            'showitem' => 'name,url,email,comment',
+        ],
     ],
     'palettes' => [
         'paletteCore' => [
             'showitem' => 'hidden,',
-            'canNotCollapse' => true
+            'canNotCollapse' => true,
         ],
-    ]
+    ],
 ];
