@@ -146,14 +146,12 @@ class CommentController extends ActionController
     }
 
     /**
-     * @param Post|null $post
+     *
      */
-    public function commentsAction(Post $post = null)
+    public function commentsAction()
     {
-        if ($post === null) {
-            $post = $this->postRepository->findCurrentPost();
-        }
-        $this->view->assign('post', $post);
+        $post = $this->postRepository->findCurrentPost();
+        $this->view->assign('comments', $post->getComments());
     }
 
     /**

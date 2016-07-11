@@ -22,6 +22,7 @@ config.tx_extbase.persistence {
             newRecordStoragePid = {$plugin.tx_blog.persistence.storagePid}
             mapping {
                 tableName = tx_blog_domain_model_comment
+                columns.parentid.mapOnProperty = post
             }
         }
     }
