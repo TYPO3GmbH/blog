@@ -23,7 +23,6 @@ use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -182,15 +181,5 @@ class CommentController extends ActionController
         }
 
         return $GLOBALS['LANG'];
-    }
-
-    /**
-     * @return PersistenceManager
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function getPersistenceManager()
-    {
-        return GeneralUtility::makeInstance(PersistenceManager::class);
     }
 }
