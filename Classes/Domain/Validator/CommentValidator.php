@@ -15,6 +15,7 @@ namespace T3G\AgencyPack\Blog\Domain\Validator;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 /**
@@ -31,16 +32,16 @@ class CommentValidator extends AbstractValidator
     {
         if ($value instanceof Comment) {
             if (trim($value->getName()) === '') {
-                $this->addError('the name is required', 1467650564);
+                $this->addError('The name is required', 1467650564);
             }
             if (trim($value->getEmail()) === '') {
-                $this->addError('the email is required', 1467650565);
+                $this->addError('The email is required', 1467650565);
             }
-            if (filter_var($value->getEmail(), FILTER_VALIDATE_EMAIL) !== $value->getEmail()) {
-                $this->addError('the email address has an invalid format', 1467650566);
+            if (!GeneralUtility::validEmail($value->getEmail())) {
+                $this->addError('The email address has an invalid format', 1467650566);
             }
             if (trim($value->getComment()) === '') {
-                $this->addError('the comment is required', 1467650567);
+                $this->addError('The comment is required', 1467650567);
             }
         }
     }

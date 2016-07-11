@@ -22,10 +22,10 @@
 				<source>Submit</source>
 			</trans-unit>
 			<trans-unit id="message.no_comments" xml:space="preserve">
-				<source>no comments</source>
+				<source>No comments</source>
 			</trans-unit>
 			<trans-unit id="message.comments_closed" xml:space="preserve">
-				<source>comments closed</source>
+				<source>Comments closed</source>
 			</trans-unit>
 			<trans-unit id="message.addComment.error.title" xml:space="preserve">
 				<source>Comments not active</source>

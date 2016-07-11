@@ -61,11 +61,15 @@ class Comment extends AbstractEntity
     protected $comment;
 
     /**
+     * Flag to determine if record is hidden.
+     *
      * @var int
      */
     protected $hidden;
 
     /**
+     * The post related to this comment.
+     *
      * @var \T3G\AgencyPack\Blog\Domain\Model\Post
      */
     protected $post;
