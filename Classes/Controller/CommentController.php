@@ -18,6 +18,7 @@ use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use T3G\AgencyPack\Blog\Service\CommentService;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -31,10 +32,38 @@ use TYPO3\CMS\Lang\LanguageService;
  */
 class CommentController extends ActionController
 {
+
+    /**
+     * @todo maybe use constants for error|moderation|success
+     * @var array
+     */
+    protected static $messages = [
+            'error' => [
+                'title' => 'message.addComment.error.title',
+                'text' => 'message.addComment.error.text',
+                'severity' => FlashMessage::ERROR
+            ],
+            'moderation' => [
+                'title' => 'message.addComment.moderation.title',
+                'text' => 'message.addComment.moderation.title',
+                'severity' => FlashMessage::INFO
+            ],
+            'success' => [
+                'title' => 'message.addComment.success.title',
+                'text' => 'message.addComment.success.text',
+                'severity' => FlashMessage::OK
+            ]
+        ];
+
     /**
      * @var PostRepository
      */
     protected $postRepository;
+
+    /**
+     * @var CommentService
+     */
+    protected $commentService;
 
     /**
      * @param PostRepository $postRepository
@@ -55,6 +84,14 @@ class CommentController extends ActionController
     public function injectCommentRepository(CommentRepository $commentRepository)
     {
         $this->commentRepository = $commentRepository;
+    }
+
+    /**
+     * @param \T3G\AgencyPack\Blog\Service\CommentService $commentService
+     */
+    public function injectCommentService(CommentService $commentService)
+    {
+        $this->commentService = $commentService;
     }
 
     /**
@@ -103,29 +140,15 @@ class CommentController extends ActionController
      */
     public function addCommentAction(Post $post, Comment $comment)
     {
-        $messageTitle = 'message.addComment.error.title';
-        $messageText = 'message.addComment.error.text';
-        $messageSeverity = FlashMessage::ERROR;
-        if ((int)$this->settings['comments']['active'] === 1) {
-            $messageTitle = 'message.addComment.success.title';
-            $messageText = 'message.addComment.success.text';
-            $messageSeverity = FlashMessage::OK;
-            if ((int)$this->settings['comments']['moderation'] === 1) {
-                $comment->setHidden(1);
-                $messageTitle = 'message.addComment.moderation.title';
-                $messageText = 'message.addComment.moderation.text';
-                $messageSeverity = FlashMessage::INFO;
-            }
-            $post->addComment($comment);
-            $this->postRepository->update($post);
-            $this->clearCacheByPost($post);
-        }
+        $this->commentService->injectSettings($this->settings['comments']);
+        $state = $this->commentService->addComment($post, $comment);
         $languageService = $this->getLanguageService();
         $this->addFlashMessage(
-            $languageService->getLL($messageText),
-            $languageService->getLL($messageTitle),
-            $messageSeverity
+            $languageService->getLL(self::$messages[$state]['text']),
+            $languageService->getLL(self::$messages[$state]['title']),
+            self::$messages[$state]['severity']
         );
+        $this->clearCacheByPost($post);
         $this->redirectToUri(
             $this->controllerContext
                 ->getUriBuilder()

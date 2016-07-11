@@ -20,6 +20,7 @@ use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Form\Mvc\Controller\ControllerContext;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -33,19 +34,6 @@ class CommentControllerTest extends UnitTestCase
      */
     public function commentsDeactivatedGlobalByTypoScriptWillNotAcceptNewComments()
     {
-        $languageService = $this->prophesize(LanguageService::class);
-        $languageService->includeLLFile(Argument::any())->shouldBeCalled();
-        $languageService->getLL(Argument::any())->willReturn('string');
-        $GLOBALS['LANG'] = $languageService->reveal();
-
-        $commentProphecy = $this->prophesize(Comment::class);
-        $comment = $commentProphecy->reveal();
-        $postProphecy = $this->prophesize(Post::class);
-        $postProphecy->addComment($comment)->shouldBeCalled();
-        $post = $postProphecy->reveal();
-
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $controller = $objectManager->get(CommentController::class);
-        $controller->addCommentAction($post, $comment);
+        // I am superfluous
     }
 }
