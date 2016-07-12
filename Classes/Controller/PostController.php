@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Controller;
 
 /*
@@ -22,8 +23,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
- * Posts related controller
- *
+ * Posts related controller.
  */
 class PostController extends ActionController
 {
@@ -54,7 +54,7 @@ class PostController extends ActionController
     }
 
     /**
-     * Show a list of recent posts
+     * Show a list of recent posts.
      */
     public function listRecentPostsAction()
     {
@@ -62,7 +62,7 @@ class PostController extends ActionController
     }
 
     /**
-     * Show a list of posts by given tag
+     * Show a list of posts by given tag.
      *
      * @param \T3G\AgencyPack\Blog\Domain\Model\Tag $tag
      */
@@ -71,7 +71,7 @@ class PostController extends ActionController
     }
 
     /**
-     * Show a list of posts by given category
+     * Show a list of posts by given category.
      *
      * @param Category $category
      *
@@ -84,14 +84,14 @@ class PostController extends ActionController
     }
 
     /**
-     * Sidebar action
+     * Sidebar action.
      */
     public function sidebarAction()
     {
     }
 
     /**
-     * Metadata action: output meta information of blog post
+     * Metadata action: output meta information of blog post.
      */
     public function metadataAction()
     {
@@ -115,7 +115,7 @@ class PostController extends ActionController
     }
 
     /**
-     * Show single post
+     * Show single post.
      *
      * @param Post $post
      */

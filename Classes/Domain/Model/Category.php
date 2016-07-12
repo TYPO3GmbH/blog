@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
 /*
@@ -14,9 +15,10 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
 /**
- * Class Category
+ * Class Category.
  *
  * This model is a representation of the sys_category table.
  * Categories can be assigned to blog posts.
@@ -56,6 +58,7 @@ class Category extends AbstractEntity
      * Gets the title.
      *
      * @return string the title, might be empty
+     *
      * @api
      */
     public function getTitle()
@@ -67,7 +70,7 @@ class Category extends AbstractEntity
      * Sets the title.
      *
      * @param string $title the title to set, may be empty
-     * @return void
+     *
      * @api
      */
     public function setTitle($title)
@@ -79,6 +82,7 @@ class Category extends AbstractEntity
      * Gets the description.
      *
      * @return string the description, might be empty
+     *
      * @api
      */
     public function getDescription()
@@ -90,7 +94,7 @@ class Category extends AbstractEntity
      * Sets the description.
      *
      * @param string $description the description to set, may be empty
-     * @return void
+     *
      * @api
      */
     public function setDescription($description)
@@ -99,9 +103,10 @@ class Category extends AbstractEntity
     }
 
     /**
-     * Returns the icon
+     * Returns the icon.
      *
      * @return string $icon
+     *
      * @api
      */
     public function getIcon()
@@ -110,10 +115,10 @@ class Category extends AbstractEntity
     }
 
     /**
-     * Sets the icon
+     * Sets the icon.
      *
      * @param string $icon
-     * @return void
+     *
      * @api
      */
     public function setIcon($icon)
@@ -125,24 +130,26 @@ class Category extends AbstractEntity
      * Gets the parent category.
      *
      * @return \TYPO3\CMS\Extbase\Domain\Model\Category|NULL the parent category
+     *
      * @api
      */
     public function getParent()
     {
-        if ($this->parent instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
+        if ($this->parent instanceof LazyLoadingProxy) {
             $this->parent->_loadRealInstance();
         }
+
         return $this->parent;
     }
 
     /**
      * Sets the parent category.
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $parent the parent category
-     * @return void
+     * @param \T3G\AgencyPack\Blog\Domain\Model\Category $parent the parent category
+     *
      * @api
      */
-    public function setParent(\TYPO3\CMS\Extbase\Domain\Model\Category $parent)
+    public function setParent(Category $parent)
     {
         $this->parent = $parent;
     }
@@ -157,11 +164,13 @@ class Category extends AbstractEntity
 
     /**
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $content
+     *
      * @return $this
      */
     public function setContent($content)
     {
         $this->content = $content;
+
         return $this;
     }
 
@@ -170,13 +179,14 @@ class Category extends AbstractEntity
      */
     public function getContentElementUidList()
     {
-        $uidList = array();
+        $uidList = [];
         $contentElements = $this->getContent();
         if ($contentElements) {
             foreach ($contentElements as $contentElement) {
                 $uidList[] = $contentElement->getUid();
             }
         }
+
         return implode(',', $uidList);
     }
 }

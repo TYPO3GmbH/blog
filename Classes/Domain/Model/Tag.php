@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
 /*
@@ -16,7 +17,7 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
- * Class Tag
+ * Class Tag.
  *
  * This model is a representation of the tag table.
  * Tags can be assigned to blog posts.
@@ -24,14 +25,14 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Tag extends AbstractEntity
 {
     /**
-     * The title of the tag
+     * The title of the tag.
      *
      * @var string
      */
     protected $title;
 
     /**
-     * The description of the tag. Used for SEO meta description
+     * The description of the tag. Used for SEO meta description.
      *
      * @var string
      */
@@ -54,11 +55,13 @@ class Tag extends AbstractEntity
 
     /**
      * @param string $title
+     *
      * @return $this
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -72,11 +75,13 @@ class Tag extends AbstractEntity
 
     /**
      * @param string $description
+     *
      * @return $this
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -90,11 +95,13 @@ class Tag extends AbstractEntity
 
     /**
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $content
+     *
      * @return $this
      */
     public function setContent($content)
     {
         $this->content = $content;
+
         return $this;
     }
 
@@ -103,13 +110,14 @@ class Tag extends AbstractEntity
      */
     public function getContentElementUidList()
     {
-        $uidList = array();
+        $uidList = [];
         $contentElements = $this->getContent();
         if ($contentElements) {
             foreach ($contentElements as $contentElement) {
                 $uidList[] = $contentElement->getUid();
             }
         }
+
         return implode(',', $uidList);
     }
 }

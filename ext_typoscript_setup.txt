@@ -18,5 +18,12 @@ config.tx_extbase.persistence {
                 tableName = sys_category
             }
         }
+        T3G\AgencyPack\Blog\Domain\Model\Comment {
+            newRecordStoragePid = {$plugin.tx_blog.persistence.storagePid}
+            mapping {
+                tableName = tx_blog_domain_model_comment
+                columns.parentid.mapOnProperty = post
+            }
+        }
     }
 }

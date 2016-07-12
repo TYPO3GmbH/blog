@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
 /*
@@ -21,14 +22,13 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * Class CategoryRepository
+ * Class CategoryRepository.
  */
 class CategoryRepository extends Repository
 {
     /**
      * Initializes the repository.
      *
-     * @return void
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \InvalidArgumentException
      */
@@ -37,14 +37,14 @@ class CategoryRepository extends Repository
         // @TODO: It looks like extbase ignore storage settings for sys_category.
         // @TODO: this hack set the storage handling for sys_category table.
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
-        $settings =  $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+        $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
         $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
         $querySettings->setRespectStoragePage(true);
         $querySettings->setStoragePageIds(GeneralUtility::trimExplode(',', $settings['storagePid']));
 
         $this->setDefaultQuerySettings($querySettings);
-        $this->defaultOrderings = array(
+        $this->defaultOrderings = [
             'title' => QueryInterface::ORDER_ASCENDING,
-        );
+        ];
     }
 }

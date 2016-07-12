@@ -57,8 +57,11 @@ CREATE TABLE tx_blog_domain_model_comment (
   hidden tinyint(4) DEFAULT '0' NOT NULL,
   author int(11) DEFAULT '0' NOT NULL,
   name varchar(100) DEFAULT '' NOT NULL,
+  url varchar(255) DEFAULT '' NOT NULL,
   email varchar(255) DEFAULT '' NOT NULL,
   comment text,
+  parentid int(11) DEFAULT '0' NOT NULL,
+  parenttable varchar(255) DEFAULT '' NOT NULL,
 
   PRIMARY KEY (uid),
   KEY parent (pid)
@@ -69,6 +72,7 @@ CREATE TABLE tx_blog_domain_model_comment (
 #
 CREATE TABLE pages (
   comments_active tinyint(4) DEFAULT '1' NOT NULL,
+  comments text
 );
 
 #
@@ -76,5 +80,6 @@ CREATE TABLE pages (
 #
 CREATE TABLE pages_language_overlay (
   comments_active tinyint(4) DEFAULT '1' NOT NULL,
+  comments text
 );
 

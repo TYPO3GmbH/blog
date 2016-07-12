@@ -1,10 +1,11 @@
 <?php
+
 if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
+    die('Access denied.');
 }
 
 $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
-$temporaryColumns = array (
+$temporaryColumns = [
     'content' => [
         'exclude' => 1,
         'label' => $ll . 'sys_category.content',
@@ -27,12 +28,12 @@ $temporaryColumns = array (
                 'showSynchronizationLink' => 1,
                 'enabledControls' => [
                     'info' => false,
-                ]
-            ]
+                ],
+            ],
         ],
         'defaultExtras' => 'richtext:rte_transform',
     ],
-);
+];
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
     'sys_category',

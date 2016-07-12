@@ -1,6 +1,6 @@
 <?php
 
-namespace T3G\AgencyPack\Blog\Tests\Unit;
+namespace T3G\AgencyPack\Blog\Domain\Repository;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -14,19 +14,21 @@ namespace T3G\AgencyPack\Blog\Tests\Unit;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use T3G\AgencyPack\Blog\Constants;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * Test case.
+ * Class CommentRepository.
  */
-class ConstantsTest extends UnitTestCase
+class CommentRepository extends Repository
 {
     /**
-     * @test
+     *
      */
-    public function constantForDoktypeOfBlogPostsIsSetCorrectly()
+    public function initializeObject()
     {
-        self::assertEquals(137, Constants::DOKTYPE_BLOG_POST);
+        $this->defaultOrderings = [
+            'crdate' => QueryInterface::ORDER_DESCENDING,
+        ];
     }
 }

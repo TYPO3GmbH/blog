@@ -35,20 +35,32 @@ call_user_func(
             'options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . $blogDocType . ')'
         );
 
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');
+
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
             'T3G.AgencyPack.Blog',
             'Posts',
             'Blog: List of posts'
         );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-        'T3G.AgencyPack.Blog',
-        'Sidebar',
-        'Blog: Sidebar'
-    );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-        'T3G.AgencyPack.Blog',
-        'Metadata',
-        'Blog: Metadata'
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'T3G.AgencyPack.Blog',
+            'Sidebar',
+            'Blog: Sidebar'
+        );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'T3G.AgencyPack.Blog',
+            'Metadata',
+            'Blog: Metadata'
+        );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'T3G.AgencyPack.Blog',
+            'CommentForm',
+            'Blog: Comment form'
+        );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'T3G.AgencyPack.Blog',
+            'Comments',
+            'Blog: Comments'
+        );
     }
 );

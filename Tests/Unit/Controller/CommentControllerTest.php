@@ -1,5 +1,6 @@
 <?php
-namespace T3G\AgencyPack\Blog\Controller;
+
+namespace T3G\AgencyPack\Blog\Tests\Unit\Controller;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -13,26 +14,18 @@ namespace T3G\AgencyPack\Blog\Controller;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**
- * Comments frontend
- *
+ * Test case.
  */
-class CommentsController extends ActionController
+class CommentControllerTest extends UnitTestCase
 {
     /**
-     * Show a list of blog comments
+     * @test
      */
-    public function listCommentsAction()
+    public function commentsDeactivatedGlobalByTypoScriptWillNotAcceptNewComments()
     {
-    }
-
-    /**
-     * Show a list of post comments
-     */
-    public function postCommentsAction()
-    {
+        // I am superfluous
     }
 }

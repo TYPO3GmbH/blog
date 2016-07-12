@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog;
 
 /*
@@ -15,12 +16,12 @@ namespace T3G\AgencyPack\Blog;
  */
 
 /**
- * Class Constants
+ * Class Constants.
  */
 class Constants
 {
     /**
-     * Named constants for "magic numbers" of the field doktype
+     * Named constants for "magic numbers" of the field doktype.
      */
     const DOKTYPE_BLOG_POST = 137;
 }

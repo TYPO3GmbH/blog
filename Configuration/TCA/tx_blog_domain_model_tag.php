@@ -1,4 +1,5 @@
 <?php
+
 defined('TYPO3_MODE') or die();
 
 $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
@@ -20,34 +21,34 @@ return [
         'searchFields' => 'uid,title',
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden,title'
+        'showRecordFieldList' => 'hidden,title',
     ],
     'columns' => [
         'pid' => [
             'label' => 'pid',
             'config' => [
-                'type' => 'passthrough'
-            ]
+                'type' => 'passthrough',
+            ],
         ],
         'crdate' => [
             'label' => 'crdate',
             'config' => [
                 'type' => 'passthrough',
-            ]
+            ],
         ],
         'tstamp' => [
             'label' => 'tstamp',
             'config' => [
                 'type' => 'passthrough',
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
-                'default' => 0
-            ]
+                'default' => 0,
+            ],
         ],
         'title' => [
             'exclude' => 0,
@@ -56,7 +57,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'required,unique,trim',
-            ]
+            ],
         ],
         'description' => [
             'exclude' => 1,
@@ -87,8 +88,8 @@ return [
                     'showSynchronizationLink' => 1,
                     'enabledControls' => [
                         'info' => false,
-                    ]
-                ]
+                    ],
+                ],
             ],
             'defaultExtras' => 'richtext:rte_transform',
         ],
@@ -96,13 +97,13 @@ return [
     'types' => [
         0 => [
             'showitem' => 'title, --palette--;;paletteCore,
-            --div--;' . $ll . 'tx_blog_domain_model_tag.tabs.seo, description, content'
-        ]
+            --div--;' . $ll . 'tx_blog_domain_model_tag.tabs.seo, description, content',
+        ],
     ],
     'palettes' => [
         'paletteCore' => [
             'showitem' => 'hidden,',
-            'canNotCollapse' => true
+            'canNotCollapse' => true,
         ],
-    ]
+    ],
 ];
