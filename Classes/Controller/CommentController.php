@@ -151,7 +151,9 @@ class CommentController extends ActionController
     public function commentsAction()
     {
         $post = $this->postRepository->findCurrentPost();
-        $this->view->assign('comments', $post->getComments());
+        if ($post instanceof Post) {
+            $this->view->assign('comments', $post->getComments());
+        }
     }
 
     /**

@@ -24,6 +24,12 @@
 			<trans-unit id="message.no_comments" xml:space="preserve">
 				<source>No comments</source>
 			</trans-unit>
+			<trans-unit id="message.comment" xml:space="preserve">
+				<source>%s comment</source>
+			</trans-unit>
+			<trans-unit id="message.comments" xml:space="preserve">
+				<source>%s comments</source>
+			</trans-unit>
 			<trans-unit id="message.comments_closed" xml:space="preserve">
 				<source>Comments closed</source>
 			</trans-unit>
