@@ -1,22 +1,33 @@
-<div class="meta">
+<div class="entry-meta">
+    <span class="entry-date">
+        <f:link.page pageUid="{post.uid}" rel="bookmark">
+            <time class="entry-date published" datetime="{f:format.date(format: '%Y-%m-%dT%H:%M:%S-%z', date: post.crdate)}" itemprop="datepublished">{f:format.date(format: '{settings.lists.posts.dateFormat}', date: post.crdate)}</time>
+        </f:link.page>
+    </span>
     <f:if condition="{post.categories}">
-        <p>Categories:
-            <f:for each="{post.categories}" as="postCategory">
-                <f:link.action pageUid="{settings.blogUid}" action="listPostsByCategory" arguments="{category: postCategory}">{postCategory.title}</f:link.action>
-            </f:for></p>
+        <span class="sep">·</span>
+        <f:for each="{post.categories}" as="postCategory">
+            <f:link.action pageUid="{settings.blogUid}" controller="Post" action="listPostsByCategory" arguments="{category: postCategory}">{postCategory.title}</f:link.action>
+        </f:for>
     </f:if>
     <f:if condition="{post.tags}">
-        <p>Tags:
+        <span class="sep">·</span>
+        <span itemprop="keywords">
             <f:for each="{post.tags}" as="tag">
-                <f:link.action pageUid="{settings.blogUid}" action="listPostsByTag" arguments="{tag: tag}">{tag.title}</f:link.action>
-            </f:for></p>
+                <f:link.action pageUid="{settings.blogUid}" controller="Post" action="listPostsByTag" arguments="{tag: tag}">{tag.title}</f:link.action>
+            </f:for>
+        </span>
     </f:if>
-    <p>
     <f:alias map="{commentCount: '<f:count subject=\'{post.comments}\' />'}">
+        <span class="sep">·</span>
+        <meta itemprop="commentCount" content="{commentCount}" />
+        <span class="comments-link">
+        <f:link.page pageUid="{post.uid}" section="comments">
         <f:if condition="{commentCount} == 1">
             <f:then><f:translate key="message.comment" arguments="{0: commentCount}" /></f:then>
             <f:else><f:translate key="message.comments" arguments="{0: commentCount}" /></f:else>
         </f:if>
+        </f:link.page>
+        </span>
     </f:alias>
-    </p>
 </div>

@@ -2,9 +2,9 @@
     <f:if condition="{validationResults.flattenedErrors}">
     <dl class="errors">
         <f:for each="{validationResults.flattenedErrors}" as="errors" key="propertyPath">
-        <dd><!-- {propertyPath} -->
+        <dd class="alert alert-danger" role="alert"><!-- {propertyPath} -->
             <f:for each="{errors}" as="error">
-            <p><!-- {error.code}: -->{error}</p>
+                <!-- {error.code}: -->{error}
             </f:for>
         </dd>
         </f:for>
