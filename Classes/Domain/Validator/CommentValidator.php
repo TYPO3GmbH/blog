@@ -43,6 +43,9 @@ class CommentValidator extends AbstractValidator
             if (trim($value->getComment()) === '') {
                 $this->addError('The comment is required', 1467650567);
             }
+            if (trim($value->getUrl()) !== '' && !GeneralUtility::isValidUrl(trim($value->getUrl()))) {
+                $this->addError('The url has an invalid format', 1467650568);
+            }
         }
     }
 }

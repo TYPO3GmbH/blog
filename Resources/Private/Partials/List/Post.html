@@ -1,12 +1,12 @@
 <div class="post">
-    <h2><f:link.page pageUid="{post.uid}">{post.title}</f:link.page></h2>
+    <h2 itemprop="name"><f:link.page pageUid="{post.uid}">{post.title}</f:link.page></h2>
     <f:render partial="Post/Meta" arguments="{_all}" />
     <f:if condition="{post.abstract}">
         <f:then>
-            <p>{post.abstract}</p>
+            <p itemprop="description">{post.abstract}</p>
         </f:then>
         <f:else>
-            <p>{post.description}</p>
+            <p itemprop="description">{post.description}</p>
         </f:else>
     </f:if>
 </div>

@@ -9,11 +9,17 @@
 			<trans-unit id="headline.comments" xml:space="preserve">
 				<source>Comments</source>
 			</trans-unit>
+			<trans-unit id="headline.category" xml:space="preserve">
+				<source>Category: %s</source>
+			</trans-unit>
 			<trans-unit id="form.comment.name" xml:space="preserve">
 				<source>Name</source>
 			</trans-unit>
 			<trans-unit id="form.comment.email" xml:space="preserve">
 				<source>E-Mail</source>
+			</trans-unit>
+			<trans-unit id="form.comment.url" xml:space="preserve">
+				<source>URL</source>
 			</trans-unit>
 			<trans-unit id="form.comment.comment" xml:space="preserve">
 				<source>Comment</source>

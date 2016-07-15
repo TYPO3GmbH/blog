@@ -9,12 +9,12 @@
     <div class="media-body">
         <f:if condition="{comment.url}">
             <f:then>
-                <cite class="fn"><f:link.external uri="{comment.url}" target="_blank" rel="external nofollow" class="url">{comment.name}</f:link.external></cite>
+                <cite itemprop="name" class="author"><span itemprop="commentTime"><f:format.date format="d.m.Y">{comment.crdate}</f:format.date></span> | <f:link.external uri="{comment.url}" target="_blank" rel="external nofollow" class="url">{comment.name}</f:link.external></cite>
             </f:then>
             <f:else>
-                <cite class="fn">{comment.name}</cite>
+                <cite itemprop="name" class="author"><span itemprop="commentTime"><f:format.date format="d.m.Y">{comment.crdate}</f:format.date></span> | {comment.name}</cite>
             </f:else>
         </f:if>
-        <p>{comment.comment}</p>
+        <p itemprop="commentText" class="content">{comment.comment}</p>
     </div>
 </div>
