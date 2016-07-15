@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
     'T3G.AgencyPack.Blog',
     'Posts',
     [
-        'Post' => 'listRecentPosts, listPostsByTag, listPostsByCategory',
+        'Post' => 'listRecentPosts, listPostsByCategory, listPostsByDate',
     ],
     [
     ]
@@ -79,6 +79,16 @@ if (!defined('TYPO3_MODE')) {
     'CommentsWidget',
     [
         'Widget' => 'comments',
+    ],
+    [
+    ]
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'T3G.AgencyPack.Blog',
+    'ArchiveWidget',
+    [
+        'Widget' => 'archive',
     ],
     [
     ]

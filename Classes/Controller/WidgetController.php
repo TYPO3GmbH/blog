@@ -88,4 +88,48 @@ class WidgetController extends ActionController
         $limit = (int) $this->settings['widgets']['comments']['limit'] ?: 5;
         $this->view->assign('comments', $this->commentRepository->findLatest($limit));
     }
+
+    /**
+     *
+     */
+    public function archiveAction()
+    {
+        $this->view->assign('archiveData', $this->resortArchiveData(
+            $this->postRepository->findMonthsAndYearsWithPosts()
+        ));
+    }
+
+    /**
+     * This method resort the database result and create a nested array
+     * in the form:
+     * [
+     *  2015 => [
+     *    [
+     *      'year' => 2015,
+     *      'month' => 3,
+     *      'count' => 9
+     *      'timestamp' => 123456789
+     *    ]
+     *    ...
+     *  ]
+     *  ...
+     * ].
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function resortArchiveData(array $data)
+    {
+        $archiveData = array();
+        foreach ($data as $result) {
+            if (empty($archiveData[$result['year']])) {
+                $archiveData[$result['year']] = array();
+            }
+            $result['timestamp'] = mktime(0, 0, 0, (int) $result['month'], 1, (int) $result['year']);
+            $archiveData[$result['year']][] = $result;
+        }
+
+        return $archiveData;
+    }
 }
