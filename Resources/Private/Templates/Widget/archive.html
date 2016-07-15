@@ -1,0 +1,45 @@
+<f:layout name="Widget" />
+
+<f:section name="content">
+    <h3 class="widget-title">Archive</h3>
+    <ul class="archive">
+    <f:for each="{archiveData}" as="rows" key="year">
+        <f:if condition="{settings.widgets.archive.groupByYear} == 1">
+            <f:then>
+                <li class="list-item archive-item archive-item-{year}">
+                    <f:link.action pageUid="{settings.blogUid}" controller="Post" action="listPostsByDate" arguments="{year: year}" title="{year}">{year}</f:link.action>
+                    <f:if condition="{settings.widgets.archive.groupByMonth} == 1">
+                        <ul>
+                            <f:for each="{rows}" as="row">
+                                <f:render section="monthLink" arguments="{settings: settings, year: year, row: row}" />
+                            </f:for>
+                        </ul>
+                    </f:if>
+                </li>
+            </f:then>
+            <f:else>
+                <f:if condition="{settings.widgets.archive.groupByMonth} == 1">
+                    <f:for each="{rows}" as="row">
+                        <f:render section="monthLink" arguments="{settings: settings, year: year, row: row}" />
+                    </f:for>
+                </f:if>
+            </f:else>
+        </f:if>
+    </f:for>
+    </ul>
+</f:section>
+
+<f:section name="monthLink">
+    <li class="list-item archive-item archive-item-{year}-{row.month}">
+        <f:link.action pageUid="{settings.blogUid}" controller="Post" action="listPostsByDate" arguments="{year: year, month: row.month}" title="{f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: row.timestamp)}">
+            <f:if condition="{settings.widgets.archive.groupByYear} == 1">
+                <f:then>
+                    {f:format.date(format: '{settings.widgets.archive.monthDateFormat}', date: row.timestamp)} <f:if condition="{settings.widgets.archive.showCounter} == 1">({row.count})</f:if>
+                </f:then>
+                <f:else>
+                    {f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: row.timestamp)} <f:if condition="{settings.widgets.archive.showCounter} == 1">({row.count})</f:if>
+                </f:else>
+            </f:if>
+        </f:link.action>
+    </li>
+</f:section>

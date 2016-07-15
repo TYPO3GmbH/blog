@@ -1,0 +1,8 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+    <h1>ListPostsByDate: <f:if condition="{month}">{f:format.date(format: '{settings.widgets.archive.monthDateFormat}', date: timestamp)}</f:if> {year}</h1>
+    <f:for each="{posts}" as="post">
+        <f:render partial="List/Post" arguments="{_all}" />
+    </f:for>
+</f:section>

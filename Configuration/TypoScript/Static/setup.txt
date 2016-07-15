@@ -9,11 +9,19 @@ plugin.tx_blog {
             10 = tt_content.list.20.blog_recentpostswidget
             20 = tt_content.list.20.blog_categorywidget
             30 = tt_content.list.20.blog_commentswidget
+            40 = tt_content.list.20.blog_archivewidget
         }
         # Widget configuration section
         widgets {
             comments {
                 limit = 5
+            }
+            archive {
+                showCounter = 1
+                groupByYear = 1
+                groupByMonth = 1
+                yearDateFormat = %Y
+                monthDateFormat = %B
             }
         }
         # Comments related settings

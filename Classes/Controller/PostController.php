@@ -17,7 +17,6 @@ namespace T3G\AgencyPack\Blog\Controller;
 
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
-use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -62,12 +61,21 @@ class PostController extends ActionController
     }
 
     /**
-     * Show a list of posts by given tag.
+     * Shows a list of posts by given month and year.
      *
-     * @param \T3G\AgencyPack\Blog\Domain\Model\Tag $tag
+     * @param int $year
+     * @param int $month
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPostsByTagAction(Tag $tag)
+    public function listPostsByDateAction($year, $month = null)
     {
+        $this->view->assignMultiple([
+            'month' => $month,
+            'year' => $year,
+            'timestamp' => mktime(0, 0, 0, $month, 1, $year),
+            'posts' => $this->postRepository->findByMonthAndYear($year, $month),
+        ]);
     }
 
     /**
