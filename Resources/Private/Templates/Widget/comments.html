@@ -1,0 +1,9 @@
+<f:layout name="Widget" />
+
+<f:section name="content">
+    <h3 class="widget-title">Recent Comments</h3>
+    <f:for each="{comments}" as="comment">
+        <h4><f:link.page pageUid="{comment.post.uid}">{comment.post.title}</f:link.page></h4>
+        <p><f:format.date format="d.m.Y">{comment.crdate}</f:format.date> | {comment.name}: {comment.comment}</p>
+    </f:for>
+</f:section>

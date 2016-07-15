@@ -11,4 +11,12 @@
                 <f:link.action pageUid="{settings.blogUid}" action="listPostsByTag" arguments="{tag: tag}">{tag.title}</f:link.action>
             </f:for></p>
     </f:if>
+    <p>
+    <f:alias map="{commentCount: '<f:count subject=\'{post.comments}\' />'}">
+        <f:if condition="{commentCount} == 1">
+            <f:then><f:translate key="message.comment" arguments="{0: commentCount}" /></f:then>
+            <f:else><f:translate key="message.comments" arguments="{0: commentCount}" /></f:else>
+        </f:if>
+    </f:alias>
+    </p>
 </div>

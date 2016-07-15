@@ -8,9 +8,15 @@ plugin.tx_blog {
         sidebarWidgets {
             10 = tt_content.list.20.blog_recentpostswidget
             20 = tt_content.list.20.blog_categorywidget
-            #20 = tt_content.list.20.blog_recentcommentswidget
-            #30 = tt_content.list.20.blog_tagswidget
+            30 = tt_content.list.20.blog_commentswidget
         }
+        # Widget configuration section
+        widgets {
+            comments {
+                limit = 5
+            }
+        }
+        # Comments related settings
         comments {
             # comments active in general or not
             active = 1

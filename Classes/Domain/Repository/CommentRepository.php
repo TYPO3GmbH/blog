@@ -31,4 +31,17 @@ class CommentRepository extends Repository
             'crdate' => QueryInterface::ORDER_DESCENDING,
         ];
     }
+
+    /**
+     * @param int $limit
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findLatest($limit = 5)
+    {
+        $query = $this->createQuery();
+        $query->setLimit($limit);
+
+        return $query->execute();
+    }
 }

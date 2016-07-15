@@ -15,17 +15,15 @@ namespace T3G\AgencyPack\Blog\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use T3G\AgencyPack\Blog\Domain\Model\Category;
-use T3G\AgencyPack\Blog\Domain\Model\Post;
-use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
+use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
- * Posts related controller.
+ * Widget related controller.
  */
-class PostController extends ActionController
+class WidgetController extends ActionController
 {
     /**
      * @var CategoryRepository
@@ -36,6 +34,11 @@ class PostController extends ActionController
      * @var PostRepository
      */
     protected $postRepository;
+
+    /**
+     * @var CommentRepository
+     */
+    protected $commentRepository;
 
     /**
      * @param CategoryRepository $categoryRepository
@@ -54,57 +57,35 @@ class PostController extends ActionController
     }
 
     /**
-     * Show a list of recent posts.
+     * @param CommentRepository $commentRepository
      */
-    public function listRecentPostsAction()
+    public function injectCommentRepository(CommentRepository $commentRepository)
+    {
+        $this->commentRepository = $commentRepository;
+    }
+
+    /**
+     *
+     */
+    public function categoriesAction()
+    {
+        $this->view->assign('categories', $this->categoryRepository->findAll());
+    }
+
+    /**
+     *
+     */
+    public function recentPostsAction()
     {
         $this->view->assign('posts', $this->postRepository->findAll());
     }
 
     /**
-     * Show a list of posts by given tag.
      *
-     * @param \T3G\AgencyPack\Blog\Domain\Model\Tag $tag
      */
-    public function listPostsByTagAction(Tag $tag)
+    public function commentsAction()
     {
-    }
-
-    /**
-     * Show a list of posts by given category.
-     *
-     * @param Category $category
-     *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public function listPostsByCategoryAction(Category $category)
-    {
-        $this->view->assign('posts', $this->postRepository->findAllByCategory($category));
-        $this->view->assign('category', $category);
-    }
-
-    /**
-     * Sidebar action.
-     */
-    public function sidebarAction()
-    {
-    }
-
-    /**
-     * Metadata action: output meta information of blog post.
-     */
-    public function metadataAction()
-    {
-        $this->view->assign('post', $this->postRepository->findCurrentPost());
-    }
-
-    /**
-     * Show single post.
-     *
-     * @param Post $post
-     */
-    public function showAction(Post $post)
-    {
-        $this->view->assign('post', $post);
+        $limit = (int) $this->settings['widgets']['comments']['limit'] ?: 5;
+        $this->view->assign('comments', $this->commentRepository->findLatest($limit));
     }
 }

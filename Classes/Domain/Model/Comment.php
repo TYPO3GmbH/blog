@@ -75,6 +75,13 @@ class Comment extends AbstractEntity
     protected $post;
 
     /**
+     * The blog post creation date.
+     *
+     * @var \DateTime
+     */
+    protected $crdate;
+
+    /**
      * @return FrontendUser
      */
     public function getAuthor()
@@ -210,6 +217,26 @@ class Comment extends AbstractEntity
     public function setPost(Post $post)
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCrdate()
+    {
+        return $this->crdate;
+    }
+
+    /**
+     * @param \DateTime $crdate
+     *
+     * @return Comment
+     */
+    public function setCrdate(\DateTime $crdate)
+    {
+        $this->crdate = $crdate;
 
         return $this;
     }

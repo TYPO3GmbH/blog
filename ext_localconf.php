@@ -58,7 +58,7 @@ if (!defined('TYPO3_MODE')) {
     'T3G.AgencyPack.Blog',
     'RecentPostsWidget',
     [
-        'Post' => 'widgetRecentPosts',
+        'Widget' => 'recentPosts',
     ],
     [
     ]
@@ -68,7 +68,17 @@ if (!defined('TYPO3_MODE')) {
     'T3G.AgencyPack.Blog',
     'CategoryWidget',
     [
-        'Post' => 'widgetCategories',
+        'Widget' => 'categories',
+    ],
+    [
+    ]
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'T3G.AgencyPack.Blog',
+    'CommentsWidget',
+    [
+        'Widget' => 'comments',
     ],
     [
     ]
