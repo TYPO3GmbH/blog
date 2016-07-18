@@ -67,6 +67,14 @@ call_user_func(
                     ],
                 ],
             ],
+            'sharing_enabled' => [
+                'exclude' => 1,
+                'label' => $ll . 'pages.sharing_enabled',
+                'config' => [
+                    'type' => 'check',
+                    'default' => '1',
+                ],
+            ],
         ];
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
@@ -75,7 +83,7 @@ call_user_func(
         );
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             'pages',
-            '--div--;' . $ll . 'pages.tabs.blog, comments_active, comments',
+            '--div--;' . $ll . 'pages.tabs.blog, comments_active, comments, sharing_enabled',
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
     },

@@ -72,6 +72,13 @@ class Post extends AbstractEntity
     protected $comments;
 
     /**
+     * Sharing enabled flag for this blog post. This flag can be used in views to enable sharing tools.
+     *
+     * @var bool
+     */
+    protected $sharingEnabled;
+
+    /**
      * Post constructor.
      */
     public function __construct()
@@ -256,6 +263,26 @@ class Post extends AbstractEntity
     public function removeComment(Comment $comment)
     {
         $this->comments->detach($comment);
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSharingEnabled()
+    {
+        return $this->sharingEnabled;
+    }
+
+    /**
+     * @param bool $sharingEnabled
+     *
+     * @return $this
+     */
+    public function setSharingEnabled($sharingEnabled)
+    {
+        $this->sharingEnabled = (bool)$sharingEnabled;
 
         return $this;
     }
