@@ -9,6 +9,9 @@
 			<trans-unit id="pages.comments" xml:space="preserve">
 				<source>Comments</source>
 			</trans-unit>
+			<trans-unit id="pages.sharing_enabled" xml:space="preserve">
+				<source>Sharing enabled (show sharing links)</source>
+			</trans-unit>
 			<trans-unit id="pages.tabs.blog" xml:space="preserve">
 				<source>Blog</source>
 			</trans-unit>
