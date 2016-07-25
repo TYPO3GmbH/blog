@@ -57,6 +57,12 @@
 			<trans-unit id="message.addComment.moderation.text" xml:space="preserve">
 				<source>Your comment was added successfully and is now waiting for approval.</source>
 			</trans-unit>
+			<trans-unit id="meta.title.listPostsByDate" xml:space="preserve">
+				<source>All blog posts in ###MONTH_NAME### ###YEAR###</source>
+			</trans-unit>
+			<trans-unit id="meta.description.listPostsByDate" xml:space="preserve">
+				<source>All blog posts ordered by date</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
