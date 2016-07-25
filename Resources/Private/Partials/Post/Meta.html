@@ -1,20 +1,22 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+
 <div class="entry-meta">
     <span class="entry-date">
-        <f:link.page pageUid="{post.uid}" rel="bookmark">
+        <blog:link.post post="{post}" rel="bookmark">
             <time class="entry-date published" datetime="{f:format.date(format: '%Y-%m-%dT%H:%M:%S-%z', date: post.crdate)}" itemprop="datepublished">{f:format.date(format: '{settings.lists.posts.dateFormat}', date: post.crdate)}</time>
-        </f:link.page>
+        </blog:link.post>
     </span>
     <f:if condition="{post.categories}">
         <span class="sep">·</span>
         <f:for each="{post.categories}" as="postCategory">
-            <f:link.action pageUid="{settings.blogUid}" controller="Post" action="listPostsByCategory" arguments="{category: postCategory}">{postCategory.title}</f:link.action>
+            <blog:link.category category="{postCategory}" />
         </f:for>
     </f:if>
     <f:if condition="{post.tags}">
         <span class="sep">·</span>
         <span itemprop="keywords">
             <f:for each="{post.tags}" as="tag">
-                <f:link.action pageUid="{settings.blogUid}" controller="Post" action="listPostsByTag" arguments="{tag: tag}">{tag.title}</f:link.action>
+                <f:link.action pageUid="{settings.tagsUid}" controller="Post" action="listPostsByTag" arguments="{tag: tag}">{tag.title}</f:link.action>
             </f:for>
         </span>
     </f:if>
@@ -22,12 +24,12 @@
         <span class="sep">·</span>
         <meta itemprop="commentCount" content="{commentCount}" />
         <span class="comments-link">
-        <f:link.page pageUid="{post.uid}" section="comments">
+        <blog:link.post post="{post}" section="comments">
         <f:if condition="{commentCount} == 1">
             <f:then><f:translate key="message.comment" arguments="{0: commentCount}" /></f:then>
             <f:else><f:translate key="message.comments" arguments="{0: commentCount}" /></f:else>
         </f:if>
-        </f:link.page>
+        </blog:link.post>
         </span>
     </f:alias>
 </div>
