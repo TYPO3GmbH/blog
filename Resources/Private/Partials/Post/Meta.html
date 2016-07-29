@@ -9,14 +9,16 @@
     <f:if condition="{post.categories}">
         <span class="sep">·</span>
         <f:for each="{post.categories}" as="postCategory">
-            <blog:link.category category="{postCategory}" />
+            <blog:link.category category="{postCategory}" class="label label-default label-category" />
         </f:for>
     </f:if>
     <f:if condition="{post.tags}">
         <span class="sep">·</span>
         <span itemprop="keywords">
-            <f:for each="{post.tags}" as="tag">
-                <f:link.action pageUid="{settings.tagsUid}" controller="Post" action="listPostsByTag" arguments="{tag: tag}">{tag.title}</f:link.action>
+            <f:for each="{post.tags}" as="postTag">
+                <blog:link.tag tag="{postTag}" class="label label-default label-tag">
+                    <span><i class="fa fa-tag"></i> {postTag.title}</span>
+                </blog:link.tag>
             </f:for>
         </span>
     </f:if>

@@ -5,14 +5,15 @@ plugin.tx_blog {
     settings {
         blogUid = {$plugin.tx_blog.settings.blogUid}
         categoryUid  = {$plugin.tx_blog.settings.categoryUid}
-        tagsUid  = {$plugin.tx_blog.settings.tagUid}
+        tagUid  = {$plugin.tx_blog.settings.tagUid}
         archiveUid = {$plugin.tx_blog.settings.archiveUid}
         storagePid = {$plugin.tx_blog.persistence.storagePid}
         sidebarWidgets {
             10 = tt_content.list.20.blog_recentpostswidget
             20 = tt_content.list.20.blog_categorywidget
-            30 = tt_content.list.20.blog_commentswidget
-            40 = tt_content.list.20.blog_archivewidget
+            30 = tt_content.list.20.blog_tagwidget
+            40 = tt_content.list.20.blog_commentswidget
+            50 = tt_content.list.20.blog_archivewidget
         }
         # Lists related settings
         lists {
@@ -24,6 +25,13 @@ plugin.tx_blog {
         widgets {
             comments {
                 limit = 5
+            }
+            tags {
+                limit = 20
+                # Minimum size in percent
+                minSize = 100
+                # Maximum size in percent
+                maxSize = 200
             }
             archive {
                 showCounter = 1

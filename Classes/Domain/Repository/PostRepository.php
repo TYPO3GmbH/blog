@@ -17,6 +17,7 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
+use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
@@ -73,6 +74,22 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
         $constraints[] = $query->contains('categories', $category);
+
+        return $query->matching($query->logicalAnd($constraints))->execute();
+    }
+
+    /**
+     * @param Tag $tag
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findAllByTag(Tag $tag)
+    {
+        $query = $this->createQuery();
+        $constraints = $this->defaultConstraints;
+        $constraints[] = $query->contains('tags', $tag);
 
         return $query->matching($query->logicalAnd($constraints))->execute();
     }

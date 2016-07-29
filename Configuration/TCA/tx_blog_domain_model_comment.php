@@ -7,7 +7,9 @@ $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
 return [
     'ctrl' => [
         'title' => $ll . 'tx_blog_domain_model_comment',
-        'label' => 'comment',
+        'label' => 'name',
+        'label_alt' => 'crdate',
+        'label_alt_force' => 1,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',

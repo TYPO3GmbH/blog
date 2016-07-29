@@ -22,6 +22,13 @@ if (!defined('TYPO3_MODE')) {
 );
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'T3G.AgencyPack.Blog',
+    'Tag',
+    [
+        'Post' => 'listPostsByTag',
+    ]
+);
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'T3G.AgencyPack.Blog',
     'Archive',
     [
         'Post' => 'listPostsByDate',
@@ -77,6 +84,14 @@ if (!defined('TYPO3_MODE')) {
     'CategoryWidget',
     [
         'Widget' => 'categories',
+    ]
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'T3G.AgencyPack.Blog',
+    'TagWidget',
+    [
+        'Widget' => 'tags',
     ]
 );
 

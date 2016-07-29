@@ -49,6 +49,11 @@ call_user_func(
         );
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
             'T3G.AgencyPack.Blog',
+            'Tag',
+            'Blog: List by tags'
+        );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'T3G.AgencyPack.Blog',
             'Archive',
             'Blog: Archive'
         );

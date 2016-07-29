@@ -12,6 +12,9 @@
 			<trans-unit id="headline.category" xml:space="preserve">
 				<source>Category: %s</source>
 			</trans-unit>
+			<trans-unit id="headline.tag" xml:space="preserve">
+				<source>Tag: %s</source>
+			</trans-unit>
 			<trans-unit id="form.comment.name" xml:space="preserve">
 				<source>Name</source>
 			</trans-unit>

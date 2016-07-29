@@ -72,6 +72,13 @@ class Post extends AbstractEntity
     protected $comments;
 
     /**
+     * Tags of the blog post.
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Tag>
+     */
+    protected $tags;
+
+    /**
      * Sharing enabled flag for this blog post. This flag can be used in views to enable sharing tools.
      *
      * @var bool
@@ -85,6 +92,7 @@ class Post extends AbstractEntity
     {
         $this->categories = new ObjectStorage();
         $this->comments = new ObjectStorage();
+        $this->tags = new ObjectStorage();
     }
 
     /**
@@ -283,6 +291,50 @@ class Post extends AbstractEntity
     public function setSharingEnabled($sharingEnabled)
     {
         $this->sharingEnabled = (bool)$sharingEnabled;
+
+        return $this;
+    }
+
+    /**
+     * @return ObjectStorage
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param ObjectStorage $tags
+     *
+     * @return $this
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * @param Tag $tag
+     *
+     * @return $this
+     */
+    public function addTag(Tag $tag)
+    {
+        $this->tags->attach($tag);
+
+        return $this;
+    }
+
+    /**
+     * @param Tag $tag
+     *
+     * @return $this
+     */
+    public function removeTag(Tag $tag)
+    {
+        $this->tags->detach($tag);
 
         return $this;
     }

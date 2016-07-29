@@ -18,6 +18,7 @@ namespace T3G\AgencyPack\Blog\Controller;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -29,6 +30,11 @@ class WidgetController extends ActionController
      * @var CategoryRepository
      */
     protected $categoryRepository;
+
+    /**
+     * @var TagRepository
+     */
+    protected $tagRepository;
 
     /**
      * @var PostRepository
@@ -46,6 +52,14 @@ class WidgetController extends ActionController
     public function injectCategoryRepository(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
+    }
+
+    /**
+     * @param TagRepository $tagRepository
+     */
+    public function injectTagRepository(TagRepository $tagRepository)
+    {
+        $this->tagRepository = $tagRepository;
     }
 
     /**
@@ -70,6 +84,39 @@ class WidgetController extends ActionController
     public function categoriesAction()
     {
         $this->view->assign('categories', $this->categoryRepository->findAll());
+    }
+
+    /**
+     *
+     */
+    public function tagsAction()
+    {
+        $limit = (int) $this->settings['widgets']['tags']['limit'] ?: 20;
+        $minSize = (int) $this->settings['widgets']['tags']['minSize'] ?: 10;
+        $maxSize = (int) $this->settings['widgets']['tags']['maxSize'] ?: 10;
+        $tags = $this->tagRepository->findTopByUsage($limit);
+        $minimumCount = null;
+        $maximumCount = 0;
+        foreach ($tags as $tag) {
+            if ($tag['cnt'] > $maximumCount) {
+                $maximumCount = $tag['cnt'];
+            }
+            if ($minimumCount === null || $tag['cnt'] < $minimumCount) {
+                $minimumCount = $tag['cnt'];
+            }
+        }
+        $spread = $maximumCount - $minimumCount;
+
+        if ($spread === 0) {
+            $spread = 1;
+        }
+
+        foreach ($tags as &$tag) {
+            $size = $minSize + ($tag['cnt'] - $minimumCount) * ($maxSize - $minSize) / $spread;
+            $tag['size'] = floor($size);
+        }
+
+        $this->view->assign('tags', $tags);
     }
 
     /**
