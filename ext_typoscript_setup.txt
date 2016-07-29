@@ -25,5 +25,11 @@ config.tx_extbase.persistence {
                 columns.parentid.mapOnProperty = post
             }
         }
+        T3G\AgencyPack\Blog\Domain\Model\Tag {
+            newRecordStoragePid = {$plugin.tx_blog.persistence.storagePid}
+            mapping {
+                tableName = tx_blog_domain_model_tag
+            }
+        }
     }
 }

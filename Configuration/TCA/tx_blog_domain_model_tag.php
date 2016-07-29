@@ -93,6 +93,11 @@ return [
             ],
             'defaultExtras' => 'richtext:rte_transform',
         ],
+        'post' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
     ],
     'types' => [
         0 => [

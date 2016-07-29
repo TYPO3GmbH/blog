@@ -59,7 +59,7 @@ call_user_func(
                     'autoSizeMax' => 30,
                     'multiple' => 0,
                     'appearance' => [
-                        'collapseAll' => 0,
+                        'collapseAll' => 1,
                         'levelLinksPosition' => 'top',
                         'showSynchronizationLink' => 1,
                         'showPossibleLocalizationRecords' => 1,
@@ -75,6 +75,22 @@ call_user_func(
                     'default' => '1',
                 ],
             ],
+            'tags' => [
+                'exclude' => 1,
+                'label' => $ll . 'pages.tags',
+                'config' => [
+                    'type' => 'select',
+                    'size' => 10,
+                    'minitems' => 0,
+                    'maxitems' => 9999,
+                    'autoSizeMax' => 10,
+                    'multiple' => 0,
+                    'foreign_table' => 'tx_blog_domain_model_tag',
+                    'MM' => 'tx_blog_tag_pages_mm',
+                    'enableMultiSelectFilterTextfield' => 1,
+                ],
+
+            ]
         ];
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
@@ -83,7 +99,7 @@ call_user_func(
         );
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             'pages',
-            '--div--;' . $ll . 'pages.tabs.blog, comments_active, comments, sharing_enabled',
+            '--div--;' . $ll . 'pages.tabs.blog, tags, comments_active, comments, sharing_enabled',
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
     },

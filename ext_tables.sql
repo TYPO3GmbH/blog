@@ -29,6 +29,19 @@ CREATE TABLE tx_blog_domain_model_tag (
 );
 
 #
+# Table structure for table 'tx_blog_tag_pages_mm'
+#
+CREATE TABLE tx_blog_tag_pages_mm (
+  uid_local int(11) DEFAULT '0' NOT NULL,
+  uid_foreign int(11) DEFAULT '0' NOT NULL,
+  sorting int(11) DEFAULT '0' NOT NULL,
+  sorting_foreign int(11) DEFAULT '0' NOT NULL,
+
+  KEY uid_local (uid_local),
+  KEY uid_foreign (uid_foreign)
+);
+
+#
 # Table structure for table 'sys_category'
 #
 CREATE TABLE sys_category (
@@ -73,7 +86,8 @@ CREATE TABLE tx_blog_domain_model_comment (
 CREATE TABLE pages (
   comments_active tinyint(4) DEFAULT '1' NOT NULL,
   sharing_enabled tinyint(4) DEFAULT '1' NOT NULL,
-  comments text
+  comments text,
+  tags text
 );
 
 #
@@ -82,6 +96,7 @@ CREATE TABLE pages (
 CREATE TABLE pages_language_overlay (
   comments_active tinyint(4) DEFAULT '1' NOT NULL,
   sharing_enabled tinyint(4) DEFAULT '1' NOT NULL,
-  comments text
+  comments text,
+  tags text
 );
 

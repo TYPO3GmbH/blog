@@ -17,6 +17,7 @@ namespace T3G\AgencyPack\Blog\Controller;
 
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
+use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\MetaService;
@@ -122,7 +123,24 @@ class PostController extends ActionController
         $this->view->assign('category', $category);
         MetaService::set(MetaService::META_TITLE, $category->getTitle());
         MetaService::set(MetaService::META_DESCRIPTION, $category->getDescription());
-        MetaService::set(MetaService::META_CATEGORIES, $category->getTitle());
+        MetaService::set(MetaService::META_CATEGORIES, [$category->getTitle()]);
+    }
+
+    /**
+     * Show a list of posts by given tag.
+     *
+     * @param Tag $tag
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws \RuntimeException
+     */
+    public function listPostsByTagAction(Tag $tag)
+    {
+        $this->view->assign('posts', $this->postRepository->findAllByTag($tag));
+        $this->view->assign('tag', $tag);
+        MetaService::set(MetaService::META_TITLE, $tag->getTitle());
+        MetaService::set(MetaService::META_DESCRIPTION, $tag->getDescription());
+        MetaService::set(MetaService::META_TAGS, [$tag->getTitle()]);
     }
 
     /**

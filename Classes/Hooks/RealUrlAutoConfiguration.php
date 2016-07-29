@@ -31,10 +31,22 @@ class RealUrlAutoConfiguration
     {
         ArrayUtility::mergeRecursiveWithOverrule($params['config'], [
             'fixedPostVars' => [
-                // &tx_blog_posts[category]=5
-                // &tx_blog_posts[action]=listPostsByCategory
-                // &tx_blog_posts[controller]=Post
-                // &cHash=54c1feebfaf5540122794700e9b39b81
+                'tx_blog_tag' => [
+                    [
+                        'GETvar' => 'tx_blog_tag[tag]',
+                        'lookUpTable' => [
+                            'table' => 'tx_blog_domain_model_tag',
+                            'id_field' => 'uid',
+                            'alias_field' => 'title',
+                            'useUniqueCache' => 1,
+                            'useUniqueCache_conf' => [
+                                'strtolower' => 1,
+                                'spaceCharacter' => '-',
+                            ],
+                            'noMatch' => 'bypass',
+                        ],
+                    ]
+                ],
                 'tx_blog_category' => [
                     [
                         'GETvar' => 'tx_blog_category[category]',

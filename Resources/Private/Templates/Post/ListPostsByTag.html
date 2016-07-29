@@ -1,0 +1,15 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+    <h1 class="page-title"><f:translate key="headline.tag" arguments="{0: tag.title}" /></h1>
+    <div class="taxonomy-description">
+        <p>{tag.description}</p>
+        <f:if condition="{tag.content}">
+            <f:cObject typoscriptObjectPath="lib.blog.contentElementRendering">{tag.contentElementUidList}</f:cObject>
+        </f:if>
+    </div>
+
+    <f:for each="{posts}" as="post">
+        <f:render partial="List/Post" arguments="{_all}" />
+    </f:for>
+</f:section>
