@@ -1,5 +1,6 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
 <div class="post">
-    <h2 itemprop="name"><f:link.page pageUid="{post.uid}">{post.title}</f:link.page></h2>
+    <h2 itemprop="name"><blog:link.post post="{post}" /></h2>
     <f:render partial="Post/Meta" arguments="{_all}" />
     <f:if condition="{post.abstract}">
         <f:then>

@@ -1,3 +1,4 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
 <f:layout name="Widget" />
 
 <f:section name="content">
@@ -7,7 +8,7 @@
         <f:if condition="{settings.widgets.archive.groupByYear} == 1">
             <f:then>
                 <li class="list-item archive-item archive-item-{year}">
-                    <f:link.action pageUid="{settings.blogUid}" controller="Post" action="listPostsByDate" arguments="{year: year}" title="{year}">{year}</f:link.action>
+                    <blog:link.archive year="{year}" title="{year}">{year}</blog:link.archive>
                     <f:if condition="{settings.widgets.archive.groupByMonth} == 1">
                         <ul>
                             <f:for each="{rows}" as="row">
@@ -31,7 +32,7 @@
 
 <f:section name="monthLink">
     <li class="list-item archive-item archive-item-{year}-{row.month}">
-        <f:link.action pageUid="{settings.blogUid}" controller="Post" action="listPostsByDate" arguments="{year: year, month: row.month}" title="{f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: row.timestamp)}">
+        <blog:link.archive year="{year}" month="{row.month}" title="{f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: row.timestamp)}">
             <f:if condition="{settings.widgets.archive.groupByYear} == 1">
                 <f:then>
                     {f:format.date(format: '{settings.widgets.archive.monthDateFormat}', date: row.timestamp)} <f:if condition="{settings.widgets.archive.showCounter} == 1">({row.count})</f:if>
@@ -40,6 +41,6 @@
                     {f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: row.timestamp)} <f:if condition="{settings.widgets.archive.showCounter} == 1">({row.count})</f:if>
                 </f:else>
             </f:if>
-        </f:link.action>
+        </blog:link.archive>
     </li>
 </f:section>

@@ -7,9 +7,27 @@ if (!defined('TYPO3_MODE')) {
     'T3G.AgencyPack.Blog',
     'Posts',
     [
-        'Post' => 'listRecentPosts, listPostsByCategory, listPostsByDate',
+        'Post' => 'listRecentPosts',
+    ]
+);
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'T3G.AgencyPack.Blog',
+    'Category',
+    [
+        'Post' => 'listPostsByCategory',
     ],
     [
+        'Post' => 'listPostsByCategory',
+    ]
+);
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'T3G.AgencyPack.Blog',
+    'Archive',
+    [
+        'Post' => 'listPostsByDate',
+    ],
+    [
+        'Post' => 'listPostsByDate',
     ]
 );
 
@@ -18,8 +36,6 @@ if (!defined('TYPO3_MODE')) {
     'Sidebar',
     [
         'Post' => 'sidebar',
-    ],
-    [
     ]
 );
 
@@ -28,8 +44,6 @@ if (!defined('TYPO3_MODE')) {
     'CommentForm',
     [
         'Comment' => 'form, addComment',
-    ],
-    [
     ]
 );
 
@@ -38,8 +52,6 @@ if (!defined('TYPO3_MODE')) {
     'Comments',
     [
         'Comment' => 'comments',
-    ],
-    [
     ]
 );
 
@@ -48,8 +60,6 @@ if (!defined('TYPO3_MODE')) {
     'Meta',
     [
         'Post' => 'metadata',
-    ],
-    [
     ]
 );
 
@@ -59,8 +69,6 @@ if (!defined('TYPO3_MODE')) {
     'RecentPostsWidget',
     [
         'Widget' => 'recentPosts',
-    ],
-    [
     ]
 );
 
@@ -69,8 +77,6 @@ if (!defined('TYPO3_MODE')) {
     'CategoryWidget',
     [
         'Widget' => 'categories',
-    ],
-    [
     ]
 );
 
@@ -79,8 +85,6 @@ if (!defined('TYPO3_MODE')) {
     'CommentsWidget',
     [
         'Widget' => 'comments',
-    ],
-    [
     ]
 );
 
@@ -89,7 +93,10 @@ if (!defined('TYPO3_MODE')) {
     'ArchiveWidget',
     [
         'Widget' => 'archive',
-    ],
-    [
     ]
 );
+
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['blog'] =
+        \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class . '->addBlogConfiguration';
+}

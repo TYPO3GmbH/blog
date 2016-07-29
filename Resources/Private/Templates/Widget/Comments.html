@@ -1,3 +1,4 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
 <f:layout name="Widget" />
 
 <f:section name="content">
@@ -11,7 +12,7 @@
                     <f:then><f:link.external<f:link.external uri="{comment.url}" target="_blank" rel="external nofollow" class="url">{comment.name}</f:link.external></f:then>
                     <f:else>{comment.name}</f:else>
                 </f:if>
-            </span> - <f:link.page pageUid="{comment.post.uid}" section="comment-{comment.uid}">{comment.post.title}</f:link.page>
+            </span> - <blog:link.post post="{comment.post}" section="comment-{comment.uid}">{comment.post.title}</blog:link.post>
             <br/><f:format.crop maxCharacters="100" append="&nbsp;[...]">{comment.comment}</f:format.crop></br>
         </li>
         </f:for>

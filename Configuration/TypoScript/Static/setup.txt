@@ -4,6 +4,9 @@ plugin.tx_blog {
     }
     settings {
         blogUid = {$plugin.tx_blog.settings.blogUid}
+        categoryUid  = {$plugin.tx_blog.settings.categoryUid}
+        tagsUid  = {$plugin.tx_blog.settings.tagUid}
+        archiveUid = {$plugin.tx_blog.settings.archiveUid}
         storagePid = {$plugin.tx_blog.persistence.storagePid}
         sidebarWidgets {
             10 = tt_content.list.20.blog_recentpostswidget

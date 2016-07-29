@@ -1,10 +1,12 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+
 <f:layout name="Widget" />
 
 <f:section name="content">
     <h3 class="widget-title">Categories</h3>
     <ul class="categories list-inline">
     <f:for each="{categories}" as="category">
-        <li class="list-item category-item category-item-{category.uid}"><f:link.action pageUid="{settings.blogUid}" controller="Post" action="listPostsByCategory" arguments="{category: category}" title="{category.description}">{category.title}</f:link.action></li>
+        <li class="list-item category-item category-item-{category.uid}"><blog:link.category category="{category}" /></li>
     </f:for>
     </ul>
 </f:section>

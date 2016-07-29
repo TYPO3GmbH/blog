@@ -1,10 +1,11 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
 <f:layout name="Widget" />
 
 <f:section name="content">
     <h3 class="widget-title">Recent Posts</h3>
     <ul class="list list-unstyled">
     <f:for each="{posts}" as="post">
-        <li><f:link.page pageUid="{post.uid}">{post.title}</f:link.page></li>
+        <li><blog:link.post post="{post}" /></li>
     </f:for>
     </ul>
 </f:section>
