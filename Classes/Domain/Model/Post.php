@@ -86,6 +86,11 @@ class Post extends AbstractEntity
     protected $sharingEnabled;
 
     /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     */
+    protected $media;
+
+    /**
      * Post constructor.
      */
     public function __construct()
@@ -93,6 +98,7 @@ class Post extends AbstractEntity
         $this->categories = new ObjectStorage();
         $this->comments = new ObjectStorage();
         $this->tags = new ObjectStorage();
+        $this->media = new ObjectStorage();
     }
 
     /**
@@ -337,5 +343,21 @@ class Post extends AbstractEntity
         $this->tags->detach($tag);
 
         return $this;
+    }
+
+    /**
+     * @return ObjectStorage
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $media
+     */
+    public function setMedia($media)
+    {
+        $this->media = $media;
     }
 }
