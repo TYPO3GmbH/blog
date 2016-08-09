@@ -98,7 +98,6 @@ class Post extends AbstractEntity
         $this->categories = new ObjectStorage();
         $this->comments = new ObjectStorage();
         $this->tags = new ObjectStorage();
-        $this->image = new ObjectStorage();
         $this->media = new ObjectStorage();
     }
 
