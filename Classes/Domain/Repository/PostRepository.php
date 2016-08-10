@@ -23,7 +23,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class PostRepository.
@@ -126,7 +125,11 @@ class PostRepository extends Repository
      */
     public function findCurrentPost()
     {
-        $pageId = (int)$this->getTypoScriptFrontendController()->id;
+        if(isset($GLOBALS['TSFE']) && $GLOBALS['TSFE'] !== null) {
+            $pageId = (int) $GLOBALS['TSFE']->id;
+        } else {
+            $pageId = (int) GeneralUtility::_GP('id');
+        }
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
         $constraints[] = $query->equals('uid', $pageId);
@@ -170,13 +173,5 @@ class PostRepository extends Repository
     protected function getDatabaseConnection()
     {
         return $GLOBALS['TYPO3_DB'];
-    }
-
-    /**
-     * @return TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
-    {
-        return $GLOBALS['TSFE'];
     }
 }
