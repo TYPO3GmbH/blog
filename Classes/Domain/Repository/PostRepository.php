@@ -125,7 +125,9 @@ class PostRepository extends Repository
      */
     public function findCurrentPost()
     {
-        $pageId = (int) GeneralUtility::_GP('id');
+        $pageId = !empty($GLOBALS['TSFE'])
+            ? (int) $GLOBALS['TSFE']->id
+            : (int) GeneralUtility::_GP('id');
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
         $constraints[] = $query->equals('uid', $pageId);
