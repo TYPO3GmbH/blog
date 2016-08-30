@@ -80,6 +80,7 @@ call_user_func(
                 'label' => $ll . 'pages.tags',
                 'config' => [
                     'type' => 'select',
+                    'renderType' => 'selectMultipleSideBySide',
                     'size' => 10,
                     'minitems' => 0,
                     'maxitems' => 9999,
