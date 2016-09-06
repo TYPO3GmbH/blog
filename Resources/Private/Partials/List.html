@@ -1,0 +1,14 @@
+<div class="tx-blog-post-list {class}" xmlns:f="http://www.w3.org/1999/html">
+    <f:if condition="{posts}">
+        <f:then>
+            <f:for each="{posts}" as="post">
+                <f:render partial="List/Post" arguments="{_all}" />
+            </f:for>
+        </f:then>
+        <f:else>
+            <div class="alert alert-info" role="alert">
+                <strong><f:translate key="list.no_posts.title" /></strong><br/><f:translate key="list.no_posts.message" />
+            </div>
+        </f:else>
+    </f:if>
+</div>

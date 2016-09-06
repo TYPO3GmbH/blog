@@ -9,7 +9,5 @@
         </f:if>
     </div>
 
-    <f:for each="{posts}" as="post">
-        <f:render partial="List/Post" arguments="{_all}" />
-    </f:for>
+    <f:render partial="List" arguments="{_all}" />
 </f:section>
