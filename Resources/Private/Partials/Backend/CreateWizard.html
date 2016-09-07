@@ -1,0 +1,30 @@
+<f:link.action action="createBlog" arguments="{data: {template: '@template', install: '@install', title: '@title'}}" class="btn btn-primary t3js-setup-wizard-trigger" data="{button-close-text: '{f:translate(key: \'wizard.button.cancel\')}', button-ok-text: '{f:translate(key: \'wizard.button.setup\')}'}"><f:translate key="wizard.button.trigger" /></f:link.action>
+<div class="hidden t3js-setup-wizard-step1">
+    <div class="step-content">
+        <p class="lead"><f:translate key="wizard.lead" /></p>
+        <p><f:translate key="wizard.description" /></p>
+        <div class="options" style="background-color: #eeeeee;padding: 10px;border: 1px solid #bbbbbb;">
+            <h4><f:translate key="wizard.headline.settings" /></h4>
+            <div class="form-group">
+                <label><f:translate key="wizard.label.title" /></label>
+                <f:form.textfield name="title" class="form-control" placeholder="{f:translate(key: 'wizard.placeholder.title')}"/>
+            </div>
+            <f:if condition="{templateExists}">
+                <f:then>
+                    <h4><f:translate key="wizard.headline.template" /></h4>
+                    <p><f:translate key="wizard.message.template.found" /></p>
+                    <div class="checkbox">
+                        <label><f:form.checkbox name="template" value="1" /><f:translate key="wizard.label.template" /></label>
+                    </div>
+                </f:then>
+                <f:else>
+                    <h4><f:translate key="wizard.headline.template" /></h4>
+                    <p><f:translate key="wizard.message.template.not_found" /></p>
+                    <div class="checkbox">
+                        <label><f:form.checkbox name="install" value="1" /><f:translate key="wizard.label.install" /></label>
+                    </div>
+                </f:else>
+            </f:if>
+        </div>
+    </div>
+</div>

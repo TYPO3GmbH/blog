@@ -2,6 +2,12 @@
 
 defined('TYPO3_MODE') or die();
 
+$GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
+    0 => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf:blog-folder',
+    1 => 'blog',
+    2 => 'apps-pagetree-folder-contains-blog'
+];
+
 call_user_func(
     function ($extKey, $table) {
         $extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($extKey);
@@ -87,6 +93,7 @@ call_user_func(
                     'autoSizeMax' => 10,
                     'multiple' => 0,
                     'foreign_table' => 'tx_blog_domain_model_tag',
+                    'foreign_table_where' => 'AND tx_blog_domain_model_tag.pid = ###PAGE_TSCONFIG_ID###',
                     'MM' => 'tx_blog_tag_pages_mm',
                     'enableMultiSelectFilterTextfield' => 1,
                 ],
@@ -98,6 +105,9 @@ call_user_func(
             'pages',
             $temporaryColumns
         );
+        $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where']
+            = ' AND sys_category.pid = ###PAGE_TSCONFIG_ID### '
+            . $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where'];
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             'pages',
             '--div--;' . $ll . 'pages.tabs.blog, tags, comments_active, comments, sharing_enabled',
@@ -107,3 +117,4 @@ call_user_func(
     'blog',
     'pages'
 );
+

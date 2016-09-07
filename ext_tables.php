@@ -12,6 +12,8 @@ call_user_func(
 
         // Provide icon for page tree, list view, ... :
         $icons = [
+            'blog-link-wizard' => 'EXT:blog/Resources/Public/Icons/blog-link-wizard.svg',
+            'apps-pagetree-folder-contains-blog' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-folder-contains-blog.svg',
             'apps-pagetree-blog' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog.svg',
             'apps-pagetree-blog-category' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-category.svg',
             'apps-pagetree-blog-comment' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment.svg',
@@ -77,5 +79,23 @@ call_user_func(
             'Comments',
             'Blog: Comments'
         );
+
+        if (TYPO3_MODE === 'BE') {
+            // Module System > Backend Users
+            \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+                'T3G.AgencyPack.Blog',
+                'system',
+                'tx_Blog',
+                'top',
+                array(
+                    'Backend' => 'index, createBlog'
+                ),
+                array(
+                    'access' => 'admin',
+                    'icon' => 'EXT:blog/Resources/Public/Icons/module-blog.svg',
+                    'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf'
+                )
+            );
+        }
     }
 );
