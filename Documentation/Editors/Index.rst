@@ -36,7 +36,7 @@ To create a new post, follow these steps:
 8. Choose tags for your blog post
 9. Choose whether you want to enable comments
 10. Choose whether you want to enable sharing
-11. Define an archive date whether your wnt to remove a blog post by given date from the main list (not for tag, category, date or archive lists)
+11. Define an archive date if your want to remove a blog post by given date from the main list (not for tag, category, date or archive lists)
 
 .. note::
 
