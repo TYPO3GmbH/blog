@@ -12,8 +12,14 @@
 			<trans-unit id="headline.category" xml:space="preserve">
 				<source>Category: %s</source>
 			</trans-unit>
+			<trans-unit id="headline.categories" xml:space="preserve">
+				<source>Categories</source>
+			</trans-unit>
 			<trans-unit id="headline.tag" xml:space="preserve">
 				<source>Tag: %s</source>
+			</trans-unit>
+			<trans-unit id="headline.tags" xml:space="preserve">
+				<source>Tags</source>
 			</trans-unit>
 			<trans-unit id="form.comment.name" xml:space="preserve">
 				<source>Name</source>
@@ -125,6 +131,7 @@
 			</trans-unit>
 			<trans-unit id="wizard.label.install" xml:space="preserve">
 				<source>Yes, please install and use the template provided by the extension</source>
+			</trans-unit>
 			<trans-unit id="constantEditor.blog" xml:space="preserve">
 				<source>TYPO3 Blog</source>
 			</trans-unit>
