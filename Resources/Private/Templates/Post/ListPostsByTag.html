@@ -1,13 +1,28 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
 <f:layout name="Default" />
 
 <f:section name="content">
-    <h1 class="page-title"><f:translate key="headline.tag" arguments="{0: tag.title}" /></h1>
-    <div class="taxonomy-description">
-        <p>{tag.description}</p>
-        <f:if condition="{tag.content}">
-            <f:cObject typoscriptObjectPath="lib.blog.contentElementRendering">{tag.contentElementUidList}</f:cObject>
-        </f:if>
-    </div>
+    <f:if condition="{tags}">
+        <f:then>
+            <f:comment>In case tags is set, to special tag is in request and we show all tags as links.</f:comment>
+            <h1 class="page-title"><f:translate key="headline.tags" /></h1>
+            <ul class="list-inline">
+                <f:for each="{tags}" as="tag">
+                    <li><blog:link.tag tag="{tag}" /></li>
+                </f:for>
+            </ul>
+        </f:then>
+        <f:else>
+            <f:comment>In case tags is NOT set, a special tag is in request and we show all blogs posts of this tag.</f:comment>
+            <h1 class="page-title"><f:translate key="headline.tag" arguments="{0: tag.title}" /></h1>
+            <div class="taxonomy-description">
+                <p>{tag.description}</p>
+                <f:if condition="{tag.content}">
+                    <f:cObject typoscriptObjectPath="lib.blog.contentElementRendering">{tag.contentElementUidList}</f:cObject>
+                </f:if>
+            </div>
 
-    <f:render partial="List" arguments="{_all}" />
+            <f:render partial="List" arguments="{_all}" />
+        </f:else>
+    </f:if>
 </f:section>

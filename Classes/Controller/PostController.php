@@ -20,6 +20,7 @@ use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\MetaService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Lang\LanguageService;
@@ -35,6 +36,11 @@ class PostController extends ActionController
     protected $categoryRepository;
 
     /**
+     * @var TagRepository
+     */
+    protected $tagRepository;
+
+    /**
      * @var PostRepository
      */
     protected $postRepository;
@@ -45,6 +51,14 @@ class PostController extends ActionController
     public function injectCategoryRepository(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
+    }
+
+    /**
+     * @param TagRepository $tagRepository
+     */
+    public function injectTagRepository(TagRepository $tagRepository)
+    {
+        $this->tagRepository = $tagRepository;
     }
 
     /**
@@ -86,9 +100,15 @@ class PostController extends ActionController
      *
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @throws \RuntimeException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
-    public function listPostsByDateAction($year, $month = null)
+    public function listPostsByDateAction($year = null, $month = null)
     {
+        if (null === $year) {
+            // we need at least the year
+            $this->redirect('listRecentPosts');
+        }
         $timestamp = mktime(0, 0, 0, $month, 1, $year);
         $this->view->assignMultiple([
             'month' => $month,
@@ -117,13 +137,17 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @throws \RuntimeException
      */
-    public function listPostsByCategoryAction(Category $category)
+    public function listPostsByCategoryAction(Category $category = null)
     {
-        $this->view->assign('posts', $this->postRepository->findAllByCategory($category));
-        $this->view->assign('category', $category);
-        MetaService::set(MetaService::META_TITLE, $category->getTitle());
-        MetaService::set(MetaService::META_DESCRIPTION, $category->getDescription());
-        MetaService::set(MetaService::META_CATEGORIES, [$category->getTitle()]);
+        if (null === $category) {
+            $this->view->assign('categories', $this->categoryRepository->findAll());
+        } else {
+            $this->view->assign('posts', $this->postRepository->findAllByCategory($category));
+            $this->view->assign('category', $category);
+            MetaService::set(MetaService::META_TITLE, $category->getTitle());
+            MetaService::set(MetaService::META_DESCRIPTION, $category->getDescription());
+            MetaService::set(MetaService::META_CATEGORIES, [$category->getTitle()]);
+        }
     }
 
     /**
@@ -134,13 +158,17 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @throws \RuntimeException
      */
-    public function listPostsByTagAction(Tag $tag)
+    public function listPostsByTagAction(Tag $tag = null)
     {
-        $this->view->assign('posts', $this->postRepository->findAllByTag($tag));
-        $this->view->assign('tag', $tag);
-        MetaService::set(MetaService::META_TITLE, $tag->getTitle());
-        MetaService::set(MetaService::META_DESCRIPTION, $tag->getDescription());
-        MetaService::set(MetaService::META_TAGS, [$tag->getTitle()]);
+        if (null === $tag) {
+            $this->view->assign('tags', $this->tagRepository->findAll());
+        } else {
+            $this->view->assign('posts', $this->postRepository->findAllByTag($tag));
+            $this->view->assign('tag', $tag);
+            MetaService::set(MetaService::META_TITLE, $tag->getTitle());
+            MetaService::set(MetaService::META_DESCRIPTION, $tag->getDescription());
+            MetaService::set(MetaService::META_TAGS, [$tag->getTitle()]);
+        }
     }
 
     /**
