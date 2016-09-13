@@ -72,6 +72,60 @@
 			<trans-unit id="list.no_posts.message" xml:space="preserve">
 				<source>This list contains no blog posts.</source>
 			</trans-unit>
+			<trans-unit id="backend.headline" xml:space="preserve">
+				<source>Blog Admin</source>
+			</trans-unit>
+			<trans-unit id="backend.lead.blogs" xml:space="preserve">
+				<source>It looks like you have the following blog setups</source>
+			</trans-unit>
+			<trans-unit id="backend.lead.noblogs" xml:space="preserve">
+				<source>It looks like no blog setup exists in this instance.</source>
+			</trans-unit>
+			<trans-unit id="backend.table.blog" xml:space="preserve">
+				<source>Blog</source>
+			</trans-unit>
+			<trans-unit id="backend.table.articles" xml:space="preserve">
+				<source>Articles</source>
+			</trans-unit>
+			<trans-unit id="wizard.button.trigger" xml:space="preserve">
+				<source>Setup a new blog</source>
+			</trans-unit>
+			<trans-unit id="wizard.button.cancel" xml:space="preserve">
+				<source>Cancel</source>
+			</trans-unit>
+			<trans-unit id="wizard.button.setup" xml:space="preserve">
+				<source>Setup</source>
+			</trans-unit>
+			<trans-unit id="wizard.lead" xml:space="preserve">
+				<source>This Wizard will create a blog setup in your tree.</source>
+			</trans-unit>
+			<trans-unit id="wizard.description" xml:space="preserve">
+				<source>After click on the button below the tree will be created. If you see the success message, go to your page tree and maybe reload the tree to see the result.</source>
+			</trans-unit>
+			<trans-unit id="wizard.headline.settings" xml:space="preserve">
+				<source>Settings</source>
+			</trans-unit>
+			<trans-unit id="wizard.headline.template" xml:space="preserve">
+				<source>Template</source>
+			</trans-unit>
+			<trans-unit id="wizard.label.title" xml:space="preserve">
+				<source>Title of the blog</source>
+			</trans-unit>
+			<trans-unit id="wizard.placeholder.title" xml:space="preserve">
+				<source>The title of your blog</source>
+			</trans-unit>
+			<trans-unit id="wizard.message.template.found" xml:space="preserve">
+				<source>Hey, I have found the extension blog_template, should I use this template?</source>
+			</trans-unit>
+			<trans-unit id="wizard.message.template.not_found" xml:space="preserve">
+				<source>Hey, I have not found a template, but I can install the extension blog_template for you, should I try to install the extension and use it as template?</source>
+			</trans-unit>
+			<trans-unit id="wizard.label.template" xml:space="preserve">
+				<source>Yes, please use the template provided by the extension</source>
+			</trans-unit>
+			<trans-unit id="wizard.label.install" xml:space="preserve">
+				<source>Yes, please install and use the template provided by the extension</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

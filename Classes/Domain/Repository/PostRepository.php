@@ -44,8 +44,14 @@ class PostRepository extends Repository
         $querySettings->setRespectStoragePage(false);
         $this->setDefaultQuerySettings($querySettings);
 
+        $pids = [];
+        $rootLine = $GLOBALS['TSFE']->sys_page->getRootLine($GLOBALS['TSFE']->id);
+        foreach ($rootLine as $value) {
+            $pids[] = $value['uid'];
+        }
         $query = $this->createQuery();
         $this->defaultConstraints[] = $query->equals('doktype', Constants::DOKTYPE_BLOG_POST);
+        $this->defaultConstraints[] = $query->in('pid', $pids);
 
         $this->defaultOrderings = [
             'crdate' => QueryInterface::ORDER_DESCENDING,

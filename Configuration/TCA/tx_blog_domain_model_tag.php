@@ -56,7 +56,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required,unique,trim',
+                'eval' => 'required,uniqueInPid,trim',
             ],
         ],
         'description' => [
