@@ -125,6 +125,23 @@
 			</trans-unit>
 			<trans-unit id="wizard.label.install" xml:space="preserve">
 				<source>Yes, please install and use the template provided by the extension</source>
+			<trans-unit id="constantEditor.blog" xml:space="preserve">
+				<source>TYPO3 Blog</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blogUid" xml:space="preserve">
+				<source>List posts UID:Location of the "Blog: List of posts" plugin. This page UID is the root page for the blog. All blog post pages are located below this page.</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.categoryUid" xml:space="preserve">
+				<source>List by category UID:Location of the "Blog: List by category" plugin. Shows all posts from one category.</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.tagUid" xml:space="preserve">
+				<source>List by tags UID:Location of the "Blog: List by tags" plugin. Shows all posts from one tag.</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.archiveUid" xml:space="preserve">
+				<source>Archive UID:Location of the "Blog: Archive" plugin. Shows archived posts.</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.storagePid" xml:space="preserve">
+				<source>Storage folder:Storage folder of all categories and tags for this blog.</source>
 			</trans-unit>
 		</body>
 	</file>
