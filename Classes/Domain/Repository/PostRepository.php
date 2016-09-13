@@ -64,8 +64,12 @@ class PostRepository extends Repository
     public function findAll()
     {
         $query = $this->createQuery();
-
-        return $query->matching($query->logicalAnd($this->defaultConstraints))->execute();
+        $constraints = $this->defaultConstraints;
+        $constraints[] = $query->logicalOr([
+            $query->equals('archiveDate', 0),
+            $query->greaterThanOrEqual('archiveDate', time())
+        ]);
+        return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
     /**

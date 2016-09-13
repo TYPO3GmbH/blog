@@ -91,6 +91,11 @@ class Post extends AbstractEntity
     protected $media;
 
     /**
+     * @var int
+     */
+    protected $archiveDate;
+
+    /**
      * Post constructor.
      */
     public function __construct()
@@ -359,5 +364,21 @@ class Post extends AbstractEntity
     public function setMedia($media)
     {
         $this->media = $media;
+    }
+
+    /**
+     * @return int
+     */
+    public function getArchiveDate()
+    {
+        return $this->archiveDate;
+    }
+
+    /**
+     * @param int $archiveDate
+     */
+    public function setArchiveDate($archiveDate)
+    {
+        $this->archiveDate = $archiveDate;
     }
 }

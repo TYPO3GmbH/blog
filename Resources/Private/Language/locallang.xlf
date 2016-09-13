@@ -125,6 +125,7 @@
 			</trans-unit>
 			<trans-unit id="wizard.label.install" xml:space="preserve">
 				<source>Yes, please install and use the template provided by the extension</source>
+			</trans-unit>
 			<trans-unit id="constantEditor.blog" xml:space="preserve">
 				<source>TYPO3 Blog</source>
 			</trans-unit>
