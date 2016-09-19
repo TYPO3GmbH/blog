@@ -22,6 +22,7 @@ All parts of your new blog are usable on their own, so you can just use the elem
 for example the comments and comment form, a sidebar or the list of blog posts. All these elements can be used as separate
 content elements and therefor be positioned and used wherever you want.
 
+
 Customizable Templates
 ----------------------
 Templating is done via Fluid templates. If you want your blog to have a custom look and feel just replace the templates and
@@ -34,6 +35,7 @@ Categorizing and Tagging
 Use categories and tags to add meta information to your blog posts. Let your users explore your posts based on their interests
 navigating via tags or categories to find similar entries. Add posts from the same category to your posts to get your readers
 to read even more.
+
 
 Be social - share your posts
 ----------------------------
