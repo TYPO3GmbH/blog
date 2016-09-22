@@ -22,6 +22,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\MetaService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Lang\LanguageService;
 
@@ -84,6 +85,8 @@ class PostController extends ActionController
      * common.
      *
      * @return void
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      * @api
      */
     protected function initializeAction()
@@ -188,9 +191,15 @@ class PostController extends ActionController
 
     /**
      * @return LanguageService
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     protected function getLanguageService()
     {
+        if (!isset($GLOBALS['LANG'])) {
+            $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageService::class);
+            $GLOBALS['LANG']->init($GLOBALS['TSFE']->tmpl->setup['config.']['language']);
+        }
         return $GLOBALS['LANG'];
     }
 }
