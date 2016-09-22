@@ -30,7 +30,7 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  *
  * @package T3G\AgencyPack\Blog\Controller
  */
-class BackendController extends ActionController
+class BackendController extends ActionController 
 {
     /**
      * @var ModuleTemplate
@@ -68,11 +68,12 @@ class BackendController extends ActionController
     public function initializeAction()
     {
         $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
+        $this->iconFactory = $this->moduleTemplate->getIconFactory();
+        $this->buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
+
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
         $pageRenderer->addCssFile(ExtensionManagementUtility::extRelPath('blog') . 'Resources/Public/Css/backend.css');
-        $this->iconFactory = $this->moduleTemplate->getIconFactory();
-        $this->buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
     }
 
     /**
@@ -86,13 +87,10 @@ class BackendController extends ActionController
      */
     public function indexAction()
     {
-        $data = [];
-        $data['blogSetups'] = $this->setupService->determineBlogSetups();
-        $data['templateExists'] = ExtensionManagementUtility::isLoaded('blog_template');
-        $view = $this->getFluidTemplateObject('Backend/Index.html');
-        $view->assignMultiple($data);
-        $this->moduleTemplate->setContent($view->render());
-        return $this->moduleTemplate->renderContent();
+        return $this->render('Backend/Index.html', [
+            'blogSetups' => $this->setupService->determineBlogSetups(),
+            'templateExists' => ExtensionManagementUtility::isLoaded('blog_template')
+        ]);
     }
 
     /**
@@ -112,6 +110,7 @@ class BackendController extends ActionController
         }
         $this->redirect('index');
     }
+
 
     /**
      * returns a new standalone view, shorthand function
@@ -133,5 +132,21 @@ class BackendController extends ActionController
         $view->setControllerContext($this->getControllerContext());
         $view->getRequest()->setControllerExtensionName('Blog');
         return $view;
+    }
+
+    /**
+     * @param string $templateNameAndPath
+     * @param array $values
+     *
+     * @return string
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
+     * @throws \InvalidArgumentException
+     */
+    protected function render($templateNameAndPath, array $values)
+    {
+        $view = $this->getFluidTemplateObject($templateNameAndPath);
+        $view->assignMultiple($values);
+        $this->moduleTemplate->setContent($view->render());
+        return $this->moduleTemplate->renderContent();
     }
 }
