@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Lang\LanguageService;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Comment frontend.
@@ -78,18 +78,6 @@ class CommentController extends ActionController
     }
 
     /**
-     * CommentController constructor.
-     *
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->getLanguageService()->includeLLFile('EXT:blog/Resources/Private/Language/locallang.xlf');
-    }
-
-    /**
      * @return bool
      */
     protected function getErrorFlashMessage()
@@ -129,10 +117,9 @@ class CommentController extends ActionController
     {
         $this->commentService->injectSettings($this->settings['comments']);
         $state = $this->commentService->addComment($post, $comment);
-        $languageService = $this->getLanguageService();
         $this->addFlashMessage(
-            $languageService->getLL(self::$messages[$state]['text']),
-            $languageService->getLL(self::$messages[$state]['title']),
+            LocalizationUtility::translate(self::$messages[$state]['text'], 'blog'),
+            LocalizationUtility::translate(self::$messages[$state]['title'], 'blog'),
             self::$messages[$state]['severity']
         );
         $this->clearCacheByPost($post);
@@ -165,21 +152,5 @@ class CommentController extends ActionController
     {
         $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
         $dataHandler->clear_cacheCmd($post->getUid());
-    }
-
-    /**
-     * @return LanguageService
-     *
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    protected function getLanguageService()
-    {
-        if ($GLOBALS['LANG'] === null) {
-            $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageService::class);
-            $GLOBALS['LANG']->init($GLOBALS['TSFE']->tmpl->setup['config.']['language']);
-        }
-
-        return $GLOBALS['LANG'];
     }
 }

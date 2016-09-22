@@ -16,15 +16,13 @@ namespace T3G\AgencyPack\Blog\Controller;
  */
 
 use T3G\AgencyPack\Blog\Domain\Model\Category;
-use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\MetaService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Lang\LanguageService;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Posts related controller.
@@ -79,23 +77,6 @@ class PostController extends ActionController
     }
 
     /**
-     * Initializes the controller before invoking an action method.
-     *
-     * Override this method to solve tasks which all actions have in
-     * common.
-     *
-     * @return void
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     * @api
-     */
-    protected function initializeAction()
-    {
-        parent::initializeAction();
-        $this->getLanguageService()->includeLLFile('EXT:blog/Resources/Private/Language/locallang.xlf');
-    }
-
-    /**
      * Shows a list of posts by given month and year.
      *
      * @param int $year
@@ -127,9 +108,9 @@ class PostController extends ActionController
             $month,
             strftime('%B', $timestamp),
             $year
-        ], $this->getLanguageService()->getLL('meta.title.listPostsByDate'));
+        ], LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
         MetaService::set(MetaService::META_TITLE, $title);
-        MetaService::set(MetaService::META_DESCRIPTION, $this->getLanguageService()->getLL('meta.description.listPostsByDate'));
+        MetaService::set(MetaService::META_DESCRIPTION, LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
     }
 
     /**
@@ -187,19 +168,5 @@ class PostController extends ActionController
     public function metadataAction()
     {
         $this->view->assign('post', $this->postRepository->findCurrentPost());
-    }
-
-    /**
-     * @return LanguageService
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    protected function getLanguageService()
-    {
-        if (!isset($GLOBALS['LANG'])) {
-            $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageService::class);
-            $GLOBALS['LANG']->init($GLOBALS['TSFE']->tmpl->setup['config.']['language']);
-        }
-        return $GLOBALS['LANG'];
     }
 }
