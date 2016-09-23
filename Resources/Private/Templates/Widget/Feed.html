@@ -1,0 +1,9 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+<f:layout name="Widget" />
+
+<f:section name="content">
+    <h3 class="widget-title">RSS-Feeds</h3>
+    <ul class="feeds">
+        <li><f:link.action pageUid="{settings.blogUid}" pageType="200" format="rss" action="listRecentPosts" controller="Post">Recent posts</f:link.action></li>
+    </ul>
+</f:section>

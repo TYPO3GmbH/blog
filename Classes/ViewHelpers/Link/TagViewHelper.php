@@ -40,6 +40,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document', false);
 
         $this->registerArgument('tag', Tag::class, 'The tag to link to', true);
+        $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
     }
 
     /**
@@ -47,6 +48,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
      */
     public function render()
     {
+        $rssFormat = (bool)$this->arguments['rss'];
         /** @var Tag $tag */
         $tag = $this->arguments['tag'];
         $pageUid = (int)$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['tagUid'];
@@ -56,11 +58,16 @@ class TagViewHelper extends AbstractTagBasedViewHelper
             ]
         ];
         $uriBuilder = $this->controllerContext->getUriBuilder();
-        $uri = $uriBuilder->reset()
+        $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setUseCacheHash(false)
-            ->setArguments($additionalParams)
-            ->build();
+            ->setArguments($additionalParams);
+        if ($rssFormat) {
+            $uriBuilder
+                ->setFormat('rss')
+                ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_tag.']['typeNum']);
+        }
+        $uri = $uriBuilder->uriFor('listPostsByTag', [], 'Post');
         if ((string)$uri !== '') {
             $linkText = $this->renderChildren() ?: $tag->getTitle();
             $this->tag->addAttribute('href', $uri);
@@ -71,5 +78,4 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         }
         return $result;
     }
-
 }

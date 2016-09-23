@@ -111,6 +111,14 @@ if (!defined('TYPO3_MODE')) {
     ]
 );
 
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'T3G.AgencyPack.Blog',
+    'FeedWidget',
+    [
+        'Widget' => 'feed',
+    ]
+);
+
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['blog'] =
         \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class . '->addBlogConfiguration';

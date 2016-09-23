@@ -28,9 +28,8 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 /**
  * Class BackendController
  *
- * @package T3G\AgencyPack\Blog\Controller
  */
-class BackendController extends ActionController 
+class BackendController extends ActionController
 {
     /**
      * @var ModuleTemplate
@@ -110,7 +109,6 @@ class BackendController extends ActionController
         }
         $this->redirect('index');
     }
-
 
     /**
      * returns a new standalone view, shorthand function

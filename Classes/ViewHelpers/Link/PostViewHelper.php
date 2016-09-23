@@ -41,6 +41,8 @@ class PostViewHelper extends AbstractTagBasedViewHelper
 
         $this->registerArgument('post', Post::class, 'The post to link to');
         $this->registerArgument('section', 'string', 'the anchor to be added to the URI');
+        $this->registerArgument('createAbsoluteUri', 'bool', 'create absolute uri', false, false);
+        $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);
     }
 
     /**
@@ -53,12 +55,17 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         $section = $this->arguments['section'] ?: null;
         $pageUid = $post !== null ? (int)$post->getUid() : 0;
         $uriBuilder = $this->controllerContext->getUriBuilder();
+        $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
         $uri = $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setUseCacheHash(false)
             ->setSection($section)
+            ->setCreateAbsoluteUri($createAbsoluteUri)
             ->build();
         if ((string)$uri !== '') {
+            if ($this->arguments['returnUri']) {
+                return $uri;
+            }
             $linkText = $this->renderChildren() ?: $post->getTitle();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
@@ -68,5 +75,4 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         }
         return $result;
     }
-
 }
