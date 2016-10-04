@@ -87,14 +87,14 @@ call_user_func(
                 'system',
                 'tx_Blog',
                 'top',
-                array(
+                [
                     'Backend' => 'index, createBlog'
-                ),
-                array(
+                ],
+                [
                     'access' => 'admin',
                     'icon' => 'EXT:blog/Resources/Public/Icons/module-blog.svg',
                     'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf'
-                )
+                ]
             );
         }
     }

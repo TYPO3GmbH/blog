@@ -1,0 +1,4 @@
+<f:layout name="Default" />
+<f:section name="content">
+   <f:render partial="List" arguments="{_all}" />
+</f:section>

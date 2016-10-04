@@ -22,6 +22,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\MetaService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -66,6 +67,41 @@ class PostController extends ActionController
     public function injectPostRepository(PostRepository $postRepository)
     {
         $this->postRepository = $postRepository;
+    }
+
+    protected function initializeView(ViewInterface $view)
+    {
+        parent::initializeView($view);
+        if ($this->request->hasArgument('format') && $this->request->getArgument('format') === 'rss') {
+            $action = '.' . $this->request->getArgument('action');
+            $arguments = [];
+            switch ($action) {
+                case '.listPostsByCategory':
+                    if (isset($this->arguments['category'])) {
+                        $arguments[] = $this->arguments['category']->getValue()->getTitle();
+                    }
+                    break;
+                case '.listPostsByDate':
+                    $arguments[] = (int)$this->arguments['year']->getValue();
+                    if (isset($this->arguments['month'])) {
+                        $arguments[] = (int)$this->arguments['month']->getValue();
+                    }
+                    break;
+                case '.listPostsByTag':
+                    if (isset($this->arguments['tag'])) {
+                        $arguments[] = $this->arguments['tag']->getValue()->getTitle();
+                    }
+                    break;
+            }
+            $feedData = [
+                'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
+                'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
+                'language' => $GLOBALS['TSFE']->sys_language_isocode,
+                'link' => $this->uriBuilder->setUseCacheHash(false)->setArgumentsToBeExcludedFromQueryString(['id'])->setCreateAbsoluteUri(true)->setAddQueryString(true)->build(),
+                'date' => date('D, j M Y H:i:s e')
+            ];
+            $this->view->assign('feed', $feedData);
+        }
     }
 
     /**

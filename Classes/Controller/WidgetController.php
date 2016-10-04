@@ -147,6 +147,13 @@ class WidgetController extends ActionController
     }
 
     /**
+     *
+     */
+    public function feedAction()
+    {
+    }
+
+    /**
      * This method resort the database result and create a nested array
      * in the form:
      * [
@@ -168,10 +175,10 @@ class WidgetController extends ActionController
      */
     protected function resortArchiveData(array $data)
     {
-        $archiveData = array();
+        $archiveData = [];
         foreach ($data as $result) {
             if (empty($archiveData[$result['year']])) {
-                $archiveData[$result['year']] = array();
+                $archiveData[$result['year']] = [];
             }
             $result['timestamp'] = mktime(0, 0, 0, (int) $result['month'], 1, (int) $result['year']);
             $archiveData[$result['year']][] = $result;

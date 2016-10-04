@@ -153,7 +153,7 @@ class PostRepository extends Repository
      */
     public function findMonthsAndYearsWithPosts()
     {
-        $sql = array();
+        $sql = [];
         $sql[] = 'SELECT MONTH(FROM_UNIXTIME(crdate)) as month, YEAR(FROM_UNIXTIME(crdate)) as year, count(*) as count';
         $sql[] = 'FROM pages';
         $sql[] = 'WHERE doktype = ' . Constants::DOKTYPE_BLOG_POST;
@@ -167,7 +167,7 @@ class PostRepository extends Repository
 
         $sql = implode(' ', $sql);
         $result = $this->getDatabaseConnection()->sql_query($sql);
-        $rows = array();
+        $rows = [];
         while ($row = $this->getDatabaseConnection()->sql_fetch_assoc($result)) {
             $rows[] = $row;
         }

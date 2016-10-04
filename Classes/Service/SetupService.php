@@ -85,7 +85,7 @@ class SetupService
                 $blogSetup['pages']['NEW_blogRoot']['title'] = $title;
             }
             $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
-            $dataHandler->start($blogSetup, array());
+            $dataHandler->start($blogSetup, []);
             $result = $dataHandler->process_datamap();
             if ($result !== false) {
                 $result = true;
@@ -105,7 +105,7 @@ class SetupService
                     $blogSetupRelations = require $blogSetupRelations;
                     $blogSetupRelations = $this->replaceNewUids($blogSetupRelations, $dataHandler->substNEWwithIDs);
                     $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
-                    $dataHandler->start($blogSetupRelations, array());
+                    $dataHandler->start($blogSetupRelations, []);
                     $resultRelations = $dataHandler->process_datamap();
                     if ($resultRelations !== false) {
                         $result = true;
@@ -174,5 +174,4 @@ class SetupService
     {
         return $GLOBALS['BE_USER'];
     }
-
 }

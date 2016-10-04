@@ -14,7 +14,6 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use T3G\AgencyPack\Blog\Domain\Model\Category;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
@@ -41,6 +40,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
 
         $this->registerArgument('month', 'int', 'The month to link to');
         $this->registerArgument('year', 'int', 'The year to link to', true);
+        $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
     }
 
     /**
@@ -48,6 +48,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
      */
     public function render()
     {
+        $rssFormat = (bool)$this->arguments['rss'];
         $year = (int)$this->arguments['year'];
         $month = (int)$this->arguments['month'];
         $pageUid = (int)$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['archiveUid'];
@@ -60,11 +61,16 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
             $additionalParams['tx_blog_archive']['month'] = $month;
         }
         $uriBuilder = $this->controllerContext->getUriBuilder();
-        $uri = $uriBuilder->reset()
+        $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setUseCacheHash(false)
-            ->setArguments($additionalParams)
-            ->build();
+            ->setArguments($additionalParams);
+        if ($rssFormat) {
+            $uriBuilder
+                ->setFormat('rss')
+                ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_archive.']['typeNum']);
+        }
+        $uri = $uriBuilder->uriFor('listPostsByDate', [], 'Post');
         if ((string)$uri !== '') {
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($this->renderChildren());
@@ -74,5 +80,4 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         }
         return $result;
     }
-
 }

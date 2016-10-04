@@ -127,4 +127,3 @@ call_user_func(
     'blog',
     'pages'
 );
-

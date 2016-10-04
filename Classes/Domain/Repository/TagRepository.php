@@ -43,7 +43,7 @@ class TagRepository extends Repository
      */
     public function findTopByUsage($limit = 20)
     {
-        $sql = array();
+        $sql = [];
         $sql[] = 'SELECT tx_blog_domain_model_tag.uid, tx_blog_domain_model_tag.title, COUNT(tx_blog_tag_pages_mm.uid_foreign) as cnt';
         $sql[] = 'FROM tx_blog_domain_model_tag';
         $sql[] = 'JOIN tx_blog_tag_pages_mm ON tx_blog_tag_pages_mm.uid_foreign = tx_blog_domain_model_tag.uid';
@@ -53,7 +53,7 @@ class TagRepository extends Repository
 
         $sql = implode(' ', $sql);
         $result = $this->getDatabaseConnection()->sql_query($sql);
-        $rows = array();
+        $rows = [];
         while ($row = $this->getDatabaseConnection()->sql_fetch_assoc($result)) {
             /** @var array $row */
             $row['tagObject'] = $this->findByUid($row['uid']);
@@ -63,7 +63,6 @@ class TagRepository extends Repository
         shuffle($rows);
         return $rows;
     }
-
 
     /**
      * @return DatabaseConnection

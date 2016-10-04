@@ -8,7 +8,7 @@
         <f:if condition="{settings.widgets.archive.groupByYear} == 1">
             <f:then>
                 <li class="list-item archive-item archive-item-{year}">
-                    <blog:link.archive year="{year}" title="{year}">{year}</blog:link.archive>
+                    <blog:link.archive year="{year}" title="{year}">{year}</blog:link.archive> <blog:link.archive rss="true" year="{year}" title="{year}"><i class="fa fa-rss-square"></i></blog:link.archive>
                     <f:if condition="{settings.widgets.archive.groupByMonth} == 1">
                         <ul>
                             <f:for each="{rows}" as="row">
@@ -42,5 +42,6 @@
                 </f:else>
             </f:if>
         </blog:link.archive>
+        <blog:link.archive rss="true" year="{year}" month="{row.month}" title="{year}"><i class="fa fa-rss-square"></i></blog:link.archive>
     </li>
 </f:section>

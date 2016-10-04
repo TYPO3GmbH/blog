@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title><f:format.cdata>{feed.title}</f:format.cdata></title>
+    <description><f:format.cdata>{feed.description}</f:format.cdata></description>
+    <language><f:format.cdata>{feed.language}</f:format.cdata></language>
+    <link><f:format.cdata>{feed.link}</f:format.cdata></link>
+    <lastBuildDate><f:format.cdata>{feed.date}</f:format.cdata></lastBuildDate>
+    <f:render section="content" />
+  </channel>
+</rss>

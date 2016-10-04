@@ -1,0 +1,7 @@
+<f:if condition="{posts}">
+   <f:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{itemsPerPage: 10, insertAbove: 0, insertBelow: 0, addQueryStringMethod: 'GET', maximumNumberOfLinks: 10}">
+       <f:for each="{posts}" as="post">
+           <f:render partial="List/Post" arguments="{_all}" />
+       </f:for>
+   </f:widget.paginate>
+</f:if>

@@ -150,6 +150,30 @@
 			<trans-unit id="constantEditor.storagePid" xml:space="preserve">
 				<source>Storage folder:Storage folder of all categories and tags for this blog.</source>
 			</trans-unit>
+			<trans-unit id="feed.title.listPostsByCategory" xml:space="preserve">
+				<source>Category RSS Feed</source>
+			</trans-unit>
+			<trans-unit id="feed.description.listPostsByCategory" xml:space="preserve">
+				<source>Posts by category %s</source>
+			</trans-unit>
+			<trans-unit id="feed.title.listPostsByDate" xml:space="preserve">
+				<source>Archive RSS Feed</source>
+			</trans-unit>
+			<trans-unit id="feed.description.listPostsByDate" xml:space="preserve">
+				<source>Posts by date: %s / %s</source>
+			</trans-unit>
+			<trans-unit id="feed.title.listPostsByTag" xml:space="preserve">
+				<source>Tag RSS Feed</source>
+			</trans-unit>
+			<trans-unit id="feed.description.listPostsByTag" xml:space="preserve">
+				<source>Posts by tag: %s</source>
+			</trans-unit>
+			<trans-unit id="feed.title.listRecentPosts" xml:space="preserve">
+				<source>RSS Feed</source>
+			</trans-unit>
+			<trans-unit id="feed.description.listRecentPosts" xml:space="preserve">
+				<source>Recent posts</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
