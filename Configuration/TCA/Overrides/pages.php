@@ -81,6 +81,16 @@ call_user_func(
                     'default' => '1',
                 ],
             ],
+            'crdate' => [
+                'exclude' => 1,
+                'label' => $ll . 'pages.crdate',
+                'config' => [
+                    'type' => 'input',
+                    'size' => '13',
+                    'eval' => 'datetime',
+                    'default' => '0'
+                ]
+            ],
             'archive_date' => [
                 'exclude' => 1,
                 'label' => $ll . 'pages.archive_date',
@@ -120,7 +130,7 @@ call_user_func(
             . $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where'];
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             'pages',
-            '--div--;' . $ll . 'pages.tabs.blog, archive_date, tags, comments_active, comments, sharing_enabled',
+            '--div--;' . $ll . 'pages.tabs.blog, crdate, archive_date, tags, comments_active, comments, sharing_enabled',
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
     },
