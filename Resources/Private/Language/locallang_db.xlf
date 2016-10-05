@@ -9,6 +9,9 @@
 			<trans-unit id="pages.comments" xml:space="preserve">
 				<source>Comments</source>
 			</trans-unit>
+			<trans-unit id="pages.crdate" xml:space="preserve">
+				<source>Creation date</source>
+			</trans-unit>
 			<trans-unit id="pages.archive_date" xml:space="preserve">
 				<source>Archive date</source>
 			</trans-unit>
