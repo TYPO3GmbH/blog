@@ -20,6 +20,9 @@ CREATE TABLE tx_blog_domain_model_tag (
   t3ver_count int(11) DEFAULT '0' NOT NULL,
   t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
   t3ver_move_id int(11) DEFAULT '0' NOT NULL,
+  sys_language_uid int(11) DEFAULT '0' NOT NULL,
+  l18n_parent int(11) DEFAULT '0' NOT NULL,
+  l18n_diffsource mediumblob NOT NULL
   title tinytext,
   description text,
   content text,
