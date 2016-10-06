@@ -8,6 +8,12 @@ return [
     'ctrl' => [
         'title' => $ll . 'tx_blog_domain_model_tag',
         'label' => 'title',
+        'label_alt'                => 'sys_language_uid',
+        // Display Language after Label
+        'label_alt_force'          => 0,
+        'languageField'            => 'sys_language_uid',
+        'transOrigPointerField'    => 'l18n_parent',
+        'transOrigDiffSourceField' => 'l18n_diffsource',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -21,7 +27,7 @@ return [
         'searchFields' => 'uid,title',
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden,title',
+        'showRecordFieldList' => 'hidden,title,sys_language_uid,l18n_parent,l18n_diffsource',
     ],
     'columns' => [
         'pid' => [
@@ -56,7 +62,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required,uniqueInPid,trim',
+                'eval' => 'required,trim',
             ],
         ],
         'description' => [
@@ -98,6 +104,37 @@ return [
                 'type' => 'passthrough',
             ],
         ],
+        'sys_language_uid' => array(
+            'exclude' => 1,
+            'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
+            'config'  => array(
+                'type'                => 'select',
+                'foreign_table'       => 'sys_language',
+                'foreign_table_where' => 'ORDER BY sys_language.title',
+                'items'               => array(
+                    array('LLL:EXT:lang/locallang_general.php:LGL.allLanguages', -1),
+                    array('LLL:EXT:lang/locallang_general.php:LGL.default_value', 0)
+                )
+            )
+        ),
+        'l18n_parent' => array(
+            'displayCond' => 'FIELD:sys_language_uid:>:0',
+            'exclude' => 1,
+            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
+            'config' => array(
+                'type'    => 'select',
+                'items'   => array(
+                    array('', 0),
+                ),
+                'foreign_table' => 'tx_blog_domain_model_tag',
+                'foreign_table_where' => 'AND tx_blog_domain_model_tag.pid=###CURRENT_PID### AND tx_blog_domain_model_tag.sys_language_uid IN (-1,0)',
+            )
+        ),
+        'l18n_diffsource' => array(
+            'config' => array(
+                'type' => 'passthrough'
+            )
+        ),
     ],
     'types' => [
         0 => [
@@ -107,7 +144,7 @@ return [
     ],
     'palettes' => [
         'paletteCore' => [
-            'showitem' => 'hidden,',
+            'showitem' => 'hidden,sys_language_uid,l18n_parent,l18n_diffsource',
             'canNotCollapse' => true,
         ],
     ],
