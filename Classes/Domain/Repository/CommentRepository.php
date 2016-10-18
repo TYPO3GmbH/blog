@@ -14,6 +14,10 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use T3G\AgencyPack\Blog\Domain\Model\Post;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
@@ -23,13 +27,47 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 class CommentRepository extends Repository
 {
     /**
+     * @var ConfigurationManager
+     */
+    protected $configurationManager;
+
+    /**
+     * @var array
+     */
+    protected $settings;
+
+    /**
      *
+     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     public function initializeObject()
     {
+        $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
+        $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+
         $this->defaultOrderings = [
             'crdate' => QueryInterface::ORDER_DESCENDING,
         ];
+    }
+
+    /**
+     * @param Post $post
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findAllByPost(Post $post)
+    {
+        $respectPostLanaguageId = isset($this->settings['comments']['respectPostLanguageId'])
+            ? (int)$this->settings['comments']['respectPostLanguageId']
+            : 0;
+        $query = $this->createQuery();
+        $constraints = [];
+        $constraints[] = $query->equals('post', $post->getUid());
+        if ($respectPostLanaguageId) {
+            $constraints[] = $query->equals('postLanguageId', $GLOBALS['TSFE']->sys_language_uid);
+        }
+        return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
     /**

@@ -104,37 +104,37 @@ return [
                 'type' => 'passthrough',
             ],
         ],
-        'sys_language_uid' => array(
+        'sys_language_uid' => [
             'exclude' => 1,
             'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
-            'config'  => array(
+            'config'  => [
                 'type'                => 'select',
                 'foreign_table'       => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items'               => array(
-                    array('LLL:EXT:lang/locallang_general.php:LGL.allLanguages', -1),
-                    array('LLL:EXT:lang/locallang_general.php:LGL.default_value', 0)
-                )
-            )
-        ),
-        'l18n_parent' => array(
+                'items'               => [
+                    ['LLL:EXT:lang/locallang_general.php:LGL.allLanguages', -1],
+                    ['LLL:EXT:lang/locallang_general.php:LGL.default_value', 0]
+                ]
+            ]
+        ],
+        'l18n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
-            'config' => array(
+            'config' => [
                 'type'    => 'select',
-                'items'   => array(
-                    array('', 0),
-                ),
+                'items'   => [
+                    ['', 0],
+                ],
                 'foreign_table' => 'tx_blog_domain_model_tag',
                 'foreign_table_where' => 'AND tx_blog_domain_model_tag.pid=###CURRENT_PID### AND tx_blog_domain_model_tag.sys_language_uid IN (-1,0)',
-            )
-        ),
-        'l18n_diffsource' => array(
-            'config' => array(
+            ]
+        ],
+        'l18n_diffsource' => [
+            'config' => [
                 'type' => 'passthrough'
-            )
-        ),
+            ]
+        ],
     ],
     'types' => [
         0 => [

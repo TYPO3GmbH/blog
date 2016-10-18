@@ -75,6 +75,11 @@ class Comment extends AbstractEntity
     protected $post;
 
     /**
+     * @var int
+     */
+    protected $postLanguageId;
+
+    /**
      * The blog post creation date.
      *
      * @var \DateTime
@@ -239,5 +244,21 @@ class Comment extends AbstractEntity
         $this->crdate = $crdate;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostLanguageId()
+    {
+        return $this->postLanguageId;
+    }
+
+    /**
+     * @param int $postLanguageId
+     */
+    public function setPostLanguageId($postLanguageId)
+    {
+        $this->postLanguageId = $postLanguageId;
     }
 }

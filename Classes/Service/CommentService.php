@@ -4,6 +4,7 @@ namespace T3G\AgencyPack\Blog\Service;
 
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
+use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 
 /**
@@ -19,6 +20,11 @@ class CommentService
      * @var PostRepository
      */
     protected $postRepository;
+
+    /**
+     * @var CommentRepository
+     */
+    protected $commentRepository;
 
     /**
      * @var array
@@ -45,6 +51,14 @@ class CommentService
     }
 
     /**
+     * @param \T3G\AgencyPack\Blog\Domain\Repository\CommentRepository $commentRepository
+     */
+    public function injectCommentRepository(CommentRepository $commentRepository)
+    {
+        $this->commentRepository = $commentRepository;
+    }
+
+    /**
      * @param Post    $post
      * @param Comment $comment
      *
@@ -62,10 +76,21 @@ class CommentService
                 $result = self::STATE_MODERATION;
                 $comment->setHidden(1);
             }
+            $comment->setPostLanguageId($GLOBALS['TSFE']->sys_language_uid);
             $post->addComment($comment);
             $this->postRepository->update($post);
         }
 
         return $result;
+    }
+
+    /**
+     * @param Post $post
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function getCommentsByPost(Post $post)
+    {
+        return $this->commentRepository->findAllByPost($post);
     }
 }

@@ -107,6 +107,19 @@ return [
                 'eval' => '',
             ],
         ],
+        'post_language_id' => [
+            'exclude' => 1,
+            'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
+            'config'  => [
+                'type'                => 'select',
+                'foreign_table'       => 'sys_language',
+                'foreign_table_where' => 'ORDER BY sys_language.title',
+                'items'               => [
+                    ['LLL:EXT:lang/locallang_general.php:LGL.allLanguages', -1],
+                    ['LLL:EXT:lang/locallang_general.php:LGL.default_value', 0]
+                ]
+            ]
+        ],
         'parentid' => [
             'config' => [
                 'type' => 'passthrough',
@@ -120,7 +133,7 @@ return [
     ],
     'types' => [
         0 => [
-            'showitem' => 'name,url,email,comment',
+            'showitem' => 'post_language_id,name,url,email,comment',
         ],
     ],
     'palettes' => [
