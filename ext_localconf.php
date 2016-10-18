@@ -53,6 +53,9 @@ call_user_func(function () {
         'CommentForm',
         [
             'Comment' => 'form, addComment',
+        ],
+        [
+            'Comment' => 'form, addComment',
         ]
     );
 
