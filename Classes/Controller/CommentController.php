@@ -128,6 +128,9 @@ class CommentController extends ActionController
                 ->getUriBuilder()
                 ->reset()
                 ->setTargetPageUid($post->getUid())
+                ->setUseCacheHash(false)
+                ->setAddQueryString(true)
+                ->setArgumentsToBeExcludedFromQueryString(['tx_blog_commentform', 'cHash'])
                 ->buildFrontendUri()
         );
     }
@@ -139,7 +142,7 @@ class CommentController extends ActionController
     {
         $post = $this->postRepository->findCurrentPost();
         if ($post instanceof Post) {
-            $this->view->assign('comments', $post->getComments());
+            $this->view->assign('comments', $this->commentService->getCommentsByPost($post));
         }
     }
 

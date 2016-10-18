@@ -78,6 +78,7 @@ CREATE TABLE tx_blog_domain_model_comment (
   comment text,
   parentid int(11) DEFAULT '0' NOT NULL,
   parenttable varchar(255) DEFAULT '' NOT NULL,
+  post_language_id int(11) DEFAULT '0' NOT NULL,
 
   PRIMARY KEY (uid),
   KEY parent (pid)

@@ -29,6 +29,7 @@ Settings (plugin.tx_blog.settings)
    widgets_                             Widget specific configuration          array           see description
    `comments.active`_                   Activate comments feature              int             1
    `comments.moderation`_               Activate comments moderation           int             0
+   `comments.respectPostLanguageId`_    Respect language of post               int             1
    ==================================== ====================================== =============== ===============
 
 .. _tsBlogUid:
@@ -185,6 +186,23 @@ comments.moderation
    Description
          Activate the comments moderation feature generally. Default: 0
          This mean, any comment must be approved, before it is visible in the frontend.
+
+
+.. _tsCommentsRespectPostLanguageId:
+
+comments.respectPostLanguageId
+""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         comments.respectPostLanguageId
+   Data type
+         int
+   Description
+         In case of a multi language setup, the comments created in the frontend will be stored with a relation
+         to the blog post (page) and with an relation to the current language.
+         If this value is 0, all comments will we shown on all blog posts in each language.
+         If this value is 1, comments will only be shown if blog post id AND language match.
 
 
 Settings (plugin.tx_blog.settings.widgets)

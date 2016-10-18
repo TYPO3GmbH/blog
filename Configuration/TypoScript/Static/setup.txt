@@ -49,6 +49,8 @@ plugin.tx_blog {
             active = 1
             # comments moderation mode, 0 = no moderation, 1 = moderation active
             moderation = 0
+            # Respect post_language_id, 0 = show all comments also on translated posts, 1 = show only comments written in current language
+            respectPostLanguageId = 1
         }
     }
     pageInfo.title = TEXT
