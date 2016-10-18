@@ -6,7 +6,7 @@
                 <f:render partial="General/FlashMessages" />
                 <f:render partial="General/FormErrors" arguments="{_all}" />
 
-                <f:form action="addComment" name="comment" object="{comment}">
+                <f:form action="addComment" name="comment" object="{comment}" pageUid="">
                     <f:form.hidden name="post" value="{post}" />
                     <div class="form-group">
                         <label for="author"><f:translate key="form.comment.name" /></label>
