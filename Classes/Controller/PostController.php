@@ -106,6 +106,8 @@ class PostController extends ActionController
 
     /**
      * Show a list of recent posts.
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function listRecentPostsAction()
     {

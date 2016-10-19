@@ -67,16 +67,15 @@ class SetupService
         $installExtension = array_key_exists('install', $data) ? (bool) $data['install'] : false;
         $title = array_key_exists('title', $data) ? (string) $data['title'] : null;
 
-        if ($installExtension) {
-            if ($this->installExtension('blog_template')) {
-                $useTemplate = true;
-            }
+        if ($installExtension && $this->installExtension('blog_template')) {
+            $useTemplate = true;
         }
 
         $blogSetup = GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRecords.php');
 
         $result = false;
         if (file_exists($blogSetup)) {
+            /** @noinspection PhpIncludeInspection */
             $blogSetup = require $blogSetup;
             if ($useTemplate) {
                 $blogSetup['sys_template']['NEW_SysTemplate']['include_static_file'] = 'EXT:fluid_styled_content/Configuration/TypoScript/Static/,EXT:blog_template/Configuration/TypoScript/BlogTemplate/,EXT:blog/Configuration/TypoScript/Static/';
@@ -102,6 +101,7 @@ class SetupService
 
                 $blogSetupRelations = GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRelations.php');
                 if (file_exists($blogSetupRelations)) {
+                    /** @noinspection PhpIncludeInspection */
                     $blogSetupRelations = require $blogSetupRelations;
                     $blogSetupRelations = $this->replaceNewUids($blogSetupRelations, $dataHandler->substNEWwithIDs);
                     $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
@@ -132,14 +132,17 @@ class SetupService
                 }
             }
             if (is_array($value)) {
+                /** @noinspection ReferenceMismatchInspection */
                 $value = $this->replaceNewUids($value, $newIds);
             } else {
                 if (false !== strpos($value, 'NEW')) {
                     foreach ($newIds as $newId => $uid) {
+                        /** @noinspection ReferenceMismatchInspection */
                         $value = str_replace($newId, $uid, $value);
                     }
                 }
             }
+            /** @noinspection ReferenceMismatchInspection */
             $newSetup[$key] = $value;
         }
         return $newSetup;

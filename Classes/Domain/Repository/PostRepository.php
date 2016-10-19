@@ -23,6 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class PostRepository.
@@ -36,6 +37,7 @@ class PostRepository extends Repository
 
     /**
      *
+     * @throws \Exception
      */
     public function initializeObject()
     {
@@ -45,7 +47,8 @@ class PostRepository extends Repository
         $this->setDefaultQuerySettings($querySettings);
 
         $pids = [];
-        $rootLine = $GLOBALS['TSFE']->sys_page->getRootLine($GLOBALS['TSFE']->id);
+        $rootLine = $this->getTypoScriptFontendController()->sys_page
+            ->getRootLine($this->getTypoScriptFontendController()->id);
         foreach ($rootLine as $value) {
             $pids[] = $value['uid'];
         }
@@ -60,6 +63,7 @@ class PostRepository extends Repository
 
     /**
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function findAll()
     {
@@ -181,5 +185,13 @@ class PostRepository extends Repository
     protected function getDatabaseConnection()
     {
         return $GLOBALS['TYPO3_DB'];
+    }
+
+    /**
+     * @return TypoScriptFrontendController
+     */
+    protected function getTypoScriptFontendController()
+    {
+        return $GLOBALS['TSFE'];
     }
 }
