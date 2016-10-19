@@ -26,8 +26,8 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
      */
     public function __construct()
     {
-        parent::__construct();
         $this->tagName = 'img';
+        parent::__construct();
     }
 
     /**

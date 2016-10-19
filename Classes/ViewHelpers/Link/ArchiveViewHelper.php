@@ -22,9 +22,13 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 class ArchiveViewHelper extends AbstractTagBasedViewHelper
 {
     /**
-     * @var string
+     * ArchiveViewHelper constructor.
      */
-    protected $tagName = 'a';
+    public function __construct()
+    {
+        $this->tagName = 'a';
+        parent::__construct();
+    }
 
     /**
      * Arguments initialization

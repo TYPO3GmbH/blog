@@ -111,16 +111,17 @@ class WidgetController extends ActionController
             $spread = 1;
         }
 
-        foreach ($tags as &$tag) {
-            $size = $minSize + ($tag['cnt'] - $minimumCount) * ($maxSize - $minSize) / $spread;
-            $tag['size'] = floor($size);
+        foreach ($tags as &$tagReference) {
+            $size = $minSize + ($tagReference['cnt'] - $minimumCount) * ($maxSize - $minSize) / $spread;
+            $tagReference['size'] = floor($size);
         }
-
+        unset($tagReference);
         $this->view->assign('tags', $tags);
     }
 
     /**
      *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function recentPostsAction()
     {

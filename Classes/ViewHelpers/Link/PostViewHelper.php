@@ -23,9 +23,13 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 class PostViewHelper extends AbstractTagBasedViewHelper
 {
     /**
-     * @var string
+     * PostViewHelper constructor.
      */
-    protected $tagName = 'a';
+    public function __construct()
+    {
+        $this->tagName = 'a';
+        parent::__construct();
+    }
 
     /**
      * Arguments initialization

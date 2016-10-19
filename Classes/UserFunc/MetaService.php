@@ -8,12 +8,12 @@ namespace T3G\AgencyPack\Blog\UserFunc;
 class MetaService
 {
     /**
-     * @param string $content
+     * @param string $_
      * @param array $conf
      *
      * @return mixed|string
      */
-    public function get($content, $conf)
+    public function get($_, $conf)
     {
         $key = isset($conf['key']) ? $conf['key'] : null;
         if ($key !== null) {
