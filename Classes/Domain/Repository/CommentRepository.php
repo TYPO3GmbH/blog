@@ -18,6 +18,7 @@ use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
@@ -46,6 +47,11 @@ class CommentRepository extends Repository
         $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
         $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
+        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        // don't add the pid constraint
+        $querySettings->setRespectStoragePage(false);
+        $this->setDefaultQuerySettings($querySettings);
+
         $this->defaultOrderings = [
             'crdate' => QueryInterface::ORDER_DESCENDING,
         ];
@@ -58,13 +64,13 @@ class CommentRepository extends Repository
      */
     public function findAllByPost(Post $post)
     {
-        $respectPostLanaguageId = isset($this->settings['comments']['respectPostLanguageId'])
+        $respectPostLanguageId = isset($this->settings['comments']['respectPostLanguageId'])
             ? (int)$this->settings['comments']['respectPostLanguageId']
             : 0;
         $query = $this->createQuery();
         $constraints = [];
         $constraints[] = $query->equals('post', $post->getUid());
-        if ($respectPostLanaguageId) {
+        if ($respectPostLanguageId) {
             $constraints[] = $query->equals('postLanguageId', $GLOBALS['TSFE']->sys_language_uid);
         }
         return $query->matching($query->logicalAnd($constraints))->execute();

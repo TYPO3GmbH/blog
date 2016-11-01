@@ -1,15 +1,13 @@
+<h3 class="comment-title" id="comments"><f:translate key="headline.comments" /></h3>
 <f:if condition="{comments}">
-    <h3 class="comment-title" id="comments"><f:translate key="headline.comments" /></h3>
-    <f:if condition="{comments}">
-        <f:then>
-            <div class="comments" itemscope itemtype="http://schema.org/UserComments">
-            <f:for each="{comments}" as="comment">
-                <f:render partial="Comments/Comment" arguments="{comment: comment}" />
-            </f:for>
-            </div>
-        </f:then>
-        <f:else>
-            <p><f:translate key="message.no_comments" /></p>
-        </f:else>
-    </f:if>
+    <f:then>
+        <div class="comments" itemscope itemtype="http://schema.org/UserComments">
+        <f:for each="{comments}" as="comment">
+            <f:render partial="Comments/Comment" arguments="{comment: comment}" />
+        </f:for>
+        </div>
+    </f:then>
+    <f:else>
+        <p><f:translate key="message.no_comments" /></p>
+    </f:else>
 </f:if>
