@@ -21,6 +21,9 @@
       "T3G\\AgencyPack\\Blog\\Tests\\": "Tests/"
     }
   },
+  "require": {
+    "typo3/cms-core": ">=7.6.0,<8.4.99"
+  },
   "require-dev": {
     "phpunit/phpunit": "5.4.6"
   }
