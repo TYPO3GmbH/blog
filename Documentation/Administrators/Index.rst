@@ -73,6 +73,21 @@ The Setup Wizard creates the following pages for you:
 - > Archive (this page is the archive, it lists all blog posts by given date (month and year, or year only)
 - > First blog post (yes, a first blog post, as an example)
 
+RealURL Setup
+^^^^^^^^^^^^^
+
+RealURL Setup
+The blog extension provides a configuration for EXT:realurl.
+
+To get nice looking URLs add the following realurl configuration to your project setup:
+
+.. code-block:: php
+
+    'fixedPostVars' => [
+        '<UID_CATEGORY_PAGE>' => 'tx_blog_category',
+        '<UID_TAG_PAGE>' => 'tx_blog_tag',
+        '<UID_ARCHIVE_PAGE>' => 'tx_blog_archive'
+    ]
 
 Plugin types
 ------------

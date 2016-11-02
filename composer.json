@@ -1,5 +1,5 @@
 {
-  "name": "T3G/blog",
+  "name": "t3g/blog",
   "description": "blog extension",
   "minimum-stability": "dev",
   "type": "typo3-cms-extension",
