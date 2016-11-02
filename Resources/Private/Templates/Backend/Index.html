@@ -17,6 +17,7 @@
                 </f:for>
             </table>
             <f:render partial="Backend/CreateWizard" arguments="{_all}" />
+            <f:render partial="Backend/RealUrlSetup" arguments="{_all}" />
         </f:then>
         <f:else>
             <p class="lead"><f:translate key="backend.lead.noblogs" /></p>
