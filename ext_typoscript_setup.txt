@@ -1,0 +1,35 @@
+config.tx_extbase.persistence {
+    storagePid = {$plugin.tx_blog.persistence.storagePid}
+    classes {
+        T3G\AgencyPack\Blog\Domain\Model\Content {
+            mapping {
+                tableName = tt_content
+            }
+        }
+        T3G\AgencyPack\Blog\Domain\Model\Post {
+            mapping {
+                tableName = pages
+                dokype = 137
+                columns.crdate.mapOnProperty = crdate
+            }
+        }
+        T3G\AgencyPack\Blog\Domain\Model\Category {
+            mapping {
+                tableName = sys_category
+            }
+        }
+        T3G\AgencyPack\Blog\Domain\Model\Comment {
+            newRecordStoragePid = {$plugin.tx_blog.persistence.storagePid}
+            mapping {
+                tableName = tx_blog_domain_model_comment
+                columns.parentid.mapOnProperty = post
+            }
+        }
+        T3G\AgencyPack\Blog\Domain\Model\Tag {
+            newRecordStoragePid = {$plugin.tx_blog.persistence.storagePid}
+            mapping {
+                tableName = tx_blog_domain_model_tag
+            }
+        }
+    }
+}

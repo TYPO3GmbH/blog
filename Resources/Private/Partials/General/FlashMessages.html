@@ -1,0 +1,7 @@
+<f:flashMessages as="flashMessages">
+    <f:for each="{flashMessages}" as="flashMessage">
+        <div class="alert {flashMessage.class}" role="alert">
+            <strong>{flashMessage.title}</strong> {flashMessage.message}
+        </div>
+    </f:for>
+</f:flashMessages>

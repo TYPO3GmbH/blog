@@ -3,6 +3,45 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2016-06-27T17:14:25Z" product-name="blog">
 		<header/>
 		<body>
+			<trans-unit id="pages.comments_active" xml:space="preserve">
+				<source>Comments enabled</source>
+			</trans-unit>
+			<trans-unit id="pages.comments" xml:space="preserve">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="pages.crdate" xml:space="preserve">
+				<source>Creation date</source>
+			</trans-unit>
+			<trans-unit id="pages.archive_date" xml:space="preserve">
+				<source>Archive date</source>
+			</trans-unit>
+			<trans-unit id="pages.tags" xml:space="preserve">
+				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="pages.sharing_enabled" xml:space="preserve">
+				<source>Sharing enabled (show sharing links)</source>
+			</trans-unit>
+			<trans-unit id="pages.tabs.blog" xml:space="preserve">
+				<source>Blog</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment" xml:space="preserve">
+				<source>Blog: Comment</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.author" xml:space="preserve">
+				<source>Author (FE-User)</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.url" xml:space="preserve">
+				<source>URL</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.email" xml:space="preserve">
+				<source>E-Mail</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.comment" xml:space="preserve">
+				<source>Comment</source>
+			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_tag" xml:space="preserve">
 				<source>Blog: Tag</source>
 			</trans-unit>
@@ -16,6 +55,12 @@
 				<source>Content</source>
 			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_tag.tabs.seo" xml:space="preserve">
+				<source>SEO</source>
+			</trans-unit>
+			<trans-unit id="sys_category.content" xml:space="preserve">
+				<source>Content</source>
+			</trans-unit>
+			<trans-unit id="sys_category.tabs.seo" xml:space="preserve">
 				<source>SEO</source>
 			</trans-unit>
 		</body>

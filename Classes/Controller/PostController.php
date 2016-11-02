@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Controller;
 
 /*
@@ -14,47 +15,196 @@ namespace T3G\AgencyPack\Blog\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
-use TYPO3\CMS\Extbase\Domain\Model\Category;
+use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
+use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
+use T3G\AgencyPack\Blog\Service\MetaService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * Posts related controller
- *
+ * Posts related controller.
  */
 class PostController extends ActionController
 {
     /**
-     * Show a list of recent posts
+     * @var CategoryRepository
+     */
+    protected $categoryRepository;
+
+    /**
+     * @var TagRepository
+     */
+    protected $tagRepository;
+
+    /**
+     * @var PostRepository
+     */
+    protected $postRepository;
+
+    /**
+     * @param CategoryRepository $categoryRepository
+     */
+    public function injectCategoryRepository(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
+    /**
+     * @param TagRepository $tagRepository
+     */
+    public function injectTagRepository(TagRepository $tagRepository)
+    {
+        $this->tagRepository = $tagRepository;
+    }
+
+    /**
+     * @param PostRepository $postRepository
+     */
+    public function injectPostRepository(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
+    protected function initializeView(ViewInterface $view)
+    {
+        parent::initializeView($view);
+        if ($this->request->hasArgument('format') && $this->request->getArgument('format') === 'rss') {
+            $action = '.' . $this->request->getArgument('action');
+            $arguments = [];
+            switch ($action) {
+                case '.listPostsByCategory':
+                    if (isset($this->arguments['category'])) {
+                        $arguments[] = $this->arguments['category']->getValue()->getTitle();
+                    }
+                    break;
+                case '.listPostsByDate':
+                    $arguments[] = (int)$this->arguments['year']->getValue();
+                    if (isset($this->arguments['month'])) {
+                        $arguments[] = (int)$this->arguments['month']->getValue();
+                    }
+                    break;
+                case '.listPostsByTag':
+                    if (isset($this->arguments['tag'])) {
+                        $arguments[] = $this->arguments['tag']->getValue()->getTitle();
+                    }
+                    break;
+            }
+            $feedData = [
+                'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
+                'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
+                'language' => $GLOBALS['TSFE']->sys_language_isocode,
+                'link' => $this->uriBuilder->setUseCacheHash(false)->setArgumentsToBeExcludedFromQueryString(['id'])->setCreateAbsoluteUri(true)->setAddQueryString(true)->build(),
+                'date' => date('D, j M Y H:i:s e')
+            ];
+            $this->view->assign('feed', $feedData);
+        }
+    }
+
+    /**
+     * Show a list of recent posts.
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function listRecentPostsAction()
     {
+        $this->view->assign('posts', $this->postRepository->findAll());
     }
 
     /**
-     * Show a list of posts by given tag
+     * Shows a list of posts by given month and year.
      *
-     * @param \T3G\AgencyPack\Blog\Domain\Model\Tag $tag
+     * @param int $year
+     * @param int $month
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws \RuntimeException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
-    public function listPostsByTag(Tag $tag)
+    public function listPostsByDateAction($year = null, $month = null)
     {
+        if (null === $year) {
+            // we need at least the year
+            $this->redirect('listRecentPosts');
+        }
+        $timestamp = mktime(0, 0, 0, $month, 1, $year);
+        $this->view->assignMultiple([
+            'month' => $month,
+            'year' => $year,
+            'timestamp' => $timestamp,
+            'posts' => $this->postRepository->findByMonthAndYear($year, $month),
+        ]);
+        $title = str_replace([
+            '###MONTH###',
+            '###MONTH_NAME###',
+            '###YEAR###'
+        ], [
+            $month,
+            strftime('%B', $timestamp),
+            $year
+        ], LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
+        MetaService::set(MetaService::META_TITLE, $title);
+        MetaService::set(MetaService::META_DESCRIPTION, LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
     }
 
     /**
-     * Show a list of posts by given category
+     * Show a list of posts by given category.
      *
      * @param Category $category
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws \RuntimeException
      */
-    public function listPostsByCategory(Category $category)
+    public function listPostsByCategoryAction(Category $category = null)
+    {
+        if (null === $category) {
+            $this->view->assign('categories', $this->categoryRepository->findAll());
+        } else {
+            $this->view->assign('posts', $this->postRepository->findAllByCategory($category));
+            $this->view->assign('category', $category);
+            MetaService::set(MetaService::META_TITLE, $category->getTitle());
+            MetaService::set(MetaService::META_DESCRIPTION, $category->getDescription());
+            MetaService::set(MetaService::META_CATEGORIES, [$category->getTitle()]);
+        }
+    }
+
+    /**
+     * Show a list of posts by given tag.
+     *
+     * @param Tag $tag
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws \RuntimeException
+     */
+    public function listPostsByTagAction(Tag $tag = null)
+    {
+        if (null === $tag) {
+            $this->view->assign('tags', $this->tagRepository->findAll());
+        } else {
+            $this->view->assign('posts', $this->postRepository->findAllByTag($tag));
+            $this->view->assign('tag', $tag);
+            MetaService::set(MetaService::META_TITLE, $tag->getTitle());
+            MetaService::set(MetaService::META_DESCRIPTION, $tag->getDescription());
+            MetaService::set(MetaService::META_TAGS, [$tag->getTitle()]);
+        }
+    }
+
+    /**
+     * Sidebar action.
+     */
+    public function sidebarAction()
     {
     }
 
     /**
-     * Search for posts
-     *
-     * @param Object $demand
+     * Metadata action: output meta information of blog post.
      */
-    public function searchAction($demand = null)
+    public function metadataAction()
     {
+        $this->view->assign('post', $this->postRepository->findCurrentPost());
     }
 }

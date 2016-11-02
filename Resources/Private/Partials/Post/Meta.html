@@ -1,0 +1,37 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+
+<div class="entry-meta">
+    <span class="entry-date">
+        <blog:link.post post="{post}" rel="bookmark">
+            <time class="entry-date published" datetime="{f:format.date(format: '%Y-%m-%dT%H:%M:%S-%z', date: post.crdate)}" itemprop="datepublished">{f:format.date(format: '{settings.lists.posts.dateFormat}', date: post.crdate)}</time>
+        </blog:link.post>
+    </span>
+    <f:if condition="{post.categories}">
+        <span class="sep">·</span>
+        <f:for each="{post.categories}" as="postCategory">
+            <blog:link.category category="{postCategory}" class="label label-default label-category" />
+        </f:for>
+    </f:if>
+    <f:if condition="{post.tags}">
+        <span class="sep">·</span>
+        <span itemprop="keywords">
+            <f:for each="{post.tags}" as="postTag">
+                <blog:link.tag tag="{postTag}" class="label label-default label-tag">
+                    <span><i class="fa fa-tag"></i> {postTag.title}</span>
+                </blog:link.tag>
+            </f:for>
+        </span>
+    </f:if>
+    <f:alias map="{commentCount: '<f:count subject=\'{post.comments}\' />'}">
+        <span class="sep">·</span>
+        <meta itemprop="commentCount" content="{commentCount}" />
+        <span class="comments-link">
+        <blog:link.post post="{post}" section="comments">
+        <f:if condition="{commentCount} == 1">
+            <f:then><f:translate key="message.comment" arguments="{0: commentCount}" /></f:then>
+            <f:else><f:translate key="message.comments" arguments="{0: commentCount}" /></f:else>
+        </f:if>
+        </blog:link.post>
+        </span>
+    </f:alias>
+</div>

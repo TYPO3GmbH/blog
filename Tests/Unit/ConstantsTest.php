@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Tests\Unit;
 
 /*
@@ -14,12 +15,12 @@ namespace T3G\AgencyPack\Blog\Tests\Unit;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Constants;
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**
- * Test case
- *
+ * Test case.
  */
-class ConstantsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class ConstantsTest extends UnitTestCase
 {
     /**
      * @test

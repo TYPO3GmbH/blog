@@ -20,6 +20,9 @@ CREATE TABLE tx_blog_domain_model_tag (
   t3ver_count int(11) DEFAULT '0' NOT NULL,
   t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
   t3ver_move_id int(11) DEFAULT '0' NOT NULL,
+  sys_language_uid int(11) DEFAULT '0' NOT NULL,
+  l18n_parent int(11) DEFAULT '0' NOT NULL,
+  l18n_diffsource mediumblob NOT NULL,
   title tinytext,
   description text,
   content text,
@@ -29,8 +32,76 @@ CREATE TABLE tx_blog_domain_model_tag (
 );
 
 #
+# Table structure for table 'tx_blog_tag_pages_mm'
+#
+CREATE TABLE tx_blog_tag_pages_mm (
+  uid_local int(11) DEFAULT '0' NOT NULL,
+  uid_foreign int(11) DEFAULT '0' NOT NULL,
+  sorting int(11) DEFAULT '0' NOT NULL,
+  sorting_foreign int(11) DEFAULT '0' NOT NULL,
+
+  KEY uid_local (uid_local),
+  KEY uid_foreign (uid_foreign)
+);
+
+#
+# Table structure for table 'sys_category'
+#
+CREATE TABLE sys_category (
+  content text
+);
+
+#
 # Table structure for table 'tt_content'
 #
 CREATE TABLE tt_content (
   tx_blog_tag_content int(11) DEFAULT '0' NOT NULL,
+  tx_blog_category_content int(11) DEFAULT '0' NOT NULL,
 );
+
+#
+# Table structure for table 'tx_blog_domain_model_comment'
+#
+CREATE TABLE tx_blog_domain_model_comment (
+  uid int(11) NOT NULL auto_increment,
+  pid int(11) DEFAULT '0' NOT NULL,
+  tstamp int(11) DEFAULT '0' NOT NULL,
+  crdate int(11) DEFAULT '0' NOT NULL,
+  cruser_id int(11) DEFAULT '0' NOT NULL,
+  sorting int(11) DEFAULT '0' NOT NULL,
+  deleted tinyint(4) DEFAULT '0' NOT NULL,
+  hidden tinyint(4) DEFAULT '0' NOT NULL,
+  author int(11) DEFAULT '0' NOT NULL,
+  name varchar(100) DEFAULT '' NOT NULL,
+  url varchar(255) DEFAULT '' NOT NULL,
+  email varchar(255) DEFAULT '' NOT NULL,
+  comment text,
+  parentid int(11) DEFAULT '0' NOT NULL,
+  parenttable varchar(255) DEFAULT '' NOT NULL,
+  post_language_id int(11) DEFAULT '0' NOT NULL,
+
+  PRIMARY KEY (uid),
+  KEY parent (pid)
+);
+
+#
+# Table structure for table 'pages'
+#
+CREATE TABLE pages (
+  comments_active tinyint(4) DEFAULT '1' NOT NULL,
+  sharing_enabled tinyint(4) DEFAULT '1' NOT NULL,
+  archive_date int(11) DEFAULT '0' NOT NULL,
+  comments text,
+  tags text
+);
+
+#
+# Table structure for table 'pages_language_overlay'
+#
+CREATE TABLE pages_language_overlay (
+  comments_active tinyint(4) DEFAULT '1' NOT NULL,
+  sharing_enabled tinyint(4) DEFAULT '1' NOT NULL,
+  comments text,
+  tags text
+);
+

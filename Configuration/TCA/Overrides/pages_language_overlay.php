@@ -1,4 +1,5 @@
 <?php
+
 defined('TYPO3_MODE') or die();
 
 call_user_func(
@@ -14,7 +15,7 @@ call_user_func(
             [
                 'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
                 $blogDocType,
-                $customPageIcon
+                $customPageIcon,
             ],
             '1',
             'after'

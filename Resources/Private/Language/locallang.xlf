@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-04T17:14:25Z" product-name="blog">
+		<header/>
+		<body>
+			<trans-unit id="headline.commentform" xml:space="preserve">
+				<source>Write comment</source>
+			</trans-unit>
+			<trans-unit id="headline.comments" xml:space="preserve">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="headline.category" xml:space="preserve">
+				<source>Category: %s</source>
+			</trans-unit>
+			<trans-unit id="headline.categories" xml:space="preserve">
+				<source>Categories</source>
+			</trans-unit>
+			<trans-unit id="headline.tag" xml:space="preserve">
+				<source>Tag: %s</source>
+			</trans-unit>
+			<trans-unit id="headline.tags" xml:space="preserve">
+				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="form.comment.name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="form.comment.email" xml:space="preserve">
+				<source>E-Mail</source>
+			</trans-unit>
+			<trans-unit id="form.comment.url" xml:space="preserve">
+				<source>URL</source>
+			</trans-unit>
+			<trans-unit id="form.comment.comment" xml:space="preserve">
+				<source>Comment</source>
+			</trans-unit>
+			<trans-unit id="form.comment.submit" xml:space="preserve">
+				<source>Submit</source>
+			</trans-unit>
+			<trans-unit id="message.no_comments" xml:space="preserve">
+				<source>No comments</source>
+			</trans-unit>
+			<trans-unit id="message.comment" xml:space="preserve">
+				<source>%s comment</source>
+			</trans-unit>
+			<trans-unit id="message.comments" xml:space="preserve">
+				<source>%s comments</source>
+			</trans-unit>
+			<trans-unit id="message.comments_closed" xml:space="preserve">
+				<source>Comments closed</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.error.title" xml:space="preserve">
+				<source>Comments not active</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.error.text" xml:space="preserve">
+				<source>The comment function is disabled.</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.success.title" xml:space="preserve">
+				<source>Comment added</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.success.text" xml:space="preserve">
+				<source>Your comment was added successfully.</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.moderation.title" xml:space="preserve">
+				<source>Comment added</source>
+			</trans-unit>
+			<trans-unit id="message.addComment.moderation.text" xml:space="preserve">
+				<source>Your comment was added successfully and is now waiting for approval.</source>
+			</trans-unit>
+			<trans-unit id="meta.title.listPostsByDate" xml:space="preserve">
+				<source>All blog posts in ###MONTH_NAME### ###YEAR###</source>
+			</trans-unit>
+			<trans-unit id="meta.description.listPostsByDate" xml:space="preserve">
+				<source>All blog posts ordered by date</source>
+			</trans-unit>
+			<trans-unit id="list.no_posts.title" xml:space="preserve">
+				<source>No blog posts</source>
+			</trans-unit>
+			<trans-unit id="list.no_posts.message" xml:space="preserve">
+				<source>This list contains no blog posts.</source>
+			</trans-unit>
+			<trans-unit id="backend.headline" xml:space="preserve">
+				<source>Blog Admin</source>
+			</trans-unit>
+			<trans-unit id="backend.lead.blogs" xml:space="preserve">
+				<source>It looks like you have the following blog setups</source>
+			</trans-unit>
+			<trans-unit id="backend.lead.noblogs" xml:space="preserve">
+				<source>It looks like no blog setup exists in this instance.</source>
+			</trans-unit>
+			<trans-unit id="backend.table.blog" xml:space="preserve">
+				<source>Blog</source>
+			</trans-unit>
+			<trans-unit id="backend.table.articles" xml:space="preserve">
+				<source>Articles</source>
+			</trans-unit>
+			<trans-unit id="wizard.button.trigger" xml:space="preserve">
+				<source>Setup a new blog</source>
+			</trans-unit>
+			<trans-unit id="wizard.button.cancel" xml:space="preserve">
+				<source>Cancel</source>
+			</trans-unit>
+			<trans-unit id="wizard.button.setup" xml:space="preserve">
+				<source>Setup</source>
+			</trans-unit>
+			<trans-unit id="wizard.lead" xml:space="preserve">
+				<source>This Wizard will create a blog setup in your tree.</source>
+			</trans-unit>
+			<trans-unit id="wizard.description" xml:space="preserve">
+				<source>After click on the button below the tree will be created. If you see the success message, go to your page tree and maybe reload the tree to see the result.</source>
+			</trans-unit>
+			<trans-unit id="wizard.headline.settings" xml:space="preserve">
+				<source>Settings</source>
+			</trans-unit>
+			<trans-unit id="wizard.headline.template" xml:space="preserve">
+				<source>Template</source>
+			</trans-unit>
+			<trans-unit id="wizard.label.title" xml:space="preserve">
+				<source>Title of the blog</source>
+			</trans-unit>
+			<trans-unit id="wizard.placeholder.title" xml:space="preserve">
+				<source>The title of your blog</source>
+			</trans-unit>
+			<trans-unit id="wizard.message.template.found" xml:space="preserve">
+				<source>Hey, I have found the extension blog_template, should I use this template?</source>
+			</trans-unit>
+			<trans-unit id="wizard.message.template.not_found" xml:space="preserve">
+				<source>Hey, I have not found a template, but I can install the extension blog_template for you, should I try to install the extension and use it as template?</source>
+			</trans-unit>
+			<trans-unit id="wizard.label.template" xml:space="preserve">
+				<source>Yes, please use the template provided by the extension</source>
+			</trans-unit>
+			<trans-unit id="wizard.label.install" xml:space="preserve">
+				<source>Yes, please install and use the template provided by the extension</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blog" xml:space="preserve">
+				<source>TYPO3 Blog</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blogUid" xml:space="preserve">
+				<source>List posts UID:Location of the "Blog: List of posts" plugin. This page UID is the root page for the blog. All blog post pages are located below this page.</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.categoryUid" xml:space="preserve">
+				<source>List by category UID:Location of the "Blog: List by category" plugin. Shows all posts from one category.</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.tagUid" xml:space="preserve">
+				<source>List by tags UID:Location of the "Blog: List by tags" plugin. Shows all posts from one tag.</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.archiveUid" xml:space="preserve">
+				<source>Archive UID:Location of the "Blog: Archive" plugin. Shows archived posts.</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.storagePid" xml:space="preserve">
+				<source>Storage folder:Storage folder of all categories and tags for this blog.</source>
+			</trans-unit>
+			<trans-unit id="feed.title.listPostsByCategory" xml:space="preserve">
+				<source>Category RSS Feed</source>
+			</trans-unit>
+			<trans-unit id="feed.description.listPostsByCategory" xml:space="preserve">
+				<source>Posts by category %s</source>
+			</trans-unit>
+			<trans-unit id="feed.title.listPostsByDate" xml:space="preserve">
+				<source>Archive RSS Feed</source>
+			</trans-unit>
+			<trans-unit id="feed.description.listPostsByDate" xml:space="preserve">
+				<source>Posts by date: %s / %s</source>
+			</trans-unit>
+			<trans-unit id="feed.title.listPostsByTag" xml:space="preserve">
+				<source>Tag RSS Feed</source>
+			</trans-unit>
+			<trans-unit id="feed.description.listPostsByTag" xml:space="preserve">
+				<source>Posts by tag: %s</source>
+			</trans-unit>
+			<trans-unit id="feed.title.listRecentPosts" xml:space="preserve">
+				<source>RSS Feed</source>
+			</trans-unit>
+			<trans-unit id="feed.description.listRecentPosts" xml:space="preserve">
+				<source>Recent posts</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

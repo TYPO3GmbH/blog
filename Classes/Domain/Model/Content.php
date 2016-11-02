@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
 /*
@@ -16,7 +17,7 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
- * Class Content
+ * Class Content.
  *
  * The additional content for tags and categories.
  * This model is a representation of the tt_content table and
