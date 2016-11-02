@@ -34,5 +34,5 @@ The git repository is public and you can clone it like every git repository:
    git clone https://bitbucket.typo3.com/projects/EXT/repos/blog/browse
 
 
-.. _service desk: https://jira.typo3.com/servicedesk/customer/portal/2
+.. _service desk: https://jira.typo3.com/servicedesk/customer/portal/3/group/21
 .. _#t3g-ext-blog: https://typo3.slack.com/archives/t3g-ext-blog
