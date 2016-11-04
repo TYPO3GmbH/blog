@@ -9,7 +9,6 @@ config.tx_extbase.persistence {
         T3G\AgencyPack\Blog\Domain\Model\Post {
             mapping {
                 tableName = pages
-                dokype = 137
                 columns.crdate.mapOnProperty = crdate
             }
         }
