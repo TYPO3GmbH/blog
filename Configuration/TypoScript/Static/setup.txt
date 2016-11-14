@@ -2,7 +2,12 @@ plugin.tx_blog {
     persistence {
         storagePid = {$plugin.tx_blog.persistence.storagePid}
     }
-    view.widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = EXT:blog/Resources/Private/Templates
+    view {
+        templateRootPaths.0 = EXT:blog/Resources/Private/Templates/
+        partialRootPaths.0 = EXT:blog/Resources/Private/Partials/
+        layoutRootPaths.0 = EXT:blog/Resources/Private/Layouts/
+        widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = EXT:blog/Resources/Private/Templates
+    }
     settings {
         blogUid = {$plugin.tx_blog.settings.blogUid}
         categoryUid  = {$plugin.tx_blog.settings.categoryUid}
