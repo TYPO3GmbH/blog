@@ -1,6 +1,8 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+if (!defined('TYPO3_MODE')) {
+	die('Access denied.');
+}
 
 $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
     0 => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf:blog-folder',

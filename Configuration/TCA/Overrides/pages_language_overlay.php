@@ -1,6 +1,8 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+if (!defined('TYPO3_MODE')) {
+	die('Access denied.');
+}
 
 call_user_func(
     function ($extKey, $table) {
