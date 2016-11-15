@@ -44,6 +44,13 @@ class Post extends AbstractEntity
     protected $description;
 
     /**
+     * Thie blog post author
+     *
+     * @var string
+     */
+    protected $author;
+
+    /**
      * The blog post creation date.
      *
      * @var \DateTime
@@ -380,5 +387,21 @@ class Post extends AbstractEntity
     public function setArchiveDate($archiveDate)
     {
         $this->archiveDate = $archiveDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthor(): string
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param string $author
+     */
+    public function setAuthor(string $author)
+    {
+        $this->author = $author;
     }
 }
