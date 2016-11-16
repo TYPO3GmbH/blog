@@ -41,6 +41,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     {
         $this->registerUniversalTagAttributes();
         $this->registerTagAttribute('target', 'string', 'Target of link', false);
+        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute', false);
         $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document', false);
 
         $this->registerArgument('post', Post::class, 'The post to link to');
