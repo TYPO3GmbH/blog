@@ -202,7 +202,7 @@ comments.respectPostLanguageId
          In case of a multi language setup, the comments created in the frontend will be stored with a relation
          to the blog post (page) and with an relation to the current language.
          If this value is 0, all comments will we shown on all blog posts in each language.
-         If this value is 1, comments will only be shown if blog post id AND language match.
+         If this value is 1, comments will only be shown if blog post language id AND comment language id match or comment language id is -1 (which means all).
 
 
 Settings (plugin.tx_blog.settings.widgets)

@@ -71,7 +71,10 @@ class CommentRepository extends Repository
         $constraints = [];
         $constraints[] = $query->equals('post', $post->getUid());
         if ($respectPostLanguageId) {
-            $constraints[] = $query->equals('postLanguageId', $GLOBALS['TSFE']->sys_language_uid);
+            $constraints[] = $query->logicalOr([
+                $query->equals('postLanguageId', $GLOBALS['TSFE']->sys_language_uid),
+                $query->equals('postLanguageId', -1)
+            ]);
         }
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
