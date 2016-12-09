@@ -67,7 +67,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         $uriBuilder = $this->controllerContext->getUriBuilder();
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
-            ->setUseCacheHash(false)
+            ->setUseCacheHash(true)
             ->setArguments($additionalParams);
         if ($rssFormat) {
             $uriBuilder
