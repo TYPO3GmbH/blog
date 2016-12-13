@@ -13,6 +13,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class SetupService
 {
+    /**
+     * @var array of created record uids
+     */
+    protected $recordUidArray = [];
 
     /**
      * @return array
@@ -86,13 +90,12 @@ class SetupService
             $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
             $dataHandler->start($blogSetup, []);
             $result = $dataHandler->process_datamap();
+            $this->recordUidArray = array_merge_recursive($this->recordUidArray, $dataHandler->substNEWwithIDs);
             if ($result !== false) {
                 $result = true;
-                $recordIds = $dataHandler->substNEWwithIDs;
-
                 // Update page id in PageTSConfig
-                $blogRootUid = (int) $recordIds['NEW_blogRoot'];
-                $blogFolderUid = (int) $recordIds['NEW_blogFolder'];
+                $blogRootUid = (int) $this->recordUidArray['NEW_blogRoot'];
+                $blogFolderUid = (int) $this->recordUidArray['NEW_blogFolder'];
                 /** @var array $record */
                 $record = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('TSconfig', 'pages', 'uid = ' . $blogRootUid);
                 $this->getDatabaseConnection()->exec_UPDATEquery('pages', 'uid = ' . $blogRootUid, [
@@ -103,14 +106,27 @@ class SetupService
                 if (file_exists($blogSetupRelations)) {
                     /** @noinspection PhpIncludeInspection */
                     $blogSetupRelations = require $blogSetupRelations;
-                    $blogSetupRelations = $this->replaceNewUids($blogSetupRelations, $dataHandler->substNEWwithIDs);
+                    $blogSetupRelations = $this->replaceNewUids($blogSetupRelations);
                     $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
                     $dataHandler->start($blogSetupRelations, []);
                     $resultRelations = $dataHandler->process_datamap();
+                    $this->recordUidArray = array_merge_recursive($this->recordUidArray, $dataHandler->substNEWwithIDs);
                     if ($resultRelations !== false) {
                         $result = true;
                     }
                 }
+            }
+            if ($result === true) {
+                // Replace UIDs in constants
+                $sysTemplateUid = (int)$this->recordUidArray['NEW_SysTemplate'];
+                $record = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('constants', 'sys_template', 'uid = ' . $sysTemplateUid);
+                $this->getDatabaseConnection()->exec_UPDATEquery('sys_template', 'uid = ' . $sysTemplateUid, [
+                    'constants' => str_replace(
+                        array_keys($this->recordUidArray),
+                        array_values($this->recordUidArray),
+                        $record['constants']
+                    )
+                ]);
             }
         }
         return $result;
@@ -118,25 +134,24 @@ class SetupService
 
     /**
      * @param array $setup
-     * @param array $newIds
      *
      * @return array
      */
-    protected function replaceNewUids(array $setup, array $newIds)
+    protected function replaceNewUids(array $setup)
     {
         $newSetup = [];
         foreach ($setup as $key => &$value) {
             if (false !== strpos($key, 'NEW')) {
-                foreach ($newIds as $newId => $uid) {
+                foreach ($this->recordUidArray as $newId => $uid) {
                     $key = str_replace($newId, $uid, $key);
                 }
             }
             if (is_array($value)) {
                 /** @noinspection ReferenceMismatchInspection */
-                $value = $this->replaceNewUids($value, $newIds);
+                $value = $this->replaceNewUids($value);
             } else {
                 if (false !== strpos($value, 'NEW')) {
-                    foreach ($newIds as $newId => $uid) {
+                    foreach ($this->recordUidArray as $newId => $uid) {
                         /** @noinspection ReferenceMismatchInspection */
                         $value = str_replace($newId, $uid, $value);
                     }
