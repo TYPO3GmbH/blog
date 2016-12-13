@@ -73,6 +73,34 @@ The Setup Wizard creates the following pages for you:
 - > Archive (this page is the archive, it lists all blog posts by given date (month and year, or year only)
 - > First blog post (yes, a first blog post, as an example)
 
+Setup without Wizard
+^^^^^^^^^^^^^^^^^^^^
+
+To create a new blog setup, follow these steps:
+
+1) Create the following page structure:
+
+- Rootpage (contains the TypoScript and PageTS-Config)
+- > Data (a folder to hold categories and tags)
+- > Category (this page is used to show blog posts, related to single category, or a category overview)
+- > Tag (this page is used to show blog posts, related to single tag, or a tag overview)
+- > Archive (this page is the archive, it lists all blog posts by given date (month and year, or year only)
+
+2) Add at least the TypoScript template which is provided by the extension
+
+3) Configure the page ids in the constants:
+
+.. code-block:: ts
+
+   plugin.tx_blog.settings.blogUid = NEW_blogRoot
+   plugin.tx_blog.settings.categoryUid = NEW_blogCategoryPage
+   plugin.tx_blog.settings.tagUid = NEW_blogTagPage
+   plugin.tx_blog.settings.archiveUid = NEW_blogArchivePage
+   plugin.tx_blog.persistence.storagePid = NEW_blogFolder
+
+4) Optional: Install and use the extension blog_template for a default template set
+
+
 RealURL Setup
 ^^^^^^^^^^^^^
 
