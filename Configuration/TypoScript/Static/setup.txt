@@ -13,7 +13,7 @@ plugin.tx_blog {
         categoryUid  = {$plugin.tx_blog.settings.categoryUid}
         tagUid  = {$plugin.tx_blog.settings.tagUid}
         archiveUid = {$plugin.tx_blog.settings.archiveUid}
-        storagePid = {$plugin.tx_blog.persistence.storagePid}
+        storagePid = {$plugin.tx_blog.settings.storagePid}
         sidebarWidgets {
             10 = tt_content.list.20.blog_recentpostswidget
             20 = tt_content.list.20.blog_categorywidget
