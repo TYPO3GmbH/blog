@@ -1,6 +1,6 @@
 plugin.tx_blog {
     persistence {
-        storagePid = {$plugin.tx_blog.persistence.storagePid}
+        storagePid = {$plugin.tx_blog.settings.storagePid}
     }
     view {
         templateRootPaths.0 = EXT:blog/Resources/Private/Templates/
