@@ -72,7 +72,7 @@ class BackendController extends ActionController
 
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
-        $pageRenderer->addCssFile(ExtensionManagementUtility::extRelPath('blog') . 'Resources/Public/Css/backend.css');
+        $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/backend.css');
     }
 
     /**
