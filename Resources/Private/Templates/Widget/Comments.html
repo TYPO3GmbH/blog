@@ -9,11 +9,11 @@
             <f:format.date format="d.m.Y">{comment.crdate}</f:format.date> |
             <span class="comment-author-link">
                 <f:if condition="{comment.url}">
-                    <f:then><f:link.external<f:link.external uri="{comment.url}" target="_blank" rel="external nofollow" class="url">{comment.name}</f:link.external></f:then>
+                    <f:then><f:link.external uri="{comment.url}" target="_blank" rel="external nofollow" class="url">{comment.name}</f:link.external></f:then>
                     <f:else>{comment.name}</f:else>
                 </f:if>
             </span> - <blog:link.post post="{comment.post}" section="comment-{comment.uid}">{comment.post.title}</blog:link.post>
-            <br/><f:format.crop maxCharacters="100" append="&nbsp;[...]">{comment.comment}</f:format.crop></br>
+            <br/><f:format.crop maxCharacters="100" append="&nbsp;[...]">{comment.comment}</f:format.crop>
         </li>
         </f:for>
     </ul>
