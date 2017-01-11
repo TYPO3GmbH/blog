@@ -8,6 +8,20 @@
 
                 <f:form action="addComment" name="comment" object="{comment}" pageUid="" addQueryString="true">
                     <f:form.hidden name="post" value="{post}" />
+                    <f:comment>
+                        This is the HoneyPot field, it will be set to hidden with JavaScript and must not be filled out.
+                    </f:comment>
+                    <div class="form-group js-hp">
+                        <label for="hp"><f:translate key="form.comment.hp" /></label>
+                        <f:form.textfield id="hp" property="hp" class="form-control" additionalAttributes="{autocomplete: 'off'}" />
+                        <script type="text/javascript">
+                            var hp = document.getElementsByClassName('js-hp');
+                            for (var i=0; i<hp.length; i++) {
+                                hp[i].style = 'display: none;';
+                                hp[i].value = '';
+                            }
+                        </script>
+                    </div>
                     <div class="form-group">
                         <label for="author"><f:translate key="form.comment.name" /></label>
                         <f:form.textfield id="author" property="name" class="form-control" />

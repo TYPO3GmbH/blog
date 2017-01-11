@@ -117,7 +117,7 @@ sidebarWidgets
 
          The default active widgets:
 
-         .. code-block:: typoscript
+         .. code-block:: ts
 
             plugin.tx_blog.settings.sidebarWidgets {
                10 = tt_content.list.20.blog_recentpostswidget

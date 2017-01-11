@@ -7,7 +7,6 @@
 TYPO3 Blog Extension
 ===========================
 
-
 :Author:    TYPO3 GmbH Team <info@typo3.com>
 :License:   GPL 3.0
 :Rendered:  |today|
@@ -24,3 +23,4 @@ TYPO3 Blog Extension
    Integrators/Index
    Editors/Index
    FAQ/Index
+   Changelog/Index

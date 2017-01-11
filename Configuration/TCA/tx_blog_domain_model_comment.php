@@ -132,6 +132,11 @@ return [
                 'type' => 'passthrough',
             ],
         ],
+        'hp' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
     ],
     'types' => [
         0 => [
