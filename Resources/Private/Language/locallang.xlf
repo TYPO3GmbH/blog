@@ -21,6 +21,9 @@
 			<trans-unit id="headline.tags" xml:space="preserve">
 				<source>Tags</source>
 			</trans-unit>
+			<trans-unit id="form.comment.hp" xml:space="preserve">
+				<source>Please let this field empty</source>
+			</trans-unit>
 			<trans-unit id="form.comment.name" xml:space="preserve">
 				<source>Name</source>
 			</trans-unit>

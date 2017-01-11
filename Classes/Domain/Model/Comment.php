@@ -75,6 +75,13 @@ class Comment extends AbstractEntity
     protected $post;
 
     /**
+     * The honeypot field, field is not stored in database.
+     *
+     * @var string
+     */
+    protected $hp = '';
+
+    /**
      * @var int
      */
     protected $postLanguageId;
@@ -260,5 +267,21 @@ class Comment extends AbstractEntity
     public function setPostLanguageId($postLanguageId)
     {
         $this->postLanguageId = $postLanguageId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHp() : string
+    {
+        return $this->hp;
+    }
+
+    /**
+     * @param string $hp
+     */
+    public function setHp(string $hp)
+    {
+        $this->hp = $hp;
     }
 }
