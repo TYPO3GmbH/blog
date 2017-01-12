@@ -88,7 +88,7 @@ class BackendController extends ActionController
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
         $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/bootstrap.min.css');
         $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/backend.css');
-        if ($this->actionMethodName === 'indexAction') {
+        if ($this->actionMethodName === 'setupWizardAction') {
             $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
         }
         if ($this->actionMethodName === 'postsAction') {
@@ -118,9 +118,9 @@ class BackendController extends ActionController
      * @return string
      * @throws \BadFunctionCallException
      */
-    public function indexAction()
+    public function setupWizardAction()
     {
-        return $this->render('Backend/Index.html', [
+        return $this->render('Backend/SetupWizard.html', [
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'templateExists' => ExtensionManagementUtility::isLoaded('blog_template')
         ]);

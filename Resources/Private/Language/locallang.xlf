@@ -81,8 +81,8 @@
 			<trans-unit id="list.no_posts.message" xml:space="preserve">
 				<source>This list contains no blog posts.</source>
 			</trans-unit>
-			<trans-unit id="backend.headline" xml:space="preserve">
-				<source>Dashboard</source>
+			<trans-unit id="backend.headline.setup_wizard" xml:space="preserve">
+				<source>SetupWizard</source>
 			</trans-unit>
 			<trans-unit id="backend.headline.posts" xml:space="preserve">
 				<source>Posts</source>
