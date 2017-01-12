@@ -78,6 +78,21 @@ class CommentController extends ActionController
     }
 
     /**
+     * Pre-process request and ensure a valid protocol for submitted URL
+     */
+    protected function initializeAddCommentAction()
+    {
+        $arguments = $this->request->getArguments();
+        if (!empty($arguments['comment']['url'])) {
+            $re = '/(http([s]*):\/\/)(.*)/';
+            if (preg_match($re, $arguments['comment']['url'], $matches) === 0) {
+                $arguments['comment']['url'] = 'http://' . $arguments['comment']['url'];
+            }
+            $this->request->setArguments($arguments);
+        }
+    }
+
+    /**
      * @return bool
      */
     protected function getErrorFlashMessage()
