@@ -45,17 +45,19 @@ class PostRepository extends Repository
         // don't add the pid constraint
         $querySettings->setRespectStoragePage(false);
         $this->setDefaultQuerySettings($querySettings);
-
-        $pids = [];
-        $rootLine = $this->getTypoScriptFontendController()->sys_page
-            ->getRootLine($this->getTypoScriptFontendController()->id);
-        foreach ($rootLine as $value) {
-            $pids[] = $value['uid'];
-        }
         $query = $this->createQuery();
-        $this->defaultConstraints[] = $query->equals('doktype', Constants::DOKTYPE_BLOG_POST);
-        $this->defaultConstraints[] = $query->in('pid', $pids);
 
+        if (TYPO3_MODE === 'FE') {
+            $pids = [];
+            $rootLine = $this->getTypoScriptFontendController()->sys_page
+                ->getRootLine($this->getTypoScriptFontendController()->id);
+            foreach ($rootLine as $value) {
+                $pids[] = $value['uid'];
+            }
+            $this->defaultConstraints[] = $query->in('pid', $pids);
+        }
+
+        $this->defaultConstraints[] = $query->equals('doktype', Constants::DOKTYPE_BLOG_POST);
         $this->defaultOrderings = [
             'crdate' => QueryInterface::ORDER_DESCENDING,
         ];

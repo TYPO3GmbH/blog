@@ -42,7 +42,7 @@ The Setup Wizard creates the recommended pagetree and it will add all configurat
 
 To create a new blog setup, follow these steps:
 
-1. Click on the blog admin module
+1. Click on the blog module in the backend
 2. Click on the "Setup a new blog" button
 
 .. figure:: ../Images/Backend/setup_wizard_1.png

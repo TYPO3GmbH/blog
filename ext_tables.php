@@ -91,7 +91,7 @@ call_user_func(function () {
             'tx_Blog',
             'top',
             [
-                'Backend' => 'index, createBlog'
+                'Backend' => 'index, createBlog, posts'
             ],
             [
                 'access' => 'admin',

@@ -1,26 +1,34 @@
 <f:layout name="Backend" />
+
+<f:section name="intro">
+  <h1><f:translate key="backend.headline" /></h1>
+  <p class="lead"><f:translate key="backend.lead.blogs" /></p>
+</f:section>
+
 <f:section name="content">
-    <h1><f:translate key="backend.headline" /></h1>
     <f:if condition="{f:count() -> blogSetups} > 0">
         <f:then>
-            <p class="lead"><f:translate key="backend.lead.blogs" /></p>
-            <table class="table">
+            <div class="table-fit">
+              <table class="table">
                 <tr>
-                    <th><f:translate key="backend.table.blog" /></th>
-                    <th><f:translate key="backend.table.articles" /></th>
+                  <th><f:translate key="backend.table.blog" /></th>
+                  <th><f:translate key="backend.table.articles" /></th>
                 </tr>
                 <f:for each="{blogSetups}" as="blog">
-                    <tr>
-                        <td>{blog.title}</td>
-                        <td>{blog.articleCount}</td>
-                    </tr>
+                <tr>
+                  <td>{blog.title}</td>
+                  <td>{blog.articleCount}</td>
+                </tr>
                 </f:for>
-            </table>
+              </table>
+            </div>
             <f:render partial="Backend/CreateWizard" arguments="{_all}" />
             <f:render partial="Backend/RealUrlSetup" arguments="{_all}" />
         </f:then>
         <f:else>
-            <p class="lead"><f:translate key="backend.lead.noblogs" /></p>
+            <f:be.infobox state="-1" title="{f:translate(key: 'backend.warning')}">
+                <p><f:translate key="backend.message.noblogs" /></p>
+            </f:be.infobox>
             <f:render partial="Backend/CreateWizard" arguments="{_all}" />
         </f:else>
     </f:if>

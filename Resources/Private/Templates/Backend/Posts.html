@@ -1,0 +1,51 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+<f:layout name="Backend" />
+
+<f:section name="intro">
+  <h1><f:translate key="backend.headline.posts" /></h1>
+  <p class="lead"><f:translate key="backend.lead.posts" /></p>
+</f:section>
+
+<f:section name="content">
+    <f:if condition="{f:count() -> posts} > 0">
+        <f:then>
+            <div class="table-fit">
+              <table class="table table-striped table-bordered dataTables" data-columns='[{"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "date"}]'>
+                <thead>
+                  <tr>
+                      <th><f:translate key="backend.table.title" /></th>
+                      <th><f:translate key="backend.table.author" /></th>
+                      <th><f:translate key="backend.table.categories" /></th>
+                      <th><f:translate key="backend.table.tags" /></th>
+                      <th><f:translate key="backend.table.date" /></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <f:for each="{posts}" as="post">
+                      <tr>
+                          <td data-search="{post.title}" data-filter="{post.title}"><blog:link.be.post post="{post}" /></td>
+                          <td data-search="{post.author}" data-filter="{post.author}">{post.author}</td>
+                          <td>
+                            <ul class="list-inline">
+                            <f:for each="{post.categories}" as="category"><li><blog:link.be.category category="{category}" /></li></f:for>
+                            </ul>
+                          </td>
+                          <td>
+                            <ul class="list-inline">
+                              <f:for each="{post.tags}" as="tag"><li><blog:link.be.tag tag="{tag}" /></li></f:for>
+                            </ul>
+                          </td>
+                          <td data-order="{f:format.date(format: 'U', date: post.crdate)}"><f:format.date format="d.m.Y">{post.crdate}</f:format.date></td>
+                      </tr>
+                  </f:for>
+                </tbody>
+              </table>
+            </div>
+        </f:then>
+        <f:else>
+          <f:be.infobox state="-1" title="{f:translate(key: 'backend.warning')}">
+              <p><f:translate key="backend.message.noposts" /></p>
+          </f:be.infobox>
+        </f:else>
+    </f:if>
+</f:section>
