@@ -14,9 +14,9 @@
                 <thead>
                   <tr>
                       <th><f:translate key="backend.table.title" /></th>
-                      <th><f:translate key="backend.table.author" /></th>
-                      <th><f:translate key="backend.table.categories" /></th>
-                      <th><f:translate key="backend.table.tags" /></th>
+                      <th data-filter="true"><f:translate key="backend.table.author" /></th>
+                      <th data-filter="true"><f:translate key="backend.table.categories" /></th>
+                      <th data-filter="true"><f:translate key="backend.table.tags" /></th>
                       <th><f:translate key="backend.table.date" /></th>
                   </tr>
                 </thead>
@@ -26,14 +26,18 @@
                           <td data-search="{post.title}" data-filter="{post.title}"><blog:link.be.post post="{post}" /></td>
                           <td data-search="{post.author}" data-filter="{post.author}">{post.author}</td>
                           <td>
+                            <f:if condition="{post.categories}">
                             <ul class="list-inline">
-                            <f:for each="{post.categories}" as="category"><li><blog:link.be.category category="{category}" /></li></f:for>
+                              <f:for each="{post.categories}" as="category"><li><blog:link.be.category category="{category}" /></li></f:for>
                             </ul>
+                            </f:if>
                           </td>
                           <td>
+                            <f:if condition="{post.tags}">
                             <ul class="list-inline">
                               <f:for each="{post.tags}" as="tag"><li><blog:link.be.tag tag="{tag}" /></li></f:for>
                             </ul>
+                            </f:if>
                           </td>
                           <td data-order="{f:format.date(format: 'U', date: post.crdate)}"><f:format.date format="d.m.Y">{post.crdate}</f:format.date></td>
                       </tr>
