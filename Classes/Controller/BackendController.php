@@ -88,26 +88,37 @@ class BackendController extends ActionController
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
         $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/bootstrap.min.css', 'stylesheet', 'all', '', false);
         $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/backend.css', 'stylesheet', 'all', '', false);
+    }
 
-        if ($this->actionMethodName === 'setupWizardAction') {
-            $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
-        }
-        if ($this->actionMethodName === 'postsAction') {
-            $blogPath = ExtensionManagementUtility::extPath('blog', 'Resources/Public/JavaScript/');
-            $blogPath = PathUtility::getAbsoluteWebPath($blogPath);
-            $pageRenderer->addRequireJsConfiguration([
-                'paths' => [
-                    'datatables_bootstrap' => $blogPath . 'dataTables.bootstrap.min'
-                ],
-                'map' => [
-                    '*' => [
-                        'datatables.net' => 'datatables',
-                    ]
+    /**
+     *
+     */
+    public function initializeSetupWizardAction()
+    {
+        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
+    }
+
+    /**
+     *
+     * @throws \BadFunctionCallException
+     */
+    public function initializePostsAction()
+    {
+        $blogPath = ExtensionManagementUtility::extPath('blog', 'Resources/Public/JavaScript/');
+        $blogPath = PathUtility::getAbsoluteWebPath($blogPath);
+        $pageRenderer = $this->moduleTemplate->getPageRenderer();
+        $pageRenderer->addRequireJsConfiguration([
+            'paths' => [
+                'datatables_bootstrap' => $blogPath . 'dataTables.bootstrap.min'
+            ],
+            'map' => [
+                '*' => [
+                    'datatables.net' => 'datatables',
                 ]
-            ]);
-            $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/DataTables');
-            $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/dataTables.bootstrap.min.css', 'stylesheet', 'all', '', false);
-        }
+            ]
+        ]);
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/DataTables');
+        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/dataTables.bootstrap.min.css', 'stylesheet', 'all', '', false);
     }
 
     /**
