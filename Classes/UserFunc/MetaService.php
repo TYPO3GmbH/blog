@@ -9,7 +9,7 @@ class MetaService
 {
     /**
      * @param string $_
-     * @param array $conf
+     * @param array  $conf
      *
      * @return mixed|string
      */

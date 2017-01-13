@@ -44,7 +44,7 @@ class Post extends AbstractEntity
     protected $description;
 
     /**
-     * Thie blog post author
+     * Thie blog post author.
      *
      * @var string
      */
@@ -308,7 +308,7 @@ class Post extends AbstractEntity
      */
     public function setSharingEnabled($sharingEnabled)
     {
-        $this->sharingEnabled = (bool)$sharingEnabled;
+        $this->sharingEnabled = (bool) $sharingEnabled;
 
         return $this;
     }

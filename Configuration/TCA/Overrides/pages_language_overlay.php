@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
+    die('Access denied.');
 }
 
 call_user_func(
@@ -13,7 +13,7 @@ call_user_func(
             $table,
             'doktype',
             [
-                'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
+                'LLL:EXT:'.$extKey.'/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
                 $blogDocType,
                 'apps-pagetree-blog-post',
             ],

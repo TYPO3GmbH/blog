@@ -36,7 +36,6 @@ class PostRepository extends Repository
     protected $defaultConstraints = [];
 
     /**
-     *
      * @throws \Exception
      */
     public function initializeObject()
@@ -65,16 +64,21 @@ class PostRepository extends Repository
 
     /**
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     *
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findAll()
+    public function findAll($blogSetup = null)
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
         $constraints[] = $query->logicalOr([
             $query->equals('archiveDate', 0),
-            $query->greaterThanOrEqual('archiveDate', time())
+            $query->greaterThanOrEqual('archiveDate', time()),
         ]);
+
+        if ($blogSetup !== null) {
+            $constraints[] = $query->equals('pid', $blogSetup);
+        }
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
@@ -162,7 +166,7 @@ class PostRepository extends Repository
         $sql = [];
         $sql[] = 'SELECT MONTH(FROM_UNIXTIME(crdate)) as month, YEAR(FROM_UNIXTIME(crdate)) as year, count(*) as count';
         $sql[] = 'FROM pages';
-        $sql[] = 'WHERE doktype = ' . Constants::DOKTYPE_BLOG_POST;
+        $sql[] = 'WHERE doktype = '.Constants::DOKTYPE_BLOG_POST;
         $sql[] = '  AND hidden = 0 AND deleted = 0';
         $sql[] = 'GROUP BY';
         $sql[] = '  MONTH(FROM_UNIXTIME(crdate)),';

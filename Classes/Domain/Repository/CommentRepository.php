@@ -14,7 +14,9 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
+use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -38,7 +40,6 @@ class CommentRepository extends Repository
     protected $settings;
 
     /**
-     *
      * @throws \InvalidArgumentException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
@@ -65,7 +66,7 @@ class CommentRepository extends Repository
     public function findAllByPost(Post $post)
     {
         $respectPostLanguageId = isset($this->settings['comments']['respectPostLanguageId'])
-            ? (int)$this->settings['comments']['respectPostLanguageId']
+            ? (int) $this->settings['comments']['respectPostLanguageId']
             : 0;
         $query = $this->createQuery();
         $constraints = [];
@@ -73,9 +74,10 @@ class CommentRepository extends Repository
         if ($respectPostLanguageId) {
             $constraints[] = $query->logicalOr([
                 $query->equals('postLanguageId', $GLOBALS['TSFE']->sys_language_uid),
-                $query->equals('postLanguageId', -1)
+                $query->equals('postLanguageId', -1),
             ]);
         }
+
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
@@ -90,5 +92,77 @@ class CommentRepository extends Repository
         $query->setLimit($limit);
 
         return $query->execute();
+    }
+
+    /**
+     * @param string $filter
+     * @param int    $blogSetup
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     *
+     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findAllByFilter($filter = null, $blogSetup = null)
+    {
+        $query = $this->createQuery();
+        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $querySettings->setRespectStoragePage(false);
+        $querySettings->setIgnoreEnableFields(true);
+        $querySettings->setIncludeDeleted(true);
+        $query->setQuerySettings($querySettings);
+
+        $constraints = [];
+        switch ($filter) {
+            case 'pending':
+                $constraints[] = $query->equals('hidden', '1');
+                $constraints[] = $query->equals('deleted', '0');
+            break;
+            case 'approved':
+                $constraints[] = $query->equals('hidden', '0');
+                $constraints[] = $query->equals('deleted', '0');
+            break;
+            case 'deleted':
+                $constraints[] = $query->equals('deleted', '1');
+            break;
+        }
+        if ($blogSetup !== null) {
+            $constraints[] = $query->in('pid', $this->getPostPidsByRootPid($blogSetup));
+        }
+        if (!empty($constraints)) {
+            return $query->matching($query->logicalAnd($constraints))->execute();
+        }
+
+        return $this->findAll();
+    }
+
+    /**
+     * @param int $blogRootPid
+     *
+     * @return array
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected function getPostPidsByRootPid($blogRootPid)
+    {
+        $rows = $this->getDatabaseConnection()->exec_SELECTgetRows(
+            'uid',
+            'pages',
+            'doktype = '.Constants::DOKTYPE_BLOG_POST.' AND pid = '.(int) $blogRootPid
+        );
+        $result = [];
+        foreach ($rows as $row) {
+            $result[] = $row['uid'];
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return DatabaseConnection
+     */
+    protected function getDatabaseConnection()
+    {
+        return $GLOBALS['TYPO3_DB'];
     }
 }

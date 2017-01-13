@@ -120,7 +120,6 @@ class WidgetController extends ActionController
     }
 
     /**
-     *
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function recentPostsAction()

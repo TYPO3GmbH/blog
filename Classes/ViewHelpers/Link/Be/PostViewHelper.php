@@ -33,9 +33,8 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * Arguments initialization
+     * Arguments initialization.
      *
-     * @return void
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
@@ -52,16 +51,17 @@ class PostViewHelper extends AbstractTagBasedViewHelper
 
     /**
      * @return string Rendered page URI
+     *
      * @throws \InvalidArgumentException
      */
     public function render()
     {
         /** @var Post $post */
         $post = $this->arguments['post'];
-        $pageUid = $post !== null ? (int)$post->getUid() : 0;
+        $pageUid = $post !== null ? (int) $post->getUid() : 0;
 
         $uri = BackendUtility::getModuleUrl('web_layout', ['id' => $pageUid]);
-        if ((string)$uri !== '') {
+        if ((string) $uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;
             }
@@ -72,6 +72,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         } else {
             $result = $this->renderChildren();
         }
+
         return $result;
     }
 }

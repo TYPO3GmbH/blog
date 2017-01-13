@@ -7,6 +7,7 @@
 </f:section>
 
 <f:section name="content">
+    <f:render partial="Backend/BlogFilter" arguments="{blogSetups: blogSetups, activeBlogSetup: activeBlogSetup, action: 'posts'}" />
     <f:if condition="{f:count() -> posts} > 0">
         <f:then>
             <div class="table-fit">

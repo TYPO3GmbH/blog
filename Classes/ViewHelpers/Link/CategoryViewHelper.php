@@ -32,9 +32,8 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * Arguments initialization
+     * Arguments initialization.
      *
-     * @return void
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
@@ -52,14 +51,14 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
      */
     public function render()
     {
-        $rssFormat = (bool)$this->arguments['rss'];
+        $rssFormat = (bool) $this->arguments['rss'];
         /** @var Category $category */
         $category = $this->arguments['category'];
-        $pageUid = (int)$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['categoryUid'];
+        $pageUid = (int) $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['categoryUid'];
         $additionalParams = [
             'tx_blog_category' => [
-                'category' => $category->getUid()
-            ]
+                'category' => $category->getUid(),
+            ],
         ];
         $uriBuilder = $this->controllerContext->getUriBuilder();
         $uriBuilder->reset()
@@ -73,7 +72,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         }
         $uri = $uriBuilder->uriFor('listPostsByCategory', [], 'Post');
 
-        if ((string)$uri !== '') {
+        if ((string) $uri !== '') {
             $linkText = $this->renderChildren() ?: $category->getTitle();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
@@ -81,6 +80,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         } else {
             $result = $this->renderChildren();
         }
+
         return $result;
     }
 }
