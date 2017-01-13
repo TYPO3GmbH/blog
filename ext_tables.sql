@@ -106,3 +106,46 @@ CREATE TABLE pages_language_overlay (
   tags text
 );
 
+
+#
+# Table structure for table 'tx_blog_domain_model_author'
+#
+CREATE TABLE tx_blog_domain_model_author (
+  uid int(11) NOT NULL auto_increment,
+  pid int(11) DEFAULT '0' NOT NULL,
+  tstamp int(11) DEFAULT '0' NOT NULL,
+  crdate int(11) DEFAULT '0' NOT NULL,
+  cruser_id int(11) DEFAULT '0' NOT NULL,
+  sorting int(11) DEFAULT '0' NOT NULL,
+  deleted tinyint(4) DEFAULT '0' NOT NULL,
+  hidden tinyint(4) DEFAULT '0' NOT NULL,
+
+  name varchar(100) DEFAULT '' NOT NULL,
+  title varchar(100) DEFAULT '' NOT NULL,
+  website varchar(255) DEFAULT '' NOT NULL,
+  email varchar(255) DEFAULT '' NOT NULL,
+  location varchar(255) DEFAULT '' NOT NULL,
+
+  twitter varchar(255) DEFAULT '' NOT NULL,
+  googleplus varchar(255) DEFAULT '' NOT NULL,
+  linkedin varchar(255) DEFAULT '' NOT NULL,
+  xing varchar(255) DEFAULT '' NOT NULL,
+  profile varchar(255) DEFAULT '' NOT NULL,
+
+  bio text,
+
+  PRIMARY KEY (uid),
+  KEY parent (pid)
+);
+
+#
+# Table structure for table 'tx_blog_post_author_mm'
+#
+CREATE TABLE tx_blog_post_author_mm (
+  uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+  uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+  sorting int(11) unsigned DEFAULT '0' NOT NULL,
+  sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+  KEY uid_local (uid_local),
+  KEY uid_foreign (uid_foreign)
+);
