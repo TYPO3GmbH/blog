@@ -7,6 +7,10 @@
     padding: 2rem 0;
 }
 
+.table-fit {
+    margin-top: 1rem;
+}
+
 table.table a {
     color: #e3612a;
 }

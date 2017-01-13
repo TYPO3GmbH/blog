@@ -67,7 +67,7 @@ class PostRepository extends Repository
      *
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findAll()
+    public function findAll($blogSetup = null)
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
@@ -76,6 +76,9 @@ class PostRepository extends Repository
             $query->greaterThanOrEqual('archiveDate', time()),
         ]);
 
+        if ($blogSetup !== null) {
+            $constraints[] = $query->equals('pid', $blogSetup);
+        }
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 

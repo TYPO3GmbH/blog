@@ -152,16 +152,19 @@ class BackendController extends ActionController
     }
 
     /**
+     * @param int    $blogSetup
      * @return string
      *
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      * @throws \InvalidArgumentException
      */
-    public function postsAction()
+    public function postsAction($blogSetup = null)
     {
         return $this->render('Backend/Posts.html', [
-            'posts' => $this->postRepository->findAll(),
+            'blogSetups' => $this->setupService->determineBlogSetups(),
+            'activeBlogSetup' => $blogSetup,
+            'posts' => $this->postRepository->findAll($blogSetup),
         ]);
     }
 
