@@ -25,6 +25,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
@@ -86,8 +87,9 @@ class BackendController extends ActionController
         $this->buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
 
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
-        $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/bootstrap.min.css');
-        $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/backend.css');
+        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/bootstrap.min.css', 'stylesheet', 'all', '', false);
+        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/backend.css', 'stylesheet', 'all', '', false);
+
         if ($this->actionMethodName === 'setupWizardAction') {
             $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
         }
@@ -105,7 +107,7 @@ class BackendController extends ActionController
                 ]
             ]);
             $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/DataTables');
-            $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/dataTables.bootstrap.min.css');
+            $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/dataTables.bootstrap.min.css', 'stylesheet', 'all', '', false);
         }
     }
 
@@ -154,7 +156,7 @@ class BackendController extends ActionController
         } else {
             $this->addFlashMessage('Sorry, your blog setup could not be created.', 'An error occurred', FlashMessage::ERROR);
         }
-        $this->redirect('index');
+        $this->redirect('setupWizard');
     }
 
     /**

@@ -61,7 +61,7 @@ define(['jquery', 'datatables', 'datatables_bootstrap'], function ($) {
                                     }
                                 }
                             });
-                            $($.uniqueSort(values)).each(function() {
+                            $($.unique(values).sort()).each(function() {
                                 var value = this;
                                 select.append( '<option value="'+value+'">'+value+'</option>' )
                             } );
