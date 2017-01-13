@@ -73,7 +73,7 @@ class PostController extends ActionController
     {
         parent::initializeView($view);
         if ($this->request->hasArgument('format') && $this->request->getArgument('format') === 'rss') {
-            $action = '.' . $this->request->getArgument('action');
+            $action = '.'.$this->request->getArgument('action');
             $arguments = [];
             switch ($action) {
                 case '.listPostsByCategory':
@@ -82,9 +82,9 @@ class PostController extends ActionController
                     }
                     break;
                 case '.listPostsByDate':
-                    $arguments[] = (int)$this->arguments['year']->getValue();
+                    $arguments[] = (int) $this->arguments['year']->getValue();
                     if (isset($this->arguments['month'])) {
-                        $arguments[] = (int)$this->arguments['month']->getValue();
+                        $arguments[] = (int) $this->arguments['month']->getValue();
                     }
                     break;
                 case '.listPostsByTag':
@@ -94,11 +94,11 @@ class PostController extends ActionController
                     break;
             }
             $feedData = [
-                'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
-                'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
+                'title' => LocalizationUtility::translate('feed.title'.$action, 'blog', $arguments),
+                'description' => LocalizationUtility::translate('feed.description'.$action, 'blog', $arguments),
                 'language' => $GLOBALS['TSFE']->sys_language_isocode,
                 'link' => $this->uriBuilder->setUseCacheHash(false)->setArgumentsToBeExcludedFromQueryString(['id'])->setCreateAbsoluteUri(true)->setAddQueryString(true)->build(),
-                'date' => date('D, j M Y H:i:s e')
+                'date' => date('D, j M Y H:i:s e'),
             ];
             $this->view->assign('feed', $feedData);
         }
@@ -141,11 +141,11 @@ class PostController extends ActionController
         $title = str_replace([
             '###MONTH###',
             '###MONTH_NAME###',
-            '###YEAR###'
+            '###YEAR###',
         ], [
             $month,
             strftime('%B', $timestamp),
-            $year
+            $year,
         ], LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
         MetaService::set(MetaService::META_TITLE, $title);
         MetaService::set(MetaService::META_DESCRIPTION, LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));

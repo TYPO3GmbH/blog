@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
+    die('Access denied.');
 }
 
 call_user_func(function () {
@@ -37,7 +37,7 @@ call_user_func(function () {
 
     // Allow backend users to drag and drop the new page type:
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
-        'options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . $blogDocType . ')'
+        'options.pageTree.doktypesToShowInNewPageDragArea := addToList('.$blogDocType.')'
     );
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');
@@ -91,12 +91,12 @@ call_user_func(function () {
             'tx_Blog',
             'top',
             [
-                'Backend' => 'posts, setupWizard, createBlog'
+                'Backend' => 'posts, comments, setupWizard, createBlog',
             ],
             [
                 'access' => 'admin',
                 'icon' => 'EXT:blog/Resources/Public/Icons/module-blog.svg',
-                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf'
+                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf',
             ]
         );
     }

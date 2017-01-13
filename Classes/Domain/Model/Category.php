@@ -42,7 +42,7 @@ class Category extends AbstractEntity
     protected $icon = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\Category|NULL
+     * @var \TYPO3\CMS\Extbase\Domain\Model\Category|null
      * @lazy
      */
     protected $parent;
@@ -129,7 +129,7 @@ class Category extends AbstractEntity
     /**
      * Gets the parent category.
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\Category|NULL the parent category
+     * @return \TYPO3\CMS\Extbase\Domain\Model\Category|null the parent category
      *
      * @api
      */

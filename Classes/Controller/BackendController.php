@@ -15,6 +15,7 @@ namespace T3G\AgencyPack\Blog\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
@@ -28,8 +29,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
- * Class BackendController
- *
+ * Class BackendController.
  */
 class BackendController extends ActionController
 {
@@ -59,6 +59,11 @@ class BackendController extends ActionController
     protected $postRepository;
 
     /**
+     * @var CommentRepository
+     */
+    protected $commentRepository;
+
+    /**
      * @param SetupService $setupService
      */
     public function injectSetupService(SetupService $setupService)
@@ -75,7 +80,14 @@ class BackendController extends ActionController
     }
 
     /**
-     *
+     * @param CommentRepository $commentRepository
+     */
+    public function injectCommentRepository(CommentRepository $commentRepository)
+    {
+        $this->commentRepository = $commentRepository;
+    }
+
+    /**
      * @throws \InvalidArgumentException
      * @throws \BadFunctionCallException
      */
@@ -118,28 +130,30 @@ class BackendController extends ActionController
             ]
         ]);
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/DataTables');
-        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/dataTables.bootstrap.min.css', 'stylesheet', 'all', '', false);
+        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/dataTables.bootstrap.min.css', 'stylesheet', 'all', '', false);   
     }
 
     /**
-     * Render the start page
+     * Render the start page.
      *
      * @throws \InvalidArgumentException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      *
      * @return string
+     *
      * @throws \BadFunctionCallException
      */
     public function setupWizardAction()
     {
         return $this->render('Backend/SetupWizard.html', [
             'blogSetups' => $this->setupService->determineBlogSetups(),
-            'templateExists' => ExtensionManagementUtility::isLoaded('blog_template')
+            'templateExists' => ExtensionManagementUtility::isLoaded('blog_template'),
         ]);
     }
 
     /**
      * @return string
+     *
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      * @throws \InvalidArgumentException
@@ -147,7 +161,32 @@ class BackendController extends ActionController
     public function postsAction()
     {
         return $this->render('Backend/Posts.html', [
-            'posts' => $this->postRepository->findAll()
+            'posts' => $this->postRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @param string $filter
+     * @param int    $blogSetup
+     *
+     * @return string
+     *
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
+     * @throws \InvalidArgumentException
+     */
+    public function commentsAction($filter = null, $blogSetup = null)
+    {
+        return $this->render('Backend/Comments.html', [
+            'activeFilter' => $filter,
+            'activeBlogSetup' => $blogSetup,
+            'commentCounts' => [
+                'all' => $this->commentRepository->findAllByFilter(null, $blogSetup)->count(),
+                'pending' => $this->commentRepository->findAllByFilter('pending', $blogSetup)->count(),
+                'approved' => $this->commentRepository->findAllByFilter('approved', $blogSetup)->count(),
+                'deleted' => $this->commentRepository->findAllByFilter('deleted', $blogSetup)->count(),
+            ],
+            'blogSetups' => $this->setupService->determineBlogSetups(),
+            'comments' => $this->commentRepository->findAllByFilter($filter, $blogSetup),
         ]);
     }
 
@@ -170,11 +209,12 @@ class BackendController extends ActionController
     }
 
     /**
-     * returns a new standalone view, shorthand function
+     * returns a new standalone view, shorthand function.
      *
      * @param string $templateNameAndPath
      *
      * @return StandaloneView
+     *
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      * @throws \InvalidArgumentException
      */
@@ -185,17 +225,19 @@ class BackendController extends ActionController
         $view->setLayoutRootPaths([GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Layouts')]);
         $view->setPartialRootPaths([GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Partials')]);
         $view->setTemplateRootPaths([GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Templates')]);
-        $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Templates/' . $templateNameAndPath));
+        $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Templates/'.$templateNameAndPath));
         $view->setControllerContext($this->getControllerContext());
         $view->getRequest()->setControllerExtensionName('Blog');
+
         return $view;
     }
 
     /**
      * @param string $templateNameAndPath
-     * @param array $values
+     * @param array  $values
      *
      * @return string
+     *
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      * @throws \InvalidArgumentException
      */
@@ -206,6 +248,7 @@ class BackendController extends ActionController
         $view->assign('action', $this->actionMethodName);
         $view->assignMultiple($values);
         $this->moduleTemplate->setContent($view->render());
+
         return $this->moduleTemplate->renderContent();
     }
 }

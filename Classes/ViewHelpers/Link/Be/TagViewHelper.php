@@ -35,9 +35,8 @@ class TagViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * Arguments initialization
+     * Arguments initialization.
      *
-     * @return void
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
@@ -54,6 +53,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
 
     /**
      * @return string Rendered page URI
+     *
      * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
      * @throws \InvalidArgumentException
      */
@@ -61,14 +61,14 @@ class TagViewHelper extends AbstractTagBasedViewHelper
     {
         /** @var Tag $tag */
         $tag = $this->arguments['tag'];
-        $tagUid = $tag !== null ? (int)$tag->getUid() : 0;
+        $tagUid = $tag !== null ? (int) $tag->getUid() : 0;
 
         $routingUriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $uri = $routingUriBuilder->buildUriFromRoute('record_edit', array('edit[tx_blog_domain_model_tag][' . $tagUid . ']' => 'edit'));
+        $uri = $routingUriBuilder->buildUriFromRoute('record_edit', array('edit[tx_blog_domain_model_tag]['.$tagUid.']' => 'edit'));
         $arguments = GeneralUtility::_GET();
         unset($arguments['M'], $arguments['moduleToken']);
-        $uri .= '&returnUrl=' . rawurlencode(BackendUtility::getModuleUrl(GeneralUtility::_GET('M'), $arguments));
-        if ((string)$uri !== '') {
+        $uri .= '&returnUrl='.rawurlencode(BackendUtility::getModuleUrl(GeneralUtility::_GET('M'), $arguments));
+        if ((string) $uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;
             }
@@ -79,6 +79,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         } else {
             $result = $this->renderChildren();
         }
+
         return $result;
     }
 }

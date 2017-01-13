@@ -57,7 +57,10 @@ define(['jquery', 'datatables', 'datatables_bootstrap'], function ($) {
                                     });
                                 } else {
                                     if (d !== '') {
-                                        values.push(d);
+                                        var str = $(d).text().trim();
+                                        if (str !== '') {
+                                            values.push(str);
+                                        }
                                     }
                                 }
                             });

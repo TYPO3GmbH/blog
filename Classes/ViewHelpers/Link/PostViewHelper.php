@@ -32,9 +32,8 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * Arguments initialization
+     * Arguments initialization.
      *
-     * @return void
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
@@ -58,16 +57,16 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         /** @var Post $post */
         $post = $this->arguments['post'];
         $section = $this->arguments['section'] ?: null;
-        $pageUid = $post !== null ? (int)$post->getUid() : 0;
+        $pageUid = $post !== null ? (int) $post->getUid() : 0;
         $uriBuilder = $this->controllerContext->getUriBuilder();
-        $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
+        $createAbsoluteUri = (bool) $this->arguments['createAbsoluteUri'];
         $uri = $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setUseCacheHash(false)
             ->setSection($section)
             ->setCreateAbsoluteUri($createAbsoluteUri)
             ->build();
-        if ((string)$uri !== '') {
+        if ((string) $uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;
             }
@@ -78,6 +77,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         } else {
             $result = $this->renderChildren();
         }
+
         return $result;
     }
 }

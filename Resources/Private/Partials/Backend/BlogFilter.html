@@ -1,0 +1,7 @@
+<f:form class="form-inline" action="{action}">
+	<div class="form-group">
+		<label for="blogSetup"><f:translate key="label.blog" /></label>
+		<f:form.select class="form-control" name="blogSetup" id="blogSetup" value="{activeBlogSetup}" options="{blogSetups}" optionLabelField="title" optionValueField="uid" prependOptionLabel="{f:translate(key: 'label.all')}" prependOptionValue="" />
+	</div>
+	<button type="submit" class="btn btn-default"><f:translate key="label.choose_blog" /></button>
+</f:form>

@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Hooks;
 
 /*
@@ -16,16 +17,16 @@ namespace T3G\AgencyPack\Blog\Hooks;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 
 /**
- * AutoConfiguration-Hook for RealURL
- *
+ * AutoConfiguration-Hook for RealURL.
  */
 class RealUrlAutoConfiguration
 {
     /**
-     * Generates additional RealURL configuration and merges it with provided configuration
+     * Generates additional RealURL configuration and merges it with provided configuration.
      *
-     * @param       array $params Default configuration
-     * @return      array Updated configuration
+     * @param array $params Default configuration
+     *
+     * @return array Updated configuration
      */
     public function addBlogConfiguration($params)
     {
@@ -45,7 +46,7 @@ class RealUrlAutoConfiguration
                             ],
                             'noMatch' => 'bypass',
                         ],
-                    ]
+                    ],
                 ],
                 'tx_blog_category' => [
                     [
@@ -61,7 +62,7 @@ class RealUrlAutoConfiguration
                             ],
                             'noMatch' => 'bypass',
                         ],
-                    ]
+                    ],
                 ],
                 'tx_blog_archive' => [
                     [
@@ -85,8 +86,9 @@ class RealUrlAutoConfiguration
                         ],
                     ],
                 ],
-            ]
+            ],
         ]);
+
         return $params['config'];
     }
 }

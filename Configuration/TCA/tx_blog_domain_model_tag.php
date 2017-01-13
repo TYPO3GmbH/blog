@@ -1,20 +1,20 @@
 <?php
 
 if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
+    die('Access denied.');
 }
 
 $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
 
 return [
     'ctrl' => [
-        'title' => $ll . 'tx_blog_domain_model_tag',
+        'title' => $ll.'tx_blog_domain_model_tag',
         'label' => 'title',
-        'label_alt'                => 'sys_language_uid',
+        'label_alt' => 'sys_language_uid',
         // Display Language after Label
-        'label_alt_force'          => 0,
-        'languageField'            => 'sys_language_uid',
-        'transOrigPointerField'    => 'l18n_parent',
+        'label_alt_force' => 0,
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l18n_parent',
         'transOrigDiffSourceField' => 'l18n_diffsource',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -60,7 +60,7 @@ return [
         ],
         'title' => [
             'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_tag.title',
+            'label' => $ll.'tx_blog_domain_model_tag.title',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -69,14 +69,14 @@ return [
         ],
         'description' => [
             'exclude' => 1,
-            'label' => $ll . 'tx_blog_domain_model_tag.description',
+            'label' => $ll.'tx_blog_domain_model_tag.description',
             'config' => [
                 'type' => 'text',
             ],
         ],
         'content' => [
             'exclude' => 1,
-            'label' => $ll . 'tx_blog_domain_model_tag.content',
+            'label' => $ll.'tx_blog_domain_model_tag.content',
             'config' => [
                 'type' => 'inline',
                 'allowed' => 'tt_content',
@@ -108,40 +108,40 @@ return [
         ],
         'sys_language_uid' => [
             'exclude' => 1,
-            'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
-            'config'  => [
-                'type'                => 'select',
-                'foreign_table'       => 'sys_language',
+            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
+            'config' => [
+                'type' => 'select',
+                'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items'               => [
+                'items' => [
                     ['LLL:EXT:lang/locallang_general.php:LGL.allLanguages', -1],
-                    ['LLL:EXT:lang/locallang_general.php:LGL.default_value', 0]
-                ]
-            ]
+                    ['LLL:EXT:lang/locallang_general.php:LGL.default_value', 0],
+                ],
+            ],
         ],
         'l18n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
             'config' => [
-                'type'    => 'select',
-                'items'   => [
+                'type' => 'select',
+                'items' => [
                     ['', 0],
                 ],
                 'foreign_table' => 'tx_blog_domain_model_tag',
                 'foreign_table_where' => 'AND tx_blog_domain_model_tag.pid=###CURRENT_PID### AND tx_blog_domain_model_tag.sys_language_uid IN (-1,0)',
-            ]
+            ],
         ],
         'l18n_diffsource' => [
             'config' => [
-                'type' => 'passthrough'
-            ]
+                'type' => 'passthrough',
+            ],
         ],
     ],
     'types' => [
         0 => [
             'showitem' => 'title, --palette--;;paletteCore,
-            --div--;' . $ll . 'tx_blog_domain_model_tag.tabs.seo, description, content',
+            --div--;'.$ll.'tx_blog_domain_model_tag.tabs.seo, description, content',
         ],
     ],
     'palettes' => [

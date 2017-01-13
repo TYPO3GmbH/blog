@@ -49,18 +49,19 @@ class TagRepository extends Repository
         $sql[] = 'JOIN tx_blog_tag_pages_mm ON tx_blog_tag_pages_mm.uid_foreign = tx_blog_domain_model_tag.uid';
         $sql[] = 'GROUP BY tx_blog_domain_model_tag.title';
         $sql[] = 'ORDER BY cnt DESC';
-        $sql[] = 'LIMIT ' . (int)$limit;
+        $sql[] = 'LIMIT '.(int) $limit;
 
         $sql = implode(' ', $sql);
         $result = $this->getDatabaseConnection()->sql_query($sql);
         $rows = [];
         while ($row = $this->getDatabaseConnection()->sql_fetch_assoc($result)) {
-            /** @var array $row */
+            /* @var array $row */
             $row['tagObject'] = $this->findByUid($row['uid']);
             $rows[] = $row;
         }
         // shuffle tags, ordering is only to get the top used tags
         shuffle($rows);
+
         return $rows;
     }
 

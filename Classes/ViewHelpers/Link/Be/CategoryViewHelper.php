@@ -35,9 +35,8 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * Arguments initialization
+     * Arguments initialization.
      *
-     * @return void
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
@@ -54,6 +53,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
 
     /**
      * @return string Rendered page URI
+     *
      * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
      * @throws \InvalidArgumentException
      */
@@ -61,14 +61,14 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
     {
         /** @var Category $category */
         $category = $this->arguments['category'];
-        $categoryUid = $category !== null ? (int)$category->getUid() : 0;
+        $categoryUid = $category !== null ? (int) $category->getUid() : 0;
 
         $routingUriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $uri = $routingUriBuilder->buildUriFromRoute('record_edit', array('edit[sys_category][' . $categoryUid . ']' => 'edit'));
+        $uri = $routingUriBuilder->buildUriFromRoute('record_edit', array('edit[sys_category]['.$categoryUid.']' => 'edit'));
         $arguments = GeneralUtility::_GET();
         unset($arguments['M'], $arguments['moduleToken']);
-        $uri .= '&returnUrl=' . rawurlencode(BackendUtility::getModuleUrl(GeneralUtility::_GET('M'), $arguments));
-        if ((string)$uri !== '') {
+        $uri .= '&returnUrl='.rawurlencode(BackendUtility::getModuleUrl(GeneralUtility::_GET('M'), $arguments));
+        if ((string) $uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;
             }
@@ -79,6 +79,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         } else {
             $result = $this->renderChildren();
         }
+
         return $result;
     }
 }

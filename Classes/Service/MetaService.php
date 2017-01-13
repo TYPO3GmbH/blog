@@ -95,7 +95,7 @@ class MetaService extends \ArrayObject
     {
         $instance = self::getInstance();
         if (!$instance->offsetExists($index)) {
-            throw new \RuntimeException('No entry is registered for key \'' . $index . '\'', 1398536594);
+            throw new \RuntimeException('No entry is registered for key \''.$index.'\'', 1398536594);
         }
 
         return $instance->offsetGet($index);

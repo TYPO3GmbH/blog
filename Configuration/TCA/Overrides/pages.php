@@ -1,13 +1,13 @@
 <?php
 
 if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
+    die('Access denied.');
 }
 
 $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
     0 => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf:blog-folder',
     1 => 'blog',
-    2 => 'apps-pagetree-folder-contains-blog'
+    2 => 'apps-pagetree-folder-contains-blog',
 ];
 
 call_user_func(
@@ -19,7 +19,7 @@ call_user_func(
             $table,
             'doktype',
             [
-                'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
+                'LLL:EXT:'.$extKey.'/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
                 $blogDocType,
                 'apps-pagetree-blog-post',
             ],
@@ -46,7 +46,7 @@ call_user_func(
         $temporaryColumns = [
             'comments_active' => [
                 'exclude' => 1,
-                'label' => $ll . 'pages.comments_active',
+                'label' => $ll.'pages.comments_active',
                 'config' => [
                     'type' => 'check',
                     'default' => '1',
@@ -54,7 +54,7 @@ call_user_func(
             ],
             'comments' => [
                 'exclude' => 1,
-                'label' => $ll . 'pages.comments',
+                'label' => $ll.'pages.comments',
                 'config' => [
                     'type' => 'inline',
                     'foreign_table' => 'tx_blog_domain_model_comment',
@@ -75,7 +75,7 @@ call_user_func(
             ],
             'sharing_enabled' => [
                 'exclude' => 1,
-                'label' => $ll . 'pages.sharing_enabled',
+                'label' => $ll.'pages.sharing_enabled',
                 'config' => [
                     'type' => 'check',
                     'default' => '1',
@@ -83,27 +83,27 @@ call_user_func(
             ],
             'crdate' => [
                 'exclude' => 1,
-                'label' => $ll . 'pages.crdate',
+                'label' => $ll.'pages.crdate',
                 'config' => [
                     'type' => 'input',
                     'size' => '13',
                     'eval' => 'datetime',
-                    'default' => '0'
-                ]
+                    'default' => '0',
+                ],
             ],
             'archive_date' => [
                 'exclude' => 1,
-                'label' => $ll . 'pages.archive_date',
+                'label' => $ll.'pages.archive_date',
                 'config' => [
                     'type' => 'input',
                     'size' => '13',
                     'eval' => 'datetime',
-                    'default' => '0'
-                ]
+                    'default' => '0',
+                ],
             ],
             'tags' => [
                 'exclude' => 1,
-                'label' => $ll . 'pages.tags',
+                'label' => $ll.'pages.tags',
                 'config' => [
                     'type' => 'select',
                     'renderType' => 'selectMultipleSideBySide',
@@ -118,7 +118,7 @@ call_user_func(
                     'enableMultiSelectFilterTextfield' => 1,
                 ],
 
-            ]
+            ],
         ];
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
@@ -127,10 +127,10 @@ call_user_func(
         );
         $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where']
             = ' AND sys_category.pid = ###PAGE_TSCONFIG_ID### '
-            . $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where'];
+            .$GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where'];
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             'pages',
-            '--div--;' . $ll . 'pages.tabs.blog, crdate, archive_date, tags, comments_active, comments, sharing_enabled',
+            '--div--;'.$ll.'pages.tabs.blog, crdate, archive_date, tags, comments_active, comments, sharing_enabled',
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
     },
