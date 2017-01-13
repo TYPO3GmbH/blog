@@ -111,10 +111,26 @@ class BackendController extends ActionController
     }
 
     /**
-     *
      * @throws \BadFunctionCallException
      */
     public function initializePostsAction()
+    {
+        $this->initializeDataTables();
+    }
+
+    /**
+     * @throws \BadFunctionCallException
+     */
+    public function initializeCommentsAction()
+    {
+        $this->initializeDataTables();
+    }
+
+    /**
+     * initialize DataTables
+     * @throws \BadFunctionCallException
+     */
+    protected function initializeDataTables()
     {
         $blogPath = ExtensionManagementUtility::extPath('blog', 'Resources/Public/JavaScript/');
         $blogPath = PathUtility::getAbsoluteWebPath($blogPath);
@@ -130,7 +146,7 @@ class BackendController extends ActionController
             ]
         ]);
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/DataTables');
-        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/dataTables.bootstrap.min.css', 'stylesheet', 'all', '', false);   
+        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/dataTables.bootstrap.min.css', 'stylesheet', 'all', '', false);
     }
 
     /**
@@ -170,9 +186,10 @@ class BackendController extends ActionController
 
     /**
      * @param string $filter
-     * @param int    $blogSetup
+     * @param int $blogSetup
      *
      * @return string
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      *
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      * @throws \InvalidArgumentException
