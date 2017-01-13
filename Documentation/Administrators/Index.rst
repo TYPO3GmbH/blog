@@ -42,23 +42,24 @@ The Setup Wizard creates the recommended pagetree and it will add all configurat
 
 To create a new blog setup, follow these steps:
 
-1. Click on the blog admin module
-2. Click on the "Setup a new blog" button
+1. Click on the blog module in the backend
+2. Click on the "SetupWizard" tab
+3. Click on the "Setup a new blog" button
 
 .. figure:: ../Images/Backend/setup_wizard_1.png
 
    Create a new blog setup structure
 
-3. Enter a title for the blog setup
-4. If the extension "blog_template" is installed, you can use the provided template by enabling the checkbox.
+4. Enter a title for the blog setup
+5. If the extension "blog_template" is installed, you can use the provided template by enabling the checkbox.
    If the extension "blog_template" is **not** installed, you can install and use it by enabling the checkbox.
-5. Click on the "Setup" button, to create the blog setup.
+6. Click on the "Setup" button, to create the blog setup.
 
 .. figure:: ../Images/Backend/setup_wizard_2.png
 
    Modal with setup options
 
-6. If the success message appears, the setup is done. Go to your page tree (maybe reload the tree) and you will see the generated page structure.
+7. If the success message appears, the setup is done. Go to your page tree (maybe reload the tree) and you will see the generated page structure.
 
 .. figure:: ../Images/Backend/setup_wizard_3.png
 

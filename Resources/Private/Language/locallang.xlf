@@ -81,20 +81,47 @@
 			<trans-unit id="list.no_posts.message" xml:space="preserve">
 				<source>This list contains no blog posts.</source>
 			</trans-unit>
-			<trans-unit id="backend.headline" xml:space="preserve">
-				<source>Blog Admin</source>
+			<trans-unit id="backend.headline.setup_wizard" xml:space="preserve">
+				<source>SetupWizard</source>
+			</trans-unit>
+			<trans-unit id="backend.headline.posts" xml:space="preserve">
+				<source>Posts</source>
 			</trans-unit>
 			<trans-unit id="backend.lead.blogs" xml:space="preserve">
 				<source>It looks like you have the following blog setups</source>
 			</trans-unit>
-			<trans-unit id="backend.lead.noblogs" xml:space="preserve">
+			<trans-unit id="backend.message.noblogs" xml:space="preserve">
 				<source>It looks like no blog setup exists in this instance.</source>
+			</trans-unit>
+			<trans-unit id="backend.lead.posts" xml:space="preserve">
+				<source>The following table shows all the blog posts available in this installation. Use the filters and search to refine the results.</source>
+			</trans-unit>
+			<trans-unit id="backend.message.noposts" xml:space="preserve">
+				<source>Oops, apparently there are no blog posts in this installation.</source>
+			</trans-unit>
+			<trans-unit id="backend.warning" xml:space="preserve">
+				<source>Warning</source>
 			</trans-unit>
 			<trans-unit id="backend.table.blog" xml:space="preserve">
 				<source>Blog</source>
 			</trans-unit>
 			<trans-unit id="backend.table.articles" xml:space="preserve">
 				<source>Articles</source>
+			</trans-unit>
+			<trans-unit id="backend.table.title" xml:space="preserve">
+				<source>Articles</source>
+			</trans-unit>
+			<trans-unit id="backend.table.author" xml:space="preserve">
+				<source>Author</source>
+			</trans-unit>
+			<trans-unit id="backend.table.categories" xml:space="preserve">
+				<source>Categories</source>
+			</trans-unit>
+			<trans-unit id="backend.table.tags" xml:space="preserve">
+				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="backend.table.date" xml:space="preserve">
+				<source>Date</source>
 			</trans-unit>
 			<trans-unit id="wizard.button.trigger" xml:space="preserve">
 				<source>Setup a new blog</source>

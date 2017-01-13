@@ -15,6 +15,7 @@ namespace T3G\AgencyPack\Blog\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
@@ -22,6 +23,7 @@ use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
@@ -52,11 +54,24 @@ class BackendController extends ActionController
     protected $setupService;
 
     /**
+     * @var PostRepository
+     */
+    protected $postRepository;
+
+    /**
      * @param SetupService $setupService
      */
     public function injectSetupService(SetupService $setupService)
     {
         $this->setupService = $setupService;
+    }
+
+    /**
+     * @param PostRepository $postRepository
+     */
+    public function injectPostRepository(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -71,8 +86,39 @@ class BackendController extends ActionController
         $this->buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
 
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
-        $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/backend.css');
+        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/bootstrap.min.css', 'stylesheet', 'all', '', false);
+        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/backend.css', 'stylesheet', 'all', '', false);
+    }
+
+    /**
+     *
+     */
+    public function initializeSetupWizardAction()
+    {
+        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
+    }
+
+    /**
+     *
+     * @throws \BadFunctionCallException
+     */
+    public function initializePostsAction()
+    {
+        $blogPath = ExtensionManagementUtility::extPath('blog', 'Resources/Public/JavaScript/');
+        $blogPath = PathUtility::getAbsoluteWebPath($blogPath);
+        $pageRenderer = $this->moduleTemplate->getPageRenderer();
+        $pageRenderer->addRequireJsConfiguration([
+            'paths' => [
+                'datatables_bootstrap' => $blogPath . 'dataTables.bootstrap.min'
+            ],
+            'map' => [
+                '*' => [
+                    'datatables.net' => 'datatables',
+                ]
+            ]
+        ]);
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/DataTables');
+        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/dataTables.bootstrap.min.css', 'stylesheet', 'all', '', false);
     }
 
     /**
@@ -84,11 +130,24 @@ class BackendController extends ActionController
      * @return string
      * @throws \BadFunctionCallException
      */
-    public function indexAction()
+    public function setupWizardAction()
     {
-        return $this->render('Backend/Index.html', [
+        return $this->render('Backend/SetupWizard.html', [
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'templateExists' => ExtensionManagementUtility::isLoaded('blog_template')
+        ]);
+    }
+
+    /**
+     * @return string
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
+     * @throws \InvalidArgumentException
+     */
+    public function postsAction()
+    {
+        return $this->render('Backend/Posts.html', [
+            'posts' => $this->postRepository->findAll()
         ]);
     }
 
@@ -107,7 +166,7 @@ class BackendController extends ActionController
         } else {
             $this->addFlashMessage('Sorry, your blog setup could not be created.', 'An error occurred', FlashMessage::ERROR);
         }
-        $this->redirect('index');
+        $this->redirect('setupWizard');
     }
 
     /**
@@ -143,6 +202,8 @@ class BackendController extends ActionController
     protected function render($templateNameAndPath, array $values)
     {
         $view = $this->getFluidTemplateObject($templateNameAndPath);
+        $view->assign('_template', $templateNameAndPath);
+        $view->assign('action', $this->actionMethodName);
         $view->assignMultiple($values);
         $this->moduleTemplate->setContent($view->render());
         return $this->moduleTemplate->renderContent();
