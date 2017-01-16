@@ -24,6 +24,16 @@ call_user_func(function () {
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
+        'AuthorPosts',
+        [
+            'Post' => 'listPostsByAuthor',
+        ],
+        [
+            'Post' => 'listPostsByAuthor',
+        ]
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
         'Tag',
         [
             'Post' => 'listPostsByTag',
@@ -72,6 +82,14 @@ call_user_func(function () {
         'Meta',
         [
             'Post' => 'metadata',
+        ]
+    );
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
+        'Authors',
+        [
+            'Post' => 'authors',
         ]
     );
 

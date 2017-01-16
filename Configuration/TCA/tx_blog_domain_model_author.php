@@ -10,8 +10,6 @@ return [
     'ctrl' => [
         'title' => $ll.'tx_blog_domain_model_author',
         'label' => 'name',
-        'label_alt' => 'sys_language_uid',
-        // Display Language after Label
         'label_alt_force' => 0,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -26,7 +24,7 @@ return [
         'searchFields' => 'uid,name,title',
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden,name,title,website,email,location,twitter,googleplus,linkedin,xing,profile,bio',
+        'showRecordFieldList' => 'hidden,name,title,website,email,location,twitter,googleplus,linkedin,xing,profile,bio,posts',
     ],
     'columns' => [
         'pid' => [
@@ -153,10 +151,22 @@ return [
                 'eval' => '',
             ],
         ],
+        'posts' => [
+            'label' => $ll.'tx_blog_domain_model_author.posts',
+            'config' => [
+                'type' => 'select',
+                'multiple' => 1,
+                'foreign_table' => 'pages',
+                'MM' => 'tx_blog_post_author_mm',
+                'MM_opposite_field' => 'posts',
+                'minitems' => 0,
+                'maxitems' => 100000,
+            ],
+        ],
     ],
     'types' => [
         0 => [
-            'showitem' => 'name,title,website,email,location,twitter,googleplus,linkedin,xing,profile,bio',
+            'showitem' => 'name,title,website,email,location,twitter,googleplus,linkedin,xing,profile,bio,posts',
         ],
     ],
     'palettes' => [

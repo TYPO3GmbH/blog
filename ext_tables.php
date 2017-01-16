@@ -55,6 +55,11 @@ call_user_func(function () {
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
+        'AuthorPosts',
+        'Blog: List by author'
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
         'Tag',
         'Blog: List by tags'
     );
@@ -82,6 +87,11 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'Comments',
         'Blog: Comments'
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
+        'Authors',
+        'Blog: Authors'
     );
 
     if (TYPO3_MODE === 'BE') {

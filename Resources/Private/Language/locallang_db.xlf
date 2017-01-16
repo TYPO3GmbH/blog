@@ -18,6 +18,9 @@
 			<trans-unit id="pages.tags" xml:space="preserve">
 				<source>Tags</source>
 			</trans-unit>
+			<trans-unit id="pages.authors" xml:space="preserve">
+				<source>Authors</source>
+			</trans-unit>
 			<trans-unit id="pages.sharing_enabled" xml:space="preserve">
 				<source>Sharing enabled (show sharing links)</source>
 			</trans-unit>
@@ -87,6 +90,9 @@
 			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_author.bio" xml:space="preserve">
 				<source>Bio</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.posts" xml:space="preserve">
+				<source>Blog posts</source>
 			</trans-unit>
 
 			<trans-unit id="sys_category.content" xml:space="preserve">

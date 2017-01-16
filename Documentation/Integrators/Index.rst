@@ -23,6 +23,7 @@ Settings (plugin.tx_blog.settings)
    categoryUid_                         UID of the category page               int             0
    tagUid_                              UID of the tag page                    int             0
    archiveUid_                          UID of the archive page                int             0
+   authorUid_                           UID of the author page                 int             0
    storagePid_                          UID of the storage folder              int             0
    sidebarWidgets_                      List of active sidebar widgets         array           see description
    `list.posts.dateFormat`_             The date format for post lists         string          %d.%m.%Y
@@ -30,6 +31,7 @@ Settings (plugin.tx_blog.settings)
    `comments.active`_                   Activate comments feature              int             1
    `comments.moderation`_               Activate comments moderation           int             0
    `comments.respectPostLanguageId`_    Respect language of post               int             1
+   `authors.avatar.provider`_           AvatarProvider specific settings       array           see description
    ==================================== ====================================== =============== ===============
 
 .. _tsBlogUid:
@@ -86,6 +88,20 @@ archiveUid
          int
    Description
          Define the uid of the archive page.
+
+
+.. _tsAuthorUid:
+
+authorUid
+"""""""""
+.. container:: table-row
+
+   Property
+         authorUid
+   Data type
+         int
+   Description
+         Define the uid of the author page.
 
 
 .. _tsStoragePid:
@@ -203,6 +219,21 @@ comments.respectPostLanguageId
          to the blog post (page) and with an relation to the current language.
          If this value is 0, all comments will we shown on all blog posts in each language.
          If this value is 1, comments will only be shown if blog post language id AND comment language id match or comment language id is -1 (which means all).
+
+.. _tsAuthorsAvatarProvider:
+
+authors.avatar.provider
+"""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         authors.avatar.provider
+   Data type
+         array
+   Description
+         Define AvatarProvider specific configuration. Please see the separate table for the default GravatarProvider `GravatarProvider Settings (plugin.tx_blog.settings.authors.avatar.provider)`_.
+         To get more info about AvatarProviders, please see the AvatarProviders section in :doc:`../Administrators/Index`
+
 
 
 Settings (plugin.tx_blog.settings.widgets)
@@ -350,3 +381,64 @@ archive.monthDateFormat
          int
    Description
          Define the format of the year link.
+
+
+GravatarProvider Settings (plugin.tx_blog.settings.authors.avatar.provider)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. container:: ts-properties
+
+   ==================================== ====================================== =============== ===============
+   Property                             Title                                  Type            Default
+   ==================================== ====================================== =============== ===============
+   `size`_                              Size in pixel                          int             64
+   `default`_                           Default image                          string          mm
+   `rating`_                            Gravatar rating                        string          g
+   ==================================== ====================================== =============== ===============
+
+
+.. _tsSize:
+
+size
+""""
+.. container:: table-row
+
+   Property
+         size
+   Data type
+         int
+   Description
+         Define the size of the gravatar icon.
+
+
+.. _tsDefault:
+
+default
+"""""""
+.. container:: table-row
+
+   Property
+         default
+   Data type
+         string
+   Description
+         Define the default image, can be an absolute URL or one of the default gravatar icons:
+         404, mm, identicon, monsterid, wavatar, retro, blank
+
+
+.. _tsRating:
+
+rating
+""""""
+.. container:: table-row
+
+   Property
+         rating
+   Data type
+         string
+   Description
+         Define the gravatar rating for images:
+         g: suitable for display on all websites with any audience type.
+         pg: may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence.
+         r: may contain such things as harsh profanity, intense violence, nudity, or hard drug use.
+         x: may contain hardcore sexual imagery or extremely disturbing violence.

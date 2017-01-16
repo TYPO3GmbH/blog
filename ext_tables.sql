@@ -93,7 +93,8 @@ CREATE TABLE pages (
   sharing_enabled tinyint(4) DEFAULT '1' NOT NULL,
   archive_date int(11) DEFAULT '0' NOT NULL,
   comments text,
-  tags text
+  tags text,
+  authors text
 );
 
 #
@@ -103,7 +104,8 @@ CREATE TABLE pages_language_overlay (
   comments_active tinyint(4) DEFAULT '1' NOT NULL,
   sharing_enabled tinyint(4) DEFAULT '1' NOT NULL,
   comments text,
-  tags text
+  tags text,
+  authors text
 );
 
 
@@ -133,6 +135,7 @@ CREATE TABLE tx_blog_domain_model_author (
   profile varchar(255) DEFAULT '' NOT NULL,
 
   bio text,
+  posts text,
 
   PRIMARY KEY (uid),
   KEY parent (pid)

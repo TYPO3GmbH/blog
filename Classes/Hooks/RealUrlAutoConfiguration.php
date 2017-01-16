@@ -64,6 +64,22 @@ class RealUrlAutoConfiguration
                         ],
                     ],
                 ],
+                'tx_blog_author' => [
+                    [
+                        'GETvar' => 'tx_blog_authorposts[author]',
+                        'lookUpTable' => [
+                            'table' => 'tx_blog_domain_model_auhor',
+                            'id_field' => 'uid',
+                            'alias_field' => 'name',
+                            'useUniqueCache' => 1,
+                            'useUniqueCache_conf' => [
+                                'strtolower' => 1,
+                                'spaceCharacter' => '-',
+                            ],
+                            'noMatch' => 'bypass',
+                        ],
+                    ],
+                ],
                 'tx_blog_archive' => [
                     [
                         'GETvar' => 'tx_blog_archive[year]',
