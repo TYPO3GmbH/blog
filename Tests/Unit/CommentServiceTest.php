@@ -84,7 +84,7 @@ class CommentServiceTest extends \PHPUnit_Framework_TestCase
         $this->commentService->injectSettings($settings);
         $result = $this->commentService->addComment($post, $comment);
 
-        self::assertEquals(1, $comment->getHidden());
+        self::assertEquals(Comment::STATUS_PENDING, $comment->getStatus());
         self::assertSame(CommentService::STATE_MODERATION, $result);
     }
 
