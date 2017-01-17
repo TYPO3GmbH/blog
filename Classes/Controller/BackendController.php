@@ -15,6 +15,7 @@ namespace T3G\AgencyPack\Blog\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\SetupService;
@@ -98,6 +99,7 @@ class BackendController extends ActionController
         $this->buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
 
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/Tooltip');
         $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/bootstrap.min.css', 'stylesheet', 'all', '', false);
         $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/backend.css', 'stylesheet', 'all', '', false);
     }
@@ -203,11 +205,46 @@ class BackendController extends ActionController
                 'all' => $this->commentRepository->findAllByFilter(null, $blogSetup)->count(),
                 'pending' => $this->commentRepository->findAllByFilter('pending', $blogSetup)->count(),
                 'approved' => $this->commentRepository->findAllByFilter('approved', $blogSetup)->count(),
+                'declined' => $this->commentRepository->findAllByFilter('declined', $blogSetup)->count(),
                 'deleted' => $this->commentRepository->findAllByFilter('deleted', $blogSetup)->count(),
             ],
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'comments' => $this->commentRepository->findAllByFilter($filter, $blogSetup),
         ]);
+    }
+
+    /** @noinspection MoreThanThreeArgumentsInspection */
+    /**
+     * @param Comment $comment
+     * @param string $status
+     * @param string $filter
+     * @param string $blogSetup
+     *
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     */
+    public function updateCommentStatusAction(Comment $comment, $status, $filter = null, $blogSetup = null)
+    {
+        $updateComment = true;
+        switch ($status) {
+            case 'approve':
+                $comment->setStatus(Comment::STATUS_APPROVED);
+                break;
+            case 'decline':
+                $comment->setStatus(Comment::STATUS_DECLINED);
+                break;
+            case 'delete':
+                $comment->setStatus(Comment::STATUS_DELETED);
+                break;
+            default:
+                $updateComment = false;
+        }
+        if ($updateComment) {
+            $this->commentRepository->update($comment);
+        }
+        $this->redirect('comments', null, null, ['filter' => $filter, 'blogSetup' => $blogSetup]);
     }
 
     /**

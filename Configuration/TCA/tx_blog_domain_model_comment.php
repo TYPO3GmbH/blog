@@ -122,6 +122,19 @@ return [
                 ],
             ],
         ],
+        'status' => [
+            'exclude' => 1,
+            'label' => $ll.'tx_blog_domain_model_comment.status',
+            'config' => [
+                'type' => 'select',
+                'items' => [
+                    [$ll.'tx_blog_domain_model_comment.status.pending', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_PENDING],
+                    [$ll.'tx_blog_domain_model_comment.status.approved', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_APPROVED],
+                    [$ll.'tx_blog_domain_model_comment.status.declined', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DECLINED],
+                    [$ll.'tx_blog_domain_model_comment.status.deleted', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DELETED],
+                ],
+            ],
+        ],
         'parentid' => [
             'config' => [
                 'type' => 'passthrough',
@@ -140,7 +153,7 @@ return [
     ],
     'types' => [
         0 => [
-            'showitem' => 'post_language_id,name,url,email,comment',
+            'showitem' => 'post_language_id,status,name,url,email,comment',
         ],
     ],
     'palettes' => [

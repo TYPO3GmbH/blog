@@ -15,6 +15,7 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Constants;
+use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -62,6 +63,7 @@ class CommentRepository extends Repository
      * @param Post $post
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function findAllByPost(Post $post)
     {
@@ -71,6 +73,7 @@ class CommentRepository extends Repository
         $query = $this->createQuery();
         $constraints = [];
         $constraints[] = $query->equals('post', $post->getUid());
+        $constraints[] = $query->lessThan('status', Comment::STATUS_DECLINED);
         if ($respectPostLanguageId) {
             $constraints[] = $query->logicalOr([
                 $query->equals('postLanguageId', $GLOBALS['TSFE']->sys_language_uid),
@@ -85,13 +88,15 @@ class CommentRepository extends Repository
      * @param int $limit
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function findLatest($limit = 5)
     {
         $query = $this->createQuery();
         $query->setLimit($limit);
+        $constraint = $query->lessThan('status', Comment::STATUS_DECLINED);
 
-        return $query->execute();
+        return $query->matching($constraint)->execute();
     }
 
     /**
@@ -108,22 +113,21 @@ class CommentRepository extends Repository
         $query = $this->createQuery();
         $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
         $querySettings->setRespectStoragePage(false);
-        $querySettings->setIgnoreEnableFields(true);
-        $querySettings->setIncludeDeleted(true);
         $query->setQuerySettings($querySettings);
 
         $constraints = [];
         switch ($filter) {
             case 'pending':
-                $constraints[] = $query->equals('hidden', '1');
-                $constraints[] = $query->equals('deleted', '0');
+                $constraints[] = $query->equals('status', Comment::STATUS_PENDING);
             break;
             case 'approved':
-                $constraints[] = $query->equals('hidden', '0');
-                $constraints[] = $query->equals('deleted', '0');
+                $constraints[] = $query->equals('status', Comment::STATUS_APPROVED);
+            break;
+            case 'declined':
+                $constraints[] = $query->equals('status', Comment::STATUS_DECLINED);
             break;
             case 'deleted':
-                $constraints[] = $query->equals('deleted', '1');
+                $constraints[] = $query->equals('status', Comment::STATUS_DELETED);
             break;
         }
         if ($blogSetup !== null) {

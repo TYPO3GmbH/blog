@@ -39,6 +39,19 @@
 		({commentCounts.approved})
 	</li>
 	<li>
+		<f:if condition="{activeFilter} == 'declined'">
+			<f:then>
+				<f:translate key="backend.comments.filter.declined"/>
+			</f:then>
+			<f:else>
+				<f:link.action action="comments" arguments="{filter: 'declined', blogSetup: activeBlogSetup}">
+					<f:translate key="backend.comments.filter.declined"/>
+				</f:link.action>
+			</f:else>
+		</f:if>
+		({commentCounts.declined})
+	</li>
+	<li>
 		<f:if condition="{activeFilter} == 'deleted'">
 			<f:then>
 				<f:translate key="backend.comments.filter.deleted"/>

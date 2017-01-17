@@ -45,6 +45,21 @@
 			<trans-unit id="tx_blog_domain_model_comment.comment" xml:space="preserve">
 				<source>Comment</source>
 			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.status" xml:space="preserve">
+				<source>Status</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.status.pending" xml:space="preserve">
+				<source>Pending</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.status.approved" xml:space="preserve">
+				<source>Approved</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.status.declined" xml:space="preserve">
+				<source>Declined</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment.status.deleted" xml:space="preserve">
+				<source>Deleted</source>
+			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_tag" xml:space="preserve">
 				<source>Blog: Tag</source>
 			</trans-unit>

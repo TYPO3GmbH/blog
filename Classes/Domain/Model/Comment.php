@@ -25,6 +25,11 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Comment extends AbstractEntity
 {
+    const STATUS_PENDING = 0;
+    const STATUS_APPROVED = 10;
+    const STATUS_DECLINED = 50;
+    const STATUS_DELETED = 90;
+
     /**
      * The author of the comment.
      *
@@ -92,6 +97,11 @@ class Comment extends AbstractEntity
      * @var \DateTime
      */
     protected $crdate;
+
+    /**
+     * @var int
+     */
+    protected $status;
 
     /**
      * @return FrontendUser
@@ -272,7 +282,7 @@ class Comment extends AbstractEntity
     /**
      * @return string
      */
-    public function getHp() : string
+    public function getHp()
     {
         return $this->hp;
     }
@@ -280,8 +290,24 @@ class Comment extends AbstractEntity
     /**
      * @param string $hp
      */
-    public function setHp(string $hp)
+    public function setHp($hp)
     {
         $this->hp = $hp;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 }

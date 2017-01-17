@@ -102,7 +102,7 @@ call_user_func(function () {
             'tx_Blog',
             'top',
             [
-                'Backend' => 'posts, comments, setupWizard, createBlog',
+                'Backend' => 'posts, comments, setupWizard, createBlog, updateCommentStatus',
             ],
             [
                 'access' => 'admin',

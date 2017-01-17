@@ -142,6 +142,14 @@ call_user_func(function () {
         ]
     );
 
+    $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
+    $dispatcher->connect(
+        \TYPO3\CMS\Extensionmanager\Utility\InstallUtility::class,
+        'afterExtensionInstall',
+        \T3G\AgencyPack\Blog\Hooks\ExtensionUpdate::class,
+        'afterExtensionInstall'
+    );
+
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['blog']
             = \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class.
