@@ -10,6 +10,7 @@ plugin.tx_blog {
     }
     settings {
         blogUid = {$plugin.tx_blog.settings.blogUid}
+        authorUid  = {$plugin.tx_blog.settings.authorUid}
         categoryUid  = {$plugin.tx_blog.settings.categoryUid}
         tagUid  = {$plugin.tx_blog.settings.tagUid}
         archiveUid = {$plugin.tx_blog.settings.archiveUid}
@@ -56,6 +57,21 @@ plugin.tx_blog {
             moderation = 0
             # Respect post_language_id, 0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)
             respectPostLanguageId = 1
+        }
+        # Authors related settings
+        authors {
+            # Avatar settings
+            avatar {
+                # This settings depends on the configured AvatarProvider. The default is the GravatarProvider
+                provider {
+                    # Size in pixel
+                    size = 64
+                    # Default image
+                    default = mm
+                    # Gravatar rating
+                    rating = g
+                }
+            }
         }
     }
     pageInfo.title = TEXT
@@ -113,3 +129,7 @@ blog_rss_archive.10 < tt_content.list.20.blog_archive
 blog_rss_comments < blog_rss_posts
 blog_rss_comments.typeNum = 240
 blog_rss_comments.10 < tt_content.list.20.blog_comments
+
+blog_rss_author < blog_rss_posts
+blog_rss_author.typeNum = 240
+blog_rss_author.10 < tt_content.list.20.blog_authorposts

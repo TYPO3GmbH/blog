@@ -18,6 +18,7 @@ call_user_func(function () {
         'blog-link-wizard' => 'EXT:blog/Resources/Public/Icons/blog-link-wizard.svg',
         'apps-pagetree-folder-contains-blog' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-folder-contains-blog.svg',
         'apps-pagetree-blog' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog.svg',
+        'apps-pagetree-blog-author' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-author.svg',
         'apps-pagetree-blog-category' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-category.svg',
         'apps-pagetree-blog-comment' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment.svg',
         'apps-pagetree-blog-comment-approved' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment-approved.svg',
@@ -54,6 +55,11 @@ call_user_func(function () {
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
+        'AuthorPosts',
+        'Blog: List by author'
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
         'Tag',
         'Blog: List by tags'
     );
@@ -81,6 +87,11 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'Comments',
         'Blog: Comments'
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
+        'Authors',
+        'Blog: Authors'
     );
 
     if (TYPO3_MODE === 'BE') {

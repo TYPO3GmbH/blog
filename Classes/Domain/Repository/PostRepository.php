@@ -15,6 +15,7 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Constants;
+use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
@@ -79,6 +80,23 @@ class PostRepository extends Repository
         if ($blogSetup !== null) {
             $constraints[] = $query->equals('pid', $blogSetup);
         }
+
+        return $query->matching($query->logicalAnd($constraints))->execute();
+    }
+
+    /**
+     * @param Author $author
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findAllByAuthor(Author $author)
+    {
+        $query = $this->createQuery();
+        $constraints = $this->defaultConstraints;
+        $constraints[] = $query->contains('authors', $author);
+
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 

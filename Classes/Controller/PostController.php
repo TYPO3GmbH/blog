@@ -15,8 +15,10 @@ namespace T3G\AgencyPack\Blog\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
+use T3G\AgencyPack\Blog\Domain\Repository\AuthorRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
@@ -46,6 +48,11 @@ class PostController extends ActionController
     protected $postRepository;
 
     /**
+     * @var AuthorRepository
+     */
+    protected $authorRepository;
+
+    /**
      * @param CategoryRepository $categoryRepository
      */
     public function injectCategoryRepository(CategoryRepository $categoryRepository)
@@ -67,6 +74,14 @@ class PostController extends ActionController
     public function injectPostRepository(PostRepository $postRepository)
     {
         $this->postRepository = $postRepository;
+    }
+
+    /**
+     * @param AuthorRepository $authorRepository
+     */
+    public function injectAuthorRepository(AuthorRepository $authorRepository)
+    {
+        $this->authorRepository = $authorRepository;
     }
 
     protected function initializeView(ViewInterface $view)
@@ -173,6 +188,26 @@ class PostController extends ActionController
     }
 
     /**
+     * Show a list of posts by given category.
+     *
+     * @param Author $author
+     *
+     * @throws \RuntimeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function listPostsByAuthorAction(Author $author = null)
+    {
+        if (null === $author) {
+            $this->view->assign('authors', $this->authorRepository->findAll());
+        } else {
+            $this->view->assign('posts', $this->postRepository->findAllByAuthor($author));
+            $this->view->assign('author', $author);
+            MetaService::set(MetaService::META_TITLE, $author->getName());
+            MetaService::set(MetaService::META_DESCRIPTION, $author->getBio());
+        }
+    }
+
+    /**
      * Show a list of posts by given tag.
      *
      * @param Tag $tag
@@ -204,6 +239,14 @@ class PostController extends ActionController
      * Metadata action: output meta information of blog post.
      */
     public function metadataAction()
+    {
+        $this->view->assign('post', $this->postRepository->findCurrentPost());
+    }
+
+    /**
+     * Authors action: output author information of blog post.
+     */
+    public function authorsAction()
     {
         $this->view->assign('post', $this->postRepository->findCurrentPost());
     }

@@ -11,6 +11,7 @@ $data['pages']['NEW_blogRoot'] = [
     'doktype' => 1,
     'is_siteroot' => 1,
     'TSconfig' => 'TCEFORM.pages.tags.PAGE_TSCONFIG_ID = NEW_blogFolder
+TCEFORM.pages.authors.PAGE_TSCONFIG_ID = NEW_blogFolder
 TCEFORM.pages.categories.PAGE_TSCONFIG_ID = NEW_blogFolder',
 ];
 $data['pages']['NEW_blogFolder'] = [
@@ -31,8 +32,14 @@ $data['pages']['NEW_blogTagPage'] = [
     'title' => 'Tag',
     'doktype' => 1,
 ];
-$data['pages']['NEW_blogArchivePage'] = [
+$data['pages']['NEW_blogAuthorPage'] = [
     'pid' => '-NEW_blogTagPage',
+    'hidden' => 0,
+    'title' => 'Author',
+    'doktype' => 1,
+];
+$data['pages']['NEW_blogArchivePage'] = [
+    'pid' => '-NEW_blogAuthorPage',
     'hidden' => 0,
     'title' => 'Archive',
     'doktype' => 1,
@@ -55,6 +62,7 @@ $data['sys_template']['NEW_SysTemplate'] = [
     'constants' => 'plugin.tx_blog.settings.blogUid = NEW_blogRoot
 plugin.tx_blog.settings.categoryUid = NEW_blogCategoryPage
 plugin.tx_blog.settings.tagUid = NEW_blogTagPage
+plugin.tx_blog.settings.authorUid = NEW_blogAuthorPage
 plugin.tx_blog.settings.archiveUid = NEW_blogArchivePage
 plugin.tx_blog.persistence.storagePid = NEW_blogFolder',
     'config' => 'plugin.tx_blog.settings.sharing.enabled = 0
@@ -78,6 +86,11 @@ $data['tt_content']['NEW_ListByTag'] = [
     'pid' => 'NEW_blogTagPage',
     'CType' => 'list',
     'list_type' => 'blog_tag',
+];
+$data['tt_content']['NEW_ListByAuthor'] = [
+    'pid' => 'NEW_blogAuthorPage',
+    'CType' => 'list',
+    'list_type' => 'blog_authorposts',
 ];
 $data['tt_content']['NEW_ListByDate'] = [
     'pid' => 'NEW_blogArchivePage',

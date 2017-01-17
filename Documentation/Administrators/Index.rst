@@ -95,6 +95,7 @@ To create a new blog setup, follow these steps:
 
    plugin.tx_blog.settings.blogUid = NEW_blogRoot
    plugin.tx_blog.settings.categoryUid = NEW_blogCategoryPage
+   plugin.tx_blog.settings.authorUid = NEW_blogAuthorPage
    plugin.tx_blog.settings.tagUid = NEW_blogTagPage
    plugin.tx_blog.settings.archiveUid = NEW_blogArchivePage
    plugin.tx_blog.persistence.storagePid = NEW_blogFolder
@@ -115,6 +116,7 @@ To get nice looking URLs add the following realurl configuration to your project
     'fixedPostVars' => [
         '<UID_CATEGORY_PAGE>' => 'tx_blog_category',
         '<UID_TAG_PAGE>' => 'tx_blog_tag',
+        '<UID_AUTHOR_PAGE>' => 'tx_blog_author',
         '<UID_ARCHIVE_PAGE>' => 'tx_blog_archive'
     ]
 
@@ -153,6 +155,14 @@ Displays all posts belonging to the chosen category.
 .. image:: ../Images/Plugins/byCategory.png
 
 
+List by Author
+^^^^^^^^^^^^^^
+
+Displays all posts belonging to the chosen author.
+
+.. image:: ../Images/Plugins/byAuthor.png
+
+
 Archive
 ^^^^^^^
 
@@ -186,6 +196,11 @@ Metadata
 Displays post meta data, like date, tags, category, sharing links...
 
 
+Authors
+"""""""
+Displays post authors, like name, title, avatar, social links...
+
+
 Comments / Comment Form
 """""""""""""""""""""""
 
@@ -217,3 +232,20 @@ Enable sharing
 --------------
 
 To enable sharing go to the page properties of your blog entry and set the check box "Sharing enabled"
+
+AvatarProvider
+--------------
+
+The default AvatarProvider is the `GravatarProvider`, this means the avatar of an author is received from gravatar.com.
+
+You can implement your own AvatarProvider, create a class which implements the `AvatarProviderInterface` and register your class:
+
+.. code-block:: ts
+
+   config.tx_extbase {
+      objects {
+         T3G\AgencyPack\Blog\AvatarProviderInterface {
+            className = T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider
+         }
+      }
+   }

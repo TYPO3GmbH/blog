@@ -18,6 +18,9 @@
 			<trans-unit id="pages.tags" xml:space="preserve">
 				<source>Tags</source>
 			</trans-unit>
+			<trans-unit id="pages.authors" xml:space="preserve">
+				<source>Authors</source>
+			</trans-unit>
 			<trans-unit id="pages.sharing_enabled" xml:space="preserve">
 				<source>Sharing enabled (show sharing links)</source>
 			</trans-unit>
@@ -51,12 +54,47 @@
 			<trans-unit id="tx_blog_domain_model_tag.description" xml:space="preserve">
 				<source>Description (meta description)</source>
 			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_tag.content" xml:space="preserve">
-				<source>Content</source>
+
+			<trans-unit id="tx_blog_domain_model_author" xml:space="preserve">
+				<source>Blog: Author</source>
 			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_tag.tabs.seo" xml:space="preserve">
-				<source>SEO</source>
+			<trans-unit id="tx_blog_domain_model_author.name" xml:space="preserve">
+				<source>Name</source>
 			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.title" xml:space="preserve">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.website" xml:space="preserve">
+				<source>Website</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.email" xml:space="preserve">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.location" xml:space="preserve">
+				<source>location</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.twitter" xml:space="preserve">
+				<source>Twitter username</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.googleplus" xml:space="preserve">
+				<source>Google+ profile URL</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.linkedin" xml:space="preserve">
+				<source>LinkIn profile URL</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.xing" xml:space="preserve">
+				<source>XING profile URL</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.profile" xml:space="preserve">
+				<source>Author profile URL (used for schema.org markup)</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.bio" xml:space="preserve">
+				<source>Bio</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.posts" xml:space="preserve">
+				<source>Blog posts</source>
+			</trans-unit>
+
 			<trans-unit id="sys_category.content" xml:space="preserve">
 				<source>Content</source>
 			</trans-unit>

@@ -117,7 +117,19 @@ call_user_func(
                     'MM' => 'tx_blog_tag_pages_mm',
                     'enableMultiSelectFilterTextfield' => 1,
                 ],
-
+            ],
+            'authors' => [
+                'exclude' => 1,
+                'label' => $ll.'pages.authors',
+                'config' => [
+                    'type' => 'select',
+                    'multiple' => 1,
+                    'foreign_table' => 'tx_blog_domain_model_author',
+                    'MM' => 'tx_blog_post_author_mm',
+                    // 'foreign_table_where' => ' AND tx_myext_domain_model_category.pid=###CURRENT_PID### ORDER BY tx_myext_domain_model_category.title ',
+                    'minitems' => 0,
+                    'maxitems' => 99999,
+                ],
             ],
         ];
 
@@ -130,7 +142,7 @@ call_user_func(
             .$GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where'];
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             'pages',
-            '--div--;'.$ll.'pages.tabs.blog, crdate, archive_date, tags, comments_active, comments, sharing_enabled',
+            '--div--;'.$ll.'pages.tabs.blog, crdate, archive_date, tags, authors, comments_active, comments, sharing_enabled',
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
     },
