@@ -273,6 +273,13 @@
 			<trans-unit id="action.editComment" xml:space="preserve">
 				<source>Edit comment</source>
 			</trans-unit>
+
+			<trans-unit id="label.required.field" xml:space="preserve">
+				<source>*</source>
+			</trans-unit>
+			<trans-unit id="label.required.field.explanation" xml:space="preserve">
+				<source>These fields are required</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
