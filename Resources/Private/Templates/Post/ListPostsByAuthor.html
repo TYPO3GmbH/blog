@@ -14,7 +14,7 @@
         </f:then>
         <f:else>
             <f:comment>In case authors is NOT set, a special author is in request and we show all blogs posts of this author.</f:comment>
-            <h1 class="page-title"><f:translate key="headline.author" arguments="{0: authors.name}" /> <blog:link.author rss="true" author="{author}"><i class="fa fa-rss-square"></i></blog:link.author></h1>
+            <h1 class="page-title"><f:translate key="headline.author" arguments="{0: author.name}" /> <blog:link.author rss="true" author="{author}"><i class="fa fa-rss-square"></i></blog:link.author></h1>
             <div class="taxonomy-description">
                 <p>{author.bio}</p>
             </div>
