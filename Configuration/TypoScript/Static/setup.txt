@@ -131,5 +131,5 @@ blog_rss_comments.typeNum = 240
 blog_rss_comments.10 < tt_content.list.20.blog_comments
 
 blog_rss_author < blog_rss_posts
-blog_rss_author.typeNum = 240
+blog_rss_author.typeNum = 250
 blog_rss_author.10 < tt_content.list.20.blog_authorposts
