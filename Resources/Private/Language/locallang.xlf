@@ -10,19 +10,19 @@
 				<source>Comments</source>
 			</trans-unit>
 			<trans-unit id="headline.category" xml:space="preserve">
-				<source>Category: %s</source>
+				<source>Post of category %s</source>
 			</trans-unit>
 			<trans-unit id="headline.categories" xml:space="preserve">
 				<source>Categories</source>
 			</trans-unit>
 			<trans-unit id="headline.author" xml:space="preserve">
-				<source>Author: %s</source>
+				<source>Posts by %s</source>
 			</trans-unit>
 			<trans-unit id="headline.authors" xml:space="preserve">
 				<source>Authors</source>
 			</trans-unit>
 			<trans-unit id="headline.tag" xml:space="preserve">
-				<source>Tag: %s</source>
+				<source>Posts tagged with %s</source>
 			</trans-unit>
 			<trans-unit id="headline.tags" xml:space="preserve">
 				<source>Tags</source>
