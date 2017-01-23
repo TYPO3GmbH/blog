@@ -68,7 +68,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         if ($rssFormat) {
             $uriBuilder
                 ->setFormat('rss')
-                ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_category.']['typeNum']);
+                ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_author.']['typeNum']);
         }
         $uri = $uriBuilder->uriFor('listPostsByAuthor', [], 'Post');
 
