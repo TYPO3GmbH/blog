@@ -68,7 +68,7 @@ class RealUrlAutoConfiguration
                     [
                         'GETvar' => 'tx_blog_authorposts[author]',
                         'lookUpTable' => [
-                            'table' => 'tx_blog_domain_model_auhor',
+                            'table' => 'tx_blog_domain_model_author',
                             'id_field' => 'uid',
                             'alias_field' => 'name',
                             'useUniqueCache' => 1,
