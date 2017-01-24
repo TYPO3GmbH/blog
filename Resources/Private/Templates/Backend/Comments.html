@@ -69,6 +69,6 @@
 				<f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-close" /></f:link.action>
 			</f:case>
 		</f:switch>
-		<blog:link.be.comment class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.editComment')}" comment="{comment}"><core:icon identifier="actions-open" /></blog:link.be.comment>
+		<blog:link.be.comment class="btn btn-default" title="{f:translate(key: 'action.editComment')}" comment="{comment}"><core:icon identifier="actions-open" /></blog:link.be.comment>
 	</div>
 </f:section>
