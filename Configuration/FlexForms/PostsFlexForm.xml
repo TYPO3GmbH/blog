@@ -1,0 +1,28 @@
+<T3DataStructure>
+    <sheets>
+
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Configuration</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+
+                    <settings.maximumItems>
+                        <TCEforms>
+                            <label>LLL:EXT:blog/Resources/Private/Language/locallang.xlf:plugin.label.max_post_items</label>
+                            <config>
+                                <type>input</type>
+                                <eval>required,num</eval>
+                                <default>0</default>
+                            </config>
+                        </TCEforms>
+                    </settings.maximumItems>
+
+                </el>
+            </ROOT>
+        </sDEF>
+
+    </sheets>
+</T3DataStructure>

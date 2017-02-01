@@ -280,6 +280,10 @@
 			<trans-unit id="label.required.field.explanation" xml:space="preserve">
 				<source>These fields are required</source>
 			</trans-unit>
+
+			<trans-unit id="plugin.label.max_post_items" xml:space="preserve">
+				<source>Maximum number of posts to be displayed (0 = no limit)</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

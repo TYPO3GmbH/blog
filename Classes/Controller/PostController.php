@@ -126,7 +126,14 @@ class PostController extends ActionController
      */
     public function listRecentPostsAction()
     {
-        $this->view->assign('posts', $this->postRepository->findAll());
+        $maximumItems = array_key_exists('maximumItems', $this->settings)
+            ? $this->settings['maximumItems']
+            : 0;
+        $posts = (0 === $maximumItems)
+            ? $this->postRepository->findAll()
+            : $this->postRepository->findAllWithLimit($maximumItems);
+
+        $this->view->assign('posts', $posts);
     }
 
     /**

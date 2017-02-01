@@ -182,7 +182,7 @@ class BackendController extends ActionController
         return $this->render('Backend/Posts.html', [
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'activeBlogSetup' => $blogSetup,
-            'posts' => $this->postRepository->findAll($blogSetup),
+            'posts' => $this->postRepository->findAllByPid($blogSetup),
         ]);
     }
 
