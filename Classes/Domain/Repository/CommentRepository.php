@@ -18,8 +18,6 @@ use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -31,7 +29,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 class CommentRepository extends Repository
 {
     /**
-     * @var ConfigurationManager
+     * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
 
@@ -46,7 +44,7 @@ class CommentRepository extends Repository
      */
     public function initializeObject()
     {
-        $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
+        $this->configurationManager = $this->objectManager->get(ConfigurationManagerInterface::class);
         $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
         $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
