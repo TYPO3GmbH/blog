@@ -25,6 +25,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\MetaService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Utility\ArrayUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -126,9 +127,9 @@ class PostController extends ActionController
      */
     public function listRecentPostsAction()
     {
-        $maximumItems = array_key_exists('maximumItems', $this->settings)
-            ? $this->settings['maximumItems']
-            : 0;
+        $maximumItems = ArrayUtility::getValueByPath($this->settings, 'lists.posts.maximumDisplayedItems') ?: 0;
+        $maximumItems = intval($maximumItems);
+
         $posts = (0 === $maximumItems)
             ? $this->postRepository->findAll()
             : $this->postRepository->findAllWithLimit($maximumItems);
