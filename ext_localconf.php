@@ -142,6 +142,13 @@ call_user_func(function () {
         ]
     );
 
+    /** @var \TYPO3\CMS\Extbase\Object\Container\Container $container */
+    $container = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class);
+    $container->registerImplementation(
+        \T3G\AgencyPack\Blog\AvatarProviderInterface::class,
+        \T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider::class
+    );
+
     $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
     $dispatcher->connect(
         \TYPO3\CMS\Extensionmanager\Utility\InstallUtility::class,
