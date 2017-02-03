@@ -18,7 +18,7 @@ plugin {
             lists {
                 posts {
                     # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.maximumDisplayedItems
-                    maximumDisplayedItems =
+                    maximumDisplayedItems = 0
                 }
             }
         }
