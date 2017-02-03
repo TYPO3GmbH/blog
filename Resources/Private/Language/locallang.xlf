@@ -222,6 +222,9 @@
 			<trans-unit id="constantEditor.storagePid" xml:space="preserve">
 				<source>Storage folder:Storage folder of all categories and tags for this blog.</source>
 			</trans-unit>
+			<trans-unit id="constantEditor.lists.posts.maximumDisplayedItems" xml:space="preserve">
+				<source>Maximum displayed items:Maximum number of posts to be displayed (0 = no limit).</source>
+			</trans-unit>
 			<trans-unit id="feed.title.listPostsByCategory" xml:space="preserve">
 				<source>Category RSS Feed</source>
 			</trans-unit>
