@@ -15,6 +15,7 @@ namespace T3G\AgencyPack\Blog\Tests\Unit;
  * The TYPO3 project - inspiring people to share!
  */
 
+use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
@@ -24,7 +25,7 @@ use T3G\AgencyPack\Blog\Service\CommentService;
 /**
  * Class CommentServiceTest.
  */
-class CommentServiceTest extends \PHPUnit_Framework_TestCase
+class CommentServiceTest extends TestCase
 {
     /**
      * @var PostRepository|ObjectProphecy
