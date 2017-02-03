@@ -26,6 +26,7 @@ Settings (plugin.tx_blog.settings)
    authorUid_                           UID of the author page                 int             0
    storagePid_                          UID of the storage folder              int             0
    sidebarWidgets_                      List of active sidebar widgets         array           see description
+   `list.posts.maximumDisplayedItems`_  Maximum posts to be displayed in list  int             0
    `list.posts.dateFormat`_             The date format for post lists         string          %d.%m.%Y
    widgets_                             Widget specific configuration          array           see description
    `comments.active`_                   Activate comments feature              int             1
@@ -145,6 +146,20 @@ sidebarWidgets
 
          You can simply add and remove widgets, also pure TypoScript widgets are possible.
          All you need is to add the TypoScript path to this setting.
+
+
+.. _tsListPostsMmaximumDisplayedItems:
+
+list.posts.maximumDisplayedItems
+""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         list.posts.maximumDisplayedItems
+   Data type
+         int
+   Description
+         Defines how many blog posts will be displayed in lists. Default is ``0``, which means no limit is applied.
 
 
 .. _tsListPostDateFormat:
