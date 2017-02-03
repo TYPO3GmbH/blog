@@ -25,6 +25,6 @@
     "typo3/cms-core": ">=7.6.0,<8.5.99"
   },
   "require-dev": {
-    "phpunit/phpunit": "5.4.6"
+    "phpunit/phpunit": "5.7.5"
   }
 }
