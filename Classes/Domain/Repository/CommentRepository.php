@@ -224,7 +224,6 @@ class CommentRepository extends Repository
             $query->equals('post.hidden', 0),
             $query->equals('post.deleted', 0)
         ]);
-
         return $constraints;
     }
 }
