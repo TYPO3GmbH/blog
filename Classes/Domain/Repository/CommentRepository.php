@@ -18,6 +18,7 @@ use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -74,17 +75,17 @@ class CommentRepository extends Repository
 
     /**
      * @param int $limit
+     * @param int $blogSetup
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \InvalidArgumentException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @deprecated since 1.3.0 will be removed in 2.0.0
      */
-    public function findLatest($limit = 5)
+    public function findLatest($limit = 5, $blogSetup = null)
     {
-        $query = $this->createQuery();
-        $query->setLimit($limit);
-        $constraint = $query->lessThan('status', Comment::STATUS_DECLINED);
-
-        return $query->matching($constraint)->execute();
+        GeneralUtility::logDeprecatedFunction();
+        return $this->findActiveComments($limit, $blogSetup);
     }
 
     /**
@@ -142,6 +143,7 @@ class CommentRepository extends Repository
         $query = $this->createQuery();
 
         $constraints = [];
+
         $constraints = $this->fillConstraintsBySettings($query, $constraints);
 
         if ($limit !== null) {
@@ -165,7 +167,7 @@ class CommentRepository extends Repository
         $rows = $this->getDatabaseConnection()->exec_SELECTgetRows(
             'uid',
             'pages',
-            'doktype = '.Constants::DOKTYPE_BLOG_POST.' AND pid = '.(int) $blogRootPid
+            'hidden = 0 and deleted = 0 AND doktype = ' . Constants::DOKTYPE_BLOG_POST . ' AND pid = ' . (int)$blogRootPid
         );
         $result = [];
         foreach ($rows as $row) {
@@ -201,6 +203,22 @@ class CommentRepository extends Repository
                 $query->equals('postLanguageId', -1),
             ]);
         }
+
+        $tstamp = time();
+        $constraints[] = $query->logicalAnd([
+            $query->logicalOr([
+                $query->equals('post.starttime', 0),
+                $query->greaterThanOrEqual('post.starttime', $tstamp)
+            ]),
+            $query->logicalOr([
+                $query->equals('post.endtime', 0),
+                $query->lessThan('post.endtime', $tstamp)
+            ])
+        ]);
+        $constraints[] = $query->logicalAnd([
+            $query->equals('post.hidden', 0),
+            $query->equals('post.deleted', 0)
+        ]);
 
         return $constraints;
     }

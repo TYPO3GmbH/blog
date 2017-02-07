@@ -138,7 +138,13 @@ return [
         ],
         'parentid' => [
             'config' => [
-                'type' => 'passthrough',
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'pages',
+                'foreign_table_where' => ' AND doktype = ' . \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
             ],
         ],
         'parenttable' => [
@@ -154,7 +160,7 @@ return [
     ],
     'types' => [
         0 => [
-            'showitem' => 'post_language_id,status,name,url,email,comment',
+            'showitem' => 'post_language_id,status,name,url,email,comment,post',
         ],
     ],
     'palettes' => [
