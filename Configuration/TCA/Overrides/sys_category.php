@@ -30,8 +30,8 @@ $temporaryColumns = [
                     'info' => false,
                 ],
             ],
+            'richtextConfiguration' => 'default'
         ],
-        'defaultExtras' => 'richtext:rte_transform',
     ],
 ];
 
