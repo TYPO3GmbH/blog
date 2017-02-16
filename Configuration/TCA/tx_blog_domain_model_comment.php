@@ -65,12 +65,11 @@ return [
                 'size' => '1',
                 'maxitems' => '1',
                 'minitems' => '0',
-                'show_thumbs' => '0',
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
-                ],
+                'fieldWizard' => [
+                    'recordsOverview' => [
+                        'disabled' => true
+                    ]
+                ]
             ],
         ],
         'name' => [
@@ -114,6 +113,7 @@ return [
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items' => [
@@ -127,6 +127,7 @@ return [
             'label' => $ll.'tx_blog_domain_model_comment.status',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
                     [$ll.'tx_blog_domain_model_comment.status.pending', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_PENDING],
                     [$ll.'tx_blog_domain_model_comment.status.approved', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_APPROVED],

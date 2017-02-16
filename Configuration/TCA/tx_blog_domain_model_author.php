@@ -155,6 +155,7 @@ return [
             'label' => $ll.'tx_blog_domain_model_author.posts',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
                 'multiple' => 1,
                 'foreign_table' => 'pages',
                 'MM' => 'tx_blog_post_author_mm',
