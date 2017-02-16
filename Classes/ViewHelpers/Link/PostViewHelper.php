@@ -68,7 +68,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
             ->build();
         if ((string) $uri !== '') {
             if ($this->arguments['returnUri']) {
-                return $uri;
+                return htmlspecialchars($uri);
             }
             $linkText = $this->renderChildren() ?: $post->getTitle();
             $this->tag->addAttribute('href', $uri);
