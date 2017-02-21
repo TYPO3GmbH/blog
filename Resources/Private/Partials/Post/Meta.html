@@ -22,7 +22,7 @@
             </f:for>
         </span>
     </f:if>
-    <f:alias map="{commentCount: '<f:count subject=\'{post.comments}\' />'}">
+    <f:alias map="{commentCount: '<f:count subject=\'{post.activeComments}\' />'}">
         <span class="sep">·</span>
         <meta itemprop="commentCount" content="{commentCount}" />
         <span class="comments-link">
