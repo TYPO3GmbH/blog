@@ -314,21 +314,6 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage
-     */
-    public function getActiveComments()
-    {
-        $comments = clone $this->comments;
-        /** @var Comment $comment */
-        foreach ($comments as $comment) {
-            if ($comment->getStatus() >= Comment::STATUS_DELETED) {
-                $comments->detach($comment);
-            }
-        }
-        return $comments;
-    }
-
-    /**
      * @param ObjectStorage $comments
      *
      * @return $this
