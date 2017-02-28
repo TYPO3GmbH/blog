@@ -306,21 +306,6 @@ class Post extends AbstractEntity
         $comments = clone $this->comments;
         /** @var Comment $comment */
         foreach ($comments as $comment) {
-            if ($comment->getStatus() >= Comment::STATUS_DELETED) {
-                $comments->detach($comment);
-            }
-        }
-        return $comments;
-    }
-
-    /**
-     * @return ObjectStorage
-     */
-    public function getActiveComments()
-    {
-        $comments = clone $this->comments;
-        /** @var Comment $comment */
-        foreach ($comments as $comment) {
             $commentStatus = $comment->getStatus();
             // Comment status must be at least "approved" and not "declined"
             if ($commentStatus >= Comment::STATUS_APPROVED && $commentStatus < Comment::STATUS_DECLINED) {
