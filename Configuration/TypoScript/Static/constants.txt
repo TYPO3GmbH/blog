@@ -14,6 +14,13 @@ plugin {
             archiveUid = 0
             # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.storagePid
             storagePid = 0
+
+            lists {
+                posts {
+                    # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.maximumDisplayedItems
+                    maximumDisplayedItems = 0
+                }
+            }
         }
     }
 }

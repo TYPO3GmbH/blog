@@ -86,6 +86,7 @@ call_user_func(
                 'label' => $ll.'pages.crdate',
                 'config' => [
                     'type' => 'input',
+                    'renderType' => 'inputDateTime',
                     'size' => '13',
                     'eval' => 'datetime',
                     'default' => '0',
@@ -96,6 +97,7 @@ call_user_func(
                 'label' => $ll.'pages.archive_date',
                 'config' => [
                     'type' => 'input',
+                    'renderType' => 'inputDateTime',
                     'size' => '13',
                     'eval' => 'datetime',
                     'default' => '0',
@@ -123,6 +125,7 @@ call_user_func(
                 'label' => $ll.'pages.authors',
                 'config' => [
                     'type' => 'select',
+                    'renderType' => 'selectMultipleSideBySide',
                     'multiple' => 1,
                     'foreign_table' => 'tx_blog_domain_model_author',
                     'MM' => 'tx_blog_post_author_mm',

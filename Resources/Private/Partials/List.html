@@ -1,16 +1,34 @@
 <div class="tx-blog-post-list {class}" xmlns:f="http://www.w3.org/1999/html">
-    <f:if condition="{posts}">
-        <f:then>
-            <f:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{itemsPerPage: 10, insertAbove: 0, insertBelow: 1, addQueryStringMethod: 'GET', maximumNumberOfLinks: 10}">
-                <f:for each="{paginatedPosts}" as="post">
-                    <f:render partial="List/Post" arguments="{_all}" />
-                </f:for>
-            </f:widget.paginate>
-        </f:then>
-        <f:else>
-            <div class="alert alert-info" role="alert">
-                <strong><f:translate key="list.no_posts.title" /></strong><br/><f:translate key="list.no_posts.message" />
-            </div>
-        </f:else>
-    </f:if>
+    <f:alias map="{paginateItemsPerPage: 10}">
+        <f:if condition="{posts}">
+            <f:then>
+                <f:if condition="{posts->f:count()} > {paginateItemsPerPage}">
+                    <f:then>
+                        <f:render section="PaginatePosts" arguments="{posts: posts, itemsPerPage: paginateItemsPerPage}" />
+                    </f:then>
+                    <f:else>
+                        <f:render section="ListPosts" arguments="{posts: posts}" />
+                    </f:else>
+                </f:if>
+            </f:then>
+            <f:else>
+                <div class="alert alert-info" role="alert">
+                    <strong><f:translate key="list.no_posts.title" /></strong><br/><f:translate key="list.no_posts.message" />
+                </div>
+            </f:else>
+        </f:if>
+    </f:alias>
 </div>
+
+<f:section name="PaginatePosts">
+    <f:widget.paginate objects="{posts}" as="paginatedPosts"
+                       configuration="{itemsPerPage: itemsPerPage, insertAbove: 0, insertBelow: 1, addQueryStringMethod: 'GET', maximumNumberOfLinks: 10}">
+        <f:render section="ListPosts" arguments="{posts: paginatedPosts}" />
+    </f:widget.paginate>
+</f:section>
+
+<f:section name="ListPosts">
+    <f:for each="{posts}" as="post">
+        <f:render partial="List/Post" arguments="{_all}" />
+    </f:for>
+</f:section>

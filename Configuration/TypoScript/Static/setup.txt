@@ -26,6 +26,7 @@ plugin.tx_blog {
         # Lists related settings
         lists {
             posts {
+                maximumDisplayedItems = {$plugin.tx_blog.settings.lists.posts.maximumDisplayedItems}
                 dateFormat = %d.%m.%Y
             }
         }

@@ -25,6 +25,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\MetaService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Utility\ArrayUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -113,7 +114,7 @@ class PostController extends ActionController
                 'description' => LocalizationUtility::translate('feed.description'.$action, 'blog', $arguments),
                 'language' => $GLOBALS['TSFE']->sys_language_isocode,
                 'link' => $this->uriBuilder->setUseCacheHash(false)->setArgumentsToBeExcludedFromQueryString(['id'])->setCreateAbsoluteUri(true)->setAddQueryString(true)->build(),
-                'date' => date('D, j M Y H:i:s e'),
+                'date' => date('r'),
             ];
             $this->view->assign('feed', $feedData);
         }
@@ -126,7 +127,13 @@ class PostController extends ActionController
      */
     public function listRecentPostsAction()
     {
-        $this->view->assign('posts', $this->postRepository->findAll());
+        $maximumItems = (int)ArrayUtility::getValueByPath($this->settings, 'lists.posts.maximumDisplayedItems') ?: 0;
+
+        $posts = (0 === $maximumItems)
+            ? $this->postRepository->findAll()
+            : $this->postRepository->findAllWithLimit($maximumItems);
+
+        $this->view->assign('posts', $posts);
     }
 
     /**

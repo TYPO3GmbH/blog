@@ -65,10 +65,48 @@ class PostRepository extends Repository
 
     /**
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findAll($blogSetup = null)
+    public function findAll()
+    {
+        return $this->getFindAllQuery()->execute();
+    }
+
+    /**
+     * @param int $blogSetup
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findAllByPid($blogSetup)
+    {
+        $query = $this->getFindAllQuery();
+
+        if (null !== $blogSetup) {
+            $constraints = $query->getConstraint();
+            $constraints[] = $query->equals('pid', $blogSetup);
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        return $query->execute();
+    }
+
+    /**
+     * @param int $limit
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findAllWithLimit($limit)
+    {
+        $query = $this->getFindAllQuery();
+
+        if (null !== $limit) {
+            $query->setLimit(intval($limit));
+        }
+
+        return $query->execute();
+    }
+
+    /**
+     * @return QueryInterface
+     */
+    protected function getFindAllQuery()
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
@@ -76,12 +114,9 @@ class PostRepository extends Repository
             $query->equals('archiveDate', 0),
             $query->greaterThanOrEqual('archiveDate', time()),
         ]);
+        $query->matching($query->logicalAnd($constraints));
 
-        if ($blogSetup !== null) {
-            $constraints[] = $query->equals('pid', $blogSetup);
-        }
-
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query;
     }
 
     /**
