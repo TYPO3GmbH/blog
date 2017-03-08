@@ -27,6 +27,17 @@ class ExtensionInstaller extends AbstractDownloadExtensionUpdate
     protected $extensionKey;
 
     /**
+     * @var array
+     */
+    protected $extensionDetails = [
+        'blog_template' => [
+            'title' => 'Blog template',
+            'description' => 'blog template extension',
+            'versionString' => '1.2.0',
+        ]
+    ];
+
+    /**
      * ExtensionInstaller constructor.
      *
      * @param string $extensionKey
