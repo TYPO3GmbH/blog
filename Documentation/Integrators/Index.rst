@@ -216,7 +216,7 @@ comments.moderation
          int
    Description
          Activate the comments moderation feature generally. Default: 0
-         This mean, any comment must be approved, before it is visible in the frontend.
+         This means, any comment must be approved, before it is visible in the frontend.
 
 
 .. _tsCommentsRespectPostLanguageId:
@@ -268,6 +268,7 @@ Settings (plugin.tx_blog.settings.widgets)
    `archive.groupByMonth`_              Group by month                         int             1
    `archive.yearDateFormat`_            Format of the year                     string          %Y
    `archive.monthDateFormat`_           Format of the month                    string          %B
+   `recentposts.limit`_                 Maximum number of posts to be shown    int             0
    ==================================== ====================================== =============== ===============
 
 .. _tsWidgetsCommentsLimit:
@@ -396,6 +397,19 @@ archive.monthDateFormat
          int
    Description
          Define the format of the year link.
+
+.. _tsWidgetsRecentPostsLimit:
+
+recentposts.limit
+""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         recentposts.limit
+   Data type
+         int
+   Description
+         Define a maximum number of posts shown in the recent posts widget. Default: 0
 
 
 GravatarProvider Settings (plugin.tx_blog.settings.authors.avatar.provider)

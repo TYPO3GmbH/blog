@@ -124,7 +124,13 @@ class WidgetController extends ActionController
      */
     public function recentPostsAction()
     {
-        $this->view->assign('posts', $this->postRepository->findAll());
+        $limit = (int) $this->settings['widgets']['recentposts']['limit'] ?: 0;
+
+        $posts = (0 === $limit)
+            ? $this->postRepository->findAll()
+            : $this->postRepository->findAllWithLimit($limit);
+        
+        $this->view->assign('posts', $posts);
     }
 
     /**
