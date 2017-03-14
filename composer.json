@@ -1,6 +1,6 @@
 {
   "name": "t3g/blog",
-  "description": "blog extension",
+  "description": "This blog extension use TYPO3s core concepts and elements to provide a full-blown blog that users of TYPO3 can instantly understand and use.",
   "minimum-stability": "dev",
   "type": "typo3-cms-extension",
   "license": "GPL-2.0+",
