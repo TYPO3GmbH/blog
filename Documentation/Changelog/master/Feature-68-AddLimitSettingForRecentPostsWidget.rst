@@ -10,6 +10,6 @@ Description
 ===========
 
 Introduction of a new setting ``widget.recentposts.limit`` for a maximum of displayed posts in the recent posts widget.
-Default value is ``0``, which means there is no limit.
+Default value is ``5``. There is no limit if the setting is not present or set to ``0``.
 
 .. index:: TypoScript

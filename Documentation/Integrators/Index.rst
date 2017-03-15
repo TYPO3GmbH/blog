@@ -268,7 +268,7 @@ Settings (plugin.tx_blog.settings.widgets)
    `archive.groupByMonth`_              Group by month                         int             1
    `archive.yearDateFormat`_            Format of the year                     string          %Y
    `archive.monthDateFormat`_           Format of the month                    string          %B
-   `recentposts.limit`_                 Maximum number of posts to be shown    int             0
+   `recentposts.limit`_                 Maximum number of posts to be shown    int             5
    ==================================== ====================================== =============== ===============
 
 .. _tsWidgetsCommentsLimit:
@@ -409,7 +409,7 @@ recentposts.limit
    Data type
          int
    Description
-         Define a maximum number of posts shown in the recent posts widget. Default: 0
+         Define a maximum number of posts shown in the recent posts widget. Default: 5
 
 
 GravatarProvider Settings (plugin.tx_blog.settings.authors.avatar.provider)
