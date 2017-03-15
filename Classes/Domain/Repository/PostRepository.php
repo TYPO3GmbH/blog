@@ -21,6 +21,8 @@ use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -37,6 +39,11 @@ class PostRepository extends Repository
     protected $defaultConstraints = [];
 
     /**
+     * @var array
+     */
+    protected $storagePids = [];
+
+    /**
      * @throws \Exception
      */
     public function initializeObject()
@@ -48,7 +55,7 @@ class PostRepository extends Repository
         $query = $this->createQuery();
 
         if (TYPO3_MODE === 'FE') {
-            $pids = [];
+            $pids = $this->getStoragePidsFromTypoScript();
             $rootLine = $this->getTypoScriptFontendController()->sys_page
                 ->getRootLine($this->getTypoScriptFontendController()->id);
             foreach ($rootLine as $value) {
@@ -255,5 +262,16 @@ class PostRepository extends Repository
     protected function getTypoScriptFontendController()
     {
         return $GLOBALS['TSFE'];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getStoragePidsFromTypoScript()
+    {
+        $configurationManager = $this->objectManager->get(ConfigurationManager::class);
+        $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+
+        return GeneralUtility::intExplode(',', $settings['persistence']['storagePid']);
     }
 }
