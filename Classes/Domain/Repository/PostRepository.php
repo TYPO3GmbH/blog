@@ -39,11 +39,6 @@ class PostRepository extends Repository
     protected $defaultConstraints = [];
 
     /**
-     * @var array
-     */
-    protected $storagePids = [];
-
-    /**
      * @throws \Exception
      */
     public function initializeObject()
