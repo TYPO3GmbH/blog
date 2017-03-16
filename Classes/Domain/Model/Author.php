@@ -102,6 +102,14 @@ class Author extends AbstractEntity
     /**
      * Post constructor.
      */
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
+
+    /**
+     * initializeObject
+     */
     public function initializeObject()
     {
         $this->posts = new ObjectStorage();

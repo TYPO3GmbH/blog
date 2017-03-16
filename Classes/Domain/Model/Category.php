@@ -16,6 +16,7 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
  */
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class Category.
@@ -53,6 +54,23 @@ class Category extends AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Content>
      */
     protected $content;
+
+    /**
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
+
+    /**
+     * initializeObject
+     */
+    public function initializeObject()
+    {
+        $this->content = new ObjectStorage();
+    }
+
 
     /**
      * Gets the title.

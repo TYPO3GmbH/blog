@@ -113,6 +113,14 @@ class Post extends AbstractEntity
     /**
      * Post constructor.
      */
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
+
+    /**
+     * initializeObject
+     */
     public function initializeObject()
     {
         $this->categories = new ObjectStorage();
