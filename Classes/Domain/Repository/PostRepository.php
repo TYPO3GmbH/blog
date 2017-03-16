@@ -81,13 +81,11 @@ class PostRepository extends Repository
     {
         $query = $this->getFindAllQuery();
 
+        $constraints = [];
         if (null !== $blogSetup) {
-            $existingConstraint = $query->getConstraint();
-            $additionalConstraint = $query->equals('pid', $blogSetup);
-            $query->matching($query->logicalAnd([
-                $existingConstraint,
-                $additionalConstraint
-            ]));
+            $constraints[] = $query->getConstraint();
+            $constraints[] = $query->equals('pid', $blogSetup);
+            $query->matching($query->logicalAnd($constraints));
         }
 
         return $query->execute();
