@@ -51,6 +51,14 @@ class Tag extends AbstractEntity
      */
     public function __construct()
     {
+        $this->initializeObject();
+    }
+
+    /**
+     * initializeObject
+     */
+    public function initializeObject()
+    {
         $this->content = new ObjectStorage();
     }
 
