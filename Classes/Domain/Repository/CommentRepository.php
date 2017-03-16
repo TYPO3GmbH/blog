@@ -148,6 +148,37 @@ class CommentRepository extends Repository
     }
 
     /**
+     * @param int    $limit
+     * @param int    $blogSetup
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     *
+     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findActiveComments($limit = null, $blogSetup = null)
+    {
+        $query = $this->createQuery();
+        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $querySettings->setRespectStoragePage(false);
+        $query->setQuerySettings($querySettings);
+
+        $constraints = [];
+        $constraints[] = $query->logicalAnd([
+            $query->greaterThanOrEqual('status', Comment::STATUS_APPROVED),
+            $query->lessThan('status', Comment::STATUS_DECLINED)
+        ]);
+
+        if ($limit !== null) {
+            $query->setLimit($limit);
+        }
+        if ($blogSetup !== null) {
+            $constraints[] = $query->in('pid', $this->getPostPidsByRootPid($blogSetup));
+        }
+        return $query->matching($query->logicalAnd($constraints))->execute();
+    }
+
+    /**
      * @param int $blogRootPid
      *
      * @return array

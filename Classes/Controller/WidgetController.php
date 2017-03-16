@@ -135,11 +135,13 @@ class WidgetController extends ActionController
 
     /**
      *
+     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function commentsAction()
     {
         $limit = (int) $this->settings['widgets']['comments']['limit'] ?: 5;
-        $this->view->assign('comments', $this->commentRepository->findLatest($limit));
+        $this->view->assign('comments', $this->commentRepository->findActiveComments($limit));
     }
 
     /**
