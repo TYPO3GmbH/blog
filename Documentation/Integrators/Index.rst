@@ -401,7 +401,7 @@ archive.monthDateFormat
 .. _tsWidgetsRecentPostsLimit:
 
 recentposts.limit
-""""""""""""""""""""""""""""""
+"""""""""""""""""
 .. container:: table-row
 
    Property
@@ -410,6 +410,7 @@ recentposts.limit
          int
    Description
          Define a maximum number of posts shown in the recent posts widget. Default: 5
+         There is no limit if the setting is not present or set to: 0.
 
 
 GravatarProvider Settings (plugin.tx_blog.settings.authors.avatar.provider)
