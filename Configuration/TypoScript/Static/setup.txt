@@ -1,14 +1,20 @@
 plugin.tx_blog {
     persistence {
-        storagePid = {$plugin.tx_blog.persistence.storagePid}
+        storagePid = {$plugin.tx_blog.settings.storagePid}
     }
-    view.widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = EXT:blog/Resources/Private/Templates
+    view {
+        templateRootPaths.0 = EXT:blog/Resources/Private/Templates/
+        partialRootPaths.0 = EXT:blog/Resources/Private/Partials/
+        layoutRootPaths.0 = EXT:blog/Resources/Private/Layouts/
+        widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = EXT:blog/Resources/Private/Templates
+    }
     settings {
         blogUid = {$plugin.tx_blog.settings.blogUid}
+        authorUid  = {$plugin.tx_blog.settings.authorUid}
         categoryUid  = {$plugin.tx_blog.settings.categoryUid}
         tagUid  = {$plugin.tx_blog.settings.tagUid}
         archiveUid = {$plugin.tx_blog.settings.archiveUid}
-        storagePid = {$plugin.tx_blog.persistence.storagePid}
+        storagePid = {$plugin.tx_blog.settings.storagePid}
         sidebarWidgets {
             10 = tt_content.list.20.blog_recentpostswidget
             20 = tt_content.list.20.blog_categorywidget
@@ -20,6 +26,7 @@ plugin.tx_blog {
         # Lists related settings
         lists {
             posts {
+                maximumDisplayedItems = {$plugin.tx_blog.settings.lists.posts.maximumDisplayedItems}
                 dateFormat = %d.%m.%Y
             }
         }
@@ -49,8 +56,23 @@ plugin.tx_blog {
             active = 1
             # comments moderation mode, 0 = no moderation, 1 = moderation active
             moderation = 0
-            # Respect post_language_id, 0 = show all comments also on translated posts, 1 = show only comments written in current language
+            # Respect post_language_id, 0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)
             respectPostLanguageId = 1
+        }
+        # Authors related settings
+        authors {
+            # Avatar settings
+            avatar {
+                # This settings depends on the configured AvatarProvider. The default is the GravatarProvider
+                provider {
+                    # Size in pixel
+                    size = 64
+                    # Default image
+                    default = mm
+                    # Gravatar rating
+                    rating = g
+                }
+            }
         }
     }
     pageInfo.title = TEXT
@@ -108,3 +130,7 @@ blog_rss_archive.10 < tt_content.list.20.blog_archive
 blog_rss_comments < blog_rss_posts
 blog_rss_comments.typeNum = 240
 blog_rss_comments.10 < tt_content.list.20.blog_comments
+
+blog_rss_author < blog_rss_posts
+blog_rss_author.typeNum = 250
+blog_rss_author.10 < tt_content.list.20.blog_authorposts

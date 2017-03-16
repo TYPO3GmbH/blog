@@ -13,9 +13,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class SetupService
 {
+    /**
+     * @var array of created record uids
+     */
+    protected $recordUidArray = [];
 
     /**
      * @return array
+     *
      * @throws \InvalidArgumentException
      */
     public function determineBlogSetups()
@@ -25,24 +30,25 @@ class SetupService
         $blogRootPages = $this->getDatabaseConnection()->exec_SELECTgetRows(
             'pid, count(pid) AS cnt',
             'pages',
-            'deleted = 0 AND doktype = ' . Constants::DOKTYPE_BLOG_POST,
+            'deleted = 0 AND doktype = '.Constants::DOKTYPE_BLOG_POST,
             'pid'
         );
         foreach ($blogRootPages as $blogRootPage) {
             $blogUid = $blogRootPage['pid'];
             if (!array_key_exists($blogUid, $setups)) {
                 /** @var array $title */
-                $title = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('title', 'pages', 'deleted = 0 AND uid = ' . (int)$blogUid);
+                $title = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('title', 'pages', 'deleted = 0 AND uid = '.(int) $blogUid);
                 if (!is_array($title)) {
                     continue;
                 }
                 $setups[$blogUid] = [
                     'uid' => $blogUid,
                     'title' => $title['title'],
-                    'articleCount' => $blogRootPage['cnt']
+                    'articleCount' => $blogRootPage['cnt'],
                 ];
             }
         }
+
         return $setups;
     }
 
@@ -53,12 +59,14 @@ class SetupService
      */
     public function getBlogRecordAsArray($uid)
     {
-        return $this->getDatabaseConnection()->exec_SELECTgetSingleRow('*', 'pages', 'uid = ' . (int) $uid);
+        return $this->getDatabaseConnection()->exec_SELECTgetSingleRow('*', 'pages', 'uid = '.(int) $uid);
     }
 
     /**
      * @param array $data
+     *
      * @return bool
+     *
      * @throws \InvalidArgumentException
      */
     public function createBlogSetup(array $data)
@@ -75,7 +83,7 @@ class SetupService
 
         $result = false;
         if (file_exists($blogSetup)) {
-            /** @noinspection PhpIncludeInspection */
+            /* @noinspection PhpIncludeInspection */
             $blogSetup = require $blogSetup;
             if ($useTemplate) {
                 $blogSetup['sys_template']['NEW_SysTemplate']['include_static_file'] = 'EXT:fluid_styled_content/Configuration/TypoScript/Static/,EXT:blog_template/Configuration/TypoScript/BlogTemplate/,EXT:blog/Configuration/TypoScript/Static/';
@@ -86,65 +94,78 @@ class SetupService
             $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
             $dataHandler->start($blogSetup, []);
             $result = $dataHandler->process_datamap();
+            $this->recordUidArray = array_merge_recursive($this->recordUidArray, $dataHandler->substNEWwithIDs);
             if ($result !== false) {
                 $result = true;
-                $recordIds = $dataHandler->substNEWwithIDs;
-
                 // Update page id in PageTSConfig
-                $blogRootUid = (int) $recordIds['NEW_blogRoot'];
-                $blogFolderUid = (int) $recordIds['NEW_blogFolder'];
+                $blogRootUid = (int) $this->recordUidArray['NEW_blogRoot'];
+                $blogFolderUid = (int) $this->recordUidArray['NEW_blogFolder'];
                 /** @var array $record */
-                $record = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('TSconfig', 'pages', 'uid = ' . $blogRootUid);
-                $this->getDatabaseConnection()->exec_UPDATEquery('pages', 'uid = ' . $blogRootUid, [
-                    'TSconfig' => str_replace('NEW_blogFolder', $blogFolderUid, $record['TSconfig'])
+                $record = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('TSconfig', 'pages', 'uid = '.$blogRootUid);
+                $this->getDatabaseConnection()->exec_UPDATEquery('pages', 'uid = '.$blogRootUid, [
+                    'TSconfig' => str_replace('NEW_blogFolder', $blogFolderUid, $record['TSconfig']),
                 ]);
 
                 $blogSetupRelations = GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRelations.php');
                 if (file_exists($blogSetupRelations)) {
-                    /** @noinspection PhpIncludeInspection */
+                    /* @noinspection PhpIncludeInspection */
                     $blogSetupRelations = require $blogSetupRelations;
-                    $blogSetupRelations = $this->replaceNewUids($blogSetupRelations, $dataHandler->substNEWwithIDs);
+                    $blogSetupRelations = $this->replaceNewUids($blogSetupRelations);
                     $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
                     $dataHandler->start($blogSetupRelations, []);
                     $resultRelations = $dataHandler->process_datamap();
+                    $this->recordUidArray = array_merge_recursive($this->recordUidArray, $dataHandler->substNEWwithIDs);
                     if ($resultRelations !== false) {
                         $result = true;
                     }
                 }
             }
+            if ($result === true) {
+                // Replace UIDs in constants
+                $sysTemplateUid = (int) $this->recordUidArray['NEW_SysTemplate'];
+                $record = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('constants', 'sys_template', 'uid = '.$sysTemplateUid);
+                $this->getDatabaseConnection()->exec_UPDATEquery('sys_template', 'uid = '.$sysTemplateUid, [
+                    'constants' => str_replace(
+                        array_keys($this->recordUidArray),
+                        array_values($this->recordUidArray),
+                        $record['constants']
+                    ),
+                ]);
+            }
         }
+
         return $result;
     }
 
     /**
      * @param array $setup
-     * @param array $newIds
      *
      * @return array
      */
-    protected function replaceNewUids(array $setup, array $newIds)
+    protected function replaceNewUids(array $setup)
     {
         $newSetup = [];
         foreach ($setup as $key => &$value) {
             if (false !== strpos($key, 'NEW')) {
-                foreach ($newIds as $newId => $uid) {
+                foreach ($this->recordUidArray as $newId => $uid) {
                     $key = str_replace($newId, $uid, $key);
                 }
             }
             if (is_array($value)) {
-                /** @noinspection ReferenceMismatchInspection */
-                $value = $this->replaceNewUids($value, $newIds);
+                /* @noinspection ReferenceMismatchInspection */
+                $value = $this->replaceNewUids($value);
             } else {
                 if (false !== strpos($value, 'NEW')) {
-                    foreach ($newIds as $newId => $uid) {
-                        /** @noinspection ReferenceMismatchInspection */
+                    foreach ($this->recordUidArray as $newId => $uid) {
+                        /* @noinspection ReferenceMismatchInspection */
                         $value = str_replace($newId, $uid, $value);
                     }
                 }
             }
-            /** @noinspection ReferenceMismatchInspection */
+            /* @noinspection ReferenceMismatchInspection */
             $newSetup[$key] = $value;
         }
+
         return $newSetup;
     }
 
@@ -152,6 +173,7 @@ class SetupService
      * @param string $extKey
      *
      * @return bool
+     *
      * @throws \InvalidArgumentException
      */
     protected function installExtension($extKey)
@@ -159,6 +181,7 @@ class SetupService
         $installer = GeneralUtility::makeInstance(ExtensionInstaller::class, $extKey);
         $databaseQueries = [];
         $customMessages = '';
+
         return $installer->performUpdate($databaseQueries, $customMessages);
     }
 

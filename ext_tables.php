@@ -1,6 +1,8 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+if (!defined('TYPO3_MODE')) {
+    die('Access denied.');
+}
 
 call_user_func(function () {
     $blogDocType = \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST;
@@ -16,6 +18,7 @@ call_user_func(function () {
         'blog-link-wizard' => 'EXT:blog/Resources/Public/Icons/blog-link-wizard.svg',
         'apps-pagetree-folder-contains-blog' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-folder-contains-blog.svg',
         'apps-pagetree-blog' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog.svg',
+        'apps-pagetree-blog-author' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-author.svg',
         'apps-pagetree-blog-category' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-category.svg',
         'apps-pagetree-blog-comment' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment.svg',
         'apps-pagetree-blog-comment-approved' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment-approved.svg',
@@ -35,7 +38,7 @@ call_user_func(function () {
 
     // Allow backend users to drag and drop the new page type:
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
-        'options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . $blogDocType . ')'
+        'options.pageTree.doktypesToShowInNewPageDragArea := addToList('.$blogDocType.')'
     );
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');
@@ -49,6 +52,11 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'Category',
         'Blog: List by category'
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
+        'AuthorPosts',
+        'Blog: List by author'
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
@@ -80,6 +88,11 @@ call_user_func(function () {
         'Comments',
         'Blog: Comments'
     );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
+        'Authors',
+        'Blog: Authors'
+    );
 
     if (TYPO3_MODE === 'BE') {
         // Module System > Backend Users
@@ -89,12 +102,12 @@ call_user_func(function () {
             'tx_Blog',
             'top',
             [
-                'Backend' => 'index, createBlog'
+                'Backend' => 'posts, comments, setupWizard, createBlog, updateCommentStatus',
             ],
             [
                 'access' => 'admin',
                 'icon' => 'EXT:blog/Resources/Public/Icons/module-blog.svg',
-                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf'
+                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf',
             ]
         );
     }

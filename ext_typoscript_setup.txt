@@ -1,3 +1,10 @@
+config.tx_extbase {
+    objects {
+        T3G\AgencyPack\Blog\AvatarProviderInterface {
+            className = T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider
+        }
+    }
+}
 config.tx_extbase.persistence {
     storagePid = {$plugin.tx_blog.persistence.storagePid}
     classes {
@@ -9,7 +16,6 @@ config.tx_extbase.persistence {
         T3G\AgencyPack\Blog\Domain\Model\Post {
             mapping {
                 tableName = pages
-                dokype = 137
                 columns.crdate.mapOnProperty = crdate
             }
         }
@@ -29,6 +35,12 @@ config.tx_extbase.persistence {
             newRecordStoragePid = {$plugin.tx_blog.persistence.storagePid}
             mapping {
                 tableName = tx_blog_domain_model_tag
+            }
+        }
+        T3G\AgencyPack\Blog\Domain\Model\Author {
+            newRecordStoragePid = {$plugin.tx_blog.persistence.storagePid}
+            mapping {
+                tableName = tx_blog_domain_model_author
             }
         }
     }

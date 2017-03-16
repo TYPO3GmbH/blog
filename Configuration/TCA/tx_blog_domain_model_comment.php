@@ -1,12 +1,14 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+if (!defined('TYPO3_MODE')) {
+    die('Access denied.');
+}
 
 $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
 
 return [
     'ctrl' => [
-        'title' => $ll . 'tx_blog_domain_model_comment',
+        'title' => $ll.'tx_blog_domain_model_comment',
         'label' => 'name',
         'label_alt' => 'crdate',
         'label_alt_force' => 1,
@@ -55,7 +57,7 @@ return [
         // author not implemented yet
         'author' => [
             'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_comment.author',
+            'label' => $ll.'tx_blog_domain_model_comment.author',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -63,17 +65,16 @@ return [
                 'size' => '1',
                 'maxitems' => '1',
                 'minitems' => '0',
-                'show_thumbs' => '0',
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
-                ],
+                'fieldWizard' => [
+                    'recordsOverview' => [
+                        'disabled' => true
+                    ]
+                ]
             ],
         ],
         'name' => [
             'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_comment.name',
+            'label' => $ll.'tx_blog_domain_model_comment.name',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -82,7 +83,7 @@ return [
         ],
         'url' => [
             'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_comment.url',
+            'label' => $ll.'tx_blog_domain_model_comment.url',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -91,7 +92,7 @@ return [
         ],
         'email' => [
             'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_comment.email',
+            'label' => $ll.'tx_blog_domain_model_comment.email',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -100,7 +101,7 @@ return [
         ],
         'comment' => [
             'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_comment.comment',
+            'label' => $ll.'tx_blog_domain_model_comment.comment',
             'config' => [
                 'type' => 'text',
                 'size' => 30,
@@ -109,16 +110,31 @@ return [
         ],
         'post_language_id' => [
             'exclude' => 1,
-            'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
-            'config'  => [
-                'type'                => 'select',
-                'foreign_table'       => 'sys_language',
+            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items'               => [
+                'items' => [
                     ['LLL:EXT:lang/locallang_general.php:LGL.allLanguages', -1],
-                    ['LLL:EXT:lang/locallang_general.php:LGL.default_value', 0]
-                ]
-            ]
+                    ['LLL:EXT:lang/locallang_general.php:LGL.default_value', 0],
+                ],
+            ],
+        ],
+        'status' => [
+            'exclude' => 1,
+            'label' => $ll.'tx_blog_domain_model_comment.status',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    [$ll.'tx_blog_domain_model_comment.status.pending', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_PENDING],
+                    [$ll.'tx_blog_domain_model_comment.status.approved', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_APPROVED],
+                    [$ll.'tx_blog_domain_model_comment.status.declined', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DECLINED],
+                    [$ll.'tx_blog_domain_model_comment.status.deleted', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DELETED],
+                ],
+            ],
         ],
         'parentid' => [
             'config' => [
@@ -130,10 +146,15 @@ return [
                 'type' => 'passthrough',
             ],
         ],
+        'hp' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
     ],
     'types' => [
         0 => [
-            'showitem' => 'post_language_id,name,url,email,comment',
+            'showitem' => 'post_language_id,status,name,url,email,comment',
         ],
     ],
     'palettes' => [

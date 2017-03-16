@@ -1,0 +1,35 @@
+<f:layout name="Backend" />
+
+<f:section name="intro">
+  <h1><f:translate key="backend.headline.setup_wizard" /></h1>
+  <p class="lead"><f:translate key="backend.lead.blogs" /></p>
+</f:section>
+
+<f:section name="content">
+    <f:if condition="{f:count() -> blogSetups} > 0">
+        <f:then>
+            <div class="table-fit">
+              <table class="table">
+                <tr>
+                  <th><f:translate key="backend.table.blog" /></th>
+                  <th><f:translate key="backend.table.articles" /></th>
+                </tr>
+                <f:for each="{blogSetups}" as="blog">
+                <tr>
+                  <td>{blog.title}</td>
+                  <td>{blog.articleCount}</td>
+                </tr>
+                </f:for>
+              </table>
+            </div>
+            <f:render partial="Backend/CreateWizard" arguments="{_all}" />
+            <f:render partial="Backend/RealUrlSetup" arguments="{_all}" />
+        </f:then>
+        <f:else>
+            <f:be.infobox state="-1" title="{f:translate(key: 'backend.warning')}">
+                <p><f:translate key="backend.message.noblogs" /></p>
+            </f:be.infobox>
+            <f:render partial="Backend/CreateWizard" arguments="{_all}" />
+        </f:else>
+    </f:if>
+</f:section>

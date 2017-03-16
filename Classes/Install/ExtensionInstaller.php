@@ -1,4 +1,5 @@
 <?php
+
 namespace T3G\AgencyPack\Blog\Install;
 
 /*
@@ -16,7 +17,7 @@ namespace T3G\AgencyPack\Blog\Install;
 use TYPO3\CMS\Install\Updates\AbstractDownloadExtensionUpdate;
 
 /**
- * Installs and downloads extension if needed
+ * Installs and downloads extension if needed.
  */
 class ExtensionInstaller extends AbstractDownloadExtensionUpdate
 {
@@ -24,6 +25,17 @@ class ExtensionInstaller extends AbstractDownloadExtensionUpdate
      * @var string
      */
     protected $extensionKey;
+
+    /**
+     * @var array
+     */
+    protected $extensionDetails = [
+        'blog_template' => [
+            'title' => 'Blog template',
+            'description' => 'blog template extension',
+            'versionString' => '1.2.0',
+        ]
+    ];
 
     /**
      * ExtensionInstaller constructor.
@@ -36,9 +48,10 @@ class ExtensionInstaller extends AbstractDownloadExtensionUpdate
     }
 
     /**
-     * Checks if an update is needed
+     * Checks if an update is needed.
      *
      * @param string $description The description for the update
+     *
      * @return bool Whether an update is needed (true) or not (false)
      */
     public function checkForUpdate(&$description)
@@ -47,15 +60,17 @@ class ExtensionInstaller extends AbstractDownloadExtensionUpdate
     }
 
     /**
-     * Performs the update
+     * Performs the update.
      *
      * @param array $databaseQueries Queries done in this update
-     * @param mixed $customMessages Custom messages
+     * @param mixed $customMessages  Custom messages
+     *
      * @return bool
      */
     public function performUpdate(array &$databaseQueries, &$customMessages)
     {
         $updateSuccessful = $this->installExtension($this->extensionKey, $customMessages);
+
         return $updateSuccessful;
     }
 }

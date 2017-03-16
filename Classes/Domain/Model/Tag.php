@@ -15,6 +15,7 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class Tag.
@@ -44,6 +45,22 @@ class Tag extends AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Content>
      */
     protected $content;
+
+    /**
+     * Tag constructor.
+     */
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
+
+    /**
+     * initializeObject
+     */
+    public function initializeObject()
+    {
+        $this->content = new ObjectStorage();
+    }
 
     /**
      * @return string

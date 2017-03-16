@@ -74,7 +74,9 @@ class CommentService
             $result = self::STATE_SUCCESS;
             if ((int) $this->settings['moderation'] === 1) {
                 $result = self::STATE_MODERATION;
-                $comment->setHidden(1);
+                $comment->setStatus(Comment::STATUS_PENDING);
+            } else {
+                $comment->setStatus(Comment::STATUS_APPROVED);
             }
             $comment->setPostLanguageId($GLOBALS['TSFE']->sys_language_uid);
             $post->addComment($comment);

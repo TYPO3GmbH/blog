@@ -25,6 +25,11 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Comment extends AbstractEntity
 {
+    const STATUS_PENDING = 0;
+    const STATUS_APPROVED = 10;
+    const STATUS_DECLINED = 50;
+    const STATUS_DELETED = 90;
+
     /**
      * The author of the comment.
      *
@@ -75,6 +80,13 @@ class Comment extends AbstractEntity
     protected $post;
 
     /**
+     * The honeypot field, field is not stored in database.
+     *
+     * @var string
+     */
+    protected $hp = '';
+
+    /**
      * @var int
      */
     protected $postLanguageId;
@@ -85,6 +97,11 @@ class Comment extends AbstractEntity
      * @var \DateTime
      */
     protected $crdate;
+
+    /**
+     * @var int
+     */
+    protected $status;
 
     /**
      * @return FrontendUser
@@ -260,5 +277,37 @@ class Comment extends AbstractEntity
     public function setPostLanguageId($postLanguageId)
     {
         $this->postLanguageId = $postLanguageId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHp()
+    {
+        return $this->hp;
+    }
+
+    /**
+     * @param string $hp
+     */
+    public function setHp($hp)
+    {
+        $this->hp = $hp;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 }

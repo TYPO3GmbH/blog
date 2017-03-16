@@ -31,6 +31,9 @@ class CommentValidator extends AbstractValidator
     public function isValid($value)
     {
         if ($value instanceof Comment) {
+            if (trim($value->getHp()) !== '') {
+                $this->addError('It looks like you are a bot!', 1484142303);
+            }
             if (trim($value->getName()) === '') {
                 $this->addError('The name is required', 1467650564);
             }

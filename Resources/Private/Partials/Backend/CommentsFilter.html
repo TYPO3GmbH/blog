@@ -1,0 +1,67 @@
+<ul class="list-filter">
+	<li>
+		<f:if condition="{activeFilter}">
+			<f:then>
+				<f:link.action action="comments" arguments="{blogSetup: activeBlogSetup}">
+					<f:translate key="backend.comments.filter.all"/>
+				</f:link.action>
+			</f:then>
+			<f:else>
+				<f:translate key="backend.comments.filter.all"/>
+			</f:else>
+		</f:if>
+		({commentCounts.all})
+	</li>
+	<li>
+		<f:if condition="{activeFilter} == 'pending'">
+			<f:then>
+				<f:translate key="backend.comments.filter.pending"/>
+			</f:then>
+			<f:else>
+				<f:link.action action="comments" arguments="{filter: 'pending', blogSetup: activeBlogSetup}">
+					<f:translate key="backend.comments.filter.pending"/>
+				</f:link.action>
+			</f:else>
+		</f:if>
+		({commentCounts.pending})
+	</li>
+	<li>
+		<f:if condition="{activeFilter} == 'approved'">
+			<f:then>
+				<f:translate key="backend.comments.filter.approved"/>
+			</f:then>
+			<f:else>
+				<f:link.action action="comments" arguments="{filter: 'approved', blogSetup: activeBlogSetup}">
+					<f:translate key="backend.comments.filter.approved"/>
+				</f:link.action>
+			</f:else>
+		</f:if>
+		({commentCounts.approved})
+	</li>
+	<li>
+		<f:if condition="{activeFilter} == 'declined'">
+			<f:then>
+				<f:translate key="backend.comments.filter.declined"/>
+			</f:then>
+			<f:else>
+				<f:link.action action="comments" arguments="{filter: 'declined', blogSetup: activeBlogSetup}">
+					<f:translate key="backend.comments.filter.declined"/>
+				</f:link.action>
+			</f:else>
+		</f:if>
+		({commentCounts.declined})
+	</li>
+	<li>
+		<f:if condition="{activeFilter} == 'deleted'">
+			<f:then>
+				<f:translate key="backend.comments.filter.deleted"/>
+			</f:then>
+			<f:else>
+				<f:link.action action="comments" arguments="{filter: 'deleted', blogSetup: activeBlogSetup}">
+					<f:translate key="backend.comments.filter.deleted"/>
+				</f:link.action>
+			</f:else>
+		</f:if>
+		({commentCounts.deleted})
+	</li>
+</ul>

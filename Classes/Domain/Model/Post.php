@@ -14,6 +14,7 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -42,6 +43,15 @@ class Post extends AbstractEntity
      * @var string
      */
     protected $description;
+
+    /**
+     * Thie blog post author.
+     *
+     * @var string
+     *
+     * @deprecated since EXT:blog v1.2.0, this property will be removed in EXT:blog v2.0.0
+     */
+    protected $author;
 
     /**
      * The blog post creation date.
@@ -96,14 +106,60 @@ class Post extends AbstractEntity
     protected $archiveDate;
 
     /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Author>
+     */
+    protected $authors;
+
+    /**
      * Post constructor.
      */
     public function __construct()
     {
+        $this->initializeObject();
+    }
+
+    /**
+     * initializeObject
+     */
+    public function initializeObject()
+    {
         $this->categories = new ObjectStorage();
         $this->comments = new ObjectStorage();
         $this->tags = new ObjectStorage();
+        $this->authors = new ObjectStorage();
         $this->media = new ObjectStorage();
+    }
+
+    /**
+     * @param Author $author
+     */
+    public function addAuthor(Author $author)
+    {
+        $this->authors->attach($author);
+    }
+
+    /**
+     * @param Author $author
+     */
+    public function removeAuthor(Author $author)
+    {
+        $this->authors->detach($author);
+    }
+
+    /**
+     * @return ObjectStorage
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
+     * @param ObjectStorage $authors
+     */
+    public function setAuthors(ObjectStorage $authors)
+    {
+        $this->authors = $authors;
     }
 
     /**
@@ -251,6 +307,24 @@ class Post extends AbstractEntity
     }
 
     /**
+     * @return ObjectStorage
+     */
+    public function getActiveComments()
+    {
+        $comments = clone $this->comments;
+        /** @var Comment $comment */
+        foreach ($comments as $comment) {
+            $commentStatus = $comment->getStatus();
+            // Comment status must be at least "approved" and not "declined"
+            if ($commentStatus >= Comment::STATUS_APPROVED && $commentStatus < Comment::STATUS_DECLINED) {
+                continue;
+            }
+            $comments->detach($comment);
+        }
+        return $comments;
+    }
+
+    /**
      * @param ObjectStorage $comments
      *
      * @return $this
@@ -301,7 +375,7 @@ class Post extends AbstractEntity
      */
     public function setSharingEnabled($sharingEnabled)
     {
-        $this->sharingEnabled = (bool)$sharingEnabled;
+        $this->sharingEnabled = (bool) $sharingEnabled;
 
         return $this;
     }
@@ -380,5 +454,28 @@ class Post extends AbstractEntity
     public function setArchiveDate($archiveDate)
     {
         $this->archiveDate = $archiveDate;
+    }
+
+    /**
+     * @return string
+     *
+     * @deprecated since EXT:blog v1.2.0, this method will be removed in EXT:blog v2.0.0
+     */
+    public function getAuthor()
+    {
+        GeneralUtility::logDeprecatedFunction();
+
+        return $this->author;
+    }
+
+    /**
+     * @param string $author
+     *
+     * @deprecated since EXT:blog v1.2.0, this method will be removed in EXT:blog v2.0.0
+     */
+    public function setAuthor($author)
+    {
+        GeneralUtility::logDeprecatedFunction();
+        $this->author = $author;
     }
 }

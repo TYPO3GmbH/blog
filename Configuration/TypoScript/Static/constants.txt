@@ -4,6 +4,8 @@ plugin {
         settings {
             # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blogUid
             blogUid = 0
+            # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authorUid
+            authorUid = 0
             # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.categoryUid
             categoryUid = 0
             # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.tagUid
@@ -12,6 +14,13 @@ plugin {
             archiveUid = 0
             # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.storagePid
             storagePid = 0
+
+            lists {
+                posts {
+                    # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.maximumDisplayedItems
+                    maximumDisplayedItems = 0
+                }
+            }
         }
     }
 }

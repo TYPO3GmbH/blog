@@ -1,6 +1,8 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+if (!defined('TYPO3_MODE')) {
+    die('Access denied.');
+}
 
 call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -18,6 +20,16 @@ call_user_func(function () {
         ],
         [
             'Post' => 'listPostsByCategory',
+        ]
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
+        'AuthorPosts',
+        [
+            'Post' => 'listPostsByAuthor',
+        ],
+        [
+            'Post' => 'listPostsByAuthor',
         ]
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -73,6 +85,14 @@ call_user_func(function () {
         ]
     );
 
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
+        'Authors',
+        [
+            'Post' => 'authors',
+        ]
+    );
+
     // Widgets
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
@@ -122,9 +142,24 @@ call_user_func(function () {
         ]
     );
 
+    /** @var \TYPO3\CMS\Extbase\Object\Container\Container $container */
+    $container = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class);
+    $container->registerImplementation(
+        \T3G\AgencyPack\Blog\AvatarProviderInterface::class,
+        \T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider::class
+    );
+
+    $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
+    $dispatcher->connect(
+        \TYPO3\CMS\Extensionmanager\Utility\InstallUtility::class,
+        'afterExtensionInstall',
+        \T3G\AgencyPack\Blog\Hooks\ExtensionUpdate::class,
+        'afterExtensionInstall'
+    );
+
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['blog']
-            = \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class .
+            = \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class.
             '->addBlogConfiguration';
     }
 });

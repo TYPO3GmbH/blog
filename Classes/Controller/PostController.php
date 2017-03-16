@@ -15,14 +15,17 @@ namespace T3G\AgencyPack\Blog\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
+use T3G\AgencyPack\Blog\Domain\Repository\AuthorRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\MetaService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Utility\ArrayUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -44,6 +47,11 @@ class PostController extends ActionController
      * @var PostRepository
      */
     protected $postRepository;
+
+    /**
+     * @var AuthorRepository
+     */
+    protected $authorRepository;
 
     /**
      * @param CategoryRepository $categoryRepository
@@ -69,11 +77,19 @@ class PostController extends ActionController
         $this->postRepository = $postRepository;
     }
 
+    /**
+     * @param AuthorRepository $authorRepository
+     */
+    public function injectAuthorRepository(AuthorRepository $authorRepository)
+    {
+        $this->authorRepository = $authorRepository;
+    }
+
     protected function initializeView(ViewInterface $view)
     {
         parent::initializeView($view);
         if ($this->request->hasArgument('format') && $this->request->getArgument('format') === 'rss') {
-            $action = '.' . $this->request->getArgument('action');
+            $action = '.'.$this->request->getArgument('action');
             $arguments = [];
             switch ($action) {
                 case '.listPostsByCategory':
@@ -82,9 +98,9 @@ class PostController extends ActionController
                     }
                     break;
                 case '.listPostsByDate':
-                    $arguments[] = (int)$this->arguments['year']->getValue();
+                    $arguments[] = (int) $this->arguments['year']->getValue();
                     if (isset($this->arguments['month'])) {
-                        $arguments[] = (int)$this->arguments['month']->getValue();
+                        $arguments[] = (int) $this->arguments['month']->getValue();
                     }
                     break;
                 case '.listPostsByTag':
@@ -94,11 +110,11 @@ class PostController extends ActionController
                     break;
             }
             $feedData = [
-                'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
-                'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
+                'title' => LocalizationUtility::translate('feed.title'.$action, 'blog', $arguments),
+                'description' => LocalizationUtility::translate('feed.description'.$action, 'blog', $arguments),
                 'language' => $GLOBALS['TSFE']->sys_language_isocode,
                 'link' => $this->uriBuilder->setUseCacheHash(false)->setArgumentsToBeExcludedFromQueryString(['id'])->setCreateAbsoluteUri(true)->setAddQueryString(true)->build(),
-                'date' => date('D, j M Y H:i:s e')
+                'date' => date('r'),
             ];
             $this->view->assign('feed', $feedData);
         }
@@ -111,7 +127,13 @@ class PostController extends ActionController
      */
     public function listRecentPostsAction()
     {
-        $this->view->assign('posts', $this->postRepository->findAll());
+        $maximumItems = (int)ArrayUtility::getValueByPath($this->settings, 'lists.posts.maximumDisplayedItems') ?: 0;
+
+        $posts = (0 === $maximumItems)
+            ? $this->postRepository->findAll()
+            : $this->postRepository->findAllWithLimit($maximumItems);
+
+        $this->view->assign('posts', $posts);
     }
 
     /**
@@ -141,11 +163,11 @@ class PostController extends ActionController
         $title = str_replace([
             '###MONTH###',
             '###MONTH_NAME###',
-            '###YEAR###'
+            '###YEAR###',
         ], [
             $month,
             strftime('%B', $timestamp),
-            $year
+            $year,
         ], LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
         MetaService::set(MetaService::META_TITLE, $title);
         MetaService::set(MetaService::META_DESCRIPTION, LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
@@ -169,6 +191,26 @@ class PostController extends ActionController
             MetaService::set(MetaService::META_TITLE, $category->getTitle());
             MetaService::set(MetaService::META_DESCRIPTION, $category->getDescription());
             MetaService::set(MetaService::META_CATEGORIES, [$category->getTitle()]);
+        }
+    }
+
+    /**
+     * Show a list of posts by given category.
+     *
+     * @param Author $author
+     *
+     * @throws \RuntimeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function listPostsByAuthorAction(Author $author = null)
+    {
+        if (null === $author) {
+            $this->view->assign('authors', $this->authorRepository->findAll());
+        } else {
+            $this->view->assign('posts', $this->postRepository->findAllByAuthor($author));
+            $this->view->assign('author', $author);
+            MetaService::set(MetaService::META_TITLE, $author->getName());
+            MetaService::set(MetaService::META_DESCRIPTION, $author->getBio());
         }
     }
 
@@ -204,6 +246,14 @@ class PostController extends ActionController
      * Metadata action: output meta information of blog post.
      */
     public function metadataAction()
+    {
+        $this->view->assign('post', $this->postRepository->findCurrentPost());
+    }
+
+    /**
+     * Authors action: output author information of blog post.
+     */
+    public function authorsAction()
     {
         $this->view->assign('post', $this->postRepository->findCurrentPost());
     }

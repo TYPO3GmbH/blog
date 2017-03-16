@@ -32,15 +32,15 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * Arguments initialization
+     * Arguments initialization.
      *
-     * @return void
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
     {
         $this->registerUniversalTagAttributes();
         $this->registerTagAttribute('target', 'string', 'Target of link', false);
+        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute', false);
         $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document', false);
 
         $this->registerArgument('post', Post::class, 'The post to link to');
@@ -57,18 +57,18 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         /** @var Post $post */
         $post = $this->arguments['post'];
         $section = $this->arguments['section'] ?: null;
-        $pageUid = $post !== null ? (int)$post->getUid() : 0;
+        $pageUid = $post !== null ? (int) $post->getUid() : 0;
         $uriBuilder = $this->controllerContext->getUriBuilder();
-        $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
+        $createAbsoluteUri = (bool) $this->arguments['createAbsoluteUri'];
         $uri = $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setUseCacheHash(false)
             ->setSection($section)
             ->setCreateAbsoluteUri($createAbsoluteUri)
             ->build();
-        if ((string)$uri !== '') {
+        if ((string) $uri !== '') {
             if ($this->arguments['returnUri']) {
-                return $uri;
+                return htmlspecialchars($uri);
             }
             $linkText = $this->renderChildren() ?: $post->getTitle();
             $this->tag->addAttribute('href', $uri);
@@ -77,6 +77,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         } else {
             $result = $this->renderChildren();
         }
+
         return $result;
     }
 }

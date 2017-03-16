@@ -32,9 +32,8 @@ class TagViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * Arguments initialization
+     * Arguments initialization.
      *
-     * @return void
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
@@ -52,19 +51,19 @@ class TagViewHelper extends AbstractTagBasedViewHelper
      */
     public function render()
     {
-        $rssFormat = (bool)$this->arguments['rss'];
+        $rssFormat = (bool) $this->arguments['rss'];
         /** @var Tag $tag */
         $tag = $this->arguments['tag'];
-        $pageUid = (int)$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['tagUid'];
+        $pageUid = (int) $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['tagUid'];
         $additionalParams = [
             'tx_blog_tag' => [
-                'tag' => $tag->getUid()
-            ]
+                'tag' => $tag->getUid(),
+            ],
         ];
         $uriBuilder = $this->controllerContext->getUriBuilder();
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
-            ->setUseCacheHash(false)
+            ->setUseCacheHash(true)
             ->setArguments($additionalParams);
         if ($rssFormat) {
             $uriBuilder
@@ -72,7 +71,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
                 ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_tag.']['typeNum']);
         }
         $uri = $uriBuilder->uriFor('listPostsByTag', [], 'Post');
-        if ((string)$uri !== '') {
+        if ((string) $uri !== '') {
             $linkText = $this->renderChildren() ?: $tag->getTitle();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
@@ -80,6 +79,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         } else {
             $result = $this->renderChildren();
         }
+
         return $result;
     }
 }

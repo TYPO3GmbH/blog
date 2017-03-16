@@ -10,16 +10,25 @@
 				<source>Comments</source>
 			</trans-unit>
 			<trans-unit id="headline.category" xml:space="preserve">
-				<source>Category: %s</source>
+				<source>Post of category %s</source>
 			</trans-unit>
 			<trans-unit id="headline.categories" xml:space="preserve">
 				<source>Categories</source>
 			</trans-unit>
+			<trans-unit id="headline.author" xml:space="preserve">
+				<source>Posts by %s</source>
+			</trans-unit>
+			<trans-unit id="headline.authors" xml:space="preserve">
+				<source>Authors</source>
+			</trans-unit>
 			<trans-unit id="headline.tag" xml:space="preserve">
-				<source>Tag: %s</source>
+				<source>Posts tagged with %s</source>
 			</trans-unit>
 			<trans-unit id="headline.tags" xml:space="preserve">
 				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="form.comment.hp" xml:space="preserve">
+				<source>Please let this field empty</source>
 			</trans-unit>
 			<trans-unit id="form.comment.name" xml:space="preserve">
 				<source>Name</source>
@@ -78,20 +87,80 @@
 			<trans-unit id="list.no_posts.message" xml:space="preserve">
 				<source>This list contains no blog posts.</source>
 			</trans-unit>
-			<trans-unit id="backend.headline" xml:space="preserve">
-				<source>Blog Admin</source>
+			<trans-unit id="backend.headline.setup_wizard" xml:space="preserve">
+				<source>SetupWizard</source>
+			</trans-unit>
+			<trans-unit id="backend.headline.posts" xml:space="preserve">
+				<source>Posts</source>
+			</trans-unit>
+			<trans-unit id="backend.headline.comments" xml:space="preserve">
+				<source>Comments</source>
 			</trans-unit>
 			<trans-unit id="backend.lead.blogs" xml:space="preserve">
 				<source>It looks like you have the following blog setups</source>
 			</trans-unit>
-			<trans-unit id="backend.lead.noblogs" xml:space="preserve">
+			<trans-unit id="backend.message.noblogs" xml:space="preserve">
 				<source>It looks like no blog setup exists in this instance.</source>
+			</trans-unit>
+			<trans-unit id="backend.lead.posts" xml:space="preserve">
+				<source>The following table shows all the blog posts available in this installation. Use the filters and search to refine the results.</source>
+			</trans-unit>
+			<trans-unit id="backend.message.noposts" xml:space="preserve">
+				<source>Oops, apparently there are no blog posts in this installation.</source>
+			</trans-unit>
+			<trans-unit id="backend.lead.comments" xml:space="preserve">
+				<source>The following table shows blog comments available in this installation. Use the filters and search to refine the results.</source>
+			</trans-unit>
+			<trans-unit id="backend.message.nocomments" xml:space="preserve">
+				<source>Oops, apparently there are no blog comments in this view.</source>
+			</trans-unit>
+			<trans-unit id="backend.warning" xml:space="preserve">
+				<source>Warning</source>
 			</trans-unit>
 			<trans-unit id="backend.table.blog" xml:space="preserve">
 				<source>Blog</source>
 			</trans-unit>
 			<trans-unit id="backend.table.articles" xml:space="preserve">
 				<source>Articles</source>
+			</trans-unit>
+			<trans-unit id="backend.table.actions" xml:space="preserve">
+				<source>Actions</source>
+			</trans-unit>
+			<trans-unit id="backend.table.title" xml:space="preserve">
+				<source>Articles</source>
+			</trans-unit>
+			<trans-unit id="backend.table.author" xml:space="preserve">
+				<source>Author</source>
+			</trans-unit>
+			<trans-unit id="backend.table.categories" xml:space="preserve">
+				<source>Categories</source>
+			</trans-unit>
+			<trans-unit id="backend.table.tags" xml:space="preserve">
+				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="backend.table.comment" xml:space="preserve">
+				<source>Comment</source>
+			</trans-unit>
+			<trans-unit id="backend.table.post" xml:space="preserve">
+				<source>Reply to post</source>
+			</trans-unit>
+			<trans-unit id="backend.table.date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="backend.comments.filter.all" xml:space="preserve">
+				<source>All</source>
+			</trans-unit>
+			<trans-unit id="backend.comments.filter.pending" xml:space="preserve">
+				<source>Pending</source>
+			</trans-unit>
+			<trans-unit id="backend.comments.filter.approved" xml:space="preserve">
+				<source>Approved</source>
+			</trans-unit>
+			<trans-unit id="backend.comments.filter.declined" xml:space="preserve">
+				<source>Declined</source>
+			</trans-unit>
+			<trans-unit id="backend.comments.filter.deleted" xml:space="preserve">
+				<source>Deleted</source>
 			</trans-unit>
 			<trans-unit id="wizard.button.trigger" xml:space="preserve">
 				<source>Setup a new blog</source>
@@ -135,6 +204,9 @@
 			<trans-unit id="constantEditor.blog" xml:space="preserve">
 				<source>TYPO3 Blog</source>
 			</trans-unit>
+			<trans-unit id="constantEditor.authorUid" xml:space="preserve">
+				<source>Author UID:Location of the "Blog: Author" plugin. Shows posts by author.</source>
+			</trans-unit>
 			<trans-unit id="constantEditor.blogUid" xml:space="preserve">
 				<source>List posts UID:Location of the "Blog: List of posts" plugin. This page UID is the root page for the blog. All blog post pages are located below this page.</source>
 			</trans-unit>
@@ -149,6 +221,9 @@
 			</trans-unit>
 			<trans-unit id="constantEditor.storagePid" xml:space="preserve">
 				<source>Storage folder:Storage folder of all categories and tags for this blog.</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.lists.posts.maximumDisplayedItems" xml:space="preserve">
+				<source>Maximum displayed items:Maximum number of posts to be displayed (0 = no limit).</source>
 			</trans-unit>
 			<trans-unit id="feed.title.listPostsByCategory" xml:space="preserve">
 				<source>Category RSS Feed</source>
@@ -173,6 +248,40 @@
 			</trans-unit>
 			<trans-unit id="feed.description.listRecentPosts" xml:space="preserve">
 				<source>Recent posts</source>
+			</trans-unit>
+
+			<trans-unit id="author.more.posts" xml:space="preserve">
+				<source>More posts by this author</source>
+			</trans-unit>
+
+			<trans-unit id="label.blog" xml:space="preserve">
+				<source>Blog</source>
+			</trans-unit>
+			<trans-unit id="label.all" xml:space="preserve">
+				<source>All</source>
+			</trans-unit>
+			<trans-unit id="label.choose_blog" xml:space="preserve">
+				<source>Choose blog</source>
+			</trans-unit>
+
+			<trans-unit id="action.approve" xml:space="preserve">
+				<source>Approve comment</source>
+			</trans-unit>
+			<trans-unit id="action.decline" xml:space="preserve">
+				<source>Decline comment</source>
+			</trans-unit>
+			<trans-unit id="action.delete" xml:space="preserve">
+				<source>Delete comment</source>
+			</trans-unit>
+			<trans-unit id="action.editComment" xml:space="preserve">
+				<source>Edit comment</source>
+			</trans-unit>
+
+			<trans-unit id="label.required.field" xml:space="preserve">
+				<source>*</source>
+			</trans-unit>
+			<trans-unit id="label.required.field.explanation" xml:space="preserve">
+				<source>These fields are required</source>
 			</trans-unit>
 		</body>
 	</file>
