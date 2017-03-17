@@ -1,7 +1,7 @@
 .. include:: ../../Includes.txt
 
 ===========================================
-Feature: #EXTBLOG-35 - Set Storage Pids
+Feature: #EXTBLOG-35 - Set StoragePids
 ===========================================
 
 See https://jira.typo3.com/browse/EXTBLOG-35
@@ -9,13 +9,17 @@ See https://jira.typo3.com/browse/EXTBLOG-35
 Description
 ===========
 
-Added possibility to set the Storage Pids for blog posts.
+Added possibility to set the StoragePids for blog posts.
 
 
 Impact
 ======
 
-You can now set a storage pid where the blog posts are saved. Besides the blog posts that are a subpage of the
-page with the plugin, it will now check TypoScript settings and the Plugin settings to define the storage pids to check.
+You can now set a StoragePid where the blog posts are saved. This can be done by TypoScript or Plugin-setting.
+
+.. note::
+
+        The "List of Posts" plugin will first check if there are any TypoScript or Plugin settings for the StoragePid.
+        If there are no StoragePids set, it will scan the rootline of the page the plugin is on if there are any blogposts.
 
 .. index:: TypoScript, Frontend

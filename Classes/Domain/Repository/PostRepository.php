@@ -50,11 +50,17 @@ class PostRepository extends Repository
         $query = $this->createQuery();
 
         if (TYPO3_MODE === 'FE') {
-            $pids = $this->getStoragePidsFromTypoScript();
-            $rootLine = $this->getTypoScriptFontendController()->sys_page
-                ->getRootLine($this->getTypoScriptFontendController()->id);
-            foreach ($rootLine as $value) {
-                $pids[] = $value['uid'];
+            // only add non empty pids (pid 0 will be removed as well
+            $pids = array_filter($this->getStoragePidsFromTypoScript(), function ($v) {
+                return !empty($v);
+            });
+
+            if (count($pids) === 0) {
+                $rootLine = $this->getTypoScriptFontendController()->sys_page
+                    ->getRootLine($this->getTypoScriptFontendController()->id);
+                foreach ($rootLine as $value) {
+                    $pids[] = $value['uid'];
+                }
             }
             $this->defaultConstraints[] = $query->in('pid', $pids);
         }
