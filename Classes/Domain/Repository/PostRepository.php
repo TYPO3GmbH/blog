@@ -55,7 +55,7 @@ class PostRepository extends Repository
                 return !empty($v);
             });
 
-            if (count($pids) === 0) {
+            if (empty($pids)) {
                 $rootLine = $this->getTypoScriptFontendController()->sys_page
                     ->getRootLine($this->getTypoScriptFontendController()->id);
                 foreach ($rootLine as $value) {
