@@ -95,14 +95,31 @@ call_user_func(function () {
     );
 
     if (TYPO3_MODE === 'BE') {
-        // Module System > Backend Users
+        // Module Web > Blog
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+            'T3G.AgencyPack.Blog',
+            'web',
+            'tx_Blog',
+            'bottom',
+            [
+                'Backend' => 'posts, comments, updateCommentStatus',
+            ],
+            [
+                'access' => 'user,group',
+                'icon' => 'EXT:blog/Resources/Public/Icons/module-blog.svg',
+                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf',
+            ]
+        );
+        unset($GLOBALS['TBE_MODULES']['_configuration']['web_BlogTxBlog']['navigationComponentId']);
+
+        // Module System > Web
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
             'T3G.AgencyPack.Blog',
             'system',
             'tx_Blog',
             'top',
             [
-                'Backend' => 'posts, comments, setupWizard, createBlog, updateCommentStatus',
+                'Backend' => 'setupWizard, createBlog',
             ],
             [
                 'access' => 'admin',
