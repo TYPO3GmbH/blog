@@ -137,4 +137,21 @@ class Tag extends AbstractEntity
 
         return implode(',', $uidList);
     }
+
+    /**
+     * @return string
+     */
+    public function getLocalizedUid()
+    {
+        return $this->_localizedUid;
+    }    
+
+    /**
+     * @return string
+     */
+    public function getLanguageUid() 
+    {
+        return $this->_languageUid;
+    }
+
 }
