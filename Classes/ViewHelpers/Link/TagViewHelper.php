@@ -55,16 +55,9 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         /** @var Tag $tag */
         $tag = $this->arguments['tag'];
         $pageUid = (int) $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['tagUid'];
-
-        if ((int) $GLOBALS['TSFE']->sys_language_uid > 0) {
-            $tagUid = $tag->getLocalizedUid();
-        } else {
-            $tagUid = $tag->getUid();
-        }
-
         $additionalParams = [
             'tx_blog_tag' => [
-                'tag' => $tagUid,
+                'tag' => $tag->getUid(),
             ],
         ];
         $uriBuilder = $this->controllerContext->getUriBuilder();
