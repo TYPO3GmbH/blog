@@ -34,6 +34,7 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
      * Arguments Initialization.
      *
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
     {
@@ -41,6 +42,7 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
         $this->registerTagAttribute('alt', 'string', 'Alternative Text for the image');
         $this->registerArgument('email', 'string', 'The email address to resolve the gravatar for', true);
         $this->registerArgument('size', 'int', 'The size of the gravatar, ranging from 1 to 512', false, 65);
+        $this->registerArgument('default', 'string', 'The default image for the gravatar, use complete url or one of the default keys');
     }
 
     /**
@@ -49,7 +51,11 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
     public function render()
     {
         $size = (int) $this->arguments['size'];
-        $url = 'https://www.gravatar.com/avatar/'.md5($this->arguments['email']).'?s='.$size;
+        $default = '';
+        if ($this->arguments['default'] !== null) {
+            $default = '&d=' . urlencode($this->arguments['default']);
+        }
+        $url = 'https://www.gravatar.com/avatar/' . md5($this->arguments['email']) . '?s=' . $size . $default;
         $this->tag->addAttribute('src', $url);
         $this->tag->addAttribute('width', $size);
         $this->tag->addAttribute('height', $size);
