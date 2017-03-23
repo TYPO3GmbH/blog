@@ -4,6 +4,7 @@ namespace T3G\AgencyPack\Blog\Service;
 
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Install\ExtensionInstaller;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -134,6 +135,7 @@ class SetupService
             }
         }
 
+        BackendUtility::setUpdateSignal('updatePageTree');
         return $result;
     }
 
