@@ -29,7 +29,12 @@
                           <td><f:render section="actions" arguments="{_all}" /></td>
                           <td data-search="{comment.name}" data-filter="{comment.name}"><strong>{comment.name}</strong></td>
                           <td>{comment.comment}</td>
-                          <td data-search="{comment.post.title}" data-filter="{comment.post.title}"><blog:link.be.post post="{comment.post}" /></td>
+                          <td data-search="{comment.post.title}" data-filter="{comment.post.title}">
+                              <f:if condition="{comment.post}">
+                                <f:then><blog:link.be.post post="{comment.post}" /></f:then>
+                                <f:else>Post not available</f:else>
+                              </f:if>
+                          </td>
                           <td data-order="{f:format.date(format: 'U', date: comment.crdate)}"><f:format.date format="d.m.Y">{comment.crdate}</f:format.date></td>
                       </tr>
                   </f:for>
