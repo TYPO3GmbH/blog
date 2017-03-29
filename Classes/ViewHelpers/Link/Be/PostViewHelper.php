@@ -65,7 +65,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
             if ($this->arguments['returnUri']) {
                 return $uri;
             }
-            $title = $post !== null ? 'post not available' : $post->getTitle();
+            $title = $post !== null ? $post->getTitle() : 'Post not available';
             $linkText = $this->renderChildren() ?: $title;
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
