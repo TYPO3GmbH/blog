@@ -17,6 +17,7 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Class PostViewHelper.
@@ -65,7 +66,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
             if ($this->arguments['returnUri']) {
                 return $uri;
             }
-            $title = $post !== null ? 'post not available' : $post->getTitle();
+            $title = $post !== null ? $post->getTitle() : LocalizationUtility::translate('backend.message.nopost', 'blog');
             $linkText = $this->renderChildren() ?: $title;
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
