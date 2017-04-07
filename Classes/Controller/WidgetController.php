@@ -124,16 +124,24 @@ class WidgetController extends ActionController
      */
     public function recentPostsAction()
     {
-        $this->view->assign('posts', $this->postRepository->findAll());
+        $limit = (int) $this->settings['widgets']['recentposts']['limit'] ?: 0;
+
+        $posts = $limit > 0
+            ? $this->postRepository->findAllWithLimit($limit)
+            : $this->postRepository->findAll();
+
+        $this->view->assign('posts', $posts);
     }
 
     /**
      *
+     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function commentsAction()
     {
         $limit = (int) $this->settings['widgets']['comments']['limit'] ?: 5;
-        $this->view->assign('comments', $this->commentRepository->findLatest($limit));
+        $this->view->assign('comments', $this->commentRepository->findActiveComments($limit));
     }
 
     /**

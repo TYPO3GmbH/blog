@@ -108,6 +108,9 @@
 			<trans-unit id="backend.message.noposts" xml:space="preserve">
 				<source>Oops, apparently there are no blog posts in this installation.</source>
 			</trans-unit>
+			<trans-unit id="backend.message.nopost" xml:space="preserve">
+				<source>Post not available</source>
+			</trans-unit>			
 			<trans-unit id="backend.lead.comments" xml:space="preserve">
 				<source>The following table shows blog comments available in this installation. Use the filters and search to refine the results.</source>
 			</trans-unit>

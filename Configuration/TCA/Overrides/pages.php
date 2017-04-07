@@ -86,7 +86,6 @@ call_user_func(
                 'label' => $ll.'pages.crdate',
                 'config' => [
                     'type' => 'input',
-                    'renderType' => 'inputDateTime',
                     'size' => '13',
                     'eval' => 'datetime',
                     'default' => '0',
@@ -97,7 +96,6 @@ call_user_func(
                 'label' => $ll.'pages.archive_date',
                 'config' => [
                     'type' => 'input',
-                    'renderType' => 'inputDateTime',
                     'size' => '13',
                     'eval' => 'datetime',
                     'default' => '0',
