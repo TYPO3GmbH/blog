@@ -21,6 +21,9 @@ use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ComparisonInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -46,16 +49,6 @@ class PostRepository extends Repository
         $querySettings->setRespectStoragePage(false);
         $this->setDefaultQuerySettings($querySettings);
         $query = $this->createQuery();
-
-        if (TYPO3_MODE === 'FE') {
-            $pids = [];
-            $rootLine = $this->getTypoScriptFontendController()->sys_page
-                ->getRootLine($this->getTypoScriptFontendController()->id);
-            foreach ($rootLine as $value) {
-                $pids[] = $value['uid'];
-            }
-            $this->defaultConstraints[] = $query->in('pid', $pids);
-        }
 
         $this->defaultConstraints[] = $query->equals('doktype', Constants::DOKTYPE_BLOG_POST);
         $this->defaultOrderings = [
@@ -113,6 +106,10 @@ class PostRepository extends Repository
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
+        $storagePidConstraint = $this->getStoragePidConstraint();
+        if ($storagePidConstraint instanceof ComparisonInterface) {
+            $constraints[] = $storagePidConstraint;
+        }
         $constraints[] = $query->logicalOr([
             $query->equals('archiveDate', 0),
             $query->greaterThanOrEqual('archiveDate', time()),
@@ -133,6 +130,10 @@ class PostRepository extends Repository
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
+        $storagePidConstraint = $this->getStoragePidConstraint();
+        if ($storagePidConstraint instanceof ComparisonInterface) {
+            $constraints[] = $storagePidConstraint;
+        }
         $constraints[] = $query->contains('authors', $author);
 
         return $query->matching($query->logicalAnd($constraints))->execute();
@@ -150,6 +151,10 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
         $constraints[] = $query->contains('categories', $category);
+        $storagePidConstraint = $this->getStoragePidConstraint();
+        if ($storagePidConstraint instanceof ComparisonInterface) {
+            $constraints[] = $storagePidConstraint;
+        }
 
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
@@ -166,6 +171,10 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
         $constraints[] = $query->contains('tags', $tag);
+        $storagePidConstraint = $this->getStoragePidConstraint();
+        if ($storagePidConstraint instanceof ComparisonInterface) {
+            $constraints[] = $storagePidConstraint;
+        }
 
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
@@ -182,6 +191,10 @@ class PostRepository extends Repository
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
+        $storagePidConstraint = $this->getStoragePidConstraint();
+        if ($storagePidConstraint instanceof ComparisonInterface) {
+            $constraints[] = $storagePidConstraint;
+        }
 
         if ($month !== null) {
             $startDate = mktime(0, 0, 0, $month, 1, $year);
@@ -206,6 +219,10 @@ class PostRepository extends Repository
             : (int) GeneralUtility::_GP('id');
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
+        $storagePidConstraint = $this->getStoragePidConstraint();
+        if ($storagePidConstraint instanceof ComparisonInterface) {
+            $constraints[] = $storagePidConstraint;
+        }
         $constraints[] = $query->equals('uid', $pageId);
 
         /** @var Post $post */
@@ -255,5 +272,39 @@ class PostRepository extends Repository
     protected function getTypoScriptFontendController()
     {
         return $GLOBALS['TSFE'];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getStoragePidsFromTypoScript()
+    {
+        $configurationManager = $this->objectManager->get(ConfigurationManager::class);
+        $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+
+        return GeneralUtility::intExplode(',', $settings['persistence']['storagePid']);
+    }
+
+    /**
+     * @return ComparisonInterface
+     */
+    protected function getStoragePidConstraint()
+    {
+        if (TYPO3_MODE === 'FE') {
+            // only add non empty pids (pid 0 will be removed as well
+            $pids = array_filter($this->getStoragePidsFromTypoScript(), function ($v) {
+                return !empty($v);
+            });
+
+            if (count($pids) === 0) {
+                $rootLine = $this->getTypoScriptFontendController()->sys_page
+                    ->getRootLine($this->getTypoScriptFontendController()->id);
+                foreach ($rootLine as $value) {
+                    $pids[] = $value['uid'];
+                }
+            }
+            $query = $this->createQuery();
+            return $query->in('pid', $pids);
+        }
     }
 }
