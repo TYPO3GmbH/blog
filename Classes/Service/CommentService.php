@@ -78,6 +78,7 @@ class CommentService
             } else {
                 $comment->setStatus(Comment::STATUS_APPROVED);
             }
+            $comment->setPid($post->getUid());
             $comment->setPostLanguageId($GLOBALS['TSFE']->sys_language_uid);
             $post->addComment($comment);
             $this->postRepository->update($post);
