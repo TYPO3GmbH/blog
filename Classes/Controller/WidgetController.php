@@ -141,7 +141,8 @@ class WidgetController extends ActionController
     public function commentsAction()
     {
         $limit = (int) $this->settings['widgets']['comments']['limit'] ?: 5;
-        $this->view->assign('comments', $this->commentRepository->findActiveComments($limit));
+        $blogSetup = (int) $this->settings['widgets']['comments']['blogSetup'] ?: null;
+        $this->view->assign('comments', $this->commentRepository->findActiveComments($limit,  $blogSetup));
     }
 
     /**
