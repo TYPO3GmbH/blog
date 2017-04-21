@@ -168,6 +168,10 @@ class CommentRepository extends Repository
             $query->greaterThanOrEqual('status', Comment::STATUS_APPROVED),
             $query->lessThan('status', Comment::STATUS_DECLINED)
         ]);
+        $constraints[] = $query->logicalOr([
+            $query->equals('post_language_id', -1),
+            $query->equals('post_language_id', $GLOBALS['TSFE']->sys_language_uid)
+        ]);
 
         if ($limit !== null) {
             $query->setLimit($limit);
