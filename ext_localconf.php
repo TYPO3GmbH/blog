@@ -79,7 +79,7 @@ call_user_func(function () {
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
-        'Meta',
+        'Metadata',
         [
             'Post' => 'metadata',
         ]
