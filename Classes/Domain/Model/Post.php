@@ -31,6 +31,13 @@ class Post extends AbstractEntity
     protected $title;
 
     /**
+     * The blog post subtitle.
+     *
+     * @var string
+     */
+    protected $subtitle;
+
+    /**
      * The blog post abstract (SEO, list if not empty).
      *
      * @var string
@@ -178,6 +185,26 @@ class Post extends AbstractEntity
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubtitle()
+    {
+        return $this->subtitle;
+    }
+
+    /**
+     * @param string $subtitle
+     *
+     * @return $this
+     */
+    public function setSubtitle($subtitle)
+    {
+        $this->subtitle = $subtitle;
 
         return $this;
     }
