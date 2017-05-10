@@ -341,10 +341,9 @@ class Post extends AbstractEntity
      */
     public function getActiveComments()
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $commentRepository = $objectManager->get(CommentRepository::class);
-        $comments = $commentRepository->findAllByPost($this);
-        return $comments;
+        return GeneralUtility::makeInstance(ObjectManager::class)
+            ->get(CommentRepository::class)
+            ->findAllByPost($this);
     }
 
     /**
