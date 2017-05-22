@@ -14,9 +14,12 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * Class Post.
@@ -338,17 +341,9 @@ class Post extends AbstractEntity
      */
     public function getActiveComments()
     {
-        $comments = clone $this->comments;
-        /** @var Comment $comment */
-        foreach ($comments as $comment) {
-            $commentStatus = $comment->getStatus();
-            // Comment status must be at least "approved" and not "declined"
-            if ($commentStatus >= Comment::STATUS_APPROVED && $commentStatus < Comment::STATUS_DECLINED) {
-                continue;
-            }
-            $comments->detach($comment);
-        }
-        return $comments;
+        return GeneralUtility::makeInstance(ObjectManager::class)
+            ->get(CommentRepository::class)
+            ->findAllByPost($this);
     }
 
     /**
