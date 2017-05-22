@@ -65,29 +65,10 @@ class CommentRepository extends Repository
      */
     public function findAllByPost(Post $post)
     {
-        $respectPostLanguageId = isset($this->settings['comments']['respectPostLanguageId'])
-            ? (int) $this->settings['comments']['respectPostLanguageId']
-            : 0;
         $query = $this->createQuery();
         $constraints = [];
         $constraints[] = $query->equals('post', $post->getUid());
-        
-        $respectCommentsModeration = isset($this->settings['comments']['moderation'])
-            ? (int) $this->settings['comments']['moderation']
-            : 0;
-
-        if ($respectCommentsModeration === 1) {
-            $constraints[] = $query->equals('status', Comment::STATUS_APPROVED);
-        } else {
-            $constraints[] = $query->lessThan('status', Comment::STATUS_DECLINED);
-        }    
-        if ($respectPostLanguageId) {
-            $constraints[] = $query->logicalOr([
-                $query->equals('postLanguageId', $GLOBALS['TSFE']->sys_language_uid),
-                $query->equals('postLanguageId', -1),
-            ]);
-        }
-
+        $constraints = $this->fillConstraintsBySettings($query, $constraints);
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
@@ -126,16 +107,16 @@ class CommentRepository extends Repository
         switch ($filter) {
             case 'pending':
                 $constraints[] = $query->equals('status', Comment::STATUS_PENDING);
-            break;
+                break;
             case 'approved':
                 $constraints[] = $query->equals('status', Comment::STATUS_APPROVED);
-            break;
+                break;
             case 'declined':
                 $constraints[] = $query->equals('status', Comment::STATUS_DECLINED);
-            break;
+                break;
             case 'deleted':
                 $constraints[] = $query->equals('status', Comment::STATUS_DELETED);
-            break;
+                break;
         }
         if ($blogSetup !== null) {
             $constraints[] = $query->in('pid', $this->getPostPidsByRootPid($blogSetup));
@@ -159,19 +140,9 @@ class CommentRepository extends Repository
     public function findActiveComments($limit = null, $blogSetup = null)
     {
         $query = $this->createQuery();
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
-        $querySettings->setRespectStoragePage(false);
-        $query->setQuerySettings($querySettings);
 
         $constraints = [];
-        $constraints[] = $query->logicalAnd([
-            $query->greaterThanOrEqual('status', Comment::STATUS_APPROVED),
-            $query->lessThan('status', Comment::STATUS_DECLINED)
-        ]);
-        $constraints[] = $query->logicalOr([
-            $query->equals('post_language_id', -1),
-            $query->equals('post_language_id', $GLOBALS['TSFE']->sys_language_uid)
-        ]);
+        $constraints = $this->fillConstraintsBySettings($query, $constraints);
 
         if ($limit !== null) {
             $query->setLimit($limit);
@@ -202,6 +173,36 @@ class CommentRepository extends Repository
         }
 
         return $result;
+    }
+    /**
+     * @param QueryInterface $query
+     * @param array $constraints
+     *
+     * @return array
+     *
+     */
+    public function fillConstraintsBySettings(QueryInterface $query, array $constraints)
+    {
+        $respectCommentsModeration = isset($this->settings['comments']['moderation'])
+            ? (int) $this->settings['comments']['moderation']
+            : 0;
+        if ($respectCommentsModeration === 1) {
+            $constraints[] = $query->equals('status', Comment::STATUS_APPROVED);
+        } else {
+            $constraints[] = $query->lessThan('status', Comment::STATUS_DECLINED);
+        }
+
+        $respectPostLanguageId = isset($this->settings['comments']['respectPostLanguageId'])
+            ? (int) $this->settings['comments']['respectPostLanguageId']
+            : 0;
+        if ($respectPostLanguageId) {
+            $constraints[] = $query->logicalOr([
+                $query->equals('postLanguageId', $GLOBALS['TSFE']->sys_language_uid),
+                $query->equals('postLanguageId', -1),
+            ]);
+        }
+
+        return $constraints;
     }
 
     /**
