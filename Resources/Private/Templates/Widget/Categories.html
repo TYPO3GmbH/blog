@@ -3,7 +3,7 @@
 <f:layout name="Widget" />
 
 <f:section name="content">
-    <h3 class="widget-title">Categories</h3>
+	<h3 class="widget-title"><f:translate key="headline.categories"/></h3>
     <ul class="categories list-inline">
     <f:for each="{categories}" as="category">
         <li class="list-item category-item category-item-{category.uid}"><blog:link.category category="{category}" /> <blog:link.category rss="true" category="{category}"><i class="fa fa-rss-square"></i></blog:link.category></li>
