@@ -21,9 +21,6 @@
     }
   },
   "require": {
-    "typo3/cms-core": ">=7.6.0,<=8.7.99"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "<=5.7.5"
+    "typo3/cms-core": "^9.0.0"
   }
 }

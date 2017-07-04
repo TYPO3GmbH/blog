@@ -260,6 +260,7 @@ Settings (plugin.tx_blog.settings.widgets)
    Property                             Title                                  Type            Default
    ==================================== ====================================== =============== ===============
    `comments.limit`_                    Limit of visible comments              int             5
+   `comments.blogSetup`_                blog setup pid for this widget         int             null
    `tags.limit`_                        Limit of visible tags                  int             20
    `tags.minSize`_                      Minimum size in percent                int             100
    `tags.maxSize`_                      Maximum size in percent                int             200
@@ -283,6 +284,20 @@ comments.limit
          int
    Description
          Define the limit of visible comments.
+
+
+.. _tsWidgetsCommentsBlogSetup:
+
+comments.blogSetup
+""""""""""""""""""
+.. container:: table-row
+
+   Property
+         comments.blogSetup
+   Data type
+         int
+   Description
+         Define the blogSetup (storage pid) of blog to show comments from.
 
 .. _tsWidgetsTagsLimit:
 

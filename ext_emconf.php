@@ -10,10 +10,10 @@ $EM_CONF[$_EXTKEY] = [
     'clearCacheOnLoad' => 0,
     'author' => 'TYPO3 GmbH',
     'author_email' => 'info@typo3.com',
-    'version' => '1.3.0',
+    'version' => '9.0.x-dev',
     'constraints' => [
         'depends' => [
-            'typo3' => '7.6.0-8.7.99',
+            'typo3' => '9.0.0-9.9.99',
         ],
         'conflicts' => [],
         'suggests' => [],
