@@ -96,6 +96,9 @@
 			<trans-unit id="meta.description.listPostsByDate" xml:space="preserve">
 				<source>All blog posts ordered by date</source>
 			</trans-unit>
+			<trans-unit id="author.aboutTheAuthor"  xml:space="preserve">
+				<source>About the Author</source>
+			</trans-unit>
 			<trans-unit id="list.no_posts.title" xml:space="preserve">
 				<source>No blog posts</source>
 			</trans-unit>
