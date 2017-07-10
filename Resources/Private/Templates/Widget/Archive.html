@@ -2,7 +2,7 @@
 <f:layout name="Widget" />
 
 <f:section name="content">
-    <h3 class="widget-title">Archive</h3>
+    <h3 class="widget-title"><f:translate key="headline.archive"/></h3>
     <ul class="archive">
     <f:for each="{archiveData}" as="rows" key="year">
         <f:if condition="{settings.widgets.archive.groupByYear} == 1">
