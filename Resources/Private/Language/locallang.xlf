@@ -15,6 +15,15 @@
 			<trans-unit id="headline.categories" xml:space="preserve">
 				<source>Categories</source>
 			</trans-unit>
+			<trans-unit id="headline.archive" xml:space="preserve">
+				<source>Archive</source>
+			</trans-unit>
+			<trans-unit id="headline.recentcomments" xml:space="preserve">
+				<source>Recent comments</source>
+			</trans-unit>
+			<trans-unit id="headline.recentposts" xml:space="preserve">
+				<source>Recent posts</source>
+			</trans-unit>
 			<trans-unit id="headline.author" xml:space="preserve">
 				<source>Posts by %s</source>
 			</trans-unit>
@@ -26,6 +35,12 @@
 			</trans-unit>
 			<trans-unit id="headline.tags" xml:space="preserve">
 				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="headline.sidebar" xml:space="preserve">
+				<source>Sidebar</source>
+			</trans-unit>
+			<trans-unit id="headline.rssfeed" xml:space="preserve">
+				<source>RSS-Feeds</source>
 			</trans-unit>
 			<trans-unit id="form.comment.hp" xml:space="preserve">
 				<source>Please let this field empty</source>
@@ -80,6 +95,9 @@
 			</trans-unit>
 			<trans-unit id="meta.description.listPostsByDate" xml:space="preserve">
 				<source>All blog posts ordered by date</source>
+			</trans-unit>
+			<trans-unit id="author.aboutTheAuthor"  xml:space="preserve">
+				<source>About the Author</source>
 			</trans-unit>
 			<trans-unit id="list.no_posts.title" xml:space="preserve">
 				<source>No blog posts</source>
