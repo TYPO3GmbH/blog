@@ -6,7 +6,7 @@ config.tx_extbase {
     }
 }
 config.tx_extbase.persistence {
-    storagePid = {$plugin.tx_blog.persistence.storagePid}
+    storagePid = {$plugin.tx_blog.settings.storagePid}
     classes {
         T3G\AgencyPack\Blog\Domain\Model\Content {
             mapping {
@@ -25,20 +25,20 @@ config.tx_extbase.persistence {
             }
         }
         T3G\AgencyPack\Blog\Domain\Model\Comment {
-            newRecordStoragePid = {$plugin.tx_blog.persistence.storagePid}
+            newRecordStoragePid = {$plugin.tx_blog.settings.storagePid}
             mapping {
                 tableName = tx_blog_domain_model_comment
                 columns.parentid.mapOnProperty = post
             }
         }
         T3G\AgencyPack\Blog\Domain\Model\Tag {
-            newRecordStoragePid = {$plugin.tx_blog.persistence.storagePid}
+            newRecordStoragePid = {$plugin.tx_blog.settings.storagePid}
             mapping {
                 tableName = tx_blog_domain_model_tag
             }
         }
         T3G\AgencyPack\Blog\Domain\Model\Author {
-            newRecordStoragePid = {$plugin.tx_blog.persistence.storagePid}
+            newRecordStoragePid = {$plugin.tx_blog.settings.storagePid}
             mapping {
                 tableName = tx_blog_domain_model_author
             }
