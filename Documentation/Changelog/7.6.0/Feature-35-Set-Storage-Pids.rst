@@ -15,7 +15,7 @@ Added possibility to set the storage pids for blog posts related plugins.
 
    # This will set pids 1, 4 and 5 as storage pid for blog posts
    # this will used for all plugins in the whole tree
-   plugin.tx_blog.persistence.storagePid = 1,4,5
+   plugin.tx_blog.settings.storagePid = 1,4,5
 
 
 Impact

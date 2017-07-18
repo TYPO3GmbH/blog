@@ -64,7 +64,7 @@ plugin.tx_blog.settings.categoryUid = NEW_blogCategoryPage
 plugin.tx_blog.settings.tagUid = NEW_blogTagPage
 plugin.tx_blog.settings.authorUid = NEW_blogAuthorPage
 plugin.tx_blog.settings.archiveUid = NEW_blogArchivePage
-plugin.tx_blog.persistence.storagePid = NEW_blogFolder',
+plugin.tx_blog.settings.storagePid = NEW_blogFolder',
     'config' => 'plugin.tx_blog.settings.sharing.enabled = 0
 page = PAGE
 page.10 < styles.content.get',
