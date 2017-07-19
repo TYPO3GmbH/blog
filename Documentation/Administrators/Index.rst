@@ -98,7 +98,7 @@ To create a new blog setup, follow these steps:
    plugin.tx_blog.settings.authorUid = NEW_blogAuthorPage
    plugin.tx_blog.settings.tagUid = NEW_blogTagPage
    plugin.tx_blog.settings.archiveUid = NEW_blogArchivePage
-   plugin.tx_blog.persistence.storagePid = NEW_blogFolder
+   plugin.tx_blog.settings.storagePid = NEW_blogFolder
 
 4) Optional: Install and use the extension blog_template for a default template set
 
