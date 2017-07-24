@@ -42,7 +42,7 @@ class MetaService extends \ArrayObject
      *
      * @throws \RuntimeException
      */
-    public static function getInstance()
+    public static function getInstance() : MetaService
     {
         if (self::$instance === null) {
             self::init();
@@ -128,7 +128,7 @@ class MetaService extends \ArrayObject
      *
      * @return bool
      */
-    public static function isRegistered($index)
+    public static function isRegistered($index) : bool
     {
         if (self::$instance === null) {
             return false;

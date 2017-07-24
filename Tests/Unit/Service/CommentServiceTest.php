@@ -1,6 +1,6 @@
 <?php
 
-namespace T3G\AgencyPack\Blog\Tests\Unit;
+namespace T3G\AgencyPack\Blog\Tests\Unit\Service;
 
 /*
  * This file is part of the TYPO3 CMS project.
