@@ -5,7 +5,9 @@ namespace T3G\AgencyPack\Blog\Service;
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Install\ExtensionInstaller;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -27,24 +29,28 @@ class SetupService
     public function determineBlogSetups()
     {
         $setups = [];
-        /** @var array $blogRootPages */
-        $blogRootPages = $this->getDatabaseConnection()->exec_SELECTgetRows(
-            'pid, count(pid) AS cnt',
-            'pages',
-            'deleted = 0 AND doktype = '.Constants::DOKTYPE_BLOG_POST,
-            'pid'
-        );
+        $queryBuilder = $this->getQueryBuilderForTable('pages');
+        $blogRootPages = $queryBuilder
+            ->select('pid')
+            ->addSelectLiteral($queryBuilder->expr()->count('pid', 'cnt'))
+            ->from('pages')
+            ->where($queryBuilder->expr()->eq('doktype', $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, \PDO::PARAM_INT)))
+            ->groupBy('pid')
+            ->execute()
+            ->fetchAll();
         foreach ($blogRootPages as $blogRootPage) {
             $blogUid = $blogRootPage['pid'];
             if (!array_key_exists($blogUid, $setups)) {
-                /** @var array $title */
-                $title = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('title', 'pages', 'deleted = 0 AND uid = '.(int) $blogUid);
-                if (!is_array($title)) {
-                    continue;
-                }
+                $queryBuilder = $this->getQueryBuilderForTable('pages');
+                $title = $queryBuilder
+                    ->select('title')
+                    ->from('pages')
+                    ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogUid, \PDO::PARAM_INT)))
+                    ->execute()
+                    ->fetchColumn();
                 $setups[$blogUid] = [
                     'uid' => $blogUid,
-                    'title' => $title['title'],
+                    'title' => $title,
                     'articleCount' => $blogRootPage['cnt'],
                 ];
             }
@@ -60,7 +66,13 @@ class SetupService
      */
     public function getBlogRecordAsArray($uid)
     {
-        return $this->getDatabaseConnection()->exec_SELECTgetSingleRow('*', 'pages', 'uid = '.(int) $uid);
+        $queryBuilder = $this->getQueryBuilderForTable('pages');
+        return $queryBuilder
+            ->select('*')
+            ->from('pages')
+            ->where($queryBuilder->expr()->eq('uid', $uid))
+            ->execute()
+            ->fetch();
     }
 
     /**
@@ -101,11 +113,17 @@ class SetupService
                 // Update page id in PageTSConfig
                 $blogRootUid = (int) $this->recordUidArray['NEW_blogRoot'];
                 $blogFolderUid = (int) $this->recordUidArray['NEW_blogFolder'];
-                /** @var array $record */
-                $record = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('TSconfig', 'pages', 'uid = '.$blogRootUid);
-                $this->getDatabaseConnection()->exec_UPDATEquery('pages', 'uid = '.$blogRootUid, [
-                    'TSconfig' => str_replace('NEW_blogFolder', $blogFolderUid, $record['TSconfig']),
-                ]);
+                $queryBuilder = $this->getQueryBuilderForTable('pages');
+                $record = $queryBuilder
+                    ->select('TSconfig')
+                    ->from('pages')
+                    ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogRootUid, \PDO::PARAM_INT)))
+                    ->execute()
+                    ->fetch();
+                $queryBuilder->update('pages')
+                    ->set('TSconfig', str_replace('NEW_blogFolder', $blogFolderUid, $record['TSconfig']))
+                    ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogRootUid, \PDO::PARAM_INT)))
+                    ->execute();
 
                 $blogSetupRelations = GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRelations.php');
                 if (file_exists($blogSetupRelations)) {
@@ -124,14 +142,22 @@ class SetupService
             if ($result === true) {
                 // Replace UIDs in constants
                 $sysTemplateUid = (int) $this->recordUidArray['NEW_SysTemplate'];
-                $record = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('constants', 'sys_template', 'uid = '.$sysTemplateUid);
-                $this->getDatabaseConnection()->exec_UPDATEquery('sys_template', 'uid = '.$sysTemplateUid, [
-                    'constants' => str_replace(
+                $queryBuilder = $this->getQueryBuilderForTable('sys_template');
+                $record = $queryBuilder
+                    ->select('constants')
+                    ->from('sys_template')
+                    ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($sysTemplateUid, \PDO::PARAM_INT)))
+                    ->execute()
+                    ->fetch();
+                $queryBuilder
+                    ->update('sys_template')
+                    ->set('constants', str_replace(
                         array_keys($this->recordUidArray),
                         array_values($this->recordUidArray),
                         $record['constants']
-                    ),
-                ]);
+                    ))
+                    ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($sysTemplateUid, \PDO::PARAM_INT)))
+                    ->execute();
             }
         }
 
@@ -188,11 +214,14 @@ class SetupService
     }
 
     /**
-     * @return DatabaseConnection
+     * @param string $table
+     *
+     * @return QueryBuilder
      */
-    protected function getDatabaseConnection()
+    protected function getQueryBuilderForTable(string $table) : QueryBuilder
     {
-        return $GLOBALS['TYPO3_DB'];
+        return GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable($table);
     }
 
     /**

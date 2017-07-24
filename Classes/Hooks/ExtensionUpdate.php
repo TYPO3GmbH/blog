@@ -2,6 +2,7 @@
 
 namespace T3G\AgencyPack\Blog\Hooks;
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Registry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -63,23 +64,24 @@ class ExtensionUpdate {
      */
     protected function migrateCommentsStatus()
     {
-        $queries = [];
-        $queries[] = 'UPDATE tx_blog_domain_model_comment SET `status` = 0 WHERE hidden = 1 AND deleted = 0';
-        $queries[] = 'UPDATE tx_blog_domain_model_comment SET `status` = 10 WHERE hidden = 0 AND deleted = 0';
-        $queries[] = 'UPDATE tx_blog_domain_model_comment SET `status` = 50 WHERE hidden = 1 AND deleted = 1';
-
-        $databaseConnection = $this->getDatabaseConnection();
-        foreach ($queries as $query) {
-            $databaseConnection->sql_query($query);
-        }
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_blog_domain_model_comment');
+        $queryBuilder->getRestrictions()->removeAll();
+        $queryBuilder->update('tx_blog_domain_model_comment')
+            ->set('status', 0)
+            ->where($queryBuilder->expr()->eq('hidden', 1))
+            ->andWhere($queryBuilder->expr()->eq('deleted', 0))
+            ->execute();
+        $queryBuilder->update('tx_blog_domain_model_comment')
+            ->set('status', 10)
+            ->where($queryBuilder->expr()->eq('hidden', 0))
+            ->andWhere($queryBuilder->expr()->eq('deleted', 0))
+            ->execute();
+        $queryBuilder->update('tx_blog_domain_model_comment')
+            ->set('status', 50)
+            ->where($queryBuilder->expr()->eq('hidden', 1))
+            ->andWhere($queryBuilder->expr()->eq('deleted', 1))
+            ->execute();
         return true;
-    }
-
-    /**
-     * @return DatabaseConnection
-     */
-    protected function getDatabaseConnection()
-    {
-       return $GLOBALS['TYPO3_DB'];
     }
 }

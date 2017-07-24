@@ -19,6 +19,7 @@ use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -233,37 +234,32 @@ class PostRepository extends Repository
 
     /**
      * Get month and years with posts.
+     *
+     * @throws \InvalidArgumentException
      */
     public function findMonthsAndYearsWithPosts()
     {
-        $sql = [];
-        $sql[] = 'SELECT MONTH(FROM_UNIXTIME(crdate)) as month, YEAR(FROM_UNIXTIME(crdate)) as year, count(*) as count';
-        $sql[] = 'FROM pages';
-        $sql[] = 'WHERE doktype = '.Constants::DOKTYPE_BLOG_POST;
-        $sql[] = '  AND hidden = 0 AND deleted = 0';
-        $sql[] = 'GROUP BY';
-        $sql[] = '  MONTH(FROM_UNIXTIME(crdate)),';
-        $sql[] = '  YEAR(FROM_UNIXTIME(crdate))';
-        $sql[] = 'ORDER BY';
-        $sql[] = '  YEAR(FROM_UNIXTIME(crdate)) DESC,';
-        $sql[] = '  MONTH(FROM_UNIXTIME(crdate)) DESC';
-
-        $sql = implode(' ', $sql);
-        $result = $this->getDatabaseConnection()->sql_query($sql);
-        $rows = [];
-        while ($row = $this->getDatabaseConnection()->sql_fetch_assoc($result)) {
-            $rows[] = $row;
-        }
-
-        return $rows;
-    }
-
-    /**
-     * @return DatabaseConnection
-     */
-    protected function getDatabaseConnection()
-    {
-        return $GLOBALS['TYPO3_DB'];
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('pages');
+        return $queryBuilder
+            ->select(
+                'crdate_month AS month',
+                'crdate_year AS year'
+            )
+            ->addSelectLiteral($queryBuilder->expr()->count('*', 'count'))
+            ->from('pages')
+            ->where($queryBuilder->expr()->eq(
+                'doktype',
+                $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, \PDO::PARAM_INT))
+            )
+            ->groupBy(
+                'month',
+                'year'
+            )
+            ->orderBy('year', 'DESC')
+            ->addOrderBy('month', 'DESC')
+            ->execute()
+            ->fetchAll();
     }
 
     /**

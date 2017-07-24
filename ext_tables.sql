@@ -93,6 +93,8 @@ CREATE TABLE pages (
   comments_active tinyint(4) DEFAULT '1' NOT NULL,
   sharing_enabled tinyint(4) DEFAULT '1' NOT NULL,
   archive_date int(11) DEFAULT '0' NOT NULL,
+  crdate_month int(11) DEFAULT '0' NOT NULL,
+  crdate_year int(11) DEFAULT '0' NOT NULL,
   comments text,
   tags text,
   authors text

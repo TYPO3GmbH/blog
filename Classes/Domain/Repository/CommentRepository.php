@@ -17,6 +17,7 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -164,11 +165,15 @@ class CommentRepository extends Repository
      */
     protected function getPostPidsByRootPid($blogRootPid)
     {
-        $rows = $this->getDatabaseConnection()->exec_SELECTgetRows(
-            'uid',
-            'pages',
-            'hidden = 0 and deleted = 0 AND doktype = ' . Constants::DOKTYPE_BLOG_POST . ' AND pid = ' . (int)$blogRootPid
-        );
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('pages');
+        $rows = $queryBuilder
+            ->select('uid')
+            ->from('pages')
+            ->where($queryBuilder->expr()->eq('doktype', Constants::DOKTYPE_BLOG_POST))
+            ->andWhere($queryBuilder->expr()->eq('pid', $blogRootPid))
+            ->execute()
+            ->fetchAll();
         $result = [];
         foreach ($rows as $row) {
             $result[] = $row['uid'];
@@ -221,13 +226,5 @@ class CommentRepository extends Repository
         ]);
 
         return $constraints;
-    }
-
-    /**
-     * @return DatabaseConnection
-     */
-    protected function getDatabaseConnection()
-    {
-        return $GLOBALS['TYPO3_DB'];
     }
 }
