@@ -14,7 +14,9 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
@@ -43,34 +45,23 @@ class TagRepository extends Repository
      */
     public function findTopByUsage($limit = 20)
     {
-        $sql = [];
-        $sql[] = 'SELECT tx_blog_domain_model_tag.uid, tx_blog_domain_model_tag.title, COUNT(tx_blog_tag_pages_mm.uid_foreign) as cnt';
-        $sql[] = 'FROM tx_blog_domain_model_tag';
-        $sql[] = 'JOIN tx_blog_tag_pages_mm ON tx_blog_tag_pages_mm.uid_foreign = tx_blog_domain_model_tag.uid';
-        $sql[] = 'WHERE tx_blog_domain_model_tag.deleted = 0 AND tx_blog_domain_model_tag.hidden = 0';
-        $sql[] = 'GROUP BY tx_blog_domain_model_tag.title';
-        $sql[] = 'ORDER BY cnt DESC';
-        $sql[] = 'LIMIT '.(int) $limit;
-
-        $sql = implode(' ', $sql);
-        $result = $this->getDatabaseConnection()->sql_query($sql);
-        $rows = [];
-        while ($row = $this->getDatabaseConnection()->sql_fetch_assoc($result)) {
-            /* @var array $row */
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_blog_domain_model_tag');
+        $result = $queryBuilder
+            ->select('t.uid', 't.title')
+            ->addSelectLiteral($queryBuilder->expr()->count('tx_blog_tag_pages_mm.uid_foreig', 'cnt'))
+            ->from('tx_blog_domain_model_tag', 't')
+            ->join('t', 'tx_blog_tag_pages_mm', 'mm', 'mm.uid_foreign = t.uid')
+            ->groupBy('t.title', 'cnt')
+            ->setMaxResults($limit)
+            ->execute()
+            ->fetchAll();
+        foreach ($result as $row) {
             $row['tagObject'] = $this->findByUid($row['uid']);
             $rows[] = $row;
         }
         // shuffle tags, ordering is only to get the top used tags
         shuffle($rows);
-
         return $rows;
-    }
-
-    /**
-     * @return DatabaseConnection
-     */
-    protected function getDatabaseConnection()
-    {
-        return $GLOBALS['TYPO3_DB'];
     }
 }

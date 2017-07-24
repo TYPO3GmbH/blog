@@ -157,6 +157,13 @@ call_user_func(function () {
         'afterExtensionInstall'
     );
 
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['Blog'] =
+        \T3G\AgencyPack\Blog\Hooks\DataHandlerHook::class;
+
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate::class]
+        = \T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate::class;
+
+
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['blog']
             = \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class.

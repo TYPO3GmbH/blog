@@ -91,6 +91,28 @@ call_user_func(
                     'default' => '0',
                 ],
             ],
+            'crdate_month' => [
+                'exclude' => 1,
+                'label' => $ll.'pages.crdate_month',
+                'config' => [
+                    'type' => 'input',
+                    'size' => '13',
+                    'eval' => 'num',
+                    'default' => '0',
+                    'readOnly' => true,
+                ],
+            ],
+            'crdate_year' => [
+                'exclude' => 1,
+                'label' => $ll.'pages.crdate_year',
+                'config' => [
+                    'type' => 'input',
+                    'size' => '13',
+                    'eval' => 'num',
+                    'default' => '0',
+                    'readOnly' => true,
+                ],
+            ],
             'archive_date' => [
                 'exclude' => 1,
                 'label' => $ll.'pages.archive_date',
@@ -143,7 +165,7 @@ call_user_func(
             .$GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where'];
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             'pages',
-            '--div--;'.$ll.'pages.tabs.blog, crdate, archive_date, tags, authors, comments_active, comments, sharing_enabled',
+            '--div--;'.$ll.'pages.tabs.blog, crdate, crdate_month, crdate_year, archive_date, tags, authors, comments_active, comments, sharing_enabled',
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
     },
