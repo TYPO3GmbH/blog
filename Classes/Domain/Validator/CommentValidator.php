@@ -15,6 +15,7 @@ namespace T3G\AgencyPack\Blog\Domain\Validator;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
+use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -31,6 +32,7 @@ class CommentValidator extends AbstractValidator
      * @param mixed $value The comment model
      *
      * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function isValid($value)
     {
@@ -61,25 +63,23 @@ class CommentValidator extends AbstractValidator
                 // this validator is called multiple times, if the first success,
                 // the global variable is set, else validate the re-captcha
                 if (empty($GLOBALS['google_recaptcha'])) {
-                    $post_data = http_build_query([
-                        'secret' => $settings['comments']['google_recaptcha']['secret_key'],
-                        'response' => GeneralUtility::_GP('g-recaptcha-response'),
-                        'remoteip' => $_SERVER['REMOTE_ADDR']
-                    ]);
-                    $opts = [
-                        'http' => [
-                            'method'  => 'POST',
-                            'header'  => 'Content-type: application/x-www-form-urlencoded',
-                            'content' => $post_data
+                    $additionalOptions = [
+                        'headers' => ['Content-type' => 'application/x-www-form-urlencoded'],
+                        'query' => [
+                            'secret' => $settings['comments']['google_recaptcha']['secret_key'],
+                            'response' => GeneralUtility::_GP('g-recaptcha-response'),
+                            'remoteip' => $_SERVER['REMOTE_ADDR']
                         ]
                     ];
-                    $context  = stream_context_create($opts);
-                    $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
-                    $result = json_decode($response);
-                    if (!$result->success) {
-                        $this->addError('The re-captcha failed', 1501341100);
-                    } else {
-                        $GLOBALS['google_recaptcha'] = true;
+                    $response = GeneralUtility::makeInstance(RequestFactory::class)
+                        ->request('https://www.google.com/recaptcha/api/siteverify', 'POST', $additionalOptions);
+                    if ($response->getStatusCode() === 200) {
+                        $result = json_decode($response->getBody()->getContents());
+                        if (!$result->success) {
+                            $this->addError('The re-captcha failed', 1501341100);
+                        } else {
+                            $GLOBALS['google_recaptcha'] = true;
+                        }
                     }
                 }
             }
