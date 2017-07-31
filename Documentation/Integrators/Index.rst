@@ -16,24 +16,27 @@ Settings (plugin.tx_blog.settings)
 
 .. container:: ts-properties
 
-   ==================================== ====================================== =============== ===============
-   Property                             Title                                  Type            Default
-   ==================================== ====================================== =============== ===============
-   blogUid_                             UID of the blog start page             int             0
-   categoryUid_                         UID of the category page               int             0
-   tagUid_                              UID of the tag page                    int             0
-   archiveUid_                          UID of the archive page                int             0
-   authorUid_                           UID of the author page                 int             0
-   storagePid_                          UID of the storage folder              int             0
-   sidebarWidgets_                      List of active sidebar widgets         array           see description
-   `list.posts.maximumDisplayedItems`_  Maximum posts to be displayed in list  int             0
-   `list.posts.dateFormat`_             The date format for post lists         string          %d.%m.%Y
-   widgets_                             Widget specific configuration          array           see description
-   `comments.active`_                   Activate comments feature              int             1
-   `comments.moderation`_               Activate comments moderation           int             0
-   `comments.respectPostLanguageId`_    Respect language of post               int             1
-   `authors.avatar.provider`_           AvatarProvider specific settings       array           see description
-   ==================================== ====================================== =============== ===============
+   ======================================== ====================================== =============== ===============
+   Property                                 Title                                  Type            Default
+   ======================================== ====================================== =============== ===============
+   blogUid_                                 UID of the blog start page             int             0
+   categoryUid_                             UID of the category page               int             0
+   tagUid_                                  UID of the tag page                    int             0
+   archiveUid_                              UID of the archive page                int             0
+   authorUid_                               UID of the author page                 int             0
+   storagePid_                              UID of the storage folder              int             0
+   sidebarWidgets_                          List of active sidebar widgets         array           see description
+   `list.posts.maximumDisplayedItems`_      Maximum posts to be displayed in list  int             0
+   `list.posts.dateFormat`_                 The date format for post lists         string          %d.%m.%Y
+   widgets_                                 Widget specific configuration          array           see description
+   `comments.active`_                       Activate comments feature              int             1
+   `comments.moderation`_                   Activate comments moderation           int             0
+   `comments.respectPostLanguageId`_        Respect language of post               int             1
+   `comments.google_recaptcha`_             Activate google re-captcha             int             0
+   `comments.google_recaptcha.website_key`_ website key of the re-captcha          string
+   `comments.google_recaptcha.secret_key`_  secret key of the re-captcha           string
+   `authors.avatar.provider`_               AvatarProvider specific settings       array           see description
+   ======================================== ====================================== =============== ===============
 
 .. _tsBlogUid:
 
@@ -234,6 +237,51 @@ comments.respectPostLanguageId
          to the blog post (page) and with an relation to the current language.
          If this value is 0, all comments will we shown on all blog posts in each language.
          If this value is 1, comments will only be shown if blog post language id AND comment language id match or comment language id is -1 (which means all).
+
+
+.. _tsCommentsGoogleReCaptcha:
+
+comments.google_recaptcha
+"""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         comments.google_recaptcha
+   Data type
+         int
+   Description
+         Activate the google re-captcha for the comment form.
+         More information can be found on https://www.google.com/recaptcha/admin#list
+
+
+.. _tsCommentsGoogleReCaptchaWebsiteKey:
+
+comments.google_recaptcha.website_key
+"""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         comments.google_recaptcha.website_key
+   Data type
+         string
+   Description
+         The website key of the google re-captcha.
+         Get this key from google: https://www.google.com/recaptcha/admin#list
+
+
+.. _tsCommentsGoogleReCaptchaSecretKey:
+
+comments.google_recaptcha.secret_key
+""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         comments.google_recaptcha.secret_key
+   Data type
+         string
+   Description
+         The secret key of the google re-captcha, this is required for the validation of the captcha
+         Get this key from google: https://www.google.com/recaptcha/admin#list
 
 .. _tsAuthorsAvatarProvider:
 

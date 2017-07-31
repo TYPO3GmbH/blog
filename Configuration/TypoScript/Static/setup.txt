@@ -61,6 +61,13 @@ plugin.tx_blog {
             moderation = 0
             # Respect post_language_id, 0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)
             respectPostLanguageId = 1
+            # Google Re-Captcha
+            google_recaptcha = 0
+            google_recaptcha {
+                # Get the keys from https://www.google.com/recaptcha/admin#list
+                website_key =
+                secret_key =
+            }
         }
         # Authors related settings
         authors {
