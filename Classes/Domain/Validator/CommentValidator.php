@@ -33,6 +33,7 @@ class CommentValidator extends AbstractValidator
      *
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
+     * @throws \UnexpectedValueException
      */
     public function isValid($value)
     {
@@ -68,7 +69,7 @@ class CommentValidator extends AbstractValidator
                         'query' => [
                             'secret' => $settings['comments']['google_recaptcha']['secret_key'],
                             'response' => GeneralUtility::_GP('g-recaptcha-response'),
-                            'remoteip' => $_SERVER['REMOTE_ADDR']
+                            'remoteip' => GeneralUtility::getIndpEnv('REMOTE_ADDR')
                         ]
                     ];
                     $response = GeneralUtility::makeInstance(RequestFactory::class)
