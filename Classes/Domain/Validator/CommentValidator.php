@@ -60,7 +60,14 @@ class CommentValidator extends AbstractValidator
             $settings = GeneralUtility::makeInstance(ObjectManager::class)
                 ->get(ConfigurationManagerInterface::class)
                 ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
-            if ((int)$settings['comments']['google_recaptcha']['_typoScriptNodeValue'] === 1) {
+            $requestData = GeneralUtility::_GP('tx_blog_commentform');
+            if (
+                // check if we create a new comment, else we don't need a validation
+                (!empty($requestData['action']) && $requestData['action'] === 'addComment')
+                && (!empty($requestData['controller']) && $requestData['controller'] === 'Comment')
+                // check if google re-captcha is active, else we don't need a validation
+                && (int)$settings['comments']['google_recaptcha']['_typoScriptNodeValue'] === 1
+            ) {
                 // this validator is called multiple times, if the first success,
                 // the global variable is set, else validate the re-captcha
                 if (empty($GLOBALS['google_recaptcha'])) {
