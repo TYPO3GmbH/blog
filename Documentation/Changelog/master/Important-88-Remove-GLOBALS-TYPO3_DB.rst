@@ -16,8 +16,8 @@ This patch introduce also two new columns in table :sql:``pages``:
 * :sql:``crdate_month``
 * :sql:``crdate_year``
 
-both fields are used for the data aggregation of the archive sidebar widget.
-for existing blog posts, an UpdateWizard is in place and should be executed in the install tool.
+Both fields are used for the data aggregation of the archive sidebar widget.
+For existing blog posts, an UpdateWizard is in place and should be executed in the install tool.
 
 Impact
 ======
