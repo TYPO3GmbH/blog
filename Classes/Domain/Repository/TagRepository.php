@@ -49,10 +49,10 @@ class TagRepository extends Repository
             ->getQueryBuilderForTable('tx_blog_domain_model_tag');
         $result = $queryBuilder
             ->select('t.uid', 't.title')
-            ->addSelectLiteral($queryBuilder->expr()->count('tx_blog_tag_pages_mm.uid_foreig', 'cnt'))
+            ->addSelectLiteral($queryBuilder->expr()->count('mm.uid_foreign', 'cnt'))
             ->from('tx_blog_domain_model_tag', 't')
             ->join('t', 'tx_blog_tag_pages_mm', 'mm', 'mm.uid_foreign = t.uid')
-            ->groupBy('t.title', 'cnt')
+            ->groupBy('t.title')
             ->setMaxResults($limit)
             ->execute()
             ->fetchAll();
