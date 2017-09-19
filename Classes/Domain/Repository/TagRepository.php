@@ -53,6 +53,7 @@ class TagRepository extends Repository
             ->from('tx_blog_domain_model_tag', 't')
             ->join('t', 'tx_blog_tag_pages_mm', 'mm', 'mm.uid_foreign = t.uid')
             ->groupBy('t.title')
+            ->orderBY('cnt', 'DESC')
             ->setMaxResults($limit)
             ->execute()
             ->fetchAll();
