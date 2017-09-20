@@ -42,6 +42,7 @@ class TagRepository extends Repository
      * @param int $limit
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \InvalidArgumentException
      */
     public function findTopByUsage($limit = 20)
     {
