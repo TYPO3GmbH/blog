@@ -42,6 +42,7 @@ class TagRepository extends Repository
      * @param int $limit
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \InvalidArgumentException
      */
     public function findTopByUsage($limit = 20)
     {
@@ -49,10 +50,11 @@ class TagRepository extends Repository
             ->getQueryBuilderForTable('tx_blog_domain_model_tag');
         $result = $queryBuilder
             ->select('t.uid', 't.title')
-            ->addSelectLiteral($queryBuilder->expr()->count('tx_blog_tag_pages_mm.uid_foreig', 'cnt'))
+            ->addSelectLiteral($queryBuilder->expr()->count('mm.uid_foreign', 'cnt'))
             ->from('tx_blog_domain_model_tag', 't')
             ->join('t', 'tx_blog_tag_pages_mm', 'mm', 'mm.uid_foreign = t.uid')
-            ->groupBy('t.title', 'cnt')
+            ->groupBy('t.title')
+            ->orderBy('cnt', 'DESC')
             ->setMaxResults($limit)
             ->execute()
             ->fetchAll();
