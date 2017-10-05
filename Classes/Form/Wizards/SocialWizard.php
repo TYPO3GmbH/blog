@@ -15,7 +15,6 @@ namespace T3G\AgencyPack\Blog\Form\Wizards;
  * The TYPO3 project - inspiring people to share!
  */
 
-use Heise\Shariff\Backend;
 use TYPO3\CMS\Backend\Form\AbstractNode;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -30,11 +29,13 @@ class SocialWizard extends AbstractNode
 {
     /**
      * @return array
+     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
      */
     public function render() :array
     {
         $wizard = parent::initializeResultArray();
         // Smells fishy, but Lolli told me this is the way to do it
+        //
         if ($this->data['fieldName'] !== 'media') {
             return $wizard;
         }
@@ -58,7 +59,8 @@ class SocialWizard extends AbstractNode
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $link = $uriBuilder->buildUriFromRoute('ext-blog-social-wizard', ['pageUid' => $this->data['effectivePid']]);
 
-        $wizard['html'] = 'My Markup Goes here';
+        $wizard['html'] = '<a href="" class="btn btn-default t3js-blog-social-image-wizard" data-wizardUrl="' . $link->getPath() . '?' . $link->getQuery(). '">Open Social Image Wizard</a>';
+        $wizard['requireJsModules']['SocialImageWizard'] = 'TYPO3/CMS/Blog/SocialImageWizard';
 
         return $wizard;
     }
