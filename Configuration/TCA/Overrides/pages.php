@@ -168,6 +168,9 @@ call_user_func(
             '--div--;'.$ll.'pages.tabs.blog, crdate, crdate_month, crdate_year, archive_date, tags, authors, comments_active, comments, sharing_enabled',
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
+
+        // Register Social Image Wizard
+        $GLOBALS['TCA']['pages']['ctrl']['container']['inline']['fieldWizard']['BlogSocialImageWizard']['renderType'] = 'BlogSocialImageWizard';
     },
     'blog',
     'pages'

@@ -169,4 +169,11 @@ call_user_func(function () {
             = \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class.
             '->addBlogConfiguration';
     }
+
+    // Register Social Image Wizard
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1506942138] = [
+        'nodeName' => 'BlogSocialImageWizard',
+        'priority' => 20,
+        'class' => \T3G\AgencyPack\Blog\Form\Wizards\SocialWizard::class
+    ];
 });
