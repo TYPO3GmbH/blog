@@ -59,7 +59,7 @@ class SocialWizard extends AbstractNode
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $link = $uriBuilder->buildUriFromRoute('ext-blog-social-wizard', ['pageUid' => $this->data['effectivePid']]);
 
-        $wizard['html'] = '<a href="" class="btn btn-default t3js-blog-social-image-wizard" data-wizardUrl="' . $link->getPath() . '?' . $link->getQuery(). '">Open Social Image Wizard</a>';
+        $wizard['html'] = '<span class="btn btn-default t3js-blog-social-image-wizard" data-wizard-url="' . $link->getPath() . '?' . $link->getQuery(). '">Open Social Image Wizard</span>';
         $wizard['requireJsModules']['SocialImageWizard'] = 'TYPO3/CMS/Blog/SocialImageWizard';
 
         return $wizard;

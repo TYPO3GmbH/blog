@@ -33,20 +33,16 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
 					trigger: function() {
 						Modal.currentModal.trigger('modal-dismiss');
 					}
-				},
-				{
-					text: $element.data('button-ok-text') || 'OK',
-					btnClass: 'btn-primary',
-					trigger: function() {
-						Modal.currentModal.trigger('modal-dismiss');
-						self.location.href = $element.attr('href')
-							.replace('%40title', Modal.currentModal.find('input[name="title"]').val())
-							.replace('%40template', Modal.currentModal.find('input[name="template"]:checked').length)
-							.replace('%40install', Modal.currentModal.find('input[name="install"]:checked').length);
-					}
 				}
 			];
-			Modal.loadUrl('Blog Social Image Wizard', Severity.notice, buttons, $element.data('wizardUrl'), function() {}, '');
+			Modal.advanced({
+				type: Modal.types.ajax,
+				title: 'Blog Social Image Wizard',
+				content: $element.data('wizardUrl'),
+				severity: Severity.notice,
+				buttons: buttons,
+				size: 'full'
+			});
 		});
 	};
 
