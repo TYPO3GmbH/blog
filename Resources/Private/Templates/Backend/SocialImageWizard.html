@@ -1,0 +1,23 @@
+<div class="hidden">
+	<span id="author">{postData.author}</span>
+	<img src="/{postData.image}" id="posterImage">
+</div>
+<div class="preview-container">
+	<textarea class="watch form-control" id="title" placeholder="Type here...">{postData.title}</textarea>
+</div>
+<div class="preview-container">
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<h3>Facebook / Twitter / Google Plus</h3>
+			<div class="preview preview-facebook">
+				<canvas id="preview-facebook" class="canvas" width="512" height="256"></canvas>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<h3>LinkedIn</h3>
+			<div class="preview preview-linkedin">
+				<canvas id="preview-linkedin" class="canvas" width="350" height="250"></canvas>
+			</div>
+		</div>
+	</div>
+</div>

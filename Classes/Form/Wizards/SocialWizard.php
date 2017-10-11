@@ -17,7 +17,6 @@ namespace T3G\AgencyPack\Blog\Form\Wizards;
 
 use TYPO3\CMS\Backend\Form\AbstractNode;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -40,24 +39,8 @@ class SocialWizard extends AbstractNode
             return $wizard;
         }
 
-        $urlParameters = [];
-        $onClick = [];
-        $onClick[] = 'this.blur();';
-        $onClick[] = 'return !TBE_EDITOR.isFormChanged();';
-
-        $foo = '';
-
-        $control = [
-            'iconIdentifier' => 'content-table',
-            'title' => 'Blog o Matic',
-            'linkAttributes' => [
-                'onClick' => implode('', $onClick),
-                'href' => BackendUtility::getModuleUrl('blogSocialWizard', $urlParameters),
-            ],
-        ];
-
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $link = $uriBuilder->buildUriFromRoute('ext-blog-social-wizard', ['pageUid' => $this->data['effectivePid']]);
+        $link = $uriBuilder->buildUriFromRoute('ext-blog-social-wizard', ['id' => $this->data['effectivePid']]);
 
         $wizard['html'] = '<span class="btn btn-default t3js-blog-social-image-wizard" data-wizard-url="' . $link->getPath() . '?' . $link->getQuery(). '">Open Social Image Wizard</span>';
         $wizard['requireJsModules']['SocialImageWizard'] = 'TYPO3/CMS/Blog/SocialImageWizard';

@@ -36,7 +36,7 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
 				}
 			];
 			Modal.advanced({
-				type: Modal.types.ajax,
+				type: Modal.types.iframe,
 				title: 'Blog Social Image Wizard',
 				content: $element.data('wizardUrl'),
 				severity: Severity.notice,

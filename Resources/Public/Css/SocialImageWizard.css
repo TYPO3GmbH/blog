@@ -1,0 +1,32 @@
+/*.preview-container {*/
+	/*overflow: hidden;*/
+/*}*/
+/*.preview {*/
+	/*background-color: #515151;*/
+	/*margin-bottom: 1.5em;*/
+	/*position: relative;*/
+/*}*/
+canvas {
+	border:1px solid grey;
+}
+/*.preview:before {*/
+	/*display: block;*/
+	/*content: "";*/
+/*}*/
+/*.preview canvas {*/
+	/*position: absolute;*/
+	/*top: 0;*/
+	/*left: 0;*/
+/*}*/
+/*.preview-facebook {*/
+	/*max-width: 852px;*/
+/*}*/
+/*.preview-facebook:before {*/
+	/*padding-top: 50%;*/
+/*}*/
+/*.preview-linkedin {*/
+	/*max-width: 700px;*/
+/*}*/
+/*.preview-linkedin:before {*/
+	/*padding-top: 71.42857142857143%;*/
+/*}*/

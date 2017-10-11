@@ -17,88 +17,80 @@ namespace T3G\AgencyPack\Blog\Form\Wizards;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use TYPO3\CMS\Backend\Module\AbstractModule;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * Class SocialImageWizardController
  *
  * @package T3G\AgencyPack\Blog\Form\Wizards
  */
-class SocialImageWizardController
+class SocialImageWizardController extends AbstractModule
 {
+
+    /**
+     * @var StandaloneView
+     */
+    protected $view;
+
+    /**
+     * SocialImageWizardController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->view = GeneralUtility::makeInstance(StandaloneView::class);
+        $this->view->setTemplatePathAndFilename('EXT:blog/Resources/Private/Templates/Backend/SocialImageWizard.html');
+
+    }
+
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return ResponseInterface
      */
-    public function indexAction(ServerRequestInterface $request, ResponseInterface $response)
+    public function indexAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
+        $postData = $this->getPageData();
+        $this->view->assign('postData', $postData);
+
         $markup = '
         <style>
-            .preview-container {
-                overflow: hidden;
-            }
-            .preview {
-                background-color: #515151;
-                margin-bottom: 1.5em;
-                width: 100%;
-                position: relative;
-            }
-            .preview:before {
-                display: block;
-                content: "";
-            }
-            .preview canvas {
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-            .preview-facebook {
-                max-width: 512px;
-            }
-            .preview-facebook:before {
-                padding-top: 50%;
-            }
-            .preview-linkedin {
-                max-width: 350px;
-            }
-            .preview-linkedin:before {
-                padding-top: 71.42857142857143%;
-            }
-            .preview-googleplus {
-                max-width: 426px;
-            }
-            .preview-googleplus:before {
-                padding-top: 50%;
-            }
+            
         </style>
-        <div class="preview-container">
-            <input type="text" class="form-control" placeholder="Enter Social Text here">
-        </div>
-        <div class="preview-container">
-            <div class="row">
-                <div class="col-sm-12 col-md-4">
-                    <h3>Facebook / Twitter (512x256)</h3>
-                    <div class="preview preview-facebook">
-                        <canvas id="preview-facebook" width="512" height="256"></canvas>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-4">
-                    <h3>LinkedIn (350x250)</h3>
-                    <div class="preview preview-linkedin">
-                        <canvas id="preview-linkedin" width="350" height="250"></canvas>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-4">
-                    <h3>Google+ (426x213)</h3>
-                    <div class="preview preview-googleplus">
-                        <canvas id="preview-googleplus" width="426" height="213"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         ';
 
-        $response->getBody()->write($markup);
+        $this->moduleTemplate->setContent($this->view->render());
+        $this->moduleTemplate->getPageRenderer()->addCssFile('EXT:blog/Resources/Public/Css/SocialImageWizard.css');
+        $this->moduleTemplate->getPageRenderer()->loadJquery();
+        $this->moduleTemplate->getPageRenderer()->addJsFile('EXT:blog/Resources/Public/JavaScript/fabric.min.js');
+        $this->moduleTemplate->getPageRenderer()->addJsFile('EXT:blog/Resources/Public/JavaScript/SocialImageApp.js');
+
+
+
+        $response->getBody()->write($this->moduleTemplate->renderContent());
         return $response;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getPageData(): array
+    {
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $postRepository = $objectManager->get(PostRepository::class);
+        $post = $postRepository->findCurrentPost();
+
+        $socialData = [
+            'author' => $post->getAuthors()->current()->getName(),
+            'image' => $post->getMedia()->current()->getOriginalResource()->getPublicUrl(),
+            'title' => $post->getTitle()
+        ];
+
+        return $socialData;
     }
 }
