@@ -19,7 +19,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use TYPO3\CMS\Backend\Module\AbstractModule;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
@@ -77,13 +79,70 @@ class SocialImageWizardController extends AbstractModule
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     *
+     * @return ResponseInterface
+     * @throws \TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function saveImageAction(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface
+    {
+        $parsedBody = $request->getParsedBody();
+        $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $parsedBody['data']));
+        $fileName = $parsedBody['name'];
+
+        $result = [];
+        $result['status'] = 'error';
+        $result['message'] = 'something went wrong';
+        if (!StringUtility::endsWith($fileName, '.png')) {
+            $result['status'] = 'error';
+            $result['message'] = 'only PNG files are allowed!';
+        } else {
+            $resourceFactory = ResourceFactory::getInstance();
+            $storage = $resourceFactory->getDefaultStorage();
+            $tempFileName = PATH_site . 'typo3temp/' . uniqid('', true);
+            if ($storage !== null && GeneralUtility::writeFileToTypo3tempDir($tempFileName, $imageData) === null) {
+                $newFile = $storage->addFile(
+                    $tempFileName,
+                    $storage->getRootLevelFolder(),
+                    $fileName
+                );
+                $result['status'] = 'ok';
+                $result['message'] = 'the file has been saved successfully';
+                $result['file'] = $newFile->getPublicUrl();
+                $result['fileIdentifier'] = $newFile->getIdentifier();
+                $result['fields'] = $this->getFalFields();
+            }
+        }
+
+        $response->getBody()->write(json_encode($result));
+        return $response;
+    }
+
+    /**
+     * @TODO: implement this stub method
      * @return array
+     */
+    protected function getFalFields()
+    {
+        return [
+            ['identifier' => 'media', 'label' => 'Media'],
+            ['identifier' => 'navigation_icon', 'label' => 'Navigation Icon'],
+            ['identifier' => 'tx_jhopengraphprotocol_ogfalimages', 'label' => 'Bild'],
+        ];
+    }
+
+    /**
+     * @return array
+     * @throws \InvalidArgumentException
      */
     protected function getPageData(): array
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $postRepository = $objectManager->get(PostRepository::class);
-        $post = $postRepository->findCurrentPost();
+        $post = GeneralUtility::makeInstance(ObjectManager::class)
+            ->get(PostRepository::class)
+            ->findCurrentPost();
 
         $socialData = [
             'author' => $post->getAuthors()->current()->getName(),
