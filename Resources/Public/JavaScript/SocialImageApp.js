@@ -1,14 +1,11 @@
 // (($) => {
 	$(document).ready(() => {
 		class CanvasInstance {
-			constructor(canvas, mainCanvasWidth, mainCanvasHeight) {
+			constructor(canvas) {
 				this.canvas = canvas;
 				this.fabric = new fabric.Canvas(canvas, {
 					preserveObjectStacking: true
 				});
-				let zoomFactor = (canvas.offsetWidth) / mainCanvasWidth;
-				this.fabric.setZoom(zoomFactor);
-
 				// Add Youtube Cover Image
 				this.preview = new fabric.Image(document.getElementById('posterImage'), {
 					top: 0,
@@ -24,74 +21,69 @@
 				this.fabric.add(this.preview);
 
 				// Add Author
-				this.fabric.add(CanvasInstance._addAuthorText());
+				this.fabric.add(this._addAuthorText());
 				// Add TagLine
-				this.fabric.add(CanvasInstance._addTYPO3TagLine());
-				this.fabric.add(CanvasInstance._addLine());
+				this.fabric.add(this._addTYPO3TagLine());
+				this.fabric.add(this._addLine());
 				// Add TextBox
-				this.text = CanvasInstance._addTextBox(mainCanvasWidth);
+				this.text = this._addTextBox();
 				this.fabric.add(this.text);
-
-				this.fabric.on({
-					'object:modified': updatePreviewImagePosition
-				});
 			}
 
-			static _addAuthorText() {
-				let authorText = new fabric.Text(
+			_addAuthorText() {
+				return new fabric.Text(
 					$('#author').html(),
 					{
 						left: 30,
-						top: 120,
+						top: (this.canvas.height / 2) - 80,
 						fontSize: 20,
 						fontFamily: 'Source Sans Pro',
+						fontWeight: '600',
 						fill: 'white'
 					}
 				);
-				return authorText;
 			}
 
-			static _addTYPO3TagLine() {
-				let tagLine = new fabric.Text(
+			_addTYPO3TagLine() {
+				return new fabric.Text(
 					'TYPO3',
 					{
 						left: 30,
-						top: 200,
+						top: (this.canvas.height / 2) - 40,
 						fontSize: 20,
 						fontFamily: 'Source Sans Pro',
+						fontWeight: '600',
 						fill: '#FF8700'
 					}
 				);
-				return tagLine;
 			}
 
-			static _addLine() {
-				let line = new fabric.Line(
+			_addLine() {
+				return new fabric.Line(
 					[
 						500, 100, 100, 100
 					],
 					{
 						left: 30,
-						top: 200,
+						top: (this.canvas.height / 2) - 50,
 						stroke: '#FF8700'
 					}
 				);
-				return line;
 			}
 
-			static _addTextBox(mainCanvasWidth) {
-				let textBox = new fabric.Textbox(
+			_addTextBox() {
+				return new fabric.Textbox(
 					$('#title').html(),
 					{
 						left: 30,
 						top: 30,
 						fontSize: 40,
 						fontFamily: 'Source Sans Pro',
-						fontWeight: '300',
+						fontWeight: '600',
 						textAlign: 'left',
 						fill: 'white',
-						fixedWidth: Math.floor(mainCanvasWidth / 1.5),
-						width: Math.floor(mainCanvasWidth / 1.5),
+						fixedWidth: (this.canvas.width /2) - 40,
+						width: (this.canvas.width /2) - 40,
 						// strokeWidth: 1,
 						// stroke: 'black',
 						lockMovementX: true,
@@ -99,25 +91,10 @@
 						selectable: false
 					}
 				);
-				return textBox;
 			}
 
 			updateText(value) {
 				this.text.setText(value);
-				this.render();
-			}
-
-			showOverlay(overlay) {
-				console.log(overlay);
-			}
-
-			adjustPreviewImagePosition(previewImage) {
-				this.preview.set({
-					top: previewImage.top,
-					left: previewImage.left,
-					scaleY: previewImage.scaleY,
-					scaleX: previewImage.scaleX
-				});
 				this.render();
 			}
 
@@ -130,18 +107,10 @@
 			}
 		}
 
-		let mainCanvasWidth = parseInt(document.getElementById('preview-facebook').getAttribute('width'));
-		let mainCanvasHeight = parseInt(document.getElementById('preview-facebook').getAttribute('height'));
-
 		let $instances = $('canvas').map((index, canvas) => {
-			return new CanvasInstance(canvas, mainCanvasWidth, mainCanvasHeight);
+			return new CanvasInstance(canvas);
 		});
 
-		function updatePreviewImagePosition(movedObject) {
-			$instances.each((index, instance) => {
-				instance.adjustPreviewImagePosition(movedObject.target);
-			});
-		}
 
 		let $input = $('.watch');
 		$input.on('input', () => {
@@ -151,16 +120,8 @@
 			});
 		});
 
-		let $overlayRadio = $('.overlay-watch');
-		$overlayRadio.on('change', () => {
-			let value = $('.overlay-watch:checked').val();
-			$instances.each((index, instance) => {
-				instance.showOverlay(value);
-			});
-		});
-
 		let $downloadLinkFacebook = $('.js-download-link-facebook');
-        $downloadLinkFacebook.on('click', () => {
+		$downloadLinkFacebook.on('click', () => {
 			$instances.each((index, instance) => {
 				if ($(instance.canvas).attr('id') === 'preview-facebook') {
                     $downloadLinkFacebook.attr('href', instance.fabric.toDataURL({
