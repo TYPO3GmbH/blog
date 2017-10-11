@@ -18,12 +18,15 @@ namespace T3G\AgencyPack\Blog\Form\Wizards;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use T3G\TemplateTypo3com\Service\LanguageService;
 use TYPO3\CMS\Backend\Module\AbstractModule;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Lang\Service\TranslationService;
 
 /**
  * Class SocialImageWizardController
@@ -113,7 +116,7 @@ class SocialImageWizardController extends AbstractModule
                 $result['message'] = 'the file has been saved successfully';
                 $result['file'] = $newFile->getPublicUrl();
                 $result['fileIdentifier'] = $newFile->getIdentifier();
-                $result['fields'] = $this->getFalFields();
+                $result['fields'] = $this->getFalFields($parsedBody['table'], $parsedBody['uid']);
             }
         }
 
@@ -122,16 +125,22 @@ class SocialImageWizardController extends AbstractModule
     }
 
     /**
-     * @TODO: implement this stub method
      * @return array
      */
-    protected function getFalFields()
+    protected function getFalFields($table, $uid)
     {
-        return [
-            ['identifier' => 'media', 'label' => 'Media'],
-            ['identifier' => 'navigation_icon', 'label' => 'Navigation Icon'],
-            ['identifier' => 'tx_jhopengraphprotocol_ogfalimages', 'label' => 'Bild'],
-        ];
+        $result = [];
+
+        foreach ($GLOBALS['TCA'][$table]['columns'] as $column => $configuration) {
+            if (!empty($configuration['config']['type'])
+                && $configuration['config']['type'] === 'inline'
+                && !empty($configuration['config']['foreign_table'])
+                && $configuration['config']['foreign_table'] === 'sys_file_reference'
+            ) {
+                $result[] = ['identifier' => $column, 'label' => LocalizationUtility::translate($configuration['label'])];
+            }
+        }
+        return $result;
     }
 
     /**
@@ -147,7 +156,9 @@ class SocialImageWizardController extends AbstractModule
         $socialData = [
             'author' => $post->getAuthors()->current()->getName(),
             'image' => $post->getMedia()->current()->getOriginalResource()->getPublicUrl(),
-            'title' => $post->getTitle()
+            'title' => $post->getTitle(),
+            'uid' => $post->getUid(),
+            'table' => 'pages'
         ];
 
         return $socialData;

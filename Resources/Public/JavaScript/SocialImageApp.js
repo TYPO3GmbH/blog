@@ -157,16 +157,19 @@
         }
 
         function saveImage(imageContent, name) {
+            let $basePanel = $('#basePanel');
             $.post(
                 TYPO3.settings.ajaxUrls['ext-blog-social-wizard-save-image'],
                 {
                     name: name,
-                    data: imageContent
+                    data: imageContent,
+                    table: $basePanel.data('table'),
+                    uid: $basePanel.data('uid')
                 },
                 function(data) {
                     if (data.status === 'ok') {
                         let $step1Panel = $('#savePanelStep1');
-                        $('#basePanel').slideUp('slow', function() {
+                        $basePanel.slideUp('slow', function() {
                             $step1Panel.find('.t3js-file-link').attr('href', '/' + data.file);
                             $step1Panel.find('.t3js-filepath').text(data.file);
                             let $listOfFields = $step1Panel.find('.t3js-list-of-fields');
