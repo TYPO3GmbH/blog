@@ -181,10 +181,58 @@ $(document).ready(() => {
         });
     });
 
-    $(document).on('click', '.t3js-save-to-field', function () {
-        let $link = $(this);
-        alert('connect image ' + $link.data('file') + ' to: ' + $link.data('id'));
-    });
+        $(document).on('click', '.t3js-save-to-field', function() {
+            let $link = $(this);
+            let file = $link.data('file');
+            let fieldIdentiier = $link.data('field');
+            let $basePanel = $('#basePanel');
+            let $step1Panel = $('#savePanelStep1');
+            let $step2Panel = $('#savePanelStep2');
+            let $step3Panel = $('#savePanelStep3');
+            $.post(
+                TYPO3.settings.ajaxUrls['ext-blog-social-wizard-get-relations'],
+                {
+                    table: $basePanel.data('table'),
+                    uid: $basePanel.data('uid'),
+                    field: fieldIdentiier
+                },
+                function(data) {
+                    if (data.length > 0) {
+                        $step1Panel.slideUp('slow', function() {
+                            let $listOfRelations = $('.t3js-list-of-relations');
+                            for (let i=0; i<data.length; i++) {
+                                let $td = $('<td>');
+                                let $tr = $('<tr>');
+                                let $img = $('<img>');
+                                let $title = $('<strong>');
+                                let $button1 = $('<button class="btn btn-danger">');
+                                let $button2 = $('<button class="btn btn-default">');
+
+                                $tr.data('fileId', data[i]['referenceId']);
+                                $img.attr('src', data[i]['thumb']).attr('width', 100);
+                                $title.text(data[i]['title']);
+                                $button1.text('replace');
+                                $button2.text('insert before');
+
+                                $tr.append($td.clone().append($img));
+                                $tr.append($td.clone().append($title));
+                                $tr.append($td.clone().append($button1));
+                                $tr.append($td.clone().append($button2));
+                                $listOfRelations.append($tr);
+                            }
+                            $listOfRelations.append('<tr><td colspan="4"><button class="btn btn-default">insert here</button></td></tr>');
+                            $step2Panel.slideDown();
+                        });
+
+                    } else {
+                        $step1Panel.slideUp('slow', function() {
+                            $step3Panel.slideDown();
+                        });
+                    }
+                },
+                'json'
+            );
+        });
 
     function slugify(text) {
         return text.toString().toLowerCase().trim()
@@ -193,37 +241,37 @@ $(document).ready(() => {
             .replace(/^-+|-+$/g, ''); // remove leading, trailing -
     }
 
-    function saveImage(imageContent, name) {
-        let $basePanel = $('#basePanel');
-        $.post(
-            TYPO3.settings.ajaxUrls['ext-blog-social-wizard-save-image'],
-            {
-                name: name,
-                data: imageContent,
-                table: $basePanel.data('table'),
-                uid: $basePanel.data('uid')
-            },
-            function (data) {
-                if (data.status === 'ok') {
-                    let $step1Panel = $('#savePanelStep1');
-                    $basePanel.slideUp('slow', function () {
-                        $step1Panel.find('.t3js-file-link').attr('href', '/' + data.file);
-                        $step1Panel.find('.t3js-filepath').text(data.file);
-                        let $listOfFields = $step1Panel.find('.t3js-list-of-fields');
-                        if (data.fields && data.fields.length) {
-                            for (let i = 0; i < data.fields.length; i++) {
-                                $listOfFields.append('<li><a href="#" class="t3js-save-to-field" data-file="' + data.file + '" data-id="' + data.fields[i].identifier + '">' + data.fields[i].label + '</a></li>');
+        function saveImage(imageContent, name) {
+            let $basePanel = $('#basePanel');
+            $.post(
+                TYPO3.settings.ajaxUrls['ext-blog-social-wizard-save-image'],
+                {
+                    name: name,
+                    data: imageContent,
+                    table: $basePanel.data('table'),
+                    uid: $basePanel.data('uid')
+                },
+                function(data) {
+                    if (data.status === 'ok') {
+                        let $step1Panel = $('#savePanelStep1');
+                        $basePanel.slideUp('slow', function() {
+                            $step1Panel.find('.t3js-file-link').attr('href', '/' + data.file);
+                            $step1Panel.find('.t3js-filepath').text(data.file);
+                            let $listOfFields = $step1Panel.find('.t3js-list-of-fields');
+                            if (data.fields && data.fields.length) {
+                                for (let i=0; i<data.fields.length; i++) {
+                                    $listOfFields.append('<li><a href="#" class="t3js-save-to-field" data-file="' + data.file + '" data-field="' + data.fields[i].identifier + '">' + data.fields[i].label + '</a></li>');
+                                }
+                            } else {
+                                $listOfFields.append('<li>Sorry, no image fields found in this record.</li>');
                             }
-                        } else {
-                            $listOfFields.append('<li>Sorry, no image fields found in this record.</li>');
-                        }
-                        $step1Panel.slideDown();
-                    });
-                }
-            },
-            'json'
-        )
-    }
+                            $step1Panel.slideDown();
+                        });
+                    }
+                },
+                'json'
+            )
+        }
 
     let $saveLinkFacebook = $('.js-save-link-facebook');
     $saveLinkFacebook.on('click', () => {
