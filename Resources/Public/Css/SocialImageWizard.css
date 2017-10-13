@@ -9,6 +9,17 @@
 canvas {
 	border:1px solid grey;
 }
+
+.module-docheader {
+	display: none;
+}
+.module-docheader, .module-body {
+	padding-top: 18px !important;
+}
+
+.adjustment-sliders {
+	margin-top: 51px;
+}
 /*.preview:before {*/
 	/*display: block;*/
 	/*content: "";*/
