@@ -219,13 +219,13 @@ $(document).ready(() => {
                 },
                 function (data) {
                     if (data.length > 0) {
-                        let $listOfRelations = $('.t3js-list-of-relations');
+                        let $listOfRelations = $('.t3js-list-of-relations tbody');
                         $listOfRelations.empty();
                         for (let i = 0; i < data.length; i++) {
                             let $td = $('<td>');
                             let $tr = $('<tr>');
                             let $img = $('<img>');
-                            let $title = $('<strong>');
+                            let $title = $('<h5>');
                             let $button1 = $('<button class="btn btn-danger">');
                             let $button2 = $('<button class="btn btn-default">');
 
@@ -235,13 +235,20 @@ $(document).ready(() => {
                             $button1.text('replace');
                             $button2.text('insert before');
 
+                            let $div = $('<div>');
+                            $div.append($title);
+                            let $buttonContainer = $('<div class="btn-group">');
+                            $buttonContainer.append($button1);
+                            $buttonContainer.append($button2);
+                            $div.append($buttonContainer);
+
                             $tr.append($td.clone().append($img));
-                            $tr.append($td.clone().append($title));
-                            $tr.append($td.clone().append($button1));
-                            $tr.append($td.clone().append($button2));
+                            $tr.append($td.clone().append($div));
+                            // $tr.append($td.clone().append($button1));
+                            // $tr.append($td.clone().append($button2));
                             $listOfRelations.append($tr);
                         }
-                        $listOfRelations.append('<tr><td colspan="4"><button class="btn btn-default">insert here</button></td></tr>');
+                        $listOfRelations.append('<tr><td colspan="2"><button class="btn btn-default">insert here</button></td></tr>');
                         $step2Panel.slideDown();
                         _this.hideWaitState();
                     } else {
