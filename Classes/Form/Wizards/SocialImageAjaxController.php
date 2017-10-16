@@ -17,6 +17,8 @@ namespace T3G\AgencyPack\Blog\Form\Wizards;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\Form\FormDataCompiler;
+use TYPO3\CMS\Backend\Form\FormDataGroup\TcaDatabaseRecord;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
@@ -73,7 +75,7 @@ class SocialImageAjaxController
                 $result['message'] = 'the file has been saved successfully';
                 $result['file'] = $newFile->getPublicUrl();
                 $result['fileIdentifier'] = $newFile->getIdentifier();
-                $result['fields'] = $this->getFalFields($parsedBody['table']);
+                $result['fields'] = $this->getFalFields($parsedBody['table'], (int)$parsedBody['uid']);
             }
         }
 
@@ -138,19 +140,34 @@ class SocialImageAjaxController
     /**
      * @param string $table
      *
+     * @param int $uid
+     *
      * @return array
+     * @throws \UnexpectedValueException
+     * @throws \InvalidArgumentException
      */
-    protected function getFalFields(string $table) : array
+    protected function getFalFields(string $table, int $uid) : array
     {
         $result = [];
+        $formDataCompiler = GeneralUtility::makeInstance(
+            FormDataCompiler::class,
+            GeneralUtility::makeInstance(TcaDatabaseRecord::class)
+        );
+        $formData = $formDataCompiler->compile([
+            'tableName' => $table,
+            'vanillaUid' => $uid,
+            'command' => 'edit'
+        ]);
 
-        foreach ($GLOBALS['TCA'][$table]['columns'] as $column => $configuration) {
-            if (!empty($configuration['config']['type'])
-                && $configuration['config']['type'] === 'inline'
-                && !empty($configuration['config']['foreign_table'])
-                && $configuration['config']['foreign_table'] === 'sys_file_reference'
-            ) {
-                $result[] = ['identifier' => $column, 'label' => LocalizationUtility::translate($configuration['label'])];
+        if (!empty($formData['processedTca']['columns'])) {
+            foreach ($formData['processedTca']['columns'] as $column => $configuration) {
+                if (!empty($configuration['config']['type'])
+                    && $configuration['config']['type'] === 'inline'
+                    && !empty($configuration['config']['foreign_table'])
+                    && $configuration['config']['foreign_table'] === 'sys_file_reference'
+                ) {
+                    $result[] = ['identifier' => $column, 'label' => $configuration['label']];
+                }
             }
         }
         return $result;
