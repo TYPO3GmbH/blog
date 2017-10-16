@@ -71,7 +71,7 @@ $(document).ready(() => {
                 $('#author').html(),
                 {
                     left: 30,
-                    top: (this.canvas.height / 2) - 56,
+                    top: (this.canvas.height) - 51,
                     fontSize: 15,
                     fontFamily: 'Source Sans Pro',
                     fontWeight: '600',
@@ -85,7 +85,7 @@ $(document).ready(() => {
                 'TYPO3',
                 {
                     left: 30,
-                    top: (this.canvas.height / 2) - 30,
+                    top: (this.canvas.height) - 25,
                     fontSize: 15,
                     fontFamily: 'Source Sans Pro',
                     fontWeight: '600',
@@ -97,11 +97,14 @@ $(document).ready(() => {
         _addLine() {
             return new fabric.Line(
                 [
-                    500, 100, 100, 100
+                    30, // X1
+                    30,// Y1
+                    this.canvas.width - 30, // X2
+                    30 // Y2
                 ],
                 {
                     left: 30,
-                    top: (this.canvas.height / 2) - 35,
+                    top: this.canvas.height - 30,
                     stroke: '#FF8700'
                 }
             );
@@ -118,8 +121,8 @@ $(document).ready(() => {
                     fontWeight: '300',
                     textAlign: 'left',
                     fill: 'white',
-                    fixedWidth: (this.canvas.width / 2) - 40,
-                    width: (this.canvas.width / 2) - 40,
+                    fixedWidth: (this.canvas.width) - 40,
+                    width: (this.canvas.width) - 40,
                     // strokeWidth: 1,
                     // stroke: 'black',
                     lockMovementX: true,
