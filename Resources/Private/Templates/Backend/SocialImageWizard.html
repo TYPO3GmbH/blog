@@ -5,17 +5,17 @@
     <span id="author">{postData.author}</span>
     <img src="/{postData.image}" id="posterImage">
   </div>
-  <div class="preview-container">
-    <textarea class="watch form-control" id="title"
-              placeholder="Type here...">{postData.title}</textarea>
-  </div>
-  <div class="preview-container">
+  <div>
     <div class="row" id="waitState" style="display: none;">
       <div class="col-xs-12 text-center">
         <core:icon identifier="spinner-circle" size="large" />
       </div>
     </div>
     <div class="row" id="basePanel" data-table="{postData.table}" data-uid="{postData.uid}">
+      <div class="col-xs-12">
+            <textarea class="watch form-control" id="title"
+                      placeholder="Type here...">{postData.title}</textarea>
+      </div>
       <div class="col-xs-12 col-md-6">
         <div class="t3js-canvas-container" data-identifier="facebook">
           <h3>Facebook / Twitter / Google Plus</h3>

@@ -162,8 +162,9 @@ $(document).ready(() => {
         saveImage(imageContent, name) {
             let $basePanel = $('#basePanel');
             let _this = this;
-            this.showWaitState();
-            $basePanel.slideUp('slow');
+            $basePanel.slideUp('slow', function() {
+                _this.showWaitState();
+            });
             $.post(
                 TYPO3.settings.ajaxUrls['ext-blog-social-wizard-save-image'],
                 {
@@ -214,9 +215,10 @@ $(document).ready(() => {
             let $step1Panel = $('#savePanelStep1');
             let $step2Panel = $('#savePanelStep2');
             let $step3Panel = $('#savePanelStep3');
-            this.showWaitState();
-            $step1Panel.slideUp('slow');
             let _this = this;
+            $step1Panel.slideUp('slow', function() {
+                _this.showWaitState();
+            });
             $.post(
                 TYPO3.settings.ajaxUrls['ext-blog-social-wizard-get-relations'],
                 {
@@ -291,13 +293,14 @@ $(document).ready(() => {
             let fileReferenceId = $row.data('fileId');
             let fieldIdentifier = $row.data('fieldIdentifier');
             let fileUid = $row.data('fileUid');
-            this.showWaitState();
             let $basePanel = $('#basePanel');
             let $step2Panel = $('#savePanelStep2');
             let $step3Panel = $('#savePanelStep3');
-
-            $step2Panel.slideUp('slow');
             let _this = this;
+
+            $step2Panel.slideUp('slow', function() {
+                _this.showWaitState();
+            });
             $.post(
                 TYPO3.settings.ajaxUrls['ext-blog-social-wizard-replace-relation'],
                 {
@@ -319,13 +322,14 @@ $(document).ready(() => {
             let fileReferenceId = $row.data('fileId');
             let fieldIdentifier = $row.data('fieldIdentifier');
             let fileUid = $row.data('fileUid');
-            this.showWaitState();
             let $basePanel = $('#basePanel');
             let $step2Panel = $('#savePanelStep2');
             let $step3Panel = $('#savePanelStep3');
-
-            $step2Panel.slideUp('slow');
             let _this = this;
+
+            $step2Panel.slideUp('slow', function() {
+                _this.showWaitState();
+            });
             $.post(
                 TYPO3.settings.ajaxUrls['ext-blog-social-wizard-insert-after-relation'],
                 {
