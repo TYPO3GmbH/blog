@@ -1,0 +1,15 @@
+{
+    "filters": [
+        {
+            "name": "Sepia"
+        },
+        {
+            "name": "Contrast",
+            "options": {"contrast": -0.6}
+        },
+        {
+            "name": "Brightness",
+            "options": {"brightness": -0.2}
+        }
+    ]
+}

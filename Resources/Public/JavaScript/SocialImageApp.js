@@ -16,11 +16,22 @@ $(document).ready(() => {
                 scaleY: 0.5,
                 crossOrigin: 'use-credentials'
             });
-            // @TODO: Move this code into skin files
-            this.preview.filters.push(new fabric.Image.filters.Sepia());
-            this.preview.filters.push(new fabric.Image.filters.Contrast({contrast: -0.6}));
-            this.preview.filters.push(new fabric.Image.filters.Brightness({brightness: -0.2}));
-            // ^^^^^^^^^ @TODO: Move this code into skin files
+
+            let _this = this;
+            // @TODO: Remove static path, resolve DefaultFilter.json file from somewhere else.
+            $.ajax({
+                'async': false,
+                'global': false,
+                'url': '/typo3conf/ext/blog/Resources/Public/JavaScript/DefaultFilter.json',
+                'dataType': 'json',
+                'success': function (data) {
+                    if (data.filters.length) {
+                        for (let i=0; i<data.filters.length; i++) {
+                            _this.preview.filters.push(new fabric.Image.filters[data.filters[i].name](data.filters[i].options));
+                        }
+                    }
+                }
+            });
 
             this.preview.applyFilters();
             this.fabric.add(this.preview);
