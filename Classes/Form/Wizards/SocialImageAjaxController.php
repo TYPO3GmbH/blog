@@ -19,6 +19,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Form\FormDataCompiler;
 use TYPO3\CMS\Backend\Form\FormDataGroup\TcaDatabaseRecord;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
@@ -66,6 +69,7 @@ class SocialImageAjaxController
             $storage = $resourceFactory->getDefaultStorage();
             $tempFileName = PATH_site . 'typo3temp/' . uniqid('', true);
             if ($storage !== null && GeneralUtility::writeFileToTypo3tempDir($tempFileName, $imageData) === null) {
+                /** @var File $newFile */
                 $newFile = $storage->addFile(
                     $tempFileName,
                     $storage->getRootLevelFolder(),
@@ -74,6 +78,7 @@ class SocialImageAjaxController
                 $result['status'] = 'ok';
                 $result['message'] = 'the file has been saved successfully';
                 $result['file'] = $newFile->getPublicUrl();
+                $result['fileUid'] = $newFile->getUid();
                 $result['fileIdentifier'] = $newFile->getIdentifier();
                 $result['fields'] = $this->getFalFields($parsedBody['table'], (int)$parsedBody['uid']);
             }
@@ -108,6 +113,108 @@ class SocialImageAjaxController
                     'thumb' => $this->createThumbnail($fileObject),
                 ];
             }
+        }
+        $response->getBody()->write(json_encode($results));
+        return $response;
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     *
+     * @return ResponseInterface
+     * @throws \RuntimeException
+     * @throws \TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException
+     * @throws \InvalidArgumentException
+     */
+    public function replaceRelationAction(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface
+    {
+        $parsedBody = $request->getParsedBody();
+
+        $fileObject = ResourceFactory::getInstance()
+            ->getFileObject((int)$parsedBody['file']);
+
+        $record = BackendUtility::getRecord(
+            $parsedBody['table'],
+            (int)$parsedBody['uid']
+        );
+
+        $newId = uniqid('NEW', true);
+        $data = [];
+        $data['sys_file_reference'][$newId] = [
+            'table_local' => 'sys_file',
+            'uid_local' => $fileObject->getUid(),
+            'tablenames' => $parsedBody['table'],
+            'uid_foreign' => (int)$parsedBody['uid'],
+            'fieldname' => $parsedBody['field'],
+            'pid' => $record['pid']
+        ];
+        $data[$parsedBody['table']][$record['uid']] = [
+            $parsedBody['field'] => $newId
+        ];
+
+        $cmd = [];
+        $cmd['sys_file_reference'][(int)$parsedBody['reference']]['delete'] = 1;
+
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $dataHandler->start($data, $cmd);
+        $dataHandler->process_cmdmap();
+        $dataHandler->process_datamap();
+
+        $results = [];
+        if (count($dataHandler->errorLog) === 0) {
+            $results['status'] = 'ok';
+        } else {
+            $results['status'] = 'error';
+        }
+        $response->getBody()->write(json_encode($results));
+        return $response;
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     *
+     * @return ResponseInterface
+     * @throws \RuntimeException
+     * @throws \TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException
+     * @throws \InvalidArgumentException
+     */
+    public function insertAfterRelationAction(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface
+    {
+        $parsedBody = $request->getParsedBody();
+
+        $fileObject = ResourceFactory::getInstance()
+            ->getFileObject((int)$parsedBody['file']);
+
+        $record = BackendUtility::getRecord(
+            $parsedBody['table'],
+            (int)$parsedBody['uid']
+        );
+
+        $newId = uniqid('NEW', true);
+        $data = [];
+        $data['sys_file_reference'][$newId] = [
+            'table_local' => 'sys_file',
+            'uid_local' => $fileObject->getUid(),
+            'tablenames' => $parsedBody['table'],
+            'uid_foreign' => (int)$parsedBody['uid'],
+            'fieldname' => $parsedBody['field'],
+            'pid' => '-' . (int)$parsedBody['reference']
+        ];
+        $data[$parsedBody['table']][$record['uid']] = [
+            $parsedBody['field'] => $newId
+        ];
+
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $dataHandler->start($data, []);
+        $dataHandler->process_datamap();
+
+        $results = [];
+        if (count($dataHandler->errorLog) === 0) {
+            $results['status'] = 'ok';
+        } else {
+            $results['status'] = 'error';
         }
         $response->getBody()->write(json_encode($results));
         return $response;

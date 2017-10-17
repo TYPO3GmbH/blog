@@ -15,4 +15,14 @@ return [
         'path' => '/ext/blog/social-wizard/get-relations',
         'target' => \T3G\AgencyPack\Blog\Form\Wizards\SocialImageAjaxController::class . '::existingRelationsAction'
     ],
+    // replace existing relation
+    'ext-blog-social-wizard-replace-relation' => [
+        'path' => '/ext/blog/social-wizard/replace-relation',
+        'target' => \T3G\AgencyPack\Blog\Form\Wizards\SocialImageAjaxController::class . '::replaceRelationAction'
+    ],
+    // insert after existing relation
+    'ext-blog-social-wizard-insert-after-relation' => [
+        'path' => '/ext/blog/social-wizard/insert-after-relation',
+        'target' => \T3G\AgencyPack\Blog\Form\Wizards\SocialImageAjaxController::class . '::insertAfterRelationAction'
+    ],
 ];
