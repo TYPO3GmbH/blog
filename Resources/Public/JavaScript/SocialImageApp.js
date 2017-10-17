@@ -65,17 +65,9 @@ $(document).ready(() => {
                 let data = this.fabric.toDataURL({
                     format: 'png'
                 });
-                let name = this.slugify($('#title').text()) + '-' + identifier + '.png';
+                let name = CanvasInstance.slugify($('#title').text()) + '-' + identifier + '.png';
                 this.saveImage(data, name);
             });
-
-            $(document).on('click', '.js-go-back', (event) => {
-                $('#savePanelStep1').slideUp();
-                $('#savePanelStep2').slideUp();
-                $('#savePanelStep3').slideUp();
-                $('#basePanel').slideDown();
-            });
-
         }
 
         _addAuthorText() {
@@ -144,26 +136,17 @@ $(document).ready(() => {
             );
         }
 
-        slugify(text) {
+        static slugify(text) {
             return text.toString().toLowerCase().trim()
                 .replace(/[^\w\s-]/g, '') // remove non-word [a-z0-9_], non-whitespace, non-hyphen characters
                 .replace(/[\s_-]+/g, '_') // swap any length of whitespace, underscore, hyphen characters with a single _
                 .replace(/^-+|-+$/g, ''); // remove leading, trailing -
         }
 
-        showWaitState() {
-            $('#waitState').show();
-        }
-
-        hideWaitState() {
-            $('#waitState').hide();
-        }
-
         saveImage(imageContent, name) {
             let $basePanel = $('#basePanel');
-            let _this = this;
             $basePanel.slideUp('slow', function() {
-                _this.showWaitState();
+                $('#waitState').show();
             });
             $.post(
                 TYPO3.settings.ajaxUrls['ext-blog-social-wizard-save-image'],
@@ -194,12 +177,8 @@ $(document).ready(() => {
                         } else {
                             $listOfFields.append('<li>Sorry, no image fields found in this record.</li>');
                         }
-                        $listOfFields.on('click', '.t3js-save-to-field', (event) => {
-                            _this.handleFieldSelection(event);
-                        });
-
                         $step1Panel.slideDown();
-                        _this.hideWaitState();
+                        $('#waitState').hide();
                     }
                 },
                 'json'
@@ -215,31 +194,27 @@ $(document).ready(() => {
             let $step1Panel = $('#savePanelStep1');
             let $step2Panel = $('#savePanelStep2');
             let $step3Panel = $('#savePanelStep3');
-            let _this = this;
-            $step1Panel.slideUp('slow', function() {
-                _this.showWaitState();
-            });
+
+            $('#waitState').show();
+            $step1Panel.slideUp('slow');
             $.post(
                 TYPO3.settings.ajaxUrls['ext-blog-social-wizard-get-relations'],
                 {
                     table: $basePanel.data('table'),
                     uid: $basePanel.data('uid'),
-                    field: fieldIdentifier
+                    field: fieldIdentifier,
+                    file: fileUid
                 },
                 function (data) {
+                    let $listOfRelations = $('.t3js-list-of-relations tbody');
+                    $listOfRelations.empty();
                     if (data.length > 0) {
-                        let $listOfRelations = $('.t3js-list-of-relations tbody');
-                        $listOfRelations.empty();
-
-
                         for (let i = 0; i < data.length; i++) {
                             let $tr = $('<tr>');
                             let $td = $('<td>');
                             let $img = $('<img>');
                             let $title = $('<h5>');
                             let $button1 = $('<button class="btn btn-danger t3js-image-replace">replace</button>');
-//                            let $button2 = $('<button class="btn btn-default t3js-image-insert-after">insert after</button>');
-//                            let $button3 = $('<button class="btn btn-default t3js-image-insert-before">insert before</button>');
 
                             $tr.data('fileId', data[i]['referenceId']);
                             $tr.data('fieldIdentifier', fieldIdentifier);
@@ -252,8 +227,6 @@ $(document).ready(() => {
                             $div.append($title);
                             let $buttonContainer = $('<div class="btn-group">');
                             $buttonContainer.append($button1);
-//                            $buttonContainer.append($button2);
-//                            $buttonContainer.append($button3);
                             $div.append($buttonContainer);
 
                             $tr.append($td.clone().append($img));
@@ -267,21 +240,11 @@ $(document).ready(() => {
                         $tr.append($('<td colspan="2">').append('<button class="btn btn-default t3js-image-insert-after">append</button>'));
                         $listOfRelations.append($tr);
 
-                        $listOfRelations.on('click', '.t3js-image-replace', (event) => {
-                            _this.handleReplaceRelation(event);
-                        });
-                        $listOfRelations.on('click', '.t3js-image-insert-after', (event) => {
-                            _this.handleInsertAfterRelation(event);
-                        });
-                        // $listOfRelations.on('click', '.t3js-image-insert-before', (event) => {
-                        //     _this.handleInsertBeforeRelation(event);
-                        // });
-
+                        $('#waitState').hide();
                         $step2Panel.slideDown();
-                        _this.hideWaitState();
                     } else {
+                        $('#waitState').hide();
                         $step3Panel.slideDown();
-                        _this.hideWaitState();
                     }
                 },
                 'json'
@@ -296,11 +259,9 @@ $(document).ready(() => {
             let $basePanel = $('#basePanel');
             let $step2Panel = $('#savePanelStep2');
             let $step3Panel = $('#savePanelStep3');
-            let _this = this;
 
-            $step2Panel.slideUp('slow', function() {
-                _this.showWaitState();
-            });
+            $('#waitState').show();
+            $step2Panel.slideUp('slow');
             $.post(
                 TYPO3.settings.ajaxUrls['ext-blog-social-wizard-replace-relation'],
                 {
@@ -310,9 +271,9 @@ $(document).ready(() => {
                     field: fieldIdentifier,
                     file: fileUid
                 },
-                function (data) {
+                function () {
                     $step3Panel.slideDown();
-                    _this.hideWaitState();
+                    $('#waitState').hide();
                 }
             );
         }
@@ -325,11 +286,9 @@ $(document).ready(() => {
             let $basePanel = $('#basePanel');
             let $step2Panel = $('#savePanelStep2');
             let $step3Panel = $('#savePanelStep3');
-            let _this = this;
 
-            $step2Panel.slideUp('slow', function() {
-                _this.showWaitState();
-            });
+            $('#waitState').show();
+            $step2Panel.slideUp('slow');
             $.post(
                 TYPO3.settings.ajaxUrls['ext-blog-social-wizard-insert-after-relation'],
                 {
@@ -339,9 +298,9 @@ $(document).ready(() => {
                     field: fieldIdentifier,
                     file: fileUid
                 },
-                function (data) {
+                function () {
                     $step3Panel.slideDown();
-                    _this.hideWaitState();
+                    $('#waitState').hide();
                 }
             );
         }
@@ -374,6 +333,30 @@ $(document).ready(() => {
     }
 
     $('.t3js-canvas-container').map((index, container) => {
-        return new CanvasInstance(container);
+        let instance = new CanvasInstance(container);
+        if (index === 0) {
+            // This little hack prevents double event registration
+            // @fixme: find a better solution, for now it works.
+            $(document).on('click', '.js-go-back', () => {
+                $('#savePanelStep1').slideUp();
+                $('#savePanelStep2').slideUp();
+                $('#savePanelStep3').slideUp();
+                $('#basePanel').slideDown();
+            });
+
+            let $listOfRelations = $('.t3js-list-of-relations tbody');
+            $listOfRelations.empty();
+            $listOfRelations.on('click', '.t3js-image-replace', (event) => {
+                instance.handleReplaceRelation(event);
+            });
+            $listOfRelations.on('click', '.t3js-image-insert-after', (event) => {
+                instance.handleInsertAfterRelation(event);
+            });
+            let $listOfFields = $('.t3js-list-of-fields', '#savePanelStep1');
+            $listOfFields.on('click', '.t3js-save-to-field', (event) => {
+                instance.handleFieldSelection(event);
+            });
+        }
+        return instance;
     });
 });
