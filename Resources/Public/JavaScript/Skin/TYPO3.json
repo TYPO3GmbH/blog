@@ -1,0 +1,56 @@
+{
+    "elements": [
+        {
+            "type": "Text",
+            "fieldSelector": "#author",
+            "options": {
+                "left": 30,
+                "top": "{{canvas.height}} - 51",
+                "fontSize": 15,
+                "fontFamily": "Source Sans Pro",
+                "fontWeight": "600",
+                "fill": "white"
+            }
+        },
+        {
+            "type": "Text",
+            "value": "TYPO3",
+            "options": {
+                "left": 30,
+                "top": "{{canvas.height}} - 25",
+                "fontSize": 15,
+                "fontFamily": "Source Sans Pro",
+                "fontWeight": "600",
+                "fill": "#FF8700"
+            }
+        },
+        {
+            "type": "Line",
+            "value": [30, 30, "{{canvas.width}} - 30", 30],
+            "options": {
+                "left": 30,
+                "top": "{{canvas.height}} - 30",
+                "stroke": "#FF8700"
+            }
+        },
+        {
+            "type": "Textbox",
+            "fieldSelector": "#title",
+            "export": "text",
+            "options": {
+                "left": 30,
+                "top": 30,
+                "fontSize": 40,
+                "fontFamily": "Source Sans Pro",
+                "fontWeight": "300",
+                "textAlign": "left",
+                "fill": "white",
+                "fixedWidth": "{{canvas.width}} - 40",
+                "width": "{{canvas.width}} - 40",
+                "lockMovementX": true,
+                "lockMovementY": true,
+                "selectable": false
+            }
+        }
+    ]
+}

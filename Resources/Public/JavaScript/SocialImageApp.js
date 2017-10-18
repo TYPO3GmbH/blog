@@ -18,11 +18,11 @@ $(document).ready(() => {
             });
 
             let _this = this;
-            // @TODO: Remove static path, resolve DefaultFilter.json file from somewhere else.
+            // @TODO: Remove static path, resolve TYPO3.json file from somewhere else.
             $.ajax({
                 'async': false,
                 'global': false,
-                'url': '/typo3conf/ext/blog/Resources/Public/JavaScript/DefaultFilter.json',
+                'url': '/typo3conf/ext/blog/Resources/Public/JavaScript/Filter/TYPO3.json',
                 'dataType': 'json',
                 'success': function (data) {
                     if (data.filters.length) {
@@ -32,20 +32,32 @@ $(document).ready(() => {
                     }
                 }
             });
-
             this.preview.applyFilters();
             this.fabric.add(this.preview);
 
-            // @TODO: Move this code into theme files
-            // Add Author
-            this.fabric.add(this._addAuthorText());
-            // Add TagLine
-            this.fabric.add(this._addTYPO3TagLine());
-            this.fabric.add(this._addLine());
-            // Add TextBox
-            this.text = this._addTextBox();
-            this.fabric.add(this.text);
-            //  ^^^^^^^^^ @TODO: Move this code into theme files
+            // @TODO: Remove static path, resolve TYPO3.json file from somewhere else.
+            $.ajax({
+                'async': false,
+                'global': false,
+                'url': '/typo3conf/ext/blog/Resources/Public/JavaScript/Skin/TYPO3.json',
+                'dataType': 'json',
+                'success': function (data) {
+                    if (data.elements.length) {
+                        for (let i=0; i<data.elements.length; i++) {
+                            let element = data.elements[i];
+                            let value = typeof element['value'] !== 'undefined' ? element['value'] : $(element['fieldSelector']).text();
+                            let tmp = new fabric[element['type']](
+                                _this.parseVariables(value),
+                                _this.parseVariables(element['options'])
+                            );
+                            _this.fabric.add(tmp);
+                            if (typeof element['export'] !== 'undefined') {
+                                _this[element['export']] = tmp;
+                            }
+                        }
+                    }
+                }
+            });
 
             $('.watch').on('input', (event) => {
                 let value = $(event.target).val();
@@ -81,70 +93,32 @@ $(document).ready(() => {
             });
         }
 
-        _addAuthorText() {
-            return new fabric.Text(
-                $('#author').html(),
-                {
-                    left: 30,
-                    top: (this.canvas.height) - 51,
-                    fontSize: 15,
-                    fontFamily: 'Source Sans Pro',
-                    fontWeight: '600',
-                    fill: 'white'
-                }
-            );
-        }
-
-        _addTYPO3TagLine() {
-            return new fabric.Text(
-                'TYPO3',
-                {
-                    left: 30,
-                    top: (this.canvas.height) - 25,
-                    fontSize: 15,
-                    fontFamily: 'Source Sans Pro',
-                    fontWeight: '600',
-                    fill: '#FF8700'
-                }
-            );
-        }
-
-        _addLine() {
-            return new fabric.Line(
-                [
-                    30, // X1
-                    30,// Y1
-                    this.canvas.width - 30, // X2
-                    30 // Y2
-                ],
-                {
-                    left: 30,
-                    top: this.canvas.height - 30,
-                    stroke: '#FF8700'
-                }
-            );
-        }
-
-        _addTextBox() {
-            return new fabric.Textbox(
-                $('#title').html(),
-                {
-                    left: 30,
-                    top: 30,
-                    fontSize: 40,
-                    fontFamily: 'Source Sans Pro',
-                    fontWeight: '300',
-                    textAlign: 'left',
-                    fill: 'white',
-                    fixedWidth: (this.canvas.width) - 40,
-                    width: (this.canvas.width) - 40,
-                    // strokeWidth: 1,
-                    // stroke: 'black',
-                    lockMovementX: true,
-                    lockMovementY: true,
-                    selectable: false
-                }
-            );
+        parseVariables(data) {
+            switch (typeof data) {
+                case 'string':
+                    if (data.indexOf('{{') !== -1 && data.indexOf('}}') !== -1) {
+                        let newString = data
+                            .replace('{{canvas.width}}', this.canvas.width)
+                            .replace('{{canvas.height}}', this.canvas.height);
+                        return eval(newString);
+                    }
+                    return data;
+                    break;
+                case 'object':
+                    let newData = {};
+                    for (let prop in data) {
+                        newData[prop] = this.parseVariables(data[prop]);
+                    }
+                    return newData;
+                    break;
+                case 'boolean':
+                case 'number':
+                    return data;
+                    break;
+                default:
+                    console.log('unknown type: ' + typeof data);
+                    break;
+            }
         }
 
         static slugify(text) {
