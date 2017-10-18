@@ -3,6 +3,7 @@ $(document).ready(() => {
     class CanvasInstance {
         constructor(container) {
             let $container = $(container);
+            let $basePanel = $('#basePanel');
             let identifier = $container.data('identifier');
             let canvas = $container.find('canvas').get(0);
             this.canvas = canvas;
@@ -18,11 +19,10 @@ $(document).ready(() => {
             });
 
             let _this = this;
-            // @TODO: Remove static path, resolve TYPO3.json file from somewhere else.
             $.ajax({
                 'async': false,
                 'global': false,
-                'url': '/typo3conf/ext/blog/Resources/Public/JavaScript/Filter/TYPO3.json',
+                'url': $basePanel.data('sourceFilter'),
                 'dataType': 'json',
                 'success': function (data) {
                     if (data.filters.length) {
@@ -35,11 +35,10 @@ $(document).ready(() => {
             this.preview.applyFilters();
             this.fabric.add(this.preview);
 
-            // @TODO: Remove static path, resolve TYPO3.json file from somewhere else.
             $.ajax({
                 'async': false,
                 'global': false,
-                'url': '/typo3conf/ext/blog/Resources/Public/JavaScript/Skin/TYPO3.json',
+                'url': $basePanel.data('sourceSkin'),
                 'dataType': 'json',
                 'success': function (data) {
                     if (data.elements.length) {
