@@ -19,7 +19,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use TYPO3\CMS\Backend\Module\AbstractModule;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
@@ -61,6 +63,8 @@ class SocialImageWizardController extends AbstractModule
     {
         $postData = $this->getPageData();
         $this->view->assign('postData', $postData);
+        $this->view->assign('dataSourceFilter', $this->getDataSource('filter', $request));
+        $this->view->assign('dataSourceSkin', $this->getDataSource('skin', $request));
         $this->moduleTemplate->setContent($this->view->render());
         $this->moduleTemplate->getPageRenderer()->addCssFile('EXT:blog/Resources/Public/Css/SocialImageWizard.css');
         $this->moduleTemplate->getPageRenderer()->loadJquery();
@@ -89,5 +93,19 @@ class SocialImageWizardController extends AbstractModule
         ];
 
         return $socialData;
+    }
+
+    /**
+     * @param string $type
+     * @param ServerRequestInterface $request
+     *
+     * @return string
+     */
+    protected function getDataSource(string $type, ServerRequestInterface $request): string
+    {
+        $pageTsConfig = BackendUtility::getPagesTSconfig((int)$request->getQueryParams()['id']);
+        $path = $pageTsConfig['mod.']['SocialImageWizard.']['dataSource.'][$type]
+            ?? 'EXT:blog/Resources/Public/JavaScript/' . ucfirst($type) . '/Default.json';
+        return PathUtility::getAbsoluteWebPath(GeneralUtility::getFileAbsFileName($path));
     }
 }
