@@ -5,23 +5,11 @@
             "fieldSelector": "#author",
             "options": {
                 "left": 30,
-                "top": "{{canvas.height}} - 51",
+                "top": 25,
                 "fontSize": 15,
-                "fontFamily": "Source Sans Pro",
+                "fontFamily": "Helvetica",
                 "fontWeight": "600",
                 "fill": "white"
-            }
-        },
-        {
-            "type": "Text",
-            "value": "TYPO3",
-            "options": {
-                "left": 30,
-                "top": "{{canvas.height}} - 25",
-                "fontSize": 15,
-                "fontFamily": "Source Sans Pro",
-                "fontWeight": "600",
-                "fill": "#FF8700"
             }
         },
         {
@@ -29,8 +17,8 @@
             "value": [30, 30, "{{canvas.width}} - 30", 30],
             "options": {
                 "left": 30,
-                "top": "{{canvas.height}} - 30",
-                "stroke": "#FF8700"
+                "top": 50,
+                "stroke": "#ffffff"
             }
         },
         {
@@ -39,9 +27,9 @@
             "export": "text",
             "options": {
                 "left": 30,
-                "top": 30,
+                "top": 60,
                 "fontSize": 40,
-                "fontFamily": "Source Sans Pro",
+                "fontFamily": "Helvetica",
                 "fontWeight": "300",
                 "textAlign": "left",
                 "fill": "white",

@@ -5,7 +5,7 @@
         },
         {
             "name": "Contrast",
-            "options": {"contrast": -0.6}
+            "options": {"contrast": -0.2}
         },
         {
             "name": "Brightness",
