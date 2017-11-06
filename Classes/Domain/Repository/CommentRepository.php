@@ -208,11 +208,11 @@ class CommentRepository extends Repository
         $constraints[] = $query->logicalAnd([
             $query->logicalOr([
                 $query->equals('post.starttime', 0),
-                $query->greaterThanOrEqual('post.starttime', $tstamp)
+                $query->lessThanOrEqual('post.starttime', $tstamp)
             ]),
             $query->logicalOr([
                 $query->equals('post.endtime', 0),
-                $query->lessThan('post.endtime', $tstamp)
+                $query->greaterThanOrEqual('post.endtime', $tstamp)
             ])
         ]);
         $constraints[] = $query->logicalAnd([
