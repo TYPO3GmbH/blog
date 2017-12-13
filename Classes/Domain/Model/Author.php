@@ -88,6 +88,7 @@ class Author extends AbstractEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Post>
+     * @lazy
      */
     protected $posts;
 
