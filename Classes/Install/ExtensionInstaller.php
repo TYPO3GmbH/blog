@@ -34,6 +34,11 @@ class ExtensionInstaller extends AbstractDownloadExtensionUpdate
             'title' => 'Blog template',
             'description' => 'blog template extension',
             'versionString' => '1.2.0',
+        ],
+        'rx_shariff' => [
+            'title' => 'rx_shariff',
+            'description' => 'rx_shariff',
+            'versionString' => '10.2.1',
         ]
     ];
 
