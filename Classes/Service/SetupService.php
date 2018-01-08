@@ -88,7 +88,10 @@ class SetupService
         $installExtension = array_key_exists('install', $data) ? (bool) $data['install'] : false;
         $title = array_key_exists('title', $data) ? (string) $data['title'] : null;
 
-        if ($installExtension && $this->installExtension('blog_template')) {
+        if ($installExtension
+            && $this->installExtension('rx_shariff')
+            && $this->installExtension('blog_template')
+        ) {
             $useTemplate = true;
         }
 
