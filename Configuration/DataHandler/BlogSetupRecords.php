@@ -45,7 +45,7 @@ $data['pages']['NEW_blogArchivePage'] = [
     'doktype' => 1,
 ];
 $data['pages']['NEW_firstBlogPostPage'] = [
-    'pid' => '-NEW_blogArchivePage',
+    'pid' => 'NEW_blogFolder',
     'hidden' => 0,
     'title' => 'First blog post',
     'doktype' => \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
