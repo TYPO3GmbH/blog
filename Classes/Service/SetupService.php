@@ -95,15 +95,14 @@ class SetupService
             $useTemplate = true;
         }
 
-        $blogSetup = GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRecords.php');
+        $blogSetup = $useTemplate
+            ? GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRecordsWithTemplate.php')
+            : GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRecords.php');
 
         $result = false;
         if (file_exists($blogSetup)) {
             /* @noinspection PhpIncludeInspection */
             $blogSetup = require $blogSetup;
-            if ($useTemplate) {
-                $blogSetup['sys_template']['NEW_SysTemplate']['include_static_file'] = 'EXT:fluid_styled_content/Configuration/TypoScript/Static/,EXT:blog_template/Configuration/TypoScript/BlogTemplate/,EXT:blog/Configuration/TypoScript/Static/';
-            }
             if ($title !== null) {
                 $blogSetup['pages']['NEW_blogRoot']['title'] = $title;
             }

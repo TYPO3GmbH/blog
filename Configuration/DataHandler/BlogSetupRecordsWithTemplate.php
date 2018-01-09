@@ -58,7 +58,7 @@ $data['sys_template']['NEW_SysTemplate'] = [
     'sitetitle' => 'Blog with TYPO3',
     'root' => 1,
     'clear' => 3,
-    'include_static_file' => 'EXT:fluid_styled_content/Configuration/TypoScript/,EXT:blog/Configuration/TypoScript/Static/',
+    'include_static_file' => 'EXT:fluid_styled_content/Configuration/TypoScript/,EXT:rx_shariff/Configuration/TypoScript/PluginOnly,EXT:blog_template/Configuration/TypoScript/BlogTemplate/,EXT:blog/Configuration/TypoScript/Static/',
     'constants' => 'plugin.tx_blog.settings.blogUid = NEW_blogRoot
 plugin.tx_blog.settings.categoryUid = NEW_blogCategoryPage
 plugin.tx_blog.settings.tagUid = NEW_blogTagPage
