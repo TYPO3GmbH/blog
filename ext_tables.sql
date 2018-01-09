@@ -101,18 +101,6 @@ CREATE TABLE pages (
 );
 
 #
-# Table structure for table 'pages_language_overlay'
-#
-CREATE TABLE pages_language_overlay (
-  comments_active tinyint(4) DEFAULT '1' NOT NULL,
-  sharing_enabled tinyint(4) DEFAULT '1' NOT NULL,
-  comments text,
-  tags text,
-  authors text
-);
-
-
-#
 # Table structure for table 'tx_blog_domain_model_author'
 #
 CREATE TABLE tx_blog_domain_model_author (
