@@ -53,7 +53,7 @@ class PostRepository extends Repository
 
         $this->defaultConstraints[] = $query->equals('doktype', Constants::DOKTYPE_BLOG_POST);
         $this->defaultOrderings = [
-            'crdate' => QueryInterface::ORDER_DESCENDING,
+            'publish_date' => QueryInterface::ORDER_DESCENDING,
         ];
     }
 
@@ -204,8 +204,8 @@ class PostRepository extends Repository
             $startDate = mktime(0, 0, 0, 1, 1, $year);
             $endDate = mktime(23, 59, 59, 12, 31, $year);
         }
-        $constraints[] = $query->greaterThanOrEqual('crdate', $startDate);
-        $constraints[] = $query->lessThanOrEqual('crdate', $endDate);
+        $constraints[] = $query->greaterThanOrEqual('publish_date', $startDate);
+        $constraints[] = $query->lessThanOrEqual('publish_date', $endDate);
 
         return $query->matching($query->logicalAnd($constraints))->execute();
     }

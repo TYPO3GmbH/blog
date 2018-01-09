@@ -81,16 +81,6 @@ call_user_func(
                     'default' => '1',
                 ],
             ],
-            'crdate' => [
-                'exclude' => 1,
-                'label' => $ll.'pages.crdate',
-                'config' => [
-                    'type' => 'input',
-                    'size' => '13',
-                    'eval' => 'datetime',
-                    'default' => '0',
-                ],
-            ],
             'crdate_month' => [
                 'exclude' => 1,
                 'label' => $ll.'pages.crdate_month',
@@ -116,6 +106,16 @@ call_user_func(
             'archive_date' => [
                 'exclude' => 1,
                 'label' => $ll.'pages.archive_date',
+                'config' => [
+                    'type' => 'input',
+                    'size' => '13',
+                    'eval' => 'datetime',
+                    'default' => '0',
+                ],
+            ],
+            'publish_date' => [
+                'exclude' => 1,
+                'label' => $ll.'pages.publish_date',
                 'config' => [
                     'type' => 'input',
                     'size' => '13',
@@ -168,9 +168,12 @@ call_user_func(
         $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where']
             = ' AND sys_category.pid = ###PAGE_TSCONFIG_ID### '
             .$GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where'];
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'publish_date', 'publish_date, crdate_month, crdate_year');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             'pages',
-            '--div--;'.$ll.'pages.tabs.blog, crdate, crdate_month, crdate_year, archive_date, tags, authors, comments_active, comments, sharing_enabled',
+            '--div--;'.$ll.'pages.tabs.blog,
+            --palette--;'.$ll.'pages.palettes.publish_date;publish_date, archive_date, tags, authors, comments_active, comments, sharing_enabled',
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
 

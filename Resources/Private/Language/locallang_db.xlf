@@ -12,6 +12,18 @@
 			<trans-unit id="pages.crdate" xml:space="preserve">
 				<source>Creation date</source>
 			</trans-unit>
+			<trans-unit id="pages.palettes.publish_date" xml:space="preserve">
+				<source>Publish date</source>
+			</trans-unit>
+			<trans-unit id="pages.crdate_month" xml:space="preserve">
+				<source>Publish date month</source>
+			</trans-unit>
+			<trans-unit id="pages.crdate_year" xml:space="preserve">
+				<source>Publish date year</source>
+			</trans-unit>
+			<trans-unit id="pages.publish_date" xml:space="preserve">
+				<source>Publish date</source>
+			</trans-unit>
 			<trans-unit id="pages.archive_date" xml:space="preserve">
 				<source>Archive date</source>
 			</trans-unit>

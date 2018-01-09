@@ -116,6 +116,11 @@ class Post extends AbstractEntity
     protected $archiveDate;
 
     /**
+     * @var int
+     */
+    protected $publishDate;
+
+    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Author>
      */
     protected $authors;
@@ -338,6 +343,8 @@ class Post extends AbstractEntity
 
     /**
      * @return ObjectStorage
+     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function getActiveComments()
     {
@@ -476,6 +483,22 @@ class Post extends AbstractEntity
     public function setArchiveDate($archiveDate)
     {
         $this->archiveDate = $archiveDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPublishDate()
+    {
+        return $this->publishDate;
+    }
+
+    /**
+     * @param int $publishDate
+     */
+    public function setPublishDate($publishDate)
+    {
+        $this->publishDate = $publishDate;
     }
 
     /**

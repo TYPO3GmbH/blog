@@ -3,7 +3,7 @@
 <div class="entry-meta">
     <span class="entry-date">
         <blog:link.post post="{post}" rel="bookmark">
-            <time class="entry-date published" datetime="{f:format.date(format: '%Y-%m-%dT%H:%M:%S-%z', date: post.crdate)}" itemprop="datepublished">{f:format.date(format: '{settings.lists.posts.dateFormat}', date: post.crdate)}</time>
+            <time class="entry-date published" datetime="{f:format.date(format: '%Y-%m-%dT%H:%M:%S-%z', date: post.publishDate)}" itemprop="datepublished">{f:format.date(format: '{settings.lists.posts.dateFormat}', date: post.publishDate)}</time>
         </blog:link.post>
     </span>
     <f:if condition="{post.categories}">
