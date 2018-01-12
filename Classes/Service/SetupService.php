@@ -116,6 +116,7 @@ class SetupService
                 $blogRootUid = (int) $this->recordUidArray['NEW_blogRoot'];
                 $blogFolderUid = (int) $this->recordUidArray['NEW_blogFolder'];
                 $queryBuilder = $this->getQueryBuilderForTable('pages');
+                $queryBuilder->getRestrictions()->removeAll();
                 $record = $queryBuilder
                     ->select('TSconfig')
                     ->from('pages')
