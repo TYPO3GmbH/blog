@@ -128,7 +128,7 @@
 			</trans-unit>
 			<trans-unit id="backend.message.nopost" xml:space="preserve">
 				<source>Post not available</source>
-			</trans-unit>			
+			</trans-unit>
 			<trans-unit id="backend.lead.comments" xml:space="preserve">
 				<source>The following table shows blog comments available in this installation. Use the filters and search to refine the results.</source>
 			</trans-unit>
@@ -215,6 +215,15 @@
 			</trans-unit>
 			<trans-unit id="wizard.message.template.not_found" xml:space="preserve">
 				<source>Hey, I have not found a template, but I can install the extension blog_template for you, should I try to install the extension and use it as template?</source>
+			</trans-unit>
+			<trans-unit id="wizard.message.template.not_found.composermode" xml:space="preserve">
+				<source>Hey, I have not found a template, but you can simply install the extension blog_template with composer, use the following command:</source>
+			</trans-unit>
+			<trans-unit id="wizard.message.template.not_found.optional.title" xml:space="preserve">
+				<source>Note</source>
+			</trans-unit>
+			<trans-unit id="wizard.message.template.not_found.optional.message" xml:space="preserve">
+				<source>The template is optional and the extension provides only a demo template. You can build your own template or use your existing template.</source>
 			</trans-unit>
 			<trans-unit id="wizard.label.template" xml:space="preserve">
 				<source>Yes, please use the template provided by the extension</source>
