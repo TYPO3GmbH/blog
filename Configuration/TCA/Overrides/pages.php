@@ -10,6 +10,8 @@ $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
     2 => 'apps-pagetree-folder-contains-blog',
 ];
 
+$GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'apps-pagetree-folder-contains-blog';
+
 call_user_func(
     function ($extKey, $table) {
         $blogDocType = \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST;
