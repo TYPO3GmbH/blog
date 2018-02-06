@@ -10,6 +10,13 @@
       "homepage": "https://typo3.com/"
     }
   ],
+  "homepage": "https://extensions.typo3.org/extension/blog/",
+  "support": {
+    "issues": "https://jira.typo3.com/servicedesk/customer/portal/3/group/21",
+    "docs": "https://docs.typo3.org/typo3cms/extensions/blog/",
+    "source": "https://bitbucket.typo3.com/projects/EXT/repos/blog/browse",
+    "slack": "https://typo3.slack.com/archives/t3g-ext-blog"
+  },
   "autoload": {
     "psr-4": {
       "T3G\\AgencyPack\\Blog\\": "Classes/"
