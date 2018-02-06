@@ -219,7 +219,11 @@ comments.moderation
          int
    Description
          Activate the comments moderation feature generally. Default: 0
-         This means, any comment must be approved, before it is visible in the frontend.
+         allowed values:
+         0 = disable moderation
+         1 = enable moderation (This means, any comment must be approved, before it is visible in the frontend.)
+         2 = enable moderation but only the first time (This means, if one approved comment with the same email exist, the other will be approved automaticly)
+
 
 
 .. _tsCommentsRespectPostLanguageId:

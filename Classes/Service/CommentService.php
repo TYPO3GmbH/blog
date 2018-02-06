@@ -72,11 +72,22 @@ class CommentService
         $result = self::STATE_ERROR;
         if ((int) $this->settings['active'] === 1) {
             $result = self::STATE_SUCCESS;
-            if ((int) $this->settings['moderation'] === 1) {
-                $result = self::STATE_MODERATION;
-                $comment->setStatus(Comment::STATUS_PENDING);
-            } else {
-                $comment->setStatus(Comment::STATUS_APPROVED);
+            switch ((int) $this->settings['moderation']) {
+                case 0:
+                    $comment->setStatus(Comment::STATUS_APPROVED);
+                    break;
+                case 1:
+                    $result = self::STATE_MODERATION;
+                    $comment->setStatus(Comment::STATUS_PENDING);
+                    break;
+                case 2:
+                    if ($this->approvedCommentExistsForSameEmail($comment)) {
+                        $comment->setStatus(Comment::STATUS_APPROVED);
+                    } else {
+                        $result = self::STATE_MODERATION;
+                        $comment->setStatus(Comment::STATUS_PENDING);
+                    }
+                    break;
             }
             $comment->setPid($post->getUid());
             $comment->setPostLanguageId($GLOBALS['TSFE']->sys_language_uid);
@@ -88,9 +99,28 @@ class CommentService
     }
 
     /**
+     * This method checks if an comment exists for the same email
+     * address in the given comment.
+     *
+     * @param Comment $comment
+     * @return bool
+     */
+    protected function approvedCommentExistsForSameEmail(Comment $comment): bool
+    {
+        $query = $this->commentRepository->createQuery();
+        return $query->matching(
+            $query->logicalAnd([
+                $query->equals('email', $comment->getEmail()),
+                $query->equals('status', Comment::STATUS_APPROVED)
+            ])
+        )->execute()->count() > 0;
+    }
+
+    /**
      * @param Post $post
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function getCommentsByPost(Post $post)
     {

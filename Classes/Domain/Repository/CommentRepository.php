@@ -181,19 +181,21 @@ class CommentRepository extends Repository
 
         return $result;
     }
+
     /**
      * @param QueryInterface $query
      * @param array $constraints
      *
      * @return array
      *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function fillConstraintsBySettings(QueryInterface $query, array $constraints)
     {
         $respectCommentsModeration = isset($this->settings['comments']['moderation'])
             ? (int) $this->settings['comments']['moderation']
             : 0;
-        if ($respectCommentsModeration === 1) {
+        if ($respectCommentsModeration > 1) {
             $constraints[] = $query->equals('status', Comment::STATUS_APPROVED);
         } else {
             $constraints[] = $query->lessThan('status', Comment::STATUS_DECLINED);
