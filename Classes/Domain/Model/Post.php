@@ -17,6 +17,7 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -522,5 +523,18 @@ class Post extends AbstractEntity
     {
         GeneralUtility::logDeprecatedFunction();
         $this->author = $author;
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getUri(): string
+    {
+        return GeneralUtility::makeInstance(ObjectManager::class)
+            ->get(UriBuilder::class)
+                ->setCreateAbsoluteUri(true)
+                ->setTargetPageUid($this->getUid())
+                ->build();
     }
 }

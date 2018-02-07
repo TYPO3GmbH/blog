@@ -178,4 +178,10 @@ call_user_func(function () {
         'priority' => 20,
         'class' => \T3G\AgencyPack\Blog\Form\Wizards\SocialWizard::class
     ];
+
+    // Register Notification visitors
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'][\T3G\AgencyPack\Blog\Notification\CommentAddedNotification::class][]
+        = \T3G\AgencyPack\Blog\Notification\Processor\AdminNotificationProcessor::class;
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'][\T3G\AgencyPack\Blog\Notification\CommentAddedNotification::class][]
+        = \T3G\AgencyPack\Blog\Notification\Processor\AuthorNotificationProcessor::class;
 });

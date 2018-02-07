@@ -1,0 +1,20 @@
+<f:layout name="Default"/>
+
+<f:section name="ContentSection">
+  <p><strong><f:translate key="email.label.post" extensionName="Blog" />: </strong>
+	<f:link.external uri="{post.uri}">{post.uri}</f:link.external>
+  </p>
+  <p><strong><f:translate key="email.label.date" extensionName="Blog" />: </strong>
+	<f:format.date format="d.m.Y H:i:s">{comment.crdate}</f:format.date>
+  </p>
+  <p><strong><f:translate key="email.label.author" extensionName="Blog" />: </strong>
+	<f:if condition="{comment.author}">
+	  <f:then>{comment.author.name} <{comment.author.email}></f:then>
+	  <f:else>{comment.name} <{comment.email}></f:else>
+	</f:if>
+  </p>
+  <p><strong><f:translate key="email.label.comment" extensionName="Blog" />: </strong><br/>
+	<f:format.nl2br>{comment.comment}</f:format.nl2br>
+  </p>
+</f:section>
+

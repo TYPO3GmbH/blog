@@ -18,11 +18,14 @@ namespace T3G\AgencyPack\Blog\Controller;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
+use T3G\AgencyPack\Blog\Notification\NotificationManager;
 use T3G\AgencyPack\Blog\Service\CommentService;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -137,6 +140,14 @@ class CommentController extends ActionController
             LocalizationUtility::translate(self::$messages[$state]['title'], 'blog'),
             self::$messages[$state]['severity']
         );
+        if ($state !== CommentService::STATE_ERROR) {
+            $comment->setCrdate(new \DateTime());
+            GeneralUtility::makeInstance(NotificationManager::class)
+                ->notify(GeneralUtility::makeInstance(CommentAddedNotification::class, '', '', [
+                    'comment' => $comment,
+                    'post' => $post,
+                ]));
+        }
         $this->clearCacheByPost($post);
         $this->redirectToUri(
             $this->controllerContext

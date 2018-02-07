@@ -6,6 +6,7 @@ use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
  * Class CommentService.
@@ -25,6 +26,11 @@ class CommentService
      * @var CommentRepository
      */
     protected $commentRepository;
+
+    /**
+     * @var PersistenceManager
+     */
+    protected $persistenceManager;
 
     /**
      * @var array
@@ -59,11 +65,20 @@ class CommentService
     }
 
     /**
-     * @param Post    $post
+     * @param PersistenceManager $persistenceManager
+     */
+    public function injectPersistenceManager(PersistenceManager $persistenceManager)
+    {
+        $this->persistenceManager = $persistenceManager;
+    }
+
+    /**
+     * @param Post $post
      * @param Comment $comment
      *
      * @return string
      *
+     * @throws \InvalidArgumentException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      */
@@ -93,6 +108,7 @@ class CommentService
             $comment->setPostLanguageId($GLOBALS['TSFE']->sys_language_uid);
             $post->addComment($comment);
             $this->postRepository->update($post);
+            $this->persistenceManager->persistAll();
         }
 
         return $result;

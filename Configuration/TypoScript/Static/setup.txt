@@ -7,6 +7,13 @@ plugin.tx_blog {
         partialRootPaths.0 = EXT:blog/Resources/Private/Partials/
         layoutRootPaths.0 = EXT:blog/Resources/Private/Layouts/
         widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = EXT:blog/Resources/Private/Templates
+
+        # Emails
+        emails {
+            templateRootPaths.0 = EXT:blog/Resources/Private/Mails/Templates/
+            partialRootPaths.0 = EXT:blog/Resources/Private/Mails/Partials/
+            layoutRootPaths.0 = EXT:blog/Resources/Private/Mails/Layouts/
+        }
     }
     settings {
         blogUid = {$plugin.tx_blog.settings.blogUid}
@@ -82,6 +89,19 @@ plugin.tx_blog {
                     # Gravatar rating
                     rating = g
                 }
+            }
+        }
+        # Notifications
+        notifications {
+            email {
+                senderName = {$plugin.tx_blog.settings.notifications.email.senderName}
+                senderMail = {$plugin.tx_blog.settings.notifications.email.senderMail}
+            }
+            T3G\AgencyPack\Blog\Notification\CommentAddedNotification {
+                admin = {$plugin.tx_blog.settings.notifications.CommentAddedNotification.admin}
+                admin.email = {$plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.email}
+
+                author = {$plugin.tx_blog.settings.notifications.CommentAddedNotification.author}
             }
         }
     }

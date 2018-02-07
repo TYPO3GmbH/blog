@@ -21,6 +21,26 @@ plugin {
                     maximumDisplayedItems = 0
                 }
             }
+
+            notifications {
+                email {
+                    # cat=blog/a; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.senderName
+                    senderName = TYPO3 Blog
+                    # cat=blog/a; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.senderMail
+                    senderMail = no-reply@example.com
+                }
+
+                CommentAddedNotification {
+                    # cat=blog/a; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.author
+                    author = 1
+                    # cat=blog/a; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.admin
+                    admin = 1
+                    admin {
+                        # cat=blog/a; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.admin.email
+                        email = admin@example.com
+                    }
+                }
+            }
         }
     }
 }

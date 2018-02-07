@@ -36,6 +36,8 @@ Settings (plugin.tx_blog.settings)
    `comments.google_recaptcha.website_key`_ website key of the re-captcha          string
    `comments.google_recaptcha.secret_key`_  secret key of the re-captcha           string
    `authors.avatar.provider`_               AvatarProvider specific settings       array           see description
+   `notifications.email.senderName`_        global sender name of notifications    string          TYPO3 Blog
+   `notifications.email.senderMail`_        global sender name of notifications    string
    ======================================== ====================================== =============== ===============
 
 .. _tsBlogUid:
@@ -300,6 +302,34 @@ authors.avatar.provider
    Description
          Define AvatarProvider specific configuration. Please see the separate table for the default GravatarProvider `GravatarProvider Settings (plugin.tx_blog.settings.authors.avatar.provider)`_.
          To get more info about AvatarProviders, please see the AvatarProviders section in :doc:`../Administrators/Index`
+
+
+.. _tsNotificationsEmailSenderName:
+
+notifications.email.senderName
+""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         notifications.email.senderName
+   Data type
+         string
+   Description
+         Define the sender name of all email notifications
+
+
+.. _tsNotificationsEmailSenderMail:
+
+notifications.email.senderMail
+""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         notifications.email.senderEmail
+   Data type
+         string
+   Description
+         Define the sender email of all email notifications
 
 
 

@@ -252,6 +252,21 @@
 			<trans-unit id="constantEditor.storagePid" xml:space="preserve">
 				<source>Storage folder:Storage folder of all categories and tags for this blog.</source>
 			</trans-unit>
+			<trans-unit id="constantEditor.senderName" xml:space="preserve">
+				<source>Sender name:Global sender name for notifications</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.senderMail" xml:space="preserve">
+				<source>Sender mail:Global sender email address for notifications</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.CommentAddedNotification.author" xml:space="preserve">
+				<source>Author notifications:Send notification to author of a blog post</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.CommentAddedNotification.admin" xml:space="preserve">
+				<source>Admin notifications:Send notification to admin of the blog</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.CommentAddedNotification.admin.email" xml:space="preserve">
+				<source>Admin mail:Global admin (receiver) email address for notifications</source>
+			</trans-unit>
 			<trans-unit id="constantEditor.lists.posts.maximumDisplayedItems" xml:space="preserve">
 				<source>Maximum displayed items:Maximum number of posts to be displayed (0 = no limit).</source>
 			</trans-unit>
@@ -313,6 +328,24 @@
 			<trans-unit id="label.required.field.explanation" xml:space="preserve">
 				<source>These fields are required</source>
 			</trans-unit>
+
+			<!-- E-Mails -->
+			<trans-unit id="emails.CommentAddedNotification.subject" xml:space="preserve">
+				<source>A new comment was added to the post: %s</source>
+			</trans-unit>
+			<trans-unit id="email.label.post" xml:space="preserve">
+				<source>Post</source>
+			</trans-unit>
+			<trans-unit id="email.label.date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="email.label.author" xml:space="preserve">
+				<source>Author</source>
+			</trans-unit>
+			<trans-unit id="email.label.comment" xml:space="preserve">
+				<source>Comment</source>
+			</trans-unit>
+
 		</body>
 	</file>
 </xliff>

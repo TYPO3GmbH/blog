@@ -20,6 +20,7 @@ use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\CommentService;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
  * Class CommentServiceTest.
@@ -41,6 +42,7 @@ class CommentServiceTest extends UnitTestCase
         $this->postRepositoryProphecy = $this->prophesize(PostRepository::class);
         $this->commentService = new CommentService();
         $this->commentService->injectPostRepository($this->postRepositoryProphecy->reveal());
+        $this->commentService->injectPersistenceManager($this->prophesize(PersistenceManager::class)->reveal());
     }
     /**
      * @test
