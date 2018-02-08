@@ -43,6 +43,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
      */
     public function initializeArguments()
     {
+        parent::initializeArguments();
         $this->registerUniversalTagAttributes();
         $this->registerTagAttribute('target', 'string', 'Target of link');
         $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute');

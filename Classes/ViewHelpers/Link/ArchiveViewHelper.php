@@ -42,6 +42,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
      */
     public function initializeArguments()
     {
+        parent::initializeArguments();
         $this->registerUniversalTagAttributes();
         $this->registerTagAttribute('target', 'string', 'Target of link');
         $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
