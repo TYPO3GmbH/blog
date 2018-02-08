@@ -35,6 +35,8 @@ Settings (plugin.tx_blog.settings)
    `comments.google_recaptcha`_             Activate google re-captcha             int             0
    `comments.google_recaptcha.website_key`_ website key of the re-captcha          string
    `comments.google_recaptcha.secret_key`_  secret key of the re-captcha           string
+   `comments.disqus`_                       Activate disque.com for your blog      int             0
+   `comments.disqus.shortname`_             Set your disqus.com shortname          string
    `authors.avatar.provider`_               AvatarProvider specific settings       array           see description
    `notifications.email.senderName`_        global sender name of notifications    string          TYPO3 Blog
    `notifications.email.senderMail`_        global sender name of notifications    string
@@ -288,6 +290,37 @@ comments.google_recaptcha.secret_key
    Description
          The secret key of the google re-captcha, this is required for the validation of the captcha
          Get this key from google: https://www.google.com/recaptcha/admin#list
+
+
+.. _tsCommentsDisqus:
+
+comments.disqus
+"""""""""""""""
+.. container:: table-row
+
+   Property
+         comments.disqus
+   Data type
+         int
+   Description
+         Activate disqus as comment system. this option disable the default comments.
+
+
+.. _tsCommentsDisqusShortname:
+
+
+comments.disqus.shortname
+"""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         comments.disqus.shortname
+   Data type
+         string
+   Description
+         The shortname / forum id of your disqus.com project. This is the subdomain part, like FOOBAR if your subdomain is FOOBAR.disqus.com
+         Get this key from disqus.com: https://disqus.com
+
 
 .. _tsAuthorsAvatarProvider:
 

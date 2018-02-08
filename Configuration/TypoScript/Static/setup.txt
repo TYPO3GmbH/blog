@@ -75,6 +75,12 @@ plugin.tx_blog {
                 website_key =
                 secret_key =
             }
+            # Disqus.com
+            disqus = {$plugin.tx_blog.settings.comments.disqus}
+            disqus {
+                # shortname is the forum name and the subdomain part
+                shortname = {$plugin.tx_blog.settings.comments.disqus.shortname}
+            }
         }
         # Authors related settings
         authors {

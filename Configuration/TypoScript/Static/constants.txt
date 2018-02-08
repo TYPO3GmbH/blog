@@ -22,6 +22,15 @@ plugin {
                 }
             }
 
+            comments {
+                # cat=blog/a; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.disqus
+                disqus = 0
+                disqus {
+                    # cat=blog/a; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.disqus.shortname
+                    shortname =
+                }
+            }
+
             notifications {
                 email {
                     # cat=blog/a; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.senderName

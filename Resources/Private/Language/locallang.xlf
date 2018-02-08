@@ -237,6 +237,12 @@
 			<trans-unit id="constantEditor.authorUid" xml:space="preserve">
 				<source>Author UID:Location of the "Blog: Author" plugin. Shows posts by author.</source>
 			</trans-unit>
+			<trans-unit id="constantEditor.comments.disqus" xml:space="preserve">
+				<source>Enable Disqus:Use disqus instead of internal comments?</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.comments.disqus.shortname" xml:space="preserve">
+				<source>Disqus shortname:The shortname / forum id of your disqus setup.</source>
+			</trans-unit>
 			<trans-unit id="constantEditor.blogUid" xml:space="preserve">
 				<source>List posts UID:Location of the "Blog: List of posts" plugin. This page UID is the root page for the blog. All blog post pages are located below this page.</source>
 			</trans-unit>

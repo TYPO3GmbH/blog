@@ -25,3 +25,9 @@
         </f:else>
     </f:if>
 </f:section>
+
+<f:section name="FooterAssets">
+    <f:if condition="{settings.comments.disqus._typoScriptNodeValue} === '1'">
+        <script id="dsq-count-scr" src="//{settings.comments.disqus.shortname}.disqus.com/count.js" async></script>
+    </f:if>
+</f:section>
