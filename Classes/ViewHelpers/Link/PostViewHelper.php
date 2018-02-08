@@ -15,13 +15,17 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Domain\Model\Post;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * Class PostViewHelper.
  */
 class PostViewHelper extends AbstractTagBasedViewHelper
 {
+    /** @var RenderingContext */
+    protected $renderingContext;
+
     /**
      * PostViewHelper constructor.
      */
@@ -34,14 +38,15 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     /**
      * Arguments initialization.
      *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
     {
         $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link', false);
-        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute', false);
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document', false);
+        $this->registerTagAttribute('target', 'string', 'Target of link');
+        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute');
+        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('post', Post::class, 'The post to link to');
         $this->registerArgument('section', 'string', 'the anchor to be added to the URI');
@@ -52,13 +57,13 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     /**
      * @return string Rendered page URI
      */
-    public function render()
+    public function render(): string
     {
         /** @var Post $post */
         $post = $this->arguments['post'];
         $section = $this->arguments['section'] ?: null;
         $pageUid = $post !== null ? (int) $post->getUid() : 0;
-        $uriBuilder = $this->controllerContext->getUriBuilder();
+        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $createAbsoluteUri = (bool) $this->arguments['createAbsoluteUri'];
         $uri = $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
@@ -66,7 +71,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
             ->setSection($section)
             ->setCreateAbsoluteUri($createAbsoluteUri)
             ->build();
-        if ((string) $uri !== '') {
+        if ($uri !== '') {
             if ($this->arguments['returnUri']) {
                 return htmlspecialchars($uri);
             }

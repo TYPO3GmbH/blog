@@ -15,13 +15,17 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Domain\Model\Author;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * Class AuthorViewHelper.
  */
 class AuthorViewHelper extends AbstractTagBasedViewHelper
 {
+    /** @var RenderingContext */
+    protected $renderingContext;
+
     /**
      * CategoryViewHelper constructor.
      */
@@ -34,13 +38,14 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
     /**
      * Arguments initialization.
      *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
     {
         $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link', false);
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document', false);
+        $this->registerTagAttribute('target', 'string', 'Target of link');
+        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('author', Author::class, 'The author to link to', true);
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
@@ -49,7 +54,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
     /**
      * @return string Rendered page URI
      */
-    public function render()
+    public function render(): string
     {
         $rssFormat = (bool) $this->arguments['rss'];
         /** @var Author $author */
@@ -60,7 +65,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
                 'author' => $author->getUid(),
             ],
         ];
-        $uriBuilder = $this->controllerContext->getUriBuilder();
+        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setUseCacheHash(true)
@@ -72,7 +77,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         }
         $uri = $uriBuilder->uriFor('listPostsByAuthor', [], 'Post');
 
-        if ((string) $uri !== '') {
+        if ($uri !== '') {
             $linkText = $this->renderChildren() ?: $author->getName();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);

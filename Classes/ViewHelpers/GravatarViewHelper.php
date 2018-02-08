@@ -14,7 +14,7 @@ namespace T3G\AgencyPack\Blog\ViewHelpers;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * Class GravatarViewHelper.
@@ -48,7 +48,7 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
     /**
      * @return string the HTML <img>-Tag of the gravatar
      */
-    public function render()
+    public function render(): string
     {
         $size = (int) $this->arguments['size'];
         $default = '';

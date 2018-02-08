@@ -15,13 +15,17 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * Class TagViewHelper.
  */
 class TagViewHelper extends AbstractTagBasedViewHelper
 {
+    /** @var RenderingContext */
+    protected $renderingContext;
+
     /**
      * TagViewHelper constructor.
      */
@@ -34,13 +38,14 @@ class TagViewHelper extends AbstractTagBasedViewHelper
     /**
      * Arguments initialization.
      *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
     {
         $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link', false);
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document', false);
+        $this->registerTagAttribute('target', 'string', 'Target of link');
+        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('tag', Tag::class, 'The tag to link to', true);
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
@@ -49,7 +54,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
     /**
      * @return string Rendered page URI
      */
-    public function render()
+    public function render(): string
     {
         $rssFormat = (bool) $this->arguments['rss'];
         /** @var Tag $tag */
@@ -60,7 +65,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
                 'tag' => $tag->getUid(),
             ],
         ];
-        $uriBuilder = $this->controllerContext->getUriBuilder();
+        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setUseCacheHash(true)
@@ -71,7 +76,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
                 ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_tag.']['typeNum']);
         }
         $uri = $uriBuilder->uriFor('listPostsByTag', [], 'Post');
-        if ((string) $uri !== '') {
+        if ($uri !== '') {
             $linkText = $this->renderChildren() ?: $tag->getTitle();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);

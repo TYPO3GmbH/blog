@@ -14,12 +14,11 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * Class CommentViewHelper.
@@ -44,9 +43,9 @@ class CommentViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments()
     {
         $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link', false);
-        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute', false);
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document', false);
+        $this->registerTagAttribute('target', 'string', 'Target of link');
+        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute');
+        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('comment', Comment::class, 'The comment to link to');
         $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);
@@ -58,7 +57,7 @@ class CommentViewHelper extends AbstractTagBasedViewHelper
      * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
      * @throws \InvalidArgumentException
      */
-    public function render()
+    public function render(): string
     {
         /** @var Comment $comment */
         $comment = $this->arguments['comment'];
@@ -69,7 +68,7 @@ class CommentViewHelper extends AbstractTagBasedViewHelper
         $arguments = GeneralUtility::_GET();
         unset($arguments['M'], $arguments['moduleToken']);
         $uri .= '&returnUrl='.rawurlencode(BackendUtility::getModuleUrl(GeneralUtility::_GET('M'), $arguments));
-        if ((string) $uri !== '') {
+        if ($uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;
             }

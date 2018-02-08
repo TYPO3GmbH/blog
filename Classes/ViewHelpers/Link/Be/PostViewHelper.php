@@ -16,7 +16,7 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
  */
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -42,9 +42,9 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments()
     {
         $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link', false);
-        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute', false);
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document', false);
+        $this->registerTagAttribute('target', 'string', 'Target of link');
+        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute');
+        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('post', Post::class, 'The post to link to');
         $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);
@@ -62,7 +62,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         $pageUid = $post !== null ? (int) $post->getUid() : 0;
 
         $uri = BackendUtility::getModuleUrl('web_layout', ['id' => $pageUid]);
-        if ((string) $uri !== '') {
+        if ($uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;
             }

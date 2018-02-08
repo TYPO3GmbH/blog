@@ -18,7 +18,7 @@ use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * Class TagViewHelper.
@@ -43,9 +43,9 @@ class TagViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments()
     {
         $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link', false);
-        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute', false);
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document', false);
+        $this->registerTagAttribute('target', 'string', 'Target of link');
+        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute');
+        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('tag', Tag::class, 'The tag to link to');
         $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);
@@ -68,7 +68,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         $arguments = GeneralUtility::_GET();
         unset($arguments['M'], $arguments['moduleToken']);
         $uri .= '&returnUrl='.rawurlencode(BackendUtility::getModuleUrl(GeneralUtility::_GET('M'), $arguments));
-        if ((string) $uri !== '') {
+        if ($uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;
             }

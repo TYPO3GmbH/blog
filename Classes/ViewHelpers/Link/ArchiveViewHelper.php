@@ -14,13 +14,17 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * Class ArchiveViewHelper.
  */
 class ArchiveViewHelper extends AbstractTagBasedViewHelper
 {
+    /** @var RenderingContext */
+    protected $renderingContext;
+
     /**
      * ArchiveViewHelper constructor.
      */
@@ -33,13 +37,14 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
     /**
      * Arguments initialization.
      *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
     {
         $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link', false);
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document', false);
+        $this->registerTagAttribute('target', 'string', 'Target of link');
+        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('month', 'int', 'The month to link to');
         $this->registerArgument('year', 'int', 'The year to link to', true);
@@ -63,7 +68,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         if ($month > 0) {
             $additionalParams['tx_blog_archive']['month'] = $month;
         }
-        $uriBuilder = $this->controllerContext->getUriBuilder();
+        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setUseCacheHash(true)
@@ -74,7 +79,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
                 ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_archive.']['typeNum']);
         }
         $uri = $uriBuilder->uriFor('listPostsByDate', [], 'Post');
-        if ((string) $uri !== '') {
+        if ($uri !== '') {
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($this->renderChildren());
             $result = $this->tag->render();

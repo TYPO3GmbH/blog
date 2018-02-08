@@ -15,13 +15,17 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Domain\Model\Category;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * Class CategoryViewHelper.
  */
 class CategoryViewHelper extends AbstractTagBasedViewHelper
 {
+    /** @var RenderingContext */
+    protected $renderingContext;
+
     /**
      * CategoryViewHelper constructor.
      */
@@ -34,13 +38,14 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
     /**
      * Arguments initialization.
      *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
     {
         $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link', false);
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document', false);
+        $this->registerTagAttribute('target', 'string', 'Target of link');
+        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('category', Category::class, 'The category to link to', true);
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
@@ -49,7 +54,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
     /**
      * @return string Rendered page URI
      */
-    public function render()
+    public function render(): string
     {
         $rssFormat = (bool) $this->arguments['rss'];
         /** @var Category $category */
@@ -60,7 +65,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
                 'category' => $category->getUid(),
             ],
         ];
-        $uriBuilder = $this->controllerContext->getUriBuilder();
+        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setUseCacheHash(true)
@@ -72,7 +77,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         }
         $uri = $uriBuilder->uriFor('listPostsByCategory', [], 'Post');
 
-        if ((string) $uri !== '') {
+        if ($uri !== '') {
             $linkText = $this->renderChildren() ?: $category->getTitle();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
