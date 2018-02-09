@@ -21,7 +21,7 @@ Contributions
 -------------
 
 Any contributor is welcome to join our team. All you need is an account on our bitbucket system.
-Please request a user account in our `service desk`_. If you already have an account, please ask for access to project in our `service desk`_.
+Please request a user account in our `service desk`_. If you already have an account, please ask for access to the project in our `service desk`_.
 
 
 Clone / git repo
