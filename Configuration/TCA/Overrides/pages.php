@@ -162,9 +162,14 @@ call_user_func(
             'pages',
             $temporaryColumns
         );
-        $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where']
-            = ' AND sys_category.pid = ###PAGE_TSCONFIG_ID### '
-            .$GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where'];
+        $GLOBALS['TCA']['pages']['types'][\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST]['columnsOverrides'] = [
+            'categories' => [
+                'config' => [
+                    'foreign_table_where' => ' AND sys_category.pid = ###PAGE_TSCONFIG_ID### ' .
+                        $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where']
+                ]
+            ]
+        ];
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             'pages',
             '--div--;'.$ll.'pages.tabs.blog, crdate, crdate_month, crdate_year, archive_date, tags, authors, comments_active, comments, sharing_enabled',
