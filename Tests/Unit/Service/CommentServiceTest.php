@@ -21,6 +21,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\CommentService;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class CommentServiceTest.
@@ -39,6 +40,7 @@ class CommentServiceTest extends UnitTestCase
 
     public function setUp()
     {
+        $GLOBALS['TSFE'] = $this->prophesize(TypoScriptFrontendController::class)->reveal();
         $this->postRepositoryProphecy = $this->prophesize(PostRepository::class);
         $this->commentService = new CommentService();
         $this->commentService->injectPostRepository($this->postRepositoryProphecy->reveal());
