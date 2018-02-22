@@ -69,6 +69,9 @@
 			<trans-unit id="tx_blog_domain_model_tag.description" xml:space="preserve">
 				<source>Description (meta description)</source>
 			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_tag.tabs.seo" xml:space="preserve">
+				<source>SEO</source>
+			</trans-unit>
 
 			<trans-unit id="tx_blog_domain_model_author" xml:space="preserve">
 				<source>Blog: Author</source>
