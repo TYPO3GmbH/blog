@@ -4,14 +4,17 @@ This blog extension uses TYPO3s core concepts and elements to provide a full-blo
 
 ## Requirements
 
-v7.6: 
+### v7.6 ![Build Status](https://bamboo.typo3.com/plugins/servlet/wittified/build-status/PP-EXTB7) 
 - TYPO3 CMS 7.6+
+- PHP 5.5
 
-v8.7:
+### v8.7 ![Build Status](https://bamboo.typo3.com/plugins/servlet/wittified/build-status/PP-EXTB8)
 - TYPO3 CMS 8.7
+- PHP 7.0
 
-master:
+### master ![Build Status](https://bamboo.typo3.com/plugins/servlet/wittified/build-status/PP-EXTBM)
 - TYPO3 CMS dev-master
+- PHP 7.0
 
 ## License
 GPL-2.0-or-later
