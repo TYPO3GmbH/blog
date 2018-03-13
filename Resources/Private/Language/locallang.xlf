@@ -10,7 +10,7 @@
 				<source>Comments</source>
 			</trans-unit>
 			<trans-unit id="headline.category" xml:space="preserve">
-				<source>Post of category %s</source>
+				<source>Posts of category: %s</source>
 			</trans-unit>
 			<trans-unit id="headline.categories" xml:space="preserve">
 				<source>Categories</source>
