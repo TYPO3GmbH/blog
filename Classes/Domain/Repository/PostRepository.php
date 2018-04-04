@@ -241,6 +241,18 @@ class PostRepository extends Repository
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('pages');
+
+        $conditions = $queryBuilder->expr()->andX(
+            $queryBuilder->expr()->eq(
+                'doktype',
+                $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, \PDO::PARAM_INT)
+            ),
+            $queryBuilder->expr()->in(
+                'pid',
+                $this->getPidsForConstraints()
+            )
+        );
+
         return $queryBuilder
             ->select(
                 'crdate_month AS month',
@@ -248,10 +260,7 @@ class PostRepository extends Repository
             )
             ->addSelectLiteral($queryBuilder->expr()->count('*', 'count'))
             ->from('pages')
-            ->where($queryBuilder->expr()->eq(
-                'doktype',
-                $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, \PDO::PARAM_INT))
-            )
+            ->where($conditions)
             ->groupBy(
                 'month',
                 'year'
@@ -287,20 +296,32 @@ class PostRepository extends Repository
     protected function getStoragePidConstraint()
     {
         if (TYPO3_MODE === 'FE') {
-            // only add non empty pids (pid 0 will be removed as well
-            $pids = array_filter($this->getStoragePidsFromTypoScript(), function ($v) {
-                return !empty($v);
-            });
+            $pids = $this->getPidsForConstraints();
 
-            if (count($pids) === 0) {
-                $rootLine = $this->getTypoScriptFontendController()->sys_page
-                    ->getRootLine($this->getTypoScriptFontendController()->id);
-                foreach ($rootLine as $value) {
-                    $pids[] = $value['uid'];
-                }
-            }
             $query = $this->createQuery();
+
             return $query->in('pid', $pids);
         }
+    }
+
+    /**
+     * @return array
+     */
+    protected function getPidsForConstraints()
+    {
+        // only add non empty pids (pid 0 will be removed as well
+        $pids = array_filter($this->getStoragePidsFromTypoScript(), function ($v) {
+            return !empty($v);
+        });
+
+        if (count($pids) === 0) {
+            $rootLine = $this->getTypoScriptFontendController()->sys_page
+                ->getRootLine($this->getTypoScriptFontendController()->id);
+            foreach ($rootLine as $value) {
+                $pids[] = $value['uid'];
+            }
+        }
+
+        return $pids;
     }
 }
