@@ -28,7 +28,7 @@
     }
   },
   "require": {
-    "typo3/cms-core": "dev-master",
-    "typo3/cms-install": "dev-master"
+    "typo3/cms-core": "9.2.x-dev",
+    "typo3/cms-install": "9.2.x-dev"
   }
 }
