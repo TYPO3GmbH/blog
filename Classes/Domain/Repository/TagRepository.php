@@ -58,6 +58,8 @@ class TagRepository extends Repository
             ->setMaxResults($limit)
             ->execute()
             ->fetchAll();
+
+        $rows = [];
         foreach ($result as $row) {
             $row['tagObject'] = $this->findByUid($row['uid']);
             $rows[] = $row;
