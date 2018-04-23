@@ -28,7 +28,17 @@
     }
   },
   "require": {
+    "psr/http-message": "^1.0.0",
+    "typo3/cms-backend": "9.3.*@dev",
     "typo3/cms-core": "9.3.*@dev",
-    "typo3/cms-install": "9.3.*@dev"
+    "typo3/cms-extbase": "9.3.*@dev",
+    "typo3/cms-extensionmanager": "9.3.*@dev",
+    "typo3/cms-fluid": "9.3.*@dev",
+    "typo3/cms-frontend": "9.3.*@dev",
+    "typo3/cms-install": "9.3.*@dev",
+    "typo3fluid/fluid": "2.5.*"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
   }
 }
