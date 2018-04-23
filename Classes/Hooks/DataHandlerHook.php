@@ -3,6 +3,7 @@
 namespace T3G\AgencyPack\Blog\Hooks;
 
 use T3G\AgencyPack\Blog\Constants;
+use T3G\AgencyPack\Blog\Service\CacheService;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -14,6 +15,10 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 class DataHandlerHook
 {
     const TABLE_PAGES = 'pages';
+    const TABLE_CATEGORIES = 'sys_category';
+    const TABLE_AUTHORS = 'tx_blog_domain_model_author';
+    const TABLE_COMMENTS = 'tx_blog_domain_model_comment';
+    const TABLE_TAGS = 'tx_blog_domain_model_tag';
 
     /**
      * @param string $status
@@ -24,6 +29,7 @@ class DataHandlerHook
      *
      * @throws \InvalidArgumentException
      * @throws \TYPO3\CMS\Core\Exception
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
     public function processDatamap_afterDatabaseOperations($status, $table, $id, array $fieldArray, $pObj)
     {
@@ -51,6 +57,30 @@ class DataHandlerHook
                     ->where($queryBuilder->expr()->eq('uid', (int)$id))
                     ->execute();
             }
+        }
+
+        // Clear caches if required
+        switch ($table) {
+            case self::TABLE_PAGES:
+                GeneralUtility::makeInstance(CacheService::class)
+                    ->flushCacheByTag('tx_blog_post_' . $id);
+                break;
+            case self::TABLE_CATEGORIES:
+                GeneralUtility::makeInstance(CacheService::class)
+                    ->flushCacheByTag('tx_blog_category_' . $id);
+                break;
+            case self::TABLE_AUTHORS:
+                GeneralUtility::makeInstance(CacheService::class)
+                    ->flushCacheByTag('tx_blog_author_' . $id);
+                break;
+            case self::TABLE_COMMENTS:
+                GeneralUtility::makeInstance(CacheService::class)
+                    ->flushCacheByTag('tx_blog_comment_' . $id);
+                break;
+            case self::TABLE_TAGS:
+                GeneralUtility::makeInstance(CacheService::class)
+                    ->flushCacheByTag('tx_blog_tag_' . $id);
+                break;
         }
     }
 

@@ -19,6 +19,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
+use T3G\AgencyPack\Blog\Service\CacheService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -45,6 +46,11 @@ class WidgetController extends ActionController
      * @var CommentRepository
      */
     protected $commentRepository;
+
+    /**
+     * @var CacheService
+     */
+    protected $blogCacheService;
 
     /**
      * @param CategoryRepository $categoryRepository
@@ -79,11 +85,23 @@ class WidgetController extends ActionController
     }
 
     /**
+     * @param \T3G\AgencyPack\Blog\Service\CacheService $cacheService
+     */
+    public function injectBlogCacheService(CacheService $cacheService)
+    {
+        $this->blogCacheService = $cacheService;
+    }
+
+    /**
      *
      */
     public function categoriesAction()
     {
-        $this->view->assign('categories', $this->categoryRepository->findAll());
+        $categories = $this->categoryRepository->findAll();
+        $this->view->assign('categories', $categories);
+        foreach ($categories as $category) {
+            $this->blogCacheService->addTagToPage('tx_blog_category_' . $category->getUid());
+        }
     }
 
     /**
@@ -116,6 +134,9 @@ class WidgetController extends ActionController
             $tagReference['size'] = floor($size);
         }
         unset($tagReference);
+        foreach ($tags as $tag) {
+            $this->blogCacheService->addTagToPage('tx_blog_tag_' . $tag->getUid());
+        }
         $this->view->assign('tags', $tags);
     }
 
@@ -130,6 +151,9 @@ class WidgetController extends ActionController
             ? $this->postRepository->findAllWithLimit($limit)
             : $this->postRepository->findAll();
 
+        foreach ($posts as $post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
         $this->view->assign('posts', $posts);
     }
 
@@ -142,7 +166,11 @@ class WidgetController extends ActionController
     {
         $limit = (int) $this->settings['widgets']['comments']['limit'] ?: 5;
         $blogSetup = (int) $this->settings['widgets']['comments']['blogSetup'] ?: null;
-        $this->view->assign('comments', $this->commentRepository->findActiveComments($limit,  $blogSetup));
+        $comments = $this->commentRepository->findActiveComments($limit,  $blogSetup);
+        $this->view->assign('comments', $comments);
+        foreach ($comments as $comment) {
+            $this->blogCacheService->addTagToPage('tx_blog_comment_' . $comment->getUid());
+        }
     }
 
     /**
@@ -150,9 +178,11 @@ class WidgetController extends ActionController
      */
     public function archiveAction()
     {
-        $this->view->assign('archiveData', $this->resortArchiveData(
-            $this->postRepository->findMonthsAndYearsWithPosts()
-        ));
+        $posts = $this->postRepository->findMonthsAndYearsWithPosts();
+        $this->view->assign('archiveData', $this->resortArchiveData($posts));
+        foreach ($posts as $post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
     }
 
     /**

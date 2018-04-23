@@ -18,6 +18,7 @@ namespace T3G\AgencyPack\Blog\Controller;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
@@ -66,6 +67,11 @@ class BackendController extends ActionController
     protected $commentRepository;
 
     /**
+     * @var CacheService
+     */
+    protected $blogCacheService;
+
+    /**
      * @param SetupService $setupService
      */
     public function injectSetupService(SetupService $setupService)
@@ -87,6 +93,14 @@ class BackendController extends ActionController
     public function injectCommentRepository(CommentRepository $commentRepository)
     {
         $this->commentRepository = $commentRepository;
+    }
+
+    /**
+     * @param \T3G\AgencyPack\Blog\Service\CacheService $cacheService
+     */
+    public function injectBlogCacheService(CacheService $cacheService)
+    {
+        $this->blogCacheService = $cacheService;
     }
 
     /**
@@ -222,10 +236,12 @@ class BackendController extends ActionController
      * @param string $filter
      * @param string $blogSetup
      *
+     * @throws \InvalidArgumentException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
     public function updateCommentStatusAction(Comment $comment, $status, $filter = null, $blogSetup = null)
     {
@@ -245,6 +261,7 @@ class BackendController extends ActionController
         }
         if ($updateComment) {
             $this->commentRepository->update($comment);
+            $this->blogCacheService->flushCacheByTag('tx_blog_comment_' . $comment->getUid());
         }
         $this->redirect('comments', null, null, ['filter' => $filter, 'blogSetup' => $blogSetup]);
     }
