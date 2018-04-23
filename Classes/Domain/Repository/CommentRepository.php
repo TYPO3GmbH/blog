@@ -195,7 +195,7 @@ class CommentRepository extends Repository
         $respectCommentsModeration = isset($this->settings['comments']['moderation'])
             ? (int) $this->settings['comments']['moderation']
             : 0;
-        if ($respectCommentsModeration > 1) {
+        if ($respectCommentsModeration >= 1) {
             $constraints[] = $query->equals('status', Comment::STATUS_APPROVED);
         } else {
             $constraints[] = $query->lessThan('status', Comment::STATUS_DECLINED);
