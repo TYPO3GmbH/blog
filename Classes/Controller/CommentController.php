@@ -18,10 +18,9 @@ namespace T3G\AgencyPack\Blog\Controller;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\CommentService;
-use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -62,6 +61,11 @@ class CommentController extends ActionController
     protected $commentService;
 
     /**
+     * @var CacheService
+     */
+    protected $blogCacheService;
+
+    /**
      * @param PostRepository $postRepository
      */
     public function injectPostRepository(PostRepository $postRepository)
@@ -75,6 +79,14 @@ class CommentController extends ActionController
     public function injectCommentService(CommentService $commentService)
     {
         $this->commentService = $commentService;
+    }
+
+    /**
+     * @param \T3G\AgencyPack\Blog\Service\CacheService $cacheService
+     */
+    public function injectBlogCacheService(CacheService $cacheService)
+    {
+        $this->blogCacheService = $cacheService;
     }
 
     /**
@@ -137,7 +149,6 @@ class CommentController extends ActionController
             LocalizationUtility::translate(self::$messages[$state]['title'], 'blog'),
             self::$messages[$state]['severity']
         );
-        $this->clearCacheByPost($post);
         $this->redirectToUri(
             $this->controllerContext
                 ->getUriBuilder()
@@ -157,18 +168,11 @@ class CommentController extends ActionController
     {
         $post = $this->postRepository->findCurrentPost();
         if ($post instanceof Post) {
-            $this->view->assign('comments', $this->commentService->getCommentsByPost($post));
+            $comments = $this->commentService->getCommentsByPost($post);
+            foreach ($comments as $comment) {
+                $this->blogCacheService->addTagToPage('tx_blog_comment_' . $comment->getUid());
+            }
+            $this->view->assign('comments', $comments);
         }
-    }
-
-    /**
-     * @param Post $post
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function clearCacheByPost(Post $post)
-    {
-        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
-        $dataHandler->clear_cacheCmd($post->getUid());
     }
 }

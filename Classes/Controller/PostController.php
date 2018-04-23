@@ -22,6 +22,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\AuthorRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
+use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\MetaService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
@@ -52,6 +53,11 @@ class PostController extends ActionController
      * @var AuthorRepository
      */
     protected $authorRepository;
+
+    /**
+     * @var CacheService
+     */
+    protected $blogCacheService;
 
     /**
      * @param CategoryRepository $categoryRepository
@@ -85,6 +91,18 @@ class PostController extends ActionController
         $this->authorRepository = $authorRepository;
     }
 
+    /**
+     * @param \T3G\AgencyPack\Blog\Service\CacheService $cacheService
+     */
+    public function injectBlogCacheService(CacheService $cacheService)
+    {
+        $this->blogCacheService = $cacheService;
+    }
+
+    /**
+     * @param ViewInterface $view
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
+     */
     protected function initializeView(ViewInterface $view)
     {
         parent::initializeView($view);
@@ -133,6 +151,10 @@ class PostController extends ActionController
             ? $this->postRepository->findAll()
             : $this->postRepository->findAllWithLimit($maximumItems);
 
+        foreach ($posts as $post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
+
         $this->view->assign('posts', $posts);
     }
 
@@ -154,11 +176,15 @@ class PostController extends ActionController
             $this->redirect('listRecentPosts');
         }
         $timestamp = mktime(0, 0, 0, $month, 1, $year);
+        $posts = $this->postRepository->findByMonthAndYear($year, $month);
+        foreach ($posts as $post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
         $this->view->assignMultiple([
             'month' => $month,
             'year' => $year,
             'timestamp' => $timestamp,
-            'posts' => $this->postRepository->findByMonthAndYear($year, $month),
+            'posts' => $posts,
         ]);
         $title = str_replace([
             '###MONTH###',
@@ -186,11 +212,15 @@ class PostController extends ActionController
         if (null === $category) {
             $this->view->assign('categories', $this->categoryRepository->findAll());
         } else {
-            $this->view->assign('posts', $this->postRepository->findAllByCategory($category));
+            $posts = $this->postRepository->findAllByCategory($category);
+            $this->view->assign('posts', $posts);
             $this->view->assign('category', $category);
             MetaService::set(MetaService::META_TITLE, $category->getTitle());
             MetaService::set(MetaService::META_DESCRIPTION, $category->getDescription());
             MetaService::set(MetaService::META_CATEGORIES, [$category->getTitle()]);
+            foreach ($posts as $post) {
+                $this->blogCacheService->addTagsForPost($post);
+            }
         }
     }
 
@@ -207,10 +237,14 @@ class PostController extends ActionController
         if (null === $author) {
             $this->view->assign('authors', $this->authorRepository->findAll());
         } else {
-            $this->view->assign('posts', $this->postRepository->findAllByAuthor($author));
+            $posts = $this->postRepository->findAllByAuthor($author);
+            $this->view->assign('posts', $posts);
             $this->view->assign('author', $author);
             MetaService::set(MetaService::META_TITLE, $author->getName());
             MetaService::set(MetaService::META_DESCRIPTION, $author->getBio());
+            foreach ($posts as $post) {
+                $this->blogCacheService->addTagsForPost($post);
+            }
         }
     }
 
@@ -227,11 +261,15 @@ class PostController extends ActionController
         if (null === $tag) {
             $this->view->assign('tags', $this->tagRepository->findAll());
         } else {
-            $this->view->assign('posts', $this->postRepository->findAllByTag($tag));
+            $posts = $this->postRepository->findAllByTag($tag);
+            $this->view->assign('posts', $posts);
             $this->view->assign('tag', $tag);
             MetaService::set(MetaService::META_TITLE, $tag->getTitle());
             MetaService::set(MetaService::META_DESCRIPTION, $tag->getDescription());
             MetaService::set(MetaService::META_TAGS, [$tag->getTitle()]);
+            foreach ($posts as $post) {
+                $this->blogCacheService->addTagsForPost($post);
+            }
         }
     }
 
@@ -247,7 +285,9 @@ class PostController extends ActionController
      */
     public function metadataAction()
     {
-        $this->view->assign('post', $this->postRepository->findCurrentPost());
+        $post = $this->postRepository->findCurrentPost();
+        $this->view->assign('post', $post);
+        $this->blogCacheService->addTagsForPost($post);
     }
 
     /**
@@ -255,6 +295,8 @@ class PostController extends ActionController
      */
     public function authorsAction()
     {
-        $this->view->assign('post', $this->postRepository->findCurrentPost());
+        $post = $this->postRepository->findCurrentPost();
+        $this->view->assign('post', $post);
+        $this->blogCacheService->addTagsForPost($post);
     }
 }
