@@ -29,7 +29,7 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  */
 
 /**
- * Class GravatarViewHelper.
+ * Class GravatarProvider.
  */
 class GravatarProvider implements AvatarProviderInterface
 {

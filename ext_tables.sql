@@ -131,6 +131,8 @@ CREATE TABLE tx_blog_domain_model_author (
   website varchar(255) DEFAULT '' NOT NULL,
   email varchar(255) DEFAULT '' NOT NULL,
   location varchar(255) DEFAULT '' NOT NULL,
+  image int(11) DEFAULT '0' NOT NULL,
+  avatar_provider varchar(255) DEFAULT '' NOT NULL,
 
   twitter varchar(255) DEFAULT '' NOT NULL,
   googleplus varchar(255) DEFAULT '' NOT NULL,

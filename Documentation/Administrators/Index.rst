@@ -237,15 +237,9 @@ AvatarProvider
 --------------
 
 The default AvatarProvider is the `GravatarProvider`, this means the avatar of an author is received from gravatar.com.
+The extension provides also an `ImageProvider` for local stored images.
 
-You can implement your own AvatarProvider, create a class which implements the `AvatarProviderInterface` and register your class:
+But you can also implement your own AvatarProvider:
 
-.. code-block:: ts
-
-   config.tx_extbase {
-      objects {
-         T3G\AgencyPack\Blog\AvatarProviderInterface {
-            className = T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider
-         }
-      }
-   }
+1) Create a class which implements the `AvatarProviderInterface`.
+2) Add your provider to the TCA field "avatar_provider" to make it selectable in the author record
