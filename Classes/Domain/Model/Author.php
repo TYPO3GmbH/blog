@@ -14,18 +14,25 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider;
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
- * Class Tag.
+ * Class Author.
  *
- * This model is a representation of the tag table.
- * Tags can be assigned to blog posts.
+ * This model is a representation of the author table.
  */
 class Author extends AbstractEntity
 {
+    /**
+     * @var string
+     */
+    protected $avatarProvider;
+
     /**
      * @var AvatarProviderInterface
      */
@@ -40,6 +47,11 @@ class Author extends AbstractEntity
      * @var string
      */
     protected $title;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     */
+    protected $image;
 
     /**
      * @var string
@@ -93,14 +105,6 @@ class Author extends AbstractEntity
     protected $posts;
 
     /**
-     * @param AvatarProviderInterface $avatarProviderInterface
-     */
-    public function injectAvatarProviderInterface(AvatarProviderInterface $avatarProviderInterface)
-    {
-        $this->avatar = $avatarProviderInterface;
-    }
-
-    /**
      * Post constructor.
      */
     public function __construct()
@@ -117,19 +121,32 @@ class Author extends AbstractEntity
     }
 
     /**
+     * @return object|AvatarProviderInterface
+     */
+    public function getAvatarProvider()
+    {
+        return !empty($this->avatarProvider)
+            ? GeneralUtility::makeInstance($this->avatarProvider)
+            : GeneralUtility::makeInstance(GravatarProvider::class);
+    }
+
+    /**
+     * @param string $avatarProvider
+     */
+    public function setAvatarProvider(string $avatarProvider)
+    {
+        $this->avatarProvider = $avatarProvider;
+    }
+
+    /**
      * @return string
      */
     public function getAvatar()
     {
+        if ($this->avatar === null) {
+            $this->avatar = $this->getAvatarProvider();
+        }
         return $this->avatar->getAvatarUrl($this);
-    }
-
-    /**
-     * @param AvatarProviderInterface $avatar
-     */
-    public function setAvatar(AvatarProviderInterface $avatar)
-    {
-        $this->avatar = $avatar;
     }
 
     /**
@@ -162,6 +179,22 @@ class Author extends AbstractEntity
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     */
+    public function setImage(FileReference $image)
+    {
+        $this->image = $image;
     }
 
     /**

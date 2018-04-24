@@ -142,13 +142,6 @@ call_user_func(function () {
         ]
     );
 
-    /** @var \TYPO3\CMS\Extbase\Object\Container\Container $container */
-    $container = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class);
-    $container->registerImplementation(
-        \T3G\AgencyPack\Blog\AvatarProviderInterface::class,
-        \T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider::class
-    );
-
     $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
     $dispatcher->connect(
         \TYPO3\CMS\Extensionmanager\Utility\InstallUtility::class,
@@ -164,6 +157,8 @@ call_user_func(function () {
         = \T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate::class;
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate::class]
         = \T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate::class]
+        = \T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate::class;
 
 
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {

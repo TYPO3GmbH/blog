@@ -4,7 +4,7 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-$ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
+$ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf' . ':';
 
 return [
     'ctrl' => [
@@ -22,9 +22,21 @@ return [
         ],
         'iconfile' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-author.svg',
         'searchFields' => 'uid,name,title',
+        'requestUpdate' => 'avatar_provider'
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden,name,title,website,email,location,twitter,googleplus,linkedin,xing,profile,bio,posts',
+        'showRecordFieldList' => 'hidden,name,image,title,website,email,location,twitter,googleplus,linkedin,xing,profile,bio,posts',
+    ],
+    'palettes' => [
+        'palette_access' => [
+            'showitem' => 'hidden'
+        ],
+        'palette_personal' => [
+            'showitem' => 'name, title'
+        ],
+        'palette_contact' => [
+            'showitem' => 'website, email'
+        ],
     ],
     'columns' => [
         'pid' => [
@@ -61,6 +73,49 @@ return [
                 'size' => 30,
                 'eval' => 'required',
             ],
+        ],
+        'avatar_provider' => [
+            'exclude' => 0,
+            'label' => $ll.'tx_blog_domain_model_author.avatar_provider',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['Please choose one avatar provider', '--div--'],
+                    ['Gravatar', \T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider::class],
+                    ['Image', \T3G\AgencyPack\Blog\AvatarProvider\ImageProvider::class],
+                ],
+            ],
+        ],
+        'image' => [
+            'exclude' => 0,
+            'label' => $ll.'tx_blog_domain_model_author.image',
+            'displayCond' => 'FIELD:avatar_provider:=:T3G\AgencyPack\Blog\AvatarProvider\ImageProvider',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', [
+                'appearance' => [
+                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
+                ],
+                'maxitems' => 1,
+                // custom configuration for displaying fields in the overlay/reference table
+                // to use the imageoverlayPalette instead of the basicoverlayPalette
+                'foreign_match_fields' => [
+                    'fieldname' => 'image',
+                    'tablenames' => 'tx_blog_domain_model_author',
+                    'table_local' => 'sys_file',
+                ],
+                'foreign_types' => [
+                    '0' => [
+                        'showitem' => '
+                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                            --palette--;;filePalette',
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                        'showitem' => '
+                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                            --palette--;;filePalette',
+                    ],
+                ],
+            ], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
         ],
         'title' => [
             'exclude' => 0,
@@ -167,9 +222,13 @@ return [
     ],
     'types' => [
         0 => [
-            'showitem' => 'name,title,website,email,location,twitter,googleplus,linkedin,xing,profile,bio,posts',
+            'showitem' => ''
+                . '--palette--;' . $ll . 'tx_blog_domain_model_author.palette_personal;palette_personal, location, avatar_provider, image, bio, '
+                . '--palette--;' . $ll . 'tx_blog_domain_model_author.palette_contact;palette_contact, '
+                . '--div--;' . $ll . 'tx_blog_domain_model_author.tab_social_media,twitter,googleplus,linkedin,xing,profile, '
+                . '--div--;' . $ll . 'tx_blog_domain_model_author.tab_blog, posts, '
+                . '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, '
+                . '--palette--;;palette_access',
         ],
-    ],
-    'palettes' => [
     ],
 ];

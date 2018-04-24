@@ -6,6 +6,7 @@ use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /*
@@ -22,9 +23,9 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  */
 
 /**
- * Class GravatarProvider.
+ * Class ImageProvider.
  */
-class GravatarProvider implements AvatarProviderInterface
+class ImageProvider implements AvatarProviderInterface
 {
     /**
      * @param Author $author
@@ -35,19 +36,10 @@ class GravatarProvider implements AvatarProviderInterface
      */
     public function getAvatarUrl(Author $author)
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
-        $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
-
-        $size = $settings['authors']['avatar']['provider']['size'] ?: 32;
-        $default = $settings['authors']['avatar']['provider']['default'] ?: 'mm';
-        $rating = $settings['authors']['avatar']['provider']['rating'] ?: 'g';
-
-        $gravatarUrl = 'https://www.gravatar.com/avatar/'.md5($author->getEmail());
-        $gravatarUrl .= '?s='.$size;
-        $gravatarUrl .= '&d='.urlencode($default);
-        $gravatarUrl .= '&r='.$rating;
-
-        return $gravatarUrl;
+        $image = $author->getImage();
+        if ($image instanceof FileReference) {
+            return $author->getImage()->getOriginalResource()->getPublicUrl();
+        }
+        return '';
     }
 }
