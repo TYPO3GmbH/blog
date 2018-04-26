@@ -31,6 +31,46 @@ class RealUrlAutoConfiguration
     public function addBlogConfiguration($params)
     {
         ArrayUtility::mergeRecursiveWithOverrule($params['config'], [
+            'fileName' => [
+                'index' => [
+                    'posts.xml' => [
+                        'keyValues' => [
+                            'type' => 200
+                        ],
+                    ],
+                    'categories.xml' => [
+                        'keyValues' => [
+                            'type' => 210
+                        ],
+                    ],
+                    'authors.xml' => [
+                        'keyValues' => [
+                            'type' => 250
+                        ]
+                    ]
+                ]
+            ],
+            'postVarSets' => [
+                '_DEFAULT' => [
+                    'tx_blog_feed' => [
+                        [
+                            'GETvar' => 'tx_blog_posts[controller]',
+                            'valueMap' => [
+                                'posts' => 'Post'
+                            ]
+                        ],
+                        [
+                            'GETvar' => 'tx_blog_posts[action]',
+                            'valueMap' => [
+                                'recent' => 'listRecentPosts'
+                            ]
+                        ],
+                        [
+                            'GETvar' => 'tx_blog_posts[format]'
+                        ]
+                    ]
+                ]
+            ],
             'fixedPostVars' => [
                 'tx_blog_tag' => [
                     [
@@ -47,7 +87,7 @@ class RealUrlAutoConfiguration
                             'languageGetVar' => 'L',
                             'languageExceptionUids' => '',
                             'languageField' => 'sys_language_uid',
-                            'transOrigPointerField' => 'l18n_parent',                            
+                            'transOrigPointerField' => 'l18n_parent',
                             'noMatch' => 'bypass',
                         ],
                     ],
@@ -67,7 +107,7 @@ class RealUrlAutoConfiguration
                             'languageGetVar' => 'L',
                             'languageExceptionUids' => '',
                             'languageField' => 'sys_language_uid',
-                            'transOrigPointerField' => 'l10n_parent',                            
+                            'transOrigPointerField' => 'l10n_parent',
                             'noMatch' => 'bypass',
                         ],
                     ],
