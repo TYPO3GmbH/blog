@@ -107,8 +107,6 @@ CREATE TABLE pages_language_overlay (
   comments_active tinyint(4) DEFAULT '1' NOT NULL,
   sharing_enabled tinyint(4) DEFAULT '1' NOT NULL,
   comments text,
-  tags text,
-  authors text
 );
 
 
