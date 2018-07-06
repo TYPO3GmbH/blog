@@ -20,6 +20,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -97,8 +98,14 @@ class WidgetController extends ActionController
      */
     public function categoriesAction()
     {
+        $requestParameters = GeneralUtility::_GP('tx_blog_category');
+        $currentCategory = 0;
+        if (!empty($requestParameters['category'])) {
+            $currentCategory = (int)$requestParameters['category'];
+        }
         $categories = $this->categoryRepository->findAll();
         $this->view->assign('categories', $categories);
+        $this->view->assign('currentCategory', $currentCategory);
         foreach ($categories as $category) {
             $this->blogCacheService->addTagToPage('tx_blog_category_' . $category->getUid());
         }

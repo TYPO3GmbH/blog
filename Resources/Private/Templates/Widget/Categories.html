@@ -6,7 +6,14 @@
 	<h3 class="widget-title"><f:translate key="headline.categories"/></h3>
     <ul class="categories list-inline">
     <f:for each="{categories}" as="category">
-        <li class="list-item category-item category-item-{category.uid}"><blog:link.category category="{category}" /> (<f:count>{category.posts}</f:count>) <blog:link.category rss="true" category="{category}"><i class="fa fa-rss-square"></i></blog:link.category></li>
+        <f:if condition="{currentCategory} == {category.uid}">
+            <f:then>
+                <li class="list-item category-item category-item-{category.uid} active"><blog:link.category category="{category}" /> (<f:count>{category.posts}</f:count>) <blog:link.category rss="true" category="{category}"><i class="fa fa-rss-square"></i></blog:link.category></li>
+            </f:then>
+            <f:else>
+                <li class="list-item category-item category-item-{category.uid}"><blog:link.category category="{category}" /> (<f:count>{category.posts}</f:count>) <blog:link.category rss="true" category="{category}"><i class="fa fa-rss-square"></i></blog:link.category></li>
+            </f:else>
+        </f:if>
     </f:for>
     </ul>
 </f:section>
