@@ -6,7 +6,7 @@
 	<h3 class="widget-title"><f:translate key="headline.categories"/></h3>
     <ul class="categories list-inline">
     <f:for each="{categories}" as="category">
-        <li class="list-item category-item category-item-{category.uid}"><blog:link.category category="{category}" /> <blog:link.category rss="true" category="{category}"><i class="fa fa-rss-square"></i></blog:link.category></li>
+        <li class="list-item category-item category-item-{category.uid}"><blog:link.category category="{category}" /> (<f:count>{category.posts}</f:count>) <blog:link.category rss="true" category="{category}"><i class="fa fa-rss-square"></i></blog:link.category></li>
     </f:for>
     </ul>
 </f:section>

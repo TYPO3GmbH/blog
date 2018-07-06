@@ -48,7 +48,8 @@ CREATE TABLE tx_blog_tag_pages_mm (
 # Table structure for table 'sys_category'
 #
 CREATE TABLE sys_category (
-  content text
+  content text,
+  posts int(11) DEFAULT '0' NOT NULL
 );
 
 #
