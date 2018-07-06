@@ -15,12 +15,8 @@ namespace T3G\AgencyPack\Blog\Tests\Unit\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
-use T3G\AgencyPack\Blog\Domain\Model\Comment;
-use T3G\AgencyPack\Blog\Domain\Model\Post;
-use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
-use T3G\AgencyPack\Blog\Service\CommentService;
 use T3G\AgencyPack\Blog\Service\MetaService;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class MetaServiceTest.
