@@ -152,6 +152,13 @@
 			<trans-unit id="sys_category.tabs.seo" xml:space="preserve">
 				<source>SEO</source>
 			</trans-unit>
+
+			<trans-unit id="sys_category.tabs.blog" xml:space="preserve">
+				<source>Blog</source>
+			</trans-unit>
+			<trans-unit id="sys_category.posts" xml:space="preserve">
+				<source>Posts</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

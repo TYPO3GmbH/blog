@@ -33,6 +33,19 @@ $temporaryColumns = [
             'richtextConfiguration' => 'default'
         ],
     ],
+    'posts' => [
+        'exclude' => 1,
+        'label' => $ll.'sys_category.posts',
+        'config' => [
+            'type' => 'group',
+            'size' => 5,
+            'internal_type' => 'db',
+            'allowed' => 'pages',
+            'foreign_table' => 'pages',
+            'MM' => 'sys_category_record_mm',
+            'maxitems' => 1000
+        ],
+    ],
 ];
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
@@ -41,5 +54,5 @@ $temporaryColumns = [
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'sys_category',
-    '--div--;'.$ll.'sys_category.tabs.seo, content'
+    '--div--;'.$ll.'sys_category.tabs.seo, content, --div--;'.$ll.'sys_category.tabs.blog, posts'
 );

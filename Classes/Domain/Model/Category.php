@@ -56,6 +56,13 @@ class Category extends AbstractEntity
     protected $content;
 
     /**
+     * The posts assigned to this category
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Post>
+     */
+    protected $posts;
+
+    /**
      * Category constructor.
      */
     public function __construct()
@@ -69,8 +76,8 @@ class Category extends AbstractEntity
     public function initializeObject()
     {
         $this->content = new ObjectStorage();
+        $this->posts = new ObjectStorage();
     }
-
 
     /**
      * Gets the title.
@@ -188,6 +195,26 @@ class Category extends AbstractEntity
     public function setContent($content)
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $posts
+     *
+     * @return $this
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
 
         return $this;
     }
