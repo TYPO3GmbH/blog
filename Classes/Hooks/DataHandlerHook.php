@@ -21,6 +21,7 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 class DataHandlerHook
 {
     const TABLE_PAGES = 'pages';
+    const TABLE_PAGES_LANUGAGE_OVERLAY = 'pages_language_overlay';
     const TABLE_CATEGORIES = 'sys_category';
     const TABLE_AUTHORS = 'tx_blog_domain_model_author';
     const TABLE_COMMENTS = 'tx_blog_domain_model_comment';
@@ -39,7 +40,7 @@ class DataHandlerHook
      */
     public function processDatamap_afterDatabaseOperations($status, $table, $id, array $fieldArray, $pObj)
     {
-        if ($table === self::TABLE_PAGES) {
+        if ($table === self::TABLE_PAGES || $table === self::TABLE_PAGES_LANUGAGE_OVERLAY) {
             if (!MathUtility::canBeInterpretedAsInteger($id)) {
                 $id = $pObj->substNEWwithIDs[$id];
             }

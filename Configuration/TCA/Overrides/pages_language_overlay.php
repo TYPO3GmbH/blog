@@ -27,6 +27,67 @@ call_user_func(
             '1',
             'after'
         );
+
+        // Add icon for new page type:
+        \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
+            $GLOBALS['TCA'][$table],
+            [
+                'ctrl' => [
+                    'typeicon_classes' => [
+                        $blogDocType => 'apps-pagetree-blog-post',
+                    ],
+                ],
+                'types' => [
+                    (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST => $GLOBALS['TCA'][$table]['types'][\TYPO3\CMS\Frontend\Page\PageRepository::DOKTYPE_DEFAULT],
+                ],
+            ]
+        );
+
+        $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
+        $temporaryColumns = [
+            'crdate' => [
+                'exclude' => 1,
+                'label' => $ll.'pages.crdate',
+                'config' => [
+                    'type' => 'input',
+                    'size' => '13',
+                    'eval' => 'datetime',
+                    'default' => '0',
+                ],
+            ],
+            'crdate_month' => [
+                'exclude' => 1,
+                'label' => $ll.'pages.crdate_month',
+                'config' => [
+                    'type' => 'input',
+                    'size' => '13',
+                    'eval' => 'num',
+                    'default' => '0',
+                    'readOnly' => true,
+                ],
+            ],
+            'crdate_year' => [
+                'exclude' => 1,
+                'label' => $ll.'pages.crdate_year',
+                'config' => [
+                    'type' => 'input',
+                    'size' => '13',
+                    'eval' => 'num',
+                    'default' => '0',
+                    'readOnly' => true,
+                ],
+            ],
+        ];
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
+            $table,
+            $temporaryColumns
+        );
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+            $table,
+            '--div--;'.$ll.'pages.tabs.blog, crdate, crdate_month, crdate_year',
+            (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
+        );
     },
     'blog',
     'pages_language_overlay'

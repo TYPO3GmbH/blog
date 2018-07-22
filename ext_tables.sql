@@ -105,6 +105,8 @@ CREATE TABLE pages (
 # Table structure for table 'pages_language_overlay'
 #
 CREATE TABLE pages_language_overlay (
+  crdate_month int(11) DEFAULT '0' NOT NULL,
+  crdate_year int(11) DEFAULT '0' NOT NULL,
   comments_active tinyint(4) DEFAULT '1' NOT NULL,
   sharing_enabled tinyint(4) DEFAULT '1' NOT NULL,
   comments text,
