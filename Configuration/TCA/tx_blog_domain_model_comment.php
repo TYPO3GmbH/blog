@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
@@ -8,7 +15,7 @@ $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
 
 return [
     'ctrl' => [
-        'title' => $ll.'tx_blog_domain_model_comment',
+        'title' => $ll . 'tx_blog_domain_model_comment',
         'label' => 'name',
         'label_alt' => 'crdate',
         'label_alt_force' => 1,
@@ -57,7 +64,7 @@ return [
         // author not implemented yet
         'author' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_comment.author',
+            'label' => $ll . 'tx_blog_domain_model_comment.author',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -74,7 +81,7 @@ return [
         ],
         'name' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_comment.name',
+            'label' => $ll . 'tx_blog_domain_model_comment.name',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -83,7 +90,7 @@ return [
         ],
         'url' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_comment.url',
+            'label' => $ll . 'tx_blog_domain_model_comment.url',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -92,7 +99,7 @@ return [
         ],
         'email' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_comment.email',
+            'label' => $ll . 'tx_blog_domain_model_comment.email',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -101,7 +108,7 @@ return [
         ],
         'comment' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_comment.comment',
+            'label' => $ll . 'tx_blog_domain_model_comment.comment',
             'config' => [
                 'type' => 'text',
                 'size' => 30,
@@ -124,15 +131,15 @@ return [
         ],
         'status' => [
             'exclude' => 1,
-            'label' => $ll.'tx_blog_domain_model_comment.status',
+            'label' => $ll . 'tx_blog_domain_model_comment.status',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [$ll.'tx_blog_domain_model_comment.status.pending', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_PENDING],
-                    [$ll.'tx_blog_domain_model_comment.status.approved', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_APPROVED],
-                    [$ll.'tx_blog_domain_model_comment.status.declined', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DECLINED],
-                    [$ll.'tx_blog_domain_model_comment.status.deleted', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DELETED],
+                    [$ll . 'tx_blog_domain_model_comment.status.pending', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_PENDING],
+                    [$ll . 'tx_blog_domain_model_comment.status.approved', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_APPROVED],
+                    [$ll . 'tx_blog_domain_model_comment.status.declined', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DECLINED],
+                    [$ll . 'tx_blog_domain_model_comment.status.deleted', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DELETED],
                 ],
             ],
         ],

@@ -1,9 +1,12 @@
 <?php
 
-/**
- * Definitions for routes provided by EXT:blog
- * Contains all AJAX-based routes for entry points
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
  */
+
 return [
     // Save images
     'ext-blog-social-wizard-save-image' => [

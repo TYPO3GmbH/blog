@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\AvatarProvider;
 
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
@@ -43,10 +50,10 @@ class GravatarProvider implements AvatarProviderInterface
         $default = $settings['authors']['avatar']['provider']['default'] ?: 'mm';
         $rating = $settings['authors']['avatar']['provider']['rating'] ?: 'g';
 
-        $gravatarUrl = 'https://www.gravatar.com/avatar/'.md5($author->getEmail());
-        $gravatarUrl .= '?s='.$size;
-        $gravatarUrl .= '&d='.urlencode($default);
-        $gravatarUrl .= '&r='.$rating;
+        $gravatarUrl = 'https://www.gravatar.com/avatar/' . md5($author->getEmail());
+        $gravatarUrl .= '?s=' . $size;
+        $gravatarUrl .= '&d=' . urlencode($default);
+        $gravatarUrl .= '&r=' . $rating;
 
         return $gravatarUrl;
     }

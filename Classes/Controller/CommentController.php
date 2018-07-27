@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Controller;
 
 /*
@@ -22,11 +29,9 @@ use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
 use T3G\AgencyPack\Blog\Notification\NotificationManager;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\CommentService;
-use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**

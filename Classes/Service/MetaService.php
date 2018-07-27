@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Service;
 
 /**
@@ -42,7 +49,7 @@ class MetaService extends \ArrayObject
      *
      * @throws \RuntimeException
      */
-    public static function getInstance() : MetaService
+    public static function getInstance() : self
     {
         if (self::$instance === null) {
             self::init();
@@ -60,7 +67,7 @@ class MetaService extends \ArrayObject
      *
      * @throws \RuntimeException
      */
-    public static function setInstance(MetaService $instance)
+    public static function setInstance(self $instance)
     {
         if (self::$instance !== null) {
             throw new \RuntimeException('Registry is already initialized', 1398536572);
@@ -95,7 +102,7 @@ class MetaService extends \ArrayObject
     {
         $instance = self::getInstance();
         if (!$instance->offsetExists($index)) {
-            throw new \RuntimeException('No entry is registered for key \''.$index.'\'', 1398536594);
+            throw new \RuntimeException('No entry is registered for key \'' . $index . '\'', 1398536594);
         }
 
         return $instance->offsetGet($index);

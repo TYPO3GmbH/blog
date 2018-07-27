@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
@@ -8,7 +15,7 @@ $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
 
 return [
     'ctrl' => [
-        'title' => $ll.'tx_blog_domain_model_tag',
+        'title' => $ll . 'tx_blog_domain_model_tag',
         'label' => 'title',
         'label_alt' => 'sys_language_uid',
         // Display Language after Label
@@ -60,7 +67,7 @@ return [
         ],
         'title' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_tag.title',
+            'label' => $ll . 'tx_blog_domain_model_tag.title',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -69,14 +76,14 @@ return [
         ],
         'description' => [
             'exclude' => 1,
-            'label' => $ll.'tx_blog_domain_model_tag.description',
+            'label' => $ll . 'tx_blog_domain_model_tag.description',
             'config' => [
                 'type' => 'text',
             ],
         ],
         'content' => [
             'exclude' => 1,
-            'label' => $ll.'tx_blog_domain_model_tag.content',
+            'label' => $ll . 'tx_blog_domain_model_tag.content',
             'config' => [
                 'type' => 'inline',
                 'allowed' => 'tt_content',
@@ -143,7 +150,7 @@ return [
     'types' => [
         0 => [
             'showitem' => 'title, --palette--;;paletteCore,
-            --div--;'.$ll.'tx_blog_domain_model_tag.tabs.seo, description, content',
+            --div--;' . $ll . 'tx_blog_domain_model_tag.tabs.seo, description, content',
         ],
     ],
     'palettes' => [

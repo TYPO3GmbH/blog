@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Form\Wizards;
 
 /*
@@ -22,7 +29,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class SocialWizard
  *
- * @package T3G\AgencyPack\Blog\Form\Wizards
  */
 class SocialWizard extends AbstractNode
 {
@@ -42,7 +48,7 @@ class SocialWizard extends AbstractNode
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $link = $uriBuilder->buildUriFromRoute('ext-blog-social-wizard', ['id' => $this->data['effectivePid']]);
 
-        $wizard['html'] = '<span class="btn btn-default t3js-blog-social-image-wizard" data-wizard-url="' . $link->getPath() . '?' . $link->getQuery(). '">Open Social Image Wizard</span>';
+        $wizard['html'] = '<span class="btn btn-default t3js-blog-social-image-wizard" data-wizard-url="' . $link->getPath() . '?' . $link->getQuery() . '">Open Social Image Wizard</span>';
         $wizard['requireJsModules']['SocialImageWizard'] = 'TYPO3/CMS/Blog/SocialImageWizard';
 
         return $wizard;

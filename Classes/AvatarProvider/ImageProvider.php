@@ -1,13 +1,17 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\AvatarProvider;
 
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /*
  * This file is part of the TYPO3 CMS project.

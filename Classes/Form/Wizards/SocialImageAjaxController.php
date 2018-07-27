@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Form\Wizards;
 
 /*
@@ -29,12 +36,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Service\ImageService;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Class SocialImageAjaxController
  *
- * @package T3G\AgencyPack\Blog\Form\Wizards
  */
 class SocialImageAjaxController
 {
@@ -178,10 +183,10 @@ class SocialImageAjaxController
                 ->get(ImageService::class);
         }
         $image = $this->imageService->getImage($fileReference->getPublicUrl(), null, false);
-        $processingInstructions = array(
+        $processingInstructions = [
             'maxWidth' => 400,
             'maxHeight' => 200,
-        );
+        ];
 
         return $this->imageService->getImageUri(
             $this->imageService->applyProcessingInstructions($image, $processingInstructions)

@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
 
 /*
@@ -16,8 +23,8 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
  */
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * Class PostViewHelper.

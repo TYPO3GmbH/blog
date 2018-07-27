@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
@@ -21,7 +28,7 @@ call_user_func(
             $table,
             'doktype',
             [
-                'LLL:EXT:'.$extKey.'/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
+                'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
                 $blogDocType,
                 'apps-pagetree-blog-post',
             ],
@@ -48,7 +55,7 @@ call_user_func(
         $temporaryColumns = [
             'comments_active' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.comments_active',
+                'label' => $ll . 'pages.comments_active',
                 'config' => [
                     'type' => 'check',
                     'default' => '1',
@@ -56,7 +63,7 @@ call_user_func(
             ],
             'comments' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.comments',
+                'label' => $ll . 'pages.comments',
                 'config' => [
                     'type' => 'inline',
                     'foreign_table' => 'tx_blog_domain_model_comment',
@@ -77,7 +84,7 @@ call_user_func(
             ],
             'sharing_enabled' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.sharing_enabled',
+                'label' => $ll . 'pages.sharing_enabled',
                 'config' => [
                     'type' => 'check',
                     'default' => '1',
@@ -85,7 +92,7 @@ call_user_func(
             ],
             'crdate_month' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.crdate_month',
+                'label' => $ll . 'pages.crdate_month',
                 'config' => [
                     'type' => 'input',
                     'size' => '13',
@@ -96,7 +103,7 @@ call_user_func(
             ],
             'crdate_year' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.crdate_year',
+                'label' => $ll . 'pages.crdate_year',
                 'config' => [
                     'type' => 'input',
                     'size' => '13',
@@ -107,7 +114,7 @@ call_user_func(
             ],
             'archive_date' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.archive_date',
+                'label' => $ll . 'pages.archive_date',
                 'config' => [
                     'type' => 'input',
                     'size' => '13',
@@ -117,7 +124,7 @@ call_user_func(
             ],
             'publish_date' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.publish_date',
+                'label' => $ll . 'pages.publish_date',
                 'config' => [
                     'type' => 'input',
                     'size' => '13',
@@ -127,7 +134,7 @@ call_user_func(
             ],
             'tags' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.tags',
+                'label' => $ll . 'pages.tags',
                 'config' => [
                     'type' => 'select',
                     'renderType' => 'selectMultipleSideBySide',
@@ -144,7 +151,7 @@ call_user_func(
             ],
             'authors' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.authors',
+                'label' => $ll . 'pages.authors',
                 'config' => [
                     'type' => 'select',
                     'renderType' => 'selectMultipleSideBySide',
@@ -160,7 +167,8 @@ call_user_func(
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
             $extKey,
-            'Configuration/PageTS/SocialImageWizard.tsconfig', 'Blog: SocialImageWizard'
+            'Configuration/PageTS/SocialImageWizard.tsconfig',
+            'Blog: SocialImageWizard'
         );
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
@@ -179,8 +187,8 @@ call_user_func(
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'publish_date', 'publish_date, crdate_month, crdate_year');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             'pages',
-            '--div--;'.$ll.'pages.tabs.blog,
-            --palette--;'.$ll.'pages.palettes.publish_date;publish_date, archive_date, tags, authors, comments_active, comments, sharing_enabled',
+            '--div--;' . $ll . 'pages.tabs.blog,
+            --palette--;' . $ll . 'pages.palettes.publish_date;publish_date, archive_date, tags, authors, comments_active, comments, sharing_enabled',
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
 

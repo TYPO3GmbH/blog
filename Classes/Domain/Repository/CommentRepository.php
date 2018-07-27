@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
 /*
@@ -18,7 +25,6 @@ use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;

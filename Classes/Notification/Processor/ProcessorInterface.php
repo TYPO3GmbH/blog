@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Notification\Processor;
 
 /*
@@ -19,9 +26,9 @@ use T3G\AgencyPack\Blog\Notification\NotificationInterface;
 
 /**
  * Interface ProcessorInterface
- * @package T3G\AgencyPack\Blog\Notification
  */
-interface ProcessorInterface {
+interface ProcessorInterface
+{
     /**
      * Process the notification
      *
