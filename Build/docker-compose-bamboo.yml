@@ -1,0 +1,36 @@
+version: '2.3'
+services:
+  mariadb10:
+    image: mariadb:10
+    environment:
+      MYSQL_ROOT_PASSWORD: funcp
+    tmpfs:
+      - /var/lib/mysql/:rw,noexec,nosuid
+    networks:
+      - test
+
+  start_dependencies:
+    image: alpine:3.8
+    links:
+      - mariadb10
+    networks:
+      - test
+    command: >
+      /bin/sh -c "
+        echo Waiting for db start...;
+        while ! nc -z mariadb10 3306;
+        do
+          sleep 1;
+        done;
+        echo Connected!;
+      "
+
+networks:
+  test:
+    external:
+      name: ${BAMBOO_COMPOSE_PROJECT_NAME}_test
+
+volumes:
+  bamboo-data:
+    external:
+      name: ${BAMBOO_COMPOSE_PROJECT_NAME}_bamboo-data
