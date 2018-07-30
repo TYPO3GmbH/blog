@@ -150,7 +150,8 @@ Allows the users to show all posts tagged with a specific keyword.
 List by Category
 ^^^^^^^^^^^^^^^^
 
-Displays all posts belonging to the chosen category.
+If you add this element and you have selected a category on the categories tab, it will show an overview of posts for
+that category. If you have no categories selected, it will show an overview of categories.
 
 .. image:: ../Images/Plugins/byCategory.png
 
