@@ -47,7 +47,7 @@ call_user_func(
         $temporaryColumns = [
             'crdate' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.crdate',
+                'label' => $ll . 'pages.crdate',
                 'config' => [
                     'type' => 'input',
                     'size' => '13',
@@ -57,7 +57,7 @@ call_user_func(
             ],
             'crdate_month' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.crdate_month',
+                'label' => $ll . 'pages.crdate_month',
                 'config' => [
                     'type' => 'input',
                     'size' => '13',
@@ -68,7 +68,7 @@ call_user_func(
             ],
             'crdate_year' => [
                 'exclude' => 1,
-                'label' => $ll.'pages.crdate_year',
+                'label' => $ll . 'pages.crdate_year',
                 'config' => [
                     'type' => 'input',
                     'size' => '13',
@@ -85,7 +85,7 @@ call_user_func(
         );
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
             $table,
-            '--div--;'.$ll.'pages.tabs.blog, crdate, crdate_month, crdate_year',
+            '--div--;' . $ll . 'pages.tabs.blog, crdate, crdate_month, crdate_year',
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
         );
     },
