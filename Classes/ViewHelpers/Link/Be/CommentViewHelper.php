@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
 
 /*
@@ -14,7 +21,6 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -65,10 +71,10 @@ class CommentViewHelper extends AbstractTagBasedViewHelper
         $commentUid = $comment !== null ? (int) $comment->getUid() : 0;
 
         $routingUriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $uri = $routingUriBuilder->buildUriFromRoute('record_edit', array('edit[tx_blog_domain_model_comment]['.$commentUid.']' => 'edit'));
+        $uri = $routingUriBuilder->buildUriFromRoute('record_edit', ['edit[tx_blog_domain_model_comment][' . $commentUid . ']' => 'edit']);
         $arguments = GeneralUtility::_GET();
         unset($arguments['M'], $arguments['moduleToken']);
-        $uri .= '&returnUrl='.rawurlencode(BackendUtility::getModuleUrl(GeneralUtility::_GET('M'), $arguments));
+        $uri .= '&returnUrl=' . rawurlencode(BackendUtility::getModuleUrl(GeneralUtility::_GET('M'), $arguments));
         if ((string) $uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;

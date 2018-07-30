@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
@@ -38,7 +45,7 @@ call_user_func(function () {
 
     // Allow backend users to drag and drop the new page type:
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
-        'options.pageTree.doktypesToShowInNewPageDragArea := addToList('.$blogDocType.')'
+        'options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . $blogDocType . ')'
     );
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');

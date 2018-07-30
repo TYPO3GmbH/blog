@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
 /*
@@ -70,7 +77,6 @@ class Category extends AbstractEntity
     {
         $this->content = new ObjectStorage();
     }
-
 
     /**
      * Gets the title.
@@ -167,7 +173,7 @@ class Category extends AbstractEntity
      *
      * @api
      */
-    public function setParent(Category $parent)
+    public function setParent(self $parent)
     {
         $this->parent = $parent;
     }

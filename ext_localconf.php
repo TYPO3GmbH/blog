@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
@@ -159,7 +166,7 @@ call_user_func(function () {
 
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['blog']
-            = \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class.
+            = \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class .
             '->addBlogConfiguration';
     }
 });

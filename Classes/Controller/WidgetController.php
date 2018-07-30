@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Controller;
 
 /*
@@ -142,7 +149,7 @@ class WidgetController extends ActionController
     {
         $limit = (int) $this->settings['widgets']['comments']['limit'] ?: 5;
         $blogSetup = (int) $this->settings['widgets']['comments']['blogSetup'] ?: null;
-        $this->view->assign('comments', $this->commentRepository->findActiveComments($limit,  $blogSetup));
+        $this->view->assign('comments', $this->commentRepository->findActiveComments($limit, $blogSetup));
     }
 
     /**

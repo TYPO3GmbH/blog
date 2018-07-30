@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
 /*
@@ -50,7 +57,7 @@ class TagRepository extends Repository
         $sql[] = 'WHERE tx_blog_domain_model_tag.deleted = 0 AND tx_blog_domain_model_tag.hidden = 0';
         $sql[] = 'GROUP BY tx_blog_domain_model_tag.title';
         $sql[] = 'ORDER BY cnt DESC';
-        $sql[] = 'LIMIT '.(int) $limit;
+        $sql[] = 'LIMIT ' . (int) $limit;
 
         $sql = implode(' ', $sql);
         $result = $this->getDatabaseConnection()->sql_query($sql);

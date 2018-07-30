@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
 /*
@@ -239,7 +246,7 @@ class PostRepository extends Repository
         $sql = [];
         $sql[] = 'SELECT MONTH(FROM_UNIXTIME(crdate)) as month, YEAR(FROM_UNIXTIME(crdate)) as year, count(*) as count';
         $sql[] = 'FROM pages';
-        $sql[] = 'WHERE doktype = '.Constants::DOKTYPE_BLOG_POST;
+        $sql[] = 'WHERE doktype = ' . Constants::DOKTYPE_BLOG_POST;
         $sql[] = '  AND hidden = 0 AND deleted = 0';
         $sql[] = 'GROUP BY';
         $sql[] = '  MONTH(FROM_UNIXTIME(crdate)),';

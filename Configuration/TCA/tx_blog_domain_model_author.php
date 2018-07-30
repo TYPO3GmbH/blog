@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
@@ -8,7 +15,7 @@ $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
 
 return [
     'ctrl' => [
-        'title' => $ll.'tx_blog_domain_model_author',
+        'title' => $ll . 'tx_blog_domain_model_author',
         'label' => 'name',
         'label_alt_force' => 0,
         'tstamp' => 'tstamp',
@@ -55,7 +62,7 @@ return [
         ],
         'name' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.name',
+            'label' => $ll . 'tx_blog_domain_model_author.name',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -64,7 +71,7 @@ return [
         ],
         'title' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.title',
+            'label' => $ll . 'tx_blog_domain_model_author.title',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -73,7 +80,7 @@ return [
         ],
         'website' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.website',
+            'label' => $ll . 'tx_blog_domain_model_author.website',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -82,7 +89,7 @@ return [
         ],
         'email' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.email',
+            'label' => $ll . 'tx_blog_domain_model_author.email',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -91,7 +98,7 @@ return [
         ],
         'location' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.location',
+            'label' => $ll . 'tx_blog_domain_model_author.location',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -100,7 +107,7 @@ return [
         ],
         'twitter' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.twitter',
+            'label' => $ll . 'tx_blog_domain_model_author.twitter',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -109,7 +116,7 @@ return [
         ],
         'googleplus' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.googleplus',
+            'label' => $ll . 'tx_blog_domain_model_author.googleplus',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -118,7 +125,7 @@ return [
         ],
         'linkedin' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.linkedin',
+            'label' => $ll . 'tx_blog_domain_model_author.linkedin',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -127,7 +134,7 @@ return [
         ],
         'xing' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.xing',
+            'label' => $ll . 'tx_blog_domain_model_author.xing',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -136,7 +143,7 @@ return [
         ],
         'profile' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.profile',
+            'label' => $ll . 'tx_blog_domain_model_author.profile',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -145,14 +152,14 @@ return [
         ],
         'bio' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.bio',
+            'label' => $ll . 'tx_blog_domain_model_author.bio',
             'config' => [
                 'type' => 'text',
                 'eval' => '',
             ],
         ],
         'posts' => [
-            'label' => $ll.'tx_blog_domain_model_author.posts',
+            'label' => $ll . 'tx_blog_domain_model_author.posts',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',

@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Controller;
 
 /*
@@ -89,7 +96,7 @@ class PostController extends ActionController
     {
         parent::initializeView($view);
         if ($this->request->hasArgument('format') && $this->request->getArgument('format') === 'rss') {
-            $action = '.'.$this->request->getArgument('action');
+            $action = '.' . $this->request->getArgument('action');
             $arguments = [];
             switch ($action) {
                 case '.listPostsByCategory':
@@ -110,8 +117,8 @@ class PostController extends ActionController
                     break;
             }
             $feedData = [
-                'title' => LocalizationUtility::translate('feed.title'.$action, 'blog', $arguments),
-                'description' => LocalizationUtility::translate('feed.description'.$action, 'blog', $arguments),
+                'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
+                'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
                 'language' => $GLOBALS['TSFE']->sys_language_isocode,
                 'link' => $this->uriBuilder->setUseCacheHash(false)->setArgumentsToBeExcludedFromQueryString(['id'])->setCreateAbsoluteUri(true)->setAddQueryString(true)->build(),
                 'date' => date('r'),

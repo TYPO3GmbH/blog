@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package t3g/blog.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace T3G\AgencyPack\Blog\Service;
 
 use T3G\AgencyPack\Blog\Constants;
@@ -31,14 +38,14 @@ class SetupService
         $blogRootPages = $this->getDatabaseConnection()->exec_SELECTgetRows(
             'pid, count(pid) AS cnt',
             'pages',
-            'deleted = 0 AND doktype = '.Constants::DOKTYPE_BLOG_POST,
+            'deleted = 0 AND doktype = ' . Constants::DOKTYPE_BLOG_POST,
             'pid'
         );
         foreach ($blogRootPages as $blogRootPage) {
             $blogUid = $blogRootPage['pid'];
             if (!array_key_exists($blogUid, $setups)) {
                 /** @var array $title */
-                $title = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('title', 'pages', 'deleted = 0 AND uid = '.(int) $blogUid);
+                $title = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('title', 'pages', 'deleted = 0 AND uid = ' . (int) $blogUid);
                 if (!is_array($title)) {
                     continue;
                 }
@@ -60,7 +67,7 @@ class SetupService
      */
     public function getBlogRecordAsArray($uid)
     {
-        return $this->getDatabaseConnection()->exec_SELECTgetSingleRow('*', 'pages', 'uid = '.(int) $uid);
+        return $this->getDatabaseConnection()->exec_SELECTgetSingleRow('*', 'pages', 'uid = ' . (int) $uid);
     }
 
     /**
@@ -102,8 +109,8 @@ class SetupService
                 $blogRootUid = (int) $this->recordUidArray['NEW_blogRoot'];
                 $blogFolderUid = (int) $this->recordUidArray['NEW_blogFolder'];
                 /** @var array $record */
-                $record = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('TSconfig', 'pages', 'uid = '.$blogRootUid);
-                $this->getDatabaseConnection()->exec_UPDATEquery('pages', 'uid = '.$blogRootUid, [
+                $record = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('TSconfig', 'pages', 'uid = ' . $blogRootUid);
+                $this->getDatabaseConnection()->exec_UPDATEquery('pages', 'uid = ' . $blogRootUid, [
                     'TSconfig' => str_replace('NEW_blogFolder', $blogFolderUid, $record['TSconfig']),
                 ]);
 
@@ -124,8 +131,8 @@ class SetupService
             if ($result === true) {
                 // Replace UIDs in constants
                 $sysTemplateUid = (int) $this->recordUidArray['NEW_SysTemplate'];
-                $record = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('constants', 'sys_template', 'uid = '.$sysTemplateUid);
-                $this->getDatabaseConnection()->exec_UPDATEquery('sys_template', 'uid = '.$sysTemplateUid, [
+                $record = $this->getDatabaseConnection()->exec_SELECTgetSingleRow('constants', 'sys_template', 'uid = ' . $sysTemplateUid);
+                $this->getDatabaseConnection()->exec_UPDATEquery('sys_template', 'uid = ' . $sysTemplateUid, [
                     'constants' => str_replace(
                         array_keys($this->recordUidArray),
                         array_values($this->recordUidArray),
