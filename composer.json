@@ -29,7 +29,10 @@
 	},
 	"config": {
 		"discard-changes": true,
-		"bin-dir": "bin"
+		"bin-dir": "bin",
+		"platform": {
+			"php": "7.0"
+		}
 	},
 	"scripts": {
 		"t3g:test:php:unit": [
