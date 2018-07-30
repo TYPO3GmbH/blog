@@ -217,6 +217,18 @@ class PostController extends ActionController
     public function listPostsByCategoryAction(Category $category = null)
     {
         if (null === $category) {
+            $categories = $this->categoryRepository->getByReference(
+                'tt_content',
+                $this->configurationManager->getContentObject()->data['uid']
+
+            );
+
+            if (!empty($categories)) {
+                $category = $categories->getFirst();
+            }
+        }
+
+        if (null === $category) {
             $this->view->assign('categories', $this->categoryRepository->findAll());
         } else {
             $posts = $this->postRepository->findAllByCategory($category);
