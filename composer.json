@@ -29,7 +29,10 @@
 	},
 	"config": {
 		"discard-changes": true,
-		"bin-dir": "bin"
+		"bin-dir": "bin",
+		"platform": {
+			"php": "5.5"
+		}
 	},
 	"scripts": {
 		"t3g:test:php:unit": [
@@ -47,7 +50,7 @@
 		"typo3/cms": "^7.6.0"
 	},
 	"require-dev": {
-		"friendsofphp/php-cs-fixer": "^2.12",
-		"phpunit/phpunit": "^5"
+		"friendsofphp/php-cs-fixer": "^2.2",
+		"phpunit/phpunit": "^4.8"
 	}
 }
