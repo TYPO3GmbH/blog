@@ -61,13 +61,54 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         $rssFormat = (bool) $this->arguments['rss'];
         /** @var Author $author */
         $author = $this->arguments['author'];
-        $pageUid = (int) $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['authorUid'];
-        $additionalParams = [
-            'tx_blog_authorposts' => [
-                'author' => $author->getUid(),
+
+        if (!empty($author->getDetailsPage())) {
+            return $this->buildUriFromDetailsPage($author, $rssFormat);
+        }
+
+        return $this->buildUriFromDefaultPage($author, $rssFormat);
+    }
+
+    /**
+     * @param Author $author
+     * @param bool $rssFormat
+     * @return mixed|string
+     */
+    protected function buildUriFromDetailsPage(Author $author, bool $rssFormat)
+    {
+        $uriBuilder = $this->getUriBuilder($author->getDetailsPage(), [], $rssFormat);
+        return $this->buildAnchorTag($uriBuilder->build(), $author);
+    }
+
+    /**
+     * @param Author $author
+     * @param bool $rssFormat
+     * @return mixed|string
+     */
+    protected function buildUriFromDefaultPage(Author $author, bool $rssFormat)
+    {
+        $uriBuilder = $this->getUriBuilder(
+            (int) $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['authorUid'],
+            [
+                'tx_blog_authorposts' => [
+                    'author' => $author->getUid(),
+                ],
             ],
-        ];
-        $uriBuilder = $this->controllerContext->getUriBuilder();
+            $rssFormat
+        );
+
+        return $this->buildAnchorTag($uriBuilder->uriFor('listPostsByAuthor', [], 'Post'), $author);
+    }
+
+    /**
+     * @param int $pageUid
+     * @param array $additionalParams
+     * @param bool $rssFormat
+     * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
+     */
+    protected function getUriBuilder(int $pageUid, array $additionalParams, bool $rssFormat)
+    {
+        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setUseCacheHash(true)
@@ -77,17 +118,14 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
                 ->setFormat('rss')
                 ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_author.']['typeNum']);
         }
-        $uri = $uriBuilder->uriFor('listPostsByAuthor', [], 'Post');
 
-        if ((string) $uri !== '') {
+        if ($uri !== '') {
             $linkText = $this->renderChildren() ?: $author->getName();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
-            $result = $this->tag->render();
-        } else {
-            $result = $this->renderChildren();
+            return $this->tag->render();
         }
 
-        return $result;
+        return $this->renderChildren();
     }
 }

@@ -127,6 +127,9 @@
 			<trans-unit id="tx_blog_domain_model_author.posts" xml:space="preserve">
 				<source>Blog posts</source>
 			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.details_page" xml:space="preserve">
+				<source>Details page</source>
+			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_author.palette_personal" xml:space="preserve">
 				<source>Personal data</source>
 			</trans-unit>

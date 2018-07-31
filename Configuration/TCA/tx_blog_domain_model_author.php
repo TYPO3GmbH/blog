@@ -226,6 +226,19 @@ return [
                 'maxitems' => 100000,
             ],
         ],
+        'details_page' => [
+            'exclude' => 1,
+            'label' => $ll . 'tx_blog_domain_model_author.details_page',
+            'config' => [
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'pages',
+                'size' => 1,
+                'maxitems' => 1,
+                'minitems' => 0,
+                'default' => 0
+            ]
+        ]
     ],
     'types' => [
         0 => [
@@ -233,7 +246,7 @@ return [
                 . '--palette--;' . $ll . 'tx_blog_domain_model_author.palette_personal;palette_personal, location, avatar_provider, image, bio, '
                 . '--palette--;' . $ll . 'tx_blog_domain_model_author.palette_contact;palette_contact, '
                 . '--div--;' . $ll . 'tx_blog_domain_model_author.tab_social_media,twitter,googleplus,linkedin,xing,profile, '
-                . '--div--;' . $ll . 'tx_blog_domain_model_author.tab_blog, posts, '
+                . '--div--;' . $ll . 'tx_blog_domain_model_author.tab_blog, posts, details_page, '
                 . '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, '
                 . '--palette--;;palette_access',
         ],
