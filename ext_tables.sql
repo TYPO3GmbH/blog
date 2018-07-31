@@ -131,6 +131,7 @@ CREATE TABLE tx_blog_domain_model_author (
 
   bio text,
   posts text,
+  details_page int(11) DEFAULT '0' NOT NULL,
 
   PRIMARY KEY (uid),
   KEY parent (pid)

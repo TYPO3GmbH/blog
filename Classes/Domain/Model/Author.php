@@ -112,6 +112,11 @@ class Author extends AbstractEntity
     protected $posts;
 
     /**
+     * @var int
+     */
+    protected $detailsPage;
+
+    /**
      * Post constructor.
      */
     public function __construct()
@@ -378,5 +383,21 @@ class Author extends AbstractEntity
     public function setPosts(ObjectStorage $posts)
     {
         $this->posts = $posts;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDetailsPage()
+    {
+        return $this->detailsPage;
+    }
+
+    /**
+     * @param int $page
+     */
+    public function setDetailsPage(int $page)
+    {
+        $this->detailsPage = $page;
     }
 }
