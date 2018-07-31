@@ -83,7 +83,7 @@ return [
         ],
         'avatar_provider' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.avatar_provider',
+            'label' => $ll . 'tx_blog_domain_model_author.avatar_provider',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -96,7 +96,7 @@ return [
         ],
         'image' => [
             'exclude' => 0,
-            'label' => $ll.'tx_blog_domain_model_author.image',
+            'label' => $ll . 'tx_blog_domain_model_author.image',
             'displayCond' => 'FIELD:avatar_provider:=:T3G\AgencyPack\Blog\AvatarProvider\ImageProvider',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', [
                 'appearance' => [
