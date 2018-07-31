@@ -12,3 +12,9 @@ logs/
 
 # CGL Fixer
 .php_cs.cache
+
+# TYPO3
+/typo3
+/typo3temp
+/uploads
+/index.php
