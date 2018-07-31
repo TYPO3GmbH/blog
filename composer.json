@@ -34,6 +34,11 @@
 			"php": "7.0"
 		}
 	},
+	"extra": {
+		"typo3/cms": {
+			"web-dir": "."
+		}
+	},
 	"scripts": {
 		"t3g:test:php:unit": [
 			"phpunit -c Build/UnitTests.xml --log-junit logs/phpunit.xml"

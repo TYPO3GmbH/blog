@@ -14,5 +14,7 @@ logs/
 .php_cs.cache
 
 # TYPO3
-typo3/
-index.php
+/typo3
+/typo3temp
+/uploads
+/index.php
