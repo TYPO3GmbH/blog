@@ -143,6 +143,8 @@ class PostController extends ActionController
             ];
             $this->view->assign('feed', $feedData);
         }
+
+        $this->view->assign('data', $this->configurationManager->getContentObject()->data);
     }
 
     /**
