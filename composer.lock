@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92cc3c14accc175995e95eee2ad7dbe2",
+    "content-hash": "793e0c721d044668e539e9e48a480b6a",
     "packages": [
         {
             "name": "cogpowered/finediff",
@@ -1361,16 +1361,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.10",
+            "version": "v5.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "dd71cc1638ed7aebbb33f2e2b0edd2cf6ea73d97"
+                "reference": "181b89f18a90f8925ef805f950d47a7190e9b950"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/dd71cc1638ed7aebbb33f2e2b0edd2cf6ea73d97",
-                "reference": "dd71cc1638ed7aebbb33f2e2b0edd2cf6ea73d97",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/181b89f18a90f8925ef805f950d47a7190e9b950",
+                "reference": "181b89f18a90f8925ef805f950d47a7190e9b950",
                 "shasum": ""
             },
             "require": {
@@ -1411,7 +1411,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2018-07-27T08:58:59+00:00"
+            "time": "2018-07-31T09:26:32+00:00"
         },
         {
             "name": "symfony/console",
@@ -1900,12 +1900,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/TYPO3-CMS/backend.git",
-                "reference": "84761d27b3d17566a98168771df8c889cca870e8"
+                "reference": "e1fd39662d7613513cfb8014423066b24756a023"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TYPO3-CMS/backend/zipball/84761d27b3d17566a98168771df8c889cca870e8",
-                "reference": "84761d27b3d17566a98168771df8c889cca870e8",
+                "url": "https://api.github.com/repos/TYPO3-CMS/backend/zipball/e1fd39662d7613513cfb8014423066b24756a023",
+                "reference": "e1fd39662d7613513cfb8014423066b24756a023",
                 "shasum": ""
             },
             "require": {
@@ -1959,7 +1959,7 @@
             ],
             "description": "Classes for the TYPO3 backend.",
             "homepage": "https://typo3.org",
-            "time": "2018-07-27T11:25:20+00:00"
+            "time": "2018-07-30T18:48:57+00:00"
         },
         {
             "name": "typo3/cms-cli",
@@ -2063,12 +2063,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/TYPO3-CMS/core.git",
-                "reference": "475b3f12f8fdb58745f418ebad222a1d0aa8972f"
+                "reference": "9b793c110bd1cdced637a54c8defde4433529ea4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TYPO3-CMS/core/zipball/475b3f12f8fdb58745f418ebad222a1d0aa8972f",
-                "reference": "475b3f12f8fdb58745f418ebad222a1d0aa8972f",
+                "url": "https://api.github.com/repos/TYPO3-CMS/core/zipball/9b793c110bd1cdced637a54c8defde4433529ea4",
+                "reference": "9b793c110bd1cdced637a54c8defde4433529ea4",
                 "shasum": ""
             },
             "require": {
@@ -2169,7 +2169,7 @@
             ],
             "description": "The core library of TYPO3.",
             "homepage": "https://typo3.org",
-            "time": "2018-07-26T20:17:07+00:00"
+            "time": "2018-07-31T06:44:15+00:00"
         },
         {
             "name": "typo3/cms-extbase",
@@ -2177,12 +2177,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/TYPO3-CMS/extbase.git",
-                "reference": "470f002c58fcbc633ad14388c9ef78da8a34ce19"
+                "reference": "3d6b469a4defd6d4a68a7a8bcecd5beeeb68b75c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TYPO3-CMS/extbase/zipball/470f002c58fcbc633ad14388c9ef78da8a34ce19",
-                "reference": "470f002c58fcbc633ad14388c9ef78da8a34ce19",
+                "url": "https://api.github.com/repos/TYPO3-CMS/extbase/zipball/3d6b469a4defd6d4a68a7a8bcecd5beeeb68b75c",
+                "reference": "3d6b469a4defd6d4a68a7a8bcecd5beeeb68b75c",
                 "shasum": ""
             },
             "require": {
@@ -2193,6 +2193,9 @@
             },
             "replace": {
                 "extbase": "*"
+            },
+            "suggest": {
+                "typo3/cms-scheduler": "Additional scheduler tasks"
             },
             "type": "typo3-cms-framework",
             "extra": {
@@ -2231,7 +2234,7 @@
             ],
             "description": "A framework to build extensions for TYPO3 CMS.",
             "homepage": "https://typo3.org",
-            "time": "2018-07-26T20:17:07+00:00"
+            "time": "2018-07-29T21:57:45+00:00"
         },
         {
             "name": "typo3/cms-extensionmanager",
@@ -2239,12 +2242,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/TYPO3-CMS/extensionmanager.git",
-                "reference": "e6fe56a5d091b1355415fffb41dfa5b3d2c65a59"
+                "reference": "c16ddf4a4af1e8600cf756dc187eb8fbe5cdd7a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TYPO3-CMS/extensionmanager/zipball/e6fe56a5d091b1355415fffb41dfa5b3d2c65a59",
-                "reference": "e6fe56a5d091b1355415fffb41dfa5b3d2c65a59",
+                "url": "https://api.github.com/repos/TYPO3-CMS/extensionmanager/zipball/c16ddf4a4af1e8600cf756dc187eb8fbe5cdd7a6",
+                "reference": "c16ddf4a4af1e8600cf756dc187eb8fbe5cdd7a6",
                 "shasum": ""
             },
             "require": {
@@ -2288,7 +2291,7 @@
             ],
             "description": "TYPO3 Extension Manager",
             "homepage": "https://typo3.org",
-            "time": "2018-07-25T22:14:31+00:00"
+            "time": "2018-07-29T21:57:45+00:00"
         },
         {
             "name": "typo3/cms-fluid",
@@ -2360,12 +2363,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/TYPO3-CMS/frontend.git",
-                "reference": "e01a57c3cd61f8bdc35402e664f44c2ea78fa37e"
+                "reference": "250fd73259f99e48f161cebad505c64e7e5e79be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TYPO3-CMS/frontend/zipball/e01a57c3cd61f8bdc35402e664f44c2ea78fa37e",
-                "reference": "e01a57c3cd61f8bdc35402e664f44c2ea78fa37e",
+                "url": "https://api.github.com/repos/TYPO3-CMS/frontend/zipball/250fd73259f99e48f161cebad505c64e7e5e79be",
+                "reference": "250fd73259f99e48f161cebad505c64e7e5e79be",
                 "shasum": ""
             },
             "require": {
@@ -2412,7 +2415,7 @@
             ],
             "description": "Classes for the frontend of TYPO3.",
             "homepage": "https://typo3.org",
-            "time": "2018-07-25T22:08:50+00:00"
+            "time": "2018-07-29T21:57:45+00:00"
         },
         {
             "name": "typo3/cms-install",
@@ -2420,12 +2423,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/TYPO3-CMS/install.git",
-                "reference": "415893effa54a150a78c320ed655212f7e84c6ce"
+                "reference": "779f999b70e0e6d125de2ebc494d846df82fb277"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TYPO3-CMS/install/zipball/415893effa54a150a78c320ed655212f7e84c6ce",
-                "reference": "415893effa54a150a78c320ed655212f7e84c6ce",
+                "url": "https://api.github.com/repos/TYPO3-CMS/install/zipball/779f999b70e0e6d125de2ebc494d846df82fb277",
+                "reference": "779f999b70e0e6d125de2ebc494d846df82fb277",
                 "shasum": ""
             },
             "require": {
@@ -2473,7 +2476,7 @@
             ],
             "description": "The Install Tool mounted as the module Tools>Install in TYPO3.",
             "homepage": "https://typo3.org",
-            "time": "2018-07-26T20:05:21+00:00"
+            "time": "2018-07-31T06:44:15+00:00"
         },
         {
             "name": "typo3fluid/fluid",
@@ -4888,8 +4891,5 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": [],
-    "platform-overrides": {
-        "php": "7.2.7"
-    }
+    "platform-dev": []
 }
