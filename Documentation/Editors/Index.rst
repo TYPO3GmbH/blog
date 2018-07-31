@@ -59,3 +59,11 @@ Add content to your post
    consistent look and feel for your visitors.
 
 .. figure:: ../Images/HowTo/5_add_content.png
+
+
+Set a details page for an author
+--------------------------------
+
+1. Go to the properties page of an author
+2. Click on the "Blog data" tab
+3. Set a details page for the author to link to as it's details page
