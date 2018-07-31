@@ -31,3 +31,4 @@ Any contributor is welcome to join our team. All you need is an account on our b
 Please request a user account in our [service desk](https://jira.typo3.com/servicedesk/customer/portal/3/group/21). If you already have an account, please ask for access to the project in our [service desk](https://jira.typo3.com/servicedesk/customer/portal/3/group/21).
 
 It is also highly recommended to join our [Slack Channel: #t3g-ext-blog](https://typo3.slack.com/archives/t3g-ext-blog)
+
