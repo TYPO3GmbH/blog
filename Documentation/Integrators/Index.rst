@@ -29,6 +29,9 @@ Settings (plugin.tx_blog.settings)
    `list.posts.maximumDisplayedItems`_      Maximum posts to be displayed in list  int             0
    `list.posts.dateFormat`_                 The date format for post lists         string          %d.%m.%Y
    widgets_                                 Widget specific configuration          array           see description
+   `relatedPosts.limit`_                    Number of related posts to show        int             5
+   `relatedPosts.categoryMultiplier`_       Weight of a matching category          int             1
+   `relatedPosts.tagMultiplier`_            Weight of a matching tag               int             1
    `comments.active`_                       Activate comments feature              int             1
    `comments.moderation`_                   Activate comments moderation           int             0
    `comments.respectPostLanguageId`_        Respect language of post               int             1
@@ -191,6 +194,48 @@ widgets
          array
    Description
          Define widgets specific configuration. Please see the separate table `Settings (plugin.tx_blog.settings.widgets)`_.
+
+
+.. relatedPostsLimit:
+
+relatedPosts.limit
+""""""""""""""""""
+.. container:: table-row
+
+   Property
+         relatedPosts.limit
+   Data type
+         int
+   Description
+         Number of related posts to show. Default: 5
+
+
+.. relatedPostsCategoryMultiplier:
+
+relatedPosts.categoryMultiplier
+"""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         relatedPosts.categoryMultiplier
+   Data type
+         int
+   Description
+         Weight of a matching category. Default: 1
+
+
+.. relatedPostsTagMultiplier:
+
+relatedPosts.tagMultiplier
+""""""""""""""""""""""""""
+.. container:: table-row
+
+   tagMultiplier
+         relatedPosts.tagMultiplier
+   Data type
+         int
+   Description
+         Weight of a matching tag. Default: 1
 
 
 .. _tsCommentsActive:

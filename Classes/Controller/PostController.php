@@ -320,4 +320,19 @@ class PostController extends ActionController
         $this->view->assign('post', $post);
         $this->blogCacheService->addTagsForPost($post);
     }
+
+    /**
+     * Related posts action: show related posts based on the current post
+     */
+    public function relatedPostsAction()
+    {
+        $post = $this->postRepository->findCurrentPost();
+        $posts = $this->postRepository->findRelatedPosts(
+            $this->settings['relatedPosts']['categoryMultiplier'],
+            $this->settings['relatedPosts']['tagMultiplier'],
+            $this->settings['relatedPosts']['limit']
+        );
+        $this->view->assign('currentPost', $post);
+        $this->view->assign('posts', $posts);
+    }
 }

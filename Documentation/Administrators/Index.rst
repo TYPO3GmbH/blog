@@ -164,6 +164,15 @@ Displays all posts belonging to the chosen author.
 .. image:: ../Images/Plugins/byAuthor.png
 
 
+List of related posts
+^^^^^^^^^^^^^^^^^^^^^
+
+Based on the categories and tags of the current post, it will show a list of related posts. This overview should only be
+placed on a Blog detail page.
+
+.. image:: ../Images/Plugins/relatedPosts.png
+
+
 Archive
 ^^^^^^^
 

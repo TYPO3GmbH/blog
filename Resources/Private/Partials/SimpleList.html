@@ -1,0 +1,7 @@
+<div class="tx-blog-post-list" xmlns:f="http://www.w3.org/1999/html">
+    <ul>
+    <f:for each="{posts}" as="post">
+        <li>{f:format.date(format: '{settings.lists.posts.dateFormat}', date: post.publishDate)} <blog:link.post post="{post}" /></li>
+    </f:for>
+    </ul>
+</div>

@@ -100,6 +100,14 @@ call_user_func(function () {
         ]
     );
 
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
+        'RelatedPosts',
+        [
+            'Post' => 'relatedPosts',
+        ]
+    );
+
     // Widgets
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
