@@ -100,6 +100,11 @@ call_user_func(function () {
         'Authors',
         'Blog: Authors'
     );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
+        'RelatedPosts',
+        'Blog: Related posts'
+    );
 
     if (TYPO3_MODE === 'BE') {
         // Module Web > Blog

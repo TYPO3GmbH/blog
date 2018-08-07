@@ -32,6 +32,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ComparisonInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -275,6 +276,73 @@ class PostRepository extends Repository
             ->addOrderBy('month', 'DESC')
             ->execute()
             ->fetchAll();
+    }
+
+    /**
+     * @param int $categoryMultiplier
+     * @param int $tagMultiplier
+     * @param int $limit
+     * @return object|ObjectStorage
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findRelatedPosts($categoryMultiplier = 1, $tagMultiplier = 1, $limit = 5)
+    {
+        if ((int)$categoryMultiplier === 0 && (int)$tagMultiplier === 0) {
+            $categoryMultiplier = 1;
+        }
+
+        $selectedPosts = [];
+        $posts = GeneralUtility::makeInstance(ObjectStorage::class);
+
+        $currentPost = $this->findCurrentPost();
+        $categories = $currentPost->getCategories();
+        $tags = $currentPost->getTags();
+
+        foreach ($categories as $category) {
+            $postsOfCategory = $category->getPosts();
+            /** @var Post $postOfCategory */
+            foreach ($postsOfCategory as $postOfCategory) {
+                if ($postOfCategory->getUid() === $currentPost->getUid()) {
+                    continue;
+                }
+
+                if (!array_key_exists($postOfCategory->getUid(), $selectedPosts)) {
+                    $selectedPosts[$postOfCategory->getUid()] = (int)$categoryMultiplier;
+                } else {
+                    $selectedPosts[$postOfCategory->getUid()] += (int)$categoryMultiplier;
+                }
+            }
+        }
+
+        /** @var Tag $tag */
+        foreach ($tags as $tag) {
+            $postsOfTag = $this->findAllByTag($tag);
+            /** @var Post $postOfTag */
+            foreach ($postsOfTag as $postOfTag) {
+                if ($postOfTag->getUid() === $currentPost->getUid()) {
+                    continue;
+                }
+
+                if (!array_key_exists($postOfTag->getUid(), $selectedPosts)) {
+                    $selectedPosts[$postOfTag->getUid()] = (int)$tagMultiplier;
+                } else {
+                    $selectedPosts[$postOfTag->getUid()] += (int)$tagMultiplier;
+                }
+            }
+        }
+
+        arsort($selectedPosts);
+        $i = 0;
+        foreach ($selectedPosts as $selectedPost => $count) {
+            if ($i === (int)$limit) {
+                break;
+            }
+
+            $posts->attach($this->findByUid($selectedPost));
+            $i++;
+        }
+
+        return $posts;
     }
 
     /**
