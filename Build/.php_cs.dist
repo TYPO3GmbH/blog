@@ -64,6 +64,5 @@ return PhpCsFixer\Config::create()
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->in('.')
-            ->exclude(['vendor', 'bin', 'typo3', 'typo3temp'])
+            ->in('Classes')
     );
