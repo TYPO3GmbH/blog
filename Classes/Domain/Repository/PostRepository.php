@@ -299,7 +299,7 @@ class PostRepository extends Repository
         $tags = $currentPost->getTags();
 
         foreach ($categories as $category) {
-            $postsOfCategory = $category->getPosts();
+            $postsOfCategory = $this->findAllByCategory($category);
             /** @var Post $postOfCategory */
             foreach ($postsOfCategory as $postOfCategory) {
                 if ($postOfCategory->getUid() === $currentPost->getUid()) {
