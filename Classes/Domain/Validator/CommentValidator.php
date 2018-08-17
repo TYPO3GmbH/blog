@@ -67,7 +67,7 @@ class CommentValidator extends AbstractValidator
             $settings = GeneralUtility::makeInstance(ObjectManager::class)
                 ->get(ConfigurationManagerInterface::class)
                 ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
-            $requestData = GeneralUtility::_GP('tx_blog_commentform');
+            $requestData = GeneralUtility::_GPmerged('tx_blog_commentform');
             if (
                 // check if we create a new comment, else we don't need a validation
                 (!empty($requestData['action']) && $requestData['action'] === 'addComment')
