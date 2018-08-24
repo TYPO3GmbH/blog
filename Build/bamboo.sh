@@ -30,8 +30,8 @@ for TEST_PHP_VERSION in "${PHP_VERSIONS[@]}"; do
     runPhpCsFixer fix --config Build/.php_cs.dist --format=junit > logs/php-cs-fixer.xml
 
     # Unit tests
-    runPhpunit -c Build/UnitTests.xml --log-junit logs/phpunit.xml
+    runPhpunit -c Build/UnitTests.xml --log-junit logs/phpunit.xml  --coverage-clover logs/coverage.xml --coverage-html logs/coverage/
 
     # Functional tests
-    # runPhpunit -c Build/FunctionalTests.xml --log-junit logs/functional.xml
+    # runPhpunit -c Build/FunctionalTests.xml --log-junit logs/functional.xml  --coverage-clover logs/coverage-functionals.xml --coverage-html logs/coverage-functionals/
 done
