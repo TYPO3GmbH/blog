@@ -59,7 +59,7 @@ class TagRepository extends Repository
             ->addSelectLiteral($queryBuilder->expr()->count('mm.uid_foreign', 'cnt'))
             ->from('tx_blog_domain_model_tag', 't')
             ->join('t', 'tx_blog_tag_pages_mm', 'mm', 'mm.uid_foreign = t.uid')
-            ->groupBy('t.title')
+            ->groupBy('t.title', 't.uid')
             ->orderBy('cnt', 'DESC')
             ->setMaxResults($limit)
             ->execute()
