@@ -149,7 +149,7 @@ class WidgetController extends ActionController
         }
         unset($tagReference);
         foreach ($tags as $tag) {
-            $this->blogCacheService->addTagToPage('tx_blog_tag_' . $tag->getUid());
+            $this->blogCacheService->addTagToPage('tx_blog_tag_' . (int)$tag['uid']);
         }
         $this->view->assign('tags', $tags);
     }
@@ -194,9 +194,6 @@ class WidgetController extends ActionController
     {
         $posts = $this->postRepository->findMonthsAndYearsWithPosts();
         $this->view->assign('archiveData', $this->resortArchiveData($posts));
-        foreach ($posts as $post) {
-            $this->blogCacheService->addTagsForPost($post);
-        }
     }
 
     /**
