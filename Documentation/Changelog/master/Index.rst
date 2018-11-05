@@ -1,8 +1,8 @@
 
 .. include:: ../../Includes.txt
 
-Changes in version 8.7.0
-========================
+Changes in version master
+=========================
 
 **Table of contents**
 
