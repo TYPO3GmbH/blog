@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -43,7 +44,7 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
@@ -58,7 +59,7 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
      */
     public function render(): string
     {
-        $size = (int) $this->arguments['size'];
+        $size = (int)$this->arguments['size'];
         $default = '';
         if ($this->arguments['default'] !== null) {
             $default = '&d=' . urlencode($this->arguments['default']);

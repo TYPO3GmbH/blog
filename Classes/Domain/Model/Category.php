@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -21,6 +22,7 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -35,7 +37,7 @@ class Category extends AbstractEntity
 {
     /**
      * @var string
-     * @validate notEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $title = '';
 
@@ -50,8 +52,8 @@ class Category extends AbstractEntity
     protected $icon = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\Category|null
-     * @lazy
+     * @var \T3G\AgencyPack\Blog\Domain\Model\Category
+     * @Extbase\ORM\Lazy
      */
     protected $parent;
 
@@ -80,8 +82,9 @@ class Category extends AbstractEntity
     /**
      * initializeObject
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
+        /** @extensionScannerIgnoreLine */
         $this->content = new ObjectStorage();
         $this->posts = new ObjectStorage();
     }
@@ -90,10 +93,8 @@ class Category extends AbstractEntity
      * Gets the title.
      *
      * @return string the title, might be empty
-     *
-     * @api
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -102,22 +103,20 @@ class Category extends AbstractEntity
      * Sets the title.
      *
      * @param string $title the title to set, may be empty
-     *
-     * @api
+     * @return Category
      */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
      * Gets the description.
      *
      * @return string the description, might be empty
-     *
-     * @api
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -126,22 +125,20 @@ class Category extends AbstractEntity
      * Sets the description.
      *
      * @param string $description the description to set, may be empty
-     *
-     * @api
+     * @return Category
      */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+        return $this;
     }
 
     /**
      * Returns the icon.
      *
      * @return string $icon
-     *
-     * @api
      */
-    public function getIcon()
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
@@ -150,22 +147,20 @@ class Category extends AbstractEntity
      * Sets the icon.
      *
      * @param string $icon
-     *
-     * @api
+     * @return Category
      */
-    public function setIcon($icon)
+    public function setIcon(string $icon): self
     {
         $this->icon = $icon;
+        return $this;
     }
 
     /**
      * Gets the parent category.
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\Category|null the parent category
-     *
-     * @api
+     * @return Category|null the parent category
      */
-    public function getParent()
+    public function getParent(): ?self
     {
         if ($this->parent instanceof LazyLoadingProxy) {
             $this->parent->_loadRealInstance();
@@ -177,59 +172,57 @@ class Category extends AbstractEntity
     /**
      * Sets the parent category.
      *
-     * @param \T3G\AgencyPack\Blog\Domain\Model\Category $parent the parent category
-     *
-     * @api
+     * @param self $parent
+     * @return Category
      */
-    public function setParent(self $parent)
+    public function setParent(self $parent): self
     {
         $this->parent = $parent;
-    }
-
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $content
-     *
-     * @return $this
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
         return $this;
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     * @return ObjectStorage
      */
-    public function getPosts()
+    public function getContent(): ObjectStorage
+    {
+        /** @extensionScannerIgnoreLine */
+        return $this->content;
+    }
+
+    /**
+     * @param ObjectStorage $content
+     * @return Category
+     */
+    public function setContent(ObjectStorage $content): self
+    {
+        /** @extensionScannerIgnoreLine */
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * @return ObjectStorage
+     */
+    public function getPosts(): ObjectStorage
     {
         return $this->posts;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $posts
-     *
-     * @return $this
+     * @param ObjectStorage $posts
+     * @return Category
      */
-    public function setPosts($posts)
+    public function setPosts(ObjectStorage $posts): self
     {
         $this->posts = $posts;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getContentElementUidList()
+    public function getContentElementUidList(): string
     {
         $uidList = [];
         $contentElements = $this->getContent();

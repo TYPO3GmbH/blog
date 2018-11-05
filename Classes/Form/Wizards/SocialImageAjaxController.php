@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -111,7 +112,7 @@ class SocialImageAjaxController
         $fileObjects = GeneralUtility::makeInstance(FileRepository::class)
             ->findByRelation($parsedBody['table'], $parsedBody['field'], $parsedBody['uid']);
         $results = [];
-        if (count($fileObjects)) {
+        if (\count($fileObjects)) {
             foreach ($fileObjects as $fileObject) {
                 $results[] = [
                     'referenceId' => $fileObject->getUid(),
@@ -265,11 +266,7 @@ class SocialImageAjaxController
         $dataHandler->process_datamap();
 
         $results = [];
-        if (count($dataHandler->errorLog) === 0) {
-            $results['status'] = 'ok';
-        } else {
-            $results['status'] = 'error';
-        }
+        $results['status'] = \count($dataHandler->errorLog) === 0 ? 'ok' : 'error';
         return $results;
     }
 }

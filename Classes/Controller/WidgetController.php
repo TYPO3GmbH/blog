@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -63,7 +64,7 @@ class WidgetController extends ActionController
     /**
      * @param CategoryRepository $categoryRepository
      */
-    public function injectCategoryRepository(CategoryRepository $categoryRepository)
+    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
     {
         $this->categoryRepository = $categoryRepository;
     }
@@ -71,7 +72,7 @@ class WidgetController extends ActionController
     /**
      * @param TagRepository $tagRepository
      */
-    public function injectTagRepository(TagRepository $tagRepository)
+    public function injectTagRepository(TagRepository $tagRepository): void
     {
         $this->tagRepository = $tagRepository;
     }
@@ -79,7 +80,7 @@ class WidgetController extends ActionController
     /**
      * @param PostRepository $postRepository
      */
-    public function injectPostRepository(PostRepository $postRepository)
+    public function injectPostRepository(PostRepository $postRepository): void
     {
         $this->postRepository = $postRepository;
     }
@@ -87,7 +88,7 @@ class WidgetController extends ActionController
     /**
      * @param CommentRepository $commentRepository
      */
-    public function injectCommentRepository(CommentRepository $commentRepository)
+    public function injectCommentRepository(CommentRepository $commentRepository): void
     {
         $this->commentRepository = $commentRepository;
     }
@@ -95,15 +96,12 @@ class WidgetController extends ActionController
     /**
      * @param \T3G\AgencyPack\Blog\Service\CacheService $cacheService
      */
-    public function injectBlogCacheService(CacheService $cacheService)
+    public function injectBlogCacheService(CacheService $cacheService): void
     {
         $this->blogCacheService = $cacheService;
     }
 
-    /**
-     *
-     */
-    public function categoriesAction()
+    public function categoriesAction(): void
     {
         $requestParameters = GeneralUtility::_GP('tx_blog_category');
         $currentCategory = 0;
@@ -118,14 +116,11 @@ class WidgetController extends ActionController
         }
     }
 
-    /**
-     *
-     */
-    public function tagsAction()
+    public function tagsAction(): void
     {
-        $limit = (int) $this->settings['widgets']['tags']['limit'] ?: 20;
-        $minSize = (int) $this->settings['widgets']['tags']['minSize'] ?: 10;
-        $maxSize = (int) $this->settings['widgets']['tags']['maxSize'] ?: 10;
+        $limit = (int)$this->settings['widgets']['tags']['limit'] ?: 20;
+        $minSize = (int)$this->settings['widgets']['tags']['minSize'] ?: 10;
+        $maxSize = (int)$this->settings['widgets']['tags']['maxSize'] ?: 10;
         $tags = $this->tagRepository->findTopByUsage($limit);
         $minimumCount = null;
         $maximumCount = 0;
@@ -155,11 +150,13 @@ class WidgetController extends ActionController
     }
 
     /**
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function recentPostsAction()
+    public function recentPostsAction(): void
     {
-        $limit = (int) $this->settings['widgets']['recentposts']['limit'] ?: 0;
+        $limit = (int)$this->settings['widgets']['recentposts']['limit'] ?: 0;
 
         $posts = $limit > 0
             ? $this->postRepository->findAllWithLimit($limit)
@@ -172,14 +169,13 @@ class WidgetController extends ActionController
     }
 
     /**
-     *
-     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function commentsAction()
+    public function commentsAction(): void
     {
-        $limit = (int) $this->settings['widgets']['comments']['limit'] ?: 5;
-        $blogSetup = (int) $this->settings['widgets']['comments']['blogSetup'] ?: null;
+        $limit = (int)$this->settings['widgets']['comments']['limit'] ?: 5;
+        $blogSetup = (int)$this->settings['widgets']['comments']['blogSetup'] ?: null;
         $comments = $this->commentRepository->findActiveComments($limit, $blogSetup);
         $this->view->assign('comments', $comments);
         foreach ($comments as $comment) {
@@ -188,18 +184,15 @@ class WidgetController extends ActionController
     }
 
     /**
-     *
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function archiveAction()
+    public function archiveAction(): void
     {
         $posts = $this->postRepository->findMonthsAndYearsWithPosts();
         $this->view->assign('archiveData', $this->resortArchiveData($posts));
     }
 
-    /**
-     *
-     */
-    public function feedAction()
+    public function feedAction(): void
     {
     }
 
@@ -220,17 +213,18 @@ class WidgetController extends ActionController
      * ].
      *
      * @param array $data
-     *
      * @return array
+     * @throws \Exception
      */
-    protected function resortArchiveData(array $data)
+    protected function resortArchiveData(array $data): array
     {
         $archiveData = [];
         foreach ($data as $result) {
             if (empty($archiveData[$result['year']])) {
                 $archiveData[$result['year']] = [];
             }
-            $result['timestamp'] = mktime(0, 0, 0, (int) $result['month'], 1, (int) $result['year']);
+            $dateTime = new \DateTimeImmutable(sprintf('%d-%d-1', (int)$result['year'], (int)$result['month']));
+            $result['timestamp'] = $dateTime->getTimestamp();
             $archiveData[$result['year']][] = $result;
         }
 

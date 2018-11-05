@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -21,18 +22,18 @@ namespace T3G\AgencyPack\Blog\Install;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+use Symfony\Component\Console\Output\Output;
+use Symfony\Component\Console\Output\StreamOutput;
 use TYPO3\CMS\Install\Updates\AbstractDownloadExtensionUpdate;
+use TYPO3\CMS\Install\Updates\Confirmation;
+use TYPO3\CMS\Install\Updates\ExtensionModel;
 
 /**
  * Installs and downloads extension if needed.
  */
 class ExtensionInstaller extends AbstractDownloadExtensionUpdate
 {
-    /**
-     * @var string
-     */
-    protected $extensionKey;
-
     /**
      * @var array
      */
@@ -41,48 +42,98 @@ class ExtensionInstaller extends AbstractDownloadExtensionUpdate
             'title' => 'Blog template',
             'description' => 'blog template extension',
             'versionString' => '1.2.0',
+            'composerName' => 't3g/blog-template'
         ],
         'rx_shariff' => [
             'title' => 'rx_shariff',
             'description' => 'rx_shariff',
             'versionString' => '10.2.1',
+            'composerName' => 'reelworx/rx-shariff'
         ]
     ];
 
     /**
-     * ExtensionInstaller constructor.
-     *
      * @param string $extensionKey
+     * @return bool
+     * @throws \TYPO3\CMS\Extensionmanager\Exception\ExtensionManagerException
      */
-    public function __construct($extensionKey)
+    public function install(string $extensionKey): bool
     {
-        $this->extensionKey = $extensionKey;
+        $extension = new ExtensionModel(
+            $extensionKey,
+            $this->extensionDetails[$extensionKey]['title'],
+            $this->extensionDetails[$extensionKey]['versionString'],
+            $this->extensionDetails[$extensionKey]['composerName'],
+            $this->extensionDetails[$extensionKey]['description']
+        );
+        $this->setOutput(new StreamOutput(fopen('php://temp', 'wb'), Output::VERBOSITY_NORMAL, false));
+        return $this->installExtension($extension);
     }
 
     /**
-     * Checks if an update is needed.
+     * Return a confirmation message instance
      *
-     * @param string $description The description for the update
-     *
-     * @return bool Whether an update is needed (true) or not (false)
+     * @return \TYPO3\CMS\Install\Updates\Confirmation
      */
-    public function checkForUpdate(&$description)
+    public function getConfirmation(): Confirmation
     {
-        return false;
+        throw new \RuntimeException('not implemented, this method should never be called', 1538678510);
     }
 
     /**
-     * Performs the update.
+     * Return the identifier for this wizard
+     * This should be the same string as used in the ext_localconf class registration
      *
-     * @param array $databaseQueries Queries done in this update
-     * @param mixed $customMessages  Custom messages
+     * @return string
+     */
+    public function getIdentifier(): string
+    {
+        throw new \RuntimeException('not implemented, this method should never be called', 1538678511);
+    }
+
+    /**
+     * Return the speaking name of this wizard
+     *
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        throw new \RuntimeException('not implemented, this method should never be called', 1538678512);
+    }
+
+    /**
+     * Return the description for this wizard
+     *
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        throw new \RuntimeException('not implemented, this method should never be called', 1538678513);
+    }
+
+    /**
+     * Is an update necessary?
+     *
+     * Is used to determine whether a wizard needs to be run.
+     * Check if data for migration exists.
      *
      * @return bool
      */
-    public function performUpdate(array &$databaseQueries, &$customMessages)
+    public function updateNecessary(): bool
     {
-        $updateSuccessful = $this->installExtension($this->extensionKey, $customMessages);
+        throw new \RuntimeException('not implemented, this method should never be called', 1538678514);
+    }
 
-        return $updateSuccessful;
+    /**
+     * Returns an array of class names of Prerequisite classes
+     *
+     * This way a wizard can define dependencies like "database up-to-date" or
+     * "reference index updated"
+     *
+     * @return string[]
+     */
+    public function getPrerequisites(): array
+    {
+        throw new \RuntimeException('not implemented, this method should never be called', 1538678515);
     }
 }

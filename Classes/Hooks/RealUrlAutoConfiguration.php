@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -32,10 +33,9 @@ class RealUrlAutoConfiguration
      * Generates additional RealURL configuration and merges it with provided configuration.
      *
      * @param array $params Default configuration
-     *
      * @return array Updated configuration
      */
-    public function addBlogConfiguration($params)
+    public function addBlogConfiguration($params): array
     {
         ArrayUtility::mergeRecursiveWithOverrule($params['config'], [
             'fileName' => [

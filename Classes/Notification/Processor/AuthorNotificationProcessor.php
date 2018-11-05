@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -53,7 +54,7 @@ class AuthorNotificationProcessor implements ProcessorInterface
      * @param NotificationInterface $notification
      * @throws \InvalidArgumentException
      */
-    protected function processCommentAddNotification(NotificationInterface $notification)
+    protected function processCommentAddNotification(NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
 

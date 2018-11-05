@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -22,7 +23,6 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Domain\Model\Post;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
@@ -30,9 +30,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  */
 class PostViewHelper extends AbstractTagBasedViewHelper
 {
-    /** @var RenderingContext */
-    protected $renderingContext;
-
     /**
      * PostViewHelper constructor.
      */
@@ -48,7 +45,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
@@ -70,9 +67,9 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         /** @var Post $post */
         $post = $this->arguments['post'];
         $section = $this->arguments['section'] ?: null;
-        $pageUid = $post !== null ? (int) $post->getUid() : 0;
+        $pageUid = $post !== null ? (int)$post->getUid() : 0;
         $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
-        $createAbsoluteUri = (bool) $this->arguments['createAbsoluteUri'];
+        $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
         $uri = $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setUseCacheHash(false)
@@ -81,7 +78,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
             ->build();
         if ($uri !== '') {
             if ($this->arguments['returnUri']) {
-                return htmlspecialchars($uri);
+                return htmlspecialchars($uri, ENT_QUOTES | ENT_HTML5);
             }
             $linkText = $this->renderChildren() ?: $post->getTitle();
             $this->tag->addAttribute('href', $uri);

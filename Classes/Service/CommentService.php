@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -13,6 +14,8 @@ use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
@@ -20,9 +23,9 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
  */
 class CommentService
 {
-    const STATE_ERROR = 'error';
-    const STATE_MODERATION = 'moderation';
-    const STATE_SUCCESS = 'success';
+    public const STATE_ERROR = 'error';
+    public const STATE_MODERATION = 'moderation';
+    public const STATE_SUCCESS = 'success';
 
     /**
      * @var PostRepository
@@ -50,7 +53,7 @@ class CommentService
     /**
      * @param array $settings
      */
-    public function injectSettings(array $settings)
+    public function injectSettings(array $settings): void
     {
         $this->settings = $settings;
     }
@@ -58,7 +61,7 @@ class CommentService
     /**
      * @param \T3G\AgencyPack\Blog\Domain\Repository\PostRepository $postRepository
      */
-    public function injectPostRepository(PostRepository $postRepository)
+    public function injectPostRepository(PostRepository $postRepository): void
     {
         $this->postRepository = $postRepository;
     }
@@ -66,7 +69,7 @@ class CommentService
     /**
      * @param \T3G\AgencyPack\Blog\Domain\Repository\CommentRepository $commentRepository
      */
-    public function injectCommentRepository(CommentRepository $commentRepository)
+    public function injectCommentRepository(CommentRepository $commentRepository): void
     {
         $this->commentRepository = $commentRepository;
     }
@@ -74,7 +77,7 @@ class CommentService
     /**
      * @param PersistenceManager $persistenceManager
      */
-    public function injectPersistenceManager(PersistenceManager $persistenceManager)
+    public function injectPersistenceManager(PersistenceManager $persistenceManager): void
     {
         $this->persistenceManager = $persistenceManager;
     }
@@ -82,19 +85,17 @@ class CommentService
     /**
      * @param Post $post
      * @param Comment $comment
-     *
      * @return string
-     *
-     * @throws \InvalidArgumentException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
-    public function addComment(Post $post, Comment $comment)
+    public function addComment(Post $post, Comment $comment): string
     {
         $result = self::STATE_ERROR;
-        if ((int) $this->settings['active'] === 1) {
+        if ((int)$this->settings['active'] === 1) {
             $result = self::STATE_SUCCESS;
-            switch ((int) $this->settings['moderation']) {
+            switch ((int)$this->settings['moderation']) {
                 case 0:
                     $comment->setStatus(Comment::STATUS_APPROVED);
                     break;
@@ -110,9 +111,11 @@ class CommentService
                         $comment->setStatus(Comment::STATUS_PENDING);
                     }
                     break;
+                default:
             }
             $comment->setPid($post->getUid());
-            $comment->setPostLanguageId($GLOBALS['TSFE']->sys_language_uid);
+            /** @noinspection PhpUnhandledExceptionInspection */
+            $comment->setPostLanguageId(GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId());
             $post->addComment($comment);
             $this->postRepository->update($post);
             $this->persistenceManager->persistAll();
@@ -141,8 +144,8 @@ class CommentService
 
     /**
      * @param Post $post
-     *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function getCommentsByPost(Post $post)

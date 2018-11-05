@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -34,10 +35,9 @@ class TagRepository extends Repository
     /**
      * Initializes the repository.
      *
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \InvalidArgumentException
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->defaultOrderings = [
             'title' => QueryInterface::ORDER_ASCENDING,
@@ -70,7 +70,9 @@ class TagRepository extends Repository
             $row['tagObject'] = $this->findByUid($row['uid']);
             $rows[] = $row;
         }
-        // shuffle tags, ordering is only to get the top used tags
+
+        // Shuffle tags, ordering is only to get the top used tags
+        /** @noinspection NonSecureShuffleUsageInspection */
         shuffle($rows);
         return $rows;
     }

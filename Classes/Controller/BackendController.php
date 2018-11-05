@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -29,7 +30,7 @@ use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
-use TYPO3\CMS\Core\Core\Bootstrap;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -81,7 +82,7 @@ class BackendController extends ActionController
     /**
      * @param SetupService $setupService
      */
-    public function injectSetupService(SetupService $setupService)
+    public function injectSetupService(SetupService $setupService): void
     {
         $this->setupService = $setupService;
     }
@@ -89,7 +90,7 @@ class BackendController extends ActionController
     /**
      * @param PostRepository $postRepository
      */
-    public function injectPostRepository(PostRepository $postRepository)
+    public function injectPostRepository(PostRepository $postRepository): void
     {
         $this->postRepository = $postRepository;
     }
@@ -97,7 +98,7 @@ class BackendController extends ActionController
     /**
      * @param CommentRepository $commentRepository
      */
-    public function injectCommentRepository(CommentRepository $commentRepository)
+    public function injectCommentRepository(CommentRepository $commentRepository): void
     {
         $this->commentRepository = $commentRepository;
     }
@@ -105,16 +106,12 @@ class BackendController extends ActionController
     /**
      * @param \T3G\AgencyPack\Blog\Service\CacheService $cacheService
      */
-    public function injectBlogCacheService(CacheService $cacheService)
+    public function injectBlogCacheService(CacheService $cacheService): void
     {
         $this->blogCacheService = $cacheService;
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     * @throws \BadFunctionCallException
-     */
-    public function initializeAction()
+    public function initializeAction(): void
     {
         $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
         $this->iconFactory = $this->moduleTemplate->getIconFactory();
@@ -129,7 +126,7 @@ class BackendController extends ActionController
     /**
      *
      */
-    public function initializeSetupWizardAction()
+    public function initializeSetupWizardAction(): void
     {
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
     }
@@ -137,7 +134,7 @@ class BackendController extends ActionController
     /**
      * @throws \BadFunctionCallException
      */
-    public function initializePostsAction()
+    public function initializePostsAction(): void
     {
         $this->initializeDataTables();
     }
@@ -145,7 +142,7 @@ class BackendController extends ActionController
     /**
      * @throws \BadFunctionCallException
      */
-    public function initializeCommentsAction()
+    public function initializeCommentsAction(): void
     {
         $this->initializeDataTables();
     }
@@ -154,7 +151,7 @@ class BackendController extends ActionController
      * initialize DataTables
      * @throws \BadFunctionCallException
      */
-    protected function initializeDataTables()
+    protected function initializeDataTables(): void
     {
         $blogPath = ExtensionManagementUtility::extPath('blog', 'Resources/Public/JavaScript/');
         $blogPath = PathUtility::getAbsoluteWebPath($blogPath);
@@ -183,24 +180,23 @@ class BackendController extends ActionController
      *
      * @throws \BadFunctionCallException
      */
-    public function setupWizardAction()
+    public function setupWizardAction(): string
     {
         return $this->render('Backend/SetupWizard.html', [
-            'composerMode' => Bootstrap::usesComposerClassLoading(),
+            'composerMode' => Environment::isComposerMode(),
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'templateExists' => ExtensionManagementUtility::isLoaded('blog_template'),
         ]);
     }
 
     /**
-     * @param int    $blogSetup
+     * @param int $blogSetup
      * @return string
-     *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
-     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function postsAction($blogSetup = null)
+    public function postsAction(int $blogSetup = null): string
     {
         return $this->render('Backend/Posts.html', [
             'blogSetups' => $this->setupService->determineBlogSetups(),
@@ -219,7 +215,7 @@ class BackendController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      * @throws \InvalidArgumentException
      */
-    public function commentsAction($filter = null, $blogSetup = null)
+    public function commentsAction(string $filter = null, int $blogSetup = null): string
     {
         return $this->render('Backend/Comments.html', [
             'activeFilter' => $filter,
@@ -236,21 +232,18 @@ class BackendController extends ActionController
         ]);
     }
 
-    /** @noinspection MoreThanThreeArgumentsInspection */
     /**
      * @param Comment $comment
      * @param string $status
-     * @param string $filter
-     * @param string $blogSetup
-     *
-     * @throws \InvalidArgumentException
+     * @param string|null $filter
+     * @param int $blogSetup
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
-     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
-    public function updateCommentStatusAction(Comment $comment, $status, $filter = null, $blogSetup = null)
+    public function updateCommentStatusAction(Comment $comment, string $status, string $filter = null, int $blogSetup = null): void
     {
         $updateComment = true;
         switch ($status) {
@@ -275,13 +268,11 @@ class BackendController extends ActionController
 
     /**
      * @param array $data
-     *
-     * @throws \InvalidArgumentException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
-     * @throws \RuntimeException
+     * @throws \TYPO3\CMS\Extensionmanager\Exception\ExtensionManagerException
      */
-    public function createBlogAction(array $data = null)
+    public function createBlogAction(array $data = null): void
     {
         if ($this->setupService->createBlogSetup($data)) {
             $this->addFlashMessage('Your blog setup has been created.', 'Congratulation');
@@ -301,9 +292,8 @@ class BackendController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      * @throws \InvalidArgumentException
      */
-    protected function getFluidTemplateObject($templateNameAndPath)
+    protected function getFluidTemplateObject(string $templateNameAndPath): StandaloneView
     {
-        /** @var StandaloneView $view */
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setLayoutRootPaths([GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Layouts')]);
         $view->setPartialRootPaths([GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Partials')]);
@@ -324,7 +314,7 @@ class BackendController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      * @throws \InvalidArgumentException
      */
-    protected function render($templateNameAndPath, array $values)
+    protected function render(string $templateNameAndPath, array $values): string
     {
         $view = $this->getFluidTemplateObject($templateNameAndPath);
         $view->assign('_template', $templateNameAndPath);

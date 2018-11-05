@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -22,7 +23,6 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
@@ -30,9 +30,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  */
 class TagViewHelper extends AbstractTagBasedViewHelper
 {
-    /** @var RenderingContext */
-    protected $renderingContext;
-
     /**
      * TagViewHelper constructor.
      */
@@ -48,7 +45,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
@@ -64,10 +61,10 @@ class TagViewHelper extends AbstractTagBasedViewHelper
      */
     public function render(): string
     {
-        $rssFormat = (bool) $this->arguments['rss'];
+        $rssFormat = (bool)$this->arguments['rss'];
         /** @var Tag $tag */
         $tag = $this->arguments['tag'];
-        $pageUid = (int) $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['tagUid'];
+        $pageUid = (int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['tagUid'];
         $additionalParams = [
             'tx_blog_tag' => [
                 'tag' => $tag->getUid(),
@@ -81,7 +78,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         if ($rssFormat) {
             $uriBuilder
                 ->setFormat('rss')
-                ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_tag.']['typeNum']);
+                ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_tag.']['typeNum']);
         }
         $uri = $uriBuilder->uriFor('listPostsByTag', [], 'Post');
         if ($uri !== '') {
@@ -94,5 +91,13 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         }
 
         return $result;
+    }
+
+    /**
+     * @return mixed|\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController()
+    {
+        return $GLOBALS['TSFE'];
     }
 }

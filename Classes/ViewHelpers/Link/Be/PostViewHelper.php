@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -22,7 +23,8 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Domain\Model\Post;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
@@ -46,7 +48,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
@@ -59,17 +61,16 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * @return string Rendered page URI
-     *
-     * @throws \InvalidArgumentException
+     * @return string
+     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
      */
-    public function render()
+    public function render(): string
     {
         /** @var Post $post */
         $post = $this->arguments['post'];
-        $pageUid = $post !== null ? (int) $post->getUid() : 0;
+        $pageUid = $post !== null ? (int)$post->getUid() : 0;
 
-        $uri = BackendUtility::getModuleUrl('web_layout', ['id' => $pageUid]);
+        $uri = (string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute('web_layout', ['id' => $pageUid]);
         if ($uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;

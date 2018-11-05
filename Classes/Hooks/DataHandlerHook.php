@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -20,11 +21,11 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  */
 class DataHandlerHook
 {
-    const TABLE_PAGES = 'pages';
-    const TABLE_CATEGORIES = 'sys_category';
-    const TABLE_AUTHORS = 'tx_blog_domain_model_author';
-    const TABLE_COMMENTS = 'tx_blog_domain_model_comment';
-    const TABLE_TAGS = 'tx_blog_domain_model_tag';
+    private const TABLE_PAGES = 'pages';
+    private const TABLE_CATEGORIES = 'sys_category';
+    private const TABLE_AUTHORS = 'tx_blog_domain_model_author';
+    private const TABLE_COMMENTS = 'tx_blog_domain_model_comment';
+    private const TABLE_TAGS = 'tx_blog_domain_model_tag';
 
     /**
      * @param string $status
@@ -34,10 +35,9 @@ class DataHandlerHook
      * @param DataHandler $pObj
      *
      * @throws \InvalidArgumentException
-     * @throws \TYPO3\CMS\Core\Exception
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
-    public function processDatamap_afterDatabaseOperations($status, $table, $id, array $fieldArray, $pObj)
+    public function processDatamap_afterDatabaseOperations($status, $table, $id, array $fieldArray, $pObj): void
     {
         if ($table === self::TABLE_PAGES) {
             if (!MathUtility::canBeInterpretedAsInteger($id)) {
@@ -87,6 +87,7 @@ class DataHandlerHook
                 GeneralUtility::makeInstance(CacheService::class)
                     ->flushCacheByTag('tx_blog_tag_' . $id);
                 break;
+            default:
         }
     }
 }

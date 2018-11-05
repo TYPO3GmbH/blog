@@ -165,23 +165,29 @@ call_user_func(function () {
         'afterExtensionInstall'
     );
 
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['Blog'] =
         \T3G\AgencyPack\Blog\Hooks\DataHandlerHook::class;
 
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate::class]
         = \T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate::class;
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate::class]
         = \T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate::class;
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate::class]
         = \T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate::class;
 
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['blog']
             = \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class .
             '->addBlogConfiguration';
     }
 
     // Register Social Image Wizard
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1506942138] = [
         'nodeName' => 'BlogSocialImageWizard',
         'priority' => 20,
@@ -189,8 +195,10 @@ call_user_func(function () {
     ];
 
     // Register Notification visitors
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'][\T3G\AgencyPack\Blog\Notification\CommentAddedNotification::class][]
         = \T3G\AgencyPack\Blog\Notification\Processor\AdminNotificationProcessor::class;
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'][\T3G\AgencyPack\Blog\Notification\CommentAddedNotification::class][]
         = \T3G\AgencyPack\Blog\Notification\Processor\AuthorNotificationProcessor::class;
 });

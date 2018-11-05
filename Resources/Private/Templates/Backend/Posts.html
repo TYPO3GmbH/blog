@@ -25,7 +25,7 @@
                   <f:for each="{posts}" as="post">
                       <tr>
                           <td data-search="{post.title}" data-filter="{post.title}"><blog:link.be.post post="{post}" /></td>
-                          <td data-search="{post.author}" data-filter="{post.author}">{post.author}</td>
+                          <td data-search="{post.authors.0}" data-filter="{post.authors.0}">{post.authors.0}</td>
                           <td>
                             <f:if condition="{post.categories}">
                             <ul class="list-inline">

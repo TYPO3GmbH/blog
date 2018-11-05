@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -22,7 +23,6 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
  * The TYPO3 project - inspiring people to share!
  */
 use T3G\AgencyPack\Blog\Domain\Model\Category;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
@@ -30,9 +30,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  */
 class CategoryViewHelper extends AbstractTagBasedViewHelper
 {
-    /** @var RenderingContext */
-    protected $renderingContext;
-
     /**
      * CategoryViewHelper constructor.
      */
@@ -48,7 +45,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
@@ -64,10 +61,10 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
      */
     public function render(): string
     {
-        $rssFormat = (bool) $this->arguments['rss'];
+        $rssFormat = (bool)$this->arguments['rss'];
         /** @var Category $category */
         $category = $this->arguments['category'];
-        $pageUid = (int) $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['categoryUid'];
+        $pageUid = (int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['categoryUid'];
         $additionalParams = [
             'tx_blog_category' => [
                 'category' => $category->getUid(),
@@ -81,7 +78,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         if ($rssFormat) {
             $uriBuilder
                 ->setFormat('rss')
-                ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_category.']['typeNum']);
+                ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_category.']['typeNum']);
         }
         $uri = $uriBuilder->uriFor('listPostsByCategory', [], 'Post');
 
@@ -95,5 +92,13 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         }
 
         return (string)$result;
+    }
+
+    /**
+     * @return mixed|\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController()
+    {
+        return $GLOBALS['TSFE'];
     }
 }

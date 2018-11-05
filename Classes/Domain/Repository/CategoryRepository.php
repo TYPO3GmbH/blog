@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -37,10 +38,9 @@ class CategoryRepository extends Repository
     /**
      * Initializes the repository.
      *
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \InvalidArgumentException
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         // @TODO: It looks like extbase ignore storage settings for sys_category.
         // @TODO: this hack set the storage handling for sys_category table.
@@ -80,8 +80,9 @@ class CategoryRepository extends Repository
 
         if (!empty($categories)) {
             $query = $this->createQuery();
-            $query->getQuerySettings()->setRespectStoragePage(false);
-            $query->getQuerySettings()->setRespectSysLanguage(false);
+            $querySettings = $query->getQuerySettings();
+            $querySettings->setRespectStoragePage(false);
+            $querySettings->setRespectSysLanguage(false);
 
             $conditions = [];
             $conditions[] = $query->in('uid', $categories);

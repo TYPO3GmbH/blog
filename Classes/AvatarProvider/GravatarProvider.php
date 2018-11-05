@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -35,12 +36,9 @@ class GravatarProvider implements AvatarProviderInterface
 {
     /**
      * @param Author $author
-     *
      * @return string
-     *
-     * @throws \InvalidArgumentException
      */
-    public function getAvatarUrl(Author $author)
+    public function getAvatarUrl(Author $author): string
     {
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
@@ -50,11 +48,11 @@ class GravatarProvider implements AvatarProviderInterface
         $default = $settings['authors']['avatar']['provider']['default'] ?: 'mm';
         $rating = $settings['authors']['avatar']['provider']['rating'] ?: 'g';
 
-        $gravatarUrl = 'https://www.gravatar.com/avatar/' . md5($author->getEmail());
-        $gravatarUrl .= '?s=' . $size;
-        $gravatarUrl .= '&d=' . urlencode($default);
-        $gravatarUrl .= '&r=' . $rating;
+        $avatarUrl = 'https://www.gravatar.com/avatar/' . md5($author->getEmail())
+            . '?s=' . $size
+            . '&d=' . urlencode($default)
+            . '&r=' . $rating;
 
-        return $gravatarUrl;
+        return $avatarUrl;
     }
 }

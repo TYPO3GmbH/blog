@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -65,10 +66,12 @@ abstract class AbstractNotification implements NotificationInterface
 
     /**
      * @param string $title
+     * @return AbstractNotification
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
@@ -81,10 +84,12 @@ abstract class AbstractNotification implements NotificationInterface
 
     /**
      * @param string $message
+     * @return AbstractNotification
      */
-    public function setMessage(string $message)
+    public function setMessage(string $message): self
     {
         $this->message = $message;
+        return $this;
     }
 
     /**
@@ -97,10 +102,12 @@ abstract class AbstractNotification implements NotificationInterface
 
     /**
      * @param array $data
+     * @return AbstractNotification
      */
-    public function setData(array $data)
+    public function setData(array $data): self
     {
         $this->data = $data;
+        return $this;
     }
 
     /**

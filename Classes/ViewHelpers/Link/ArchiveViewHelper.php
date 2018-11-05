@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -21,7 +22,6 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
@@ -29,9 +29,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  */
 class ArchiveViewHelper extends AbstractTagBasedViewHelper
 {
-    /** @var RenderingContext */
-    protected $renderingContext;
-
     /**
      * ArchiveViewHelper constructor.
      */
@@ -47,7 +44,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
@@ -62,12 +59,12 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
     /**
      * @return string Rendered page URI
      */
-    public function render()
+    public function render(): string
     {
-        $rssFormat = (bool) $this->arguments['rss'];
-        $year = (int) $this->arguments['year'];
-        $month = (int) $this->arguments['month'];
-        $pageUid = (int) $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['archiveUid'];
+        $rssFormat = (bool)$this->arguments['rss'];
+        $year = (int)$this->arguments['year'];
+        $month = (int)$this->arguments['month'];
+        $pageUid = (int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['archiveUid'];
         $additionalParams = [
             'tx_blog_archive' => [
                 'year' => $year,
@@ -84,7 +81,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         if ($rssFormat) {
             $uriBuilder
                 ->setFormat('rss')
-                ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_archive.']['typeNum']);
+                ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_archive.']['typeNum']);
         }
         $uri = $uriBuilder->uriFor('listPostsByDate', [], 'Post');
         if ($uri !== '') {
@@ -96,5 +93,13 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         }
 
         return $result;
+    }
+
+    /**
+     * @return mixed|\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController()
+    {
+        return $GLOBALS['TSFE'];
     }
 }

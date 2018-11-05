@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -32,10 +33,10 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Comment extends AbstractEntity
 {
-    const STATUS_PENDING = 0;
-    const STATUS_APPROVED = 10;
-    const STATUS_DECLINED = 50;
-    const STATUS_DELETED = 90;
+    public const STATUS_PENDING = 0;
+    public const STATUS_APPROVED = 10;
+    public const STATUS_DECLINED = 50;
+    public const STATUS_DELETED = 90;
 
     /**
      * The author of the comment.
@@ -113,7 +114,7 @@ class Comment extends AbstractEntity
     /**
      * @return FrontendUser
      */
-    public function getAuthor()
+    public function getAuthor(): ?FrontendUser
     {
         return $this->author;
     }
@@ -123,17 +124,16 @@ class Comment extends AbstractEntity
      *
      * @return Comment
      */
-    public function setAuthor($author)
+    public function setAuthor(FrontendUser $author): self
     {
         $this->author = $author;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -143,17 +143,16 @@ class Comment extends AbstractEntity
      *
      * @return Comment
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -163,17 +162,16 @@ class Comment extends AbstractEntity
      *
      * @return Comment
      */
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getComment()
+    public function getComment(): ?string
     {
         return $this->comment;
     }
@@ -183,17 +181,16 @@ class Comment extends AbstractEntity
      *
      * @return Comment
      */
-    public function setComment($comment)
+    public function setComment(string $comment): self
     {
         $this->comment = $comment;
-
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getHidden()
+    public function getHidden(): ?int
     {
         return $this->hidden;
     }
@@ -203,17 +200,16 @@ class Comment extends AbstractEntity
      *
      * @return Comment
      */
-    public function setHidden($hidden)
+    public function setHidden(int $hidden): self
     {
         $this->hidden = $hidden;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->url;
     }
@@ -223,17 +219,16 @@ class Comment extends AbstractEntity
      *
      * @return Comment
      */
-    public function setUrl($url)
+    public function setUrl(string $url): self
     {
         $this->url = $url;
-
         return $this;
     }
 
     /**
      * @return Post
      */
-    public function getPost()
+    public function getPost(): ?Post
     {
         return $this->post;
     }
@@ -243,17 +238,16 @@ class Comment extends AbstractEntity
      *
      * @return Comment
      */
-    public function setPost(Post $post)
+    public function setPost(Post $post): self
     {
         $this->post = $post;
-
         return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getCrdate()
+    public function getCrdate(): ?\DateTime
     {
         return $this->crdate;
     }
@@ -263,58 +257,63 @@ class Comment extends AbstractEntity
      *
      * @return Comment
      */
-    public function setCrdate(\DateTime $crdate)
+    public function setCrdate(\DateTime $crdate): self
     {
         $this->crdate = $crdate;
-
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getPostLanguageId()
+    public function getPostLanguageId(): ?int
     {
         return $this->postLanguageId;
     }
 
     /**
      * @param int $postLanguageId
+     * @return Comment
      */
-    public function setPostLanguageId($postLanguageId)
+    public function setPostLanguageId($postLanguageId): self
     {
         $this->postLanguageId = $postLanguageId;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getHp()
+    public function getHp(): ?string
     {
         return $this->hp;
     }
 
     /**
      * @param string $hp
+     * @return Comment
      */
-    public function setHp($hp)
+    public function setHp($hp): self
     {
         $this->hp = $hp;
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getStatus()
+    public function getStatus(): ?int
     {
         return $this->status;
     }
 
     /**
      * @param int $status
+     * @return Comment
      */
-    public function setStatus($status)
+    public function setStatus($status): self
     {
         $this->status = $status;
+        return $this;
     }
 }

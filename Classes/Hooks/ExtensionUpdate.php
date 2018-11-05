@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -47,7 +48,7 @@ class ExtensionUpdate
      *
      * @throws \InvalidArgumentException
      */
-    public function afterExtensionInstall($extensionKey, InstallUtility $installUtilityInstance)
+    public function afterExtensionInstall($extensionKey, InstallUtility $installUtilityInstance): void
     {
         if ($extensionKey !== 'blog') {
             return;
@@ -69,7 +70,7 @@ class ExtensionUpdate
     /**
      * @return bool
      */
-    protected function migrateCommentsStatus()
+    protected function migrateCommentsStatus(): bool
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_blog_domain_model_comment');

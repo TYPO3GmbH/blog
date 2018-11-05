@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -24,9 +25,11 @@ namespace T3G\AgencyPack\Blog\Form\Wizards;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
-use TYPO3\CMS\Backend\Module\AbstractModule;
+use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -36,8 +39,12 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  * Class SocialImageWizardController
  *
  */
-class SocialImageWizardController extends AbstractModule
+class SocialImageWizardController
 {
+    /**
+     * @var ModuleTemplate
+     */
+    protected $moduleTemplate;
 
     /**
      * @var StandaloneView
@@ -51,38 +58,35 @@ class SocialImageWizardController extends AbstractModule
      */
     public function __construct()
     {
-        parent::__construct();
         $this->view = GeneralUtility::makeInstance(StandaloneView::class);
         $this->view->setTemplatePathAndFilename('EXT:blog/Resources/Private/Templates/Backend/SocialImageWizard.html');
     }
 
     /**
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     *
      * @return ResponseInterface
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws \UnexpectedValueException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function indexAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function indexAction(ServerRequestInterface $request): ResponseInterface
     {
         $postData = $this->getPageData();
         $this->view->assign('postData', $postData);
         $this->view->assign('dataSourceFilter', $this->getDataSource('filter', $request));
         $this->view->assign('dataSourceSkin', $this->getDataSource('skin', $request));
+        $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
         $this->moduleTemplate->setContent($this->view->render());
-        $this->moduleTemplate->getPageRenderer()->addCssFile('EXT:blog/Resources/Public/Css/SocialImageWizard.css');
-        $this->moduleTemplate->getPageRenderer()->loadJquery();
-        $this->moduleTemplate->getPageRenderer()->addJsFile('EXT:blog/Resources/Public/JavaScript/fabric.min.js');
-        $this->moduleTemplate->getPageRenderer()->addJsFile('EXT:blog/Resources/Public/JavaScript/SocialImageApp.js');
-        $response->getBody()->write($this->moduleTemplate->renderContent());
-        return $response;
+        $pageRenderer = $this->moduleTemplate->getPageRenderer();
+        $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/SocialImageWizard.css');
+        $pageRenderer->addJsFile('EXT:blog/Resources/Public/JavaScript/fabric.min.js');
+        $pageRenderer->addJsFile('EXT:blog/Resources/Public/JavaScript/SocialImageApp.js');
+        return GeneralUtility::makeInstance(HtmlResponse::class, $this->moduleTemplate->renderContent());
     }
 
     /**
      * @return array
-     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     protected function getPageData(): array
     {
@@ -90,15 +94,13 @@ class SocialImageWizardController extends AbstractModule
             ->get(PostRepository::class)
             ->findCurrentPost();
 
-        $socialData = [
+        return $post instanceof Post ? [
             'author' => $post->getAuthors()->current()->getName(),
             'image' => $post->getMedia()->current()->getOriginalResource()->getPublicUrl(),
             'title' => $post->getTitle(),
             'uid' => $post->getUid(),
             'table' => 'pages'
-        ];
-
-        return $socialData;
+        ] : [];
     }
 
     /**

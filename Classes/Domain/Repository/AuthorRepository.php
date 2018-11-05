@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -20,10 +21,9 @@ class AuthorRepository extends Repository
     /**
      * Initializes the repository.
      *
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \InvalidArgumentException
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->defaultOrderings = [
             'name' => QueryInterface::ORDER_ASCENDING,

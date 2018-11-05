@@ -47,6 +47,7 @@ plugin.tx_blog {
         widgets {
             comments {
                 limit = 5
+                blogSetup = {$plugin.tx_blog.settings.storagePid}
             }
             recentposts {
                 limit = 5

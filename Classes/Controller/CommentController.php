@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -78,7 +79,7 @@ class CommentController extends ActionController
     /**
      * @param PostRepository $postRepository
      */
-    public function injectPostRepository(PostRepository $postRepository)
+    public function injectPostRepository(PostRepository $postRepository): void
     {
         $this->postRepository = $postRepository;
     }
@@ -86,7 +87,7 @@ class CommentController extends ActionController
     /**
      * @param \T3G\AgencyPack\Blog\Service\CommentService $commentService
      */
-    public function injectCommentService(CommentService $commentService)
+    public function injectCommentService(CommentService $commentService): void
     {
         $this->commentService = $commentService;
     }
@@ -94,7 +95,7 @@ class CommentController extends ActionController
     /**
      * @param \T3G\AgencyPack\Blog\Service\CacheService $cacheService
      */
-    public function injectBlogCacheService(CacheService $cacheService)
+    public function injectBlogCacheService(CacheService $cacheService): void
     {
         $this->blogCacheService = $cacheService;
     }
@@ -102,11 +103,11 @@ class CommentController extends ActionController
     /**
      * Pre-process request and ensure a valid protocol for submitted URL
      */
-    protected function initializeAddCommentAction()
+    protected function initializeAddCommentAction(): void
     {
         $arguments = $this->request->getArguments();
         if (!empty($arguments['comment']['url'])) {
-            $re = '/(http([s]*):\/\/)(.*)/';
+            $re = '/^(http([s]*):\/\/)(.*)/';
             if (preg_match($re, $arguments['comment']['url'], $matches) === 0) {
                 $arguments['comment']['url'] = 'http://' . $arguments['comment']['url'];
             }
@@ -114,10 +115,7 @@ class CommentController extends ActionController
         }
     }
 
-    /**
-     * @return bool
-     */
-    protected function getErrorFlashMessage()
+    protected function getErrorFlashMessage(): bool
     {
         return false;
     }
@@ -125,10 +123,12 @@ class CommentController extends ActionController
     /**
      * Show comment form.
      *
-     * @param Post|null    $post
+     * @param Post|null $post
      * @param Comment|null $comment
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function formAction(Post $post = null, Comment $comment = null)
+    public function formAction(Post $post = null, Comment $comment = null): void
     {
         if ($post === null) {
             $post = $this->postRepository->findCurrentPost();
@@ -140,17 +140,15 @@ class CommentController extends ActionController
     /**
      * Add comment to blog post.
      *
-     * @param Post    $post
+     * @param Post $post
      * @param Comment $comment
-     *
-     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
-     * @throws \RuntimeException
      */
-    public function addCommentAction(Post $post, Comment $comment)
+    public function addCommentAction(Post $post, Comment $comment): void
     {
         $this->commentService->injectSettings($this->settings['comments']);
         $state = $this->commentService->addComment($post, $comment);
@@ -180,9 +178,11 @@ class CommentController extends ActionController
     }
 
     /**
-     *
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function commentsAction()
+    public function commentsAction(): void
     {
         $post = $this->postRepository->findCurrentPost();
         if ($post instanceof Post) {

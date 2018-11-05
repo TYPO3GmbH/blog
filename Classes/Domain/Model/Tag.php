@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -64,15 +65,16 @@ class Tag extends AbstractEntity
     /**
      * initializeObject
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
+        /** @extensionScannerIgnoreLine */
         $this->content = new ObjectStorage();
     }
 
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -80,59 +82,56 @@ class Tag extends AbstractEntity
     /**
      * @param string $title
      *
-     * @return $this
+     * @return Tag
      */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return Tag
      */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
-
         return $this;
     }
 
     /**
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
-    public function getContent()
+    public function getContent(): ObjectStorage
     {
+        /** @extensionScannerIgnoreLine */
         return $this->content;
     }
 
     /**
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $content
-     *
-     * @return $this
+     * @return Tag
      */
-    public function setContent($content)
+    public function setContent($content): self
     {
+        /** @extensionScannerIgnoreLine */
         $this->content = $content;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getContentElementUidList()
+    public function getContentElementUidList(): string
     {
         $uidList = [];
         $contentElements = $this->getContent();

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -35,6 +36,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class CommentServiceTest extends UnitTestCase
 {
+    protected $resetSingletonInstances = true;
+
     /**
      * @var PostRepository
      */
@@ -53,16 +56,15 @@ class CommentServiceTest extends UnitTestCase
         $this->commentService->injectPostRepository($this->postRepositoryProphecy->reveal());
         $this->commentService->injectPersistenceManager($this->prophesize(PersistenceManager::class)->reveal());
     }
+
     /**
      * @test
      */
-    public function inactiveCommentsReturnErrorOnAdd()
+    public function inactiveCommentsReturnErrorOnAdd(): void
     {
         $post = new Post();
         $comment = new Comment();
-
-        $commentService = new CommentService();
-        $result = $commentService->addComment($post, $comment);
+        $result = (new CommentService())->addComment($post, $comment);
 
         self::assertSame(CommentService::STATE_ERROR, $result);
     }
@@ -70,7 +72,7 @@ class CommentServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function activeCommentsWithoutModerationReturnSuccessOnAdd()
+    public function activeCommentsWithoutModerationReturnSuccessOnAdd(): void
     {
         $post = new Post();
         $comment = new Comment();
@@ -86,7 +88,7 @@ class CommentServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function activeCommentsWithModerationReturnModerationOnAdd()
+    public function activeCommentsWithModerationReturnModerationOnAdd(): void
     {
         $post = new Post();
         $comment = new Comment();
@@ -102,7 +104,7 @@ class CommentServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function commentGetsAddedToPost()
+    public function commentGetsAddedToPost(): void
     {
         $post = new Post();
         $comment = new Comment();
@@ -118,7 +120,7 @@ class CommentServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function postGetsUpdatedInDatabase()
+    public function postGetsUpdatedInDatabase(): void
     {
         $post = new Post();
         $comment = new Comment();

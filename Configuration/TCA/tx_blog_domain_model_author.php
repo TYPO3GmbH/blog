@@ -28,8 +28,7 @@ return [
             'disabled' => 'hidden',
         ],
         'iconfile' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-author.svg',
-        'searchFields' => 'uid,name,title',
-        'requestUpdate' => 'avatar_provider'
+        'searchFields' => 'uid,name,title'
     ],
     'interface' => [
         'showRecordFieldList' => 'hidden,name,image,title,website,email,location,twitter,googleplus,linkedin,xing,profile,bio,posts',
@@ -66,7 +65,7 @@ return [
         ],
         'hidden' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
                 'default' => 0,
@@ -84,6 +83,7 @@ return [
         'avatar_provider' => [
             'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.avatar_provider',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -98,6 +98,20 @@ return [
             'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.image',
             'displayCond' => 'FIELD:avatar_provider:=:T3G\AgencyPack\Blog\AvatarProvider\ImageProvider',
+            'overrideChildTca' => [
+                'types' => [
+                    '0' => [
+                        'showitem' => '
+                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                            --palette--;;filePalette',
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                        'showitem' => '
+                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                            --palette--;;filePalette',
+                    ],
+                ]
+            ],
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', [
                 'appearance' => [
                     'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
@@ -109,18 +123,6 @@ return [
                     'fieldname' => 'image',
                     'tablenames' => 'tx_blog_domain_model_author',
                     'table_local' => 'sys_file',
-                ],
-                'foreign_types' => [
-                    '0' => [
-                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette',
-                    ],
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette',
-                    ],
                 ],
             ], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
         ],

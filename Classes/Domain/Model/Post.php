@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -62,15 +63,6 @@ class Post extends AbstractEntity
     protected $description;
 
     /**
-     * Thie blog post author.
-     *
-     * @var string
-     *
-     * @deprecated since EXT:blog v1.2.0, this property will be removed in EXT:blog v2.0.0
-     */
-    protected $author;
-
-    /**
      * The blog post creation date.
      *
      * @var \DateTime
@@ -89,7 +81,7 @@ class Post extends AbstractEntity
      *
      * @var bool
      */
-    protected $commentsActive;
+    protected $commentsActive = false;
 
     /**
      * Comments of the blog post.
@@ -143,7 +135,7 @@ class Post extends AbstractEntity
     /**
      * initializeObject
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->categories = new ObjectStorage();
         $this->comments = new ObjectStorage();
@@ -154,203 +146,200 @@ class Post extends AbstractEntity
 
     /**
      * @param Author $author
+     * @return Post
      */
-    public function addAuthor(Author $author)
+    public function addAuthor(Author $author): self
     {
         $this->authors->attach($author);
+        return $this;
     }
 
     /**
      * @param Author $author
+     * @return Post
      */
-    public function removeAuthor(Author $author)
+    public function removeAuthor(Author $author): self
     {
         $this->authors->detach($author);
+        return $this;
     }
 
     /**
      * @return ObjectStorage
      */
-    public function getAuthors()
+    public function getAuthors(): ObjectStorage
     {
         return $this->authors;
     }
 
     /**
      * @param ObjectStorage $authors
+     * @return Post
      */
-    public function setAuthors(ObjectStorage $authors)
+    public function setAuthors(ObjectStorage $authors): self
     {
         $this->authors = $authors;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
      * @param string $title
-     *
-     * @return $this
+     * @return Post
      */
-    public function setTitle($title)
+    public function setTitle($title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getSubtitle()
+    public function getSubtitle(): ?string
     {
         return $this->subtitle;
     }
 
     /**
-     * @param string $subtitle
-     *
-     * @return $this
+     * @param $subtitle
+     * @return Post
      */
-    public function setSubtitle($subtitle)
+    public function setSubtitle($subtitle): self
     {
         $this->subtitle = $subtitle;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getAbstract()
+    public function getAbstract(): ?string
     {
         return $this->abstract;
     }
 
     /**
      * @param string $abstract
-     *
-     * @return $this
+     * @return Post
      */
-    public function setAbstract($abstract)
+    public function setAbstract($abstract): self
     {
         $this->abstract = $abstract;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return Post
      */
-    public function setDescription($description)
+    public function setDescription($description): self
     {
         $this->description = $description;
-
         return $this;
     }
 
     /**
      * @return ObjectStorage
      */
-    public function getCategories()
+    public function getCategories(): ObjectStorage
     {
         return $this->categories;
     }
 
     /**
      * @param ObjectStorage $categories
+     * @return Post
      */
-    public function setCategories($categories)
+    public function setCategories($categories): self
     {
         $this->categories = $categories;
+        return $this;
     }
 
     /**
      * @param Category $category
-     *
-     * @return $this
+     * @return Post
      */
-    public function addCategory(Category $category)
+    public function addCategory(Category $category): self
     {
         $this->categories->attach($category);
-
         return $this;
     }
 
     /**
      * @param Category $category
      *
-     * @return $this
+     * @return Post
      */
-    public function removeCategory(Category $category)
+    public function removeCategory(Category $category): self
     {
         $this->categories->detach($category);
-
         return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getCrdate()
+    public function getCrdate(): \DateTime
     {
         return $this->crdate;
     }
 
     /**
      * @param \DateTime $crdate
-     *
-     * @return $this
+     * @return Post
      */
-    public function setCrdate($crdate)
+    public function setCrdate($crdate): self
     {
         $this->crdate = $crdate;
-
         return $this;
     }
 
     /**
      * @return bool
      */
-    public function getCommentsActive()
+    public function getCommentsActive(): bool
     {
         return $this->commentsActive;
     }
 
     /**
      * @param bool $commentsActive
+     * @return Post
      */
-    public function setCommentsActive($commentsActive)
+    public function setCommentsActive($commentsActive): self
     {
         $this->commentsActive = $commentsActive;
+        return $this;
     }
 
     /**
      * @return ObjectStorage
      */
-    public function getComments()
+    public function getComments(): ObjectStorage
     {
         return $this->comments;
     }
 
     /**
-     * @return ObjectStorage
-     * @throws \InvalidArgumentException
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function getActiveComments()
@@ -363,63 +352,56 @@ class Post extends AbstractEntity
     /**
      * @param ObjectStorage $comments
      *
-     * @return $this
+     * @return Post
      */
-    public function setComments($comments)
+    public function setComments($comments): self
     {
         $this->comments = $comments;
-
         return $this;
     }
 
     /**
      * @param Comment $comment
-     *
-     * @return $this
+     * @return Post
      */
-    public function addComment(Comment $comment)
+    public function addComment(Comment $comment): self
     {
         $this->comments->attach($comment);
-
         return $this;
     }
 
     /**
      * @param Comment $comment
-     *
-     * @return $this
+     * @return Post
      */
-    public function removeComment(Comment $comment)
+    public function removeComment(Comment $comment): self
     {
         $this->comments->detach($comment);
-
         return $this;
     }
 
     /**
      * @return bool
      */
-    public function isSharingEnabled()
+    public function isSharingEnabled(): bool
     {
         return $this->sharingEnabled;
     }
 
     /**
      * @param bool $sharingEnabled
-     *
-     * @return $this
+     * @return Post
      */
-    public function setSharingEnabled($sharingEnabled)
+    public function setSharingEnabled(bool $sharingEnabled): self
     {
-        $this->sharingEnabled = (bool) $sharingEnabled;
-
+        $this->sharingEnabled = $sharingEnabled;
         return $this;
     }
 
     /**
      * @return ObjectStorage
      */
-    public function getTags()
+    public function getTags(): ObjectStorage
     {
         return $this->tags;
     }
@@ -427,108 +409,86 @@ class Post extends AbstractEntity
     /**
      * @param ObjectStorage $tags
      *
-     * @return $this
+     * @return Post
      */
-    public function setTags($tags)
+    public function setTags(ObjectStorage $tags): self
     {
         $this->tags = $tags;
-
         return $this;
     }
 
     /**
      * @param Tag $tag
-     *
-     * @return $this
+     * @return Post
      */
-    public function addTag(Tag $tag)
+    public function addTag(Tag $tag): self
     {
         $this->tags->attach($tag);
-
         return $this;
     }
 
     /**
      * @param Tag $tag
-     *
-     * @return $this
+     * @return Post
      */
-    public function removeTag(Tag $tag)
+    public function removeTag(Tag $tag): self
     {
         $this->tags->detach($tag);
-
         return $this;
     }
 
     /**
      * @return ObjectStorage
      */
-    public function getMedia()
+    public function getMedia(): ObjectStorage
     {
         return $this->media;
     }
 
     /**
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $media
+     * @return Post
      */
-    public function setMedia($media)
+    public function setMedia(ObjectStorage $media): self
     {
         $this->media = $media;
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getArchiveDate()
+    public function getArchiveDate(): ?int
     {
         return $this->archiveDate;
     }
 
     /**
      * @param int $archiveDate
+     * @return Post
      */
-    public function setArchiveDate($archiveDate)
+    public function setArchiveDate(int $archiveDate): self
     {
         $this->archiveDate = $archiveDate;
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getPublishDate()
+    public function getPublishDate(): ?int
     {
         return $this->publishDate;
     }
 
     /**
      * @param int $publishDate
+     * @return Post
      */
-    public function setPublishDate($publishDate)
+    public function setPublishDate(int $publishDate): self
     {
         $this->publishDate = $publishDate;
-    }
-
-    /**
-     * @return string
-     *
-     * @deprecated since EXT:blog v1.2.0, this method will be removed in EXT:blog v2.0.0
-     */
-    public function getAuthor()
-    {
-        GeneralUtility::logDeprecatedFunction();
-
-        return $this->author;
-    }
-
-    /**
-     * @param string $author
-     *
-     * @deprecated since EXT:blog v1.2.0, this method will be removed in EXT:blog v2.0.0
-     */
-    public function setAuthor($author)
-    {
-        GeneralUtility::logDeprecatedFunction();
-        $this->author = $author;
+        return $this;
     }
 
     /**

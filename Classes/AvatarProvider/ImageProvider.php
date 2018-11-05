@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -38,11 +39,11 @@ class ImageProvider implements AvatarProviderInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function getAvatarUrl(Author $author)
+    public function getAvatarUrl(Author $author): string
     {
         $image = $author->getImage();
         if ($image instanceof FileReference) {
-            return $author->getImage()->getOriginalResource()->getPublicUrl();
+            return $image->getOriginalResource()->getPublicUrl();
         }
         return '';
     }

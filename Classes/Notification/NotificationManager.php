@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -52,7 +53,7 @@ class NotificationManager
      * @param NotificationInterface $notification
      * @throws \InvalidArgumentException
      */
-    public function notify(NotificationInterface $notification)
+    public function notify(NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
         if (\is_array($this->visitorsRegistry[$notificationId])) {

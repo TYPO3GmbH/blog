@@ -48,14 +48,18 @@
 		]
 	},
 	"require": {
+		"php": "^7.2",
+		"ext-json": "*",
+		"ext-pdo": "*",
 		"psr/http-message": "^1.0.0",
-		"typo3/cms-backend": "9.5.*@dev",
-		"typo3/cms-core": "9.5.*@dev",
-		"typo3/cms-extbase": "9.5.*@dev",
-		"typo3/cms-extensionmanager": "9.5.*@dev",
-		"typo3/cms-fluid": "9.5.*@dev",
-		"typo3/cms-frontend": "9.5.*@dev",
-		"typo3/cms-install": "9.5.*@dev",
+		"symfony/console": "^4.1",
+		"typo3/cms-backend": "^9.5.1",
+		"typo3/cms-core": "^9.5.1",
+		"typo3/cms-extbase": "^9.5.1",
+		"typo3/cms-extensionmanager": "^9.5.1",
+		"typo3/cms-fluid": "^9.5.1",
+		"typo3/cms-frontend": "^9.5.1",
+		"typo3/cms-install": "^9.5.1",
 		"typo3fluid/fluid": "2.5.*"
 	},
 	"require-dev": {

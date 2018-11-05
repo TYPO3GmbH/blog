@@ -6,10 +6,14 @@ This blog extension uses TYPO3s core concepts and elements to provide a full-blo
 
 ### master
 - TYPO3 CMS dev-master
-- PHP 7.0
+- PHP 7.2
+
+### v9.0
+- TYPO3 CMS 9.5.1 or higher
+- PHP 7.2
 
 ### v8.7
-- TYPO3 CMS 8.7
+- TYPO3 CMS 8.7.0
 - PHP 7.0
 
 ### v7.6
@@ -24,6 +28,12 @@ GPL-2.0-or-later
 * Use a `composer require t3g/blog`
 * or download it from [bitbucket.typo3.com/scm/ext/blog](https://bitbucket.typo3.com/scm/ext/blog)
 * or download ir from [TER](https://extensions.typo3.org/extension/blog/)
+
+## Route configuration
+The route enhancer config is not final yet, but a good start. You can simply include it in your site configuration:
+
+    imports:
+    - { resource: "EXT:blog/Configuration/Routes/Default.yaml" }
 
 ## Contribution
 

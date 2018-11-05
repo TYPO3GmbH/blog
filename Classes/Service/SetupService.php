@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -12,6 +13,7 @@ namespace T3G\AgencyPack\Blog\Service;
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Install\ExtensionInstaller;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
@@ -29,10 +31,8 @@ class SetupService
 
     /**
      * @return array
-     *
-     * @throws \InvalidArgumentException
      */
-    public function determineBlogSetups()
+    public function determineBlogSetups(): array
     {
         $setups = [];
         $queryBuilder = $this->getQueryBuilderForTable('pages');
@@ -65,12 +65,7 @@ class SetupService
         return $setups;
     }
 
-    /**
-     * @param $uid
-     *
-     * @return array
-     */
-    public function getBlogRecordAsArray($uid)
+    public function getBlogRecordAsArray(int $uid): array
     {
         $queryBuilder = $this->getQueryBuilderForTable('pages');
         return $queryBuilder
@@ -83,16 +78,14 @@ class SetupService
 
     /**
      * @param array $data
-     *
      * @return bool
-     *
-     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Extensionmanager\Exception\ExtensionManagerException
      */
-    public function createBlogSetup(array $data)
+    public function createBlogSetup(array $data): bool
     {
-        $useTemplate = array_key_exists('template', $data) ? (bool) $data['template'] : false;
-        $installExtension = array_key_exists('install', $data) ? (bool) $data['install'] : false;
-        $title = array_key_exists('title', $data) ? (string) $data['title'] : null;
+        $useTemplate = array_key_exists('template', $data) ? (bool)$data['template'] : false;
+        $installExtension = array_key_exists('install', $data) ? (bool)$data['install'] : false;
+        $title = array_key_exists('title', $data) ? (string)$data['title'] : null;
 
         if ($installExtension
             && $this->installExtension('rx_shariff')
@@ -119,8 +112,8 @@ class SetupService
             if ($result !== false) {
                 $result = true;
                 // Update page id in PageTSConfig
-                $blogRootUid = (int) $this->recordUidArray['NEW_blogRoot'];
-                $blogFolderUid = (int) $this->recordUidArray['NEW_blogFolder'];
+                $blogRootUid = (int)$this->recordUidArray['NEW_blogRoot'];
+                $blogFolderUid = (int)$this->recordUidArray['NEW_blogFolder'];
                 $queryBuilder = $this->getQueryBuilderForTable('pages');
                 $queryBuilder->getRestrictions()->removeAll();
                 $record = $queryBuilder
@@ -150,7 +143,7 @@ class SetupService
             }
             if ($result === true) {
                 // Replace UIDs in constants
-                $sysTemplateUid = (int) $this->recordUidArray['NEW_SysTemplate'];
+                $sysTemplateUid = (int)$this->recordUidArray['NEW_SysTemplate'];
                 $queryBuilder = $this->getQueryBuilderForTable('sys_template');
                 $record = $queryBuilder
                     ->select('constants')
@@ -162,7 +155,7 @@ class SetupService
                     ->update('sys_template')
                     ->set('constants', str_replace(
                         array_keys($this->recordUidArray),
-                        array_values($this->recordUidArray),
+                        $this->recordUidArray,
                         $record['constants']
                     ))
                     ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($sysTemplateUid, \PDO::PARAM_INT)))
@@ -174,57 +167,39 @@ class SetupService
         return $result;
     }
 
-    /**
-     * @param array $setup
-     *
-     * @return array
-     */
-    protected function replaceNewUids(array $setup)
+    protected function replaceNewUids(array $setup): array
     {
         $newSetup = [];
         foreach ($setup as $key => &$value) {
-            if (false !== strpos($key, 'NEW')) {
+            if (strpos($key, 'NEW') !== false) {
                 foreach ($this->recordUidArray as $newId => $uid) {
                     $key = str_replace($newId, $uid, $key);
                 }
             }
-            if (is_array($value)) {
-                /* @noinspection ReferenceMismatchInspection */
+            if (\is_array($value)) {
                 $value = $this->replaceNewUids($value);
-            } else {
-                if (false !== strpos($value, 'NEW')) {
-                    foreach ($this->recordUidArray as $newId => $uid) {
-                        /* @noinspection ReferenceMismatchInspection */
-                        $value = str_replace($newId, $uid, $value);
-                    }
+            } elseif (strpos($value, 'NEW') !== false) {
+                foreach ($this->recordUidArray as $newId => $uid) {
+                    $value = str_replace($newId, $uid, $value);
                 }
             }
-            /* @noinspection ReferenceMismatchInspection */
             $newSetup[$key] = $value;
         }
-
         return $newSetup;
     }
 
     /**
-     * @param string $extKey
-     *
+     * @param string $extensionKey
      * @return bool
-     *
-     * @throws \InvalidArgumentException
+     * @throws \TYPO3\CMS\Extensionmanager\Exception\ExtensionManagerException
      */
-    protected function installExtension($extKey)
+    protected function installExtension(string $extensionKey): bool
     {
-        $installer = GeneralUtility::makeInstance(ExtensionInstaller::class, $extKey);
-        $databaseQueries = [];
-        $customMessages = '';
-
-        return $installer->performUpdate($databaseQueries, $customMessages);
+        return GeneralUtility::makeInstance(ExtensionInstaller::class)->install($extensionKey);
     }
 
     /**
      * @param string $table
-     *
      * @return QueryBuilder
      */
     protected function getQueryBuilderForTable(string $table) : QueryBuilder
@@ -233,10 +208,7 @@ class SetupService
             ->getQueryBuilderForTable($table);
     }
 
-    /**
-     * @return \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
-     */
-    protected function getBackendUser()
+    protected function getBackendUser(): BackendUserAuthentication
     {
         return $GLOBALS['BE_USER'];
     }

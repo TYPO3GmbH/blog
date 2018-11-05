@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -24,6 +25,7 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
 use T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider;
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -38,7 +40,7 @@ class Author extends AbstractEntity
     /**
      * @var string
      */
-    protected $avatarProvider;
+    protected $avatarProvider = '';
 
     /**
      * @var AvatarProviderInterface
@@ -48,12 +50,12 @@ class Author extends AbstractEntity
     /**
      * @var string
      */
-    protected $name;
+    protected $name = '';
 
     /**
      * @var string
      */
-    protected $title;
+    protected $title = '';
 
     /**
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
@@ -63,51 +65,51 @@ class Author extends AbstractEntity
     /**
      * @var string
      */
-    protected $website;
+    protected $website = '';
 
     /**
      * @var string
      */
-    protected $email;
+    protected $email = '';
 
     /**
      * @var string
      */
-    protected $location;
+    protected $location = '';
 
     /**
      * @var string
      */
-    protected $twitter;
+    protected $twitter = '';
 
     /**
      * @var string
      */
-    protected $googleplus;
+    protected $googleplus = '';
 
     /**
      * @var string
      */
-    protected $linkedin;
+    protected $linkedin = '';
 
     /**
      * @var string
      */
-    protected $xing;
+    protected $xing = '';
 
     /**
      * @var string
      */
-    protected $profile;
+    protected $profile = '';
 
     /**
      * @var string
      */
-    protected $bio;
+    protected $bio = '';
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Post>
-     * @lazy
+     * @Extbase\ORM\Lazy
      */
     protected $posts;
 
@@ -127,7 +129,7 @@ class Author extends AbstractEntity
     /**
      * initializeObject
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->posts = new ObjectStorage();
     }
@@ -144,16 +146,18 @@ class Author extends AbstractEntity
 
     /**
      * @param string $avatarProvider
+     * @return Author
      */
-    public function setAvatarProvider(string $avatarProvider)
+    public function setAvatarProvider(string $avatarProvider): self
     {
         $this->avatarProvider = $avatarProvider;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getAvatar()
+    public function getAvatar(): string
     {
         if ($this->avatar === null) {
             $this->avatar = $this->getAvatarProvider();
@@ -164,240 +168,272 @@ class Author extends AbstractEntity
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
      * @param string $name
+     * @return Author
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
      * @param string $title
+     * @return Author
      */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
      * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
-    public function getImage()
+    public function getImage(): ?FileReference
     {
         return $this->image;
     }
 
     /**
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     * @return Author
      */
-    public function setImage(FileReference $image)
+    public function setImage(FileReference $image): self
     {
         $this->image = $image;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getWebsite()
+    public function getWebsite(): ?string
     {
         return $this->website;
     }
 
     /**
      * @param string $website
+     * @return Author
      */
-    public function setWebsite($website)
+    public function setWebsite(string $website): self
     {
         $this->website = $website;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
      * @param string $email
+     * @return Author
      */
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getLocation()
+    public function getLocation(): ?string
     {
         return $this->location;
     }
 
     /**
      * @param string $location
+     * @return Author
      */
-    public function setLocation($location)
+    public function setLocation(string $location): self
     {
         $this->location = $location;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getTwitter()
+    public function getTwitter(): ?string
     {
         return $this->twitter;
     }
 
     /**
      * @param string $twitter
+     * @return Author
      */
-    public function setTwitter($twitter)
+    public function setTwitter(string $twitter): self
     {
         $this->twitter = $twitter;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getGoogleplus()
+    public function getGoogleplus(): ?string
     {
         return $this->googleplus;
     }
 
     /**
      * @param string $googleplus
+     * @return Author
      */
-    public function setGoogleplus($googleplus)
+    public function setGoogleplus(string $googleplus): self
     {
         $this->googleplus = $googleplus;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getLinkedin()
+    public function getLinkedin(): ?string
     {
         return $this->linkedin;
     }
 
     /**
      * @param string $linkedin
+     * @return Author
      */
-    public function setLinkedin($linkedin)
+    public function setLinkedin(string $linkedin): self
     {
         $this->linkedin = $linkedin;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getXing()
+    public function getXing(): ?string
     {
         return $this->xing;
     }
 
     /**
      * @param string $xing
+     * @return Author
      */
-    public function setXing($xing)
+    public function setXing(string $xing): self
     {
         $this->xing = $xing;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getProfile()
+    public function getProfile(): ?string
     {
         return $this->profile;
     }
 
     /**
      * @param string $profile
+     * @return Author
      */
-    public function setProfile($profile)
+    public function setProfile(string $profile): self
     {
         $this->profile = $profile;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getBio()
+    public function getBio(): ?string
     {
         return $this->bio;
     }
 
     /**
      * @param string $bio
+     * @return Author
      */
-    public function setBio($bio)
+    public function setBio(string $bio): self
     {
         $this->bio = $bio;
+        return $this;
     }
 
     /**
      * @param Post $post
+     * @return Author
      */
-    public function addPost(Post $post)
+    public function addPost(Post $post): self
     {
         $this->posts->attach($post);
+        return $this;
     }
 
     /**
      * @param Post $post
+     * @return Author
      */
-    public function removePost(Post $post)
+    public function removePost(Post $post): self
     {
         $this->posts->detach($post);
+        return $this;
     }
 
     /**
      * @return ObjectStorage
      */
-    public function getPosts()
+    public function getPosts(): ObjectStorage
     {
         return $this->posts;
     }
 
     /**
      * @param ObjectStorage $posts
+     * @return Author
      */
-    public function setPosts(ObjectStorage $posts)
+    public function setPosts(ObjectStorage $posts): self
     {
         $this->posts = $posts;
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getDetailsPage()
+    public function getDetailsPage(): ?int
     {
         return $this->detailsPage;
     }
 
     /**
      * @param int $page
+     * @return Author
      */
-    public function setDetailsPage(int $page)
+    public function setDetailsPage(int $page): self
     {
         $this->detailsPage = $page;
+        return $this;
     }
 }

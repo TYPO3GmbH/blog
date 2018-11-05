@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -30,5 +31,5 @@ class Constants
     /**
      * Named constants for "magic numbers" of the field doktype.
      */
-    const DOKTYPE_BLOG_POST = 137;
+    public const DOKTYPE_BLOG_POST = 137;
 }

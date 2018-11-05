@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -25,62 +26,54 @@ namespace T3G\AgencyPack\Blog\Install\Updates;
 use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Install\Updates\AbstractUpdate;
+use /** @noinspection PhpInternalEntityUsedInspection */
+    TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
+use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
  * Migrate "crdate_month" and "crdate_year" field for existing blog posts
  */
-class DatabaseMonthYearUpdate extends AbstractUpdate
+class DatabaseMonthYearUpdate implements UpgradeWizardInterface
 {
     /**
-     * @var string
-     */
-    protected $title = '[EXT:blog] Set new month and year fields for existing blog posts';
-
-    /**
-     * Checks if an update is needed
+     * Return the identifier for this wizard
+     * This should be the same string as used in the ext_localconf class registration
      *
-     * @param string &$description The description for the update
-     *
-     * @return bool Whether an update is needed (TRUE) or not (FALSE)
-     * @throws \InvalidArgumentException
+     * @return string
      */
-    public function checkForUpdate(&$description) : bool
+    public function getIdentifier(): string
     {
-        if ($this->isWizardDone()) {
-            return false;
-        }
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('pages');
-        $queryBuilder->getRestrictions()->removeAll();
-        $elementCount = $queryBuilder
-            ->count('uid')
-            ->from('pages')
-            ->where(
-                $queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->eq(
-                        'doktype',
-                        $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, \PDO::PARAM_INT)
-                    ),
-                    $queryBuilder->expr()->eq('crdate_month', 0),
-                    $queryBuilder->expr()->eq('crdate_year', 0)
-                )
-            )
-            ->execute()
-            ->fetchColumn();
-        return (bool)$elementCount;
+        return self::class;
     }
 
     /**
-     * Performs the database update
+     * Return the speaking name of this wizard
      *
-     * @param array &$databaseQueries Queries done in this update
-     * @param string &$customMessage Custom message
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return '[EXT:blog] Set new month and year fields for existing blog posts';
+    }
+
+    /**
+     * Return the description for this wizard
+     *
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return '';
+    }
+
+    /**
+     * Execute the update
+     *
+     * Called when a wizard reports that an update is necessary
      *
      * @return bool
-     * @throws \InvalidArgumentException
      */
-    public function performUpdate(array &$databaseQueries, &$customMessage) : bool
+    public function executeUpdate(): bool
     {
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('pages');
@@ -114,7 +107,53 @@ class DatabaseMonthYearUpdate extends AbstractUpdate
             $databaseQueries[] = $queryBuilder->getSQL();
             $queryBuilder->execute();
         }
-        $this->markWizardAsDone();
         return true;
+    }
+
+    /**
+     * Is an update necessary?
+     *
+     * Is used to determine whether a wizard needs to be run.
+     * Check if data for migration exists.
+     *
+     * @return bool
+     */
+    public function updateNecessary(): bool
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('pages');
+        $queryBuilder->getRestrictions()->removeAll();
+        $elementCount = $queryBuilder
+            ->count('uid')
+            ->from('pages')
+            ->where(
+                $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->eq(
+                        'doktype',
+                        $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, \PDO::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->eq('crdate_month', 0),
+                    $queryBuilder->expr()->eq('crdate_year', 0)
+                )
+            )
+            ->execute()
+            ->fetchColumn();
+        return (bool)$elementCount;
+    }
+
+    /**
+     * Returns an array of class names of Prerequisite classes
+     *
+     * This way a wizard can define dependencies like "database up-to-date" or
+     * "reference index updated"
+     *
+     * @return string[]
+     */
+    public function getPrerequisites(): array
+    {
+        /** @noinspection PhpInternalEntityUsedInspection */
+        return [
+            DatabaseUpdatedPrerequisite::class
+        ];
     }
 }

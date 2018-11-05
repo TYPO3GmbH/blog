@@ -420,7 +420,7 @@ Settings (plugin.tx_blog.settings.widgets)
    Property                             Title                                  Type            Default
    ==================================== ====================================== =============== ===============
    `comments.limit`_                    Limit of visible comments              int             5
-   `comments.blogSetup`_                blog setup pid for this widget         int             null
+   `comments.blogSetup`_                blog setup pid for this widget         int             storage PID
    `tags.limit`_                        Limit of visible tags                  int             20
    `tags.minSize`_                      Minimum size in percent                int             100
    `tags.maxSize`_                      Maximum size in percent                int             200

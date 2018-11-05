@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -22,8 +23,9 @@ class CacheService
      * @param Post $post
      * @throws \InvalidArgumentException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      */
-    public function addTagsForPost(Post $post)
+    public function addTagsForPost(Post $post): void
     {
         $this->addTagToPage('tx_blog_post_' . $post->getUid());
         foreach ($post->getAuthors() as $author) {
@@ -43,7 +45,7 @@ class CacheService
     /**
      * @param string $tag
      */
-    public function addTagToPage(string $tag)
+    public function addTagToPage(string $tag): void
     {
         $this->addTagsToPage([$tag]);
     }
@@ -51,7 +53,7 @@ class CacheService
     /**
      * @param array $tags
      */
-    public function addTagsToPage(array $tags)
+    public function addTagsToPage(array $tags): void
     {
         $this->getTypoScriptFrontendController()->addCacheTags($tags);
     }
@@ -61,7 +63,7 @@ class CacheService
      * @throws \InvalidArgumentException
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
-    public function flushCacheByTag(string $tag)
+    public function flushCacheByTag(string $tag): void
     {
         $this->flushCacheByTags([$tag]);
     }
@@ -71,7 +73,7 @@ class CacheService
      * @throws \InvalidArgumentException
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
-    public function flushCacheByTags(array $tags)
+    public function flushCacheByTags(array $tags): void
     {
         GeneralUtility::makeInstance(CacheManager::class)
             ->getCache('cache_pages')

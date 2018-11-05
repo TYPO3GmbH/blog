@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -22,7 +23,7 @@ class MetaService
      */
     public function get($_, $conf)
     {
-        $key = isset($conf['key']) ? $conf['key'] : null;
+        $key = $conf['key'] ?? null;
         if ($key !== null) {
             try {
                 return \T3G\AgencyPack\Blog\Service\MetaService::get($key);

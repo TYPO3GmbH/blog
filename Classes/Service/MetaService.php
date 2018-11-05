@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -15,25 +16,25 @@ namespace T3G\AgencyPack\Blog\Service;
 class MetaService extends \ArrayObject
 {
     // Used for the <title>-Tag or meta title tags
-    const META_TITLE = 'title';
+    public const META_TITLE = 'title';
 
     // <meta>-Description tag
-    const META_DESCRIPTION = 'description';
+    public const META_DESCRIPTION = 'description';
 
     // Creation date
-    const META_PUBLISHED_DATE = 'published_date';
+    public const META_PUBLISHED_DATE = 'published_date';
 
     // Last modified date (field: tstamp)
-    const META_MODIFIED_DATE = 'modified_date';
+    public const META_MODIFIED_DATE = 'modified_date';
 
     // Overwrite the canonical URL
-    const META_URL = 'url';
+    public const META_URL = 'url';
 
     // The tags of the blog post
-    const META_TAGS = 'tags';
+    public const META_TAGS = 'tags';
 
     // The categories of the blog post
-    const META_CATEGORIES = 'categories';
+    public const META_CATEGORIES = 'categories';
 
     /**
      * Registry object provides storage for shared objects.
@@ -61,13 +62,9 @@ class MetaService extends \ArrayObject
     /**
      * Set the default registry instance to a specified instance.
      *
-     * @param MetaService $instance An object instance of type Registry,
-     *                              or a subclass.
-     * @param MetaService $instance
-     *
-     * @throws \RuntimeException
+     * @param self $instance
      */
-    public static function setInstance(self $instance)
+    public static function setInstance(self $instance): void
     {
         if (self::$instance !== null) {
             throw new \RuntimeException('Registry is already initialized', 1398536572);
@@ -80,7 +77,7 @@ class MetaService extends \ArrayObject
      *
      * @throws \RuntimeException
      */
-    protected static function init()
+    protected static function init(): void
     {
         self::setInstance(new self());
     }
@@ -121,7 +118,7 @@ class MetaService extends \ArrayObject
      *
      * @throws \RuntimeException
      */
-    public static function set($index, $value)
+    public static function set($index, $value): void
     {
         $instance = self::getInstance();
         $instance->offsetSet($index, $value);
@@ -145,15 +142,13 @@ class MetaService extends \ArrayObject
     }
 
     /**
-     * method to check if offset exists.
-     *
-     * @param string $index
-     *
-     * @returns mixed
-     *
+     * Method to check if offset exists.
      * Workaround for http://bugs.php.net/bug.php?id=40442 (ZF-960).
+     *
+     * @param mixed $index
+     * @return bool
      */
-    public function offsetExists($index)
+    public function offsetExists($index): bool
     {
         return array_key_exists($index, $this);
     }

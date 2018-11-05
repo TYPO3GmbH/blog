@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
  * This file is part of the package t3g/blog.
@@ -33,5 +34,5 @@ interface AvatarProviderInterface
      *
      * @return string
      */
-    public function getAvatarUrl(Author $author);
+    public function getAvatarUrl(Author $author): string;
 }
