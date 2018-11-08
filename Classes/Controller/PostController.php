@@ -308,7 +308,9 @@ class PostController extends ActionController
     {
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
-        $this->blogCacheService->addTagsForPost($post);
+        if ($post instanceof Post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
     }
 
     /**
@@ -318,7 +320,9 @@ class PostController extends ActionController
     {
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
-        $this->blogCacheService->addTagsForPost($post);
+        if ($post instanceof Post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
     }
 
     /**

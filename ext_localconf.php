@@ -170,8 +170,6 @@ call_user_func(function () {
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate::class]
         = \T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate::class;
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate::class]
-        = \T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate::class;
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate::class]
         = \T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate::class;
 
