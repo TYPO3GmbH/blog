@@ -58,8 +58,8 @@ class DataHandlerHook
                 $queryBuilder
                     ->update($table)
                     ->set('publish_date', $record['publish_date'])
-                    ->set('crdate_month', date('n', $timestamp))
-                    ->set('crdate_year', date('Y', $timestamp))
+                    ->set('crdate_month', date('n', (int)$timestamp))
+                    ->set('crdate_year', date('Y', (int)$timestamp))
                     ->where($queryBuilder->expr()->eq('uid', (int)$id))
                     ->execute();
             }
