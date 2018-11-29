@@ -109,8 +109,8 @@ class DatabaseMonthYearUpdate extends AbstractUpdate
                         $queryBuilder->createNamedParameter($record['uid'], \PDO::PARAM_INT)
                     )
                 )
-                ->set('crdate_month', date('n', $timestamp))
-                ->set('crdate_year', date('Y', $timestamp));
+                ->set('crdate_month', date('n', (int)$timestamp))
+                ->set('crdate_year', date('Y', (int)$timestamp));
             $databaseQueries[] = $queryBuilder->getSQL();
             $queryBuilder->execute();
         }
