@@ -31,7 +31,7 @@ The git repository is public and you can clone it like every git repository:
 
 .. code-block:: bash
 
-   git clone https://bitbucket.typo3.com/projects/EXT/repos/blog/browse
+   git clone https://bitbucket.typo3.com/scm/ext/blog.git
 
 
 .. _service desk: https://jira.typo3.com/servicedesk/customer/portal/3/group/21
