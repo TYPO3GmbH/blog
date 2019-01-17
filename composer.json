@@ -35,7 +35,7 @@
             "php": "7.0"
         },
         "vendor-dir": ".build/vendor"
-	},,
+	},
 	"extra": {
 		"typo3/cms": {
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
