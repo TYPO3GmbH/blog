@@ -5,16 +5,12 @@
 .DS_Store
 
 # Composer
-public/
 vendor/
 bin/
 logs/
 
+# Build stuff
+.build/
+
 # CGL Fixer
 .php_cs.cache
-
-# TYPO3
-/typo3
-/typo3temp
-/uploads
-/index.php
