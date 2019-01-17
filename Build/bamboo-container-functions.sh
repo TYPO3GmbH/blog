@@ -39,7 +39,7 @@ function runPhpCsFixer() {
         --name ${BAMBOO_COMPOSE_PROJECT_NAME}sib_adhoc \
         --rm \
         typo3gmbh/${TEST_PHP_VERSION}:latest \
-        bin/bash -c "cd ${PWD}; ./bin/php-cs-fixer $*"
+        bin/bash -c "cd ${PWD}; ./.build/bin/php-cs-fixer $*"
 }
 
 function runPhpunit() {
@@ -57,5 +57,5 @@ function runPhpunit() {
         --network ${BAMBOO_COMPOSE_PROJECT_NAME}_test \
         --rm \
         typo3gmbh/${TEST_PHP_VERSION}:latest \
-        bin/bash -c "cd ${PWD}; ./bin/phpunit $*"
+        bin/bash -c "cd ${PWD}; ./.build/bin/phpunit $*"
 }

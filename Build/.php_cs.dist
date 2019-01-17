@@ -64,5 +64,6 @@ return PhpCsFixer\Config::create()
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->in(['Classes', 'Tests'])
+            ->in(['*'])
+            ->exclude(['.build'])
     );
