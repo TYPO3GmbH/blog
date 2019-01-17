@@ -8,6 +8,7 @@
 vendor/
 bin/
 logs/
+composer.lock
 
 # Build stuff
 .build/
