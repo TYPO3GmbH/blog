@@ -12,7 +12,7 @@ Description
 A new value for the moderation settings allows to auto approve comments
 if a comment with the same email address has been approved before.
 
-.. code-block::typoscript
+.. code-block:: typoscript
 
    plugin.tx_blog.settings.comments.moderation = 2
 
