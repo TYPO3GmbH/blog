@@ -70,6 +70,7 @@
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^2.12",
+        "symfony/polyfill-php70": "1.8.0",
 		"roave/security-advisories": "dev-master",
 		"typo3/testing-framework": "^2.0.4"
 	}
