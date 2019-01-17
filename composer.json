@@ -72,6 +72,6 @@
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^2.12",
 		"roave/security-advisories": "dev-master",
-		"typo3/testing-framework": "dev-master"
+		"typo3/testing-framework": "^4.11"
 	}
 }
