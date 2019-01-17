@@ -69,7 +69,7 @@
 		"typo3fluid/fluid": "2.5.*"
 	},
 	"require-dev": {
-		"friendsofphp/php-cs-fixer": "^2.12",
+		"friendsofphp/php-cs-fixer": "2.12",
 		"roave/security-advisories": "dev-master",
 		"typo3/testing-framework": "^2.0.4"
 	}
