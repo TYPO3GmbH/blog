@@ -1,4 +1,28 @@
-.gitignore export-ignore
+# Folders
+/Build export-ignore
+/Tests export-ignore
+
+# Files
+.editorconfig export-ignore
 .gitattributes export-ignore
-Build export-ignore
-Tests export-ignore
+.gitignore export-ignore
+
+# Enforce checkout with linux lf consistent over all plattforms
+*.xml text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.tmpl text eol=lf
+*.less text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.php text eol=lf
+*.rst text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.ts text eol=lf
+*.xlf text eol=lf
+*.sql text eol=lf
+*.t3s text eol=lf
+*.txt text eol=lf
+*.typoscript text eol=lf
+*.tsconfig text eol=lf
