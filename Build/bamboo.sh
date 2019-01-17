@@ -19,6 +19,9 @@ source Build/bamboo-container-functions.sh
 source Build/php_versions.sh
 
 for TEST_PHP_VERSION in "${PHP_VERSIONS[@]}"; do
+    # clear build folder for each PHP version
+    rm -rf .build/
+
     # Check for PHP Errors
     runLint
 
