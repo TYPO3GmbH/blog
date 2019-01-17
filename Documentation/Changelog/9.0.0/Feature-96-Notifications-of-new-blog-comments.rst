@@ -13,7 +13,7 @@ A notification system was introduced to send notifications on new comments.
 The notification system is extensible and will be used for more notifications in the future.
 The first implementation handles the email notifications for new comments on posts.
 
-.. code-block::typoscript
+.. code-block:: typoscript
 
    plugin.tx_blog.settings.notifications {
       email {

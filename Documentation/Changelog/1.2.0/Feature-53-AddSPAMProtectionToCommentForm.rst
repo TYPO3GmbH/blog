@@ -21,7 +21,7 @@ The template of the comment form has been changed.
 Please add the the following code to your custom template if you not use the templates delivered by the extension:
 
 
-.. code-block::html
+.. code-block:: html
 
    <div class="form-group js-hp">
       <f:form.textfield id="hp" property="hp" class="form-control" additionalAttributes="{autocomplete: 'off'}" />

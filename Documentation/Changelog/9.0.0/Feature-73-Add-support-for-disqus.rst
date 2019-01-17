@@ -12,7 +12,7 @@ Description
 Support for disqus.com was added which allows threaded and interactive comments.
 To use disqus.com you have to enable it and set your disqus shortname (forum identifier)
 
-.. code-block::typoscript
+.. code-block:: typoscript
 
    plugin.tx_blog.settings.comments {
       disqus = 1

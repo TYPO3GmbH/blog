@@ -13,7 +13,7 @@ The wizard puts the title of the blog post and the author to the image. The text
 To customize the layout auf the images, it is possible to override the filter and define an own skin.
 With PageTS-Config it is possible to define custom files:
 
-.. code-block::tsconfig
+.. code-block:: tsconfig
 
     mod.SocialImageWizard {
         dataSource {

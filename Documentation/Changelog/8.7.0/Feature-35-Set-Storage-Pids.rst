@@ -11,7 +11,7 @@ Description
 
 Added possibility to set the storage pids for blog posts related plugins.
 
-.. code-block::typoscript
+.. code-block:: typoscript
 
    # This will set pids 1, 4 and 5 as storage pid for blog posts
    # this will used for all plugins in the whole tree

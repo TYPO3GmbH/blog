@@ -14,7 +14,7 @@ The feature prevent comment spam by adding an additional captcha field to the co
 To use the feature it is required to activate and configure the captcha field.
 The required keys can be received from google: https://www.google.com/recaptcha/admin#list
 
-.. code-block::typoscript
+.. code-block:: typoscript
 
    plugin.tx_blog.settings.google_recaptcha = 1
    plugin.tx_blog.settings.google_recaptcha {
