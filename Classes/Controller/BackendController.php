@@ -235,7 +235,7 @@ class BackendController extends ActionController
     /**
      * @param Comment $comment
      * @param string $status
-     * @param string|null $filter
+     * @param string $filter
      * @param int $blogSetup
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
