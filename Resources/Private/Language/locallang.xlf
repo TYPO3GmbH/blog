@@ -327,6 +327,15 @@
 			<trans-unit id="action.editComment" xml:space="preserve">
 				<source>Edit comment</source>
 			</trans-unit>
+            <trans-unit id="action.multiple.approve" xml:space="preserve">
+				<source>Approve</source>
+			</trans-unit>
+            <trans-unit id="action.multiple.decline" xml:space="preserve">
+				<source>Decline</source>
+			</trans-unit>
+            <trans-unit id="action.multiple.delete" xml:space="preserve">
+				<source>Delete</source>
+			</trans-unit>
 
 			<trans-unit id="label.required.field" xml:space="preserve">
 				<source>*</source>

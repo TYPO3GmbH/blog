@@ -108,6 +108,10 @@ class CommentRepository extends Repository
             case 'deleted':
                 $constraints[] = $query->equals('status', Comment::STATUS_DELETED);
                 break;
+            case null:
+                // null means all, and all means all but not deleted
+                $constraints[] = $query->logicalNot($query->equals('status', Comment::STATUS_DELETED));
+                break;
             default:
         }
         if ($blogSetup !== null) {

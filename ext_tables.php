@@ -22,6 +22,8 @@ call_user_func(function () {
 
     // Provide icon for page tree, list view, ... :
     $icons = [
+        'actions-approve' => 'EXT:blog/Resources/Public/Icons/actions-approve.svg',
+        'actions-decline' => 'EXT:blog/Resources/Public/Icons/actions-decline.svg',
         'blog-link-wizard' => 'EXT:blog/Resources/Public/Icons/blog-link-wizard.svg',
         'apps-pagetree-folder-contains-blog' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-folder-contains-blog.svg',
         'apps-pagetree-blog' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog.svg',

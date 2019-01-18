@@ -145,6 +145,7 @@ class BackendController extends ActionController
     public function initializeCommentsAction(): void
     {
         $this->initializeDataTables();
+        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('TYPO3/CMS/Blog/MassUpdate');
     }
 
     /**
@@ -233,35 +234,42 @@ class BackendController extends ActionController
     }
 
     /**
-     * @param Comment $comment
      * @param string $status
      * @param string $filter
      * @param int $blogSetup
+     * @param array $comments
+     * @param int $comment
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
-    public function updateCommentStatusAction(Comment $comment, string $status, string $filter = null, int $blogSetup = null): void
+    public function updateCommentStatusAction(string $status, string $filter = null, int $blogSetup = null, array $comments = [], int $comment = null): void
     {
-        $updateComment = true;
-        switch ($status) {
-            case 'approve':
-                $comment->setStatus(Comment::STATUS_APPROVED);
-                break;
-            case 'decline':
-                $comment->setStatus(Comment::STATUS_DECLINED);
-                break;
-            case 'delete':
-                $comment->setStatus(Comment::STATUS_DELETED);
-                break;
-            default:
-                $updateComment = false;
+        if ($comment !== null) {
+            $comments['__identity'][] = $comment;
         }
-        if ($updateComment) {
-            $this->commentRepository->update($comment);
-            $this->blogCacheService->flushCacheByTag('tx_blog_comment_' . $comment->getUid());
+        foreach ($comments['__identity'] as $commentId) {
+            $comment = $this->commentRepository->findByUid((int)$commentId);
+            $updateComment = true;
+            switch ($status) {
+                case 'approve':
+                    $comment->setStatus(Comment::STATUS_APPROVED);
+                    break;
+                case 'decline':
+                    $comment->setStatus(Comment::STATUS_DECLINED);
+                    break;
+                case 'delete':
+                    $comment->setStatus(Comment::STATUS_DELETED);
+                    break;
+                default:
+                    $updateComment = false;
+            }
+            if ($updateComment) {
+                $this->commentRepository->update($comment);
+                $this->blogCacheService->flushCacheByTag('tx_blog_comment_' . $comment->getUid());
+            }
         }
         $this->redirect('comments', null, null, ['filter' => $filter, 'blogSetup' => $blogSetup]);
     }
