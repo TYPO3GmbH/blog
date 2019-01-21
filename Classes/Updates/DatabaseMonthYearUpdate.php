@@ -8,7 +8,7 @@ declare(strict_types = 1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog\Install\Updates;
+namespace T3G\AgencyPack\Blog\Updates;
 
 /*
  * This file is part of the TYPO3 CMS project.

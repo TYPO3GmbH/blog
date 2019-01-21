@@ -170,14 +170,14 @@ call_user_func(function () {
         \T3G\AgencyPack\Blog\Hooks\DataHandlerHook::class;
 
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate::class]
-        = \T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate']
+        = \T3G\AgencyPack\Blog\Updates\DatabaseMonthYearUpdate::class;
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate::class]
-        = \T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate']
+        = \T3G\AgencyPack\Blog\Updates\DatabasePublishDateUpdate::class;
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate::class]
-        = \T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate']
+        = \T3G\AgencyPack\Blog\Updates\AvatarProviderUpdate::class;
 
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
         /** @noinspection UnsupportedStringOffsetOperationsInspection */

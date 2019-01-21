@@ -8,7 +8,7 @@ declare(strict_types = 1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog\Install\Updates;
+namespace T3G\AgencyPack\Blog\Updates;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -23,18 +23,17 @@ namespace T3G\AgencyPack\Blog\Install\Updates;
  * The TYPO3 project - inspiring people to share!
  */
 
-use T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider;
+use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use /** @noinspection PhpInternalEntityUsedInspection */
     TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
- * Class AvatarProviderUpdate
+ * Migrate "crdate" into "publish_date" field for existing blog posts
  */
-class AvatarProviderUpdate implements UpgradeWizardInterface
+class DatabasePublishDateUpdate implements UpgradeWizardInterface
 {
     /**
      * Return the identifier for this wizard
@@ -54,7 +53,7 @@ class AvatarProviderUpdate implements UpgradeWizardInterface
      */
     public function getTitle(): string
     {
-        return '[EXT:blog] Migrate AvatarProvider';
+        return '[EXT:blog] Set publish date fields to crdate for existing blog posts';
     }
 
     /**
@@ -76,25 +75,33 @@ class AvatarProviderUpdate implements UpgradeWizardInterface
      */
     public function executeUpdate(): bool
     {
-        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_blog_domain_model_author');
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('pages');
         $queryBuilder = $connection->createQueryBuilder();
-        $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
-        $statement = $queryBuilder->select('uid', 'avatar_provider')
-            ->from('tx_blog_domain_model_author')
+        $queryBuilder->getRestrictions()->removeAll();
+        $statement = $queryBuilder->select('uid', 'crdate', 'publish_date')
+            ->from('pages')
             ->where(
-                $queryBuilder->expr()->eq('avatar_provider', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR))
+                $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->eq(
+                        'doktype',
+                        $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, \PDO::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->eq('publish_date', 0)
+                )
             )
             ->execute();
         while ($record = $statement->fetch()) {
+            $timestamp = $record['crdate'] ?? time();
             $queryBuilder = $connection->createQueryBuilder();
-            $queryBuilder->update('tx_blog_domain_model_author')
+            $queryBuilder->update('pages')
                 ->where(
                     $queryBuilder->expr()->eq(
                         'uid',
                         $queryBuilder->createNamedParameter($record['uid'], \PDO::PARAM_INT)
                     )
                 )
-                ->set('avatar_provider', $queryBuilder->createNamedParameter(GravatarProvider::class, \PDO::PARAM_STR), false);
+                ->set('publish_date', $timestamp);
             $databaseQueries[] = $queryBuilder->getSQL();
             $queryBuilder->execute();
         }
@@ -111,14 +118,23 @@ class AvatarProviderUpdate implements UpgradeWizardInterface
      */
     public function updateNecessary(): bool
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_blog_domain_model_author');
-        $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
-        $elementCount = $queryBuilder->count('uid')
-            ->from('tx_blog_domain_model_author')
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('pages');
+        $queryBuilder->getRestrictions()->removeAll();
+        $elementCount = $queryBuilder
+            ->count('uid')
+            ->from('pages')
             ->where(
-                $queryBuilder->expr()->eq('avatar_provider', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR))
+                $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->eq(
+                        'doktype',
+                        $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, \PDO::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->eq('publish_date', 0)
+                )
             )
-            ->execute()->fetchColumn(0);
+            ->execute()
+            ->fetchColumn();
         return (bool)$elementCount;
     }
 
