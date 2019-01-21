@@ -50,6 +50,7 @@ class Tag extends AbstractEntity
      * The additional content of the tag. Used to enrich the SEO rating of tag pages.
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Content>
+     * @lazy
      */
     protected $content;
 

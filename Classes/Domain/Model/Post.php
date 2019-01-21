@@ -80,6 +80,7 @@ class Post extends AbstractEntity
      * The blog post categories.
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Category>
+     * @lazy
      */
     protected $categories;
 
@@ -94,6 +95,7 @@ class Post extends AbstractEntity
      * Comments of the blog post.
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Comment>
+     * @lazy
      */
     protected $comments;
 
@@ -101,6 +103,7 @@ class Post extends AbstractEntity
      * Tags of the blog post.
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Tag>
+     * @lazy
      */
     protected $tags;
 
@@ -113,6 +116,7 @@ class Post extends AbstractEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @lazy
      */
     protected $media;
 
@@ -123,6 +127,7 @@ class Post extends AbstractEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Author>
+     * @lazy
      */
     protected $authors;
 
