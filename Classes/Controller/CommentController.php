@@ -147,6 +147,7 @@ class CommentController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
     public function addCommentAction(Post $post, Comment $comment): void
     {
@@ -164,6 +165,7 @@ class CommentController extends ActionController
                     'comment' => $comment,
                     'post' => $post,
                 ]));
+            $this->blogCacheService->flushCacheByTag('tx_blog_post_' . $post->getUid());
         }
         $this->redirectToUri(
             $this->controllerContext

@@ -61,6 +61,7 @@ class Category extends AbstractEntity
      * The additional content of the category. Used to enrich the SEO rating of category pages.
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Content>
+     * @Extbase\ORM\Lazy
      */
     protected $content;
 
