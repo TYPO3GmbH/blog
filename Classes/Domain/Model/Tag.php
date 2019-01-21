@@ -22,6 +22,7 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -51,6 +52,7 @@ class Tag extends AbstractEntity
      * The additional content of the tag. Used to enrich the SEO rating of tag pages.
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Content>
+     * @Extbase\ORM\Lazy
      */
     protected $content;
 

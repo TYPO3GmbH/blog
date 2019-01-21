@@ -24,17 +24,11 @@ call_user_func(function () {
         'Category',
         [
             'Post' => 'listPostsByCategory',
-        ],
-        [
-            'Post' => 'listPostsByCategory',
         ]
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
         'AuthorPosts',
-        [
-            'Post' => 'listPostsByAuthor',
-        ],
         [
             'Post' => 'listPostsByAuthor',
         ]
@@ -49,9 +43,6 @@ call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
         'Archive',
-        [
-            'Post' => 'listPostsByDate',
-        ],
         [
             'Post' => 'listPostsByDate',
         ]
