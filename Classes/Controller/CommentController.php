@@ -123,24 +123,19 @@ class CommentController extends ActionController
     /**
      * Show comment form.
      *
-     * @param Post|null $post
      * @param Comment|null $comment
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function formAction(Post $post = null, Comment $comment = null): void
+    public function formAction(Comment $comment = null): void
     {
-        if ($post === null) {
-            $post = $this->postRepository->findCurrentPost();
-        }
-        $this->view->assign('post', $post);
+        $this->view->assign('post', $this->postRepository->findCurrentPost());
         $this->view->assign('comment', $comment);
     }
 
     /**
      * Add comment to blog post.
      *
-     * @param Post $post
      * @param Comment $comment
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
@@ -149,9 +144,10 @@ class CommentController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
-    public function addCommentAction(Post $post, Comment $comment): void
+    public function addCommentAction(Comment $comment): void
     {
         $this->commentService->injectSettings($this->settings['comments']);
+        $post = $this->postRepository->findCurrentPost();
         $state = $this->commentService->addComment($post, $comment);
         $this->addFlashMessage(
             LocalizationUtility::translate(self::$messages[$state]['text'], 'blog'),
