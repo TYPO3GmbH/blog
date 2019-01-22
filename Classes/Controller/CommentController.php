@@ -122,22 +122,17 @@ class CommentController extends ActionController
     /**
      * Show comment form.
      *
-     * @param Post|null    $post
      * @param Comment|null $comment
      */
-    public function formAction(Post $post = null, Comment $comment = null)
+    public function formAction(Comment $comment = null): void
     {
-        if ($post === null) {
-            $post = $this->postRepository->findCurrentPost();
-        }
-        $this->view->assign('post', $post);
+        $this->view->assign('post', $this->postRepository->findCurrentPost());
         $this->view->assign('comment', $comment);
     }
 
     /**
      * Add comment to blog post.
      *
-     * @param Post    $post
      * @param Comment $comment
      *
      * @throws \InvalidArgumentException
@@ -147,9 +142,10 @@ class CommentController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \RuntimeException
      */
-    public function addCommentAction(Post $post, Comment $comment)
+    public function addCommentAction(Comment $comment): void
     {
         $this->commentService->injectSettings($this->settings['comments']);
+        $post = $this->postRepository->findCurrentPost();
         $state = $this->commentService->addComment($post, $comment);
         $this->addFlashMessage(
             LocalizationUtility::translate(self::$messages[$state]['text'], 'blog'),
