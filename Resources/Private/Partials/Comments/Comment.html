@@ -15,6 +15,6 @@
                 <cite itemprop="name" class="author"><span itemprop="commentTime"><f:format.date format="d.m.Y">{comment.crdate}</f:format.date></span> | {comment.name}</cite>
             </f:else>
         </f:if>
-        <p itemprop="commentText" class="content">{comment.comment}</p>
+        <p itemprop="commentText" class="content"><f:format.nl2br>{comment.comment}</f:format.nl2br></p>
     </div>
 </div>
