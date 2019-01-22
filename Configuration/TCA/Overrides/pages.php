@@ -158,7 +158,6 @@ call_user_func(
                     'multiple' => 1,
                     'foreign_table' => 'tx_blog_domain_model_author',
                     'MM' => 'tx_blog_post_author_mm',
-                    // 'foreign_table_where' => ' AND tx_myext_domain_model_category.pid=###CURRENT_PID### ORDER BY tx_myext_domain_model_category.title ',
                     'minitems' => 0,
                     'maxitems' => 99999,
                 ],
