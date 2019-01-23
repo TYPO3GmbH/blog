@@ -1,51 +1,155 @@
+##################
+### CATEGORIES ###
+##################
 # customcategory=blog=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog
+# customsubcategory=blog_100_uids=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_100_uids
+# customsubcategory=blog_110_templates=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_110_templates
+# customsubcategory=blog_120_lists=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_120_lists
+# customsubcategory=blog_130_widgets=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_130_widgets
+# customsubcategory=blog_131_widgets_comments=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_131_widgets_comments
+# customsubcategory=blog_132_widgets_recent_posts=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_132_widgets_recent_posts
+# customsubcategory=blog_133_widgets_tags=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_133_widgets_tags
+# customsubcategory=blog_134_widgets_archive=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_134_widgets_archive
+# customsubcategory=blog_140_comments=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_140_comments
+# customsubcategory=blog_150_authors=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_150_authors
+# customsubcategory=blog_160_notifications=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_160_notifications
+
 plugin {
     tx_blog {
+        view {
+            # cat=blog/blog_110_templates; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.templateRootPath
+            templateRootPaths = EXT:blog/Resources/Private/Templates/
+            # cat=blog/blog_110_templates; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.partialRootPaths
+            partialRootPaths = EXT:blog/Resources/Private/Partials/
+            # cat=blog/blog_110_templates; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.layoutRootPaths
+            layoutRootPaths = EXT:blog/Resources/Private/Layouts/
+
+            emails {
+                # cat=blog/blog_110_templates; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.emails.templateRootPath
+                templateRootPaths = EXT:blog/Resources/Private/Mails/Templates/
+                # cat=blog/blog_110_templates; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.emails.partialRootPaths
+                partialRootPaths = EXT:blog/Resources/Private/Mails/Partials/
+                # cat=blog/blog_110_templates; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.emails.layoutRootPaths
+                layoutRootPaths = EXT:blog/Resources/Private/Mails/Layouts/
+            }
+
+        }
         settings {
-            # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blogUid
+            # cat=blog/blog_100_uids; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blogUid
             blogUid = 0
-            # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authorUid
+            # cat=blog/blog_100_uids; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authorUid
             authorUid = 0
-            # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.categoryUid
+            # cat=blog/blog_100_uids; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.categoryUid
             categoryUid = 0
-            # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.tagUid
+            # cat=blog/blog_100_uids; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.tagUid
             tagUid = 0
-            # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.archiveUid
+            # cat=blog/blog_100_uids; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.archiveUid
             archiveUid = 0
-            # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.storagePid
+            # cat=blog/blog_100_uids; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.storagePid
             storagePid = 0
 
             lists {
                 posts {
-                    # cat=blog/a; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.maximumDisplayedItems
+                    # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.maximumDisplayedItems
                     maximumDisplayedItems = 0
+                    # cat=blog/blog_120_lists; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.dateFormat
+                    dateFormat = %d.%m.%Y
+                }
+            }
+
+            relatedPosts {
+                # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.relatedPosts.limit
+                limit = 5
+                # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.relatedPosts.categoryMultiplier
+                categoryMultiplier = 1
+                # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.relatedPosts.tagMultiplier
+                tagMultiplier = 1
+            }
+
+            widgets {
+                comments {
+                    # cat=blog/blog_131_widgets_comments; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.comments.limit
+                    limit = 5
+                }
+                recentposts {
+                    # cat=blog/blog_132_widgets_recent_posts; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.recentposts.limit
+                    limit = 5
+                }
+                tags {
+                    # cat=blog/blog_133_widgets_tags; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.tags.limit
+                    limit = 20
+                    # cat=blog/blog_133_widgets_tags; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.tags.minSize
+                    minSize = 100
+                    # cat=blog/blog_133_widgets_tags; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.tags.maxSize
+                    maxSize = 200
+                }
+                archive {
+                    # cat=blog/blog_134_widgets_archive; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.showCounter
+                    showCounter = 1
+                    # cat=blog/blog_134_widgets_archive; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.groupByYear
+                    groupByYear = 1
+                    # cat=blog/blog_134_widgets_archive; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.groupByMonth
+                    groupByMonth = 1
+                    # cat=blog/blog_134_widgets_archive; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.yearDateFormat
+                    yearDateFormat = %Y
+                    # cat=blog/blog_134_widgets_archive; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.monthDateFormat
+                    monthDateFormat = %B
                 }
             }
 
             comments {
-                # cat=blog/a; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.disqus
+                # cat=blog/blog_140_comments; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.active
+                active = 1
+                # cat=blog/blog_140_comments; type=options[0,1,2]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.moderation
+                moderation = 0
+                # cat=blog/blog_140_comments; type=options[0,1,-1]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.respectPostLanguageId
+                respectPostLanguageId = 1
+
+                # cat=blog/blog_140_comments; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.disqus
                 disqus = 0
                 disqus {
-                    # cat=blog/a; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.disqus.shortname
+                    # cat=blog/blog_140_comments; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.disqus.shortname
                     shortname =
+                }
+
+                # cat=blog/blog_140_comments; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.google_recaptcha
+                google_recaptcha = 0
+                google_recaptcha {
+                    # cat=blog/blog_140_comments; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.google_recaptcha.website_key
+                    website_key =
+                    # cat=blog/blog_140_comments; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.google_recaptcha.secret_key
+                    secret_key =
+                }
+            }
+
+            authors {
+                avatar {
+                    provider {
+                        # cat=blog/blog_150_authors; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.size
+                        size = 64
+                        # cat=blog/blog_150_authors; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.default
+                        default = mm
+                        # cat=blog/blog_150_authors; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.rating
+                        rating = g
+                    }
                 }
             }
 
             notifications {
                 email {
-                    # cat=blog/a; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.senderName
+                    # cat=blog/blog_160_notifications; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.senderName
                     senderName = TYPO3 Blog
-                    # cat=blog/a; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.senderMail
+                    # cat=blog/blog_160_notifications; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.senderMail
                     senderMail = no-reply@example.com
                 }
 
                 CommentAddedNotification {
-                    # cat=blog/a; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.author
+                    # cat=blog/blog_160_notifications; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.author
                     author = 1
-                    # cat=blog/a; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.admin
+                    # cat=blog/blog_160_notifications; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.admin
                     admin = 1
                     admin {
-                        # cat=blog/a; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.admin.email
+                        # cat=blog/blog_160_notifications; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.admin.email
                         email = admin@example.com
                     }
                 }

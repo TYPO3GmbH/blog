@@ -210,14 +210,89 @@
 			<trans-unit id="constantEditor.blog" xml:space="preserve">
 				<source>TYPO3 Blog</source>
 			</trans-unit>
+			<trans-unit id="constantEditor.blog_100_uids" xml:space="preserve">
+				<source>Page ID settings</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blog_110_templates" xml:space="preserve">
+				<source>Templates</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blog_120_lists" xml:space="preserve">
+				<source>Listings</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blog_130_widgets" xml:space="preserve">
+				<source>Widgets</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blog_131_widgets_comments" xml:space="preserve">
+				<source>Widget: Comment</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blog_132_widgets_recent_posts" xml:space="preserve">
+				<source>Widget: Recent posts</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blog_133_widgets_tags" xml:space="preserve">
+				<source>Widget: Tags</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blog_134_widgets_archive" xml:space="preserve">
+				<source>Widget: Archive</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blog_140_comments" xml:space="preserve">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blog_150_authors" xml:space="preserve">
+				<source>Authors</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.blog_160_notifications" xml:space="preserve">
+				<source>Notifications</source>
+			</trans-unit>
+            <trans-unit id="constantEditor.view.templateRootPath" xml:space="preserve">
+				<source>Template Root Path: Path to templates folder</source>
+			</trans-unit>
+            <trans-unit id="constantEditor.view.partialRootPaths" xml:space="preserve">
+				<source>Partial Root Path: Path to partial folder</source>
+			</trans-unit>
+            <trans-unit id="constantEditor.view.layoutRootPaths" xml:space="preserve">
+				<source>Layout Root Path: Path to layout folder</source>
+			</trans-unit>
+            <trans-unit id="constantEditor.view.emails.templateRootPath" xml:space="preserve">
+				<source>Email-Template Root Path: Path to templates folder</source>
+			</trans-unit>
+            <trans-unit id="constantEditor.view.emails.partialRootPaths" xml:space="preserve">
+				<source>Email-Partial Root Path: Path to partial folder</source>
+			</trans-unit>
+            <trans-unit id="constantEditor.view.emails.layoutRootPaths" xml:space="preserve">
+				<source>Email-Layout Root Path: Path to layout folder</source>
+			</trans-unit>
 			<trans-unit id="constantEditor.authorUid" xml:space="preserve">
 				<source>Author UID:Location of the "Blog: Author" plugin. Shows posts by author.</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.comments.active" xml:space="preserve">
+				<source>Enable Comments:Activate comments as a general feature</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.comments.moderation" xml:space="preserve">
+				<source>Comments moderation mode:0 = no moderation, 1 = moderation active, 2 = moderation only on first comment</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.comments.respectPostLanguageId" xml:space="preserve">
+				<source>Respect post_language_id:0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.comments.google_recaptcha" xml:space="preserve">
+				<source>Google Recaptcha:Enable google recaptcha for comments?</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.comments.google_recaptcha.website_key" xml:space="preserve">
+				<source>Google Recaptcha Website-Key</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.comments.google_recaptcha.secret_key" xml:space="preserve">
+				<source>Google Recaptcha Secrete-Key</source>
 			</trans-unit>
 			<trans-unit id="constantEditor.comments.disqus" xml:space="preserve">
 				<source>Enable Disqus:Use disqus instead of internal comments?</source>
 			</trans-unit>
 			<trans-unit id="constantEditor.comments.disqus.shortname" xml:space="preserve">
 				<source>Disqus shortname:The shortname / forum id of your disqus setup.</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.authors.avatar.provider.size" xml:space="preserve">
+				<source>Author Avatar Size:The size in px for the author avatar</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.authors.avatar.provider.default" xml:space="preserve">
+				<source>Author Avatar Default:The default image for an author avatar</source>
 			</trans-unit>
 			<trans-unit id="constantEditor.blogUid" xml:space="preserve">
 				<source>List posts UID:Location of the "Blog: List of posts" plugin. This page UID is the root page for the blog. All blog post pages are located below this page.</source>
@@ -251,6 +326,48 @@
 			</trans-unit>
 			<trans-unit id="constantEditor.lists.posts.maximumDisplayedItems" xml:space="preserve">
 				<source>Maximum displayed items:Maximum number of posts to be displayed (0 = no limit).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.lists.posts.dateFormat" xml:space="preserve">
+				<source>Date format:The format for the list items (default: %d.%m.%Y).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.relatedPosts.limit" xml:space="preserve">
+				<source>Limit:The limit of displayed items (default: 5).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.relatedPosts.categoryMultiplier" xml:space="preserve">
+				<source>Category Multiplier:The multiplier for categories (default: 1).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.relatedPosts.tagMultiplier" xml:space="preserve">
+				<source>Tag Multiplier:The multiplier for tags (default: 1).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.widgets.comments.limit" xml:space="preserve">
+				<source>Limit:The limit of displayed items (default: 5).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.widgets.recentposts.limit" xml:space="preserve">
+				<source>Limit:The limit of displayed items (default: 5).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.widgets.tags.limit" xml:space="preserve">
+				<source>Limit:The limit of displayed items (default: 20).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.widgets.tags.minSize" xml:space="preserve">
+				<source>Minimum size:The minimum size of the font (default: 100).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.widgets.tags.maxSize" xml:space="preserve">
+				<source>Maximum size:The maximum size of the font (default: 200).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.widgets.archive.showCounter" xml:space="preserve">
+				<source>Show counter:If enabled, the count of posts is visible (default: 1).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.widgets.archive.groupByYear" xml:space="preserve">
+				<source>Group by year:If enabled, the posts are grouped by year (default: 1).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.widgets.archive.groupByMonth" xml:space="preserve">
+				<source>Group by month:If enabled, the posts are grouped by year and month (default: 1).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.widgets.archive.yearDateFormat" xml:space="preserve">
+				<source>Year format:The format of the year (default: %Y).</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.widgets.archive.monthDateFormat" xml:space="preserve">
+				<source>Month format:The format of the month (default: %B).</source>
 			</trans-unit>
 			<trans-unit id="feed.title.listPostsByCategory" xml:space="preserve">
 				<source>Category RSS Feed</source>
