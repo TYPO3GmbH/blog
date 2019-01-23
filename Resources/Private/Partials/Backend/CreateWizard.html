@@ -9,31 +9,6 @@
                 <label><f:translate key="wizard.label.title" /></label>
                 <f:form.textfield name="title" class="form-control" placeholder="{f:translate(key: 'wizard.placeholder.title')}"/>
             </div>
-            <f:if condition="{templateExists}">
-                <f:then>
-                    <h4><f:translate key="wizard.headline.template" /></h4>
-                    <p><f:translate key="wizard.message.template.found" /></p>
-                    <div class="checkbox">
-                        <label><f:form.checkbox name="template" value="1" /><f:translate key="wizard.label.template" /></label>
-                    </div>
-                </f:then>
-                <f:else>
-                    <h4><f:translate key="wizard.headline.template" /></h4>
-                    <f:if condition="{composerMode}">
-                        <f:then>
-                            <p><f:translate key="wizard.message.template.not_found.composermode" /></p>
-                            <pre><code>composer require t3g/blog-template</code></pre>
-                        </f:then>
-                        <f:else>
-                            <p><f:translate key="wizard.message.template.not_found" /></p>
-                            <div class="checkbox">
-                                <label><f:form.checkbox name="install" value="1" /><f:translate key="wizard.label.install" /></label>
-                            </div>
-                        </f:else>
-                    </f:if>
-                    <f:be.infobox title="{f:translate(key: 'wizard.message.template.not_found.optional.title')}" state="-1"><f:translate key="wizard.message.template.not_found.optional.message" /></f:be.infobox>
-                </f:else>
-            </f:if>
         </div>
     </div>
 </div>

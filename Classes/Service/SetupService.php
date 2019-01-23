@@ -11,17 +11,12 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Service;
 
 use T3G\AgencyPack\Blog\Constants;
-use T3G\AgencyPack\Blog\Install\ExtensionInstaller;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class SetupService.
- */
 class SetupService
 {
     /**
@@ -29,9 +24,6 @@ class SetupService
      */
     protected $recordUidArray = [];
 
-    /**
-     * @return array
-     */
     public function determineBlogSetups(): array
     {
         $setups = [];
@@ -76,27 +68,10 @@ class SetupService
             ->fetch();
     }
 
-    /**
-     * @param array $data
-     * @return bool
-     * @throws \TYPO3\CMS\Extensionmanager\Exception\ExtensionManagerException
-     */
     public function createBlogSetup(array $data): bool
     {
-        $useTemplate = array_key_exists('template', $data) ? (bool)$data['template'] : false;
-        $installExtension = array_key_exists('install', $data) ? (bool)$data['install'] : false;
         $title = array_key_exists('title', $data) ? (string)$data['title'] : null;
-
-        if ($installExtension
-            && $this->installExtension('rx_shariff')
-            && $this->installExtension('blog_template')
-        ) {
-            $useTemplate = true;
-        }
-
-        $blogSetup = $useTemplate
-            ? GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRecordsWithTemplate.php')
-            : GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRecords.php');
+        $blogSetup = GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRecords.php');
 
         $result = false;
         if (file_exists($blogSetup)) {
@@ -188,28 +163,9 @@ class SetupService
         return $newSetup;
     }
 
-    /**
-     * @param string $extensionKey
-     * @return bool
-     * @throws \TYPO3\CMS\Extensionmanager\Exception\ExtensionManagerException
-     */
-    protected function installExtension(string $extensionKey): bool
-    {
-        return GeneralUtility::makeInstance(ExtensionInstaller::class)->install($extensionKey);
-    }
-
-    /**
-     * @param string $table
-     * @return QueryBuilder
-     */
     protected function getQueryBuilderForTable(string $table) : QueryBuilder
     {
         return GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable($table);
-    }
-
-    protected function getBackendUser(): BackendUserAuthentication
-    {
-        return $GLOBALS['BE_USER'];
     }
 }
