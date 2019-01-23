@@ -57,14 +57,17 @@ define(['jquery', 'datatables', 'datatables_bootstrap'], function ($) {
                                     });
                                 } else {
                                     if (d !== '') {
-                                        var str = $(d).text().trim();
+                                        var str = $('<span>').text(d).text().trim();
                                         if (str !== '') {
                                             values.push(str);
                                         }
                                     }
                                 }
                             });
-                            $($.unique(values).sort()).each(function() {
+                            values = values.filter(function (value, index, self) {
+                                return self.indexOf(value) === index;
+                            });
+                            $(values).sort().each(function() {
                                 var value = this;
                                 select.append( '<option value="'+value+'">'+value+'</option>' )
                             } );
