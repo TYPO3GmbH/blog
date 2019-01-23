@@ -201,35 +201,11 @@
 			<trans-unit id="wizard.headline.settings" xml:space="preserve">
 				<source>Settings</source>
 			</trans-unit>
-			<trans-unit id="wizard.headline.template" xml:space="preserve">
-				<source>Template</source>
-			</trans-unit>
 			<trans-unit id="wizard.label.title" xml:space="preserve">
 				<source>Title of the blog</source>
 			</trans-unit>
 			<trans-unit id="wizard.placeholder.title" xml:space="preserve">
 				<source>The title of your blog</source>
-			</trans-unit>
-			<trans-unit id="wizard.message.template.found" xml:space="preserve">
-				<source>Hey, I have found the extension blog_template, should I use this template?</source>
-			</trans-unit>
-			<trans-unit id="wizard.message.template.not_found" xml:space="preserve">
-				<source>Hey, I have not found a template, but I can install the extension blog_template for you, should I try to install the extension and use it as template?</source>
-			</trans-unit>
-			<trans-unit id="wizard.message.template.not_found.composermode" xml:space="preserve">
-				<source>Hey, I have not found a template, but you can simply install the extension blog_template with composer, use the following command:</source>
-			</trans-unit>
-			<trans-unit id="wizard.message.template.not_found.optional.title" xml:space="preserve">
-				<source>Note</source>
-			</trans-unit>
-			<trans-unit id="wizard.message.template.not_found.optional.message" xml:space="preserve">
-				<source>The template is optional and the extension provides only a demo template. You can build your own template or use your existing template.</source>
-			</trans-unit>
-			<trans-unit id="wizard.label.template" xml:space="preserve">
-				<source>Yes, please use the template provided by the extension</source>
-			</trans-unit>
-			<trans-unit id="wizard.label.install" xml:space="preserve">
-				<source>Yes, please install and use the template provided by the extension</source>
 			</trans-unit>
 			<trans-unit id="constantEditor.blog" xml:space="preserve">
 				<source>TYPO3 Blog</source>

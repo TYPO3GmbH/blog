@@ -30,7 +30,6 @@ use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
-use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -184,9 +183,7 @@ class BackendController extends ActionController
     public function setupWizardAction(): string
     {
         return $this->render('Backend/SetupWizard.html', [
-            'composerMode' => Environment::isComposerMode(),
             'blogSetups' => $this->setupService->determineBlogSetups(),
-            'templateExists' => ExtensionManagementUtility::isLoaded('blog_template'),
         ]);
     }
 
