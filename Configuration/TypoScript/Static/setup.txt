@@ -3,16 +3,16 @@ plugin.tx_blog {
         storagePid = {$plugin.tx_blog.settings.storagePid}
     }
     view {
-        templateRootPaths.0 = EXT:blog/Resources/Private/Templates/
-        partialRootPaths.0 = EXT:blog/Resources/Private/Partials/
-        layoutRootPaths.0 = EXT:blog/Resources/Private/Layouts/
+        templateRootPaths.0 = {$plugin.tx_blog.view.templateRootPaths}
+        partialRootPaths.0 = {$plugin.tx_blog.view.partialRootPaths}
+        layoutRootPaths.0 = {$plugin.tx_blog.view.layoutRootPaths}
         widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = EXT:blog/Resources/Private/Templates
 
         # Emails
         emails {
-            templateRootPaths.0 = EXT:blog/Resources/Private/Mails/Templates/
-            partialRootPaths.0 = EXT:blog/Resources/Private/Mails/Partials/
-            layoutRootPaths.0 = EXT:blog/Resources/Private/Mails/Layouts/
+            templateRootPaths.0 = {$plugin.tx_blog.view.emails.templateRootPaths}
+            partialRootPaths.0 = {$plugin.tx_blog.view.emails.partialRootPaths}
+            layoutRootPaths.0 = {$plugin.tx_blog.view.emails.layoutRootPaths}
         }
     }
     settings {
@@ -34,53 +34,53 @@ plugin.tx_blog {
         lists {
             posts {
                 maximumDisplayedItems = {$plugin.tx_blog.settings.lists.posts.maximumDisplayedItems}
-                dateFormat = %d.%m.%Y
+                dateFormat = {$plugin.tx_blog.settings.lists.posts.dateFormat}
             }
         }
         # How important are categories and tags for related posts
         relatedPosts {
-            limit = 5
-            categoryMultiplier = 1
-            tagMultiplier = 1
+            limit = {$plugin.tx_blog.settings.relatedPosts.limit}
+            categoryMultiplier = {$plugin.tx_blog.settings.relatedPosts.categoryMultiplier}
+            tagMultiplier = {$plugin.tx_blog.settings.relatedPosts.tagMultiplier}
         }
         # Widget configuration section
         widgets {
             comments {
-                limit = 5
+                limit = {$plugin.tx_blog.settings.widgets.comments.limit}
                 blogSetup = {$plugin.tx_blog.settings.storagePid}
             }
             recentposts {
-                limit = 5
+                limit = {$plugin.tx_blog.settings.widgets.recentposts.limit}
             }
             tags {
-                limit = 20
+                limit = {$plugin.tx_blog.settings.widgets.tags.limit}
                 # Minimum size in percent
-                minSize = 100
+                minSize = {$plugin.tx_blog.settings.widgets.tags.minSize}
                 # Maximum size in percent
-                maxSize = 200
+                maxSize = {$plugin.tx_blog.settings.widgets.tags.maxSize}
             }
             archive {
-                showCounter = 1
-                groupByYear = 1
-                groupByMonth = 1
-                yearDateFormat = %Y
-                monthDateFormat = %B
+                showCounter = {$plugin.tx_blog.settings.widgets.archive.showCounter}
+                groupByYear = {$plugin.tx_blog.settings.widgets.archive.groupByYear}
+                groupByMonth = {$plugin.tx_blog.settings.widgets.archive.groupByMonth}
+                yearDateFormat = {$plugin.tx_blog.settings.widgets.archive.yearDateFormat}
+                monthDateFormat = {$plugin.tx_blog.settings.widgets.archive.monthDateFormat}
             }
         }
         # Comments related settings
         comments {
             # comments active in general or not
-            active = 1
+            active = {$plugin.tx_blog.settings.comments.active}
             # comments moderation mode, 0 = no moderation, 1 = moderation active, 2 = moderation only on first comment
-            moderation = 0
+            moderation = {$plugin.tx_blog.settings.comments.moderation}
             # Respect post_language_id, 0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)
-            respectPostLanguageId = 1
+            respectPostLanguageId = {$plugin.tx_blog.settings.comments.respectPostLanguageId}
             # Google Re-Captcha
-            google_recaptcha = 0
+            google_recaptcha = {$plugin.tx_blog.settings.comments.google_recaptcha}
             google_recaptcha {
                 # Get the keys from https://www.google.com/recaptcha/admin#list
-                website_key =
-                secret_key =
+                website_key = {$plugin.tx_blog.settings.comments.google_recaptcha.website_key}
+                secret_key = {$plugin.tx_blog.settings.comments.google_recaptcha.secret_key}
             }
             # Disqus.com
             disqus = {$plugin.tx_blog.settings.comments.disqus}
@@ -96,11 +96,11 @@ plugin.tx_blog {
                 # This settings depends on the configured AvatarProvider. The default is the GravatarProvider
                 provider {
                     # Size in pixel
-                    size = 64
+                    size = {$plugin.tx_blog.settings.authors.avatar.provider.size}
                     # Default image
-                    default = mm
+                    default = {$plugin.tx_blog.settings.authors.avatar.provider.default}
                     # Gravatar rating
-                    rating = g
+                    rating = {$plugin.tx_blog.settings.authors.avatar.provider.rating}
                 }
             }
         }
