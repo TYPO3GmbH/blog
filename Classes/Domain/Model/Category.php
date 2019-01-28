@@ -67,6 +67,7 @@ class Category extends AbstractEntity
      * The posts assigned to this category
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Post>
+     * @lazy
      */
     protected $posts;
 
