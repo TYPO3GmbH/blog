@@ -155,7 +155,6 @@ class PostController extends ActionController
     /**
      * Show a list of recent posts.
      *
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
@@ -167,17 +166,12 @@ class PostController extends ActionController
             ? $this->postRepository->findAll()
             : $this->postRepository->findAllWithLimit($maximumItems);
 
-        foreach ($posts as $post) {
-            $this->blogCacheService->addTagsForPost($post);
-        }
-
         $this->view->assign('posts', $posts);
     }
 
     /**
      * @param int $year
      * @param int $month
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
@@ -192,9 +186,6 @@ class PostController extends ActionController
         }
         $dateTime = new \DateTimeImmutable(sprintf('%d-%d-1', $year, $month ?? 1));
         $posts = $this->postRepository->findByMonthAndYear($year, $month);
-        foreach ($posts as $post) {
-            $this->blogCacheService->addTagsForPost($post);
-        }
         $this->view->assignMultiple([
             'month' => $month,
             'year' => $year,
@@ -218,7 +209,6 @@ class PostController extends ActionController
      * Show a list of posts by given category.
      *
      * @param Category|null $category
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
@@ -246,9 +236,6 @@ class PostController extends ActionController
             MetaService::set(MetaService::META_TITLE, $category->getTitle());
             MetaService::set(MetaService::META_DESCRIPTION, $category->getDescription());
             MetaService::set(MetaService::META_CATEGORIES, [$category->getTitle()]);
-            foreach ($posts as $post) {
-                $this->blogCacheService->addTagsForPost($post);
-            }
         }
     }
 
@@ -256,7 +243,6 @@ class PostController extends ActionController
      * Show a list of posts by given category.
      *
      * @param Author|null $author
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
@@ -270,9 +256,6 @@ class PostController extends ActionController
             $this->view->assign('author', $author);
             MetaService::set(MetaService::META_TITLE, $author->getName());
             MetaService::set(MetaService::META_DESCRIPTION, $author->getBio());
-            foreach ($posts as $post) {
-                $this->blogCacheService->addTagsForPost($post);
-            }
         }
     }
 
@@ -280,7 +263,6 @@ class PostController extends ActionController
      * Show a list of posts by given tag.
      *
      * @param Tag|null $tag
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
@@ -295,9 +277,6 @@ class PostController extends ActionController
             MetaService::set(MetaService::META_TITLE, $tag->getTitle());
             MetaService::set(MetaService::META_DESCRIPTION, $tag->getDescription());
             MetaService::set(MetaService::META_TAGS, [$tag->getTitle()]);
-            foreach ($posts as $post) {
-                $this->blogCacheService->addTagsForPost($post);
-            }
         }
     }
 

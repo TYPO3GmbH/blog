@@ -1,4 +1,4 @@
-<div class="tx-blog-post-list {class}" xmlns:f="http://www.w3.org/1999/html">
+<div class="tx-blog-post-list {class}" xmlns:f="http://www.w3.org/1999/html" xmlns:blog="http://typo3.org/ns/T3G/AgencyPack/Blog/ViewHelpers">
     <f:alias map="{paginateItemsPerPage: 10}">
         <f:if condition="{posts}">
             <f:then>
@@ -29,6 +29,7 @@
 
 <f:section name="ListPosts">
     <f:for each="{posts}" as="post">
+        <blog:cache post="{post}" />
         <f:render partial="List/Post" arguments="{_all}" />
     </f:for>
 </f:section>
