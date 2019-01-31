@@ -109,6 +109,7 @@ class PostRepository extends Repository
 
     /**
      * @return QueryInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     protected function getFindAllQuery()
     {
@@ -122,6 +123,15 @@ class PostRepository extends Repository
             $query->equals('archiveDate', 0),
             $query->greaterThanOrEqual('archiveDate', time()),
         ]);
+
+        if ($this->getTypoScriptFontendController()->sys_language_uid === 0) {
+            $constraints[] = $query->logicalOr([
+                $query->equals('l18n_cfg', 0),
+                $query->equals('l18n_cfg', 2)
+            ]);
+        } else {
+            $constraints[] = $query->lessThan('l18n_cfg', 2);
+        }
         $query->matching($query->logicalAnd($constraints));
 
         return $query;
