@@ -27,6 +27,7 @@ use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
@@ -116,6 +117,7 @@ class PostRepository extends Repository
      * @return QueryInterface
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      */
     protected function getFindAllQuery(): QueryInterface
     {
@@ -129,6 +131,15 @@ class PostRepository extends Repository
             $query->equals('archiveDate', 0),
             $query->greaterThanOrEqual('archiveDate', time()),
         ]);
+
+        if (GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId() === 0) {
+            $constraints[] = $query->logicalOr([
+                $query->equals('l18n_cfg', 0),
+                $query->equals('l18n_cfg', 2)
+            ]);
+        } else {
+            $constraints[] = $query->lessThan('l18n_cfg', 2);
+        }
         $query->matching($query->logicalAnd($constraints));
 
         return $query;
