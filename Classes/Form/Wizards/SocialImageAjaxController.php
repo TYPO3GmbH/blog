@@ -166,7 +166,7 @@ class SocialImageAjaxController
             $this->imageService = GeneralUtility::makeInstance(ObjectManager::class)
                 ->get(ImageService::class);
         }
-        $image = $this->imageService->getImage($fileReference->getPublicUrl(), null, false);
+        $image = $this->imageService->getImage((string)$fileReference->getPublicUrl(), null, false);
         $processingInstructions = [
             'maxWidth' => 400,
             'maxHeight' => 200,
