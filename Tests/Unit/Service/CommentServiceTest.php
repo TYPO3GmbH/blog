@@ -47,6 +47,7 @@ class CommentServiceTest extends UnitTestCase
     public function inactiveCommentsReturnErrorOnAdd(): void
     {
         $post = new Post();
+        $post->_setProperty('uid', 1);
         $comment = new Comment();
         $result = (new CommentService())->addComment($post, $comment);
 
@@ -59,6 +60,7 @@ class CommentServiceTest extends UnitTestCase
     public function activeCommentsWithoutModerationReturnSuccessOnAdd(): void
     {
         $post = new Post();
+        $post->_setProperty('uid', 1);
         $comment = new Comment();
         $settings = ['active' => 1, 'moderation' => 0];
 
@@ -75,6 +77,7 @@ class CommentServiceTest extends UnitTestCase
     public function activeCommentsWithModerationReturnModerationOnAdd(): void
     {
         $post = new Post();
+        $post->_setProperty('uid', 1);
         $comment = new Comment();
         $settings = ['active' => 1, 'moderation' => 1];
 
@@ -91,6 +94,7 @@ class CommentServiceTest extends UnitTestCase
     public function commentGetsAddedToPost(): void
     {
         $post = new Post();
+        $post->_setProperty('uid', 1);
         $comment = new Comment();
 
         $settings = ['active' => 1, 'moderation' => 0];
@@ -107,6 +111,7 @@ class CommentServiceTest extends UnitTestCase
     public function postGetsUpdatedInDatabase(): void
     {
         $post = new Post();
+        $post->_setProperty('uid', 1);
         $comment = new Comment();
 
         $settings = ['active' => 1, 'moderation' => 0];

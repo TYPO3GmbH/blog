@@ -1,77 +1,82 @@
 {
-	"name": "t3g/blog",
-	"description": "This blog extension uses TYPO3s core concepts and elements to provide a full-blown blog that users of TYPO3 can instantly understand and use.",
-	"type": "typo3-cms-extension",
-	"license": "GPL-2.0-or-later",
-	"authors": [
-		{
-			"name": "TYPO3 GmbH",
-			"role": "Developer",
-			"homepage": "https://typo3.com/"
-		}
-	],
-	"homepage": "https://extensions.typo3.org/extension/blog/",
-	"support": {
-		"issues": "https://jira.typo3.com/servicedesk/customer/portal/3/group/21",
-		"docs": "https://docs.typo3.org/typo3cms/extensions/blog/",
-		"source": "https://bitbucket.typo3.com/projects/EXT/repos/blog/browse",
-		"slack": "https://typo3.slack.com/archives/t3g-ext-blog"
-	},
-	"autoload": {
-		"psr-4": {
-			"T3G\\AgencyPack\\Blog\\": "Classes/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"T3G\\AgencyPack\\Blog\\Tests\\": "Tests/"
-		}
-	},
-	"config": {
+    "name": "t3g/blog",
+    "description": "This blog extension uses TYPO3s core concepts and elements to provide a full-blown blog that users of TYPO3 can instantly understand and use.",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "TYPO3 GmbH",
+            "role": "Developer",
+            "homepage": "https://typo3.com/"
+        }
+    ],
+    "homepage": "https://extensions.typo3.org/extension/blog/",
+    "support": {
+        "issues": "https://jira.typo3.com/servicedesk/customer/portal/3/group/21",
+        "docs": "https://docs.typo3.org/typo3cms/extensions/blog/",
+        "source": "https://bitbucket.typo3.com/projects/EXT/repos/blog/browse",
+        "slack": "https://typo3.slack.com/archives/t3g-ext-blog"
+    },
+    "autoload": {
+        "psr-4": {
+            "T3G\\AgencyPack\\Blog\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "T3G\\AgencyPack\\Blog\\Tests\\": "Tests/"
+        }
+    },
+    "config": {
         "bin-dir": ".build/bin",
         "discard-changes": true,
         "optimize-autoloader": true,
         "vendor-dir": ".build/vendor"
-	},
-	"extra": {
-		"typo3/cms": {
+    },
+    "extra": {
+        "typo3/cms": {
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
             "web-dir": ".build/web"
         }
-	},
-	"scripts": {
-		"t3g:test:php:unit": [
-			"phpunit -c Build/UnitTests.xml --log-junit logs/phpunit.xml"
-		],
-		"t3g:test": [
-			"@t3g:test:php:unit"
-		],
-		"t3g:cgl": [
-			"php-cs-fixer fix --config Build/.php_cs.dist --format=junit > logs/php-cs-fixer.xml"
-		],
+    },
+    "scripts": {
+        "t3g:test:php:unit": [
+            "phpunit -c Build/UnitTests.xml --log-junit logs/phpunit.xml"
+        ],
+        "t3g:test": [
+            "@t3g:test:php:unit"
+        ],
+        "t3g:cgl": [
+            "php-cs-fixer fix --config Build/.php_cs.dist --format=junit > logs/php-cs-fixer.xml"
+        ],
         "post-autoload-dump": [
             "mkdir -p .build/web/typo3conf/ext/",
             "[ -L .build/web/typo3conf/ext/blog ] || ln -snvf ../../../../. .build/web/typo3conf/ext/blog"
         ]
-	},
-	"require": {
-		"php": "^7.2",
-		"ext-json": "*",
-		"ext-pdo": "*",
-		"psr/http-message": "^1.0.0",
-		"symfony/console": "^4.1",
-		"typo3/cms-backend": "^9.5.1",
-		"typo3/cms-core": "^9.5.1",
-		"typo3/cms-extbase": "^9.5.1",
-		"typo3/cms-extensionmanager": "^9.5.1",
-		"typo3/cms-fluid": "^9.5.1",
-		"typo3/cms-frontend": "^9.5.1",
-		"typo3/cms-install": "^9.5.1",
-		"typo3fluid/fluid": "2.5.*"
-	},
-	"require-dev": {
-		"friendsofphp/php-cs-fixer": "^2.12",
-		"roave/security-advisories": "dev-master",
-		"typo3/testing-framework": "^4.11"
-	}
+    },
+    "suggest": {
+        "typo3/cms-fluid-styled-content": "Content rendering definition based on fluid"
+    },
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "psr/http-message": "^1.0.0",
+        "symfony/console": "^4.1",
+        "typo3/cms-backend": "10.0.*@dev",
+        "typo3/cms-core": "10.0.*@dev",
+        "typo3/cms-extbase": "10.0.*@dev",
+        "typo3/cms-extensionmanager": "10.0.*@dev",
+        "typo3/cms-fluid": "10.0.*@dev",
+        "typo3/cms-frontend": "10.0.*@dev",
+        "typo3/cms-install": "10.0.*@dev",
+        "typo3fluid/fluid": "^2.6.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.14.0",
+        "roave/security-advisories": "dev-master",
+        "typo3/testing-framework": "^5.0.0"
+    }
 }
