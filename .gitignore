@@ -12,6 +12,7 @@ composer.lock
 
 # Build stuff
 .build/
+var/
 
 # CGL Fixer
 .php_cs.cache
