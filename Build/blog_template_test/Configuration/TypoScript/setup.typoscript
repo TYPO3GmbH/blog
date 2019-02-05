@@ -1,0 +1,66 @@
+######################
+#### DEPENDENCIES ####
+######################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:fluid_styled_content/Configuration/TypoScript/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Static/setup.txt">
+
+
+################################################
+#### DYNAMIC CONTENT LIB FOR USAGE IN FLUID ####
+################################################
+lib.dynamicContent = COA
+lib.dynamicContent {
+    5 = LOAD_REGISTER
+    5 {
+        colPos.cObject = TEXT
+        colPos.cObject {
+            field = colPos
+            ifEmpty.cObject = TEXT
+            ifEmpty.cObject {
+                value.current = 1
+                ifEmpty = 0
+            }
+        }
+    }
+    20 = CONTENT
+    20 {
+        table = tt_content
+        select {
+            includeRecordsWithoutDefaultTranslation = 1
+            orderBy = sorting
+            where = {#colPos}={register:colPos}
+            where.insertData = 1
+        }
+    }
+    90 = RESTORE_REGISTER
+}
+
+
+##############
+#### PAGE ####
+##############
+page = PAGE
+page {
+    typeNum = 0
+    10 = FLUIDTEMPLATE
+    10 {
+        templateName = Default
+        templateRootPaths.0 = EXT:blog_template_test/Resources/Private/Templates/Page/
+        partialRootPaths.0 = EXT:blog_template_test/Resources/Private/Partials/Page/
+        layoutRootPaths.0 = EXT:blog_template_test/Resources/Private/Layouts/Page/
+    }
+
+    includeCSS {
+        bootstrap = https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css
+        bootstrap.external = 1
+    }
+
+    includeJSFooterlibs {
+        jquery = https://code.jquery.com/jquery-3.3.1.slim.min.js
+        jquery.external = 1
+        popper = https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js
+        popper.external = 1
+        bootstrap = https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js
+        bootstrap.external = 1
+    }
+}

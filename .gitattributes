@@ -1,4 +1,5 @@
 # Folders
+/.ddev export-ignore
 /Build export-ignore
 /Tests export-ignore
 
