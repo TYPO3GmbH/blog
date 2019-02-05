@@ -1,0 +1,13 @@
+{
+    "name": "t3g/blog-template-test",
+    "type": "typo3-cms-extension",
+    "description": "",
+    "homepage": "https://typo3.com",
+    "license": ["GPL-2.0-or-later"],
+    "keywords": ["TYPO3 CMS"],
+    "version": "1.0.0",
+    "require": {
+        "t3g/blog": "*",
+        "typo3/cms-fluid-styled-content": "*"
+    }
+}

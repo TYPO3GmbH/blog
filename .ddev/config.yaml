@@ -12,10 +12,6 @@ additional_fqdns: []
 mariadb_version: "10.2"
 webcache_enabled: false
 provider: default
-hooks:
-  post-start:
-  - exec-host: ddev composer require typo3/cms-fluid-styled-content:10.0.*@dev
-  - exec-host: git checkout composer.json
 
 
 # This config.yaml was created with ddev version v1.5.2 
