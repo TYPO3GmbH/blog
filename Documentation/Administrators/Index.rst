@@ -23,6 +23,7 @@ The extension needs to be installed as any other extension of TYPO3 CMS:
 
    #. **Use composer**: Use `composer require T3G/blog`.
 
+
 Latest version from git
 -----------------------
 You can get the latest version from git by using the git command:
@@ -68,11 +69,12 @@ To create a new blog setup, follow these steps:
 The Setup Wizard creates the following pages for you:
 
 - Rootpage (hidden by default, contains the TypoScript and PageTS-Config)
-- > Data (a folder to hold categories and tags)
+- > Data (a folder to hold categories, authors and tags, but also blog posts are possible)
 - > Category (this page is used to show blog posts, related to single category, or a category overview)
 - > Tag (this page is used to show blog posts, related to single tag, or a tag overview)
 - > Archive (this page is the archive, it lists all blog posts by given date (month and year, or year only)
 - > First blog post (yes, a first blog post, as an example)
+
 
 Setup without Wizard
 ^^^^^^^^^^^^^^^^^^^^
@@ -82,7 +84,7 @@ To create a new blog setup, follow these steps:
 1) Create the following page structure:
 
 - Rootpage (contains the TypoScript and PageTS-Config)
-- > Data (a folder to hold categories and tags)
+- > Data (a folder to hold categories, authors and tags, but also blog posts are possible)
 - > Category (this page is used to show blog posts, related to single category, or a category overview)
 - > Tag (this page is used to show blog posts, related to single tag, or a tag overview)
 - > Archive (this page is the archive, it lists all blog posts by given date (month and year, or year only)
@@ -100,7 +102,11 @@ To create a new blog setup, follow these steps:
    plugin.tx_blog.settings.archiveUid = NEW_blogArchivePage
    plugin.tx_blog.settings.storagePid = NEW_blogFolder
 
-4) Optional: Install and use the extension blog_template for a default template set
+.. note::
+
+       If you have multiple folder or root pages for your blog posts your have
+       to add all root pages to :typoscript:`plugin.tx_blog.settings.storagePid`
+       as a comma separated list. The first value must be the value of NEW_blogFolder
 
 
 RealURL Setup
@@ -120,10 +126,26 @@ To get nice looking URLs add the following realurl configuration to your project
         '<UID_ARCHIVE_PAGE>' => 'tx_blog_archive'
     ]
 
+
+Frontend Routing Setup
+^^^^^^^^^^^^^^^^^^^^^^
+
+The extension provides a frontend route enhancer config.
+This route enhancer config is not final yet, but you can simply include it in your site configuration:
+
+.. code-block:: yaml
+
+   imports:
+     - { resource: "EXT:blog/Configuration/Routes/Default.yaml" }
+
+Feel free to modify or enhance this configuration, feedback is welcome.
+
+
 Plugin types
 ------------
 
 The following plugins are available after installing the extension.
+
 
 List of Posts by Date
 ^^^^^^^^^^^^^^^^^^^^^
@@ -138,6 +160,7 @@ Displays a list of blog posts ordered by date. All non-hidden, non-deleted and n
 .. figure:: ../Images/Plugins/list.png
 
    Backend view of blog post list.
+
 
 List by Tag
 ^^^^^^^^^^^^
@@ -189,6 +212,7 @@ templates included in the extension you won't need them as they represent parts 
 in your templates. For special circumstances we provide these plugins as standalone versions so you can use them in every
 way you want:
 
+
 Sidebar
 """""""
 
@@ -238,10 +262,12 @@ Tags are blog specific records. Creating a new tag works in the same way as crea
 * Enter a title for the tag
 * Click "Save"
 
+
 Enable sharing
 --------------
 
 To enable sharing go to the page properties of your blog entry and set the check box "Sharing enabled"
+
 
 AvatarProvider
 --------------
