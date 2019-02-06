@@ -12,6 +12,7 @@ namespace T3G\AgencyPack\Blog\Form\Wizards;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
@@ -77,13 +78,18 @@ class SocialImageWizardController
             ->get(PostRepository::class)
             ->findCurrentPost();
 
-        return $post instanceof Post ? [
-            'author' => $post->getAuthors()->current()->getName(),
-            'image' => $post->getMedia()->current()->getOriginalResource()->getPublicUrl(),
-            'title' => $post->getTitle(),
-            'uid' => $post->getUid(),
-            'table' => 'pages'
-        ] : [];
+        $result = [];
+        if ($post instanceof Post) {
+            $author = $post->getAuthors()->current();
+            $result = [
+                'author' => $author instanceof Author ? $author->getName() : '',
+                'image' => $post->getMedia()->current()->getOriginalResource()->getPublicUrl(),
+                'title' => $post->getTitle(),
+                'uid' => $post->getUid(),
+                'table' => 'pages'
+            ];
+        }
+        return $result;
     }
 
     /**

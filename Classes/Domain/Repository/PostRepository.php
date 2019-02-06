@@ -401,8 +401,8 @@ class PostRepository extends Repository
     /**
      * @return TypoScriptFrontendController
      */
-    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
+    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
     {
-        return $GLOBALS['TSFE'];
+        return $GLOBALS['TSFE'] ?? null;
     }
 }
