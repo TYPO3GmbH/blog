@@ -14,9 +14,9 @@
     ],
     "homepage": "https://extensions.typo3.org/extension/blog/",
     "support": {
-        "issues": "https://jira.typo3.com/servicedesk/customer/portal/3/group/21",
+        "issues": "https://github.com/TYPO3GmbH/blog/issues",
         "docs": "https://docs.typo3.org/typo3cms/extensions/blog/",
-        "source": "https://bitbucket.typo3.com/projects/EXT/repos/blog/browse",
+        "source": "https://github.com/TYPO3GmbH/blog",
         "slack": "https://typo3.slack.com/archives/t3g-ext-blog"
     },
     "repositories": [

@@ -8,7 +8,7 @@ Frequently Asked Questions
 Where to report bugs or improvements?
 -------------------------------------
 
-Please visit our `service desk`_ to report bugs or request improvements.
+Please visit our `github project`_ to report bugs or request improvements.
 
 
 Slack channel
@@ -20,8 +20,8 @@ Visit us on slack in channel `#t3g-ext-blog`_
 Contributions
 -------------
 
-Any contributor is welcome to join our team. All you need is an account on our bitbucket system.
-Please request a user account in our `service desk`_. If you already have an account, please ask for access to the project in our `service desk`_.
+Any contributor is welcome to join our team. All you need is an github account.
+If you already have an account, visit the: `github project`_.
 
 
 Clone / git repo
@@ -31,8 +31,8 @@ The git repository is public and you can clone it like every git repository:
 
 .. code-block:: bash
 
-   git clone https://bitbucket.typo3.com/scm/ext/blog.git
+   git clone https://github.com/TYPO3GmbH/blog.git
 
 
-.. _service desk: https://jira.typo3.com/servicedesk/customer/portal/3/group/21
+.. _github project: https://github.com/TYPO3GmbH/blog
 .. _#t3g-ext-blog: https://typo3.slack.com/archives/t3g-ext-blog
