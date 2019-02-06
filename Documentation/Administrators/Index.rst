@@ -29,7 +29,7 @@ You can get the latest version from git by using the git command:
 
 .. code-block:: bash
 
-   git clone https://bitbucket.typo3.com/scm/ext/blog.git
+   git clone https://github.com/TYPO3GmbH/blog.git
 
 
 Setup

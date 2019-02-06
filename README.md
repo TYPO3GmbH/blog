@@ -22,12 +22,12 @@ GPL-2.0-or-later
 ## Installation
 
 * Use a `composer require t3g/blog`
-* or download it from [bitbucket.typo3.com/scm/ext/blog](https://bitbucket.typo3.com/scm/ext/blog)
+* or download it from [github.com/TYPO3GmbH/blog](https://github.com/TYPO3GmbH/blog)
 * or download ir from [TER](https://extensions.typo3.org/extension/blog/)
 
 ## Contribution
 
-Any contributor is welcome to join our team. All you need is an account on our bitbucket system.
-Please request a user account in our [service desk](https://jira.typo3.com/servicedesk/customer/portal/3/group/21). If you already have an account, please ask for access to the project in our [service desk](https://jira.typo3.com/servicedesk/customer/portal/3/group/21).
+Any contributor is welcome to join our team. All you need is an github account.
+If you already have an account, visit the: [github.com/TYPO3GmbH/blog](https://github.com/TYPO3GmbH/blog).
 
 It is also highly recommended to join our [Slack Channel: #t3g-ext-blog](https://typo3.slack.com/archives/t3g-ext-blog)
