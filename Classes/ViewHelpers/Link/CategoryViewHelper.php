@@ -80,7 +80,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
                 ->setFormat('rss')
                 ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_category.']['typeNum']);
         }
-        $uri = $uriBuilder->uriFor('listPostsByCategory', [], 'Post');
+        $uri = $uriBuilder->uriFor('listPostsByCategory', [], 'Post', 'Blog');
 
         if ($uri !== '') {
             $linkText = $this->renderChildren() ?: $category->getTitle();
