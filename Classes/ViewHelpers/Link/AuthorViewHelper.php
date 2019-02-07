@@ -83,7 +83,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
             $rssFormat
         );
 
-        return $this->buildAnchorTag($uriBuilder->uriFor('listPostsByAuthor', [], 'Post'), $author);
+        return $this->buildAnchorTag($uriBuilder->uriFor('listPostsByAuthor', [], 'Post'), $author, 'Blog');
     }
 
     /**
