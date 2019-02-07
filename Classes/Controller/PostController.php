@@ -350,9 +350,9 @@ class PostController extends ActionController
     {
         $post = $this->postRepository->findCurrentPost();
         $posts = $this->postRepository->findRelatedPosts(
-            $this->settings['relatedPosts']['categoryMultiplier'],
-            $this->settings['relatedPosts']['tagMultiplier'],
-            $this->settings['relatedPosts']['limit']
+            (int)$this->settings['relatedPosts']['categoryMultiplier'],
+            (int)$this->settings['relatedPosts']['tagMultiplier'],
+            (int)$this->settings['relatedPosts']['limit']
         );
         $this->view->assign('currentPost', $post);
         $this->view->assign('posts', $posts);
