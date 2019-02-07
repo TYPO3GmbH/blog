@@ -77,7 +77,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
                 ->setFormat('rss')
                 ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_category.']['typeNum']);
         }
-        $uri = $uriBuilder->uriFor('listPostsByCategory', [], 'Post');
+        $uri = $uriBuilder->uriFor('listPostsByCategory', [], 'Post', 'Blog');
 
         if ((string) $uri !== '') {
             $linkText = $this->renderChildren() ?: $category->getTitle();
