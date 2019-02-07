@@ -62,7 +62,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
                 ->setFormat('rss')
                 ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_tag.']['typeNum']);
         }
-        $uri = $uriBuilder->uriFor('listPostsByTag', [], 'Post');
+        $uri = $uriBuilder->uriFor('listPostsByTag', [], 'Post', 'Blog');
         if ($uri !== '') {
             $linkText = $this->renderChildren() ?: $tag->getTitle();
             $this->tag->addAttribute('href', $uri);
