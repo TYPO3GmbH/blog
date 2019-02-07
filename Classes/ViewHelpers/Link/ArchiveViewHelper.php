@@ -65,7 +65,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
                 ->setFormat('rss')
                 ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_archive.']['typeNum']);
         }
-        $uri = $uriBuilder->uriFor('listPostsByDate', [], 'Post');
+        $uri = $uriBuilder->uriFor('listPostsByDate', [], 'Post', 'Blog');
         if ($uri !== '') {
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($this->renderChildren());
