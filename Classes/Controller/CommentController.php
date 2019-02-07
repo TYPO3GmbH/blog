@@ -124,7 +124,7 @@ class CommentController extends ActionController
      *
      * @param Comment|null $comment
      */
-    public function formAction(Comment $comment = null): void
+    public function formAction(Comment $comment = null)
     {
         $this->view->assign('post', $this->postRepository->findCurrentPost());
         $this->view->assign('comment', $comment);
@@ -142,7 +142,7 @@ class CommentController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \RuntimeException
      */
-    public function addCommentAction(Comment $comment): void
+    public function addCommentAction(Comment $comment)
     {
         $this->commentService->injectSettings($this->settings['comments']);
         $post = $this->postRepository->findCurrentPost();
