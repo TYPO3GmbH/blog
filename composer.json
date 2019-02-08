@@ -37,9 +37,6 @@
         "bin-dir": ".build/bin",
         "discard-changes": true,
         "optimize-autoloader": true,
-        "platform": {
-            "php": "7.0"
-        },
         "vendor-dir": ".build/vendor"
     },
     "extra": {
@@ -64,6 +61,7 @@
         ]
     },
     "require": {
+        "php": ">=7.0.0",
         "psr/http-message": "^1.0.0",
         "typo3/cms-backend": "^8.7.0",
         "typo3/cms-core": "^8.7.0",
@@ -76,7 +74,6 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.12",
-        "symfony/polyfill-php70": "1.8.0",
         "roave/security-advisories": "dev-master",
         "t3g/blog-template-test": "^1.0.0",
         "typo3/testing-framework": "^2.0.4"
