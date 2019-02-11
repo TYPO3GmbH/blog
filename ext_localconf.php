@@ -170,13 +170,6 @@ call_user_func(function () {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate']
         = \T3G\AgencyPack\Blog\Updates\AvatarProviderUpdate::class;
 
-    if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['blog']
-            = \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class .
-            '->addBlogConfiguration';
-    }
-
     // Register Social Image Wizard
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1506942138] = [
