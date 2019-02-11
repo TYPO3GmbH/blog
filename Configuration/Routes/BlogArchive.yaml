@@ -1,0 +1,57 @@
+routeEnhancers:
+  BlogArchive:
+    type: Extbase
+    extension: Blog
+    plugin: Archive
+    routes:
+      -
+        routePath: '/{year}'
+        _controller: 'Post::listPostsByDate'
+        _arguments:
+          year: year
+      -
+        routePath: '/{year}/{month}'
+        _controller: 'Post::listPostsByDate'
+        _arguments:
+          year: year
+          month: month
+    defaultController: 'Post::listPostsByDate'
+    defaults:
+      year: ''
+      month: ''
+    aspects:
+      year:
+        type: StaticRangeMapper
+        start: '1950'
+        end: '2050'
+      month:
+        type: StaticValueMapper
+        map:
+          january: 1
+          february: 2
+          march: 3
+          april: 4
+          may: 5
+          june: 6
+          july: 7
+          august: 8
+          september: 9
+          october: 10
+          november: 11
+          december: 12
+        localeMap:
+          -
+            locale: 'de_.*'
+            map:
+              januar: 1
+              februar: 2
+              maerz: 3
+              april: 4
+              mai: 5
+              juni: 6
+              juli: 7
+              august: 8
+              september: 9
+              oktober: 10
+              november: 11
+              dezember: 12

@@ -1,0 +1,18 @@
+routeEnhancers:
+  BlogCategory:
+    type: Extbase
+    extension: Blog
+    plugin: Category
+    routes:
+      -
+        routePath: '/{category_title}'
+        _controller: 'Post::listPostsByCategory'
+        _arguments:
+          category_title: category
+    defaultController: 'Post::listPostsByCategory'
+    aspects:
+      category_title:
+        type: PersistedPatternMapper
+        tableName: sys_category
+        routeFieldPattern: '^(?P<title>.+)-(?P<uid>\d+)$'
+        routeFieldResult: '{title}-{uid}'
