@@ -55,6 +55,7 @@ routeEnhancers:
               oktober: 10
               november: 11
               dezember: 12
+          -
             locale: 'fr_.*'
             map:
               janvier: 1
