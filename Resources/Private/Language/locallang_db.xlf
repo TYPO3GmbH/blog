@@ -78,8 +78,14 @@
 			<trans-unit id="tx_blog_domain_model_tag.title" xml:space="preserve">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_tag.slug" xml:space="preserve">
+				<source>Path Segment</source>
+			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_tag.description" xml:space="preserve">
 				<source>Description (meta description)</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_tag.tabs.general" xml:space="preserve">
+				<source>General</source>
 			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_tag.tabs.seo" xml:space="preserve">
 				<source>SEO</source>
@@ -93,6 +99,9 @@
 			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_author.name" xml:space="preserve">
 				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.slug" xml:space="preserve">
+				<source>Path Segment</source>
 			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_author.avatar_provider" xml:space="preserve">
 				<source>Avatar Provider</source>
@@ -142,6 +151,9 @@
 			<trans-unit id="tx_blog_domain_model_author.palette_contact" xml:space="preserve">
 				<source>Contact data</source>
 			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.tab_profile" xml:space="preserve">
+				<source>Profile</source>
+			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_author.tab_social_media" xml:space="preserve">
 				<source>Social Media</source>
 			</trans-unit>
@@ -151,6 +163,9 @@
 
 			<trans-unit id="sys_category.content" xml:space="preserve">
 				<source>Content</source>
+			</trans-unit>
+			<trans-unit id="sys_category.slug" xml:space="preserve">
+				<source>Path Segment</source>
 			</trans-unit>
 			<trans-unit id="sys_category.tabs.seo" xml:space="preserve">
 				<source>SEO</source>
