@@ -1,0 +1,10 @@
+routeEnhancers:
+  PageTypeSuffix:
+    type: PageType
+    map:
+      'blog.recent.xml': 200
+      'blog.category.xml': 210
+      'blog.tag.xml': 220
+      'blog.archive.xml': 230
+      'blog.comments.xml': 240
+      'blog.author.xml': 250

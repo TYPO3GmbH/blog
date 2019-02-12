@@ -7,3 +7,4 @@ imports:
   - { resource: "EXT:blog/Configuration/Routes/BlogTag.yaml" }
   - { resource: "EXT:blog/Configuration/Routes/BlogArchive.yaml" }
   - { resource: "EXT:blog/Configuration/Routes/BlogAuthorPosts.yaml" }
+  - { resource: "EXT:blog/Configuration/Routes/BlogFeedWidget.yaml" }
