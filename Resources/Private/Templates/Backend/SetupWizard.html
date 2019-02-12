@@ -23,7 +23,7 @@
               </table>
             </div>
             <f:render partial="Backend/CreateWizard" arguments="{_all}" />
-            <f:render partial="Backend/RealUrlSetup" arguments="{_all}" />
+            <f:render partial="Backend/UrlSetup" arguments="{_all}" />
         </f:then>
         <f:else>
             <f:be.infobox state="-1" title="{f:translate(key: 'backend.warning')}">
