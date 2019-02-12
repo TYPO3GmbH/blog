@@ -1,0 +1,19 @@
+routeEnhancers:
+  BlogTag:
+    type: Extbase
+    extension: Blog
+    plugin: Tag
+    routes:
+      -
+        routePath: '/{tag_title}'
+        _controller: 'Post::listPostsByTag'
+        _arguments:
+          tag_title: tag
+    defaultController: 'Post::listPostsByTag'
+    aspects:
+      tag_title:
+        type: PersistedPatternMapper
+        tableName: tx_blog_domain_model_tag
+        routeFieldPattern: '^(?P<slug>.+)$'
+        routeFieldName: 'slug'
+        routeFieldResult: '{slug}'
