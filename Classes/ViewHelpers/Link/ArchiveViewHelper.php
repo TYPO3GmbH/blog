@@ -62,25 +62,22 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         $year = (int) $this->arguments['year'];
         $month = (int) $this->arguments['month'];
         $pageUid = (int) $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_blog.']['settings.']['archiveUid'];
-        $additionalParams = [
-            'tx_blog_archive' => [
-                'year' => $year,
-            ],
+        $arguments = [
+            'year' => $year
         ];
         if ($month > 0) {
-            $additionalParams['tx_blog_archive']['month'] = $month;
+            $arguments['month'] = $month;
         }
         $uriBuilder = $this->controllerContext->getUriBuilder();
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
-            ->setUseCacheHash(true)
-            ->setArguments($additionalParams);
+            ->setUseCacheHash(true);
         if ($rssFormat) {
             $uriBuilder
                 ->setFormat('rss')
                 ->setTargetPageType($GLOBALS['TSFE']->tmpl->setup['blog_rss_archive.']['typeNum']);
         }
-        $uri = $uriBuilder->uriFor('listPostsByDate', [], 'Post', 'Blog');
+        $uri = $uriBuilder->uriFor('listPostsByDate', $arguments, 'Post', 'Blog', 'Archive');
         if ((string) $uri !== '') {
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($this->renderChildren());
