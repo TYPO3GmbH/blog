@@ -169,6 +169,15 @@ call_user_func(function () {
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate::class]
         = \T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate::class;
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class]
+        = \T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class;
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class]
+        = \T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class;
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class]
+        = \T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class;
 
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
         /** @noinspection UnsupportedStringOffsetOperationsInspection */

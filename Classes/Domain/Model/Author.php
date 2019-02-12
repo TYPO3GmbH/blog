@@ -55,6 +55,11 @@ class Author extends AbstractEntity
     /**
      * @var string
      */
+    protected $slug;
+
+    /**
+     * @var string
+     */
     protected $title = '';
 
     /**
@@ -181,6 +186,14 @@ class Author extends AbstractEntity
     {
         $this->name = $name;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 
     /**
