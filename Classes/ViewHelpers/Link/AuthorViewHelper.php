@@ -73,17 +73,11 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
      */
     protected function buildUriFromDefaultPage(Author $author, bool $rssFormat)
     {
-        $uriBuilder = $this->getUriBuilder(
-            (int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['authorUid'],
-            [
-                'tx_blog_authorposts' => [
-                    'author' => $author->getUid(),
-                ],
-            ],
-            $rssFormat
-        );
-
-        return $this->buildAnchorTag($uriBuilder->uriFor('listPostsByAuthor', [], 'Post'), $author, 'Blog');
+        $uriBuilder = $this->getUriBuilder((int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['authorUid'], [], $rssFormat);
+        $arguments = [
+            'author' => $author->getUid(),
+        ];
+        return $this->buildAnchorTag($uriBuilder->uriFor('listPostsByAuthor', $arguments, 'Post', 'Blog', 'AuthorPosts'), $author);
     }
 
     /**
