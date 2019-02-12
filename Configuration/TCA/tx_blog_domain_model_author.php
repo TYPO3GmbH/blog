@@ -31,7 +31,23 @@ return [
         'searchFields' => 'uid,name,title'
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden,name,image,title,website,email,location,twitter,googleplus,linkedin,xing,profile,bio,posts',
+        'showRecordFieldList' => '
+            hidden,
+            name,
+            slug,
+            image,
+            title,
+            website,
+            email,
+            location,
+            twitter,
+            googleplus,
+            linkedin,
+            xing,
+            profile,
+            bio,
+            posts
+        ',
     ],
     'palettes' => [
         'palette_access' => [
@@ -79,6 +95,23 @@ return [
                 'size' => 30,
                 'eval' => 'required',
             ],
+        ],
+        'slug' => [
+            'exclude' => 0,
+            'label' => $ll . 'tx_blog_domain_model_author.slug',
+            'displayCond' => 'USER:' . \TYPO3\CMS\Core\Compatibility\PseudoSiteTcaDisplayCondition::class . '->isInPseudoSite:pages:false',
+            'config' => [
+                'type' => 'slug',
+                'generatorOptions' => [
+                    'fields' => ['name'],
+                    'replacements' => [
+                        '/' => ''
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => ''
+            ]
         ],
         'avatar_provider' => [
             'exclude' => 0,
@@ -244,13 +277,27 @@ return [
     ],
     'types' => [
         0 => [
-            'showitem' => ''
-                . '--palette--;' . $ll . 'tx_blog_domain_model_author.palette_personal;palette_personal, location, avatar_provider, image, bio, '
-                . '--palette--;' . $ll . 'tx_blog_domain_model_author.palette_contact;palette_contact, '
-                . '--div--;' . $ll . 'tx_blog_domain_model_author.tab_social_media,twitter,googleplus,linkedin,xing,profile, '
-                . '--div--;' . $ll . 'tx_blog_domain_model_author.tab_blog, posts, details_page, '
-                . '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, '
-                . '--palette--;;palette_access',
+            'showitem' => '
+                --div--;' . $ll . 'tx_blog_domain_model_author.tab_profile,
+                    --palette--;' . $ll . 'tx_blog_domain_model_author.palette_personal;palette_personal,
+                    slug,
+                    location,
+                    avatar_provider,
+                    image,
+                    bio,
+                    --palette--;' . $ll . 'tx_blog_domain_model_author.palette_contact;palette_contact,
+                --div--;' . $ll . 'tx_blog_domain_model_author.tab_social_media,
+                    twitter,
+                    googleplus,
+                    linkedin,
+                    xing,
+                    profile,
+                --div--;' . $ll . 'tx_blog_domain_model_author.tab_blog,
+                    posts,
+                    details_page,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+                    --palette--;;palette_access
+            ',
         ],
     ],
 ];
