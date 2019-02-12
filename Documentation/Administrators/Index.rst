@@ -109,29 +109,10 @@ To create a new blog setup, follow these steps:
        as a comma separated list. The first value must be the value of NEW_blogFolder
 
 
-RealURL Setup
-^^^^^^^^^^^^^
-
-RealURL Setup
-The blog extension provides a configuration for EXT:realurl.
-
-To get nice looking URLs add the following realurl configuration to your project setup:
-
-.. code-block:: php
-
-    'fixedPostVars' => [
-        '<UID_CATEGORY_PAGE>' => 'tx_blog_category',
-        '<UID_TAG_PAGE>' => 'tx_blog_tag',
-        '<UID_AUTHOR_PAGE>' => 'tx_blog_author',
-        '<UID_ARCHIVE_PAGE>' => 'tx_blog_archive'
-    ]
-
-
 Frontend Routing Setup
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The extension provides a frontend route enhancer config.
-This route enhancer config is not final yet, but you can simply include it in your site configuration:
+The extension provides a frontend route enhancer configuration that you can include it in your site configuration.
 
 .. code-block:: yaml
 
