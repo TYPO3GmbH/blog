@@ -14,5 +14,6 @@ routeEnhancers:
       category_title:
         type: PersistedPatternMapper
         tableName: sys_category
-        routeFieldPattern: '^(?P<title>.+)-(?P<uid>\d+)$'
-        routeFieldResult: '{title}-{uid}'
+        routeFieldPattern: '^(?P<slug>.+)$'
+        routeFieldName: 'slug'
+        routeFieldResult: '{slug}'

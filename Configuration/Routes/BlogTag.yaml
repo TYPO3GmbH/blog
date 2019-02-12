@@ -14,5 +14,6 @@ routeEnhancers:
       tag_title:
         type: PersistedPatternMapper
         tableName: tx_blog_domain_model_tag
-        routeFieldPattern: '^(?P<title>.+)-(?P<uid>\d+)$'
-        routeFieldResult: '{title}-{uid}'
+        routeFieldPattern: '^(?P<slug>.+)$'
+        routeFieldName: 'slug'
+        routeFieldResult: '{slug}'

@@ -16,5 +16,6 @@ routeEnhancers:
       author_title:
         type: PersistedPatternMapper
         tableName: 'tx_blog_domain_model_author'
-        routeFieldPattern: '^(?P<name>.+)$'
-        routeFieldResult: '{name}'
+        routeFieldPattern: '^(?P<slug>.+)$'
+        routeFieldName: 'slug'
+        routeFieldResult: '{slug}'
