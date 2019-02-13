@@ -1,5 +1,7 @@
 # TYPO3 CMS Extension "blog"
 
+[![Build Status](https://travis-ci.org/TYPO3GmbH/blog.svg?branch=master)](https://travis-ci.org/TYPO3GmbH/blog)
+
 This blog extension uses TYPO3s core concepts and elements to provide a full-blown blog that users of TYPO3 can instantly understand and use.
 
 ## Requirements
@@ -35,4 +37,3 @@ Any contributor is welcome to join our team. All you need is an github account.
 If you already have an account, visit the: [github.com/TYPO3GmbH/blog](https://github.com/TYPO3GmbH/blog).
 
 It is also highly recommended to join our [Slack Channel: #t3g-ext-blog](https://typo3.slack.com/archives/t3g-ext-blog).
-
