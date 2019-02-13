@@ -142,7 +142,7 @@ class PostController extends ActionController
                 'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
                 'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
                 'language' => $this->getTypoScriptFontendController()->sys_language_isocode,
-                'link' => $this->uriBuilder->setUseCacheHash(false)->setArgumentsToBeExcludedFromQueryString(['id'])->setCreateAbsoluteUri(true)->setAddQueryString(true)->build(),
+                'link' => $this->uriBuilder->getRequest()->getRequestUri(),
                 'date' => date('r'),
             ];
             $this->view->assign('feed', $feedData);
