@@ -1,6 +1,7 @@
 # Folders
 /.ddev export-ignore
 /.github export-ignore
+/.vscode export-ignore
 /Build export-ignore
 /Tests export-ignore
 
