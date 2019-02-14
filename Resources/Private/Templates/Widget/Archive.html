@@ -1,47 +1,7 @@
-{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
 <f:layout name="Widget" />
-
 <f:section name="content">
-    <h3 class="widget-title"><f:translate key="headline.archive"/></h3>
-    <ul class="archive">
-    <f:for each="{archiveData}" as="rows" key="year">
-        <f:if condition="{settings.widgets.archive.groupByYear} == 1">
-            <f:then>
-                <li class="list-item archive-item archive-item-{year}">
-                    <blog:link.archive year="{year}" title="{year}">{year}</blog:link.archive> <blog:link.archive rss="true" year="{year}" title="{year}"><i class="fa fa-rss-square"></i></blog:link.archive>
-                    <f:if condition="{settings.widgets.archive.groupByMonth} == 1">
-                        <ul>
-                            <f:for each="{rows}" as="row">
-                                <f:render section="monthLink" arguments="{settings: settings, year: year, row: row}" />
-                            </f:for>
-                        </ul>
-                    </f:if>
-                </li>
-            </f:then>
-            <f:else>
-                <f:if condition="{settings.widgets.archive.groupByMonth} == 1">
-                    <f:for each="{rows}" as="row">
-                        <f:render section="monthLink" arguments="{settings: settings, year: year, row: row}" />
-                    </f:for>
-                </f:if>
-            </f:else>
-        </f:if>
-    </f:for>
-    </ul>
-</f:section>
 
-<f:section name="monthLink">
-    <li class="list-item archive-item archive-item-{year}-{row.month}">
-        <blog:link.archive year="{year}" month="{row.month}" title="{f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: row.timestamp)}">
-            <f:if condition="{settings.widgets.archive.groupByYear} == 1">
-                <f:then>
-                    {f:format.date(format: '{settings.widgets.archive.monthDateFormat}', date: row.timestamp)} <f:if condition="{settings.widgets.archive.showCounter} == 1">({row.count})</f:if>
-                </f:then>
-                <f:else>
-                    {f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: row.timestamp)} <f:if condition="{settings.widgets.archive.showCounter} == 1">({row.count})</f:if>
-                </f:else>
-            </f:if>
-        </blog:link.archive>
-        <blog:link.archive rss="true" year="{year}" month="{row.month}" title="{year}"><i class="fa fa-rss-square"></i></blog:link.archive>
-    </li>
+    <h3 class="widget-title"><f:translate key="headline.archive"/></h3>
+    <f:render partial="Archive/Menu" arguments="{settings: settings, items: archiveData}" />
+
 </f:section>

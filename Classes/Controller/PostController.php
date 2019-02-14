@@ -31,6 +31,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\MetaService;
+use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Utility\ArrayUtility;
@@ -180,32 +181,33 @@ class PostController extends ActionController
      */
     public function listPostsByDateAction($year = null, $month = null)
     {
-        if (null === $year) {
-            // we need at least the year
-            $this->redirect('listRecentPosts');
+        if ($year === null) {
+            $posts = $this->postRepository->findMonthsAndYearsWithPosts();
+            $this->view->assign('archiveData', ArchiveUtility::extractDataFromPosts($posts));
+        } else {
+            $timestamp = mktime(0, 0, 0, $month, 1, $year);
+            $posts = $this->postRepository->findByMonthAndYear($year, $month);
+            foreach ($posts as $post) {
+                $this->blogCacheService->addTagsForPost($post);
+            }
+            $this->view->assignMultiple([
+                'month' => $month,
+                'year' => $year,
+                'timestamp' => $timestamp,
+                'posts' => $posts,
+            ]);
+            $title = str_replace([
+                '###MONTH###',
+                '###MONTH_NAME###',
+                '###YEAR###',
+            ], [
+                $month,
+                strftime('%B', $timestamp),
+                $year,
+            ], LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
+            MetaService::set(MetaService::META_TITLE, $title);
+            MetaService::set(MetaService::META_DESCRIPTION, LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
         }
-        $timestamp = mktime(0, 0, 0, $month, 1, $year);
-        $posts = $this->postRepository->findByMonthAndYear($year, $month);
-        foreach ($posts as $post) {
-            $this->blogCacheService->addTagsForPost($post);
-        }
-        $this->view->assignMultiple([
-            'month' => $month,
-            'year' => $year,
-            'timestamp' => $timestamp,
-            'posts' => $posts,
-        ]);
-        $title = str_replace([
-            '###MONTH###',
-            '###MONTH_NAME###',
-            '###YEAR###',
-        ], [
-            $month,
-            strftime('%B', $timestamp),
-            $year,
-        ], LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
-        MetaService::set(MetaService::META_TITLE, $title);
-        MetaService::set(MetaService::META_DESCRIPTION, LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
     }
 
     /**

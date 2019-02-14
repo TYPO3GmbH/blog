@@ -27,6 +27,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
+use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -193,7 +194,7 @@ class WidgetController extends ActionController
     public function archiveAction()
     {
         $posts = $this->postRepository->findMonthsAndYearsWithPosts();
-        $this->view->assign('archiveData', $this->resortArchiveData($posts));
+        $this->view->assign('archiveData', ArchiveUtility::extractDataFromPosts($posts));
     }
 
     /**
@@ -201,39 +202,5 @@ class WidgetController extends ActionController
      */
     public function feedAction()
     {
-    }
-
-    /**
-     * This method resort the database result and create a nested array
-     * in the form:
-     * [
-     *  2015 => [
-     *    [
-     *      'year' => 2015,
-     *      'month' => 3,
-     *      'count' => 9
-     *      'timestamp' => 123456789
-     *    ]
-     *    ...
-     *  ]
-     *  ...
-     * ].
-     *
-     * @param array $data
-     *
-     * @return array
-     */
-    protected function resortArchiveData(array $data)
-    {
-        $archiveData = [];
-        foreach ($data as $result) {
-            if (empty($archiveData[$result['year']])) {
-                $archiveData[$result['year']] = [];
-            }
-            $result['timestamp'] = mktime(0, 0, 0, (int) $result['month'], 1, (int) $result['year']);
-            $archiveData[$result['year']][] = $result;
-        }
-
-        return $archiveData;
     }
 }
