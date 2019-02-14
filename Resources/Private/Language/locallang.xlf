@@ -324,6 +324,18 @@
 			<trans-unit id="constantEditor.CommentAddedNotification.admin.email" xml:space="preserve">
 				<source>Admin mail:Global admin (receiver) email address for notifications</source>
 			</trans-unit>
+			<trans-unit id="constantEditor.lists.pagination.itemsPerPage" xml:space="preserve">
+				<source>Number of post that should be displayed per page</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.lists.pagination.insertAbove" xml:space="preserve">
+				<source>Show the pagination above the posts</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.lists.pagination.insertBelow" xml:space="preserve">
+				<source>Show the pagination below the posts</source>
+			</trans-unit>
+			<trans-unit id="constantEditor.lists.pagination.maximumNumberOfLinks" xml:space="preserve">
+				<source>Maximum number of links in the pagination</source>
+			</trans-unit>
 			<trans-unit id="constantEditor.lists.posts.maximumDisplayedItems" xml:space="preserve">
 				<source>Maximum displayed items:Maximum number of posts to be displayed (0 = no limit).</source>
 			</trans-unit>
