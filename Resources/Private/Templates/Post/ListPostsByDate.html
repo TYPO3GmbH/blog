@@ -1,10 +1,23 @@
 {namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
-
 <f:layout name="Default" />
 
 <f:section name="content">
-    <h1 class="page-title"><f:if condition="{month}">{f:format.date(format: '{settings.widgets.archive.monthDateFormat}', date: timestamp)}</f:if> {year} <blog:link.archive rss="true" year="{year}" month="{month}"><i class="fa fa-rss-square"></i></blog:link.archive></h1>
-    <f:render partial="List" arguments="{_all}" />
+    <f:if condition="{archiveData}">
+        <f:then>
+
+            <f:comment>If year is missing show an overview of the archive.</f:comment>
+            <h1 class="page-title"><f:translate key="headline.archive"/></h1>
+            <f:render partial="Archive/Menu" arguments="{settings: settings, items: archiveData}" />
+
+        </f:then>
+        <f:else>
+
+            <f:comment>If a year/+month is selected show posts matching.</f:comment>
+            <h1 class="page-title"><f:if condition="{month}">{f:format.date(format: '{settings.widgets.archive.monthDateFormat}', date: timestamp)}</f:if> {year} <blog:link.archive rss="true" year="{year}" month="{month}"><i class="fa fa-rss-square"></i></blog:link.archive></h1>
+            <f:render partial="List" arguments="{_all}" />
+
+        </f:else>
+    </f:if>
 </f:section>
 
 <f:section name="FooterAssets">
