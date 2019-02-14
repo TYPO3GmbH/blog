@@ -5,11 +5,20 @@ routeEnhancers:
     plugin: Category
     routes:
       -
-        routePath: '/{category_title}'
+        routePath: '/category/{category_title}'
         _controller: 'Post::listPostsByCategory'
         _arguments:
           category_title: category
+      -
+        routePath: '/category/{category_title}/page-{page}'
+        _controller: 'Post::listPostsByCategory'
+        _arguments:
+          category_title: category
+          page: '@widget_0/currentPage'
     defaultController: 'Post::listPostsByCategory'
+    requirements:
+      category_title: '^[a-z0-9].*$'
+      page: '\d+'
     aspects:
       category_title:
         type: PersistedPatternMapper
@@ -17,3 +26,7 @@ routeEnhancers:
         routeFieldPattern: '^(?P<slug>.+)$'
         routeFieldName: 'slug'
         routeFieldResult: '{slug}'
+      page:
+        type: StaticRangeMapper
+        start: '1'
+        end: '99'

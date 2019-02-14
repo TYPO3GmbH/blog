@@ -187,6 +187,11 @@ call_user_func(function () {
         'class' => \T3G\AgencyPack\Blog\Form\Wizards\SocialWizard::class
     ];
 
+    // Register Social Image Wizard
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['BlogStaticDatabaseMapper'] =
+        \T3G\AgencyPack\Blog\Routing\Aspect\StaticDatabaseMapper::class;
+
     // Register Notification visitors
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'][\T3G\AgencyPack\Blog\Notification\CommentAddedNotification::class][]

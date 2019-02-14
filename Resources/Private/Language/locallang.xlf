@@ -387,6 +387,12 @@
 			<trans-unit id="feed.description.listPostsByCategory" xml:space="preserve">
 				<source>Posts by category %s</source>
 			</trans-unit>
+			<trans-unit id="feed.title.listPostsByAuthor" xml:space="preserve">
+				<source>Author RSS Feed</source>
+			</trans-unit>
+			<trans-unit id="feed.description.listPostsByAuthor" xml:space="preserve">
+				<source>Posts by author %s</source>
+			</trans-unit>
 			<trans-unit id="feed.title.listPostsByDate" xml:space="preserve">
 				<source>Archive RSS Feed</source>
 			</trans-unit>

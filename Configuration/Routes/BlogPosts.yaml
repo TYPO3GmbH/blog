@@ -1,0 +1,19 @@
+routeEnhancers:
+  BlogPosts:
+    type: Extbase
+    extension: Blog
+    plugin: Posts
+    routes:
+      -
+        routePath: '/page-{page}'
+        _controller: 'Post::listRecentPosts'
+        _arguments:
+          page: '@widget_0/currentPage'
+    defaultController: 'Post::listRecentPosts'
+    requirements:
+      page: '\d+'
+    aspects:
+      page:
+        type: StaticRangeMapper
+        start: '1'
+        end: '99'
