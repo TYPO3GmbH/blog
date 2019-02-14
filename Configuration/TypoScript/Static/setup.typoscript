@@ -32,6 +32,12 @@ plugin.tx_blog {
         }
         # Lists related settings
         lists {
+            pagination {
+                itemsPerPage = {$plugin.tx_blog.settings.lists.pagination.itemsPerPage}
+                insertAbove = {$plugin.tx_blog.settings.lists.pagination.insertAbove}
+                insertBelow = {$plugin.tx_blog.settings.lists.pagination.insertBelow}
+                maximumNumberOfLinks = {$plugin.tx_blog.settings.lists.pagination.maximumNumberOfLinks}
+            }
             posts {
                 maximumDisplayedItems = {$plugin.tx_blog.settings.lists.posts.maximumDisplayedItems}
                 dateFormat = {$plugin.tx_blog.settings.lists.posts.dateFormat}
