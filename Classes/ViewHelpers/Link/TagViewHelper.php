@@ -74,7 +74,6 @@ class TagViewHelper extends AbstractTagBasedViewHelper
             ->setUseCacheHash(true);
         if ($rssFormat) {
             $uriBuilder
-                ->setFormat('rss')
                 ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_tag.']['typeNum']);
         }
         $uri = $uriBuilder->uriFor('listPostsByTag', $arguments, 'Post', 'Blog', 'Tag');
