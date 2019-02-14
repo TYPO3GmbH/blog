@@ -19,7 +19,7 @@
 </div>
 
 <f:section name="PaginatePosts">
-    <f:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{itemsPerPage: pagination.itemsPerPage, insertAbove: pagination.insertAbove, insertBelow: pagination.insertBelow, maximumNumberOfLinks: pagination.maximumNumberOfLinks}">
+    <f:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{itemsPerPage: pagination.itemsPerPage, insertAbove: pagination.insertAbove, insertBelow: pagination.insertBelow, maximumNumberOfLinks: pagination.maximumNumberOfLinks, addQueryStringMethod: 'GET'}">
         <f:render section="ListPosts" arguments="{posts: paginatedPosts}" />
     </f:widget.paginate>
 </f:section>
