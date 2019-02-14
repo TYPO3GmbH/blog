@@ -53,6 +53,8 @@ page {
     includeCSS {
         bootstrap = https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css
         bootstrap.external = 1
+        fontawesome = https://use.fontawesome.com/releases/v5.7.2/css/all.css
+        fontawesome.external = 1
     }
 
     includeJSFooterlibs {
