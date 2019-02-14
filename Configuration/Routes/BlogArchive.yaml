@@ -16,13 +16,13 @@ routeEnhancers:
           year: year
           page: '@widget_0/currentPage'
       -
-        routePath: '/archive/{year}-{month}'
+        routePath: '/archive/{year}/{month}'
         _controller: 'Post::listPostsByDate'
         _arguments:
           year: year
           month: month
       -
-        routePath: '/archive/{year}-{month}/page-{page}'
+        routePath: '/archive/{year}/{month}/page-{page}'
         _controller: 'Post::listPostsByDate'
         _arguments:
           year: year
@@ -34,6 +34,17 @@ routeEnhancers:
       month: '[a-z]+'
       page: '\d+'
     aspects:
+      year:
+        type: BlogStaticDatabaseMapper
+        table: 'pages'
+        field: 'crdate_year'
+        groupBy: 'crdate_year'
+        where:
+          doktype: 137
+      page:
+        type: StaticRangeMapper
+        start: '1'
+        end: '99'
       month:
         type: StaticValueMapper
         map:
