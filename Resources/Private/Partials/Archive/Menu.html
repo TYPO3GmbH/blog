@@ -1,0 +1,50 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:blog="http://typo3.org/ns/T3G/AgencyPack/Blog/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:if condition="{items}">
+    <ul class="archive">
+        <f:for each="{items}" as="months" key="year">
+            <f:if condition="{settings.widgets.archive.groupByYear} == 1">
+                <f:then>
+                    <li class="archive-item archive-item-year archive-item-{year}">
+                        <blog:link.archive class="archive-item-year-link" year="{year}" title="{year}">
+                            {year}
+                        </blog:link.archive>
+                        <blog:link.archive class="archive-item-year-rss" rss="true" year="{year}" title="{year}">
+                            <i class="fa fa-rss-square"></i>
+                        </blog:link.archive>
+                        <f:if condition="{settings.widgets.archive.groupByMonth} == 1">
+                            <ul>
+                                <f:for each="{months}" as="month">
+                                    <f:render section="Month" arguments="{settings: settings, year: year, month: month}" />
+                                </f:for>
+                            </ul>
+                        </f:if>
+                    </li>
+                </f:then>
+                <f:else>
+                    <f:for each="{months}" as="month">
+                        <f:render section="Month" arguments="{settings: settings, year: year, month: month}" />
+                    </f:for>
+                </f:else>
+            </f:if>
+        </f:for>
+    </ul>
+</f:if>
+
+<f:section name="Month">
+    <li class="archive-item archive-item-month archive-item-{year}-{month.month}">
+        <blog:link.archive class="archive-item-month-link" year="{year}" month="{month.month}" title="{f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: month.timestamp)}">
+            <f:if condition="{settings.widgets.archive.groupByYear} == 1">
+                    <f:then>
+                        {f:format.date(format: '{settings.widgets.archive.monthDateFormat}', date: month.timestamp)} <f:if condition="{settings.widgets.archive.showCounter} == 1">({month.count})</f:if>
+                    </f:then>
+                    <f:else>
+                        {f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: month.timestamp)} <f:if condition="{settings.widgets.archive.showCounter} == 1">({month.count})</f:if>
+                </f:else>
+            </f:if>
+        </blog:link.archive>
+        <blog:link.archive class="archive-item-month-rss" rss="true" year="{year}" month="{month.month}" title="{year}">
+            <i class="fa fa-rss-square"></i>
+        </blog:link.archive>
+    </li>
+</f:section>
+</html>
