@@ -26,3 +26,7 @@ routeEnhancers:
         routeFieldPattern: '^(?P<slug>.+)$'
         routeFieldName: 'slug'
         routeFieldResult: '{slug}'
+      page:
+        type: StaticRangeMapper
+        start: '1'
+        end: '99'

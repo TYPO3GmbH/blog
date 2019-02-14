@@ -41,10 +41,6 @@ routeEnhancers:
         groupBy: 'crdate_year'
         where:
           doktype: 137
-      page:
-        type: StaticRangeMapper
-        start: '1'
-        end: '99'
       month:
         type: StaticValueMapper
         map:
@@ -91,3 +87,7 @@ routeEnhancers:
               octobre: 10
               novembre: 11
               decembre: 12
+      page:
+        type: StaticRangeMapper
+        start: '1'
+        end: '99'
