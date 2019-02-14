@@ -95,13 +95,12 @@ class PostController extends ActionController
 
     /**
      * @param ViewInterface $view
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
     protected function initializeView(ViewInterface $view): void
     {
         parent::initializeView($view);
-        if ($this->request->hasArgument('format') && $this->request->getArgument('format') === 'rss') {
-            $action = '.' . $this->request->getArgument('action');
+        if ($this->request->getFormat() === 'rss') {
+            $action = '.' . $this->request->getControllerActionName();
             $arguments = [];
             switch ($action) {
                 case '.listPostsByCategory':
@@ -118,6 +117,11 @@ class PostController extends ActionController
                 case '.listPostsByTag':
                     if (isset($this->arguments['tag'])) {
                         $arguments[] = $this->arguments['tag']->getValue()->getTitle();
+                    }
+                    break;
+                case '.listPostsByAuthor':
+                    if (isset($this->arguments['author'])) {
+                        $arguments[] = $this->arguments['author']->getValue()->getName();
                     }
                     break;
                 default:
