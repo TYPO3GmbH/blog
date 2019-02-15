@@ -9,6 +9,7 @@
 .editorconfig export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
+.travis.yaml
 
 # Enforce checkout with linux lf consistent over all plattforms
 *.xml text eol=lf
