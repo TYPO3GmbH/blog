@@ -79,6 +79,10 @@ table.dataTable thead th.sorting_desc:after {
 	content: "\f0dd";
 }
 
+table.table-comments .actions {
+    white-space: nowrap;
+}
+
 .dataTables_length {
 	padding-top: 5px;
 	padding-left: 5px;
