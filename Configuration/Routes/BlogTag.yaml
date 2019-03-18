@@ -1,0 +1,32 @@
+routeEnhancers:
+  BlogTag:
+    type: Extbase
+    extension: Blog
+    plugin: Tag
+    routes:
+      -
+        routePath: '/tag/{tag_title}'
+        _controller: 'Post::listPostsByTag'
+        _arguments:
+          tag_title: tag
+      -
+        routePath: '/tag/{tag_title}/page-{page}'
+        _controller: 'Post::listPostsByTag'
+        _arguments:
+          tag_title: tag
+          page: '@widget_0/currentPage'
+    defaultController: 'Post::listPostsByTag'
+    requirements:
+      tag_title: '^[a-z0-9].*$'
+      page: '\d+'
+    aspects:
+      tag_title:
+        type: PersistedPatternMapper
+        tableName: tx_blog_domain_model_tag
+        routeFieldPattern: '^(?P<slug>.+)$'
+        routeFieldName: 'slug'
+        routeFieldResult: '{slug}'
+      page:
+        type: StaticRangeMapper
+        start: '1'
+        end: '99'

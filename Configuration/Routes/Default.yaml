@@ -2,90 +2,10 @@
 # But you can simply include it in your site configuration:
 # imports:
 #  - { resource: "EXT:blog/Configuration/Routes/Default.yaml" }
-routeEnhancers:
-  BlogCategoryPlugin:
-    type: Extbase
-    limitToPages: [161]
-    extension: Blog
-    plugin: Category
-    routes:
-    - { routePath: '/{category_title}', _controller: 'Post::listPostsByCategory', _arguments: {'category_title': 'category'} }
-    defaultController: 'Post::listRecentPostsAction'
-    aspects:
-      category_title:
-        type: PersistedPatternMapper
-        tableName: 'sys_category'
-        routeFieldPattern: '^(?P<title>.+)-(?P<uid>\d+)$'
-        routeFieldResult: '{title}-{uid}'
-  BlogTagPlugin:
-    type: Extbase
-    limitToPages: [162]
-    extension: Blog
-    plugin: Tag
-    routes:
-    - { routePath: '/{tag_name}', _controller: 'Post::listPostsByTag', _arguments: {'tag_name': 'tag'} }
-    defaultController: 'Post::listRecentPostsAction'
-    aspects:
-      tag_name:
-        type: PersistedPatternMapper
-        tableName: 'tx_blog_domain_model_tag'
-        routeFieldPattern: '^(?P<title>.+)-(?P<uid>\d+)$'
-        routeFieldResult: '{title}-{uid}'
-  BlogAuthorPlugin:
-    type: Extbase
-    limitToPages: [163]
-    extension: Blog
-    plugin: AuthorPosts
-    routes:
-    - { routePath: '/{author_name}', _controller: 'Post::listPostsByAuthor', _arguments: {'author_name': 'author'} }
-    defaultController: 'Post::listRecentPostsAction'
-    aspects:
-      author_name:
-        type: PersistedPatternMapper
-        tableName: 'tx_blog_domain_model_author'
-        routeFieldPattern: '^(?P<name>.+)$'
-        routeFieldResult: '{name}'
-  BlogArchivePlugin:
-    type: Extbase
-    limitToPages: [164]
-    extension: Blog
-    plugin: Archive
-    routes:
-    - { routePath: '/{year}', _controller: 'Post::listPostsByDate', _arguments: {'year': 'year'} }
-    - { routePath: '/{year}/{month}', _controller: 'Post::listPostsByDate', _arguments: {'year': 'year', 'month': 'month'} }
-    defaultController: 'Post::listRecentPostsAction'
-    defaults:
-      month: null
-    requirements:
-      year: '[0-9]{4}'
-    aspects:
-      month:
-        type: StaticValueMapper
-        map:
-          january: 1
-          february: 2
-          march: 3
-          april: 4
-          may: 5
-          june: 6
-          july: 7
-          august: 8
-          september: 9
-          october: 10
-          november: 11
-          december: 12
-        localeMap:
-        - locale: 'de_.*'
-          map:
-            januar: 1
-            februar: 2
-            maerz: 3
-            april: 4
-            mai: 5
-            juni: 6
-            juli: 7
-            august: 8
-            september: 9
-            oktober: 10
-            november: 11
-            dezember: 12
+imports:
+  - { resource: "EXT:blog/Configuration/Routes/BlogCategory.yaml" }
+  - { resource: "EXT:blog/Configuration/Routes/BlogTag.yaml" }
+  - { resource: "EXT:blog/Configuration/Routes/BlogArchive.yaml" }
+  - { resource: "EXT:blog/Configuration/Routes/BlogAuthorPosts.yaml" }
+  - { resource: "EXT:blog/Configuration/Routes/BlogFeedWidget.yaml" }
+  - { resource: "EXT:blog/Configuration/Routes/BlogPosts.yaml" }

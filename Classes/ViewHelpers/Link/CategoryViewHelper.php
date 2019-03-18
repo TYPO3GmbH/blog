@@ -47,22 +47,18 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         /** @var Category $category */
         $category = $this->arguments['category'];
         $pageUid = (int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['categoryUid'];
-        $additionalParams = [
-            'tx_blog_category' => [
-                'category' => $category->getUid(),
-            ],
+        $arguments = [
+            'category' => $category->getUid(),
         ];
         $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
-            ->setUseCacheHash(true)
-            ->setArguments($additionalParams);
+            ->setUseCacheHash(true);
         if ($rssFormat) {
             $uriBuilder
-                ->setFormat('rss')
                 ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_category.']['typeNum']);
         }
-        $uri = $uriBuilder->uriFor('listPostsByCategory', [], 'Post');
+        $uri = $uriBuilder->uriFor('listPostsByCategory', $arguments, 'Post', 'Blog', 'Category');
 
         if ($uri !== '') {
             $linkText = $this->renderChildren() ?: $category->getTitle();

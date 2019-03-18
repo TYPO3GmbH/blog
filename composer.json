@@ -84,6 +84,7 @@
         "friendsofphp/php-cs-fixer": "^2.14.0",
         "roave/security-advisories": "dev-master",
         "t3g/blog-template-test": "^1.0.0",
-        "typo3/testing-framework": "^5.0.0"
+        "typo3/testing-framework": "^5.0.0",
+        "bk2k/extension-helper": "^1.0.2"
     }
 }

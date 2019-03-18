@@ -1,0 +1,93 @@
+routeEnhancers:
+  BlogArchive:
+    type: Extbase
+    extension: Blog
+    plugin: Archive
+    routes:
+      -
+        routePath: '/archive/{year}'
+        _controller: 'Post::listPostsByDate'
+        _arguments:
+          year: year
+      -
+        routePath: '/archive/{year}/page-{page}'
+        _controller: 'Post::listPostsByDate'
+        _arguments:
+          year: year
+          page: '@widget_0/currentPage'
+      -
+        routePath: '/archive/{year}/{month}'
+        _controller: 'Post::listPostsByDate'
+        _arguments:
+          year: year
+          month: month
+      -
+        routePath: '/archive/{year}/{month}/page-{page}'
+        _controller: 'Post::listPostsByDate'
+        _arguments:
+          year: year
+          month: month
+          page: '@widget_0/currentPage'
+    defaultController: 'Post::listPostsByDate'
+    requirements:
+      year: '[0-9]{1..4}'
+      month: '[a-z]+'
+      page: '\d+'
+    aspects:
+      year:
+        type: BlogStaticDatabaseMapper
+        table: 'pages'
+        field: 'crdate_year'
+        groupBy: 'crdate_year'
+        where:
+          doktype: 137
+      month:
+        type: StaticValueMapper
+        map:
+          january: 1
+          february: 2
+          march: 3
+          april: 4
+          may: 5
+          june: 6
+          july: 7
+          august: 8
+          september: 9
+          october: 10
+          november: 11
+          december: 12
+        localeMap:
+          -
+            locale: 'de_.*'
+            map:
+              januar: 1
+              februar: 2
+              maerz: 3
+              april: 4
+              mai: 5
+              juni: 6
+              juli: 7
+              august: 8
+              september: 9
+              oktober: 10
+              november: 11
+              dezember: 12
+          -
+            locale: 'fr_.*'
+            map:
+              janvier: 1
+              fevrier: 2
+              mars: 3
+              avril: 4
+              mai: 5
+              juin: 6
+              juillet: 7
+              aout: 8
+              septembre: 9
+              octobre: 10
+              novembre: 11
+              decembre: 12
+      page:
+        type: StaticRangeMapper
+        start: '1'
+        end: '99'

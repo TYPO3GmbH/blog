@@ -49,6 +49,16 @@ plugin {
             storagePid = 0
 
             lists {
+                pagination {
+                    # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.pagination.itemsPerPage
+                    itemsPerPage = 10
+                    # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.pagination.insertAbove
+                    insertAbove = 0
+                    # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.pagination.insertBelow
+                    insertBelow = 1
+                    # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.pagination.maximumNumberOfLinks
+                    maximumNumberOfLinks = 10
+                }
                 posts {
                     # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.maximumDisplayedItems
                     maximumDisplayedItems = 0

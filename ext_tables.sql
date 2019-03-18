@@ -24,6 +24,7 @@ CREATE TABLE tx_blog_domain_model_tag (
   l18n_parent int(11) DEFAULT '0' NOT NULL,
   l18n_diffsource mediumblob NOT NULL,
   title tinytext,
+  slug varchar(2048),
   description text,
   content text,
 
@@ -48,6 +49,7 @@ CREATE TABLE tx_blog_tag_pages_mm (
 # Table structure for table 'sys_category'
 #
 CREATE TABLE sys_category (
+  slug varchar(2048),
   content text,
   posts int(11) DEFAULT '0' NOT NULL
 );
@@ -116,6 +118,7 @@ CREATE TABLE tx_blog_domain_model_author (
   hidden tinyint(4) DEFAULT '0' NOT NULL,
 
   name varchar(100) DEFAULT '' NOT NULL,
+  slug varchar(2048),
   title varchar(100) DEFAULT '' NOT NULL,
   website varchar(255) DEFAULT '' NOT NULL,
   email varchar(255) DEFAULT '' NOT NULL,

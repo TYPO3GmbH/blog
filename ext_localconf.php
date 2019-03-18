@@ -169,13 +169,15 @@ call_user_func(function () {
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate']
         = \T3G\AgencyPack\Blog\Updates\AvatarProviderUpdate::class;
-
-    if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['blog']
-            = \T3G\AgencyPack\Blog\Hooks\RealUrlAutoConfiguration::class .
-            '->addBlogConfiguration';
-    }
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class]
+        = \T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class;
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class]
+        = \T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class;
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class]
+    = \T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class;
 
     // Register Social Image Wizard
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
@@ -184,6 +186,11 @@ call_user_func(function () {
         'priority' => 20,
         'class' => \T3G\AgencyPack\Blog\Form\Wizards\SocialWizard::class
     ];
+
+    // Register Social Image Wizard
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['BlogStaticDatabaseMapper'] =
+        \T3G\AgencyPack\Blog\Routing\Aspect\StaticDatabaseMapper::class;
 
     // Register Notification visitors
     /** @noinspection UnsupportedStringOffsetOperationsInspection */

@@ -47,22 +47,18 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         /** @var Tag $tag */
         $tag = $this->arguments['tag'];
         $pageUid = (int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['tagUid'];
-        $additionalParams = [
-            'tx_blog_tag' => [
-                'tag' => $tag->getUid(),
-            ],
+        $arguments = [
+            'tag' => $tag->getUid(),
         ];
         $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
-            ->setUseCacheHash(true)
-            ->setArguments($additionalParams);
+            ->setUseCacheHash(true);
         if ($rssFormat) {
             $uriBuilder
-                ->setFormat('rss')
                 ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_tag.']['typeNum']);
         }
-        $uri = $uriBuilder->uriFor('listPostsByTag', [], 'Post');
+        $uri = $uriBuilder->uriFor('listPostsByTag', $arguments, 'Post', 'Blog', 'Tag');
         if ($uri !== '') {
             $linkText = $this->renderChildren() ?: $tag->getTitle();
             $this->tag->addAttribute('href', $uri);

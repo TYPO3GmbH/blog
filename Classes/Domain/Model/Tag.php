@@ -24,6 +24,11 @@ class Tag extends AbstractEntity
     protected $title;
 
     /**
+     * @var string
+     */
+    protected $slug;
+
+    /**
      * The description of the tag. Used for SEO meta description.
      *
      * @var string
@@ -72,6 +77,14 @@ class Tag extends AbstractEntity
     {
         $this->title = $title;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 
     /**

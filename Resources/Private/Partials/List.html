@@ -1,28 +1,25 @@
 <div class="tx-blog-post-list {class}" xmlns:f="http://www.w3.org/1999/html" xmlns:blog="http://typo3.org/ns/T3G/AgencyPack/Blog/ViewHelpers">
-    <f:alias map="{paginateItemsPerPage: 10}">
-        <f:if condition="{posts}">
-            <f:then>
-                <f:if condition="{posts->f:count()} > {paginateItemsPerPage}">
-                    <f:then>
-                        <f:render section="PaginatePosts" arguments="{posts: posts, itemsPerPage: paginateItemsPerPage}" />
-                    </f:then>
-                    <f:else>
-                        <f:render section="ListPosts" arguments="{posts: posts}" />
-                    </f:else>
-                </f:if>
-            </f:then>
-            <f:else>
-                <div class="alert alert-info" role="alert">
-                    <strong><f:translate key="list.no_posts.title" /></strong><br/><f:translate key="list.no_posts.message" />
-                </div>
-            </f:else>
-        </f:if>
-    </f:alias>
+    <f:if condition="{posts}">
+        <f:then>
+            <f:if condition="{posts->f:count()} > {settings.lists.pagination.itemsPerPage}">
+                <f:then>
+                    <f:render section="PaginatePosts" arguments="{posts: posts, pagination: settings.lists.pagination}" />
+                </f:then>
+                <f:else>
+                    <f:render section="ListPosts" arguments="{posts: posts}" />
+                </f:else>
+            </f:if>
+        </f:then>
+        <f:else>
+            <div class="alert alert-info" role="alert">
+                <strong><f:translate key="list.no_posts.title" /></strong><br/><f:translate key="list.no_posts.message" />
+            </div>
+        </f:else>
+    </f:if>
 </div>
 
 <f:section name="PaginatePosts">
-    <f:widget.paginate objects="{posts}" as="paginatedPosts"
-                       configuration="{itemsPerPage: itemsPerPage, insertAbove: 0, insertBelow: 1, addQueryStringMethod: 'GET', maximumNumberOfLinks: 10}">
+    <f:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{itemsPerPage: pagination.itemsPerPage, insertAbove: pagination.insertAbove, insertBelow: pagination.insertBelow, maximumNumberOfLinks: pagination.maximumNumberOfLinks, addQueryStringMethod: 'GET'}">
         <f:render section="ListPosts" arguments="{posts: paginatedPosts}" />
     </f:widget.paginate>
 </f:section>
