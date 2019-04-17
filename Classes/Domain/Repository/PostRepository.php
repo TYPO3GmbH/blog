@@ -249,7 +249,11 @@ class PostRepository extends Repository
         if ($storagePidConstraint instanceof ComparisonInterface) {
             $constraints[] = $storagePidConstraint;
         }
-        $constraints[] = $query->equals('uid', $pageId);
+        if ((int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('language', 'id', 0) > 0) {
+            $constraints[] = $query->equals('l10n_parent', $pageId);
+        } else {
+            $constraints[] = $query->equals('uid', $pageId);
+        }
 
         /** @var Post $post */
         $post = $query
