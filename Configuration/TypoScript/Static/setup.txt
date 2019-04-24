@@ -118,6 +118,7 @@ blog_rss_posts = PAGE
 blog_rss_posts {
     typeNum = 200
     10 < tt_content.list.20.blog_posts
+    10.format = rss
 
     config {
         disableAllHeaderCode = 1
@@ -134,19 +135,24 @@ blog_rss_posts {
 blog_rss_category < blog_rss_posts
 blog_rss_category.typeNum = 210
 blog_rss_category.10 < tt_content.list.20.blog_category
+blog_rss_category.10.format = rss
 
 blog_rss_tag < blog_rss_posts
 blog_rss_tag.typeNum = 220
 blog_rss_tag.10 < tt_content.list.20.blog_tag
+blog_rss_tag.10.format = rss
 
 blog_rss_archive < blog_rss_posts
 blog_rss_archive.typeNum = 230
 blog_rss_archive.10 < tt_content.list.20.blog_archive
+blog_rss_archive.10.format = rss
 
 blog_rss_comments < blog_rss_posts
 blog_rss_comments.typeNum = 240
 blog_rss_comments.10 < tt_content.list.20.blog_comments
+blog_rss_comments.10.format = rss
 
 blog_rss_author < blog_rss_posts
 blog_rss_author.typeNum = 250
 blog_rss_author.10 < tt_content.list.20.blog_authorposts
+blog_rss_author.10.format = rss
