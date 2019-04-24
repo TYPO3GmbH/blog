@@ -114,8 +114,8 @@ class PostController extends ActionController
     protected function initializeView(ViewInterface $view)
     {
         parent::initializeView($view);
-        if ($this->request->hasArgument('format') && $this->request->getArgument('format') === 'rss') {
-            $action = '.' . $this->request->getArgument('action');
+        if ($this->request->getFormat() === 'rss') {
+            $action = '.' . $this->request->getControllerActionName();
             $arguments = [];
             switch ($action) {
                 case '.listPostsByCategory':
