@@ -35,6 +35,18 @@ call_user_func(function () {
         'apps-pagetree-blog-comment-todo' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment-todo.svg',
         'apps-pagetree-blog-post' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-post.svg',
         'apps-pagetree-blog-tag' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-tag.svg',
+        'plugin-blog-archive' => 'EXT:blog/Resources/Public/Icons/plugin-blog-archive.svg',
+        'plugin-blog-authorposts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-authorposts.svg',
+        'plugin-blog-authors' => 'EXT:blog/Resources/Public/Icons/plugin-blog-authors.svg',
+        'plugin-blog-category' => 'EXT:blog/Resources/Public/Icons/plugin-blog-category.svg',
+        'plugin-blog-commentform' => 'EXT:blog/Resources/Public/Icons/plugin-blog-commentform.svg',
+        'plugin-blog-comments' => 'EXT:blog/Resources/Public/Icons/plugin-blog-comments.svg',
+        'plugin-blog-metadata' => 'EXT:blog/Resources/Public/Icons/plugin-blog-metadata.svg',
+        'plugin-blog-posts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-posts.svg',
+        'plugin-blog-relatedposts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-relatedposts.svg',
+        'plugin-blog-sidebar' => 'EXT:blog/Resources/Public/Icons/plugin-blog-sidebar.svg',
+        'plugin-blog-tag' => 'EXT:blog/Resources/Public/Icons/plugin-blog-tag.svg',
+
     ];
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
     foreach ($icons as $identifier => $path) {
@@ -55,57 +67,68 @@ call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
         'Posts',
-        'Blog: List of posts'
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_posts.title',
+        'plugin-blog-posts'
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
         'Category',
-        'Blog: List by category'
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_category.title',
+        'plugin-blog-category'
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
         'AuthorPosts',
-        'Blog: List by author'
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authorposts.title',
+        'plugin-blog-authorposts'
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
         'Tag',
-        'Blog: List by tags'
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_tag.title',
+        'plugin-blog-tag'
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
         'Archive',
-        'Blog: Archive'
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_archive.title',
+        'plugin-blog-archive'
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
         'Sidebar',
-        'Blog: Sidebar'
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_sidebar.title',
+        'plugin-blog-sidebar'
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
         'Metadata',
-        'Blog: Metadata'
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_metadata.title',
+        'plugin-blog-metadata'
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
         'CommentForm',
-        'Blog: Comment form'
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_commentform.title',
+        'plugin-blog-commentform'
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
         'Comments',
-        'Blog: Comments'
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_comments.title',
+        'plugin-blog-comments'
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
         'Authors',
-        'Blog: Authors'
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authors.title',
+        'plugin-blog-authors'
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
         'RelatedPosts',
-        'Blog: Related posts'
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_relatedposts.title',
+        'plugin-blog-relatedposts'
     );
 
     if (TYPO3_MODE === 'BE') {
