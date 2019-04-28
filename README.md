@@ -6,21 +6,13 @@ This blog extension uses TYPO3s core concepts and elements to provide a full-blo
 
 ## Requirements
 
-### master
-- TYPO3 CMS dev-master
-- PHP 7.2
-
-### v9.0
-- TYPO3 CMS 9.5.1 or higher
-- PHP 7.2
-
-### v8.7
-- TYPO3 CMS 8.7+
-- PHP 7.0
-
-### v7.6
-- TYPO3 CMS 7.6+
-- PHP 5.5
+| Version  | TYPO3       | PHP      |
+|----------|-------------|----------|
+| master   | 10.0.*@dev  | ^7.2     |
+| v9.1.x   | ^9.5.1      | ^7.2     |
+| v9.0.x   | ^9.5.1      | ^7.2     |
+| v8.7.x   | ^8.7.0      | >=7.0.0  |
+| v7.6.x   | ^7.6.0      | >=5.5.0  |
 
 ## License
 GPL-2.0-or-later
