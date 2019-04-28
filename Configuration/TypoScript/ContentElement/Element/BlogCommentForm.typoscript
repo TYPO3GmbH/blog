@@ -1,0 +1,29 @@
+###########################
+#### BLOG COMMENT FORM ####
+###########################
+tt_content.list.stdWrap.override.cObject.10.blog_commentform = COA
+tt_content.list.stdWrap.override.cObject.10.blog_commentform {
+    10 = TEXT
+    10 {
+        value = &#32;
+        if.isFalse = {$plugin.tx_blog.settings.comments.active}
+    }
+    20 = TEXT
+    20 {
+        value = &#32;
+        if.isFalse.data = page:comments_active
+    }
+}
+tt_content.list.20.blog_commentform.stdWrap.override.cObject = COA
+tt_content.list.20.blog_commentform.stdWrap.override.cObject {
+    10 = TEXT
+    10 {
+        value = &#32;
+        if.isFalse = {$plugin.tx_blog.settings.comments.active}
+    }
+    20 = TEXT
+    20 {
+        value = &#32;
+        if.isFalse.data = page:comments_active
+    }
+}

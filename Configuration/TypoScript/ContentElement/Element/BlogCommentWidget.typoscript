@@ -1,0 +1,19 @@
+#############################
+#### BLOG COMMENT WIDGET ####
+#############################
+tt_content.list.stdWrap.override.cObject.10.blog_commentswidget = COA
+tt_content.list.stdWrap.override.cObject.10.blog_commentswidget {
+    10 = TEXT
+    10 {
+        value = &#32;
+        if.isFalse = {$plugin.tx_blog.settings.comments.active}
+    }
+}
+tt_content.list.20.blog_commentswidget.stdWrap.override.cObject = COA
+tt_content.list.20.blog_commentswidget.stdWrap.override.cObject {
+    10 = TEXT
+    10 {
+        value = &#32;
+        if.isFalse = {$plugin.tx_blog.settings.comments.active}
+    }
+}

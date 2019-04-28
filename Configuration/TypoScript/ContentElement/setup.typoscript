@@ -1,0 +1,14 @@
+###################################
+#### CONTENT ELEMENT RENDERING ####
+###################################
+tt_content.list.stdWrap.override.cObject = COA
+tt_content.list.stdWrap.override.cObject {
+    10 = CASE
+    10 {
+        key.field = list_type
+    }
+}
+
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/ContentElement/Element/BlogCommentForm.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/ContentElement/Element/BlogComments.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/ContentElement/Element/BlogCommentWidget.typoscript">
