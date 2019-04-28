@@ -133,7 +133,7 @@ class PostController extends ActionController
      */
     public function listRecentPostsAction()
     {
-        $maximumItems = (int) ($this->settings['lists']['posts']['maximumDisplayedItems'] ?? 0);
+        $maximumItems = (int) (isset($this->settings['lists']['posts']['maximumDisplayedItems']) ? $this->settings['lists']['posts']['maximumDisplayedItems'] : 0);
         $posts = (0 === $maximumItems)
             ? $this->postRepository->findAll()
             : $this->postRepository->findAllWithLimit($maximumItems);
