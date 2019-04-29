@@ -54,7 +54,7 @@ class DataHandlerHook
                 ->execute()
                 ->fetch();
             if (!empty($record)) {
-                $timestamp = (int) ($record['publish_date'] !== 0 ? $record['publish_date'] : time());
+                $timestamp = (int) (!empty($record['publish_date']) ? $record['publish_date'] : time());
                 $queryBuilder
                     ->update($table)
                     ->set('publish_date', $timestamp)
