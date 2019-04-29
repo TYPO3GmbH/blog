@@ -195,9 +195,6 @@
 			<trans-unit id="tx_blog_domain_model_author.twitter" xml:space="preserve">
 				<source>Twitter username</source>
 			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.googleplus" xml:space="preserve">
-				<source>Google+ profile URL</source>
-			</trans-unit>
 			<trans-unit id="tx_blog_domain_model_author.linkedin" xml:space="preserve">
 				<source>LinkIn profile URL</source>
 			</trans-unit>

@@ -73,11 +73,6 @@ class Author extends AbstractEntity
     /**
      * @var string
      */
-    protected $googleplus = '';
-
-    /**
-     * @var string
-     */
     protected $linkedin = '';
 
     /**
@@ -284,24 +279,6 @@ class Author extends AbstractEntity
     public function setTwitter(string $twitter): self
     {
         $this->twitter = $twitter;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getGoogleplus(): ?string
-    {
-        return $this->googleplus;
-    }
-
-    /**
-     * @param string $googleplus
-     * @return Author
-     */
-    public function setGoogleplus(string $googleplus): self
-    {
-        $this->googleplus = $googleplus;
         return $this;
     }
 

@@ -127,7 +127,6 @@ CREATE TABLE tx_blog_domain_model_author (
   avatar_provider varchar(255) DEFAULT '' NOT NULL,
 
   twitter varchar(255) DEFAULT '' NOT NULL,
-  googleplus varchar(255) DEFAULT '' NOT NULL,
   linkedin varchar(255) DEFAULT '' NOT NULL,
   xing varchar(255) DEFAULT '' NOT NULL,
   profile varchar(255) DEFAULT '' NOT NULL,
