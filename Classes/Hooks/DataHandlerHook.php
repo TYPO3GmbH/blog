@@ -55,7 +55,7 @@ class DataHandlerHook
                 ->execute()
                 ->fetch();
             if (!empty($record)) {
-                $timestamp = $record['crdate'] ?? time();
+                $timestamp = (int) (!empty($record['crdate']) ? $record['crdate'] : time());
                 $queryBuilder
                     ->update($table)
                     ->set('crdate_month', date('n', (int)$timestamp))
