@@ -11,6 +11,9 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
+// Include TsConfig
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TsConfig/Page/All.tsconfig">');
+
 call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
