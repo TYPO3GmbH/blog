@@ -165,7 +165,7 @@ call_user_func(function () {
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'multiple' => 1,
+                'multiple' => 0,
                 'foreign_table' => 'tx_blog_domain_model_author',
                 'MM' => 'tx_blog_post_author_mm',
                 'minitems' => 0,
