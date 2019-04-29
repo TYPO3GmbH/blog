@@ -36,9 +36,6 @@
 			<trans-unit id="headline.tags" xml:space="preserve">
 				<source>Tags</source>
 			</trans-unit>
-			<trans-unit id="headline.sidebar" xml:space="preserve">
-				<source>Sidebar</source>
-			</trans-unit>
 			<trans-unit id="headline.rssfeed" xml:space="preserve">
 				<source>RSS-Feeds</source>
 			</trans-unit>
