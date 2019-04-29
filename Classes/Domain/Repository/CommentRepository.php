@@ -150,14 +150,16 @@ class CommentRepository extends Repository
         $query = $this->createQuery();
 
         $constraints = [];
-
         $constraints = $this->fillConstraintsBySettings($query, $constraints);
 
         if ($limit !== null) {
             $query->setLimit($limit);
         }
         if ($blogSetup !== null) {
-            $constraints[] = $query->in('pid', $this->getPostPidsByRootPid($blogSetup));
+            $storagePids = $this->getPostPidsByRootPid($blogSetup);
+            if (!empty($storagePids)) {
+                $constraints[] = $query->in('pid', $storagePids);
+            }
         }
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
