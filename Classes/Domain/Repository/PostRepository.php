@@ -226,10 +226,6 @@ class PostRepository extends Repository
             : (int) GeneralUtility::_GP('id');
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
-        $storagePidConstraint = $this->getStoragePidConstraint();
-        if ($storagePidConstraint instanceof ComparisonInterface) {
-            $constraints[] = $storagePidConstraint;
-        }
         $constraints[] = $query->equals('uid', $pageId);
 
         /** @var Post $post */
