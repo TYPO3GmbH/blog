@@ -253,8 +253,9 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'multiple' => 1,
+                'multiple' => 0,
                 'foreign_table' => 'pages',
+                'foreign_table_where' => 'AND {#pages}.{#doktype}=' . \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST . ' AND {#pages}.{#sys_language_uid} IN (-1,0)',
                 'MM' => 'tx_blog_post_author_mm',
                 'MM_opposite_field' => 'posts',
                 'minitems' => 0,
