@@ -52,6 +52,12 @@ call_user_func(function () {
 
     $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
     $temporaryColumns = [
+        'crdate' => [
+            'label' => 'crdate',
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
         'comments_active' => [
             'exclude' => 1,
             'label' => $ll . 'pages.comments_active',
