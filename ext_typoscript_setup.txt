@@ -6,40 +6,14 @@ plugin.tx_blog {
 
 config.tx_extbase.persistence {
     classes {
-        T3G\AgencyPack\Blog\Domain\Model\Content {
-            mapping {
-                tableName = tt_content
-            }
-        }
-        T3G\AgencyPack\Blog\Domain\Model\Post {
-            mapping {
-                tableName = pages
-                columns.crdate.mapOnProperty = crdate
-            }
-        }
-        T3G\AgencyPack\Blog\Domain\Model\Category {
-            mapping {
-                tableName = sys_category
-            }
-        }
         T3G\AgencyPack\Blog\Domain\Model\Comment {
             newRecordStoragePid = {$plugin.tx_blog.settings.storagePid}
-            mapping {
-                tableName = tx_blog_domain_model_comment
-                columns.parentid.mapOnProperty = post
-            }
         }
         T3G\AgencyPack\Blog\Domain\Model\Tag {
             newRecordStoragePid = {$plugin.tx_blog.settings.storagePid}
-            mapping {
-                tableName = tx_blog_domain_model_tag
-            }
         }
         T3G\AgencyPack\Blog\Domain\Model\Author {
             newRecordStoragePid = {$plugin.tx_blog.settings.storagePid}
-            mapping {
-                tableName = tx_blog_domain_model_author
-            }
         }
     }
 }
