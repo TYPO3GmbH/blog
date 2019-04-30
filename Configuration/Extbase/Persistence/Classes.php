@@ -21,8 +21,8 @@ return [
     \T3G\AgencyPack\Blog\Domain\Model\Comment::class => [
         'tableName' => 'tx_blog_domain_model_comment',
         'properties' => [
-            'parentid' => [
-                'fieldName' => 'post'
+            'post' => [
+                'fieldName' => 'parentid'
             ],
         ],
     ],
