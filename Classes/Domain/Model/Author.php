@@ -46,7 +46,7 @@ class Author extends AbstractEntity
     protected $title = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      */
     protected $image;
 
@@ -202,7 +202,8 @@ class Author extends AbstractEntity
      */
     public function getImage(): ?FileReference
     {
-        return $this->image;
+        $this->image->rewind();
+        return $this->image->current();
     }
 
     /**
@@ -211,7 +212,8 @@ class Author extends AbstractEntity
      */
     public function setImage(FileReference $image): self
     {
-        $this->image = $image;
+        $this->image->removeAll();
+        $this->image->attach($image);
         return $this;
     }
 
