@@ -36,7 +36,7 @@ script:
         if [[ "$PHP_CS_FIXER" == "yes" ]]; then
             echo;
             echo "PHP CS Fixer";
-            ./.build/bin/php-cs-fixer fix --config Build/.php_cs.dist --format=junit > logs/php-cs-fixer.xml
+            ./.build/bin/php-cs-fixer fix --format=junit > logs/php-cs-fixer.xml
         fi
 
     - >
