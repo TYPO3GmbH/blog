@@ -183,12 +183,6 @@ call_user_func(function () {
         ],
     ];
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-        'blog',
-        'Configuration/PageTS/SocialImageWizard.tsconfig',
-        'Blog: SocialImageWizard'
-    );
-
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
         'pages',
         $temporaryColumns
