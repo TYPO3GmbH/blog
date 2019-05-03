@@ -41,7 +41,6 @@ return [
             email,
             location,
             twitter,
-            googleplus,
             linkedin,
             xing,
             profile,
@@ -204,15 +203,6 @@ return [
                 'eval' => '',
             ],
         ],
-        'googleplus' => [
-            'exclude' => 0,
-            'label' => $ll . 'tx_blog_domain_model_author.googleplus',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => '',
-            ],
-        ],
         'linkedin' => [
             'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.linkedin',
@@ -288,7 +278,6 @@ return [
                     --palette--;' . $ll . 'tx_blog_domain_model_author.palette_contact;palette_contact,
                 --div--;' . $ll . 'tx_blog_domain_model_author.tab_social_media,
                     twitter,
-                    googleplus,
                     linkedin,
                     xing,
                     profile,
