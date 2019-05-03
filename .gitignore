@@ -12,6 +12,7 @@ composer.lock
 
 # Build stuff
 .build/
+node_modules/
 var/
 config/
 
