@@ -1,9 +1,9 @@
 <f:layout name="BackendWeb" />
-<f:section name="intro">
+<f:section name="Intro">
     <h1><f:translate key="backend.headline.comments" /></h1>
     <p class="lead"><f:translate key="backend.lead.comments" /></p>
 </f:section>
-<f:section name="content">
+<f:section name="Content">
     <f:render partial="Backend/BlogFilter" arguments="{blogSetups: blogSetups, activeBlogSetup: activeBlogSetup, action: 'comments'}" />
     <f:render partial="Backend/CommentsFilter" arguments="{_all}" />
     <f:if condition="{f:count() -> comments} > 0">
@@ -25,7 +25,7 @@
                         <tbody>
                             <f:for each="{comments}" as="comment">
                                 <tr>
-                                    <td class="actions"><f:render section="actions" arguments="{_all}" /></td>
+                                    <td class="actions"><f:render section="Actions" arguments="{_all}" /></td>
                                     <td data-search="{comment.name}" data-filter="{comment.name}"><strong>{comment.name}</strong></td>
                                     <td>{comment.comment}</td>
                                     <td data-search="{comment.post.title}" data-filter="{comment.post.title}">
@@ -58,7 +58,7 @@
         </f:else>
     </f:if>
 </f:section>
-<f:section name="actions">
+<f:section name="Actions">
     <div class="btn-group" role="group">
         <label class="btn btn-default btn-checkbox t3js-check-multiple-selection">
             <f:form.checkbox name="comments" multiple="true" value="{comment}" /><span class="t3-icon fa"></span>

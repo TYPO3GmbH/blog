@@ -6,6 +6,6 @@
         <language>{feed.language}</language>
         <link>{feed.link}</link>
         <lastBuildDate>{feed.date}</lastBuildDate>
-        <f:render section="content" />
+        <f:render section="Content" />
     </channel>
 </rss>
