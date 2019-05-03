@@ -69,25 +69,24 @@
         "php": "^7.2",
         "ext-json": "*",
         "ext-pdo": "*",
-        "psr/http-message": "^1.0.0",
-        "symfony/console": "^4.1",
-        "typo3/cms-backend": "10.0.*@dev",
-        "typo3/cms-core": "10.0.*@dev",
-        "typo3/cms-extbase": "10.0.*@dev",
-        "typo3/cms-extensionmanager": "10.0.*@dev",
-        "typo3/cms-fluid": "10.0.*@dev",
-        "typo3/cms-frontend": "10.0.*@dev",
-        "typo3/cms-install": "10.0.*@dev",
-        "typo3fluid/fluid": "^2.6.0"
+        "psr/http-message": "^1.0",
+        "typo3/cms-backend": "^9.5.5 || 10.0.*@dev",
+        "typo3/cms-core": "^9.5.5 || 10.0.*@dev",
+        "typo3/cms-extbase": "^9.5.5 || 10.0.*@dev",
+        "typo3/cms-extensionmanager": "^9.5.5 || 10.0.*@dev",
+        "typo3/cms-fluid": "^9.5.5 || 10.0.*@dev",
+        "typo3/cms-frontend": "^9.5.5 || 10.0.*@dev",
+        "typo3/cms-install": "^9.5.5 || 10.0.*@dev",
+        "typo3fluid/fluid": "^2.6"
     },
     "require-dev": {
-        "typo3/cms-filelist": "10.0.*@dev",
-        "typo3/cms-lowlevel": "10.0.*@dev",
-        "typo3/cms-tstemplate": "10.0.*@dev",
-        "friendsofphp/php-cs-fixer": "^2.14.0",
+        "typo3/cms-filelist": "^9.5.5 || 10.0.*@dev",
+        "typo3/cms-lowlevel": "^9.5.5 || 10.0.*@dev",
+        "typo3/cms-tstemplate": "^9.5.5 || 10.0.*@dev",
+        "friendsofphp/php-cs-fixer": "^2.14",
         "roave/security-advisories": "dev-master",
-        "t3g/blog-template-test": "^1.0.0",
-        "typo3/testing-framework": "^5.0.0",
-        "bk2k/extension-helper": "^1.0.2"
+        "t3g/blog-template-test": "^1.0",
+        "typo3/testing-framework": "^4.9 || ^5.0",
+        "bk2k/extension-helper": "^1.0"
     }
 }
