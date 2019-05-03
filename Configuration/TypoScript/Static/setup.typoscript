@@ -134,6 +134,16 @@ plugin.tx_blog {
     pageInfo.sharingEnabled {
         data = page:sharing_enabled
     }
+    _CSS_DEFAULT_STYLE (
+        .alert__title {
+            font-weight: bold;
+        }
+        .alert__list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    )
 }
 
 lib.blog.pageInfo < plugin.tx_blog.pageInfo
