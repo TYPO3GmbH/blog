@@ -1,12 +1,9 @@
-{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
-
 <f:layout name="Widget" />
-
 <f:section name="content">
     <h3 class="widget-title"><f:translate key="headline.tags"/></h3>
     <div class="tags">
     <f:for each="{tags}" as="tag">
-        <blog:link.tag tag="{tag.tagObject}" style="font-size: {tag.size}%" class="label label-default label-tag" />
+        <blogvh:link.tag tag="{tag.tagObject}" style="font-size: {tag.size}%" class="label label-default label-tag" />
     </f:for>
     </div>
 </f:section>

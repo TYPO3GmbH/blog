@@ -74,28 +74,19 @@
                                 </label>
                                 <f:form.textarea id="comment" property="comment" class="form-control"/>
                             </div>
-                            <p><span class="tx-blog-comment-required"><f:translate key="label.required.field"/> <f:translate
-                                key="label.required.field.explanation"/></span></p>
-
+                            <p><span class="tx-blog-comment-required"><f:translate key="label.required.field"/> <f:translate key="label.required.field.explanation"/></span></p>
                             <f:if condition="{settings.comments.google_recaptcha}">
                                 <script src="https://www.google.com/recaptcha/api.js"></script>
-                                <div class="g-recaptcha"
-                                     data-sitekey="{settings.comments.google_recaptcha.website_key}"></div>
+                                <div class="g-recaptcha" data-sitekey="{settings.comments.google_recaptcha.website_key}"></div>
                             </f:if>
-
-                            <f:form.submit name="submit" class="btn btn-primary"
-                                           value="{f:translate(key: 'form.comment.submit')}"/>
+                            <f:form.submit name="submit" class="btn btn-primary" value="{f:translate(key: 'form.comment.submit')}"/>
                         </f:form>
                     </f:else>
                 </f:if>
             </f:then>
             <f:else>
-                <h3 class="comment-title">
-                    <f:translate key="headline.commentform"/>
-                </h3>
-                <p>
-                    <f:translate key="message.comments_closed"/>
-                </p>
+                <h3 class="comment-title"><f:translate key="headline.commentform"/></h3>
+                <p><f:translate key="message.comments_closed"/></p>
             </f:else>
         </f:if>
     </f:if>

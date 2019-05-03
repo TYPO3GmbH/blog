@@ -1,35 +1,34 @@
-{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
 <section class="author-box">
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-0">
-					<img class="img-responsive img-circle center-block" src="{author.avatar}">
-				</div>
-				<div class="col-xs-12 col-sm-10">
-					<hr class="visible-xs-block">
-					<div class="author-box-intro small text-muted"><f:translate key="author.aboutTheAuthor"/></div>
-					<div class="author-inline-block">
-						<h4 class="author-box-title">
-							<span class="author-name text-primary">
-								<f:if condition="{author.profile}">
-									<f:then><a rel="author" href="{author.profile}">{author.name}</a></f:then>
-									<f:else>{author.name}</f:else>
-								</f:if>
-							</span>
-							<small class="author-social-links small">
-								<f:if condition="{author.website}"><a href="{author.website}" class="author-social-link website small" target="_blank"><i class="fa fa-2x fa-globe"></i></a></f:if>
-								<f:if condition="{author.twitter}"><a href="https://twitter.com/{author.twitter}" class="author-social-link twitter small" target="_blank"><i class="fa fa-2x fa-twitter"></i></a></f:if>
-								<f:if condition="{author.linkedin}"><a href="{author.linkedin}" class="author-social-link linkedin small" target="_blank"><i class="fa fa-2x fa-linkedin"></i></a></f:if>
-								<f:if condition="{author.xing}"><a href="{author.xing}" class="author-social-link xing small" target="_blank"><i class="fa fa-2x fa-xing"></i></a></f:if>
-							</small>
-						</h4>
-						<h5><f:if condition="{author.title}"><span class="author-title text-secondary">{author.title}, {author.location}</span></f:if></h5>
-					</div>
-					<div class="author-box-content">{author.bio}</div>
-					<p><blog:link.author author="{author}"><f:translate key="author.more.posts" /></blog:link.author></p>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-0">
+                    <img class="img-responsive img-circle center-block" src="{author.avatar}">
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                    <hr class="visible-xs-block">
+                    <div class="author-box-intro small text-muted"><f:translate key="author.aboutTheAuthor"/></div>
+                    <div class="author-inline-block">
+                        <h4 class="author-box-title">
+                            <span class="author-name text-primary">
+                                <f:if condition="{author.profile}">
+                                    <f:then><a rel="author" href="{author.profile}">{author.name}</a></f:then>
+                                    <f:else>{author.name}</f:else>
+                                </f:if>
+                            </span>
+                            <small class="author-social-links small">
+                                <f:if condition="{author.website}"><a href="{author.website}" class="author-social-link website small" target="_blank"><i class="fa fa-2x fa-globe"></i></a></f:if>
+                                <f:if condition="{author.twitter}"><a href="https://twitter.com/{author.twitter}" class="author-social-link twitter small" target="_blank"><i class="fa fa-2x fa-twitter"></i></a></f:if>
+                                <f:if condition="{author.linkedin}"><a href="{author.linkedin}" class="author-social-link linkedin small" target="_blank"><i class="fa fa-2x fa-linkedin"></i></a></f:if>
+                                <f:if condition="{author.xing}"><a href="{author.xing}" class="author-social-link xing small" target="_blank"><i class="fa fa-2x fa-xing"></i></a></f:if>
+                            </small>
+                        </h4>
+                        <h5><f:if condition="{author.title}"><span class="author-title text-secondary">{author.title}, {author.location}</span></f:if></h5>
+                    </div>
+                    <div class="author-box-content">{author.bio}</div>
+                    <p><blogvh:link.author author="{author}"><f:translate key="author.more.posts" /></blogvh:link.author></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

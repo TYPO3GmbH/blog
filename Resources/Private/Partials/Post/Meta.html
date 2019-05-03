@@ -1,24 +1,22 @@
-{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
-
 <div class="entry-meta">
     <span class="entry-date">
-        <blog:link.post post="{post}" rel="bookmark">
+        <blogvh:link.post post="{post}" rel="bookmark">
             <time class="entry-date published" datetime="{f:format.date(format: '%Y-%m-%dT%H:%M:%S-%z', date: post.publishDate)}" itemprop="datepublished">{f:format.date(format: '{settings.lists.posts.dateFormat}', date: post.publishDate)}</time>
-        </blog:link.post>
+        </blogvh:link.post>
     </span>
     <f:if condition="{post.categories}">
         <span class="sep">·</span>
         <f:for each="{post.categories}" as="postCategory">
-            <blog:link.category category="{postCategory}" class="label label-default label-category" />
+            <blogvh:link.category category="{postCategory}" class="label label-default label-category" />
         </f:for>
     </f:if>
     <f:if condition="{post.tags}">
         <span class="sep">·</span>
         <span itemprop="keywords">
             <f:for each="{post.tags}" as="postTag">
-                <blog:link.tag tag="{postTag}" class="label label-default label-tag">
+                <blogvh:link.tag tag="{postTag}" class="label label-default label-tag">
                     <span><i class="fa fa-tag"></i> {postTag.title}</span>
-                </blog:link.tag>
+                </blogvh:link.tag>
             </f:for>
         </span>
     </f:if>
@@ -28,19 +26,19 @@
                 <span class="sep">·</span>
                 <meta itemprop="commentCount" content="{commentCount}"/>
                 <span class="comments-link">
-                    <blog:link.post post="{post}" section="comments">
+                    <blogvh:link.post post="{post}" section="comments">
                         <f:if condition="{commentCount} == 1">
                             <f:then><f:translate key="message.comment" arguments="{0: commentCount}"/></f:then>
                             <f:else><f:translate key="message.comments" arguments="{0: commentCount}"/></f:else>
                         </f:if>
-                    </blog:link.post>
+                    </blogvh:link.post>
                 </span>
             </f:alias>
         </f:then>
         <f:else>
-            <blog:link.post post="{post}" section="disqus_thread" data="{disqus-identifier: '{settings.comments.disqus.shortname}:post:{post.uid}'}">
+            <blogvh:link.post post="{post}" section="disqus_thread" data="{disqus-identifier: '{settings.comments.disqus.shortname}:post:{post.uid}'}">
                 <f:translate key="message.comments" arguments="{0: 0}"/>
-            </blog:link.post>
+            </blogvh:link.post>
         </f:else>
     </f:if>
 </div>
