@@ -46,9 +46,12 @@ class GravatarProvider implements AvatarProviderInterface
         $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
         $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
-        $size = $settings['authors']['avatar']['provider']['size'] ?: 32;
-        $default = $settings['authors']['avatar']['provider']['default'] ?: 'mm';
-        $rating = $settings['authors']['avatar']['provider']['rating'] ?: 'g';
+        $defaultSize = 32;
+        $defaultDefault = 'mm';
+        $defaultRating = 'g';
+        $size = ($settings['authors']['avatar']['provider']['size'] ?? $defaultSize) ?: $defaultSize;
+        $default = ($settings['authors']['avatar']['provider']['default'] ?? $defaultDefault) ?: $defaultDefault;
+        $rating = ($settings['authors']['avatar']['provider']['rating'] ?? $defaultRating) ?: $defaultRating;
 
         $gravatarUrl = 'https://www.gravatar.com/avatar/' . md5($author->getEmail());
         $gravatarUrl .= '?s=' . $size;
