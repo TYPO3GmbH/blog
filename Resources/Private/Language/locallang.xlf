@@ -282,6 +282,9 @@
 			<trans-unit id="constantEditor.comments.respectPostLanguageId" xml:space="preserve">
 				<source>Respect post_language_id:0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)</source>
 			</trans-unit>
+			<trans-unit id="constantEditor.comments.date.format" xml:space="preserve">
+				<source>Date format:The format for the comments (default: %B %e, %Y).</source>
+			</trans-unit>
 			<trans-unit id="constantEditor.comments.google_recaptcha" xml:space="preserve">
 				<source>Google Recaptcha:Enable google recaptcha for comments?</source>
 			</trans-unit>

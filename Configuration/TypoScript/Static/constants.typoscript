@@ -115,6 +115,11 @@ plugin {
                 # cat=blog/blog_140_comments; type=options[0,1,-1]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.respectPostLanguageId
                 respectPostLanguageId = 1
 
+                date {
+                    # cat=blog/blog_140_comments; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.date.format
+                    format = %B %e, %Y
+                }
+
                 # cat=blog/blog_140_comments; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.disqus
                 disqus = 0
                 disqus {

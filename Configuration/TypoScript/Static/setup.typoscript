@@ -84,6 +84,9 @@ plugin.tx_blog {
             moderation = {$plugin.tx_blog.settings.comments.moderation}
             # Respect post_language_id, 0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)
             respectPostLanguageId = {$plugin.tx_blog.settings.comments.respectPostLanguageId}
+            date {
+                format = {$plugin.tx_blog.settings.comments.date.format}
+            }
             # Google Re-Captcha
             google_recaptcha = {$plugin.tx_blog.settings.comments.google_recaptcha}
             google_recaptcha {
