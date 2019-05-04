@@ -1,24 +1,24 @@
 <f:spaceless>
-    <div class="postauthor postauthor--full">
+    <div class="postauthor postauthor--full" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <div class="postauthor__avatar">
             <f:variable name="avatarsize" value="{settings.authors.avatar.provider.size as integer}" />
             <f:if condition="{avatarsize}"><f:else><f:variable name="avatarsize" value="32" /></f:else></f:if>
-            <img class="postauthor__avatarimage" height="{avatarsize}" width="{avatarsize}" src="{author.avatar}">
+            <img class="postauthor__avatarimage" height="{avatarsize}" width="{avatarsize}" src="{author.avatar}" itemprop="image">
         </div>
         <div class="postauthor__body">
             <div class="postauthor__intro"><f:translate key="author.aboutTheAuthor"/></div>
             <div class="postauthor__name"><f:render section="ProfileLink" arguments="{_all}" contentAs="content">{author.name}</f:render></div>
             <f:if condition="{author.title} || {author.location}">
                 <div class="postauthor__subline">
-                    <f:if condition="{author.title}"><span class="postauthor__title">{author.title}</span></f:if>
+                    <f:if condition="{author.title}"><span class="postauthor__title" itemprop="jobTitle">{author.title}</span></f:if>
                     <f:if condition="{author.title} && {author.location}"><span class="postauthor__sublinedivider">,</span></f:if>
-                    <f:if condition="{author.location}"><span class="postauthor__location">{author.location}</span></f:if>
+                    <f:if condition="{author.location}"><span class="postauthor__location" itemprop="homeLocation">{author.location}</span></f:if>
                 </div>
             </f:if>
             <f:if condition="{author.website} || {author.twitter} || {author.linkedin} || {author.xing}">
                 <div class="postauthor__social">
                     <f:if condition="{author.website}">
-                        <a href="{author.website}" class="postauthor__sociallink postauthor__sociallink--website" target="_blank">
+                        <a href="{author.website}" class="postauthor__sociallink postauthor__sociallink--website" target="_blank" itemprop="url">
                             <span class="postauthor__sociallinkicon postauthor__sociallinkicon--website">
                                 <f:render partial="General/SocialIcons" section="Website" optional="true" />
                             </span>
@@ -26,7 +26,7 @@
                         </a>
                     </f:if>
                     <f:if condition="{author.twitter}">
-                        <a href="https://twitter.com/{author.twitter}" class="postauthor__sociallink postauthor__sociallink--twitter" target="_blank">
+                        <a href="https://twitter.com/{author.twitter}" class="postauthor__sociallink postauthor__sociallink--twitter" target="_blank" itemprop="url">
                             <span class="postauthor__sociallinkicon postauthor__sociallinkicon--twitter">
                                 <f:render partial="General/SocialIcons" section="Twitter" optional="true" />
                             </span>
@@ -34,7 +34,7 @@
                         </a>
                     </f:if>
                     <f:if condition="{author.linkedin}">
-                        <a href="{author.linkedin}" class="postauthor__sociallink postauthor__sociallink--linkedin" target="_blank">
+                        <a href="{author.linkedin}" class="postauthor__sociallink postauthor__sociallink--linkedin" target="_blank" itemprop="url">
                             <span class="postauthor__sociallinkicon postauthor__sociallinkicon--linkedin">
                                 <f:render partial="General/SocialIcons" section="LinkedIn" optional="true" />
                             </span>
@@ -42,7 +42,7 @@
                         </a>
                     </f:if>
                     <f:if condition="{author.xing}">
-                        <a href="{author.xing}" class="postauthor__sociallink postauthor__sociallink--xing" target="_blank">
+                        <a href="{author.xing}" class="postauthor__sociallink postauthor__sociallink--xing" target="_blank" itemprop="url">
                             <span class="postauthor__sociallinkicon postauthor__sociallinkicon--xing">
                                 <f:render partial="General/SocialIcons" section="Xing" optional="true" />
                             </span>
@@ -52,7 +52,7 @@
                 </div>
             </f:if>
             <f:if condition="{author.bio}">
-                <div class="postauthor__bio"><f:format.html>{author.bio}</f:format.html></div>
+                <div class="postauthor__bio" itemprop="description"><f:format.html>{author.bio}</f:format.html></div>
             </f:if>
             <f:if condition="{author.detailsPage} || {settings.authorUid}">
                 <div class="postauthor__actions">
@@ -63,8 +63,8 @@
     </div>
     <f:section name="ProfileLink">
         <f:if condition="{author.profile}">
-            <f:then><a rel="author" href="{author.profile}"><span>{content}</span></a></f:then>
-            <f:else><span>{content}</span></f:else>
+            <f:then><a rel="author" href="{author.profile}"><span itemprop="name">{content}</span></a></f:then>
+            <f:else><span itemprop="name">{content}</span></f:else>
         </f:if>
     </f:section>
 </f:spaceless>
