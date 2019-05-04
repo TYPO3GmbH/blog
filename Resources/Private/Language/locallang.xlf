@@ -96,6 +96,18 @@
 			<trans-unit id="author.aboutTheAuthor"  xml:space="preserve">
 				<source>About the Author</source>
 			</trans-unit>
+			<trans-unit id="author.social.website"  xml:space="preserve">
+				<source>Website</source>
+			</trans-unit>
+			<trans-unit id="author.social.twitter"  xml:space="preserve">
+				<source>Twitter</source>
+			</trans-unit>
+			<trans-unit id="author.social.linkedin"  xml:space="preserve">
+				<source>LinkedIn</source>
+			</trans-unit>
+			<trans-unit id="author.social.xing"  xml:space="preserve">
+				<source>Xing</source>
+			</trans-unit>
 			<trans-unit id="list.no_posts.title" xml:space="preserve">
 				<source>No blog posts</source>
 			</trans-unit>
