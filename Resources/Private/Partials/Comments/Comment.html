@@ -1,6 +1,6 @@
 {namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
 
-<div class="media comment comment-wrap">
+<div id="comment-{comment.uid}" class="media comment comment-wrap">
     <div class="media-left">
         <div class="comment-avatar">
             <blog:gravatar email="{comment.email}" />
