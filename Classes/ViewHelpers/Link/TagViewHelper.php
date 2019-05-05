@@ -86,7 +86,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
             $result = $this->renderChildren();
         }
 
-        return $result;
+        return (string)$result;
     }
 
     /**
