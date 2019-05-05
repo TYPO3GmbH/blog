@@ -1,6 +1,8 @@
 <f:layout name="Default" />
 <f:section name="Content">
-    <f:for each="{settings.sidebarWidgets}" as="widget">
-        <f:cObject typoscriptObjectPath="{widget}" />
-    </f:for>
+    <div class="blogwidgets">
+        <f:for each="{settings.sidebarWidgets}" as="widget">
+            <f:cObject typoscriptObjectPath="{widget}" />
+        </f:for>
+    </div>
 </f:section>

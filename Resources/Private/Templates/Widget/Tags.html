@@ -1,6 +1,6 @@
 <f:layout name="Widget" />
+<f:section name="Title"><f:translate key="headline.tags" /></f:section>
 <f:section name="Content">
-    <h3 class="widget-title"><f:translate key="headline.tags"/></h3>
     <div class="tags">
     <f:for each="{tags}" as="tag">
         <blogvh:link.tag tag="{tag.tagObject}" style="font-size: {tag.size}%" class="label label-default label-tag" />

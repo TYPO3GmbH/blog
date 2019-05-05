@@ -1,0 +1,14 @@
+/**
+ * Widget
+ */
+.blogwidget {
+    margin-bottom: 1.5rem;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+.blogwidget__content {
+    > *:last-child {
+        margin-bottom: 0;
+    }
+}
