@@ -1,494 +1,494 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-04T17:14:25Z" product-name="blog">
-		<header/>
-		<body>
-			<trans-unit id="headline.commentform" xml:space="preserve">
-				<source>Write comment</source>
-			</trans-unit>
-			<trans-unit id="headline.comments" xml:space="preserve">
-				<source>Comments</source>
-			</trans-unit>
-			<trans-unit id="headline.category" xml:space="preserve">
-				<source>Posts of category: %s</source>
-			</trans-unit>
-			<trans-unit id="headline.categories" xml:space="preserve">
-				<source>Categories</source>
-			</trans-unit>
-			<trans-unit id="headline.archive" xml:space="preserve">
-				<source>Archive</source>
-			</trans-unit>
-			<trans-unit id="headline.recentcomments" xml:space="preserve">
-				<source>Recent comments</source>
-			</trans-unit>
-			<trans-unit id="headline.recentposts" xml:space="preserve">
-				<source>Recent posts</source>
-			</trans-unit>
-			<trans-unit id="headline.author" xml:space="preserve">
-				<source>Posts by %s</source>
-			</trans-unit>
-			<trans-unit id="headline.authors" xml:space="preserve">
-				<source>Authors</source>
-			</trans-unit>
-			<trans-unit id="headline.tag" xml:space="preserve">
-				<source>Posts tagged with %s</source>
-			</trans-unit>
-			<trans-unit id="headline.tags" xml:space="preserve">
-				<source>Tags</source>
-			</trans-unit>
-			<trans-unit id="headline.rssfeed" xml:space="preserve">
-				<source>RSS-Feeds</source>
-			</trans-unit>
-			<trans-unit id="form.comment.hp" xml:space="preserve">
-				<source>Please let this field empty</source>
-			</trans-unit>
-			<trans-unit id="form.comment.name" xml:space="preserve">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="form.comment.email" xml:space="preserve">
-				<source>E-Mail</source>
-			</trans-unit>
-			<trans-unit id="form.comment.url" xml:space="preserve">
-				<source>URL</source>
-			</trans-unit>
-			<trans-unit id="form.comment.comment" xml:space="preserve">
-				<source>Comment</source>
-			</trans-unit>
-			<trans-unit id="form.comment.submit" xml:space="preserve">
-				<source>Submit</source>
-			</trans-unit>
-			<trans-unit id="message.no_comments" xml:space="preserve">
-				<source>No comments</source>
-			</trans-unit>
-			<trans-unit id="message.comment" xml:space="preserve">
-				<source>%s comment</source>
-			</trans-unit>
-			<trans-unit id="message.comments" xml:space="preserve">
-				<source>%s comments</source>
-			</trans-unit>
-			<trans-unit id="message.comments_closed" xml:space="preserve">
-				<source>Comments closed</source>
-			</trans-unit>
-			<trans-unit id="message.addComment.error.title" xml:space="preserve">
-				<source>Comments not active</source>
-			</trans-unit>
-			<trans-unit id="message.addComment.error.text" xml:space="preserve">
-				<source>The comment function is disabled.</source>
-			</trans-unit>
-			<trans-unit id="message.addComment.success.title" xml:space="preserve">
-				<source>Comment added</source>
-			</trans-unit>
-			<trans-unit id="message.addComment.success.text" xml:space="preserve">
-				<source>Your comment was added successfully.</source>
-			</trans-unit>
-			<trans-unit id="message.addComment.moderation.title" xml:space="preserve">
-				<source>Comment added</source>
-			</trans-unit>
-			<trans-unit id="message.addComment.moderation.text" xml:space="preserve">
-				<source>Your comment was added successfully and is now waiting for approval.</source>
-			</trans-unit>
-			<trans-unit id="meta.title.listPostsByDate" xml:space="preserve">
-				<source>All blog posts in ###MONTH_NAME### ###YEAR###</source>
-			</trans-unit>
-			<trans-unit id="meta.description.listPostsByDate" xml:space="preserve">
-				<source>All blog posts ordered by date</source>
-			</trans-unit>
-			<trans-unit id="author.aboutTheAuthor"  xml:space="preserve">
-				<source>About the Author</source>
-			</trans-unit>
-			<trans-unit id="author.social.website"  xml:space="preserve">
-				<source>Website</source>
-			</trans-unit>
-			<trans-unit id="author.social.twitter"  xml:space="preserve">
-				<source>Twitter</source>
-			</trans-unit>
-			<trans-unit id="author.social.linkedin"  xml:space="preserve">
-				<source>LinkedIn</source>
-			</trans-unit>
-			<trans-unit id="author.social.xing"  xml:space="preserve">
-				<source>Xing</source>
-			</trans-unit>
-			<trans-unit id="list.no_posts.title" xml:space="preserve">
-				<source>No blog posts</source>
-			</trans-unit>
-			<trans-unit id="list.no_posts.message" xml:space="preserve">
-				<source>This list contains no blog posts.</source>
-			</trans-unit>
-			<trans-unit id="backend.headline.setup_wizard" xml:space="preserve">
-				<source>SetupWizard</source>
-			</trans-unit>
-			<trans-unit id="backend.headline.posts" xml:space="preserve">
-				<source>Posts</source>
-			</trans-unit>
-			<trans-unit id="backend.headline.comments" xml:space="preserve">
-				<source>Comments</source>
-			</trans-unit>
-			<trans-unit id="backend.lead.blogs" xml:space="preserve">
-				<source>It looks like you have the following blog setups</source>
-			</trans-unit>
-			<trans-unit id="backend.message.noblogs" xml:space="preserve">
-				<source>It looks like no blog setup exists in this instance.</source>
-			</trans-unit>
-			<trans-unit id="backend.lead.posts" xml:space="preserve">
-				<source>The following table shows all the blog posts available in this installation. Use the filters and search to refine the results.</source>
-			</trans-unit>
-			<trans-unit id="backend.message.noposts" xml:space="preserve">
-				<source>Oops, apparently there are no blog posts in this installation.</source>
-			</trans-unit>
-			<trans-unit id="backend.message.nopost" xml:space="preserve">
-				<source>Post not available</source>
-			</trans-unit>
-			<trans-unit id="backend.lead.comments" xml:space="preserve">
-				<source>The following table shows blog comments available in this installation. Use the filters and search to refine the results.</source>
-			</trans-unit>
-			<trans-unit id="backend.message.nocomments" xml:space="preserve">
-				<source>Oops, apparently there are no blog comments in this view.</source>
-			</trans-unit>
-			<trans-unit id="backend.warning" xml:space="preserve">
-				<source>Warning</source>
-			</trans-unit>
-			<trans-unit id="backend.table.blog" xml:space="preserve">
-				<source>Blog</source>
-			</trans-unit>
-			<trans-unit id="backend.table.articles" xml:space="preserve">
-				<source>Articles</source>
-			</trans-unit>
-			<trans-unit id="backend.table.actions" xml:space="preserve">
-				<source>Actions</source>
-			</trans-unit>
-			<trans-unit id="backend.table.title" xml:space="preserve">
-				<source>Articles</source>
-			</trans-unit>
-			<trans-unit id="backend.table.author" xml:space="preserve">
-				<source>Author</source>
-			</trans-unit>
-			<trans-unit id="backend.table.categories" xml:space="preserve">
-				<source>Categories</source>
-			</trans-unit>
-			<trans-unit id="backend.table.tags" xml:space="preserve">
-				<source>Tags</source>
-			</trans-unit>
-			<trans-unit id="backend.table.comment" xml:space="preserve">
-				<source>Comment</source>
-			</trans-unit>
-			<trans-unit id="backend.table.post" xml:space="preserve">
-				<source>Reply to post</source>
-			</trans-unit>
-			<trans-unit id="backend.table.date" xml:space="preserve">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="backend.comments.filter.all" xml:space="preserve">
-				<source>All</source>
-			</trans-unit>
-			<trans-unit id="backend.comments.filter.pending" xml:space="preserve">
-				<source>Pending</source>
-			</trans-unit>
-			<trans-unit id="backend.comments.filter.approved" xml:space="preserve">
-				<source>Approved</source>
-			</trans-unit>
-			<trans-unit id="backend.comments.filter.declined" xml:space="preserve">
-				<source>Declined</source>
-			</trans-unit>
-			<trans-unit id="backend.comments.filter.deleted" xml:space="preserve">
-				<source>Deleted</source>
-			</trans-unit>
-			<trans-unit id="wizard.button.trigger" xml:space="preserve">
-				<source>Setup a new blog</source>
-			</trans-unit>
-			<trans-unit id="wizard.button.cancel" xml:space="preserve">
-				<source>Cancel</source>
-			</trans-unit>
-			<trans-unit id="wizard.button.setup" xml:space="preserve">
-				<source>Setup</source>
-			</trans-unit>
-			<trans-unit id="wizard.lead" xml:space="preserve">
-				<source>This Wizard will create a blog setup in your tree.</source>
-			</trans-unit>
-			<trans-unit id="wizard.description" xml:space="preserve">
-				<source>After click on the button below the tree will be created. If you see the success message, go to your page tree and maybe reload the tree to see the result.</source>
-			</trans-unit>
-			<trans-unit id="wizard.headline.settings" xml:space="preserve">
-				<source>Settings</source>
-			</trans-unit>
-			<trans-unit id="wizard.label.title" xml:space="preserve">
-				<source>Title of the blog</source>
-			</trans-unit>
-			<trans-unit id="wizard.placeholder.title" xml:space="preserve">
-				<source>The title of your blog</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog" xml:space="preserve">
-				<source>TYPO3 Blog</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog_100_uids" xml:space="preserve">
-				<source>Page ID settings</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog_110_templates" xml:space="preserve">
-				<source>Templates</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog_120_lists" xml:space="preserve">
-				<source>Listings</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog_130_widgets" xml:space="preserve">
-				<source>Widgets</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog_131_widgets_comments" xml:space="preserve">
-				<source>Widget: Comment</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog_132_widgets_recent_posts" xml:space="preserve">
-				<source>Widget: Recent posts</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog_133_widgets_tags" xml:space="preserve">
-				<source>Widget: Tags</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog_134_widgets_archive" xml:space="preserve">
-				<source>Widget: Archive</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog_140_comments" xml:space="preserve">
-				<source>Comments</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog_150_authors" xml:space="preserve">
-				<source>Authors</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blog_160_notifications" xml:space="preserve">
-				<source>Notifications</source>
-			</trans-unit>
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file t3:id="1557352034" source-language="en" datatype="plaintext" original="messages" date="2019-05-08T21:47:12Z" product-name="blog">
+        <header/>
+        <body>
+            <trans-unit id="headline.commentform" xml:space="preserve">
+                <source>Write comment</source>
+            </trans-unit>
+            <trans-unit id="headline.comments" xml:space="preserve">
+                <source>Comments</source>
+            </trans-unit>
+            <trans-unit id="headline.category" xml:space="preserve">
+                <source>Posts of category: %s</source>
+            </trans-unit>
+            <trans-unit id="headline.categories" xml:space="preserve">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="headline.archive" xml:space="preserve">
+                <source>Archive</source>
+            </trans-unit>
+            <trans-unit id="headline.recentcomments" xml:space="preserve">
+                <source>Recent comments</source>
+            </trans-unit>
+            <trans-unit id="headline.recentposts" xml:space="preserve">
+                <source>Recent posts</source>
+            </trans-unit>
+            <trans-unit id="headline.author" xml:space="preserve">
+                <source>Posts by %s</source>
+            </trans-unit>
+            <trans-unit id="headline.authors" xml:space="preserve">
+                <source>Authors</source>
+            </trans-unit>
+            <trans-unit id="headline.tag" xml:space="preserve">
+                <source>Posts tagged with %s</source>
+            </trans-unit>
+            <trans-unit id="headline.tags" xml:space="preserve">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="headline.rssfeed" xml:space="preserve">
+                <source>RSS-Feeds</source>
+            </trans-unit>
+            <trans-unit id="form.comment.hp" xml:space="preserve">
+                <source>Please let this field empty</source>
+            </trans-unit>
+            <trans-unit id="form.comment.name" xml:space="preserve">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="form.comment.email" xml:space="preserve">
+                <source>E-Mail</source>
+            </trans-unit>
+            <trans-unit id="form.comment.url" xml:space="preserve">
+                <source>URL</source>
+            </trans-unit>
+            <trans-unit id="form.comment.comment" xml:space="preserve">
+                <source>Comment</source>
+            </trans-unit>
+            <trans-unit id="form.comment.submit" xml:space="preserve">
+                <source>Submit</source>
+            </trans-unit>
+            <trans-unit id="message.no_comments" xml:space="preserve">
+                <source>No comments</source>
+            </trans-unit>
+            <trans-unit id="message.comment" xml:space="preserve">
+                <source>%s comment</source>
+            </trans-unit>
+            <trans-unit id="message.comments" xml:space="preserve">
+                <source>%s comments</source>
+            </trans-unit>
+            <trans-unit id="message.comments_closed" xml:space="preserve">
+                <source>Comments closed</source>
+            </trans-unit>
+            <trans-unit id="message.addComment.error.title" xml:space="preserve">
+                <source>Comments not active</source>
+            </trans-unit>
+            <trans-unit id="message.addComment.error.text" xml:space="preserve">
+                <source>The comment function is disabled.</source>
+            </trans-unit>
+            <trans-unit id="message.addComment.success.title" xml:space="preserve">
+                <source>Comment added</source>
+            </trans-unit>
+            <trans-unit id="message.addComment.success.text" xml:space="preserve">
+                <source>Your comment was added successfully.</source>
+            </trans-unit>
+            <trans-unit id="message.addComment.moderation.title" xml:space="preserve">
+                <source>Comment added</source>
+            </trans-unit>
+            <trans-unit id="message.addComment.moderation.text" xml:space="preserve">
+                <source>Your comment was added successfully and is now waiting for approval.</source>
+            </trans-unit>
+            <trans-unit id="meta.title.listPostsByDate" xml:space="preserve">
+                <source>All blog posts in ###MONTH_NAME### ###YEAR###</source>
+            </trans-unit>
+            <trans-unit id="meta.description.listPostsByDate" xml:space="preserve">
+                <source>All blog posts ordered by date</source>
+            </trans-unit>
+            <trans-unit id="author.aboutTheAuthor"  xml:space="preserve">
+                <source>About the Author</source>
+            </trans-unit>
+            <trans-unit id="author.social.website"  xml:space="preserve">
+                <source>Website</source>
+            </trans-unit>
+            <trans-unit id="author.social.twitter"  xml:space="preserve">
+                <source>Twitter</source>
+            </trans-unit>
+            <trans-unit id="author.social.linkedin"  xml:space="preserve">
+                <source>LinkedIn</source>
+            </trans-unit>
+            <trans-unit id="author.social.xing"  xml:space="preserve">
+                <source>Xing</source>
+            </trans-unit>
+            <trans-unit id="list.no_posts.title" xml:space="preserve">
+                <source>No blog posts</source>
+            </trans-unit>
+            <trans-unit id="list.no_posts.message" xml:space="preserve">
+                <source>This list contains no blog posts.</source>
+            </trans-unit>
+            <trans-unit id="backend.headline.setup_wizard" xml:space="preserve">
+                <source>SetupWizard</source>
+            </trans-unit>
+            <trans-unit id="backend.headline.posts" xml:space="preserve">
+                <source>Posts</source>
+            </trans-unit>
+            <trans-unit id="backend.headline.comments" xml:space="preserve">
+                <source>Comments</source>
+            </trans-unit>
+            <trans-unit id="backend.lead.blogs" xml:space="preserve">
+                <source>It looks like you have the following blog setups</source>
+            </trans-unit>
+            <trans-unit id="backend.message.noblogs" xml:space="preserve">
+                <source>It looks like no blog setup exists in this instance.</source>
+            </trans-unit>
+            <trans-unit id="backend.lead.posts" xml:space="preserve">
+                <source>The following table shows all the blog posts available in this installation. Use the filters and search to refine the results.</source>
+            </trans-unit>
+            <trans-unit id="backend.message.noposts" xml:space="preserve">
+                <source>Oops, apparently there are no blog posts in this installation.</source>
+            </trans-unit>
+            <trans-unit id="backend.message.nopost" xml:space="preserve">
+                <source>Post not available</source>
+            </trans-unit>
+            <trans-unit id="backend.lead.comments" xml:space="preserve">
+                <source>The following table shows blog comments available in this installation. Use the filters and search to refine the results.</source>
+            </trans-unit>
+            <trans-unit id="backend.message.nocomments" xml:space="preserve">
+                <source>Oops, apparently there are no blog comments in this view.</source>
+            </trans-unit>
+            <trans-unit id="backend.warning" xml:space="preserve">
+                <source>Warning</source>
+            </trans-unit>
+            <trans-unit id="backend.table.blog" xml:space="preserve">
+                <source>Blog</source>
+            </trans-unit>
+            <trans-unit id="backend.table.articles" xml:space="preserve">
+                <source>Articles</source>
+            </trans-unit>
+            <trans-unit id="backend.table.actions" xml:space="preserve">
+                <source>Actions</source>
+            </trans-unit>
+            <trans-unit id="backend.table.title" xml:space="preserve">
+                <source>Articles</source>
+            </trans-unit>
+            <trans-unit id="backend.table.author" xml:space="preserve">
+                <source>Author</source>
+            </trans-unit>
+            <trans-unit id="backend.table.categories" xml:space="preserve">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="backend.table.tags" xml:space="preserve">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="backend.table.comment" xml:space="preserve">
+                <source>Comment</source>
+            </trans-unit>
+            <trans-unit id="backend.table.post" xml:space="preserve">
+                <source>Reply to post</source>
+            </trans-unit>
+            <trans-unit id="backend.table.date" xml:space="preserve">
+                <source>Date</source>
+            </trans-unit>
+            <trans-unit id="backend.comments.filter.all" xml:space="preserve">
+                <source>All</source>
+            </trans-unit>
+            <trans-unit id="backend.comments.filter.pending" xml:space="preserve">
+                <source>Pending</source>
+            </trans-unit>
+            <trans-unit id="backend.comments.filter.approved" xml:space="preserve">
+                <source>Approved</source>
+            </trans-unit>
+            <trans-unit id="backend.comments.filter.declined" xml:space="preserve">
+                <source>Declined</source>
+            </trans-unit>
+            <trans-unit id="backend.comments.filter.deleted" xml:space="preserve">
+                <source>Deleted</source>
+            </trans-unit>
+            <trans-unit id="wizard.button.trigger" xml:space="preserve">
+                <source>Setup a new blog</source>
+            </trans-unit>
+            <trans-unit id="wizard.button.cancel" xml:space="preserve">
+                <source>Cancel</source>
+            </trans-unit>
+            <trans-unit id="wizard.button.setup" xml:space="preserve">
+                <source>Setup</source>
+            </trans-unit>
+            <trans-unit id="wizard.lead" xml:space="preserve">
+                <source>This Wizard will create a blog setup in your tree.</source>
+            </trans-unit>
+            <trans-unit id="wizard.description" xml:space="preserve">
+                <source>After click on the button below the tree will be created. If you see the success message, go to your page tree and maybe reload the tree to see the result.</source>
+            </trans-unit>
+            <trans-unit id="wizard.headline.settings" xml:space="preserve">
+                <source>Settings</source>
+            </trans-unit>
+            <trans-unit id="wizard.label.title" xml:space="preserve">
+                <source>Title of the blog</source>
+            </trans-unit>
+            <trans-unit id="wizard.placeholder.title" xml:space="preserve">
+                <source>The title of your blog</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog" xml:space="preserve">
+                <source>TYPO3 Blog</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_100_uids" xml:space="preserve">
+                <source>Page ID settings</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_110_templates" xml:space="preserve">
+                <source>Templates</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_120_lists" xml:space="preserve">
+                <source>Listings</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_130_widgets" xml:space="preserve">
+                <source>Widgets</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_131_widgets_comments" xml:space="preserve">
+                <source>Widget: Comment</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_132_widgets_recent_posts" xml:space="preserve">
+                <source>Widget: Recent posts</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_133_widgets_tags" xml:space="preserve">
+                <source>Widget: Tags</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_134_widgets_archive" xml:space="preserve">
+                <source>Widget: Archive</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_140_comments" xml:space="preserve">
+                <source>Comments</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_150_authors" xml:space="preserve">
+                <source>Authors</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_160_notifications" xml:space="preserve">
+                <source>Notifications</source>
+            </trans-unit>
             <trans-unit id="constantEditor.view.templateRootPath" xml:space="preserve">
-				<source>Template Root Path: Path to templates folder</source>
-			</trans-unit>
+                <source>Template Root Path: Path to templates folder</source>
+            </trans-unit>
             <trans-unit id="constantEditor.view.partialRootPaths" xml:space="preserve">
-				<source>Partial Root Path: Path to partial folder</source>
-			</trans-unit>
+                <source>Partial Root Path: Path to partial folder</source>
+            </trans-unit>
             <trans-unit id="constantEditor.view.layoutRootPaths" xml:space="preserve">
-				<source>Layout Root Path: Path to layout folder</source>
-			</trans-unit>
+                <source>Layout Root Path: Path to layout folder</source>
+            </trans-unit>
             <trans-unit id="constantEditor.view.emails.templateRootPath" xml:space="preserve">
-				<source>Email-Template Root Path: Path to templates folder</source>
-			</trans-unit>
+                <source>Email-Template Root Path: Path to templates folder</source>
+            </trans-unit>
             <trans-unit id="constantEditor.view.emails.partialRootPaths" xml:space="preserve">
-				<source>Email-Partial Root Path: Path to partial folder</source>
-			</trans-unit>
+                <source>Email-Partial Root Path: Path to partial folder</source>
+            </trans-unit>
             <trans-unit id="constantEditor.view.emails.layoutRootPaths" xml:space="preserve">
-				<source>Email-Layout Root Path: Path to layout folder</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.authorUid" xml:space="preserve">
-				<source>Author UID:Location of the "Blog: Author" plugin. Shows posts by author.</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.comments.active" xml:space="preserve">
-				<source>Enable Comments:Activate comments as a general feature</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.comments.moderation" xml:space="preserve">
-				<source>Comments moderation mode:0 = no moderation, 1 = moderation active, 2 = moderation only on first comment</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.comments.respectPostLanguageId" xml:space="preserve">
-				<source>Respect post_language_id:0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.comments.date.format" xml:space="preserve">
-				<source>Date format:The format for the comments (default: %B %e, %Y).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.comments.google_recaptcha" xml:space="preserve">
-				<source>Google Recaptcha:Enable google recaptcha for comments?</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.comments.google_recaptcha.website_key" xml:space="preserve">
-				<source>Google Recaptcha Website-Key</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.comments.google_recaptcha.secret_key" xml:space="preserve">
-				<source>Google Recaptcha Secrete-Key</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.comments.disqus" xml:space="preserve">
-				<source>Enable Disqus:Use disqus instead of internal comments?</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.comments.disqus.shortname" xml:space="preserve">
-				<source>Disqus shortname:The shortname / forum id of your disqus setup.</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.authors.avatar.provider.size" xml:space="preserve">
-				<source>Author Avatar Size:The size in px for the author avatar</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.authors.avatar.provider.default" xml:space="preserve">
-				<source>Author Avatar Default:The default image for an author avatar</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.blogUid" xml:space="preserve">
-				<source>List posts UID:Location of the "Blog: List of posts" plugin. This page UID is the root page for the blog. All blog post pages are located below this page.</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.categoryUid" xml:space="preserve">
-				<source>List by category UID:Location of the "Blog: List by category" plugin. Shows all posts from one category.</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.tagUid" xml:space="preserve">
-				<source>List by tags UID:Location of the "Blog: List by tags" plugin. Shows all posts from one tag.</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.archiveUid" xml:space="preserve">
-				<source>Archive UID:Location of the "Blog: Archive" plugin. Shows archived posts.</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.storagePid" xml:space="preserve">
-				<source>Storage folder:Storage folder of all categories and tags for this blog.</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.senderName" xml:space="preserve">
-				<source>Sender name:Global sender name for notifications</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.senderMail" xml:space="preserve">
-				<source>Sender mail:Global sender email address for notifications</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.CommentAddedNotification.author" xml:space="preserve">
-				<source>Author notifications:Send notification to author of a blog post</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.CommentAddedNotification.admin" xml:space="preserve">
-				<source>Admin notifications:Send notification to admin of the blog</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.CommentAddedNotification.admin.email" xml:space="preserve">
-				<source>Admin mail:Global admin (receiver) email address for notifications</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.lists.pagination.itemsPerPage" xml:space="preserve">
-				<source>Number of post that should be displayed per page</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.lists.pagination.insertAbove" xml:space="preserve">
-				<source>Show the pagination above the posts</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.lists.pagination.insertBelow" xml:space="preserve">
-				<source>Show the pagination below the posts</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.lists.pagination.maximumNumberOfLinks" xml:space="preserve">
-				<source>Maximum number of links in the pagination</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.lists.posts.maximumDisplayedItems" xml:space="preserve">
-				<source>Maximum displayed items:Maximum number of posts to be displayed (0 = no limit).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.lists.posts.dateFormat" xml:space="preserve">
-				<source>Date format:The format for the list items (default: %d.%m.%Y).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.relatedPosts.limit" xml:space="preserve">
-				<source>Limit:The limit of displayed items (default: 5).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.relatedPosts.categoryMultiplier" xml:space="preserve">
-				<source>Category Multiplier:The multiplier for categories (default: 1).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.relatedPosts.tagMultiplier" xml:space="preserve">
-				<source>Tag Multiplier:The multiplier for tags (default: 1).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.widgets.comments.limit" xml:space="preserve">
-				<source>Limit:The limit of displayed items (default: 5).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.widgets.recentposts.limit" xml:space="preserve">
-				<source>Limit:The limit of displayed items (default: 5).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.widgets.tags.limit" xml:space="preserve">
-				<source>Limit:The limit of displayed items (default: 20).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.widgets.tags.minSize" xml:space="preserve">
-				<source>Minimum size:The minimum size of the font (default: 100).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.widgets.tags.maxSize" xml:space="preserve">
-				<source>Maximum size:The maximum size of the font (default: 200).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.widgets.archive.showCounter" xml:space="preserve">
-				<source>Show counter:If enabled, the count of posts is visible (default: 1).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.widgets.archive.groupByYear" xml:space="preserve">
-				<source>Group by year:If enabled, the posts are grouped by year (default: 1).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.widgets.archive.groupByMonth" xml:space="preserve">
-				<source>Group by month:If enabled, the posts are grouped by year and month (default: 1).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.widgets.archive.yearDateFormat" xml:space="preserve">
-				<source>Year format:The format of the year (default: %Y).</source>
-			</trans-unit>
-			<trans-unit id="constantEditor.widgets.archive.monthDateFormat" xml:space="preserve">
-				<source>Month format:The format of the month (default: %B).</source>
-			</trans-unit>
-			<trans-unit id="feed.title.listPostsByCategory" xml:space="preserve">
-				<source>Category RSS Feed</source>
-			</trans-unit>
-			<trans-unit id="feed.description.listPostsByCategory" xml:space="preserve">
-				<source>Posts by category %s</source>
-			</trans-unit>
-			<trans-unit id="feed.title.listPostsByAuthor" xml:space="preserve">
-				<source>Author RSS Feed</source>
-			</trans-unit>
-			<trans-unit id="feed.description.listPostsByAuthor" xml:space="preserve">
-				<source>Posts by author %s</source>
-			</trans-unit>
-			<trans-unit id="feed.title.listPostsByDate" xml:space="preserve">
-				<source>Archive RSS Feed</source>
-			</trans-unit>
-			<trans-unit id="feed.description.listPostsByDate" xml:space="preserve">
-				<source>Posts by date: %s / %s</source>
-			</trans-unit>
-			<trans-unit id="feed.title.listPostsByTag" xml:space="preserve">
-				<source>Tag RSS Feed</source>
-			</trans-unit>
-			<trans-unit id="feed.description.listPostsByTag" xml:space="preserve">
-				<source>Posts by tag: %s</source>
-			</trans-unit>
-			<trans-unit id="feed.title.listRecentPosts" xml:space="preserve">
-				<source>RSS Feed</source>
-			</trans-unit>
-			<trans-unit id="feed.description.listRecentPosts" xml:space="preserve">
-				<source>Recent posts</source>
-			</trans-unit>
+                <source>Email-Layout Root Path: Path to layout folder</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.authorUid" xml:space="preserve">
+                <source>Author UID:Location of the "Blog: Author" plugin. Shows posts by author.</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.comments.active" xml:space="preserve">
+                <source>Enable Comments:Activate comments as a general feature</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.comments.moderation" xml:space="preserve">
+                <source>Comments moderation mode:0 = no moderation, 1 = moderation active, 2 = moderation only on first comment</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.comments.respectPostLanguageId" xml:space="preserve">
+                <source>Respect post_language_id:0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.comments.date.format" xml:space="preserve">
+                <source>Date format:The format for the comments (default: %B %e, %Y).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.comments.google_recaptcha" xml:space="preserve">
+                <source>Google Recaptcha:Enable google recaptcha for comments?</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.comments.google_recaptcha.website_key" xml:space="preserve">
+                <source>Google Recaptcha Website-Key</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.comments.google_recaptcha.secret_key" xml:space="preserve">
+                <source>Google Recaptcha Secrete-Key</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.comments.disqus" xml:space="preserve">
+                <source>Enable Disqus:Use disqus instead of internal comments?</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.comments.disqus.shortname" xml:space="preserve">
+                <source>Disqus shortname:The shortname / forum id of your disqus setup.</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.authors.avatar.provider.size" xml:space="preserve">
+                <source>Author Avatar Size:The size in px for the author avatar</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.authors.avatar.provider.default" xml:space="preserve">
+                <source>Author Avatar Default:The default image for an author avatar</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blogUid" xml:space="preserve">
+                <source>List posts UID:Location of the "Blog: List of posts" plugin. This page UID is the root page for the blog. All blog post pages are located below this page.</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.categoryUid" xml:space="preserve">
+                <source>List by category UID:Location of the "Blog: List by category" plugin. Shows all posts from one category.</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.tagUid" xml:space="preserve">
+                <source>List by tags UID:Location of the "Blog: List by tags" plugin. Shows all posts from one tag.</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.archiveUid" xml:space="preserve">
+                <source>Archive UID:Location of the "Blog: Archive" plugin. Shows archived posts.</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.storagePid" xml:space="preserve">
+                <source>Storage folder:Storage folder of all categories and tags for this blog.</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.senderName" xml:space="preserve">
+                <source>Sender name:Global sender name for notifications</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.senderMail" xml:space="preserve">
+                <source>Sender mail:Global sender email address for notifications</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.CommentAddedNotification.author" xml:space="preserve">
+                <source>Author notifications:Send notification to author of a blog post</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.CommentAddedNotification.admin" xml:space="preserve">
+                <source>Admin notifications:Send notification to admin of the blog</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.CommentAddedNotification.admin.email" xml:space="preserve">
+                <source>Admin mail:Global admin (receiver) email address for notifications</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.lists.pagination.itemsPerPage" xml:space="preserve">
+                <source>Number of post that should be displayed per page</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.lists.pagination.insertAbove" xml:space="preserve">
+                <source>Show the pagination above the posts</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.lists.pagination.insertBelow" xml:space="preserve">
+                <source>Show the pagination below the posts</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.lists.pagination.maximumNumberOfLinks" xml:space="preserve">
+                <source>Maximum number of links in the pagination</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.lists.posts.maximumDisplayedItems" xml:space="preserve">
+                <source>Maximum displayed items:Maximum number of posts to be displayed (0 = no limit).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.lists.posts.dateFormat" xml:space="preserve">
+                <source>Date format:The format for the list items (default: %d.%m.%Y).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.relatedPosts.limit" xml:space="preserve">
+                <source>Limit:The limit of displayed items (default: 5).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.relatedPosts.categoryMultiplier" xml:space="preserve">
+                <source>Category Multiplier:The multiplier for categories (default: 1).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.relatedPosts.tagMultiplier" xml:space="preserve">
+                <source>Tag Multiplier:The multiplier for tags (default: 1).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.widgets.comments.limit" xml:space="preserve">
+                <source>Limit:The limit of displayed items (default: 5).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.widgets.recentposts.limit" xml:space="preserve">
+                <source>Limit:The limit of displayed items (default: 5).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.widgets.tags.limit" xml:space="preserve">
+                <source>Limit:The limit of displayed items (default: 20).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.widgets.tags.minSize" xml:space="preserve">
+                <source>Minimum size:The minimum size of the font (default: 100).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.widgets.tags.maxSize" xml:space="preserve">
+                <source>Maximum size:The maximum size of the font (default: 200).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.widgets.archive.showCounter" xml:space="preserve">
+                <source>Show counter:If enabled, the count of posts is visible (default: 1).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.widgets.archive.groupByYear" xml:space="preserve">
+                <source>Group by year:If enabled, the posts are grouped by year (default: 1).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.widgets.archive.groupByMonth" xml:space="preserve">
+                <source>Group by month:If enabled, the posts are grouped by year and month (default: 1).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.widgets.archive.yearDateFormat" xml:space="preserve">
+                <source>Year format:The format of the year (default: %Y).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.widgets.archive.monthDateFormat" xml:space="preserve">
+                <source>Month format:The format of the month (default: %B).</source>
+            </trans-unit>
+            <trans-unit id="feed.title.listPostsByCategory" xml:space="preserve">
+                <source>Category RSS Feed</source>
+            </trans-unit>
+            <trans-unit id="feed.description.listPostsByCategory" xml:space="preserve">
+                <source>Posts by category %s</source>
+            </trans-unit>
+            <trans-unit id="feed.title.listPostsByAuthor" xml:space="preserve">
+                <source>Author RSS Feed</source>
+            </trans-unit>
+            <trans-unit id="feed.description.listPostsByAuthor" xml:space="preserve">
+                <source>Posts by author %s</source>
+            </trans-unit>
+            <trans-unit id="feed.title.listPostsByDate" xml:space="preserve">
+                <source>Archive RSS Feed</source>
+            </trans-unit>
+            <trans-unit id="feed.description.listPostsByDate" xml:space="preserve">
+                <source>Posts by date: %s / %s</source>
+            </trans-unit>
+            <trans-unit id="feed.title.listPostsByTag" xml:space="preserve">
+                <source>Tag RSS Feed</source>
+            </trans-unit>
+            <trans-unit id="feed.description.listPostsByTag" xml:space="preserve">
+                <source>Posts by tag: %s</source>
+            </trans-unit>
+            <trans-unit id="feed.title.listRecentPosts" xml:space="preserve">
+                <source>RSS Feed</source>
+            </trans-unit>
+            <trans-unit id="feed.description.listRecentPosts" xml:space="preserve">
+                <source>Recent posts</source>
+            </trans-unit>
 
-			<trans-unit id="author.more.posts" xml:space="preserve">
-				<source>More posts by this author</source>
-			</trans-unit>
+            <trans-unit id="author.more.posts" xml:space="preserve">
+                <source>More posts by this author</source>
+            </trans-unit>
 
-			<trans-unit id="label.blog" xml:space="preserve">
-				<source>Blog</source>
-			</trans-unit>
-			<trans-unit id="label.all" xml:space="preserve">
-				<source>All</source>
-			</trans-unit>
-			<trans-unit id="label.choose_blog" xml:space="preserve">
-				<source>Choose blog</source>
-			</trans-unit>
+            <trans-unit id="label.blog" xml:space="preserve">
+                <source>Blog</source>
+            </trans-unit>
+            <trans-unit id="label.all" xml:space="preserve">
+                <source>All</source>
+            </trans-unit>
+            <trans-unit id="label.choose_blog" xml:space="preserve">
+                <source>Choose blog</source>
+            </trans-unit>
 
-			<trans-unit id="action.approve" xml:space="preserve">
-				<source>Approve comment</source>
-			</trans-unit>
-			<trans-unit id="action.decline" xml:space="preserve">
-				<source>Decline comment</source>
-			</trans-unit>
-			<trans-unit id="action.delete" xml:space="preserve">
-				<source>Delete comment</source>
-			</trans-unit>
-			<trans-unit id="action.editComment" xml:space="preserve">
-				<source>Edit comment</source>
-			</trans-unit>
+            <trans-unit id="action.approve" xml:space="preserve">
+                <source>Approve comment</source>
+            </trans-unit>
+            <trans-unit id="action.decline" xml:space="preserve">
+                <source>Decline comment</source>
+            </trans-unit>
+            <trans-unit id="action.delete" xml:space="preserve">
+                <source>Delete comment</source>
+            </trans-unit>
+            <trans-unit id="action.editComment" xml:space="preserve">
+                <source>Edit comment</source>
+            </trans-unit>
             <trans-unit id="action.multiple.approve" xml:space="preserve">
-				<source>Approve</source>
-			</trans-unit>
+                <source>Approve</source>
+            </trans-unit>
             <trans-unit id="action.multiple.decline" xml:space="preserve">
-				<source>Decline</source>
-			</trans-unit>
+                <source>Decline</source>
+            </trans-unit>
             <trans-unit id="action.multiple.delete" xml:space="preserve">
-				<source>Delete</source>
-			</trans-unit>
+                <source>Delete</source>
+            </trans-unit>
 
-			<trans-unit id="label.required.field" xml:space="preserve">
-				<source>*</source>
-			</trans-unit>
-			<trans-unit id="label.required.field.explanation" xml:space="preserve">
-				<source>These fields are required</source>
-			</trans-unit>
+            <trans-unit id="label.required.field" xml:space="preserve">
+                <source>*</source>
+            </trans-unit>
+            <trans-unit id="label.required.field.explanation" xml:space="preserve">
+                <source>These fields are required</source>
+            </trans-unit>
 
-			<!-- E-Mails -->
-			<trans-unit id="emails.CommentAddedNotification.subject" xml:space="preserve">
-				<source>A new comment was added to the post: %s</source>
-			</trans-unit>
-			<trans-unit id="email.label.post" xml:space="preserve">
-				<source>Post</source>
-			</trans-unit>
-			<trans-unit id="email.label.date" xml:space="preserve">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="email.label.author" xml:space="preserve">
-				<source>Author</source>
-			</trans-unit>
-			<trans-unit id="email.label.comment" xml:space="preserve">
-				<source>Comment</source>
-			</trans-unit>
+            <!-- E-Mails -->
+            <trans-unit id="emails.CommentAddedNotification.subject" xml:space="preserve">
+                <source>A new comment was added to the post: %s</source>
+            </trans-unit>
+            <trans-unit id="email.label.post" xml:space="preserve">
+                <source>Post</source>
+            </trans-unit>
+            <trans-unit id="email.label.date" xml:space="preserve">
+                <source>Date</source>
+            </trans-unit>
+            <trans-unit id="email.label.author" xml:space="preserve">
+                <source>Author</source>
+            </trans-unit>
+            <trans-unit id="email.label.comment" xml:space="preserve">
+                <source>Comment</source>
+            </trans-unit>
 
             <!-- Widgets -->
             <trans-unit id="widget.recentcomments.on" xml:space="preserve">
                 <source>on</source>
             </trans-unit>
 
-		</body>
-	</file>
+        </body>
+    </file>
 </xliff>

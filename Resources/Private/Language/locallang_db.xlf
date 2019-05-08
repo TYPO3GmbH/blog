@@ -1,250 +1,250 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-06-27T17:14:25Z" product-name="blog">
-		<header/>
-		<body>
-			<trans-unit id="wizard.group.blog" xml:space="preserve">
-				<source>Blog</source>
-			</trans-unit>
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file t3:id="1557352031" source-language="en" datatype="plaintext" original="messages" date="2019-05-08T21:47:12Z" product-name="blog">
+        <header/>
+        <body>
+            <trans-unit id="wizard.group.blog" xml:space="preserve">
+                <source>Blog</source>
+            </trans-unit>
 
-			<trans-unit id="plugin.blog_posts.title" xml:space="preserve">
-				<source>Blog: List of posts</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_posts.description" xml:space="preserve">
-				<source>Displays a list of blog posts ordered by date. All non-hidden, non-deleted and non-archived posts are shown in the list.</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_category.title" xml:space="preserve">
-				<source>Blog: List by category</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_category.description" xml:space="preserve">
-				<source>If you add this element and you have selected a category on the categories tab, it will show an overview of posts for that category. If you have no categories selected, it will show an overview of categories.</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_authorposts.title" xml:space="preserve">
-				<source>Blog: List by author</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_authorposts.description" xml:space="preserve">
-				<source>Displays all posts belonging to the chosen author.</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_tag.title" xml:space="preserve">
-				<source>Blog: List by tags</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_tag.description" xml:space="preserve">
-				<source>Allows the users to show all posts tagged with a specific keyword.</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_archive.title" xml:space="preserve">
-				<source>Blog: Archive</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_archive.description" xml:space="preserve">
-				<source>The archive plugin displays all posts categorized by year and month.</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_sidebar.title" xml:space="preserve">
-				<source>Blog: Sidebar</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_sidebar.description" xml:space="preserve">
-				<source>The sidebar contains links enabling the user to quickly navigate your blog. It shows an overview of recent posts and comments, categories, tags and archive links.</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_metadata.title" xml:space="preserve">
-				<source>Blog: Metadata</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_metadata.description" xml:space="preserve">
-				<source>Displays post meta data, like date, tags, category, sharing links...</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_commentform.title" xml:space="preserve">
-				<source>Blog: Comment Form</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_commentform.description" xml:space="preserve">
-				<source>Displays the comment form for a post.</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_comments.title" xml:space="preserve">
-				<source>Blog: Comments</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_comments.description" xml:space="preserve">
-				<source>Displays the comments for a post.</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_authors.title" xml:space="preserve">
-				<source>Blog: Authors</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_authors.description" xml:space="preserve">
-				<source>Displays post authors, like name, title, avatar, social links...</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_relatedposts.title" xml:space="preserve">
-				<source>Blog: Related Posts</source>
-			</trans-unit>
-			<trans-unit id="plugin.blog_relatedposts.description" xml:space="preserve">
-				<source>Based on the categories and tags of the current post, it will show a list of related posts. This overview should only be placed on a Blog detail page.</source>
-			</trans-unit>
+            <trans-unit id="plugin.blog_posts.title" xml:space="preserve">
+                <source>Blog: List of posts</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_posts.description" xml:space="preserve">
+                <source>Displays a list of blog posts ordered by date. All non-hidden, non-deleted and non-archived posts are shown in the list.</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_category.title" xml:space="preserve">
+                <source>Blog: List by category</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_category.description" xml:space="preserve">
+                <source>If you add this element and you have selected a category on the categories tab, it will show an overview of posts for that category. If you have no categories selected, it will show an overview of categories.</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_authorposts.title" xml:space="preserve">
+                <source>Blog: List by author</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_authorposts.description" xml:space="preserve">
+                <source>Displays all posts belonging to the chosen author.</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_tag.title" xml:space="preserve">
+                <source>Blog: List by tags</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_tag.description" xml:space="preserve">
+                <source>Allows the users to show all posts tagged with a specific keyword.</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_archive.title" xml:space="preserve">
+                <source>Blog: Archive</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_archive.description" xml:space="preserve">
+                <source>The archive plugin displays all posts categorized by year and month.</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_sidebar.title" xml:space="preserve">
+                <source>Blog: Sidebar</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_sidebar.description" xml:space="preserve">
+                <source>The sidebar contains links enabling the user to quickly navigate your blog. It shows an overview of recent posts and comments, categories, tags and archive links.</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_metadata.title" xml:space="preserve">
+                <source>Blog: Metadata</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_metadata.description" xml:space="preserve">
+                <source>Displays post meta data, like date, tags, category, sharing links...</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_commentform.title" xml:space="preserve">
+                <source>Blog: Comment Form</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_commentform.description" xml:space="preserve">
+                <source>Displays the comment form for a post.</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_comments.title" xml:space="preserve">
+                <source>Blog: Comments</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_comments.description" xml:space="preserve">
+                <source>Displays the comments for a post.</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_authors.title" xml:space="preserve">
+                <source>Blog: Authors</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_authors.description" xml:space="preserve">
+                <source>Displays post authors, like name, title, avatar, social links...</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_relatedposts.title" xml:space="preserve">
+                <source>Blog: Related Posts</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_relatedposts.description" xml:space="preserve">
+                <source>Based on the categories and tags of the current post, it will show a list of related posts. This overview should only be placed on a Blog detail page.</source>
+            </trans-unit>
 
-			<trans-unit id="pages.comments_active" xml:space="preserve">
-				<source>Comments enabled</source>
-			</trans-unit>
-			<trans-unit id="pages.comments" xml:space="preserve">
-				<source>Comments</source>
-			</trans-unit>
-			<trans-unit id="pages.crdate" xml:space="preserve">
-				<source>Creation date</source>
-			</trans-unit>
-			<trans-unit id="pages.palettes.publish_date" xml:space="preserve">
-				<source>Publish date</source>
-			</trans-unit>
-			<trans-unit id="pages.crdate_month" xml:space="preserve">
-				<source>Publish date month</source>
-			</trans-unit>
-			<trans-unit id="pages.crdate_year" xml:space="preserve">
-				<source>Publish date year</source>
-			</trans-unit>
-			<trans-unit id="pages.publish_date" xml:space="preserve">
-				<source>Publish date</source>
-			</trans-unit>
-			<trans-unit id="pages.archive_date" xml:space="preserve">
-				<source>Archive date</source>
-			</trans-unit>
-			<trans-unit id="pages.tags" xml:space="preserve">
-				<source>Tags</source>
-			</trans-unit>
-			<trans-unit id="pages.authors" xml:space="preserve">
-				<source>Authors</source>
-			</trans-unit>
-			<trans-unit id="pages.sharing_enabled" xml:space="preserve">
-				<source>Sharing enabled (show sharing links)</source>
-			</trans-unit>
-			<trans-unit id="pages.tabs.blog" xml:space="preserve">
-				<source>Blog</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_comment" xml:space="preserve">
-				<source>Blog: Comment</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_comment.author" xml:space="preserve">
-				<source>Author (FE-User)</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_comment.name" xml:space="preserve">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_comment.url" xml:space="preserve">
-				<source>URL</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_comment.email" xml:space="preserve">
-				<source>E-Mail</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_comment.comment" xml:space="preserve">
-				<source>Comment</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_comment.status" xml:space="preserve">
-				<source>Status</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_comment.status.pending" xml:space="preserve">
-				<source>Pending</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_comment.status.approved" xml:space="preserve">
-				<source>Approved</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_comment.status.declined" xml:space="preserve">
-				<source>Declined</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_comment.status.deleted" xml:space="preserve">
-				<source>Deleted</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_tag" xml:space="preserve">
-				<source>Blog: Tag</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_tag.title" xml:space="preserve">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_tag.slug" xml:space="preserve">
-				<source>Path Segment</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_tag.description" xml:space="preserve">
-				<source>Description (meta description)</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_tag.tabs.general" xml:space="preserve">
-				<source>General</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_tag.tabs.seo" xml:space="preserve">
-				<source>SEO</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_tag.content" xml:space="preserve">
-				<source>Content</source>
-			</trans-unit>
+            <trans-unit id="pages.comments_active" xml:space="preserve">
+                <source>Comments enabled</source>
+            </trans-unit>
+            <trans-unit id="pages.comments" xml:space="preserve">
+                <source>Comments</source>
+            </trans-unit>
+            <trans-unit id="pages.crdate" xml:space="preserve">
+                <source>Creation date</source>
+            </trans-unit>
+            <trans-unit id="pages.palettes.publish_date" xml:space="preserve">
+                <source>Publish date</source>
+            </trans-unit>
+            <trans-unit id="pages.crdate_month" xml:space="preserve">
+                <source>Publish date month</source>
+            </trans-unit>
+            <trans-unit id="pages.crdate_year" xml:space="preserve">
+                <source>Publish date year</source>
+            </trans-unit>
+            <trans-unit id="pages.publish_date" xml:space="preserve">
+                <source>Publish date</source>
+            </trans-unit>
+            <trans-unit id="pages.archive_date" xml:space="preserve">
+                <source>Archive date</source>
+            </trans-unit>
+            <trans-unit id="pages.tags" xml:space="preserve">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="pages.authors" xml:space="preserve">
+                <source>Authors</source>
+            </trans-unit>
+            <trans-unit id="pages.sharing_enabled" xml:space="preserve">
+                <source>Sharing enabled (show sharing links)</source>
+            </trans-unit>
+            <trans-unit id="pages.tabs.blog" xml:space="preserve">
+                <source>Blog</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_comment" xml:space="preserve">
+                <source>Blog: Comment</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_comment.author" xml:space="preserve">
+                <source>Author (FE-User)</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_comment.name" xml:space="preserve">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_comment.url" xml:space="preserve">
+                <source>URL</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_comment.email" xml:space="preserve">
+                <source>E-Mail</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_comment.comment" xml:space="preserve">
+                <source>Comment</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_comment.status" xml:space="preserve">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_comment.status.pending" xml:space="preserve">
+                <source>Pending</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_comment.status.approved" xml:space="preserve">
+                <source>Approved</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_comment.status.declined" xml:space="preserve">
+                <source>Declined</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_comment.status.deleted" xml:space="preserve">
+                <source>Deleted</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_tag" xml:space="preserve">
+                <source>Blog: Tag</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_tag.title" xml:space="preserve">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_tag.slug" xml:space="preserve">
+                <source>Path Segment</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_tag.description" xml:space="preserve">
+                <source>Description (meta description)</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_tag.tabs.general" xml:space="preserve">
+                <source>General</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_tag.tabs.seo" xml:space="preserve">
+                <source>SEO</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_tag.content" xml:space="preserve">
+                <source>Content</source>
+            </trans-unit>
 
-			<trans-unit id="tx_blog_domain_model_author" xml:space="preserve">
-				<source>Blog: Author</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.name" xml:space="preserve">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.slug" xml:space="preserve">
-				<source>Path Segment</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.avatar_provider" xml:space="preserve">
-				<source>Avatar Provider</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.image" xml:space="preserve">
-				<source>Image</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.title" xml:space="preserve">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.website" xml:space="preserve">
-				<source>Website</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.email" xml:space="preserve">
-				<source>Email</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.location" xml:space="preserve">
-				<source>Location</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.twitter" xml:space="preserve">
-				<source>Twitter username</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.linkedin" xml:space="preserve">
-				<source>LinkIn profile URL</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.xing" xml:space="preserve">
-				<source>XING profile URL</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.profile" xml:space="preserve">
-				<source>Author profile URL (used for schema.org markup)</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.bio" xml:space="preserve">
-				<source>Bio</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.posts" xml:space="preserve">
-				<source>Blog posts</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.details_page" xml:space="preserve">
-				<source>Details page</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.palette_personal" xml:space="preserve">
-				<source>Personal data</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.palette_contact" xml:space="preserve">
-				<source>Contact data</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.tab_profile" xml:space="preserve">
-				<source>Profile</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.tab_social_media" xml:space="preserve">
-				<source>Social Media</source>
-			</trans-unit>
-			<trans-unit id="tx_blog_domain_model_author.tab_blog" xml:space="preserve">
-				<source>Blog data</source>
-			</trans-unit>
+            <trans-unit id="tx_blog_domain_model_author" xml:space="preserve">
+                <source>Blog: Author</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.name" xml:space="preserve">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.slug" xml:space="preserve">
+                <source>Path Segment</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.avatar_provider" xml:space="preserve">
+                <source>Avatar Provider</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.image" xml:space="preserve">
+                <source>Image</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.title" xml:space="preserve">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.website" xml:space="preserve">
+                <source>Website</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.email" xml:space="preserve">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.location" xml:space="preserve">
+                <source>Location</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.twitter" xml:space="preserve">
+                <source>Twitter username</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.linkedin" xml:space="preserve">
+                <source>LinkIn profile URL</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.xing" xml:space="preserve">
+                <source>XING profile URL</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.profile" xml:space="preserve">
+                <source>Author profile URL (used for schema.org markup)</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.bio" xml:space="preserve">
+                <source>Bio</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.posts" xml:space="preserve">
+                <source>Blog posts</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.details_page" xml:space="preserve">
+                <source>Details page</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.palette_personal" xml:space="preserve">
+                <source>Personal data</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.palette_contact" xml:space="preserve">
+                <source>Contact data</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.tab_profile" xml:space="preserve">
+                <source>Profile</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.tab_social_media" xml:space="preserve">
+                <source>Social Media</source>
+            </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.tab_blog" xml:space="preserve">
+                <source>Blog data</source>
+            </trans-unit>
 
-			<trans-unit id="sys_category.content" xml:space="preserve">
-				<source>Content</source>
-			</trans-unit>
-			<trans-unit id="sys_category.slug" xml:space="preserve">
-				<source>Path Segment</source>
-			</trans-unit>
-			<trans-unit id="sys_category.tabs.seo" xml:space="preserve">
-				<source>SEO</source>
-			</trans-unit>
+            <trans-unit id="sys_category.content" xml:space="preserve">
+                <source>Content</source>
+            </trans-unit>
+            <trans-unit id="sys_category.slug" xml:space="preserve">
+                <source>Path Segment</source>
+            </trans-unit>
+            <trans-unit id="sys_category.tabs.seo" xml:space="preserve">
+                <source>SEO</source>
+            </trans-unit>
 
-			<trans-unit id="sys_category.tabs.blog" xml:space="preserve">
-				<source>Blog</source>
-			</trans-unit>
-			<trans-unit id="sys_category.posts" xml:space="preserve">
-				<source>Posts</source>
-			</trans-unit>
-		</body>
-	</file>
+            <trans-unit id="sys_category.tabs.blog" xml:space="preserve">
+                <source>Blog</source>
+            </trans-unit>
+            <trans-unit id="sys_category.posts" xml:space="preserve">
+                <source>Posts</source>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>
