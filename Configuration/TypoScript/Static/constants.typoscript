@@ -91,7 +91,7 @@ plugin {
                     # cat=blog/blog_133_widgets_tags; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.tags.minSize
                     minSize = 100
                     # cat=blog/blog_133_widgets_tags; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.tags.maxSize
-                    maxSize = 200
+                    maxSize = 100
                 }
                 archive {
                     # cat=blog/blog_134_widgets_archive; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.showCounter
