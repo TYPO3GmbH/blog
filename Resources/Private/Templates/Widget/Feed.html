@@ -1,7 +1,11 @@
 <f:layout name="Widget" />
 <f:section name="Title"><f:translate key="headline.rssfeed" /></f:section>
 <f:section name="Content">
-    <ul class="feeds">
-        <li><f:link.page pageUid="{settings.blogUid}" pageType="200">Recent posts</f:link.page></li>
+    <ul class="blogwidgetlist blogwidgetlist--feeds">
+        <li class="blogwidgetlist__item">
+            <f:link.page pageUid="{settings.blogUid}" class="blogwidgetlist__itemlink" title="Recent posts" pageType="200">
+                <span class="blogwidgetlist__itemtitle">Recent posts</span>
+            </f:link.page>
+        </li>
     </ul>
 </f:section>

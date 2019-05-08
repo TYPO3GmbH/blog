@@ -1,16 +1,14 @@
 <f:layout name="Widget" />
 <f:section name="Title"><f:translate key="headline.categories" /></f:section>
 <f:section name="Content">
-    <ul class="categories list-inline">
+    <ul class="blogwidgetlist blogwidgetlist--categories">
         <f:for each="{categories}" as="category">
-            <f:if condition="{currentCategory} == {category.uid}">
-                <f:then>
-                    <li class="list-item category-item category-item-{category.uid} active"><blogvh:link.category category="{category}" /> (<f:count>{category.posts}</f:count>) <blogvh:link.category rss="true" category="{category}"><i class="fa fa-rss-square"></i></blogvh:link.category></li>
-                </f:then>
-                <f:else>
-                    <li class="list-item category-item category-item-{category.uid}"><blogvh:link.category category="{category}" /> (<f:count>{category.posts}</f:count>) <blogvh:link.category rss="true" category="{category}"><i class="fa fa-rss-square"></i></blogvh:link.category></li>
-                </f:else>
-            </f:if>
+            <li id="category-{category.uid}" class="blogwidgetlist__item{f:if(condition: '{currentCategory} == {category.uid}', then: ' blogwidgetlist__item--active')}">
+                <blogvh:link.category class="blogwidgetlist__itemlink" title="{category.title}" category="{category}">
+                    <span class="blogwidgetlist__itemtitle">{category.title}</span>
+                    <span class="blogwidgetlist__itemcount"><f:count>{category.posts}</f:count></span>
+                </blogvh:link.category>
+            </li>
         </f:for>
     </ul>
 </f:section>

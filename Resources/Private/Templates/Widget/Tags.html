@@ -1,9 +1,11 @@
 <f:layout name="Widget" />
 <f:section name="Title"><f:translate key="headline.tags" /></f:section>
 <f:section name="Content">
-    <div class="tags">
-    <f:for each="{tags}" as="tag">
-        <blogvh:link.tag tag="{tag.tagObject}" style="font-size: {tag.size}%" class="label label-default label-tag" />
-    </f:for>
-    </div>
+    <ul class="blogwidgetlist blogwidgetlist--tags">
+        <f:for each="{tags}" as="tag">
+            <li class="blogwidgetlist__item">
+                <blogvh:link.tag class="blogbadge" tag="{tag.tagObject}" style="font-size: {tag.size}%" />
+            </li>
+        </f:for>
+    </ul>
 </f:section>

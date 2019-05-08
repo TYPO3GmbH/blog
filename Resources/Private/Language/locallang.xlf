@@ -484,6 +484,11 @@
 				<source>Comment</source>
 			</trans-unit>
 
+            <!-- Widgets -->
+            <trans-unit id="widget.recentcomments.on" xml:space="preserve">
+                <source>on</source>
+            </trans-unit>
+
 		</body>
 	</file>
 </xliff>
