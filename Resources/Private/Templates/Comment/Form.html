@@ -75,7 +75,7 @@
                                 <f:form.textarea id="comment" property="comment" class="form-control"/>
                             </div>
                             <p><span class="tx-blog-comment-required"><f:translate key="label.required.field"/> <f:translate key="label.required.field.explanation"/></span></p>
-                            <f:if condition="{settings.comments.google_recaptcha}">
+                            <f:if condition="{settings.comments.google_recaptcha._typoScriptNodeValue}">
                                 <script src="https://www.google.com/recaptcha/api.js"></script>
                                 <div class="g-recaptcha" data-sitekey="{settings.comments.google_recaptcha.website_key}"></div>
                             </f:if>
