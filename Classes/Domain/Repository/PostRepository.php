@@ -16,7 +16,6 @@ use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -253,36 +252,39 @@ class PostRepository extends Repository
      */
     public function findMonthsAndYearsWithPosts(): array
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('pages');
+        $query = $this->createQuery();
+        $constraints = $this->defaultConstraints;
+        $storagePidConstraint = $this->getStoragePidConstraint();
+        if ($storagePidConstraint instanceof ComparisonInterface) {
+            $constraints[] = $storagePidConstraint;
+        }
+        $constraints[] = $query->greaterThan('crdateMonth', 0);
+        $constraints[] = $query->greaterThan('crdateYear', 0);
+        $query->matching($query->logicalAnd($constraints));
+        $posts = $query->execute(true);
 
-        $conditions = $queryBuilder->expr()->andX(
-            $queryBuilder->expr()->eq(
-                'doktype',
-                $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, \PDO::PARAM_INT)
-            ),
-            $queryBuilder->expr()->in(
-                'pid',
-                $this->getPidsForConstraints()
-            )
-        );
+        $result = [];
+        $currentIndex = -1;
+        $currentYear = null;
+        $currentMonth = null;
+        foreach ($posts as $post) {
+            $year = $post['crdate_year'];
+            $month = $post['crdate_month'];
+            if ($currentYear !== $year || $currentMonth !== $month) {
+                $currentIndex++;
+                $currentYear = $year;
+                $currentMonth = $month;
+                $result[$currentIndex] = [
+                    'year' => $currentYear,
+                    'month' => $currentMonth,
+                    'count' => 1
+                ];
+            } else {
+                $result[$currentIndex]['count']++;
+            }
+        }
 
-        return $queryBuilder
-            ->select(
-                'crdate_month AS month',
-                'crdate_year AS year'
-            )
-            ->addSelectLiteral($queryBuilder->expr()->count('*', 'count'))
-            ->from('pages')
-            ->where($conditions)
-            ->groupBy(
-                'month',
-                'year'
-            )
-            ->orderBy('year', 'DESC')
-            ->addOrderBy('month', 'DESC')
-            ->execute()
-            ->fetchAll();
+        return $result;
     }
 
     /**
