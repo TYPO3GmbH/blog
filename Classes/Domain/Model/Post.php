@@ -125,6 +125,16 @@ class Post extends AbstractEntity
     protected $publishDate;
 
     /**
+     * @var int
+     */
+    protected $crdateMonth = 0;
+
+    /**
+     * @var int
+     */
+    protected $crdateYear = 0;
+
+    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Author>
      * @Extbase\ORM\Lazy
      */
@@ -495,6 +505,22 @@ class Post extends AbstractEntity
     {
         $this->publishDate = $publishDate;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCrdateMonth(): int
+    {
+        return $this->crdateMonth;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCrdateYear(): int
+    {
+        return $this->crdateYear;
     }
 
     /**
