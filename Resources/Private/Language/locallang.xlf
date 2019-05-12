@@ -39,9 +39,6 @@
             <trans-unit id="headline.rssfeed" xml:space="preserve">
                 <source>RSS-Feeds</source>
             </trans-unit>
-            <trans-unit id="form.comment.hp" xml:space="preserve">
-                <source>Please let this field empty</source>
-            </trans-unit>
             <trans-unit id="form.comment.name" xml:space="preserve">
                 <source>Name</source>
             </trans-unit>
@@ -286,7 +283,7 @@
                 <source>Date format:The format for the comments (default: %B %e, %Y).</source>
             </trans-unit>
             <trans-unit id="constantEditor.comments.google_recaptcha" xml:space="preserve">
-                <source>Google Recaptcha:Enable google recaptcha for comments?</source>
+                <source>Google Recaptcha v2:Enable google recaptcha for comments?</source>
             </trans-unit>
             <trans-unit id="constantEditor.comments.google_recaptcha.website_key" xml:space="preserve">
                 <source>Google Recaptcha Website-Key</source>

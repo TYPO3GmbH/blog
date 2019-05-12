@@ -1,0 +1,6 @@
+<formvh:renderRenderable renderable="{element}">
+    <f:render partial="Field/Field" arguments="{element: element, doNotShowLabel: 1}" contentAs="elementContent">
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <div class="g-recaptcha" data-sitekey="{element.properties.sitekey}"></div>
+    </f:render>
+</formvh:renderRenderable>
