@@ -1,17 +1,7 @@
 <f:layout name="Default" />
 <f:section name="Content">
-    <f:if condition="{tags}">
+    <f:if condition="{tag}">
         <f:then>
-            <f:comment>In case tags is set, to special tag is in request and we show all tags as links.</f:comment>
-            <h1 class="page-title"><f:translate key="headline.tags" /></h1>
-            <ul class="list-inline">
-                <f:for each="{tags}" as="tag">
-                    <li><blogvh:link.tag tag="{tag}" /></li>
-                </f:for>
-            </ul>
-        </f:then>
-        <f:else>
-            <f:comment>In case tags is NOT set, a special tag is in request and we show all blogs posts of this tag.</f:comment>
             <h1 class="page-title"><f:translate key="headline.tag" arguments="{0: tag.title}" /> <blogvh:link.tag rss="true" tag="{tag}"><i class="fa fa-rss-square"></i></blogvh:link.tag></h1>
             <div class="taxonomy-description">
                 <p>{tag.description}</p>
@@ -20,6 +10,14 @@
                 </f:if>
             </div>
             <f:render partial="List" arguments="{_all}" />
+        </f:then>
+        <f:else>
+            <h1 class="page-title"><f:translate key="headline.tags" /></h1>
+            <ul class="list-inline">
+                <f:for each="{tags}" as="tag">
+                    <li><blogvh:link.tag tag="{tag}" /></li>
+                </f:for>
+            </ul>
         </f:else>
     </f:if>
 </f:section>
