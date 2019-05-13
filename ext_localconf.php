@@ -66,10 +66,10 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'CommentForm',
         [
-            'Comment' => 'form, addComment',
+            'Comment' => 'form',
         ],
         [
-            'Comment' => 'form, addComment',
+            'Comment' => 'form',
         ]
     );
 
