@@ -188,14 +188,14 @@ class PostController extends ActionController
      */
     public function listPostsByCategoryAction(Category $category = null)
     {
-        if (null === $category) {
-            $this->view->assign('categories', $this->categoryRepository->findAll());
-        } else {
+        if ($category) {
             $this->view->assign('posts', $this->postRepository->findAllByCategory($category));
             $this->view->assign('category', $category);
             MetaService::set(MetaService::META_TITLE, $category->getTitle());
             MetaService::set(MetaService::META_DESCRIPTION, $category->getDescription());
             MetaService::set(MetaService::META_CATEGORIES, [$category->getTitle()]);
+        } else {
+            $this->view->assign('categories', $this->categoryRepository->findAll());
         }
     }
 
