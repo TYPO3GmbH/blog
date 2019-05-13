@@ -266,9 +266,7 @@ class PostController extends ActionController
      */
     public function listPostsByAuthorAction(Author $author = null): void
     {
-        if (null === $author) {
-            $this->view->assign('authors', $this->authorRepository->findAll());
-        } else {
+        if ($author) {
             $posts = $this->postRepository->findAllByAuthor($author);
             $this->view->assign('posts', $posts);
             $this->view->assign('author', $author);
@@ -277,6 +275,8 @@ class PostController extends ActionController
             foreach ($posts as $post) {
                 $this->blogCacheService->addTagsForPost($post);
             }
+        } else {
+            $this->view->assign('authors', $this->authorRepository->findAll());
         }
     }
 
