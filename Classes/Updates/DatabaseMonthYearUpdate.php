@@ -107,6 +107,12 @@ class DatabaseMonthYearUpdate implements UpgradeWizardInterface
      */
     public function updateNecessary(): bool
     {
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
+        $tableColumns = $connection->getSchemaManager()->listTableColumns('pages');
+        if (!isset($tableColumns['crdate_month']) && !isset($tableColumns['crdate_year'])) {
+            return false;
+        }
+
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('pages');
         $queryBuilder->getRestrictions()->removeAll();
