@@ -229,14 +229,14 @@ class PostController extends ActionController
      */
     public function listPostsByTagAction(Tag $tag = null)
     {
-        if (null === $tag) {
-            $this->view->assign('tags', $this->tagRepository->findAll());
-        } else {
+        if ($tag) {
             $this->view->assign('posts', $this->postRepository->findAllByTag($tag));
             $this->view->assign('tag', $tag);
             MetaService::set(MetaService::META_TITLE, $tag->getTitle());
             MetaService::set(MetaService::META_DESCRIPTION, $tag->getDescription());
             MetaService::set(MetaService::META_TAGS, [$tag->getTitle()]);
+        } else {
+            $this->view->assign('tags', $this->tagRepository->findAll());
         }
     }
 
