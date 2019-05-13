@@ -289,9 +289,7 @@ class PostController extends ActionController
      */
     public function listPostsByTagAction(Tag $tag = null): void
     {
-        if (null === $tag) {
-            $this->view->assign('tags', $this->tagRepository->findAll());
-        } else {
+        if ($tag) {
             $posts = $this->postRepository->findAllByTag($tag);
             $this->view->assign('posts', $posts);
             $this->view->assign('tag', $tag);
@@ -301,6 +299,8 @@ class PostController extends ActionController
             foreach ($posts as $post) {
                 $this->blogCacheService->addTagsForPost($post);
             }
+        } else {
+            $this->view->assign('tags', $this->tagRepository->findAll());
         }
     }
 
