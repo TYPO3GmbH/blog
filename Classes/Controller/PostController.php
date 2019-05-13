@@ -218,11 +218,10 @@ class PostController extends ActionController
      */
     public function listPostsByCategoryAction(Category $category = null)
     {
-        if (null === $category) {
+        if ($category === null) {
             $categories = $this->categoryRepository->getByReference(
                 'tt_content',
                 $this->configurationManager->getContentObject()->data['uid']
-
             );
 
             if (!empty($categories)) {
@@ -230,9 +229,7 @@ class PostController extends ActionController
             }
         }
 
-        if (null === $category) {
-            $this->view->assign('categories', $this->categoryRepository->findAll());
-        } else {
+        if ($category) {
             $posts = $this->postRepository->findAllByCategory($category);
             $this->view->assign('posts', $posts);
             $this->view->assign('category', $category);
@@ -242,6 +239,8 @@ class PostController extends ActionController
             foreach ($posts as $post) {
                 $this->blogCacheService->addTagsForPost($post);
             }
+        } else {
+            $this->view->assign('categories', $this->categoryRepository->findAll());
         }
     }
 
