@@ -236,14 +236,14 @@ class PostController extends ActionController
      */
     public function listPostsByAuthorAction(Author $author = null): void
     {
-        if (null === $author) {
-            $this->view->assign('authors', $this->authorRepository->findAll());
-        } else {
+        if ($author) {
             $posts = $this->postRepository->findAllByAuthor($author);
             $this->view->assign('posts', $posts);
             $this->view->assign('author', $author);
             MetaService::set(MetaService::META_TITLE, $author->getName());
             MetaService::set(MetaService::META_DESCRIPTION, $author->getBio());
+        } else {
+            $this->view->assign('authors', $this->authorRepository->findAll());
         }
     }
 

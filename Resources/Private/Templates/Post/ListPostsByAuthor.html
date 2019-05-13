@@ -1,22 +1,20 @@
 <f:layout name="Default" />
 <f:section name="Content">
-    <f:if condition="{authors}">
+    <f:if condition="{author}">
         <f:then>
-            <f:comment>In case authors is set, to special author is in request and we show all authors as links.</f:comment>
+            <h1 class="page-title"><f:translate key="headline.author" arguments="{0: author.name}" /> <blogvh:link.author rss="true" author="{author}"><i class="fa fa-rss-square"></i></blogvh:link.author></h1>
+            <div class="taxonomy-description">
+                <p>{author.bio}</p>
+            </div>
+            <f:render partial="List" arguments="{_all}" />
+        </f:then>
+        <f:else>
             <h1 class="page-title"><f:translate key="headline.authors" /></h1>
             <ul class="list-inline">
                 <f:for each="{authors}" as="author">
                     <li><blogvh:link.author author="{author}" /></li>
                 </f:for>
             </ul>
-        </f:then>
-        <f:else>
-            <f:comment>In case authors is NOT set, a special author is in request and we show all blogs posts of this author.</f:comment>
-            <h1 class="page-title"><f:translate key="headline.author" arguments="{0: author.name}" /> <blogvh:link.author rss="true" author="{author}"><i class="fa fa-rss-square"></i></blogvh:link.author></h1>
-            <div class="taxonomy-description">
-                <p>{author.bio}</p>
-            </div>
-            <f:render partial="List" arguments="{_all}" />
         </f:else>
     </f:if>
 </f:section>
