@@ -2,18 +2,8 @@
 <f:layout name="Default" />
 
 <f:section name="content">
-    <f:if condition="{categories}">
+    <f:if condition="{category}">
         <f:then>
-            <f:comment>In case categories is set, to special category is in request and we show all categories as links.</f:comment>
-            <h1 class="page-title"><f:translate key="headline.categories" /></h1>
-            <ul class="list-inline">
-                <f:for each="{categories}" as="category">
-                    <li><blog:link.category category="{category}" /></li>
-                </f:for>
-            </ul>
-        </f:then>
-        <f:else>
-            <f:comment>In case categories is NOT set, a special category is in request and we show all blogs posts of this category.</f:comment>
             <h1 class="page-title"><f:translate key="headline.category" arguments="{0: category.title}" /> <blog:link.category rss="true" category="{category}"><i class="fa fa-rss-square"></i></blog:link.category></h1>
             <div class="taxonomy-description">
                 <p>{category.description}</p>
@@ -22,6 +12,14 @@
                 </f:if>
             </div>
             <f:render partial="List" arguments="{_all}" />
+        </f:then>
+        <f:else>
+            <h1 class="page-title"><f:translate key="headline.categories" /></h1>
+            <ul class="list-inline">
+                <f:for each="{categories}" as="category">
+                    <li><blog:link.category category="{category}" /></li>
+                </f:for>
+            </ul>
         </f:else>
     </f:if>
 </f:section>
