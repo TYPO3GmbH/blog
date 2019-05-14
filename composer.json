@@ -81,6 +81,7 @@
         "typo3fluid/fluid": "^2.6"
     },
     "require-dev": {
+        "typo3/cms-belog": "^9.5.5 || 10.0.*@dev",
         "typo3/cms-filelist": "^9.5.5 || 10.0.*@dev",
         "typo3/cms-lowlevel": "^9.5.5 || 10.0.*@dev",
         "typo3/cms-tstemplate": "^9.5.5 || 10.0.*@dev",
