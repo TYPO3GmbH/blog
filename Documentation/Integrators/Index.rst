@@ -16,24 +16,24 @@ Settings (plugin.tx_blog.settings)
 
 .. container:: ts-properties
 
-   ==================================== ====================================== =============== ===============
-   Property                             Title                                  Type            Default
-   ==================================== ====================================== =============== ===============
-   blogUid_                             UID of the blog start page             int             0
-   categoryUid_                         UID of the category page               int             0
-   tagUid_                              UID of the tag page                    int             0
-   archiveUid_                          UID of the archive page                int             0
-   authorUid_                           UID of the author page                 int             0
-   storagePid_                          UID of the storage folder              int             0
-   sidebarWidgets_                      List of active sidebar widgets         array           see description
-   `list.posts.maximumDisplayedItems`_  Maximum posts to be displayed in list  int             0
-   `list.posts.dateFormat`_             The date format for post lists         string          %d.%m.%Y
-   widgets_                             Widget specific configuration          array           see description
-   `comments.active`_                   Activate comments feature              int             1
-   `comments.moderation`_               Activate comments moderation           int             0
-   `comments.respectPostLanguageId`_    Respect language of post               int             1
-   `authors.avatar.provider`_           AvatarProvider specific settings       array           see description
-   ==================================== ====================================== =============== ===============
+   ===================================== ====================================== =============== ===============
+   Property                              Title                                  Type            Default
+   ===================================== ====================================== =============== ===============
+   blogUid_                              UID of the blog start page             int             0
+   categoryUid_                          UID of the category page               int             0
+   tagUid_                               UID of the tag page                    int             0
+   archiveUid_                           UID of the archive page                int             0
+   authorUid_                            UID of the author page                 int             0
+   storagePid_                           UID of the storage folder              int             0
+   sidebarWidgets_                       List of active sidebar widgets         array           see description
+   `lists.posts.maximumDisplayedItems`_  Maximum posts to be displayed in list  int             0
+   `lists.posts.dateFormat`_             The date format for post lists         string          %d.%m.%Y
+   widgets_                              Widget specific configuration          array           see description
+   `comments.active`_                    Activate comments feature              int             1
+   `comments.moderation`_                Activate comments moderation           int             0
+   `comments.respectPostLanguageId`_     Respect language of post               int             1
+   `authors.avatar.provider`_            AvatarProvider specific settings       array           see description
+   ===================================== ====================================== =============== ===============
 
 .. _tsBlogUid:
 
@@ -150,12 +150,12 @@ sidebarWidgets
 
 .. _tsListPostsMmaximumDisplayedItems:
 
-list.posts.maximumDisplayedItems
-""""""""""""""""""""""""""""""""
+lists.posts.maximumDisplayedItems
+"""""""""""""""""""""""""""""""""
 .. container:: table-row
 
    Property
-         list.posts.maximumDisplayedItems
+         lists.posts.maximumDisplayedItems
    Data type
          int
    Description
@@ -164,12 +164,12 @@ list.posts.maximumDisplayedItems
 
 .. _tsListPostDateFormat:
 
-list.posts.dateFormat
-"""""""""""""""""""""
+lists.posts.dateFormat
+""""""""""""""""""""""
 .. container:: table-row
 
    Property
-         list.posts.dateFormat
+         lists.posts.dateFormat
    Data type
          string
    Description
