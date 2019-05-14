@@ -13,8 +13,8 @@ namespace T3G\AgencyPack\Blog\Notification;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Messaging\MailMessage;
-use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class CommentAddedNotification extends AbstractNotification
 {
@@ -25,7 +25,7 @@ class CommentAddedNotification extends AbstractNotification
     {
         /** @var Post $post */
         $post = $this->data['post'];
-        return sprintf($this->getLanguageService()->sL('LLL:EXT:blog/Resources/Private/Language/locallang.xlf:emails.CommentAddedNotification.subject'), $post->getTitle());
+        return sprintf(LocalizationUtility::translate('emails.CommentAddedNotification.subject', 'blog'), $post->getTitle());
     }
 
     /**
@@ -47,13 +47,5 @@ class CommentAddedNotification extends AbstractNotification
             'comment' => $comment,
             'post' => $post
         ]);
-    }
-
-    /**
-     * @return LanguageService
-     */
-    protected function getLanguageService(): LanguageService
-    {
-        return $GLOBALS['LANG'];
     }
 }
