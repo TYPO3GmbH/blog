@@ -125,8 +125,8 @@ class CommentController extends ActionController
     /**
      * Add comment to blog post.
      *
-     * @param Post    $post
-     * @param Comment $comment
+     * @param Post|null    $post
+     * @param Comment|null $comment
      *
      * @throws \InvalidArgumentException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
@@ -135,8 +135,11 @@ class CommentController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \RuntimeException
      */
-    public function addCommentAction(Post $post, Comment $comment)
+    public function addCommentAction(Post $post = null, Comment $comment = null)
     {
+        if (!$post || !$comment) {
+            $this->redirect('form');
+        }
         $this->commentService->injectSettings($this->settings['comments']);
         $state = $this->commentService->addComment($post, $comment);
         $this->addFlashMessage(
