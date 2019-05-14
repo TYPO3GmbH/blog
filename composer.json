@@ -76,6 +76,11 @@
         "typo3fluid/fluid": "^2.5.0"
     },
     "require-dev": {
+        "typo3/cms-belog": "^9.5.1",
+        "typo3/cms-filelist": "^9.5.1",
+        "typo3/cms-lowlevel": "^9.5.1",
+        "typo3/cms-tstemplate": "^9.5.1",
+        "typo3/cms-rte-ckeditor": "^9.5.1",
         "friendsofphp/php-cs-fixer": "^2.12",
         "roave/security-advisories": "dev-master",
         "t3g/blog-template-test": "^1.0.0",
