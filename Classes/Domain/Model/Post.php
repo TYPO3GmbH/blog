@@ -21,6 +21,13 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class Post extends AbstractEntity
 {
     /**
+     * The blog post doktype
+     *
+     * @var int
+     */
+    protected $doktype = 137;
+
+    /**
      * The blog post title.
      *
      * @var string
