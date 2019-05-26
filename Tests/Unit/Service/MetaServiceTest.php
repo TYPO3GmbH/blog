@@ -20,10 +20,7 @@ class MetaServiceTest extends UnitTestCase
      */
     protected $metaService;
 
-    /**
-     *
-     */
-    public function setUp()
+    public function initialize()
     {
         $this->metaService = MetaService::getInstance();
     }
@@ -52,6 +49,8 @@ class MetaServiceTest extends UnitTestCase
      */
     public function ensureDataCanStoredInMetaService(string $key)
     {
+        $this->initialize();
+
         MetaService::set($key, $key);
         self::assertSame($key, MetaService::get($key));
     }
