@@ -32,7 +32,7 @@ class CommentServiceTest extends UnitTestCase
      */
     protected $commentService;
 
-    public function setUp()
+    public function initialize()
     {
         $GLOBALS['TSFE'] = $this->prophesize(TypoScriptFrontendController::class)->reveal();
         $this->postRepositoryProphecy = $this->prophesize(PostRepository::class);
@@ -46,6 +46,8 @@ class CommentServiceTest extends UnitTestCase
      */
     public function inactiveCommentsReturnErrorOnAdd(): void
     {
+        $this->initialize();
+
         $post = new Post();
         $post->_setProperty('uid', 1);
         $comment = new Comment();
@@ -59,6 +61,8 @@ class CommentServiceTest extends UnitTestCase
      */
     public function activeCommentsWithoutModerationReturnSuccessOnAdd(): void
     {
+        $this->initialize();
+
         $post = new Post();
         $post->_setProperty('uid', 1);
         $comment = new Comment();
@@ -76,6 +80,8 @@ class CommentServiceTest extends UnitTestCase
      */
     public function activeCommentsWithModerationReturnModerationOnAdd(): void
     {
+        $this->initialize();
+
         $post = new Post();
         $post->_setProperty('uid', 1);
         $comment = new Comment();
@@ -93,6 +99,8 @@ class CommentServiceTest extends UnitTestCase
      */
     public function commentGetsAddedToPost(): void
     {
+        $this->initialize();
+
         $post = new Post();
         $post->_setProperty('uid', 1);
         $comment = new Comment();
@@ -110,6 +118,8 @@ class CommentServiceTest extends UnitTestCase
      */
     public function postGetsUpdatedInDatabase(): void
     {
+        $this->initialize();
+
         $post = new Post();
         $post->_setProperty('uid', 1);
         $comment = new Comment();
