@@ -2,7 +2,12 @@
 <f:section name="Content">
     <f:if condition="{tag}">
         <f:then>
-            <h1 class="page-title"><f:translate key="headline.tag" arguments="{0: tag.title}" /> <blogvh:link.tag rss="true" tag="{tag}"><i class="fa fa-rss-square"></i></blogvh:link.tag></h1>
+            <h1 class="page-title">
+                <span><f:translate key="headline.tag" arguments="{0: tag.title}" /></span>
+                <blogvh:link.tag rss="true" tag="{tag}">
+                    <span class="blogicon"><f:render partial="General/SocialIcons" section="Rss" optional="true" /></span>
+                </blogvh:link.tag>
+            </h1>
             <div class="taxonomy-description">
                 <p>{tag.description}</p>
                 <f:if condition="{tag.content}">
@@ -12,7 +17,9 @@
             <f:render partial="List" arguments="{_all}" />
         </f:then>
         <f:else>
-            <h1 class="page-title"><f:translate key="headline.tags" /></h1>
+            <h1 class="page-title">
+                <span><f:translate key="headline.tags" /></span>
+            </h1>
             <ul class="list-inline">
                 <f:for each="{tags}" as="tag">
                     <li><blogvh:link.tag tag="{tag}" /></li>

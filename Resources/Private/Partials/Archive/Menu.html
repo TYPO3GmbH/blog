@@ -8,7 +8,7 @@
                             {year}
                         </blogvh:link.archive>
                         <blogvh:link.archive class="archive-item-year-rss" rss="true" year="{year}" title="{year}">
-                            <i class="fa fa-rss-square"></i>
+                            <span class="blogicon"><f:render partial="General/SocialIcons" section="Rss" optional="true" /></span>
                         </blogvh:link.archive>
                         <f:if condition="{settings.widgets.archive.groupByMonth} == 1">
                             <ul>
@@ -41,7 +41,7 @@
             </f:if>
         </blogvh:link.archive>
         <blogvh:link.archive class="archive-item-month-rss" rss="true" year="{year}" month="{month.month}" title="{year}">
-            <i class="fa fa-rss-square"></i>
+            <span class="blogicon"><f:render partial="General/SocialIcons" section="Rss" optional="true" /></span>
         </blogvh:link.archive>
     </li>
 </f:section>

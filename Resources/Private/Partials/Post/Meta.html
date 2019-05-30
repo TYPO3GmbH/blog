@@ -15,7 +15,8 @@
         <span itemprop="keywords">
             <f:for each="{post.tags}" as="postTag">
                 <blogvh:link.tag tag="{postTag}" class="label label-default label-tag">
-                    <span><i class="fa fa-tag"></i> {postTag.title}</span>
+                    <span class="blogicon"><f:render partial="General/BlogIcons" section="Tag" optional="true" /></span>
+                    <span>{postTag.title}</span>
                 </blogvh:link.tag>
             </f:for>
         </span>

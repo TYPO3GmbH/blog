@@ -35,26 +35,18 @@
     margin-right: .25rem;
 }
 .postauthor__social {
-    line-height: 1rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
     margin-top: .25rem;
     + .postauthor__actions {
         margin-top: .5rem;
     }
 }
 .postauthor__sociallink {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin-right: 0.5rem;
-}
-.postauthor__sociallinkicon {
-    display: inline-block;
-    vertical-align: middle;
-    height: 1rem;
-    width: 1rem;
-    svg {
-        display: block;
-        height: 100%;
-        width: 100%;
-    }
 }
 .postauthor__sociallinklabel {
     position: absolute !important;

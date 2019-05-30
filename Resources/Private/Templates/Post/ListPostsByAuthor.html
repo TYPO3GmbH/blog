@@ -2,7 +2,12 @@
 <f:section name="Content">
     <f:if condition="{author}">
         <f:then>
-            <h1 class="page-title"><f:translate key="headline.author" arguments="{0: author.name}" /> <blogvh:link.author rss="true" author="{author}"><i class="fa fa-rss-square"></i></blogvh:link.author></h1>
+            <h1 class="page-title">
+                <span><f:translate key="headline.author" arguments="{0: author.name}" /></span>
+                <blogvh:link.author rss="true" author="{author}">
+                    <span class="blogicon"><f:render partial="General/SocialIcons" section="Rss" optional="true" /></span>
+                </blogvh:link.author>
+            </h1>
             <div class="taxonomy-description">
                 <p>{author.bio}</p>
             </div>
