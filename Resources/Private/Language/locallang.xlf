@@ -3,6 +3,8 @@
     <file t3:id="1557352034" source-language="en" datatype="plaintext" original="messages" date="2019-05-08T21:47:12Z" product-name="blog">
         <header/>
         <body>
+
+            <!-- Headline -->
             <trans-unit id="headline.commentform" xml:space="preserve">
                 <source>Write comment</source>
             </trans-unit>
@@ -39,6 +41,8 @@
             <trans-unit id="headline.rssfeed" xml:space="preserve">
                 <source>RSS-Feeds</source>
             </trans-unit>
+
+            <!-- Form -->
             <trans-unit id="form.comment.name" xml:space="preserve">
                 <source>Name</source>
             </trans-unit>
@@ -54,6 +58,8 @@
             <trans-unit id="form.comment.submit" xml:space="preserve">
                 <source>Submit</source>
             </trans-unit>
+
+            <!-- Message -->
             <trans-unit id="message.no_comments" xml:space="preserve">
                 <source>No comments</source>
             </trans-unit>
@@ -84,12 +90,16 @@
             <trans-unit id="message.addComment.moderation.text" xml:space="preserve">
                 <source>Your comment was added successfully and is now waiting for approval.</source>
             </trans-unit>
+
+            <!-- Meta -->
             <trans-unit id="meta.title.listPostsByDate" xml:space="preserve">
                 <source>All blog posts in ###MONTH_NAME### ###YEAR###</source>
             </trans-unit>
             <trans-unit id="meta.description.listPostsByDate" xml:space="preserve">
                 <source>All blog posts ordered by date</source>
             </trans-unit>
+
+            <!-- Author -->
             <trans-unit id="author.aboutTheAuthor"  xml:space="preserve">
                 <source>About the Author</source>
             </trans-unit>
@@ -105,12 +115,19 @@
             <trans-unit id="author.social.xing"  xml:space="preserve">
                 <source>Xing</source>
             </trans-unit>
+            <trans-unit id="author.more.posts" xml:space="preserve">
+                <source>More posts by this author</source>
+            </trans-unit>
+
+            <!-- List -->
             <trans-unit id="list.no_posts.title" xml:space="preserve">
                 <source>No blog posts</source>
             </trans-unit>
             <trans-unit id="list.no_posts.message" xml:space="preserve">
                 <source>This list contains no blog posts.</source>
             </trans-unit>
+
+            <!-- Backend -->
             <trans-unit id="backend.headline.setup_wizard" xml:space="preserve">
                 <source>SetupWizard</source>
             </trans-unit>
@@ -189,6 +206,8 @@
             <trans-unit id="backend.comments.filter.deleted" xml:space="preserve">
                 <source>Deleted</source>
             </trans-unit>
+
+            <!-- Wizard -->
             <trans-unit id="wizard.button.trigger" xml:space="preserve">
                 <source>Setup a new blog</source>
             </trans-unit>
@@ -213,6 +232,8 @@
             <trans-unit id="wizard.placeholder.title" xml:space="preserve">
                 <source>The title of your blog</source>
             </trans-unit>
+
+            <!-- Constant Editor -->
             <trans-unit id="constantEditor.blog" xml:space="preserve">
                 <source>TYPO3 Blog</source>
             </trans-unit>
@@ -390,6 +411,8 @@
             <trans-unit id="constantEditor.widgets.archive.monthDateFormat" xml:space="preserve">
                 <source>Month format:The format of the month (default: %B).</source>
             </trans-unit>
+
+            <!-- Feed -->
             <trans-unit id="feed.title.listPostsByCategory" xml:space="preserve">
                 <source>Category RSS Feed</source>
             </trans-unit>
@@ -421,10 +444,7 @@
                 <source>Recent posts</source>
             </trans-unit>
 
-            <trans-unit id="author.more.posts" xml:space="preserve">
-                <source>More posts by this author</source>
-            </trans-unit>
-
+            <!-- Label -->
             <trans-unit id="label.blog" xml:space="preserve">
                 <source>Blog</source>
             </trans-unit>
@@ -434,7 +454,14 @@
             <trans-unit id="label.choose_blog" xml:space="preserve">
                 <source>Choose blog</source>
             </trans-unit>
+            <trans-unit id="label.required.field" xml:space="preserve">
+                <source>*</source>
+            </trans-unit>
+            <trans-unit id="label.required.field.explanation" xml:space="preserve">
+                <source>These fields are required</source>
+            </trans-unit>
 
+            <!-- Actions -->
             <trans-unit id="action.approve" xml:space="preserve">
                 <source>Approve comment</source>
             </trans-unit>
@@ -455,13 +482,6 @@
             </trans-unit>
             <trans-unit id="action.multiple.delete" xml:space="preserve">
                 <source>Delete</source>
-            </trans-unit>
-
-            <trans-unit id="label.required.field" xml:space="preserve">
-                <source>*</source>
-            </trans-unit>
-            <trans-unit id="label.required.field.explanation" xml:space="preserve">
-                <source>These fields are required</source>
             </trans-unit>
 
             <!-- E-Mails -->
