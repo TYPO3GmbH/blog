@@ -61,13 +61,13 @@
 
             <!-- Message -->
             <trans-unit id="message.no_comments" xml:space="preserve">
-                <source>No comments</source>
+                <source>No Comments</source>
             </trans-unit>
             <trans-unit id="message.comment" xml:space="preserve">
-                <source>%s comment</source>
+                <source>%s Comment</source>
             </trans-unit>
             <trans-unit id="message.comments" xml:space="preserve">
-                <source>%s comments</source>
+                <source>%s Comments</source>
             </trans-unit>
             <trans-unit id="message.comments_closed" xml:space="preserve">
                 <source>Comments closed</source>
@@ -92,6 +92,42 @@
             </trans-unit>
 
             <!-- Meta -->
+            <trans-unit id="meta.author.prefix.label" xml:space="preserve">
+                <source>Author</source>
+            </trans-unit>
+            <trans-unit id="meta.categories.prefix.category" xml:space="preserve">
+                <source>Category</source>
+            </trans-unit>
+            <trans-unit id="meta.categories.prefix.categories" xml:space="preserve">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="meta.tags.prefix.tag" xml:space="preserve">
+                <source>Tag</source>
+            </trans-unit>
+            <trans-unit id="meta.tags.prefix.tags" xml:space="preserve">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="meta.published.prefix.label" xml:space="preserve">
+                <source>Published</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.prefix.comments" xml:space="preserve">
+                <source>Comments</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.prefix.has_comment" xml:space="preserve">
+                <source>%s Comment</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.prefix.has_comments" xml:space="preserve">
+                <source>%s Comments</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.body.start_conversation" xml:space="preserve">
+                <source>Start the Conversation</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.body.join_conversation" xml:space="preserve">
+                <source>Join the Conversation</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.body.view_conversation" xml:space="preserve">
+                <source>View the Conversation</source>
+            </trans-unit>
             <trans-unit id="meta.title.listPostsByDate" xml:space="preserve">
                 <source>All blog posts in ###MONTH_NAME### ###YEAR###</source>
             </trans-unit>

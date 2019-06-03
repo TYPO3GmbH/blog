@@ -1,0 +1,11 @@
+<f:spaceless>
+    <header class="postheader">
+        <h1 class="postheader__title">{post.title}</h1>
+        <f:if condition="{settings.meta.header.enable}">
+            <div class="postheader__meta">
+                <f:render partial="Meta/Header" arguments="{_all}" />
+            </div>
+        </f:if>
+    </header>
+</f:spaceless>
+

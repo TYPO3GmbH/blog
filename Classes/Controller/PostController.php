@@ -275,6 +275,38 @@ class PostController extends ActionController
     }
 
     /**
+     * Header action: output the header of blog post.
+     *
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function headerAction(): void
+    {
+        $post = $this->postRepository->findCurrentPost();
+        $this->view->assign('post', $post);
+        if ($post instanceof Post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
+    }
+
+    /**
+     * Footer action: output the footer of blog post.
+     *
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function footerAction(): void
+    {
+        $post = $this->postRepository->findCurrentPost();
+        $this->view->assign('post', $post);
+        if ($post instanceof Post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
+    }
+
+    /**
      * Metadata action: output meta information of blog post.
      *
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException

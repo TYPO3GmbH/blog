@@ -59,6 +59,24 @@ mod.wizards.newContentElement.wizardItems.blog {
                 list_type = blog_sidebar
             }
         }
+        blog_header {
+            iconIdentifier = plugin-blog-header
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_header.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_header.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_header
+            }
+        }
+        blog_footer {
+            iconIdentifier = plugin-blog-footer
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_footer.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_footer.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_footer
+            }
+        }
         blog_metadata {
             iconIdentifier = plugin-blog-metadata
             title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_metadata.title

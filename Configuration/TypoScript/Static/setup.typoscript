@@ -39,6 +39,75 @@ plugin.tx_blog {
             50 = tt_content.list.20.blog_archivewidget
             60 = tt_content.list.20.blog_feedwidget
         }
+        # Post View
+        meta {
+            header {
+                enable = 1
+                modifierClass = header
+                elements {
+                    authors {
+                        enable = 1
+                    }
+                    categories {
+                        enable = 0
+                    }
+                    tags {
+                        enable = 0
+                    }
+                    published {
+                        enable = 1
+                    }
+                    comments {
+                        enable = 1
+                    }
+                }
+            }
+            footer {
+                enable = 1
+                modifierClass = footer
+                elements {
+                    authors {
+                        enable = 0
+                    }
+                    categories {
+                        enable = 1
+                    }
+                    tags {
+                        enable = 1
+                    }
+                    published {
+                        enable = 0
+                    }
+                    comments {
+                        enable = 0
+                    }
+                }
+
+            }
+            list {
+                enable = 1
+                modifierClass = list
+                elements {
+                    author {
+                        enable = 0
+                    }
+                    categories {
+                        enable = 0
+                    }
+                    tags {
+                        enable = 0
+                    }
+                    published {
+                        enable = 1
+                    }
+                    comments {
+                        enable = 1
+                    }
+                }
+            }
+            default =< .list
+        }
+
         # Lists related settings
         lists {
             pagination {

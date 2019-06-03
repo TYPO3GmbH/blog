@@ -1,0 +1,39 @@
+/**
+ * Metagroup
+ */
+.postmetagroup {
+    display: flex;
+    align-items: center;
+    margin: -.135rem -.5rem;
+    flex-wrap: wrap;
+}
+.postmetagroup__item {
+    padding: .135rem .5rem;
+    white-space: nowrap;
+    width: 100%;
+    @media (min-width: 576px) {
+        width: auto;
+    }
+}
+.postmetagroup__icon,
+.postmetagroup__prefix {
+    opacity: .75;
+}
+.postmetagroup__item {
+    display: inline-flex;
+}
+.postmetagroup__body {
+    margin-left: 0.25rem
+}
+.postmetagroup__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    li {
+        display: inline;
+        &:not(:last-child):after {
+            display: inline;
+            content: ', ';
+        }
+    }
+}

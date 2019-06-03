@@ -1,0 +1,24 @@
+<f:variable name="name">comments</f:variable>
+<f:variable name="icon"><f:render partial="General/BlogIcons" section="Comment" optional="true" /></f:variable>
+<f:variable name="prefix"><f:translate key="meta.comments.prefix.comments"/></f:variable>
+
+<f:if condition="{settings.comments.active} && {post.commentsActive}">
+    <f:variable name="commentCount" value="{post.activeComments -> f:count()}" />
+    <f:if condition="{settings.comments.disqus._typoScriptNodeValue} !== '1' && {commentCount} == 1">
+        <f:variable name="prefix"><f:translate key="meta.comments.prefix.has_comment" arguments="{0: commentCount}"/></f:variable>
+    </f:if>
+    <f:if condition="{settings.comments.disqus._typoScriptNodeValue} !== '1' && {commentCount} > 1">
+        <f:variable name="prefix"><f:translate key="meta.comments.prefix.has_comments" arguments="{0: commentCount}"/></f:variable>
+    </f:if>
+    <f:render partial="Meta/Rendering/Item" arguments="{name: name, icon: icon, prefix: prefix}" contentAs="content">
+        <f:variable name="text"><f:translate key="meta.comments.body.join_conversation"/></f:variable>
+        <f:if condition="{settings.comments.disqus._typoScriptNodeValue} !== '1'">
+            <f:if condition="{commentCount}">
+                <f:else>
+                    <f:variable name="text"><f:translate key="meta.comments.body.start_conversation"/></f:variable>
+                </f:else>
+            </f:if>
+        </f:if>
+        <blogvh:link.post post="{post}" section="comments">{text}</blogvh:link.post>
+    </f:render>
+</f:if>

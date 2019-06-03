@@ -1,0 +1,20 @@
+<f:if condition="!{metatype}"><f:variable name="metatype" value="default" /></f:if>
+<f:if condition="{settings.meta.{metatype}.enable}">
+    <f:render partial="Meta/Rendering/Group" arguments="{_all}" contentAs="content">
+        <f:if condition="{settings.meta.{metatype}.elements.authors.enable}">
+            <f:render partial="Meta/Elements/Authors" arguments="{_all}" />
+        </f:if>
+        <f:if condition="{settings.meta.{metatype}.elements.categories.enable}">
+            <f:render partial="Meta/Elements/Categories" arguments="{_all}" />
+        </f:if>
+        <f:if condition="{settings.meta.{metatype}.elements.tags.enable}">
+            <f:render partial="Meta/Elements/Tags" arguments="{_all}" />
+        </f:if>
+        <f:if condition="{settings.meta.{metatype}.elements.published.enable}">
+            <f:render partial="Meta/Elements/Published" arguments="{_all}" />
+        </f:if>
+        <f:if condition="{settings.meta.{metatype}.elements.comments.enable}">
+            <f:render partial="Meta/Elements/Comments" arguments="{_all}" />
+        </f:if>
+    </f:render>
+</f:if>
