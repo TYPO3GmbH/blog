@@ -13,6 +13,12 @@
             <trans-unit id="plugin.blog_posts.description" xml:space="preserve">
                 <source>Displays a list of blog posts ordered by date. All non-hidden, non-deleted and non-archived posts are shown in the list.</source>
             </trans-unit>
+            <trans-unit id="plugin.blog_latestposts.title" xml:space="preserve">
+                <source>Blog: Latest posts</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_latestposts.description" xml:space="preserve">
+                <source>Displays a number of latest posts. You can specify the amount of items yourself.</source>
+            </trans-unit>
             <trans-unit id="plugin.blog_category.title" xml:space="preserve">
                 <source>Blog: List by category</source>
             </trans-unit>
@@ -250,7 +256,7 @@
                 <source>General</source>
             </trans-unit>
             <trans-unit id="display_flexform.maximumDisplayedItems" xml:space="preserve">
-                <source>Maximum number of items to be shown (0 or empty = all items)</source>
+                <source>Amount of items to show in overview of latest posts</source>
             </trans-unit>
         </body>
     </file>

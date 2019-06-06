@@ -13,7 +13,7 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
-                    <settings.lists.posts.maximumDisplayedItems>
+                    <settings.lists.posts.numberOfLatestItems>
                         <TCEforms>
                             <label>
                                 LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:display_flexform.maximumDisplayedItems
@@ -23,7 +23,7 @@
                                 <eval>int</eval>
                             </config>
                         </TCEforms>
-                    </settings.lists.posts.maximumDisplayedItems>
+                    </settings.lists.posts.numberOfLatestItems>
                 </el>
             </ROOT>
         </sDEF>

@@ -62,6 +62,8 @@ plugin {
                 posts {
                     # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.maximumDisplayedItems
                     maximumDisplayedItems = 0
+                    # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.numberOfLatestItems
+                    numberOfLatestItems = 3
                     # cat=blog/blog_120_lists; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.dateFormat
                     dateFormat = %d.%m.%Y
                 }

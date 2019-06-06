@@ -27,6 +27,13 @@ call_user_func(function () {
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
+        'LatestPosts',
+        [
+            'Post' => 'listLatestPosts',
+        ]
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
         'Category',
         [
             'Post' => 'listPostsByCategory',
