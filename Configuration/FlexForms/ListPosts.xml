@@ -1,0 +1,32 @@
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>
+                        LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:display_flexform.sheet_general
+                    </sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.lists.posts.maximumDisplayedItems>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:display_flexform.maximumDisplayedItems
+                            </label>
+                            <config>
+                                <type>input</type>
+                                <eval>int</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.lists.posts.maximumDisplayedItems>
+                </el>
+            </ROOT>
+        </sDEF>
+
+    </sheets>
+</T3DataStructure>

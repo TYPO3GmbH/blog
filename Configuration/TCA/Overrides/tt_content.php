@@ -19,3 +19,9 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_tag
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_posts'] = 'select_key';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_metadata'] = 'recursive,select_key,pages';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_sidebar'] = 'recursive,select_key,pages';
+
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['blog_posts'] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    'blog_posts',
+    'FILE:EXT:blog/Configuration/FlexForms/ListPosts.xml'
+);
