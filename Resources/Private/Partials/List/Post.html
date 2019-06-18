@@ -1,6 +1,6 @@
 <div class="post">
     <h2 itemprop="name"><blogvh:link.post post="{post}" /></h2>
-    <f:render partial="Meta/List" arguments="{_all}" />
+    <f:render partial="Meta/ListHeader" arguments="{_all}" />
     <f:if condition="{post.abstract}">
         <f:then>
             <p itemprop="description">{post.abstract}</p>
@@ -9,4 +9,5 @@
             <p itemprop="description">{post.description}</p>
         </f:else>
     </f:if>
+    <f:render partial="Meta/ListFooter" arguments="{_all}" />
 </div>

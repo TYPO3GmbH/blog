@@ -23,7 +23,7 @@
     display: inline-flex;
 }
 .postmetagroup__body {
-    margin-left: 0.25rem
+    margin-left: .25rem
 }
 .postmetagroup__list {
     padding: 0;
@@ -35,5 +35,28 @@
             display: inline;
             content: ', ';
         }
+    }
+}
+
+/**
+ * Extended
+ */
+.postmetagroup--extended {
+
+}
+
+/**
+ * Condensed
+ */
+.postmetagroup--condensed {
+    .postmetagroup__body {
+        display: flex;
+    }
+    .postmetagroup__prefix:after {
+        display: inline;
+        content: ':';
+    }
+    .postmetagroup__content {
+        margin-left: .25rem;
     }
 }

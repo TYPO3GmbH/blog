@@ -41,9 +41,9 @@ plugin.tx_blog {
         }
         # Post View
         meta {
-            header {
+            postheader {
                 enable = 1
-                modifierClass = header
+                modifierClass = condensed
                 elements {
                     authors {
                         enable = 1
@@ -62,9 +62,9 @@ plugin.tx_blog {
                     }
                 }
             }
-            footer {
+            postfooter {
                 enable = 1
-                modifierClass = footer
+                modifierClass = condensed
                 elements {
                     authors {
                         enable = 0
@@ -82,11 +82,10 @@ plugin.tx_blog {
                         enable = 0
                     }
                 }
-
             }
-            list {
+            listheader {
                 enable = 1
-                modifierClass = list
+                modifierClass = condensed
                 elements {
                     author {
                         enable = 0
@@ -102,6 +101,27 @@ plugin.tx_blog {
                     }
                     comments {
                         enable = 1
+                    }
+                }
+            }
+            listfooter {
+                enable = 1
+                modifierClass = condensed
+                elements {
+                    author {
+                        enable = 1
+                    }
+                    categories {
+                        enable = 0
+                    }
+                    tags {
+                        enable = 1
+                    }
+                    published {
+                        enable = 0
+                    }
+                    comments {
+                        enable = 0
                     }
                 }
             }
