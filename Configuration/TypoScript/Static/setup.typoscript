@@ -42,90 +42,94 @@ plugin.tx_blog {
         # Post View
         meta {
             postheader {
-                enable = 1
-                modifierClass = condensed
+                enable = {$plugin.tx_blog.settings.meta.postheader.enable}
+                modifierClass = {$plugin.tx_blog.settings.meta.postheader.modifierClass}
                 elements {
-                    authors {
-                        enable = 1
+                    author {
+                        enable = {$plugin.tx_blog.settings.meta.postheader.elements.authors.enable}
                     }
                     categories {
-                        enable = 0
+                        enable = {$plugin.tx_blog.settings.meta.postheader.elements.categories.enable}
                     }
                     tags {
-                        enable = 0
+                        enable = {$plugin.tx_blog.settings.meta.postheader.elements.tags.enable}
                     }
                     published {
-                        enable = 1
+                        enable = {$plugin.tx_blog.settings.meta.postheader.elements.published.enable}
+                        format = {$plugin.tx_blog.settings.meta.postheader.elements.published.format}
                     }
                     comments {
-                        enable = 1
+                        enable = {$plugin.tx_blog.settings.meta.postheader.elements.comments.enable}
                     }
                 }
             }
             postfooter {
-                enable = 1
-                modifierClass = condensed
+                enable = {$plugin.tx_blog.settings.meta.postfooter.enable}
+                modifierClass = {$plugin.tx_blog.settings.meta.postfooter.modifierClass}
                 elements {
-                    authors {
-                        enable = 0
+                    author {
+                        enable = {$plugin.tx_blog.settings.meta.postfooter.elements.authors.enable}
                     }
                     categories {
-                        enable = 1
+                        enable = {$plugin.tx_blog.settings.meta.postfooter.elements.categories.enable}
                     }
                     tags {
-                        enable = 1
+                        enable = {$plugin.tx_blog.settings.meta.postfooter.elements.tags.enable}
                     }
                     published {
-                        enable = 0
+                        enable = {$plugin.tx_blog.settings.meta.postfooter.elements.published.enable}
+                        format = {$plugin.tx_blog.settings.meta.postfooter.elements.published.format}
                     }
                     comments {
-                        enable = 0
+                        enable = {$plugin.tx_blog.settings.meta.postfooter.elements.comments.enable}
                     }
                 }
             }
             listheader {
-                enable = 1
-                modifierClass = condensed
+                enable = {$plugin.tx_blog.settings.meta.listheader.enable}
+                modifierClass = {$plugin.tx_blog.settings.meta.listheader.modifierClass}
                 elements {
                     author {
-                        enable = 0
+                        enable = {$plugin.tx_blog.settings.meta.listheader.elements.authors.enable}
                     }
                     categories {
-                        enable = 0
+                        enable = {$plugin.tx_blog.settings.meta.listheader.elements.categories.enable}
                     }
                     tags {
-                        enable = 0
+                        enable = {$plugin.tx_blog.settings.meta.listheader.elements.tags.enable}
                     }
                     published {
-                        enable = 1
+                        enable = {$plugin.tx_blog.settings.meta.listheader.elements.published.enable}
+                        format = {$plugin.tx_blog.settings.meta.listheader.elements.published.format}
                     }
                     comments {
-                        enable = 1
+                        enable = {$plugin.tx_blog.settings.meta.listheader.elements.comments.enable}
                     }
                 }
             }
             listfooter {
-                enable = 1
-                modifierClass = condensed
+                enable = {$plugin.tx_blog.settings.meta.listfooter.enable}
+                modifierClass = {$plugin.tx_blog.settings.meta.listfooter.modifierClass}
                 elements {
                     author {
-                        enable = 1
+                        enable = {$plugin.tx_blog.settings.meta.listfooter.elements.authors.enable}
                     }
                     categories {
-                        enable = 0
+                        enable = {$plugin.tx_blog.settings.meta.listfooter.elements.categories.enable}
                     }
                     tags {
-                        enable = 1
+                        enable = {$plugin.tx_blog.settings.meta.listfooter.elements.tags.enable}
                     }
                     published {
-                        enable = 0
+                        enable = {$plugin.tx_blog.settings.meta.listfooter.elements.published.enable}
+                        format = {$plugin.tx_blog.settings.meta.listfooter.elements.published.format}
                     }
                     comments {
-                        enable = 0
+                        enable = {$plugin.tx_blog.settings.meta.listfooter.elements.comments.enable}
                     }
                 }
             }
-            default =< .list
+            default =< .listheader
         }
 
         # Lists related settings

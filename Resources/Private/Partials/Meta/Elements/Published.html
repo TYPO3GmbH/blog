@@ -4,6 +4,7 @@
 
 <f:render partial="Meta/Rendering/Item" arguments="{name: name, icon: icon, prefix: prefix}" contentAs="content">
     <blogvh:link.post post="{post}" rel="bookmark">
-        <time datetime="{f:format.date(format: '%Y-%m-%dT%H:%M:%S-%z', date: post.publishDate)}" itemprop="datepublished">{f:format.date(format: '{settings.lists.posts.dateFormat}', date:post.publishDate)}</time>
+        <f:if condition="!{publishDateFormat}"><f:variable name="dateformat" value="%d.%m.%Y" /></f:if>
+        <time datetime="{f:format.date(format: '%Y-%m-%dT%H:%M:%S-%z', date: post.publishDate)}" itemprop="datepublished">{f:format.date(format: publishDateFormat, date: post.publishDate)}</time>
     </blogvh:link.post>
 </f:render>

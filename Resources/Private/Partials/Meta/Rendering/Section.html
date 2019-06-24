@@ -11,6 +11,7 @@
             <f:render partial="Meta/Elements/Tags" arguments="{_all}" />
         </f:if>
         <f:if condition="{settings.meta.{metatype}.elements.published.enable}">
+            <f:variable name="publishDateFormat" value="{settings.meta.{metatype}.elements.published.format}" />
             <f:render partial="Meta/Elements/Published" arguments="{_all}" />
         </f:if>
         <f:if condition="{settings.meta.{metatype}.elements.comments.enable}">
