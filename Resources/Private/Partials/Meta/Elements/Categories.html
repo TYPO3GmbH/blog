@@ -1,10 +1,10 @@
 <f:variable name="name">categories</f:variable>
 <f:variable name="icon"><f:render partial="General/BlogIcons" section="Category" optional="true" /></f:variable>
-<f:variable name="prefix"><f:translate key="meta.categories.prefix.category"/></f:variable>
+<f:variable name="prefix"><f:translate key="meta.categories.category"/></f:variable>
 
 <f:if condition="{post.categories}">
     <f:if condition="{post.categories -> f:count()} > 1">
-        <f:variable name="prefix"><f:translate key="meta.categories.prefix.categories"/></f:variable>
+        <f:variable name="prefix"><f:translate key="meta.categories.categories"/></f:variable>
     </f:if>
     <f:render partial="Meta/Rendering/Item" arguments="{name: name, icon: icon, prefix: prefix}" contentAs="content">
         <ul class="postmetagroup__list">

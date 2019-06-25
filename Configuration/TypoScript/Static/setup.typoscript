@@ -43,9 +43,9 @@ plugin.tx_blog {
         meta {
             postheader {
                 enable = {$plugin.tx_blog.settings.meta.postheader.enable}
-                modifierClass = {$plugin.tx_blog.settings.meta.postheader.modifierClass}
+                modifier = {$plugin.tx_blog.settings.meta.postheader.modifier}
                 elements {
-                    author {
+                    authors {
                         enable = {$plugin.tx_blog.settings.meta.postheader.elements.authors.enable}
                     }
                     categories {
@@ -65,9 +65,9 @@ plugin.tx_blog {
             }
             postfooter {
                 enable = {$plugin.tx_blog.settings.meta.postfooter.enable}
-                modifierClass = {$plugin.tx_blog.settings.meta.postfooter.modifierClass}
+                modifier = {$plugin.tx_blog.settings.meta.postfooter.modifier}
                 elements {
-                    author {
+                    authors {
                         enable = {$plugin.tx_blog.settings.meta.postfooter.elements.authors.enable}
                     }
                     categories {
@@ -87,9 +87,9 @@ plugin.tx_blog {
             }
             listheader {
                 enable = {$plugin.tx_blog.settings.meta.listheader.enable}
-                modifierClass = {$plugin.tx_blog.settings.meta.listheader.modifierClass}
+                modifier = {$plugin.tx_blog.settings.meta.listheader.modifier}
                 elements {
-                    author {
+                    authors {
                         enable = {$plugin.tx_blog.settings.meta.listheader.elements.authors.enable}
                     }
                     categories {
@@ -109,9 +109,9 @@ plugin.tx_blog {
             }
             listfooter {
                 enable = {$plugin.tx_blog.settings.meta.listfooter.enable}
-                modifierClass = {$plugin.tx_blog.settings.meta.listfooter.modifierClass}
+                modifier = {$plugin.tx_blog.settings.meta.listfooter.modifier}
                 elements {
-                    author {
+                    authors {
                         enable = {$plugin.tx_blog.settings.meta.listfooter.elements.authors.enable}
                     }
                     categories {
@@ -129,8 +129,7 @@ plugin.tx_blog {
                     }
                 }
             }
-            # @Deprecated will be removed with v11
-            data < .listheader
+            default < .listheader
         }
 
         # Lists related settings

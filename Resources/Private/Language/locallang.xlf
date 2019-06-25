@@ -92,40 +92,40 @@
             </trans-unit>
 
             <!-- Meta -->
-            <trans-unit id="meta.author.prefix.label" xml:space="preserve">
+            <trans-unit id="meta.author.label" xml:space="preserve">
                 <source>Author</source>
             </trans-unit>
-            <trans-unit id="meta.categories.prefix.category" xml:space="preserve">
+            <trans-unit id="meta.categories.category" xml:space="preserve">
                 <source>Category</source>
             </trans-unit>
-            <trans-unit id="meta.categories.prefix.categories" xml:space="preserve">
+            <trans-unit id="meta.categories.categories" xml:space="preserve">
                 <source>Categories</source>
             </trans-unit>
-            <trans-unit id="meta.tags.prefix.tag" xml:space="preserve">
+            <trans-unit id="meta.tags.tag" xml:space="preserve">
                 <source>Tag</source>
             </trans-unit>
-            <trans-unit id="meta.tags.prefix.tags" xml:space="preserve">
+            <trans-unit id="meta.tags.tags" xml:space="preserve">
                 <source>Tags</source>
             </trans-unit>
-            <trans-unit id="meta.published.prefix.label" xml:space="preserve">
+            <trans-unit id="meta.published.label" xml:space="preserve">
                 <source>Published</source>
             </trans-unit>
-            <trans-unit id="meta.comments.prefix.comments" xml:space="preserve">
+            <trans-unit id="meta.comments.comments" xml:space="preserve">
                 <source>Comments</source>
             </trans-unit>
-            <trans-unit id="meta.comments.prefix.has_comment" xml:space="preserve">
+            <trans-unit id="meta.comments.has_comment" xml:space="preserve">
                 <source>%s Comment</source>
             </trans-unit>
-            <trans-unit id="meta.comments.prefix.has_comments" xml:space="preserve">
+            <trans-unit id="meta.comments.has_comments" xml:space="preserve">
                 <source>%s Comments</source>
             </trans-unit>
-            <trans-unit id="meta.comments.body.start_conversation" xml:space="preserve">
+            <trans-unit id="meta.comments.start_conversation" xml:space="preserve">
                 <source>Start the Conversation</source>
             </trans-unit>
-            <trans-unit id="meta.comments.body.join_conversation" xml:space="preserve">
+            <trans-unit id="meta.comments.join_conversation" xml:space="preserve">
                 <source>Join the Conversation</source>
             </trans-unit>
-            <trans-unit id="meta.comments.body.view_conversation" xml:space="preserve">
+            <trans-unit id="meta.comments.view_conversation" xml:space="preserve">
                 <source>View the Conversation</source>
             </trans-unit>
             <trans-unit id="meta.title.listPostsByDate" xml:space="preserve">
@@ -478,14 +478,17 @@
             <trans-unit id="constantEditor.meta.footer.enable" xml:space="preserve">
                 <source>Display meta information in the footer</source>
             </trans-unit>
-            <trans-unit id="constantEditor.meta.modifierClass" xml:space="preserve">
+            <trans-unit id="constantEditor.meta.modifier" xml:space="preserve">
                 <source>Meta information display style</source>
             </trans-unit>
-            <trans-unit id="constantEditor.meta.modifierClass.condensed" xml:space="preserve">
+            <trans-unit id="constantEditor.meta.modifier.condensed" xml:space="preserve">
                 <source>Condensed</source>
             </trans-unit>
-            <trans-unit id="constantEditor.meta.modifierClass.extended" xml:space="preserve">
+            <trans-unit id="constantEditor.meta.modifier.extended" xml:space="preserve">
                 <source>Extended</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.modifier.simple" xml:space="preserve">
+                <source>Simple</source>
             </trans-unit>
             <trans-unit id="constantEditor.meta.elements.authors.enable" xml:space="preserve">
                 <source>Show authors in the meta section</source>

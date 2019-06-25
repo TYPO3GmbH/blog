@@ -62,8 +62,8 @@ plugin {
                 postheader {
                     # cat=blog_post/110_blog_post_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
                     enable = 1
-                    # cat=blog_post/110_blog_post_header; type=options[condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifierClass
-                    modifierClass = condensed
+                    # cat=blog_post/110_blog_post_header; type=options[simple, condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
+                    modifier = condensed
                     elements {
                         authors {
                             # cat=blog_post/110_blog_post_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
@@ -92,8 +92,8 @@ plugin {
                 postfooter {
                     # cat=blog_post/120_blog_post_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.footer.enable
                     enable = 1
-                    # cat=blog_post/120_blog_post_footer; type=options[condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifierClass
-                    modifierClass = condensed
+                    # cat=blog_post/120_blog_post_footer; type=options[simple, condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
+                    modifier = condensed
                     elements {
                         authors {
                             # cat=blog_post/120_blog_post_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
@@ -122,8 +122,8 @@ plugin {
                 listheader {
                     # cat=blog_list/210_blog_list_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
                     enable = 1
-                    # cat=blog_list/210_blog_list_element_header; type=options[condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifierClass
-                    modifierClass = condensed
+                    # cat=blog_list/210_blog_list_element_header; type=options[simple, condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
+                    modifier = simple
                     elements {
                         authors {
                             # cat=blog_list/210_blog_list_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
@@ -152,8 +152,8 @@ plugin {
                 listfooter {
                     # cat=blog_list/220_blog_list_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.footer.enable
                     enable = 1
-                    # cat=blog_list/220_blog_list_element_footer; type=options[condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifierClass
-                    modifierClass = condensed
+                    # cat=blog_list/220_blog_list_element_footer; type=options[simple, condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
+                    modifier = simple
                     elements {
                         authors {
                             # cat=blog_list/220_blog_list_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
