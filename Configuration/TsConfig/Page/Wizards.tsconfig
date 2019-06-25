@@ -77,15 +77,6 @@ mod.wizards.newContentElement.wizardItems.blog {
                 list_type = blog_footer
             }
         }
-        blog_metadata {
-            iconIdentifier = plugin-blog-metadata
-            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_metadata.title
-            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_metadata.description
-            tt_content_defValues {
-                CType = list
-                list_type = blog_metadata
-            }
-        }
         blog_commentform {
             iconIdentifier = plugin-blog-commentform
             title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_commentform.title

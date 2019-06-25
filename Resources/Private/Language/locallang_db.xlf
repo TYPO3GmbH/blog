@@ -56,7 +56,7 @@
                 <source>Displays post footer</source>
             </trans-unit>
             <trans-unit id="plugin.blog_metadata.title" xml:space="preserve">
-                <source>Blog: Metadata</source>
+                <source>Blog: Metadata (Deprecated, will be removed with v11)</source>
             </trans-unit>
             <trans-unit id="plugin.blog_metadata.description" xml:space="preserve">
                 <source>Displays post meta data, like date, tags, category, sharing links...</source>

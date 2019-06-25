@@ -129,7 +129,8 @@ plugin.tx_blog {
                     }
                 }
             }
-            default =< .listheader
+            # @Deprecated will be removed with v11
+            data < .listheader
         }
 
         # Lists related settings
