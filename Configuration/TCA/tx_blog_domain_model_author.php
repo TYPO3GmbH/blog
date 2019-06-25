@@ -98,7 +98,6 @@ return [
         'slug' => [
             'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.slug',
-            'displayCond' => 'USER:' . \TYPO3\CMS\Core\Compatibility\PseudoSiteTcaDisplayCondition::class . '->isInPseudoSite:pages:false',
             'config' => [
                 'type' => 'slug',
                 'generatorOptions' => [
@@ -130,33 +129,27 @@ return [
             'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.image',
             'displayCond' => 'FIELD:avatar_provider:=:T3G\AgencyPack\Blog\AvatarProvider\ImageProvider',
-            'overrideChildTca' => [
-                'types' => [
-                    '0' => [
-                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'image',
+                [
+                    'appearance' => [
+                        'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
                     ],
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette',
+                    'overrideChildTca' => [
+                        'types' => [
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
+                                    crop,
+                                    --palette--;;filePalette
+                                '
+                            ],
+                        ],
                     ],
-                ]
-            ],
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', [
-                'appearance' => [
-                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
+                    'minitems' => 0,
+                    'maxitems' => 1,
                 ],
-                'maxitems' => 1,
-                // custom configuration for displaying fields in the overlay/reference table
-                // to use the imageoverlayPalette instead of the basicoverlayPalette
-                'foreign_match_fields' => [
-                    'fieldname' => 'image',
-                    'tablenames' => 'tx_blog_domain_model_author',
-                    'table_local' => 'sys_file',
-                ],
-            ], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            ),
         ],
         'title' => [
             'exclude' => 0,

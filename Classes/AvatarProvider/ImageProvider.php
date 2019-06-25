@@ -12,6 +12,7 @@ namespace T3G\AgencyPack\Blog\AvatarProvider;
 
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
+use TYPO3\CMS\Core\Imaging\ImageManipulation\CropVariantCollection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
@@ -33,11 +34,19 @@ class ImageProvider implements AvatarProviderInterface
 
             $imageService = $objectManager->get(ImageService::class);
             $image = $imageService->getImage('', $image, false);
+
+            if ($image->hasProperty('crop') && $image->getProperty('crop')) {
+                $cropString = $image->getProperty('crop');
+            }
+            $cropVariantCollection = CropVariantCollection::create((string)$cropString);
+            $cropArea = $cropVariantCollection->getCropArea('default');
+
             $processingInstructions = [
                 'width' => $size . 'c',
                 'height' => $size,
                 'minWidth' => $size,
                 'minHeight' => $size,
+                'crop' => $cropArea->isEmpty() ? null : $cropArea->makeAbsoluteBasedOnFile($image),
             ];
             $processedImage = $imageService->applyProcessingInstructions($image, $processingInstructions);
             return $imageService->getImageUri($processedImage);
