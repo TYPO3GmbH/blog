@@ -92,8 +92,11 @@
             </trans-unit>
 
             <!-- Meta -->
-            <trans-unit id="meta.author.label" xml:space="preserve">
+            <trans-unit id="meta.authors.author" xml:space="preserve">
                 <source>Author</source>
+            </trans-unit>
+            <trans-unit id="meta.authors.author" xml:space="preserve">
+                <source>Authors</source>
             </trans-unit>
             <trans-unit id="meta.categories.category" xml:space="preserve">
                 <source>Category</source>
@@ -107,7 +110,7 @@
             <trans-unit id="meta.tags.tags" xml:space="preserve">
                 <source>Tags</source>
             </trans-unit>
-            <trans-unit id="meta.published.label" xml:space="preserve">
+            <trans-unit id="meta.published.published" xml:space="preserve">
                 <source>Published</source>
             </trans-unit>
             <trans-unit id="meta.comments.comments" xml:space="preserve">

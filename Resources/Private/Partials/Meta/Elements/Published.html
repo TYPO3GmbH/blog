@@ -1,6 +1,6 @@
 <f:variable name="name">published</f:variable>
 <f:variable name="icon"><f:render partial="General/BlogIcons" section="Published" optional="true" /></f:variable>
-<f:variable name="prefix"><f:translate key="meta.published.label"/></f:variable>
+<f:variable name="prefix"><f:translate key="meta.published.published"/></f:variable>
 
 <f:render partial="Meta/Rendering/Item" arguments="{name: name, icon: icon, prefix: prefix}" contentAs="content">
     <blogvh:link.post post="{post}" rel="bookmark">

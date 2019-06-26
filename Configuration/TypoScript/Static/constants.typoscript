@@ -63,7 +63,7 @@ plugin {
                     # cat=blog_post/110_blog_post_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
                     enable = 1
                     # cat=blog_post/110_blog_post_header; type=options[simple, condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
-                    modifier = condensed
+                    modifier = simple
                     elements {
                         authors {
                             # cat=blog_post/110_blog_post_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
@@ -93,7 +93,7 @@ plugin {
                     # cat=blog_post/120_blog_post_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.footer.enable
                     enable = 1
                     # cat=blog_post/120_blog_post_footer; type=options[simple, condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
-                    modifier = condensed
+                    modifier = simple
                     elements {
                         authors {
                             # cat=blog_post/120_blog_post_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
