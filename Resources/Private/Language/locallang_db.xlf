@@ -43,8 +43,20 @@
             <trans-unit id="plugin.blog_sidebar.description" xml:space="preserve">
                 <source>The sidebar contains links enabling the user to quickly navigate your blog. It shows an overview of recent posts and comments, categories, tags and archive links.</source>
             </trans-unit>
+            <trans-unit id="plugin.blog_header.title" xml:space="preserve">
+                <source>Blog: Header</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_header.description" xml:space="preserve">
+                <source>Displays post header</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_footer.title" xml:space="preserve">
+                <source>Blog: Footer</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_footer.description" xml:space="preserve">
+                <source>Displays post footer</source>
+            </trans-unit>
             <trans-unit id="plugin.blog_metadata.title" xml:space="preserve">
-                <source>Blog: Metadata</source>
+                <source>Blog: Metadata (Deprecated, will be removed with v11)</source>
             </trans-unit>
             <trans-unit id="plugin.blog_metadata.description" xml:space="preserve">
                 <source>Displays post meta data, like date, tags, category, sharing links...</source>

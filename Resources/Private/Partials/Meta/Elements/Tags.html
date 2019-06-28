@@ -1,0 +1,16 @@
+<f:variable name="name">tags</f:variable>
+<f:variable name="icon"><f:render partial="General/BlogIcons" section="Tag" optional="true" /></f:variable>
+<f:variable name="prefix"><f:translate key="meta.tags.tag"/></f:variable>
+
+<f:if condition="{post.tags}">
+    <f:if condition="{post.tags -> f:count()} > 1">
+        <f:variable name="prefix"><f:translate key="meta.tags.tags"/></f:variable>
+    </f:if>
+    <f:render partial="Meta/Rendering/Item" arguments="{name: name, icon: icon, prefix: prefix}" contentAs="content">
+        <ul class="postmetagroup__list">
+            <f:for each="{post.tags}" as="postTag">
+                <li><blogvh:link.tag tag="{postTag}" /></li>
+            </f:for>
+        </ul>
+    </f:render>
+</f:if>

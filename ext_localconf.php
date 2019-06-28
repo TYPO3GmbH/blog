@@ -83,6 +83,22 @@ call_user_func(function () {
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
+        'Header',
+        [
+            'Post' => 'header',
+        ]
+    );
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
+        'Footer',
+        [
+            'Post' => 'footer',
+        ]
+    );
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
         'Metadata',
         [
             'Post' => 'metadata',
