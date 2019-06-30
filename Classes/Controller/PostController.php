@@ -153,6 +153,7 @@ class PostController extends ActionController
             ? $this->postRepository->findAll()
             : $this->postRepository->findAllWithLimit($maximumItems);
 
+        $this->view->assign('type', 'recent');
         $this->view->assign('posts', $posts);
     }
 
@@ -173,12 +174,11 @@ class PostController extends ActionController
         } else {
             $dateTime = new \DateTimeImmutable(sprintf('%d-%d-1', $year, $month ?? 1));
             $posts = $this->postRepository->findByMonthAndYear($year, $month);
-            $this->view->assignMultiple([
-                'month' => $month,
-                'year' => $year,
-                'timestamp' => $dateTime->getTimestamp(),
-                'posts' => $posts,
-            ]);
+            $this->view->assign('type', 'bydate');
+            $this->view->assign('month', $month);
+            $this->view->assign('year', $year);
+            $this->view->assign('timestamp', $dateTime->getTimestamp());
+            $this->view->assign('posts', $posts);
             $title = str_replace([
                 '###MONTH###',
                 '###MONTH_NAME###',
@@ -216,6 +216,7 @@ class PostController extends ActionController
 
         if ($category) {
             $posts = $this->postRepository->findAllByCategory($category);
+            $this->view->assign('type', 'bycategory');
             $this->view->assign('posts', $posts);
             $this->view->assign('category', $category);
             MetaService::set(MetaService::META_TITLE, $category->getTitle());
@@ -237,6 +238,7 @@ class PostController extends ActionController
     {
         if ($author) {
             $posts = $this->postRepository->findAllByAuthor($author);
+            $this->view->assign('type', 'byauthor');
             $this->view->assign('posts', $posts);
             $this->view->assign('author', $author);
             MetaService::set(MetaService::META_TITLE, $author->getName());
@@ -257,6 +259,7 @@ class PostController extends ActionController
     {
         if ($tag) {
             $posts = $this->postRepository->findAllByTag($tag);
+            $this->view->assign('type', 'bytag');
             $this->view->assign('posts', $posts);
             $this->view->assign('tag', $tag);
             MetaService::set(MetaService::META_TITLE, $tag->getTitle());
@@ -359,6 +362,7 @@ class PostController extends ActionController
             (int)$this->settings['relatedPosts']['tagMultiplier'],
             (int)$this->settings['relatedPosts']['limit']
         );
+        $this->view->assign('type', 'related');
         $this->view->assign('currentPost', $post);
         $this->view->assign('posts', $posts);
     }
