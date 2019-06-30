@@ -8,3 +8,6 @@
 /import-db
 /.bgsync*
 /config.*.y*ml
+/.webimageExtra
+/.dbimageExtra
+/*-build/Dockerfile.example
