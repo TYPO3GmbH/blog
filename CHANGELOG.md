@@ -1,3 +1,47 @@
+# 9.1.2
+
+## TASK
+- [TASK] Update ddev to 1.9.1 7fc7afb
+- [TASK] Add several typo3/cms packages as development dependency 8d8980d
+- [TASK] Update ddev to 1.7.1 eae8825
+- [TASK] Remove .travis.yaml from archive 5b41c70
+
+## BUGFIX
+- [BUGFIX] Remove obsolete fields and enable cropping for author images 12f7ca1
+- [BUGFIX] Remove display condition for slug fields of custom records (#43) 886cf1e
+- [BUGFIX] Set default doktype for post model (#83) 198fa92
+- [BUGFIX] Use settings.lists in documentation cc245af
+- [BUGFIX] Use LocalizationUtility instead of LanguageService 39b61a4
+- [BUGFIX] Avoid exception when comment is not set e8e61e9
+- [BUGFIX] Use correct identifier for publish date update ec154af
+- [BUGFIX] Only execute publish date update when fields exist 63fb6ba
+- [BUGFIX] Use correct identifier for month and year update c6463e6
+- [BUGFIX] Only execute month and year update when fields exist 95da92e
+- [BUGFIX] Check if tag does exist before accessing properties ed8e58e
+- [BUGFIX] Check if category does exist before accessing properties 6675721
+- [BUGFIX] Check if author does exist before accessing properties b716822
+- [BUGFIX] Do not include google captcha when disabled in settings b1f4ab4
+- [BUGFIX] Respect translation settings in archive widget (#77) 843e2f3
+- [BUGFIX] Use correct column type for comment sorting by date in backend a88a725
+- [BUGFIX] Use correct column type for post sorting by date in backend 3f5c413
+- [BUGFIX] Use publishDate for date sorting in backend module 5c3a893
+- [BUGFIX] Ensure tag link viewhelper always returns a string 0e40385
+- [BUGFIX] Add missing comment id attribute for section links 8dd0c84
+- [BUGFIX] Respect configured size in Avatar ImageProvider (#74) f750dfd
+- [BUGFIX] Add severity classes to flash messages (#76) 1a3ebf5
+- [BUGFIX] Correct cgl and remove obsolete php_versions file 14bbb91
+- [BUGFIX] Add crdate field configuration for extbase a46fff7
+- [BUGFIX] Use today as publishing date for new blog entries (#59) 2fea8d7
+- [BUGFIX] Add plugins to new content element wizard (#61) ee1f657
+- [BUGFIX] Remove storage constraint from finding current post (#63) 5210aea
+- [BUGFIX] Only add storage constraint if pages could be resolved (#65) 0a256be
+- [BUGFIX] Avoid exception when accessing uninitialized settings (#50) 13508ba
+- [BUGFIX] Set format for comments rss feed (#56) 53046b4
+- [BUGFIX] Correct fluid namespace definitions - fixes #51 (#52) 9d402a1
+- [BUGFIX] Allow language synchronization (#48) 8073303
+- [BUGFIX] Fix language sensitivity of getCurrentPost (#47) e3c89ae
+- [BUGFIX] Fix column width for comment actions column 2d2d5fd
+
 # 9.1.1
 
 ## FEATURE
