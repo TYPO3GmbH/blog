@@ -1,3 +1,34 @@
+# 8.7.6
+
+## TASK
+- [TASK] Update ddev to 1.9.1 2fb88eb
+- [TASK] Update ddev to 1.7.1 f7b3170
+- [TASK] Remove .travis.yaml from archive dc755dd
+
+## BUGFIX
+- [BUGFIX] Remove obsolete fields and enable cropping for author images b31a526
+- [BUGFIX] Set default doktype for post model (#83) 6155665
+- [BUGFIX] Use settings.lists in documentation 310189f
+- [BUGFIX] Avoid exception when comment is not set a098b27
+- [BUGFIX] Only execute month and year update when fields exist 6e07854
+- [BUGFIX] Check if tag does exist before accessing properties f1a3f49
+- [BUGFIX] Check if category does exist before accessing properties 6b9189d
+- [BUGFIX] Check if author does exist before accessing properties 20efb0e
+- [BUGFIX] Do not include google captcha when disabled in settings 9a0643e
+- [BUGFIX] Use correct column type for comment sorting by date in backend 63239b6
+- [BUGFIX] Use correct column type for post sorting by date in backend 66292b1
+- [BUGFIX] Add missing comment id attribute for section links c973a76
+- [BUGFIX] Respect configured size in Avatar ImageProvider (#74) 89bf706
+- [BUGFIX] Add severity classes to flash messages (#76) 694e7ad
+- [BUGFIX] Correct travis cgl fixer config eacac9f
+- [BUGFIX] Use today as publishing date for new blog entries (#59) 8f47217
+- [BUGFIX] Remove storage constraint from finding current post (#63) a3d6c1d
+- [BUGFIX] Only add storage constraint if pages could be resolved (#65) c3b0cc5
+- [BUGFIX] Avoid exception when accessing uninitialized settings (#50) ea0f3a4
+- [BUGFIX] Set format for rss feeds (#55) 59943b9
+- [BUGFIX] Fix format detection for feed data (#54) a29cdc8
+- [BUGFIX] Correct fluid namespace definitions - fixes #51 (#52) 57317d9
+
 # 8.7.4
 
 ## TASK
