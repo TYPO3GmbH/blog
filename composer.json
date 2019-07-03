@@ -43,6 +43,9 @@
         "typo3/cms": {
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
             "web-dir": ".build/web"
+        },
+        "branch-alias": {
+            "dev-v9.0": "9.0.x-dev"
         }
     },
     "scripts": {

@@ -1,3 +1,45 @@
+# 9.0.3
+
+## TASK
+- [TASK] Update ddev to 1.9.1 5203c04
+- [TASK] Add several typo3/cms packages as development dependency 8cfa98d
+- [TASK] Update ddev to 1.7.1 b062a2a
+- [TASK] Remove .travis.yaml from archive ed6b09a
+
+## BUGFIX
+- [BUGFIX] Remove obsolete fields and enable cropping for author images 7994108
+- [BUGFIX] Remove display condition for slug fields of custom records (#43) 9045add
+- [BUGFIX] Set default doktype for post model (#83) 0a506c9
+- [BUGFIX] Use settings.lists in documentation a1a7cb6
+- [BUGFIX] Use LocalizationUtility instead of LanguageService fcb83de
+- [BUGFIX] Avoid exception when comment is not set f88f7ac
+- [BUGFIX] Only execute publish date update when fields exist 11210f5
+- [BUGFIX] Only execute month and year update when fields exist e99b34f
+- [BUGFIX] Check if tag does exist before accessing properties 5326fac
+- [BUGFIX] Check if category does exist before accessing properties 53fb359
+- [BUGFIX] Check if author does exist before accessing properties 6aec95b
+- [BUGFIX] Do not include google captcha when disabled in settings 16aeee5
+- [BUGFIX] Respect translation settings in archive widget (#77) 5c71f04
+- [BUGFIX] Use correct column type for comment sorting by date in backend 6d3f5e3
+- [BUGFIX] Use correct column type for post sorting by date in backend 54f56bc
+- [BUGFIX] Use publishDate for date sorting in backend module cbfefb3
+- [BUGFIX] Ensure tag link viewhelper always returns a string 6529670
+- [BUGFIX] Add missing comment id attribute for section links 1e0dcfc
+- [BUGFIX] Respect configured size in Avatar ImageProvider (#74) 6dadd6f
+- [BUGFIX] Add severity classes to flash messages (#76) 2adfc55
+- [BUGFIX] Correct path to fixer config in composer.json 473940a
+- [BUGFIX] Correct travis cgl fixer config fb828a2
+- [BUGFIX] Add crdate field configuration for extbase 3ac861f
+- [BUGFIX] Use today as publishing date for new blog entries (#59) 42fc55e
+- [BUGFIX] Add plugins to new content element wizard (#61) c2faaea
+- [BUGFIX] Remove storage constraint from finding current post (#63) f477ee4
+- [BUGFIX] Only add storage constraint if pages could be resolved (#65) 5b598ef
+- [BUGFIX] Avoid exception when accessing uninitialized settings (#50) d05382e
+- [BUGFIX] Set format for comments rss feed (#56) b0f32fb
+- [BUGFIX] Correct fluid namespace definitions - fixes #51 (#52) 76804af
+- [BUGFIX] Allow language synchronization (#48) 9006fb9
+- [BUGFIX] Fix language sensitivity of getCurrentPost (#47) 1ba7068
+
 # 9.0.2
 
 ## FEATURE
