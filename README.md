@@ -6,13 +6,13 @@ This blog extension uses TYPO3s core concepts and elements to provide a full-blo
 
 ## Requirements
 
-| Version  | TYPO3       | PHP      |
-|----------|-------------|----------|
-| master   | 10.0.*@dev  | ^7.2     |
-| v9.1.x   | ^9.5.1      | ^7.2     |
-| v9.0.x   | ^9.5.1      | ^7.2     |
-| v8.7.x   | ^8.7.0      | >=7.0.0  |
-| v7.6.x   | ^7.6.0      | >=5.5.0  |
+| Version  | TYPO3                 | PHP      |
+|----------|-----------------------|----------|
+| master   | ^9.5.5 or 10.0.*@dev  | ^7.2     |
+| v9.1.x   | ^9.5.1                | ^7.2     |
+| v9.0.x   | ^9.5.1                | ^7.2     |
+| v8.7.x   | ^8.7.0                | >=7.0.0  |
+| v7.6.x   | ^7.6.0                | >=5.5.0  |
 
 ## License
 GPL-2.0-or-later

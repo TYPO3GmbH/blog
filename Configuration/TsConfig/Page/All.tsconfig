@@ -1,4 +1,5 @@
 ##################
 #### TsConfig ####
 ##################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TsConfig/Page/SocialImageWizard.tsconfig">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TsConfig/Page/Wizards.tsconfig">

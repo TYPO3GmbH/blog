@@ -14,6 +14,9 @@ if (!defined('TYPO3_MODE')) {
 // Include TsConfig
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TsConfig/Page/All.tsconfig">');
 
+// Register "blogvh" as global fluid namespace
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['blogvh'][] = 'T3G\\AgencyPack\\Blog\\ViewHelpers';
+
 call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
@@ -63,10 +66,10 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'CommentForm',
         [
-            'Comment' => 'form, addComment',
+            'Comment' => 'form',
         ],
         [
-            'Comment' => 'form, addComment',
+            'Comment' => 'form',
         ]
     );
 
@@ -75,6 +78,22 @@ call_user_func(function () {
         'Comments',
         [
             'Comment' => 'comments',
+        ]
+    );
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
+        'Header',
+        [
+            'Post' => 'header',
+        ]
+    );
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
+        'Footer',
+        [
+            'Post' => 'footer',
         ]
     );
 

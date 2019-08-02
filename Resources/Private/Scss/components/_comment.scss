@@ -1,0 +1,40 @@
+/**
+ * Comment
+ */
+.postcomment {
+    display: flex;
+    & + & {
+        border-top: 1px solid rgba(0,0,0,.15);
+        padding-top: 1.5rem;
+        margin-top: 1.5rem;
+    }
+}
+.postcomment__avatar {
+    margin-right: 1rem;
+}
+.postcomment__avatarimage {
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.postcomment__body {
+    flex-grow: 1;
+    > *:last-child {
+        margin-bottom: 0;
+    }
+}
+.postcomment__author {
+    font-weight: bold;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    margin-top: .5rem;
+}
+.postcomment__comment {
+    margin-top: 1rem;
+    p {
+        margin-bottom: .5rem;
+    }
+    > *:last-child {
+        margin-bottom: 0;
+    }
+}

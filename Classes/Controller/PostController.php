@@ -153,6 +153,7 @@ class PostController extends ActionController
             ? $this->postRepository->findAll()
             : $this->postRepository->findAllWithLimit($maximumItems);
 
+        $this->view->assign('type', 'recent');
         $this->view->assign('posts', $posts);
     }
 
@@ -173,12 +174,11 @@ class PostController extends ActionController
         } else {
             $dateTime = new \DateTimeImmutable(sprintf('%d-%d-1', $year, $month ?? 1));
             $posts = $this->postRepository->findByMonthAndYear($year, $month);
-            $this->view->assignMultiple([
-                'month' => $month,
-                'year' => $year,
-                'timestamp' => $dateTime->getTimestamp(),
-                'posts' => $posts,
-            ]);
+            $this->view->assign('type', 'bydate');
+            $this->view->assign('month', $month);
+            $this->view->assign('year', $year);
+            $this->view->assign('timestamp', $dateTime->getTimestamp());
+            $this->view->assign('posts', $posts);
             $title = str_replace([
                 '###MONTH###',
                 '###MONTH_NAME###',
@@ -202,11 +202,10 @@ class PostController extends ActionController
      */
     public function listPostsByCategoryAction(Category $category = null): void
     {
-        if (null === $category) {
+        if ($category === null) {
             $categories = $this->categoryRepository->getByReference(
                 'tt_content',
                 $this->configurationManager->getContentObject()->data['uid']
-
             );
 
             if (!empty($categories)) {
@@ -215,15 +214,16 @@ class PostController extends ActionController
             }
         }
 
-        if (null === $category) {
-            $this->view->assign('categories', $this->categoryRepository->findAll());
-        } else {
+        if ($category) {
             $posts = $this->postRepository->findAllByCategory($category);
+            $this->view->assign('type', 'bycategory');
             $this->view->assign('posts', $posts);
             $this->view->assign('category', $category);
             MetaService::set(MetaService::META_TITLE, $category->getTitle());
             MetaService::set(MetaService::META_DESCRIPTION, $category->getDescription());
             MetaService::set(MetaService::META_CATEGORIES, [$category->getTitle()]);
+        } else {
+            $this->view->assign('categories', $this->categoryRepository->findAll());
         }
     }
 
@@ -236,14 +236,15 @@ class PostController extends ActionController
      */
     public function listPostsByAuthorAction(Author $author = null): void
     {
-        if (null === $author) {
-            $this->view->assign('authors', $this->authorRepository->findAll());
-        } else {
+        if ($author) {
             $posts = $this->postRepository->findAllByAuthor($author);
+            $this->view->assign('type', 'byauthor');
             $this->view->assign('posts', $posts);
             $this->view->assign('author', $author);
             MetaService::set(MetaService::META_TITLE, $author->getName());
             MetaService::set(MetaService::META_DESCRIPTION, $author->getBio());
+        } else {
+            $this->view->assign('authors', $this->authorRepository->findAll());
         }
     }
 
@@ -256,15 +257,16 @@ class PostController extends ActionController
      */
     public function listPostsByTagAction(Tag $tag = null): void
     {
-        if (null === $tag) {
-            $this->view->assign('tags', $this->tagRepository->findAll());
-        } else {
+        if ($tag) {
             $posts = $this->postRepository->findAllByTag($tag);
+            $this->view->assign('type', 'bytag');
             $this->view->assign('posts', $posts);
             $this->view->assign('tag', $tag);
             MetaService::set(MetaService::META_TITLE, $tag->getTitle());
             MetaService::set(MetaService::META_DESCRIPTION, $tag->getDescription());
             MetaService::set(MetaService::META_TAGS, [$tag->getTitle()]);
+        } else {
+            $this->view->assign('tags', $this->tagRepository->findAll());
         }
     }
 
@@ -276,14 +278,53 @@ class PostController extends ActionController
     }
 
     /**
-     * Metadata action: output meta information of blog post.
+     * Header action: output the header of blog post.
      *
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
+    public function headerAction(): void
+    {
+        $post = $this->postRepository->findCurrentPost();
+        $this->view->assign('post', $post);
+        if ($post instanceof Post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
+    }
+
+    /**
+     * Footer action: output the footer of blog post.
+     *
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function footerAction(): void
+    {
+        $post = $this->postRepository->findCurrentPost();
+        $this->view->assign('post', $post);
+        if ($post instanceof Post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
+    }
+
+    /**
+     * Metadata action: output meta information of blog post.
+     *
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     *
+     * @deprecated
+     */
     public function metadataAction(): void
     {
+        trigger_error(
+            'Using \T3G\AgencyPack\Blog\Controller\PostController::metadataAction is deprecated. Use headerAction or footerAction instead.',
+            E_USER_DEPRECATED
+        );
+
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
@@ -321,6 +362,7 @@ class PostController extends ActionController
             (int)$this->settings['relatedPosts']['tagMultiplier'],
             (int)$this->settings['relatedPosts']['limit']
         );
+        $this->view->assign('type', 'related');
         $this->view->assign('currentPost', $post);
         $this->view->assign('posts', $posts);
     }

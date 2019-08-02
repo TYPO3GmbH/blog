@@ -1,11 +1,20 @@
 language: php
-php:
-    - 7.2
 
-env:
-    - UNIT_TESTS=yes
-    - PHP_LINT=yes
-    - PHP_CS_FIXER=yes
+matrix:
+    fast_finish: true
+    include:
+        -
+            php: 7.2
+            env: TYPO3_CORE=^9 TESTING_FRAMEWORK=^4 PHP_LINT=1 PHP_CS_FIXER=1
+        -
+            php: 7.3
+            env: TYPO3_CORE=^9 TESTING_FRAMEWORK=^4 PHP_LINT=1 PHP_CS_FIXER=0
+        -
+            php: 7.2
+            env: TYPO3_CORE=10.0.*@dev TESTING_FRAMEWORK=^5 PHP_LINT=0 PHP_CS_FIXER=0
+        -
+            php: 7.3
+            env: TYPO3_CORE=10.0.*@dev TESTING_FRAMEWORK=^5 PHP_LINT=0 PHP_CS_FIXER=0
 
 sudo: false
 
@@ -18,28 +27,31 @@ cache:
     directories:
         - $HOME/.composer/cache
 
+before_install:
+    - composer self-update
+    - composer --version
+
 before_script:
     - mkdir -p logs
     - rm -rf .build/
-    - composer install --no-interaction --no-progress
+    - composer require "typo3/cms-core:${TYPO3_CORE}"
+    - composer require "typo3/testing-framework:${TESTING_FRAMEWORK}"
+    - git checkout composer.json
 
 script:
     - >
-        if [[ "$PHP_LINT" == "yes" ]]; then
+        if [[ "$PHP_LINT" == "1" ]]; then
             echo;
             echo "PHP lint";
             find . -name \*.php ! -path "./.build/*" | parallel --gnu php -d display_errors=stderr -l {} > /dev/null \;
         fi
     - >
-        if [[ "$PHP_CS_FIXER" == "yes" ]]; then
+        if [[ "$PHP_CS_FIXER" == "1" ]]; then
             echo;
             echo "PHP CS Fixer";
-            ./.build/bin/php-cs-fixer fix --config Build/.php_cs.dist --format=junit > logs/php-cs-fixer.xml
+            ./.build/bin/php-cs-fixer fix --dry-run --verbose --diff
         fi
-
     - >
-        if [[ "$UNIT_TESTS" == "yes" ]]; then
-            echo;
-            echo "Unit tests";
-            .build/vendor/phpunit/phpunit/phpunit -c Build/UnitTests.xml --log-junit logs/phpunit.xml  --coverage-clover logs/coverage.xml --coverage-html logs/coverage/
-        fi
+        echo;
+        echo "Unit tests";
+        .build/vendor/phpunit/phpunit/phpunit -c Build/UnitTests.xml

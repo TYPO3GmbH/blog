@@ -1,0 +1,72 @@
+/**
+ * Author
+ */
+.postauthor {
+    display: flex;
+    & + & {
+        border-top: 1px solid rgba(0,0,0,.15);
+        padding-top: 1.5rem;
+        margin-top: 1.5rem;
+    }
+}
+.postauthor__avatar {
+    margin-right: 1rem;
+}
+.postauthor__avatarimage {
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.postauthor__body {
+    flex-grow: 1;
+    > *:last-child {
+        margin-bottom: 0;
+    }
+}
+.postauthor__intro {
+    opacity: .75;
+}
+.postauthor__name {
+    font-weight: bold;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+}
+.postauthor__sublinedivider {
+    margin-right: .25rem;
+}
+.postauthor__social {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: .25rem;
+    + .postauthor__actions {
+        margin-top: .5rem;
+    }
+}
+.postauthor__sociallink {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+.postauthor__sociallinklabel {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden !important;
+}
+.postauthor__bio {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    p {
+        margin-bottom: .5rem;
+    }
+    > *:last-child {
+        margin-bottom: 0;
+    }
+}
+.postauthor__actions {
+    margin-bottom: 1rem;
+}

@@ -48,7 +48,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     {
         /** @var Post $post */
         $post = $this->arguments['post'];
-        $section = $this->arguments['section'] ?: null;
+        $section = $this->arguments['section'] ?: '';
         $pageUid = $post !== null ? (int)$post->getUid() : 0;
         $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];

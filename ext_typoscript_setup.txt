@@ -14,7 +14,6 @@ config.tx_extbase.persistence {
         T3G\AgencyPack\Blog\Domain\Model\Post {
             mapping {
                 tableName = pages
-                columns.crdate.mapOnProperty = crdate
             }
         }
         T3G\AgencyPack\Blog\Domain\Model\Category {

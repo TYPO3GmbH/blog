@@ -1,11 +1,13 @@
-{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
 <f:layout name="Widget" />
-
-<f:section name="content">
-    <h3 class="widget-title"><f:translate key="headline.recentposts"/></h3>
-    <ul class="list list-unstyled">
-    <f:for each="{posts}" as="post">
-        <li><blog:link.post post="{post}" /></li>
-    </f:for>
+<f:section name="Title"><f:translate key="headline.recentposts" /></f:section>
+<f:section name="Content">
+    <ul class="blogwidgetlist blogwidgetlist--recentposts">
+        <f:for each="{posts}" as="post">
+            <li class="blogwidgetlist__item">
+                <blogvh:link.post class="blogwidgetlist__itemlink" title="{post.title}" post="{post}">
+                    <span class="blogwidgetlist__itemtitle">{post.title}</span>
+                </blogvh:link.post>
+            </li>
+        </f:for>
     </ul>
 </f:section>

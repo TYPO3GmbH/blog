@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
+use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
@@ -20,6 +21,13 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Post extends AbstractEntity
 {
+    /**
+     * The blog post doktype
+     *
+     * @var int
+     */
+    protected $doktype = Constants::DOKTYPE_BLOG_POST;
+
     /**
      * The blog post title.
      *
@@ -110,6 +118,16 @@ class Post extends AbstractEntity
     protected $publishDate;
 
     /**
+     * @var int
+     */
+    protected $crdateMonth = 0;
+
+    /**
+     * @var int
+     */
+    protected $crdateYear = 0;
+
+    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Author>
      * @Extbase\ORM\Lazy
      */
@@ -133,6 +151,14 @@ class Post extends AbstractEntity
         $this->tags = new ObjectStorage();
         $this->authors = new ObjectStorage();
         $this->media = new ObjectStorage();
+    }
+
+    /**
+     * @return int
+     */
+    public function getDoktype(): ?int
+    {
+        return $this->doktype;
     }
 
     /**
@@ -480,6 +506,22 @@ class Post extends AbstractEntity
     {
         $this->publishDate = $publishDate;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCrdateMonth(): int
+    {
+        return $this->crdateMonth;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCrdateYear(): int
+    {
+        return $this->crdateYear;
     }
 
     /**

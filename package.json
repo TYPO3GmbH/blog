@@ -1,0 +1,23 @@
+{
+    "name": "t3g-blog",
+    "scripts": {
+        "build": "webpack",
+        "watch": "webpack --watch"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions"
+    ],
+    "devDependencies": {
+        "autoprefixer": "^9.6.0",
+        "css-loader": "^3.0.0",
+        "mini-css-extract-plugin": "^0.7.0",
+        "node-sass": "^4.12.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.1",
+        "postcss-loader": "^3.0.0",
+        "sass-loader": "^7.1.0",
+        "webpack": "^4.34.0",
+        "webpack-command": "^0.4.2",
+        "webpack-fix-style-only-entries": "^0.3.0"
+    }
+}

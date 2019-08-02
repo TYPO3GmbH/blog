@@ -1,7 +1,58 @@
 <f:layout name="Widget" />
-<f:section name="content">
-
-    <h3 class="widget-title"><f:translate key="headline.archive"/></h3>
-    <f:render partial="Archive/Menu" arguments="{settings: settings, items: archiveData}" />
-
+<f:section name="Title"><f:translate key="headline.archive"/></f:section>
+<f:section name="Content">
+    <f:variable name="years" value="{archiveData}" />
+    <f:if condition="{years}">
+        <f:if condition="{settings.widgets.archive.groupByYear} == 1">
+            <f:then>
+                <ul data-archive-type="year" class="blogwidgetlist blogwidgetlist--archive">
+                    <f:for each="{years}" key="year" as="months">
+                        <li class="blogwidgetlist__item blogwidgetlist__item--year">
+                            <blogvh:link.archive class="blogwidgetlist__itemlink" year="{year}" title="{year}">
+                                <span class="blogwidgetlist__itemtitle">{year}</span>
+                                <f:if condition="{settings.widgets.archive.showCounter}">
+                                    <f:variable name="yearCount" value="0" />
+                                    <f:for each="{months}" as="month"><f:variable name="yearCount" value="{yearCount + month.count}" /></f:for>
+                                    <span class="blogwidgetlist__itemcount">{yearCount}</span>
+                                </f:if>
+                            </blogvh:link.archive>
+                            <f:if condition="{settings.widgets.archive.groupByMonth}">
+                                <ul data-archive-type="month" class="blogwidgetlist blogwidgetlist--archive">
+                                    <f:for each="{months}" as="month">
+                                        <f:render section="Month" arguments="{settings: settings, year: year, month: month}" />
+                                    </f:for>
+                                </ul>
+                            </f:if>
+                        </li>
+                    </f:for>
+                </ul>
+            </f:then>
+            <f:else>
+                <ul data-archive-type="month" class="blogwidgetlist blogwidgetlist--archive">
+                    <f:for each="{years}" key="year" as="months">
+                        <f:for each="{months}" as="month">
+                            <f:render section="Month" arguments="{settings: settings, year: year, month: month}" />
+                        </f:for>
+                    </f:for>
+                </ul>
+            </f:else>
+        </f:if>
+    </f:if>
+</f:section>
+<f:section name="Month">
+    <li class="blogwidgetlist__item blogwidgetlist__item--month">
+        <blogvh:link.archive class="blogwidgetlist__itemlink" year="{year}" month="{month.month}" title="{f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: month.timestamp)}">
+            <f:if condition="{settings.widgets.archive.groupByYear} == 1">
+                <f:then>
+                    <span class="blogwidgetlist__itemtitle">{f:format.date(format: '{settings.widgets.archive.monthDateFormat}', date: month.timestamp)}</span>
+                </f:then>
+                <f:else>
+                    <span class="blogwidgetlist__itemtitle">{f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: month.timestamp)}</span>
+                </f:else>
+            </f:if>
+            <f:if condition="{settings.widgets.archive.showCounter} == 1">
+                <span class="blogwidgetlist__itemcount">{month.count}</span>
+            </f:if>
+        </blogvh:link.archive>
+    </li>
 </f:section>

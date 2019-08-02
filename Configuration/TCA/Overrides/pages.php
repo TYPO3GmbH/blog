@@ -52,6 +52,12 @@ call_user_func(function () {
 
     $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
     $temporaryColumns = [
+        'crdate' => [
+            'label' => 'crdate',
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
         'comments_active' => [
             'exclude' => 1,
             'label' => $ll . 'pages.comments_active',
@@ -165,7 +171,7 @@ call_user_func(function () {
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'multiple' => 1,
+                'multiple' => 0,
                 'foreign_table' => 'tx_blog_domain_model_author',
                 'MM' => 'tx_blog_post_author_mm',
                 'minitems' => 0,
@@ -176,12 +182,6 @@ call_user_func(function () {
             ],
         ],
     ];
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-        'blog',
-        'Configuration/PageTS/SocialImageWizard.tsconfig',
-        'Blog: SocialImageWizard'
-    );
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
         'pages',

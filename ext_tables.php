@@ -41,6 +41,8 @@ call_user_func(function () {
         'plugin-blog-category' => 'EXT:blog/Resources/Public/Icons/plugin-blog-category.svg',
         'plugin-blog-commentform' => 'EXT:blog/Resources/Public/Icons/plugin-blog-commentform.svg',
         'plugin-blog-comments' => 'EXT:blog/Resources/Public/Icons/plugin-blog-comments.svg',
+        'plugin-blog-header' => 'EXT:blog/Resources/Public/Icons/plugin-blog-header.svg',
+        'plugin-blog-footer' => 'EXT:blog/Resources/Public/Icons/plugin-blog-footer.svg',
         'plugin-blog-metadata' => 'EXT:blog/Resources/Public/Icons/plugin-blog-metadata.svg',
         'plugin-blog-posts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-posts.svg',
         'plugin-blog-relatedposts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-relatedposts.svg',
@@ -129,6 +131,18 @@ call_user_func(function () {
         'RelatedPosts',
         'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_relatedposts.title',
         'plugin-blog-relatedposts'
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
+        'Header',
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_header.title',
+        'plugin-blog-header'
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
+        'Footer',
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_footer.title',
+        'plugin-blog-footer'
     );
 
     if (TYPO3_MODE === 'BE') {

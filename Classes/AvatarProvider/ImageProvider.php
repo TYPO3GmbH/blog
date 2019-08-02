@@ -12,7 +12,12 @@ namespace T3G\AgencyPack\Blog\AvatarProvider;
 
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
+use TYPO3\CMS\Core\Imaging\ImageManipulation\CropVariantCollection;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Service\ImageService;
 
 class ImageProvider implements AvatarProviderInterface
 {
@@ -20,7 +25,31 @@ class ImageProvider implements AvatarProviderInterface
     {
         $image = $author->getImage();
         if ($image instanceof FileReference) {
-            return $image->getOriginalResource()->getPublicUrl();
+            $defaultSize = 32;
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+            $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
+            $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+            $size = ($settings['authors']['avatar']['provider']['size'] ?? $defaultSize) ?: $defaultSize;
+
+            $imageService = $objectManager->get(ImageService::class);
+            $image = $imageService->getImage('', $image, false);
+
+            if ($image->hasProperty('crop') && $image->getProperty('crop')) {
+                $cropString = $image->getProperty('crop');
+            }
+            $cropVariantCollection = CropVariantCollection::create((string)$cropString);
+            $cropArea = $cropVariantCollection->getCropArea('default');
+
+            $processingInstructions = [
+                'width' => $size . 'c',
+                'height' => $size,
+                'minWidth' => $size,
+                'minHeight' => $size,
+                'crop' => $cropArea->isEmpty() ? null : $cropArea->makeAbsoluteBasedOnFile($image),
+            ];
+            $processedImage = $imageService->applyProcessingInstructions($image, $processingInstructions);
+            return $imageService->getImageUri($processedImage);
         }
         return '';
     }

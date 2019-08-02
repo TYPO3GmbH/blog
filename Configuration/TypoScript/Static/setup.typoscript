@@ -1,3 +1,12 @@
+######################
+#### DEPENDENCIES ####
+######################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:form/Configuration/TypoScript/setup.typoscript">
+
+
+##############
+### PLUGIN ###
+##############
 plugin.tx_blog {
     persistence {
         storagePid = {$plugin.tx_blog.settings.storagePid}
@@ -30,6 +39,99 @@ plugin.tx_blog {
             50 = tt_content.list.20.blog_archivewidget
             60 = tt_content.list.20.blog_feedwidget
         }
+        # Post View
+        meta {
+            postheader {
+                enable = {$plugin.tx_blog.settings.meta.postheader.enable}
+                modifier = {$plugin.tx_blog.settings.meta.postheader.modifier}
+                elements {
+                    authors {
+                        enable = {$plugin.tx_blog.settings.meta.postheader.elements.authors.enable}
+                    }
+                    categories {
+                        enable = {$plugin.tx_blog.settings.meta.postheader.elements.categories.enable}
+                    }
+                    tags {
+                        enable = {$plugin.tx_blog.settings.meta.postheader.elements.tags.enable}
+                    }
+                    published {
+                        enable = {$plugin.tx_blog.settings.meta.postheader.elements.published.enable}
+                        format = {$plugin.tx_blog.settings.meta.postheader.elements.published.format}
+                    }
+                    comments {
+                        enable = {$plugin.tx_blog.settings.meta.postheader.elements.comments.enable}
+                    }
+                }
+            }
+            postfooter {
+                enable = {$plugin.tx_blog.settings.meta.postfooter.enable}
+                modifier = {$plugin.tx_blog.settings.meta.postfooter.modifier}
+                elements {
+                    authors {
+                        enable = {$plugin.tx_blog.settings.meta.postfooter.elements.authors.enable}
+                    }
+                    categories {
+                        enable = {$plugin.tx_blog.settings.meta.postfooter.elements.categories.enable}
+                    }
+                    tags {
+                        enable = {$plugin.tx_blog.settings.meta.postfooter.elements.tags.enable}
+                    }
+                    published {
+                        enable = {$plugin.tx_blog.settings.meta.postfooter.elements.published.enable}
+                        format = {$plugin.tx_blog.settings.meta.postfooter.elements.published.format}
+                    }
+                    comments {
+                        enable = {$plugin.tx_blog.settings.meta.postfooter.elements.comments.enable}
+                    }
+                }
+            }
+            listheader {
+                enable = {$plugin.tx_blog.settings.meta.listheader.enable}
+                modifier = {$plugin.tx_blog.settings.meta.listheader.modifier}
+                elements {
+                    authors {
+                        enable = {$plugin.tx_blog.settings.meta.listheader.elements.authors.enable}
+                    }
+                    categories {
+                        enable = {$plugin.tx_blog.settings.meta.listheader.elements.categories.enable}
+                    }
+                    tags {
+                        enable = {$plugin.tx_blog.settings.meta.listheader.elements.tags.enable}
+                    }
+                    published {
+                        enable = {$plugin.tx_blog.settings.meta.listheader.elements.published.enable}
+                        format = {$plugin.tx_blog.settings.meta.listheader.elements.published.format}
+                    }
+                    comments {
+                        enable = {$plugin.tx_blog.settings.meta.listheader.elements.comments.enable}
+                    }
+                }
+            }
+            listfooter {
+                enable = {$plugin.tx_blog.settings.meta.listfooter.enable}
+                modifier = {$plugin.tx_blog.settings.meta.listfooter.modifier}
+                elements {
+                    authors {
+                        enable = {$plugin.tx_blog.settings.meta.listfooter.elements.authors.enable}
+                    }
+                    categories {
+                        enable = {$plugin.tx_blog.settings.meta.listfooter.elements.categories.enable}
+                    }
+                    tags {
+                        enable = {$plugin.tx_blog.settings.meta.listfooter.elements.tags.enable}
+                    }
+                    published {
+                        enable = {$plugin.tx_blog.settings.meta.listfooter.elements.published.enable}
+                        format = {$plugin.tx_blog.settings.meta.listfooter.elements.published.format}
+                    }
+                    comments {
+                        enable = {$plugin.tx_blog.settings.meta.listfooter.elements.comments.enable}
+                    }
+                }
+            }
+            default < .listheader
+        }
+
         # Lists related settings
         lists {
             pagination {
@@ -81,6 +183,9 @@ plugin.tx_blog {
             moderation = {$plugin.tx_blog.settings.comments.moderation}
             # Respect post_language_id, 0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)
             respectPostLanguageId = {$plugin.tx_blog.settings.comments.respectPostLanguageId}
+            date {
+                format = {$plugin.tx_blog.settings.comments.date.format}
+            }
             # Google Re-Captcha
             google_recaptcha = {$plugin.tx_blog.settings.comments.google_recaptcha}
             google_recaptcha {
@@ -135,6 +240,18 @@ plugin.tx_blog {
         data = page:sharing_enabled
     }
 }
+
+
+############
+### PAGE ###
+############
+page.includeCSSLibs {
+    blog = EXT:blog/Resources/Public/Css/frontend.min.css
+    blog {
+        forceOnTop = 1
+    }
+}
+
 
 lib.blog.pageInfo < plugin.tx_blog.pageInfo
 

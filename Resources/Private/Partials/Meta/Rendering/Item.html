@@ -1,0 +1,12 @@
+<f:if condition="!{name}"><f:variable name="name">default</f:variable></f:if>
+<div class="postmetagroup__item postmetagroup__item--{name}">
+    <f:if condition="{icon}">
+        <div class="postmetagroup__icon">
+            <span class="blogicon">{icon -> f:format.raw()}</span>
+        </div>
+    </f:if>
+    <div class="postmetagroup__body">
+        <f:if condition="{prefix}"><div class="postmetagroup__prefix">{prefix -> f:format.raw()}</div></f:if>
+        <f:if condition="{content}"><div class="postmetagroup__content">{content -> f:format.raw()}</div></f:if>
+    </div>
+</div>

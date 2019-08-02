@@ -12,6 +12,8 @@ composer.lock
 
 # Build stuff
 .build/
+Build/.phpunit.result.cache
+node_modules/
 var/
 config/
 

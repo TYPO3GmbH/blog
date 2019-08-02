@@ -48,13 +48,23 @@ page {
         templateRootPaths.0 = EXT:blog_template_test/Resources/Private/Templates/Page/
         partialRootPaths.0 = EXT:blog_template_test/Resources/Private/Partials/Page/
         layoutRootPaths.0 = EXT:blog_template_test/Resources/Private/Layouts/Page/
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+            10 {
+                levels = 2
+                includeSpacer = 1
+                as = mainnavigation
+            }
+        }
+        variables {
+            siteTitle = TEXT
+            siteTitle.data = TSFE:tmpl|setup|sitetitle
+        }
     }
 
     includeCSS {
         bootstrap = https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css
         bootstrap.external = 1
-        fontawesome = https://use.fontawesome.com/releases/v5.7.2/css/all.css
-        fontawesome.external = 1
     }
 
     includeJSFooterlibs {

@@ -1,5 +1,4 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:blog="http://typo3.org/ns/T3G/AgencyPack/Blog/ViewHelpers" data-namespace-typo3-fluid="true">
-<div class="tx-blog-post-list {class}">
+<div class="postlist{f:if(condition: type, then: ' postlist--{type}')}">
     <f:if condition="{posts}">
         <f:then>
             <f:if condition="{posts->f:count()} > {settings.lists.pagination.itemsPerPage}">
@@ -13,7 +12,7 @@
         </f:then>
         <f:else>
             <div class="alert alert-info" role="alert">
-                <strong><f:translate key="list.no_posts.title" /></strong><br/><f:translate key="list.no_posts.message" />
+                <strong><f:translate key="list.no_posts.title" /></strong><br><f:translate key="list.no_posts.message" />
             </div>
         </f:else>
     </f:if>
@@ -25,8 +24,7 @@
 </f:section>
 <f:section name="ListPosts">
     <f:for each="{posts}" as="post">
-        <blog:cache post="{post}" />
+        <blogvh:cache post="{post}" />
         <f:render partial="List/Post" arguments="{_all}" />
     </f:for>
 </f:section>
-</html>

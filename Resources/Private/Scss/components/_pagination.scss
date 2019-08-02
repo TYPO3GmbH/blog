@@ -1,0 +1,31 @@
+/**
+ * Pagination
+ */
+.blogpagination__list {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+}
+.blogpagination__item {
+    &:first-child {
+        .blogpagination__link {
+            margin-left: 0;
+        }
+    }
+}
+.blogpagination__item--active {
+    font-weight: bold;
+}
+.blogpagination__link {
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1;
+    border: 1px solid;
+    .blogpagination__item--disabled  & {
+        pointer-events: none;
+        cursor: auto;
+    }
+}

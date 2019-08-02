@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
-  <channel>
-    <title>{feed.title}</title>
-    <description>{feed.description}</description>
-    <language>{feed.language}</language>
-    <link>{feed.link}</link>
-    <lastBuildDate>{feed.date}</lastBuildDate>
-    <f:render section="content" />
-  </channel>
+    <channel>
+        <title>{feed.title}</title>
+        <description>{feed.description}</description>
+        <language>{feed.language}</language>
+        <link>{feed.link}</link>
+        <lastBuildDate>{feed.date}</lastBuildDate>
+        <f:render section="Content" />
+    </channel>
 </rss>
