@@ -43,6 +43,7 @@
     },
     "extra": {
         "typo3/cms": {
+            "extension-key": "blog",
             "web-dir": ".build/web",
             "app-dir": ".build"
         }
