@@ -12,6 +12,9 @@ composer.lock
 
 # Build stuff
 .build/
+.ddev/**/*.example
+.ddev/**/*.txt
+.ddev/commands/
 Build/.phpunit.result.cache
 node_modules/
 var/
