@@ -240,9 +240,9 @@ return [
                 'foreign_table' => 'pages',
                 'foreign_table_where' => 'AND {#pages}.{#doktype}=' . \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST . ' AND {#pages}.{#sys_language_uid} IN (-1,0)',
                 'MM' => 'tx_blog_post_author_mm',
-                'MM_opposite_field' => 'posts',
+                'MM_opposite_field' => 'authors',
                 'minitems' => 0,
-                'maxitems' => 100000,
+                'maxitems' => 99999,
             ],
         ],
         'details_page' => [
