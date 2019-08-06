@@ -1,18 +1,46 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-        <a class="navbar-brand" href="/">{siteTitle}</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <f:for each="{mainnavigation}" as="item">
-                    <li class="nav-item{f:if(condition: item.active, then: ' active')}">
-                        <a class="nav-link" href="{item.link}">{item.title}</a>
-                    </li>
-                </f:for>
-            </ul>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">{siteTitle}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <f:for each="{mainnavigation}" as="item">
+                        <li class="nav-item{f:if(condition: item.active, then: ' active')}">
+                            <a class="nav-link" href="{item.link}">{item.title}</a>
+                        </li>
+                    </f:for>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>
+
 <f:render section="Main" />
+
+<footer>
+    <f:if condition="{languagenavigation}">
+        <nav class="navbar navbar-expand navbar-dark bg-primary">
+            <div class="container">
+                <ul class="navbar-nav justify-content-center w-100">
+                    <f:for each="{languagenavigation}" as="item">
+                        <li class="nav-item">
+                            <f:if condition="{item.available}">
+                                <f:then>
+                                    <a class="nav-link{f:if(condition: item.active, then: ' active')}{f:if(condition: item.available, else: ' disabled')}" href="{item.link}" hreflang="{item.hreflang}" title="{item.title}">
+                                        <span>{item.navigationTitle}</span>
+                                    </a>
+                                </f:then>
+                                <f:else>
+                                    <span class="nav-link{f:if(condition: item.active, then: ' active')}{f:if(condition: item.available, else: ' disabled')}">{item.navigationTitle}</span>
+                                </f:else>
+                            </f:if>
+                        </li>
+                    </f:for>
+                </ul>
+            </div>
+        </nav>
+    </f:if>
+</footer>

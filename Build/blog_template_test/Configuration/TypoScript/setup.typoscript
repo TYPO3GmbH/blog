@@ -55,6 +55,10 @@ page {
                 includeSpacer = 1
                 as = mainnavigation
             }
+            20 = TYPO3\CMS\Frontend\DataProcessing\LanguageMenuProcessor
+            20 {
+                as = languagenavigation
+            }
         }
         variables {
             siteTitle = TEXT
