@@ -1,4 +1,6 @@
-<f:spaceless>
+<f:layout name="Post" />
+<f:section name="Content">
+
     <f:if condition="{settings.comments.active}">
         <div class="postcomments">
             <h3 class="postcomments__title" id="comments"><f:translate key="headline.comments"/></h3>
@@ -18,4 +20,5 @@
             </f:if>
         </div>
     </f:if>
-</f:spaceless>
+
+</f:section>
