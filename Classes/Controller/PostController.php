@@ -363,7 +363,7 @@ class PostController extends ActionController
             (int)$this->settings['relatedPosts']['limit']
         );
         $this->view->assign('type', 'related');
-        $this->view->assign('currentPost', $post);
+        $this->view->assign('post', $post);
         $this->view->assign('posts', $posts);
     }
 

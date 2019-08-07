@@ -1,4 +1,6 @@
-<f:spaceless>
+<f:layout name="Post" />
+<f:section name="Content">
+
     <header class="postheader">
         <h1 class="postheader__title">{post.title}</h1>
         <f:if condition="{settings.meta.postheader.enable}">
@@ -7,4 +9,5 @@
             </div>
         </f:if>
     </header>
-</f:spaceless>
+
+</f:section>

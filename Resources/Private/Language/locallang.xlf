@@ -4,6 +4,14 @@
         <header/>
         <body>
 
+            <!-- General -->
+            <trans-unit id="general.message.configuration_error.title" xml:space="preserve">
+                <source>A possible configuration error was detected.</source>
+            </trans-unit>
+            <trans-unit id="general.message.configuration_error.single_no_post" xml:space="preserve">
+                <source>No matching post could be obtained. Make sure that this plugin is only used on a post.</source>
+            </trans-unit>
+
             <!-- Headline -->
             <trans-unit id="headline.commentform" xml:space="preserve">
                 <source>Write comment</source>
