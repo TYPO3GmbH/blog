@@ -7,7 +7,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = {
     mode: 'production',
     entry: {
-        frontend: './Resources/Private/Scss/frontend.scss',
+        frontend: './Resources/Private/Scss/frontend/frontend.scss',
     },
     output: {
         path: __dirname + '/Resources/Public'
