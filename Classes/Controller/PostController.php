@@ -20,6 +20,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\MetaService;
+use T3G\AgencyPack\Blog\Service\MetaTagService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
@@ -190,6 +191,8 @@ class PostController extends ActionController
             ], LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
             MetaService::set(MetaService::META_TITLE, $title);
             MetaService::set(MetaService::META_DESCRIPTION, LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
+            MetaTagService::set(MetaTagService::META_TITLE, (string) $title);
+            MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
         }
     }
 
@@ -222,6 +225,8 @@ class PostController extends ActionController
             MetaService::set(MetaService::META_TITLE, $category->getTitle());
             MetaService::set(MetaService::META_DESCRIPTION, $category->getDescription());
             MetaService::set(MetaService::META_CATEGORIES, [$category->getTitle()]);
+            MetaTagService::set(MetaTagService::META_TITLE, (string) $category->getTitle());
+            MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $category->getDescription());
         } else {
             $this->view->assign('categories', $this->categoryRepository->findAll());
         }
@@ -243,6 +248,8 @@ class PostController extends ActionController
             $this->view->assign('author', $author);
             MetaService::set(MetaService::META_TITLE, $author->getName());
             MetaService::set(MetaService::META_DESCRIPTION, $author->getBio());
+            MetaTagService::set(MetaTagService::META_TITLE, (string) $author->getName());
+            MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $author->getBio());
         } else {
             $this->view->assign('authors', $this->authorRepository->findAll());
         }
@@ -265,6 +272,8 @@ class PostController extends ActionController
             MetaService::set(MetaService::META_TITLE, $tag->getTitle());
             MetaService::set(MetaService::META_DESCRIPTION, $tag->getDescription());
             MetaService::set(MetaService::META_TAGS, [$tag->getTitle()]);
+            MetaTagService::set(MetaTagService::META_TITLE, (string) $tag->getTitle());
+            MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $tag->getDescription());
         } else {
             $this->view->assign('tags', $this->tagRepository->findAll());
         }

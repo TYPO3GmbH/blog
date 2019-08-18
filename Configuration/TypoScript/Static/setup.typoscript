@@ -253,6 +253,18 @@ page.includeCSSLibs {
 }
 
 
+##############
+### CONFIG ###
+##############
+config.pageTitleProviders {
+    blog {
+        provider = T3G\AgencyPack\Blog\TitleTagProvider\BlogTitleTagProvider
+        before = seo
+        after = altPageTitle
+    }
+}
+
+
 lib.blog.pageInfo < plugin.tx_blog.pageInfo
 
 lib.blog.contentElementRendering = RECORDS
