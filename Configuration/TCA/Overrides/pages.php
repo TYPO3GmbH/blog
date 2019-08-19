@@ -12,7 +12,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
-    0 => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf:blog-folder',
+    0 => 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:blog-folder',
     1 => 'blog',
     2 => 'apps-pagetree-folder-contains-blog',
 ];

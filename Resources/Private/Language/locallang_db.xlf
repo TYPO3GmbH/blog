@@ -3,6 +3,10 @@
     <file t3:id="1557352031" source-language="en" datatype="plaintext" original="messages" date="2019-05-08T21:47:12Z" product-name="blog">
         <header/>
         <body>
+            <trans-unit id="blog-folder">
+                <source>Blog</source>
+            </trans-unit>
+
             <trans-unit id="wizard.group.blog" xml:space="preserve">
                 <source>Blog</source>
             </trans-unit>
