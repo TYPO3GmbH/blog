@@ -95,13 +95,6 @@ class Post extends AbstractEntity
     protected $tags;
 
     /**
-     * Sharing enabled flag for this blog post. This flag can be used in views to enable sharing tools.
-     *
-     * @var bool
-     */
-    protected $sharingEnabled;
-
-    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Extbase\ORM\Lazy
      */
@@ -394,24 +387,6 @@ class Post extends AbstractEntity
     public function removeComment(Comment $comment): self
     {
         $this->comments->detach($comment);
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSharingEnabled(): bool
-    {
-        return $this->sharingEnabled;
-    }
-
-    /**
-     * @param bool $sharingEnabled
-     * @return Post
-     */
-    public function setSharingEnabled(bool $sharingEnabled): self
-    {
-        $this->sharingEnabled = $sharingEnabled;
         return $this;
     }
 

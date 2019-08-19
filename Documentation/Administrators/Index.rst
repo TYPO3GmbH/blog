@@ -208,7 +208,7 @@ categories, tags and archive links.
 
 Metadata
 """"""""
-Displays post meta data, like date, tags, category, sharing links...
+Displays post meta data, like date, tags, category...
 
 
 Authors
@@ -242,12 +242,6 @@ Tags are blog specific records. Creating a new tag works in the same way as crea
 * Click on the page where you want to create the new tag
 * Enter a title for the tag
 * Click "Save"
-
-
-Enable sharing
---------------
-
-To enable sharing go to the page properties of your blog entry and set the check box "Sharing enabled"
 
 
 AvatarProvider

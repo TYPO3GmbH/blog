@@ -87,14 +87,6 @@ call_user_func(function () {
                 ],
             ],
         ],
-        'sharing_enabled' => [
-            'exclude' => 1,
-            'label' => $ll . 'pages.sharing_enabled',
-            'config' => [
-                'type' => 'check',
-                'default' => '1',
-            ],
-        ],
         'crdate_month' => [
             'exclude' => 1,
             'label' => $ll . 'pages.crdate_month',
@@ -201,7 +193,7 @@ call_user_func(function () {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
         'pages',
         '--div--;' . $ll . 'pages.tabs.blog,
-        --palette--;' . $ll . 'pages.palettes.publish_date;publish_date, archive_date, tags, authors, comments_active, comments, sharing_enabled',
+        --palette--;' . $ll . 'pages.palettes.publish_date;publish_date, archive_date, tags, authors, comments_active, comments',
         (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
     );
 

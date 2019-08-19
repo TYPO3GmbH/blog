@@ -235,10 +235,6 @@ plugin.tx_blog {
         stdWrap.wrap = <h1>|</h1>
         stdWrap.typolink.parameter.data = page:uid
     }
-    pageInfo.sharingEnabled = TEXT
-    pageInfo.sharingEnabled {
-        data = page:sharing_enabled
-    }
 }
 
 
