@@ -4,8 +4,8 @@
 	 viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
 <path fill="#5BA34F" d="M0,0h64v64H0V0z"/>
 <polygon fill="#FFFFFF" points="18,16 18,44 27,44 32,50 37,44 46,44 46,16 "/>
-<rect x="22" y="20" fill="#5BA34F" width="20" height="4"/>
-<rect x="22" y="26" opacity="0.5" fill="#5BA34F" width="16" height="2"/>
-<rect x="22" y="30" opacity="0.5" fill="#5BA34F" width="16" height="2"/>
-<rect x="22" y="34" opacity="0.5" fill="#5BA34F" width="16" height="2"/>
+<rect x="22" y="20" fill="#333333" width="20" height="4"/>
+<rect x="22" y="26" opacity="0.25" fill="#333333" enable-background="new    " width="20" height="2"/>
+<rect x="22" y="30" opacity="0.25" fill="#333333" enable-background="new    " width="20" height="2"/>
+<rect x="22" y="34" opacity="0.25" fill="#333333" enable-background="new    " width="20" height="2"/>
 </svg>

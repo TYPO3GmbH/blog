@@ -14,10 +14,10 @@ if (!defined('TYPO3_MODE')) {
 $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
     0 => 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:blog-folder',
     1 => 'blog',
-    2 => 'apps-pagetree-folder-contains-blog',
+    2 => 'record-folder-contains-blog',
 ];
 
-$GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'apps-pagetree-folder-contains-blog';
+$GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-folder-contains-blog';
 
 call_user_func(function () {
     $blogDocType = \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST;
@@ -29,7 +29,7 @@ call_user_func(function () {
         [
             'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
             $blogDocType,
-            'apps-pagetree-blog-post',
+            'record-blog-post',
         ],
         '1',
         'after'
@@ -41,7 +41,7 @@ call_user_func(function () {
         [
             'ctrl' => [
                 'typeicon_classes' => [
-                    $blogDocType => 'apps-pagetree-blog-post',
+                    $blogDocType => 'record-blog-post',
                 ],
             ],
             'types' => [

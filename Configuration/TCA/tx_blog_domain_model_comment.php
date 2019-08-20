@@ -28,7 +28,9 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment.svg',
+        'typeicon_classes' => [
+            'default' => 'record-blog-comment'
+        ],
         'searchFields' => 'uid,comment,name,email',
     ],
     'interface' => [

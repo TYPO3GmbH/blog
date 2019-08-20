@@ -32,7 +32,9 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-tag.svg',
+        'typeicon_classes' => [
+            'default' => 'record-blog-tag'
+        ],
         'searchFields' => 'uid,title',
     ],
     'interface' => [

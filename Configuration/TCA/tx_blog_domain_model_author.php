@@ -27,7 +27,9 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-author.svg',
+        'typeicon_classes' => [
+            'default' => 'record-blog-author'
+        ],
         'searchFields' => 'uid,name,title'
     ],
     'interface' => [
