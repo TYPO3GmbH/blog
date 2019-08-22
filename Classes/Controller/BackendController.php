@@ -102,8 +102,7 @@ class BackendController extends ActionController
 
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/Tooltip');
-        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/bootstrap.min.css', 'stylesheet', 'all', '', false);
-        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/backend.css', 'stylesheet', 'all', '', false);
+        $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/backend.min.css', 'stylesheet', 'all', '', false);
     }
 
     public function initializeSetupWizardAction(): void
@@ -124,21 +123,9 @@ class BackendController extends ActionController
 
     protected function initializeDataTables(): void
     {
-        $blogPath = ExtensionManagementUtility::extPath('blog', 'Resources/Public/JavaScript/');
-        $blogPath = PathUtility::getAbsoluteWebPath($blogPath);
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
-        $pageRenderer->addRequireJsConfiguration([
-            'paths' => [
-                'datatables_bootstrap' => $blogPath . 'dataTables.bootstrap.min'
-            ],
-            'map' => [
-                '*' => [
-                    'datatables.net' => 'datatables',
-                ]
-            ]
-        ]);
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/DataTables');
-        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/dataTables.bootstrap.min.css', 'stylesheet', 'all', '', false);
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/Datatables');
+        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/Datatables.min.css', 'stylesheet', 'all', '', false);
     }
 
     /**

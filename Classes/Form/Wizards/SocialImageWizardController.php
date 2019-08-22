@@ -62,8 +62,7 @@ class SocialImageWizardController
         $this->moduleTemplate->setContent($this->view->render());
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
         $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/SocialImageWizard.css');
-        $pageRenderer->addJsFile('EXT:blog/Resources/Public/JavaScript/fabric.min.js');
-        $pageRenderer->addJsFile('EXT:blog/Resources/Public/JavaScript/SocialImageApp.js');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/SocialImageApp');
         return GeneralUtility::makeInstance(HtmlResponse::class, $this->moduleTemplate->renderContent());
     }
 
