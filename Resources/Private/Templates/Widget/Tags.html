@@ -3,7 +3,7 @@
 <f:section name="Content">
     <ul class="blogwidgetlist blogwidgetlist--tags">
         <f:for each="{tags}" as="tag">
-            <li class="blogwidgetlist__item">
+            <li class="blogwidgetlist__item{f:if(condition: '{currentTag} == {tag.uid}', then: ' blogwidgetlist__item--active')}">
                 <blogvh:link.tag class="blogbadge" tag="{tag.tagObject}" style="font-size: {tag.size}%" />
             </li>
         </f:for>
