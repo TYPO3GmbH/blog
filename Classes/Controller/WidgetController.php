@@ -108,7 +108,6 @@ class WidgetController extends ActionController
         if (!empty($requestParameters['tag'])) {
             $currentTag = (int)$requestParameters['tag'];
         }
-
         $limit = (int)$this->settings['widgets']['tags']['limit'] ?: 20;
         $minSize = (int)$this->settings['widgets']['tags']['minSize'] ?: 100;
         $maxSize = (int)$this->settings['widgets']['tags']['maxSize'] ?: 100;
