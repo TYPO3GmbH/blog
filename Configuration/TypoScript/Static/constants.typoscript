@@ -16,10 +16,12 @@
 
 # customcategory=blog_post=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.post
 # customsubcategory=100_blog_post=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.post
+# customsubcategory=101_blog_post_featuredImage=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.post.featuredimage
 # customsubcategory=110_blog_post_header=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.post.header
 # customsubcategory=120_blog_post_footer=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.post.footer
 
 # customcategory=blog_list=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.list
+# customsubcategory=100_blog_list_featuredimage=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.featuredimage
 # customsubcategory=200_blog_list_element=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.element
 # customsubcategory=210_blog_list_element_header=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.element.header
 # customsubcategory=220_blog_list_element_footer=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.element.footer
@@ -181,7 +183,22 @@ plugin {
                 }
             }
 
+            post {
+                featuredImage {
+                    # cat=blog_post/101_blog_post_featuredImage; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.width
+                    width = 1140
+                    # cat=blog_post/101_blog_post_featuredImage; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.height
+                    height = 400c
+                }
+            }
+
             lists {
+                featuredImage {
+                    # cat=blog_list/100_blog_list_featuredimage; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.width
+                    width = 1140
+                    # cat=blog_list/100_blog_list_featuredimage; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.height
+                    height = 400c
+                }
                 pagination {
                     # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.pagination.itemsPerPage
                     itemsPerPage = 10

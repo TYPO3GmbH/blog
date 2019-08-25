@@ -132,8 +132,20 @@ plugin.tx_blog {
             default < .listheader
         }
 
+        # Single post related settings
+        post {
+            featuredImage {
+                width = {$plugin.tx_blog.settings.post.featuredImage.height}
+                height = {$plugin.tx_blog.settings.post.featuredImage.height}
+            }
+        }
+
         # Lists related settings
         lists {
+            featuredImage {
+                width = {$plugin.tx_blog.settings.lists.featuredImage.height}
+                height = {$plugin.tx_blog.settings.lists.featuredImage.height}
+            }
             pagination {
                 itemsPerPage = {$plugin.tx_blog.settings.lists.pagination.itemsPerPage}
                 insertAbove = {$plugin.tx_blog.settings.lists.pagination.insertAbove}

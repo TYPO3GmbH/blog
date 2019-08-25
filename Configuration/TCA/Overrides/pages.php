@@ -174,6 +174,18 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
                 ]
             ],
         ],
+        'featured_image' => [
+            'exclude' => true,
+            'label' => $ll . 'pages.featured_image',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'featured_image',
+                [
+                    'minitems' => 0,
+                    'maxitems' => 1,
+                ],
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            ),
+        ],
     ]
 );
 
@@ -191,7 +203,7 @@ $GLOBALS['TCA']['pages']['types'][\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_P
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'pages',
     '--div--;' . $ll . 'pages.tabs.blog,
-    --palette--;' . $ll . 'pages.palettes.publish_date;publish_date, archive_date, tags, authors, comments_active, comments',
+    --palette--;' . $ll . 'pages.palettes.publish_date;publish_date, featured_image, archive_date, tags, authors, comments_active, comments',
     (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
 );
 
