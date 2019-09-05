@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2016-07-04T17:14:25Z" product-name="blog" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="headline.commentform" xml:space="preserve">
+				<source>Write comment</source>
+			<target>crwdns46586:0crwdne46586:0</target></trans-unit>
+      <trans-unit id="headline.comments" xml:space="preserve">
+				<source>Comments</source>
+			<target>crwdns46588:0crwdne46588:0</target></trans-unit>
+      <trans-unit id="headline.category" xml:space="preserve">
+				<source>Posts of category: %s</source>
+			<target>crwdns46590:0%scrwdne46590:0</target></trans-unit>
+      <trans-unit id="headline.categories" xml:space="preserve">
+				<source>Categories</source>
+			<target>crwdns46592:0crwdne46592:0</target></trans-unit>
+      <trans-unit id="headline.archive" xml:space="preserve">
+				<source>Archive</source>
+			<target>crwdns46594:0crwdne46594:0</target></trans-unit>
+      <trans-unit id="headline.recentcomments" xml:space="preserve">
+				<source>Recent comments</source>
+			<target>crwdns46596:0crwdne46596:0</target></trans-unit>
+      <trans-unit id="headline.recentposts" xml:space="preserve">
+				<source>Recent posts</source>
+			<target>crwdns46598:0crwdne46598:0</target></trans-unit>
+      <trans-unit id="headline.author" xml:space="preserve">
+				<source>Posts by %s</source>
+			<target>crwdns46600:0%scrwdne46600:0</target></trans-unit>
+      <trans-unit id="headline.authors" xml:space="preserve">
+				<source>Authors</source>
+			<target>crwdns46602:0crwdne46602:0</target></trans-unit>
+      <trans-unit id="headline.tag" xml:space="preserve">
+				<source>Posts tagged with %s</source>
+			<target>crwdns46604:0%scrwdne46604:0</target></trans-unit>
+      <trans-unit id="headline.tags" xml:space="preserve">
+				<source>Tags</source>
+			<target>crwdns46606:0crwdne46606:0</target></trans-unit>
+      <trans-unit id="headline.sidebar" xml:space="preserve">
+				<source>Sidebar</source>
+			<target>crwdns46608:0crwdne46608:0</target></trans-unit>
+      <trans-unit id="headline.rssfeed" xml:space="preserve">
+				<source>RSS-Feeds</source>
+			<target>crwdns46610:0crwdne46610:0</target></trans-unit>
+      <trans-unit id="form.comment.hp" xml:space="preserve">
+				<source>Please let this field empty</source>
+			<target>crwdns46612:0crwdne46612:0</target></trans-unit>
+      <trans-unit id="form.comment.name" xml:space="preserve">
+				<source>Name</source>
+			<target>crwdns46614:0crwdne46614:0</target></trans-unit>
+      <trans-unit id="form.comment.email" xml:space="preserve">
+				<source>E-Mail</source>
+			<target>crwdns46616:0crwdne46616:0</target></trans-unit>
+      <trans-unit id="form.comment.url" xml:space="preserve">
+				<source>URL</source>
+			<target>crwdns46618:0crwdne46618:0</target></trans-unit>
+      <trans-unit id="form.comment.comment" xml:space="preserve">
+				<source>Comment</source>
+			<target>crwdns46620:0crwdne46620:0</target></trans-unit>
+      <trans-unit id="form.comment.submit" xml:space="preserve">
+				<source>Submit</source>
+			<target>crwdns46622:0crwdne46622:0</target></trans-unit>
+      <trans-unit id="message.no_comments" xml:space="preserve">
+				<source>No comments</source>
+			<target>crwdns46624:0crwdne46624:0</target></trans-unit>
+      <trans-unit id="message.comment" xml:space="preserve">
+				<source>%s comment</source>
+			<target>crwdns46626:0%scrwdne46626:0</target></trans-unit>
+      <trans-unit id="message.comments" xml:space="preserve">
+				<source>%s comments</source>
+			<target>crwdns46628:0%scrwdne46628:0</target></trans-unit>
+      <trans-unit id="message.comments_closed" xml:space="preserve">
+				<source>Comments closed</source>
+			<target>crwdns46630:0crwdne46630:0</target></trans-unit>
+      <trans-unit id="message.addComment.error.title" xml:space="preserve">
+				<source>Comments not active</source>
+			<target>crwdns46632:0crwdne46632:0</target></trans-unit>
+      <trans-unit id="message.addComment.error.text" xml:space="preserve">
+				<source>The comment function is disabled.</source>
+			<target>crwdns46634:0crwdne46634:0</target></trans-unit>
+      <trans-unit id="message.addComment.success.title" xml:space="preserve">
+				<source>Comment added</source>
+			<target>crwdns46636:0crwdne46636:0</target></trans-unit>
+      <trans-unit id="message.addComment.success.text" xml:space="preserve">
+				<source>Your comment was added successfully.</source>
+			<target>crwdns46638:0crwdne46638:0</target></trans-unit>
+      <trans-unit id="message.addComment.moderation.title" xml:space="preserve">
+				<source>Comment added</source>
+			<target>crwdns46640:0crwdne46640:0</target></trans-unit>
+      <trans-unit id="message.addComment.moderation.text" xml:space="preserve">
+				<source>Your comment was added successfully and is now waiting for approval.</source>
+			<target>crwdns46642:0crwdne46642:0</target></trans-unit>
+      <trans-unit id="meta.title.listPostsByDate" xml:space="preserve">
+				<source>All blog posts in ###MONTH_NAME### ###YEAR###</source>
+			<target>crwdns46644:0crwdne46644:0</target></trans-unit>
+      <trans-unit id="meta.description.listPostsByDate" xml:space="preserve">
+				<source>All blog posts ordered by date</source>
+			<target>crwdns46646:0crwdne46646:0</target></trans-unit>
+      <trans-unit id="author.aboutTheAuthor" xml:space="preserve">
+				<source>About the Author</source>
+			<target>crwdns46648:0crwdne46648:0</target></trans-unit>
+      <trans-unit id="list.no_posts.title" xml:space="preserve">
+				<source>No blog posts</source>
+			<target>crwdns46650:0crwdne46650:0</target></trans-unit>
+      <trans-unit id="list.no_posts.message" xml:space="preserve">
+				<source>This list contains no blog posts.</source>
+			<target>crwdns46652:0crwdne46652:0</target></trans-unit>
+      <trans-unit id="backend.headline.setup_wizard" xml:space="preserve">
+				<source>SetupWizard</source>
+			<target>crwdns46654:0crwdne46654:0</target></trans-unit>
+      <trans-unit id="backend.headline.posts" xml:space="preserve">
+				<source>Posts</source>
+			<target>crwdns46656:0crwdne46656:0</target></trans-unit>
+      <trans-unit id="backend.headline.comments" xml:space="preserve">
+				<source>Comments</source>
+			<target>crwdns46658:0crwdne46658:0</target></trans-unit>
+      <trans-unit id="backend.lead.blogs" xml:space="preserve">
+				<source>It looks like you have the following blog setups</source>
+			<target>crwdns46660:0crwdne46660:0</target></trans-unit>
+      <trans-unit id="backend.message.noblogs" xml:space="preserve">
+				<source>It looks like no blog setup exists in this instance.</source>
+			<target>crwdns46662:0crwdne46662:0</target></trans-unit>
+      <trans-unit id="backend.lead.posts" xml:space="preserve">
+				<source>The following table shows all the blog posts available in this installation. Use the filters and search to refine the results.</source>
+			<target>crwdns46664:0crwdne46664:0</target></trans-unit>
+      <trans-unit id="backend.message.noposts" xml:space="preserve">
+				<source>Oops, apparently there are no blog posts in this installation.</source>
+			<target>crwdns46666:0crwdne46666:0</target></trans-unit>
+      <trans-unit id="backend.message.nopost" xml:space="preserve">
+				<source>Post not available</source>
+			<target>crwdns46668:0crwdne46668:0</target></trans-unit>
+      <trans-unit id="backend.lead.comments" xml:space="preserve">
+				<source>The following table shows blog comments available in this installation. Use the filters and search to refine the results.</source>
+			<target>crwdns46670:0crwdne46670:0</target></trans-unit>
+      <trans-unit id="backend.message.nocomments" xml:space="preserve">
+				<source>Oops, apparently there are no blog comments in this view.</source>
+			<target>crwdns46672:0crwdne46672:0</target></trans-unit>
+      <trans-unit id="backend.warning" xml:space="preserve">
+				<source>Warning</source>
+			<target>crwdns46674:0crwdne46674:0</target></trans-unit>
+      <trans-unit id="backend.table.blog" xml:space="preserve">
+				<source>Blog</source>
+			<target>crwdns46676:0crwdne46676:0</target></trans-unit>
+      <trans-unit id="backend.table.articles" xml:space="preserve">
+				<source>Articles</source>
+			<target>crwdns46678:0crwdne46678:0</target></trans-unit>
+      <trans-unit id="backend.table.actions" xml:space="preserve">
+				<source>Actions</source>
+			<target>crwdns46680:0crwdne46680:0</target></trans-unit>
+      <trans-unit id="backend.table.title" xml:space="preserve">
+				<source>Articles</source>
+			<target>crwdns46682:0crwdne46682:0</target></trans-unit>
+      <trans-unit id="backend.table.author" xml:space="preserve">
+				<source>Author</source>
+			<target>crwdns46684:0crwdne46684:0</target></trans-unit>
+      <trans-unit id="backend.table.categories" xml:space="preserve">
+				<source>Categories</source>
+			<target>crwdns46686:0crwdne46686:0</target></trans-unit>
+      <trans-unit id="backend.table.tags" xml:space="preserve">
+				<source>Tags</source>
+			<target>crwdns46688:0crwdne46688:0</target></trans-unit>
+      <trans-unit id="backend.table.comment" xml:space="preserve">
+				<source>Comment</source>
+			<target>crwdns46690:0crwdne46690:0</target></trans-unit>
+      <trans-unit id="backend.table.post" xml:space="preserve">
+				<source>Reply to post</source>
+			<target>crwdns46692:0crwdne46692:0</target></trans-unit>
+      <trans-unit id="backend.table.date" xml:space="preserve">
+				<source>Date</source>
+			<target>crwdns46694:0crwdne46694:0</target></trans-unit>
+      <trans-unit id="backend.comments.filter.all" xml:space="preserve">
+				<source>All</source>
+			<target>crwdns46696:0crwdne46696:0</target></trans-unit>
+      <trans-unit id="backend.comments.filter.pending" xml:space="preserve">
+				<source>Pending</source>
+			<target>crwdns46698:0crwdne46698:0</target></trans-unit>
+      <trans-unit id="backend.comments.filter.approved" xml:space="preserve">
+				<source>Approved</source>
+			<target>crwdns46700:0crwdne46700:0</target></trans-unit>
+      <trans-unit id="backend.comments.filter.declined" xml:space="preserve">
+				<source>Declined</source>
+			<target>crwdns46702:0crwdne46702:0</target></trans-unit>
+      <trans-unit id="backend.comments.filter.deleted" xml:space="preserve">
+				<source>Deleted</source>
+			<target>crwdns46704:0crwdne46704:0</target></trans-unit>
+      <trans-unit id="wizard.button.trigger" xml:space="preserve">
+				<source>Setup a new blog</source>
+			<target>crwdns46706:0crwdne46706:0</target></trans-unit>
+      <trans-unit id="wizard.button.cancel" xml:space="preserve">
+				<source>Cancel</source>
+			<target>crwdns46708:0crwdne46708:0</target></trans-unit>
+      <trans-unit id="wizard.button.setup" xml:space="preserve">
+				<source>Setup</source>
+			<target>crwdns46710:0crwdne46710:0</target></trans-unit>
+      <trans-unit id="wizard.lead" xml:space="preserve">
+				<source>This Wizard will create a blog setup in your tree.</source>
+			<target>crwdns46712:0crwdne46712:0</target></trans-unit>
+      <trans-unit id="wizard.description" xml:space="preserve">
+				<source>After click on the button below the tree will be created. If you see the success message, go to your page tree and maybe reload the tree to see the result.</source>
+			<target>crwdns46714:0crwdne46714:0</target></trans-unit>
+      <trans-unit id="wizard.headline.settings" xml:space="preserve">
+				<source>Settings</source>
+			<target>crwdns46716:0crwdne46716:0</target></trans-unit>
+      <trans-unit id="wizard.label.title" xml:space="preserve">
+				<source>Title of the blog</source>
+			<target>crwdns46718:0crwdne46718:0</target></trans-unit>
+      <trans-unit id="wizard.placeholder.title" xml:space="preserve">
+				<source>The title of your blog</source>
+			<target>crwdns46720:0crwdne46720:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog" xml:space="preserve">
+				<source>TYPO3 Blog</source>
+			<target>crwdns46722:0crwdne46722:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog_100_uids" xml:space="preserve">
+				<source>Page ID settings</source>
+			<target>crwdns46724:0crwdne46724:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog_110_templates" xml:space="preserve">
+				<source>Templates</source>
+			<target>crwdns46726:0crwdne46726:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog_120_lists" xml:space="preserve">
+				<source>Listings</source>
+			<target>crwdns46728:0crwdne46728:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog_130_widgets" xml:space="preserve">
+				<source>Widgets</source>
+			<target>crwdns46730:0crwdne46730:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog_131_widgets_comments" xml:space="preserve">
+				<source>Widget: Comment</source>
+			<target>crwdns46732:0crwdne46732:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog_132_widgets_recent_posts" xml:space="preserve">
+				<source>Widget: Recent posts</source>
+			<target>crwdns46734:0crwdne46734:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog_133_widgets_tags" xml:space="preserve">
+				<source>Widget: Tags</source>
+			<target>crwdns46736:0crwdne46736:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog_134_widgets_archive" xml:space="preserve">
+				<source>Widget: Archive</source>
+			<target>crwdns46738:0crwdne46738:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog_140_comments" xml:space="preserve">
+				<source>Comments</source>
+			<target>crwdns46740:0crwdne46740:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog_150_authors" xml:space="preserve">
+				<source>Authors</source>
+			<target>crwdns46742:0crwdne46742:0</target></trans-unit>
+      <trans-unit id="constantEditor.blog_160_notifications" xml:space="preserve">
+				<source>Notifications</source>
+			<target>crwdns46744:0crwdne46744:0</target></trans-unit>
+      <trans-unit id="constantEditor.view.templateRootPath" xml:space="preserve">
+				<source>Template Root Path: Path to templates folder</source>
+			<target>crwdns46746:0crwdne46746:0</target></trans-unit>
+      <trans-unit id="constantEditor.view.partialRootPaths" xml:space="preserve">
+				<source>Partial Root Path: Path to partial folder</source>
+			<target>crwdns46748:0crwdne46748:0</target></trans-unit>
+      <trans-unit id="constantEditor.view.layoutRootPaths" xml:space="preserve">
+				<source>Layout Root Path: Path to layout folder</source>
+			<target>crwdns46750:0crwdne46750:0</target></trans-unit>
+      <trans-unit id="constantEditor.view.emails.templateRootPath" xml:space="preserve">
+				<source>Email-Template Root Path: Path to templates folder</source>
+			<target>crwdns46752:0crwdne46752:0</target></trans-unit>
+      <trans-unit id="constantEditor.view.emails.partialRootPaths" xml:space="preserve">
+				<source>Email-Partial Root Path: Path to partial folder</source>
+			<target>crwdns46754:0crwdne46754:0</target></trans-unit>
+      <trans-unit id="constantEditor.view.emails.layoutRootPaths" xml:space="preserve">
+				<source>Email-Layout Root Path: Path to layout folder</source>
+			<target>crwdns46756:0crwdne46756:0</target></trans-unit>
+      <trans-unit id="constantEditor.authorUid" xml:space="preserve">
+				<source>Author UID:Location of the "Blog: Author" plugin. Shows posts by author.</source>
+			<target>crwdns46758:0crwdne46758:0</target></trans-unit>
+      <trans-unit id="constantEditor.comments.active" xml:space="preserve">
+				<source>Enable Comments:Activate comments as a general feature</source>
+			<target>crwdns46760:0crwdne46760:0</target></trans-unit>
+      <trans-unit id="constantEditor.comments.moderation" xml:space="preserve">
+				<source>Comments moderation mode:0 = no moderation, 1 = moderation active, 2 = moderation only on first comment</source>
+			<target>crwdns46762:0crwdne46762:0</target></trans-unit>
+      <trans-unit id="constantEditor.comments.respectPostLanguageId" xml:space="preserve">
+				<source>Respect post_language_id:0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)</source>
+			<target>crwdns46764:0crwdne46764:0</target></trans-unit>
+      <trans-unit id="constantEditor.comments.google_recaptcha" xml:space="preserve">
+				<source>Google Recaptcha:Enable google recaptcha for comments?</source>
+			<target>crwdns46766:0crwdne46766:0</target></trans-unit>
+      <trans-unit id="constantEditor.comments.google_recaptcha.website_key" xml:space="preserve">
+				<source>Google Recaptcha Website-Key</source>
+			<target>crwdns46768:0crwdne46768:0</target></trans-unit>
+      <trans-unit id="constantEditor.comments.google_recaptcha.secret_key" xml:space="preserve">
+				<source>Google Recaptcha Secrete-Key</source>
+			<target>crwdns46770:0crwdne46770:0</target></trans-unit>
+      <trans-unit id="constantEditor.comments.disqus" xml:space="preserve">
+				<source>Enable Disqus:Use disqus instead of internal comments?</source>
+			<target>crwdns46772:0crwdne46772:0</target></trans-unit>
+      <trans-unit id="constantEditor.comments.disqus.shortname" xml:space="preserve">
+				<source>Disqus shortname:The shortname / forum id of your disqus setup.</source>
+			<target>crwdns46774:0crwdne46774:0</target></trans-unit>
+      <trans-unit id="constantEditor.authors.avatar.provider.size" xml:space="preserve">
+				<source>Author Avatar Size:The size in px for the author avatar</source>
+			<target>crwdns46776:0crwdne46776:0</target></trans-unit>
+      <trans-unit id="constantEditor.authors.avatar.provider.default" xml:space="preserve">
+				<source>Author Avatar Default:The default image for an author avatar</source>
+			<target>crwdns46778:0crwdne46778:0</target></trans-unit>
+      <trans-unit id="constantEditor.blogUid" xml:space="preserve">
+				<source>List posts UID:Location of the "Blog: List of posts" plugin. This page UID is the root page for the blog. All blog post pages are located below this page.</source>
+			<target>crwdns46780:0crwdne46780:0</target></trans-unit>
+      <trans-unit id="constantEditor.categoryUid" xml:space="preserve">
+				<source>List by category UID:Location of the "Blog: List by category" plugin. Shows all posts from one category.</source>
+			<target>crwdns46782:0crwdne46782:0</target></trans-unit>
+      <trans-unit id="constantEditor.tagUid" xml:space="preserve">
+				<source>List by tags UID:Location of the "Blog: List by tags" plugin. Shows all posts from one tag.</source>
+			<target>crwdns46784:0crwdne46784:0</target></trans-unit>
+      <trans-unit id="constantEditor.archiveUid" xml:space="preserve">
+				<source>Archive UID:Location of the "Blog: Archive" plugin. Shows archived posts.</source>
+			<target>crwdns46786:0crwdne46786:0</target></trans-unit>
+      <trans-unit id="constantEditor.storagePid" xml:space="preserve">
+				<source>Storage folder:Storage folder of all categories and tags for this blog.</source>
+			<target>crwdns46788:0crwdne46788:0</target></trans-unit>
+      <trans-unit id="constantEditor.senderName" xml:space="preserve">
+				<source>Sender name:Global sender name for notifications</source>
+			<target>crwdns46790:0crwdne46790:0</target></trans-unit>
+      <trans-unit id="constantEditor.senderMail" xml:space="preserve">
+				<source>Sender mail:Global sender email address for notifications</source>
+			<target>crwdns46792:0crwdne46792:0</target></trans-unit>
+      <trans-unit id="constantEditor.CommentAddedNotification.author" xml:space="preserve">
+				<source>Author notifications:Send notification to author of a blog post</source>
+			<target>crwdns46794:0crwdne46794:0</target></trans-unit>
+      <trans-unit id="constantEditor.CommentAddedNotification.admin" xml:space="preserve">
+				<source>Admin notifications:Send notification to admin of the blog</source>
+			<target>crwdns46796:0crwdne46796:0</target></trans-unit>
+      <trans-unit id="constantEditor.CommentAddedNotification.admin.email" xml:space="preserve">
+				<source>Admin mail:Global admin (receiver) email address for notifications</source>
+			<target>crwdns46798:0crwdne46798:0</target></trans-unit>
+      <trans-unit id="constantEditor.lists.pagination.itemsPerPage" xml:space="preserve">
+				<source>Number of post that should be displayed per page</source>
+			<target>crwdns46800:0crwdne46800:0</target></trans-unit>
+      <trans-unit id="constantEditor.lists.pagination.insertAbove" xml:space="preserve">
+				<source>Show the pagination above the posts</source>
+			<target>crwdns46802:0crwdne46802:0</target></trans-unit>
+      <trans-unit id="constantEditor.lists.pagination.insertBelow" xml:space="preserve">
+				<source>Show the pagination below the posts</source>
+			<target>crwdns46804:0crwdne46804:0</target></trans-unit>
+      <trans-unit id="constantEditor.lists.pagination.maximumNumberOfLinks" xml:space="preserve">
+				<source>Maximum number of links in the pagination</source>
+			<target>crwdns46806:0crwdne46806:0</target></trans-unit>
+      <trans-unit id="constantEditor.lists.posts.maximumDisplayedItems" xml:space="preserve">
+				<source>Maximum displayed items:Maximum number of posts to be displayed (0 = no limit).</source>
+			<target>crwdns46808:0crwdne46808:0</target></trans-unit>
+      <trans-unit id="constantEditor.lists.posts.dateFormat" xml:space="preserve">
+				<source>Date format:The format for the list items (default: %d.%m.%Y).</source>
+			<target>crwdns46810:0%d.%m.%Ycrwdne46810:0</target></trans-unit>
+      <trans-unit id="constantEditor.relatedPosts.limit" xml:space="preserve">
+				<source>Limit:The limit of displayed items (default: 5).</source>
+			<target>crwdns46812:0crwdne46812:0</target></trans-unit>
+      <trans-unit id="constantEditor.relatedPosts.categoryMultiplier" xml:space="preserve">
+				<source>Category Multiplier:The multiplier for categories (default: 1).</source>
+			<target>crwdns46814:0crwdne46814:0</target></trans-unit>
+      <trans-unit id="constantEditor.relatedPosts.tagMultiplier" xml:space="preserve">
+				<source>Tag Multiplier:The multiplier for tags (default: 1).</source>
+			<target>crwdns46816:0crwdne46816:0</target></trans-unit>
+      <trans-unit id="constantEditor.widgets.comments.limit" xml:space="preserve">
+				<source>Limit:The limit of displayed items (default: 5).</source>
+			<target>crwdns46818:0crwdne46818:0</target></trans-unit>
+      <trans-unit id="constantEditor.widgets.recentposts.limit" xml:space="preserve">
+				<source>Limit:The limit of displayed items (default: 5).</source>
+			<target>crwdns46820:0crwdne46820:0</target></trans-unit>
+      <trans-unit id="constantEditor.widgets.tags.limit" xml:space="preserve">
+				<source>Limit:The limit of displayed items (default: 20).</source>
+			<target>crwdns46822:0crwdne46822:0</target></trans-unit>
+      <trans-unit id="constantEditor.widgets.tags.minSize" xml:space="preserve">
+				<source>Minimum size:The minimum size of the font (default: 100).</source>
+			<target>crwdns46824:0crwdne46824:0</target></trans-unit>
+      <trans-unit id="constantEditor.widgets.tags.maxSize" xml:space="preserve">
+				<source>Maximum size:The maximum size of the font (default: 200).</source>
+			<target>crwdns46826:0crwdne46826:0</target></trans-unit>
+      <trans-unit id="constantEditor.widgets.archive.showCounter" xml:space="preserve">
+				<source>Show counter:If enabled, the count of posts is visible (default: 1).</source>
+			<target>crwdns46828:0crwdne46828:0</target></trans-unit>
+      <trans-unit id="constantEditor.widgets.archive.groupByYear" xml:space="preserve">
+				<source>Group by year:If enabled, the posts are grouped by year (default: 1).</source>
+			<target>crwdns46830:0crwdne46830:0</target></trans-unit>
+      <trans-unit id="constantEditor.widgets.archive.groupByMonth" xml:space="preserve">
+				<source>Group by month:If enabled, the posts are grouped by year and month (default: 1).</source>
+			<target>crwdns46832:0crwdne46832:0</target></trans-unit>
+      <trans-unit id="constantEditor.widgets.archive.yearDateFormat" xml:space="preserve">
+				<source>Year format:The format of the year (default: %Y).</source>
+			<target>crwdns46834:0%Ycrwdne46834:0</target></trans-unit>
+      <trans-unit id="constantEditor.widgets.archive.monthDateFormat" xml:space="preserve">
+				<source>Month format:The format of the month (default: %B).</source>
+			<target>crwdns46836:0%Bcrwdne46836:0</target></trans-unit>
+      <trans-unit id="feed.title.listPostsByCategory" xml:space="preserve">
+				<source>Category RSS Feed</source>
+			<target>crwdns46838:0crwdne46838:0</target></trans-unit>
+      <trans-unit id="feed.description.listPostsByCategory" xml:space="preserve">
+				<source>Posts by category %s</source>
+			<target>crwdns46840:0%scrwdne46840:0</target></trans-unit>
+      <trans-unit id="feed.title.listPostsByAuthor" xml:space="preserve">
+				<source>Author RSS Feed</source>
+			<target>crwdns46842:0crwdne46842:0</target></trans-unit>
+      <trans-unit id="feed.description.listPostsByAuthor" xml:space="preserve">
+				<source>Posts by author %s</source>
+			<target>crwdns46844:0%scrwdne46844:0</target></trans-unit>
+      <trans-unit id="feed.title.listPostsByDate" xml:space="preserve">
+				<source>Archive RSS Feed</source>
+			<target>crwdns46846:0crwdne46846:0</target></trans-unit>
+      <trans-unit id="feed.description.listPostsByDate" xml:space="preserve">
+				<source>Posts by date: %s / %s</source>
+			<target>crwdns46848:0%scrwdnd46848:0%scrwdne46848:0</target></trans-unit>
+      <trans-unit id="feed.title.listPostsByTag" xml:space="preserve">
+				<source>Tag RSS Feed</source>
+			<target>crwdns46850:0crwdne46850:0</target></trans-unit>
+      <trans-unit id="feed.description.listPostsByTag" xml:space="preserve">
+				<source>Posts by tag: %s</source>
+			<target>crwdns46852:0%scrwdne46852:0</target></trans-unit>
+      <trans-unit id="feed.title.listRecentPosts" xml:space="preserve">
+				<source>RSS Feed</source>
+			<target>crwdns46854:0crwdne46854:0</target></trans-unit>
+      <trans-unit id="feed.description.listRecentPosts" xml:space="preserve">
+				<source>Recent posts</source>
+			<target>crwdns46856:0crwdne46856:0</target></trans-unit>
+      <trans-unit id="author.more.posts" xml:space="preserve">
+				<source>More posts by this author</source>
+			<target>crwdns46858:0crwdne46858:0</target></trans-unit>
+      <trans-unit id="label.blog" xml:space="preserve">
+				<source>Blog</source>
+			<target>crwdns46860:0crwdne46860:0</target></trans-unit>
+      <trans-unit id="label.all" xml:space="preserve">
+				<source>All</source>
+			<target>crwdns46862:0crwdne46862:0</target></trans-unit>
+      <trans-unit id="label.choose_blog" xml:space="preserve">
+				<source>Choose blog</source>
+			<target>crwdns46864:0crwdne46864:0</target></trans-unit>
+      <trans-unit id="action.approve" xml:space="preserve">
+				<source>Approve comment</source>
+			<target>crwdns46866:0crwdne46866:0</target></trans-unit>
+      <trans-unit id="action.decline" xml:space="preserve">
+				<source>Decline comment</source>
+			<target>crwdns46868:0crwdne46868:0</target></trans-unit>
+      <trans-unit id="action.delete" xml:space="preserve">
+				<source>Delete comment</source>
+			<target>crwdns46870:0crwdne46870:0</target></trans-unit>
+      <trans-unit id="action.editComment" xml:space="preserve">
+				<source>Edit comment</source>
+			<target>crwdns46872:0crwdne46872:0</target></trans-unit>
+      <trans-unit id="action.multiple.approve" xml:space="preserve">
+				<source>Approve</source>
+			<target>crwdns46874:0crwdne46874:0</target></trans-unit>
+      <trans-unit id="action.multiple.decline" xml:space="preserve">
+				<source>Decline</source>
+			<target>crwdns46876:0crwdne46876:0</target></trans-unit>
+      <trans-unit id="action.multiple.delete" xml:space="preserve">
+				<source>Delete</source>
+			<target>crwdns46878:0crwdne46878:0</target></trans-unit>
+      <trans-unit id="label.required.field" xml:space="preserve">
+				<source>*</source>
+			<target>crwdns46880:0crwdne46880:0</target></trans-unit>
+      <trans-unit id="label.required.field.explanation" xml:space="preserve">
+				<source>These fields are required</source>
+			<target>crwdns46882:0crwdne46882:0</target></trans-unit>
+      <!-- E-Mails -->
+      <trans-unit id="emails.CommentAddedNotification.subject" xml:space="preserve">
+				<source>A new comment was added to the post: %s</source>
+			<target>crwdns46884:0%scrwdne46884:0</target></trans-unit>
+      <trans-unit id="email.label.post" xml:space="preserve">
+				<source>Post</source>
+			<target>crwdns46886:0crwdne46886:0</target></trans-unit>
+      <trans-unit id="email.label.date" xml:space="preserve">
+				<source>Date</source>
+			<target>crwdns46888:0crwdne46888:0</target></trans-unit>
+      <trans-unit id="email.label.author" xml:space="preserve">
+				<source>Author</source>
+			<target>crwdns46890:0crwdne46890:0</target></trans-unit>
+      <trans-unit id="email.label.comment" xml:space="preserve">
+				<source>Comment</source>
+			<target>crwdns46892:0crwdne46892:0</target></trans-unit>
+    </body>
+  </file>
+</xliff>
