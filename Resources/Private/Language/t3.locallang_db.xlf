@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2016-06-27T17:14:25Z" product-name="blog" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="wizard.group.blog" xml:space="preserve">
+				<source>Blog</source>
+			<target>crwdns46894:0crwdne46894:0</target></trans-unit>
+      <trans-unit id="plugin.blog_posts.title" xml:space="preserve">
+				<source>Blog: List of posts</source>
+			<target>crwdns46896:0crwdne46896:0</target></trans-unit>
+      <trans-unit id="plugin.blog_posts.description" xml:space="preserve">
+				<source>Displays a list of blog posts ordered by date. All non-hidden, non-deleted and non-archived posts are shown in the list.</source>
+			<target>crwdns46898:0crwdne46898:0</target></trans-unit>
+      <trans-unit id="plugin.blog_category.title" xml:space="preserve">
+				<source>Blog: List by category</source>
+			<target>crwdns46900:0crwdne46900:0</target></trans-unit>
+      <trans-unit id="plugin.blog_category.description" xml:space="preserve">
+				<source>If you add this element and you have selected a category on the categories tab, it will show an overview of posts for that category. If you have no categories selected, it will show an overview of categories.</source>
+			<target>crwdns46902:0crwdne46902:0</target></trans-unit>
+      <trans-unit id="plugin.blog_authorposts.title" xml:space="preserve">
+				<source>Blog: List by author</source>
+			<target>crwdns46904:0crwdne46904:0</target></trans-unit>
+      <trans-unit id="plugin.blog_authorposts.description" xml:space="preserve">
+				<source>Displays all posts belonging to the chosen author.</source>
+			<target>crwdns46906:0crwdne46906:0</target></trans-unit>
+      <trans-unit id="plugin.blog_tag.title" xml:space="preserve">
+				<source>Blog: List by tags</source>
+			<target>crwdns46908:0crwdne46908:0</target></trans-unit>
+      <trans-unit id="plugin.blog_tag.description" xml:space="preserve">
+				<source>Allows the users to show all posts tagged with a specific keyword.</source>
+			<target>crwdns46910:0crwdne46910:0</target></trans-unit>
+      <trans-unit id="plugin.blog_archive.title" xml:space="preserve">
+				<source>Blog: Archive</source>
+			<target>crwdns46912:0crwdne46912:0</target></trans-unit>
+      <trans-unit id="plugin.blog_archive.description" xml:space="preserve">
+				<source>The archive plugin displays all posts categorized by year and month.</source>
+			<target>crwdns46914:0crwdne46914:0</target></trans-unit>
+      <trans-unit id="plugin.blog_sidebar.title" xml:space="preserve">
+				<source>Blog: Sidebar</source>
+			<target>crwdns46916:0crwdne46916:0</target></trans-unit>
+      <trans-unit id="plugin.blog_sidebar.description" xml:space="preserve">
+				<source>The sidebar contains links enabling the user to quickly navigate your blog. It shows an overview of recent posts and comments, categories, tags and archive links.</source>
+			<target>crwdns46918:0crwdne46918:0</target></trans-unit>
+      <trans-unit id="plugin.blog_metadata.title" xml:space="preserve">
+				<source>Blog: Metadata</source>
+			<target>crwdns46920:0crwdne46920:0</target></trans-unit>
+      <trans-unit id="plugin.blog_metadata.description" xml:space="preserve">
+				<source>Displays post meta data, like date, tags, category, sharing links...</source>
+			<target>crwdns46922:0crwdne46922:0</target></trans-unit>
+      <trans-unit id="plugin.blog_commentform.title" xml:space="preserve">
+				<source>Blog: Comment Form</source>
+			<target>crwdns46924:0crwdne46924:0</target></trans-unit>
+      <trans-unit id="plugin.blog_commentform.description" xml:space="preserve">
+				<source>Displays the comment form for a post.</source>
+			<target>crwdns46926:0crwdne46926:0</target></trans-unit>
+      <trans-unit id="plugin.blog_comments.title" xml:space="preserve">
+				<source>Blog: Comments</source>
+			<target>crwdns46928:0crwdne46928:0</target></trans-unit>
+      <trans-unit id="plugin.blog_comments.description" xml:space="preserve">
+				<source>Displays the comments for a post.</source>
+			<target>crwdns46930:0crwdne46930:0</target></trans-unit>
+      <trans-unit id="plugin.blog_authors.title" xml:space="preserve">
+				<source>Blog: Authors</source>
+			<target>crwdns46932:0crwdne46932:0</target></trans-unit>
+      <trans-unit id="plugin.blog_authors.description" xml:space="preserve">
+				<source>Displays post authors, like name, title, avatar, social links...</source>
+			<target>crwdns46934:0crwdne46934:0</target></trans-unit>
+      <trans-unit id="plugin.blog_relatedposts.title" xml:space="preserve">
+				<source>Blog: Related Posts</source>
+			<target>crwdns46936:0crwdne46936:0</target></trans-unit>
+      <trans-unit id="plugin.blog_relatedposts.description" xml:space="preserve">
+				<source>Based on the categories and tags of the current post, it will show a list of related posts. This overview should only be placed on a Blog detail page.</source>
+			<target>crwdns46938:0crwdne46938:0</target></trans-unit>
+      <trans-unit id="pages.comments_active" xml:space="preserve">
+				<source>Comments enabled</source>
+			<target>crwdns46940:0crwdne46940:0</target></trans-unit>
+      <trans-unit id="pages.comments" xml:space="preserve">
+				<source>Comments</source>
+			<target>crwdns46942:0crwdne46942:0</target></trans-unit>
+      <trans-unit id="pages.crdate" xml:space="preserve">
+				<source>Creation date</source>
+			<target>crwdns46944:0crwdne46944:0</target></trans-unit>
+      <trans-unit id="pages.palettes.publish_date" xml:space="preserve">
+				<source>Publish date</source>
+			<target>crwdns46946:0crwdne46946:0</target></trans-unit>
+      <trans-unit id="pages.crdate_month" xml:space="preserve">
+				<source>Publish date month</source>
+			<target>crwdns46948:0crwdne46948:0</target></trans-unit>
+      <trans-unit id="pages.crdate_year" xml:space="preserve">
+				<source>Publish date year</source>
+			<target>crwdns46950:0crwdne46950:0</target></trans-unit>
+      <trans-unit id="pages.publish_date" xml:space="preserve">
+				<source>Publish date</source>
+			<target>crwdns46952:0crwdne46952:0</target></trans-unit>
+      <trans-unit id="pages.archive_date" xml:space="preserve">
+				<source>Archive date</source>
+			<target>crwdns46954:0crwdne46954:0</target></trans-unit>
+      <trans-unit id="pages.tags" xml:space="preserve">
+				<source>Tags</source>
+			<target>crwdns46956:0crwdne46956:0</target></trans-unit>
+      <trans-unit id="pages.authors" xml:space="preserve">
+				<source>Authors</source>
+			<target>crwdns46958:0crwdne46958:0</target></trans-unit>
+      <trans-unit id="pages.sharing_enabled" xml:space="preserve">
+				<source>Sharing enabled (show sharing links)</source>
+			<target>crwdns46960:0crwdne46960:0</target></trans-unit>
+      <trans-unit id="pages.tabs.blog" xml:space="preserve">
+				<source>Blog</source>
+			<target>crwdns46962:0crwdne46962:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_comment" xml:space="preserve">
+				<source>Blog: Comment</source>
+			<target>crwdns46964:0crwdne46964:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_comment.author" xml:space="preserve">
+				<source>Author (FE-User)</source>
+			<target>crwdns46966:0crwdne46966:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_comment.name" xml:space="preserve">
+				<source>Name</source>
+			<target>crwdns46968:0crwdne46968:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_comment.url" xml:space="preserve">
+				<source>URL</source>
+			<target>crwdns46970:0crwdne46970:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_comment.email" xml:space="preserve">
+				<source>E-Mail</source>
+			<target>crwdns46972:0crwdne46972:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_comment.comment" xml:space="preserve">
+				<source>Comment</source>
+			<target>crwdns46974:0crwdne46974:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_comment.status" xml:space="preserve">
+				<source>Status</source>
+			<target>crwdns46976:0crwdne46976:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_comment.status.pending" xml:space="preserve">
+				<source>Pending</source>
+			<target>crwdns46978:0crwdne46978:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_comment.status.approved" xml:space="preserve">
+				<source>Approved</source>
+			<target>crwdns46980:0crwdne46980:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_comment.status.declined" xml:space="preserve">
+				<source>Declined</source>
+			<target>crwdns46982:0crwdne46982:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_comment.status.deleted" xml:space="preserve">
+				<source>Deleted</source>
+			<target>crwdns46984:0crwdne46984:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_tag" xml:space="preserve">
+				<source>Blog: Tag</source>
+			<target>crwdns46986:0crwdne46986:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_tag.title" xml:space="preserve">
+				<source>Title</source>
+			<target>crwdns46988:0crwdne46988:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_tag.slug" xml:space="preserve">
+				<source>Path Segment</source>
+			<target>crwdns46990:0crwdne46990:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_tag.description" xml:space="preserve">
+				<source>Description (meta description)</source>
+			<target>crwdns46992:0crwdne46992:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_tag.tabs.general" xml:space="preserve">
+				<source>General</source>
+			<target>crwdns46994:0crwdne46994:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_tag.tabs.seo" xml:space="preserve">
+				<source>SEO</source>
+			<target>crwdns46996:0crwdne46996:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_tag.content" xml:space="preserve">
+				<source>Content</source>
+			<target>crwdns46998:0crwdne46998:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author" xml:space="preserve">
+				<source>Blog: Author</source>
+			<target>crwdns47000:0crwdne47000:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.name" xml:space="preserve">
+				<source>Name</source>
+			<target>crwdns47002:0crwdne47002:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.slug" xml:space="preserve">
+				<source>Path Segment</source>
+			<target>crwdns47004:0crwdne47004:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.avatar_provider" xml:space="preserve">
+				<source>Avatar Provider</source>
+			<target>crwdns47006:0crwdne47006:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.image" xml:space="preserve">
+				<source>Image</source>
+			<target>crwdns47008:0crwdne47008:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.title" xml:space="preserve">
+				<source>Title</source>
+			<target>crwdns47010:0crwdne47010:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.website" xml:space="preserve">
+				<source>Website</source>
+			<target>crwdns47012:0crwdne47012:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.email" xml:space="preserve">
+				<source>Email</source>
+			<target>crwdns47014:0crwdne47014:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.location" xml:space="preserve">
+				<source>Location</source>
+			<target>crwdns47016:0crwdne47016:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.twitter" xml:space="preserve">
+				<source>Twitter username</source>
+			<target>crwdns47018:0crwdne47018:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.googleplus" xml:space="preserve">
+				<source>Google+ profile URL</source>
+			<target>crwdns47020:0crwdne47020:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.linkedin" xml:space="preserve">
+				<source>LinkIn profile URL</source>
+			<target>crwdns47022:0crwdne47022:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.xing" xml:space="preserve">
+				<source>XING profile URL</source>
+			<target>crwdns47024:0crwdne47024:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.profile" xml:space="preserve">
+				<source>Author profile URL (used for schema.org markup)</source>
+			<target>crwdns47026:0crwdne47026:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.bio" xml:space="preserve">
+				<source>Bio</source>
+			<target>crwdns47028:0crwdne47028:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.posts" xml:space="preserve">
+				<source>Blog posts</source>
+			<target>crwdns47030:0crwdne47030:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.details_page" xml:space="preserve">
+				<source>Details page</source>
+			<target>crwdns47032:0crwdne47032:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.palette_personal" xml:space="preserve">
+				<source>Personal data</source>
+			<target>crwdns47034:0crwdne47034:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.palette_contact" xml:space="preserve">
+				<source>Contact data</source>
+			<target>crwdns47036:0crwdne47036:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.tab_profile" xml:space="preserve">
+				<source>Profile</source>
+			<target>crwdns47038:0crwdne47038:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.tab_social_media" xml:space="preserve">
+				<source>Social Media</source>
+			<target>crwdns47040:0crwdne47040:0</target></trans-unit>
+      <trans-unit id="tx_blog_domain_model_author.tab_blog" xml:space="preserve">
+				<source>Blog data</source>
+			<target>crwdns47042:0crwdne47042:0</target></trans-unit>
+      <trans-unit id="sys_category.content" xml:space="preserve">
+				<source>Content</source>
+			<target>crwdns47044:0crwdne47044:0</target></trans-unit>
+      <trans-unit id="sys_category.slug" xml:space="preserve">
+				<source>Path Segment</source>
+			<target>crwdns47046:0crwdne47046:0</target></trans-unit>
+      <trans-unit id="sys_category.tabs.seo" xml:space="preserve">
+				<source>SEO</source>
+			<target>crwdns47048:0crwdne47048:0</target></trans-unit>
+      <trans-unit id="sys_category.tabs.blog" xml:space="preserve">
+				<source>Blog</source>
+			<target>crwdns47050:0crwdne47050:0</target></trans-unit>
+      <trans-unit id="sys_category.posts" xml:space="preserve">
+				<source>Posts</source>
+			<target>crwdns47052:0crwdne47052:0</target></trans-unit>
+    </body>
+  </file>
+</xliff>
