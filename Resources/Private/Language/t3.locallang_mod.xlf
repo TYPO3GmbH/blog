@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns:t3="http://typo3.org/schemas/xliff" version="1.0">
+  <file t3:id="1415814784" source-language="en" datatype="plaintext" original="messages" date="2012-02-06T16:10:22Z" product-name="beuser" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="mlang_labels_tablabel">
+        <source>Blog</source>
+        <target>crwdns45972:0crwdne45972:0</target>
+      </trans-unit>
+      <trans-unit id="mlang_labels_tabdescr">
+        <source>Blog</source>
+        <target>crwdns45974:0crwdne45974:0</target>
+      </trans-unit>
+      <trans-unit id="mlang_tabs_tab">
+        <source>Blog</source>
+        <target>crwdns45976:0crwdne45976:0</target>
+      </trans-unit>
+      <trans-unit id="blog-folder">
+        <source>Blog</source>
+        <target>crwdns45978:0crwdne45978:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
