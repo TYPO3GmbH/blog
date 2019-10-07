@@ -23,9 +23,9 @@ class SocialWizard extends AbstractNode
     public function render() :array
     {
         $wizard = parent::initializeResultArray();
-        // Smells fishy, but Lolli told me this is the way to do it
-        //
-        if ($this->data['fieldName'] !== 'media') {
+
+        // Only add social media wizard when blog page type is used
+        if ($this->data['fieldName'] !== 'media' || (int)$this->data['recordTypeValue'] !== (int)\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST) {
             return $wizard;
         }
 
