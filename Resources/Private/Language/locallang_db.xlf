@@ -90,6 +90,9 @@
                 <source>Based on the categories and tags of the current post, it will show a list of related posts. This overview should only be placed on a Blog detail page.</source>
             </trans-unit>
 
+            <trans-unit id="pages.featured_image" xml:space="preserve">
+                <source>Featured Image</source>
+            </trans-unit>
             <trans-unit id="pages.comments_active" xml:space="preserve">
                 <source>Comments enabled</source>
             </trans-unit>

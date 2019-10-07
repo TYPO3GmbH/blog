@@ -302,11 +302,17 @@
             <trans-unit id="constantEditor.customsubcategory.post" xml:space="preserve">
                 <source>Post</source>
             </trans-unit>
+            <trans-unit id="constantEditor.customsubcategory.post.featuredimage" xml:space="preserve">
+                <source>Featured Image</source>
+            </trans-unit>
             <trans-unit id="constantEditor.customsubcategory.post.header" xml:space="preserve">
                 <source>Post Header</source>
             </trans-unit>
             <trans-unit id="constantEditor.customsubcategory.post.footer" xml:space="preserve">
                 <source>Post Footer</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customsubcategory.list.featuredimage" xml:space="preserve">
+                <source>Featured Image</source>
             </trans-unit>
             <trans-unit id="constantEditor.customsubcategory.list.element" xml:space="preserve">
                 <source>Element</source>
@@ -424,6 +430,18 @@
             </trans-unit>
             <trans-unit id="constantEditor.CommentAddedNotification.admin.email" xml:space="preserve">
                 <source>Admin mail:Global admin (receiver) email address for notifications</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.post.featuredImage.width" xml:space="preserve">
+                <source>Width</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.post.featuredImage.height" xml:space="preserve">
+                <source>Height</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.lists.featuredImage.width" xml:space="preserve">
+                <source>Width</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.lists.featuredImage.height" xml:space="preserve">
+                <source>Height</source>
             </trans-unit>
             <trans-unit id="constantEditor.lists.pagination.itemsPerPage" xml:space="preserve">
                 <source>Number of post that should be displayed per page</source>
