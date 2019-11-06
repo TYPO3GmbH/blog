@@ -112,6 +112,10 @@ $GLOBALS['TCA']['sys_category']['columns'] = array_replace_recursive(
                 'allowed' => 'pages',
                 'foreign_table' => 'pages',
                 'MM' => 'sys_category_record_mm',
+                'MM_match_fields' => [
+                    'fieldname' => 'categories',
+                    'tablenames' => 'pages',
+                ],
                 'maxitems' => 1000
             ],
         ],
