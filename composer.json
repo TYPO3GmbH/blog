@@ -49,14 +49,18 @@
         }
     },
     "scripts": {
+        "t3g:test:php:lint": [
+            "phplint"
+        ],
         "t3g:test:php:unit": [
-            "phpunit -c Build/UnitTests.xml --log-junit logs/phpunit.xml"
+            "phpunit -c Build/UnitTests.xml"
         ],
         "t3g:test": [
+            "@t3g:test:php:lint",
             "@t3g:test:php:unit"
         ],
         "t3g:cgl": [
-            "php-cs-fixer fix --format=junit > logs/php-cs-fixer.xml"
+            "php-cs-fixer --diff -v fix"
         ],
         "post-autoload-dump": [
             "mkdir -p .build/web/typo3conf/ext/",
@@ -92,6 +96,7 @@
         "roave/security-advisories": "dev-master",
         "t3g/blog-template-test": "^1.0",
         "typo3/testing-framework": "^4.9 || ^5.0",
-        "bk2k/extension-helper": "^1.0"
+        "bk2k/extension-helper": "^1.0",
+        "overtrue/phplint": "^1.1"
     }
 }
