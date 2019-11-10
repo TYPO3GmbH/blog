@@ -6,15 +6,25 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        typo3: [^9.5, ^10.0, dev-master]
 
     steps:
     - uses: actions/checkout@v1
+
+    - name: Update Composer
+      run: |
+        sudo composer self-update
+        composer --version
 
     - name: Validate composer.json and composer.lock
       run: composer validate
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      run: |
+        composer require typo3/cms-core:${{ matrix.typo3 }} --no-progress
+        git checkout composer.json
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
