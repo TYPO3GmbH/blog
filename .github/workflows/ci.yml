@@ -9,9 +9,15 @@ jobs:
     strategy:
       matrix:
         typo3: [^9.5, ^10.0, dev-master]
+        php: ['7.2', '7.3']
 
     steps:
     - uses: actions/checkout@v1
+
+    - name: Set up PHP Version
+      run: |
+        sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
+        php -v
 
     - name: Update Composer
       run: |
