@@ -31,9 +31,12 @@ jobs:
       run: |
         composer require typo3/cms-core:${{ matrix.typo3 }} --no-progress
         git checkout composer.json
-
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
-
-    # - name: Run test suite
-    #   run: composer run-script test
+             
+    - name: CGL
+      run: composer t3g:cgl
+        
+    - name: Lint PHP
+      run: composer t3g:test:php:lint
+    
+    - name: Unit Tests
+      run: composer t3g:test:php:unit    
