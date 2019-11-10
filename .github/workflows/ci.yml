@@ -1,4 +1,4 @@
-name: PHP Composer
+name: CI
 
 on: [push, pull_request]
 
@@ -31,12 +31,12 @@ jobs:
       run: |
         composer require typo3/cms-core:${{ matrix.typo3 }} --no-progress
         git checkout composer.json
-             
+
     - name: CGL
       run: composer t3g:cgl
-        
+
     - name: Lint PHP
       run: composer t3g:test:php:lint
-    
+
     - name: Unit Tests
-      run: composer t3g:test:php:unit    
+      run: composer t3g:test:php:unit
