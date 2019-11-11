@@ -30,7 +30,10 @@ return [
         'typeicon_classes' => [
             'default' => 'record-blog-author'
         ],
-        'searchFields' => 'uid,name,title'
+        'searchFields' => 'uid,name,title',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l18n_parent',
+        'transOrigDiffSourceField' => 'l18n_diffsource',
     ],
     'interface' => [
         'showRecordFieldList' => '
@@ -260,6 +263,40 @@ return [
                 'default' => 0
             ]
         ]
+    ],
+    'sys_language_uid' => [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
+        'config' => [
+            'type' => 'select',
+            'default' => 0,
+            'renderType' => 'selectSingle',
+            'foreign_table' => 'sys_language',
+            'foreign_table_where' => 'ORDER BY sys_language.title',
+            'items' => [
+                ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
+                ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0],
+            ],
+        ],
+    ],
+    'l18n_parent' => [
+        'displayCond' => 'FIELD:sys_language_uid:>:0',
+        'exclude' => 1,
+        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
+        'config' => [
+            'type' => 'select',
+            'renderType' => 'selectSingle',
+            'items' => [
+                ['', 0],
+            ],
+            'foreign_table' => 'tx_blog_domain_model_author',
+            'foreign_table_where' => 'AND tx_blog_domain_model_author.pid=###CURRENT_PID### AND tx_blog_domain_model_author.sys_language_uid IN (-1,0)',
+        ],
+    ],
+    'l18n_diffsource' => [
+        'config' => [
+            'type' => 'passthrough',
+        ],
     ],
     'types' => [
         0 => [
