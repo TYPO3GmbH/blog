@@ -409,4 +409,22 @@ class Author extends AbstractEntity
         $this->detailsPage = $page;
         return $this;
     }
+
+    /**
+     * Function to get all unique tag's from all posts of the author.
+     *
+     * @return array $tags
+     */
+    public function getAllTags(): array
+    {
+        $uniqueTags = [];
+        foreach ($this->posts as $post) {
+            foreach ($post->getTags() as $tag) {
+                if (!array_key_exists($tag->getUid(), $uniqueTags)) {
+                    $uniqueTags[$tag->getUid()] = $tag;
+                }
+            }
+        }
+        return $uniqueTags;
+    }
 }
