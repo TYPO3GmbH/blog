@@ -25,7 +25,8 @@ class SocialWizard extends AbstractNode
         $wizard = parent::initializeResultArray();
         // Smells fishy, but Lolli told me this is the way to do it
         //
-        if ($this->data['fieldName'] !== 'media') {
+        if ($this->data['fieldName'] !== 'media' ||
+            (int)$this->data['recordTypeValue'] !== (int)\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST) {
             return $wizard;
         }
 
