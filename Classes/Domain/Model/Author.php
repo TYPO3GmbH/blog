@@ -411,7 +411,7 @@ class Author extends AbstractEntity
     }
 
     /**
-     * Function to get all unique tag's from all posts of the author.
+     * Function to get all unique tags from all posts of the author.
      *
      * @return array $tags
      */
