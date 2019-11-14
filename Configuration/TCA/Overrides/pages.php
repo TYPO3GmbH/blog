@@ -182,6 +182,9 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
                 [
                     'minitems' => 0,
                     'maxitems' => 1,
+                    'behaviour' => [
+                        'allowLanguageSynchronization' => true
+                    ]
                 ],
                 $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
             ),
