@@ -1,6 +1,6 @@
 # TYPO3 CMS Extension "blog"
 
-[![Build Status](https://travis-ci.org/TYPO3GmbH/blog.svg?branch=master)](https://travis-ci.org/TYPO3GmbH/blog)
+[![Build Status](https://github.com/typo3gmbh/blog/workflows/CI/badge.svg?branch=master)](https://github.com/TYPO3GmbH/blog/actions)
 
 This blog extension uses TYPO3s core concepts and elements to provide a full-blown blog that users of TYPO3 can instantly understand and use.
 
