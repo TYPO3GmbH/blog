@@ -23,7 +23,6 @@
     },
     "dependencies": {
         "datatables.net": "^1.10.19",
-        "datatables.net-bs": "^1.10.19",
-        "fabric": "^3.4.0"
+        "datatables.net-bs": "^1.10.19"
     }
 }
