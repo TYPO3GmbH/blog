@@ -99,6 +99,8 @@ return [
                 'size' => 30,
                 'eval' => 'required',
             ],
+            'l10n_display' => 'defaultAsReadonly',
+            'l10n_mode' => 'exclude',
         ],
         'slug' => [
             'exclude' => 0,
@@ -114,7 +116,9 @@ return [
                 'fallbackCharacter' => '-',
                 'eval' => 'uniqueInSite',
                 'default' => ''
-            ]
+            ],
+            'l10n_display' => 'defaultAsReadonly',
+            'l10n_mode' => 'exclude',
         ],
         'avatar_provider' => [
             'exclude' => 0,
@@ -129,6 +133,7 @@ return [
                     ['Image', \T3G\AgencyPack\Blog\AvatarProvider\ImageProvider::class],
                 ],
             ],
+            'l10n_mode' => 'exclude',
         ],
         'image' => [
             'exclude' => 0,
@@ -155,6 +160,7 @@ return [
                 ],
                 $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
             ),
+            'l10n_mode' => 'exclude',
         ],
         'title' => [
             'exclude' => 0,
@@ -173,6 +179,7 @@ return [
                 'size' => 30,
                 'eval' => 'domainname',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'email' => [
             'exclude' => 0,
@@ -182,6 +189,7 @@ return [
                 'size' => 30,
                 'eval' => 'required,email',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'location' => [
             'exclude' => 0,
@@ -191,6 +199,7 @@ return [
                 'size' => 30,
                 'eval' => '',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'twitter' => [
             'exclude' => 0,
@@ -200,6 +209,7 @@ return [
                 'size' => 30,
                 'eval' => '',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'linkedin' => [
             'exclude' => 0,
@@ -209,6 +219,7 @@ return [
                 'size' => 30,
                 'eval' => '',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'xing' => [
             'exclude' => 0,
@@ -218,6 +229,7 @@ return [
                 'size' => 30,
                 'eval' => '',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'profile' => [
             'exclude' => 0,
@@ -227,6 +239,7 @@ return [
                 'size' => 30,
                 'eval' => '',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'bio' => [
             'exclude' => 0,
@@ -249,6 +262,7 @@ return [
                 'minitems' => 0,
                 'maxitems' => 99999,
             ],
+            'l10n_mode' => 'exclude',
         ],
         'details_page' => [
             'exclude' => 1,
@@ -261,7 +275,8 @@ return [
                 'maxitems' => 1,
                 'minitems' => 0,
                 'default' => 0
-            ]
+            ],
+            'l10n_mode' => 'exclude',
         ]
     ],
     'sys_language_uid' => [
