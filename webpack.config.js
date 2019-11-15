@@ -13,8 +13,6 @@ module.exports = {
         Datatables: './Resources/Private/JavaScript/backend/Datatables.js',
         MassUpdate: './Resources/Private/JavaScript/backend/MassUpdate.js',
         SetupWizard: './Resources/Private/JavaScript/backend/SetupWizard.js',
-        SocialImageApp: './Resources/Private/JavaScript/backend/SocialImageApp.js',
-        SocialImageWizard: './Resources/Private/JavaScript/backend/SocialImageWizard.js',
     },
     externals: {
         "jquery": "jquery",

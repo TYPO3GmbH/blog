@@ -1,6 +1,0 @@
-mod.SocialImageWizard {
-    dataSource {
-        filter = EXT:blog/Resources/Public/JavaScript/Filter/Default.json
-        skin = EXT:blog/Resources/Public/JavaScript/Skin/Default.json
-    }
-}

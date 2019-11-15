@@ -209,7 +209,3 @@ $GLOBALS['TCA']['pages']['types'][\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_P
     --palette--;' . $ll . 'pages.palettes.publish_date;publish_date, featured_image, archive_date, tags, authors, comments_active, comments',
     (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
 );
-
-// Register Social Image Wizard
-/** @noinspection UnsupportedStringOffsetOperationsInspection */
-$GLOBALS['TCA']['pages']['ctrl']['container']['inline']['fieldWizard']['BlogSocialImageWizard']['renderType'] = 'BlogSocialImageWizard';
