@@ -11,6 +11,11 @@
             <div class="taxonomy-description">
                 <p>{author.bio}</p>
             </div>
+            <div class="author__taglist">
+                <f:for each="{author.allTags}" as="tag">
+                    <blogvh:link.tag class="author__tag" tag="{tag}"/>
+                </f:for>
+            </div>
             <f:render partial="List" arguments="{_all}" />
         </f:then>
         <f:else>
