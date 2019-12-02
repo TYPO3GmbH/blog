@@ -25,7 +25,7 @@ GPL-2.0-or-later
 
 ## Documentation
 
-The documentation is available on [https://docs.typo3.org/p/t3g/blog/master/en-us/](docs.typo3.org).
+The documentation is available on [docs.typo3.org](https://docs.typo3.org/p/t3g/blog/master/en-us/).
 
 ## Contribution
 
