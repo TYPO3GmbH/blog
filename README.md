@@ -23,6 +23,10 @@ GPL-2.0-or-later
 * or download it from [github.com/TYPO3GmbH/blog](https://github.com/TYPO3GmbH/blog)
 * or download it from [TER](https://extensions.typo3.org/extension/blog/)
 
+## Documentation
+
+The documentation is available on [https://docs.typo3.org/p/t3g/blog/master/en-us/](docs.typo3.org).
+
 ## Contribution
 
 Any contributor is welcome to join our team. All you need is an github account.
