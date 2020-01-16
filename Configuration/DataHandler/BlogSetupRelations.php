@@ -9,10 +9,11 @@
 
 $data = [];
 
-// Tag and Category relation
+// Relations
 $data['pages']['NEW_firstBlogPostPage']['tags'] = 'NEW_blogTagTYPO3';
 $data['pages']['NEW_firstBlogPostPage']['categories'] = 'NEW_blogCategoryTYPO3';
-$data['pages']['NEW_firstBlogPostPage']['authors'] = 'NEW_blogAuthor';
 $data['pages']['NEW_firstBlogPostPage']['comments'] = 'NEW_blogComment';
+$data['pages']['NEW_firstBlogPostPage']['authors'] = 'NEW_blogAuthor';
+$data['tx_blog_domain_model_author']['NEW_blogAuthor']['posts'] = 'NEW_firstBlogPostPage';
 
 return $data;
