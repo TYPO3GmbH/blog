@@ -1,5 +1,4 @@
 ######################
 #### DEPENDENCIES ####
 ######################
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Static/constants.typoscript">

@@ -1,0 +1,24 @@
+######################
+#### DEPENDENCIES ####
+######################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Static/constants.typoscript">
+
+##################
+### CATEGORIES ###
+##################
+# customcategory=blog_standalone=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.standalone
+
+############
+### PAGE ###
+############
+page {
+    fluidtemplate {
+        # cat=blog_standalone/blog_110_templates; type=string; label=Layout Root Path: Path to layouts
+        layoutRootPath = EXT:blog/Resources/Private/Layouts/Page/
+        # cat=blog_standalone/blog_110_templates; type=string; label=Partial Root Path: Path to partials
+        partialRootPath = EXT:blog/Resources/Private/Partials/Page/
+        # cat=blog_standalone/blog_110_templates; type=string; label=Template Root Path: Path to templates
+        templateRootPath = EXT:blog/Resources/Private/Templates/Page/
+    }
+}
