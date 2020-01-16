@@ -12,5 +12,7 @@ $data = [];
 // Tag and Category relation
 $data['pages']['NEW_firstBlogPostPage']['tags'] = 'NEW_blogTagTYPO3';
 $data['pages']['NEW_firstBlogPostPage']['categories'] = 'NEW_blogCategoryTYPO3';
+$data['pages']['NEW_firstBlogPostPage']['authors'] = 'NEW_blogAuthor';
+$data['pages']['NEW_firstBlogPostPage']['comments'] = 'NEW_blogComment';
 
 return $data;
