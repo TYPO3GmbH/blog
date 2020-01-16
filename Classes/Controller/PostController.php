@@ -227,7 +227,7 @@ class PostController extends ActionController
     }
 
     /**
-     * Show a list of posts by given category.
+     * Show a list of posts by given author.
      *
      * @param Author|null $author
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
