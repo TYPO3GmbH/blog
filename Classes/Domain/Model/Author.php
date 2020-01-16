@@ -418,7 +418,7 @@ class Author extends AbstractEntity
     public function getAllTags(): array
     {
         $uniqueTags = [];
-        foreach ($this->posts as $post) {
+        foreach ($this->getPosts() as $post) {
             foreach ($post->getTags() as $tag) {
                 if (!array_key_exists($tag->getUid(), $uniqueTags)) {
                     $uniqueTags[$tag->getUid()] = $tag;
