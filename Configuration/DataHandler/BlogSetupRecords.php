@@ -25,6 +25,7 @@ $data['pages']['NEW_blogFolder'] = [
     'hidden' => 0,
     'title' => 'Data',
     'doktype' => 254,
+    'module' => 'blog'
 ];
 $data['pages']['NEW_blogCategoryPage'] = [
     'pid' => '-NEW_blogFolder',
@@ -55,6 +56,7 @@ $data['pages']['NEW_firstBlogPostPage'] = [
     'hidden' => 0,
     'title' => 'First blog post',
     'doktype' => \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
+    'abstract' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut consectetur quam. Ut rutrum augue libero, non rhoncus libero imperdiet vel. Pellentesque libero orci, porttitor sed dui vel, tempus sodales ex. Sed placerat lobortis tellus at tempus.'
 ];
 
 // Template
@@ -102,11 +104,33 @@ $data['tt_content']['NEW_ListByDate'] = [
     'CType' => 'list',
     'list_type' => 'blog_archive',
 ];
-$data['tt_content']['NEW_firstBlogPostContent'] = [
+
+// Content
+$data['tt_content']['NEW_BlogPostContentThird'] = [
     'pid' => 'NEW_firstBlogPostPage',
-    'CType' => 'textmedia',
-    'header' => 'First blog post',
-    'bodytext' => 'This is your first blog post!',
+    'CType' => 'text',
+    'header' => 'Third Content Block',
+    'header_layout' => 3,
+    'bodytext' => 'Phasellus at ornare arcu, vel lobortis magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed hendrerit tortor nisi, at iaculis eros dignissim ac. Praesent bibendum nibh vitae dictum tempus. Etiam elit nibh, tristique non velit a, malesuada feugiat nisi. Fusce at lacinia dolor. Curabitur sit amet leo massa. Curabitur tellus dui, fermentum luctus augue placerat, blandit blandit ante.',
+];
+$data['tt_content']['NEW_BlogPostContentSecond'] = [
+    'pid' => 'NEW_firstBlogPostPage',
+    'CType' => 'text',
+    'header' => 'Second Content Block',
+    'header_layout' => 3,
+    'bodytext' => '<ul>'
+        . '<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>'
+        . '<li>Integer et eros at nulla rhoncus elementum id ac tortor.</li>'
+        . '<li>Fusce ultrices ipsum vitae nisl vulputate aliquam.</li>'
+        . '<li>In tempus augue sed diam tempus iaculis.</li>'
+        . '<li>In interdum velit sed purus molestie hendrerit in ac justo.</li>'
+        . '</ul>',
+];
+$data['tt_content']['NEW_BlogPostContentFirst'] = [
+    'pid' => 'NEW_firstBlogPostPage',
+    'CType' => 'text',
+    'header' => 'First Content Block',
+    'bodytext' => 'Sed vitae finibus sapien, ac sagittis nisi. Nam at quam sed ipsum convallis rhoncus. Sed eget erat fringilla, ultrices lorem in, luctus nunc. Sed aliquam congue odio, non fermentum metus consectetur in. Donec aliquet erat est, id eleifend nunc viverra sed. Vivamus tempus rutrum justo tempor dapibus. Integer scelerisque, est at lacinia tristique, est mauris bibendum tortor, sed malesuada mi augue nec orci. In dictum vitae purus eu facilisis. Morbi porta efficitur turpis. Curabitur vel erat magna. Vivamus finibus sapien sed ante euismod semper. Integer cursus lectus at ligula porttitor, blandit gravida urna suscipit. Vestibulum dictum eros pulvinar, vehicula lorem id, viverra neque. Phasellus maximus nisl a magna convallis imperdiet. In a quam dolor. Vestibulum auctor dolor lectus, vel faucibus odio efficitur in.',
 ];
 
 // Categories
@@ -140,7 +164,7 @@ $data['tx_blog_domain_model_author']['NEW_blogAuthor'] = [
 // Comment
 $data['tx_blog_domain_model_comment']['NEW_blogComment'] = [
     'pid' => 'NEW_blogFolder',
-    'status' => '10',
+    'status' => 10,
     'name' => 'TYPO3 Inc Team',
     'url' => 'https://typo3.com/',
     'email' => 'info@typo3.com',
