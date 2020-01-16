@@ -90,6 +90,7 @@
         "typo3/cms-seo": "^9.5.5 || ^10.0 || 10.*@dev",
         "typo3/cms-filelist": "^9.5.5 || ^10.0 || 10.*@dev",
         "typo3/cms-lowlevel": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-setup": "^9.5.5 || ^10.0 || 10.*@dev",
         "typo3/cms-tstemplate": "^9.5.5 || ^10.0 || 10.*@dev",
         "typo3/cms-rte-ckeditor": "^9.5.5 || ^10.0 || 10.*@dev",
         "friendsofphp/php-cs-fixer": "^2.14",
