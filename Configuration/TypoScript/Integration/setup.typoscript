@@ -2,3 +2,19 @@
 #### DEPENDENCIES ####
 ######################
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Static/setup.typoscript">
+
+###################
+#### BLOG POST ####
+###################
+[blog.isPost()]
+page.10 {
+    templateName >
+    templateName = Blog
+    layoutRootPaths {
+        -1579272243 = EXT:blog/Resources/Private/Layouts/Page/
+    }
+    templateRootPaths {
+        -1579272243 = EXT:blog/Resources/Private/Templates/Page/
+    }
+}
+[end]
