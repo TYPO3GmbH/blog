@@ -21,7 +21,7 @@ $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
 ];
 $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-folder-contains-blog';
 
-// Add new page type as possible select item:
+// Add new page types as possible select item:
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
     'pages',
     'doktype',
@@ -33,8 +33,19 @@ $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-
     '1',
     'after'
 );
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
+    'pages',
+    'doktype',
+    [
+        'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-page',
+        (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE,
+        'record-blog-page',
+    ],
+    (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
+    'after'
+);
 
-// Add icon for new page type:
+// Add icon for new page types:
 \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
     $GLOBALS['TCA']['pages'],
     [
@@ -45,6 +56,19 @@ $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-
         ],
         'types' => [
             (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST => $GLOBALS['TCA']['pages']['types'][\TYPO3\CMS\Frontend\Page\PageRepository::DOKTYPE_DEFAULT],
+        ],
+    ]
+);
+\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
+    $GLOBALS['TCA']['pages'],
+    [
+        'ctrl' => [
+            'typeicon_classes' => [
+                (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE => 'record-blog-page',
+            ],
+        ],
+        'types' => [
+            (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE => $GLOBALS['TCA']['pages']['types'][\TYPO3\CMS\Frontend\Page\PageRepository::DOKTYPE_DEFAULT],
         ],
     ]
 );

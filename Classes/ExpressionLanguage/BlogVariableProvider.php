@@ -25,4 +25,13 @@ class BlogVariableProvider
         $page = $GLOBALS['TSFE']->page ?? [];
         return $page['doktype'] == Constants::DOKTYPE_BLOG_POST;
     }
+
+    /**
+     * @return bool
+     */
+    public function isPage(): bool
+    {
+        $page = $GLOBALS['TSFE']->page ?? [];
+        return $page['doktype'] == Constants::DOKTYPE_BLOG_PAGE;
+    }
 }

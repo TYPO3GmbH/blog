@@ -16,4 +16,5 @@ class Constants
      * Named constants for "magic numbers" of the field doktype.
      */
     public const DOKTYPE_BLOG_POST = 137;
+    public const DOKTYPE_BLOG_PAGE = 138;
 }

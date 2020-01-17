@@ -6,7 +6,7 @@
 ###################
 #### BLOG POST ####
 ###################
-[blog.isPost()]
+[blog.isPost() || blog.isPage()]
 page {
     10 {
         templateName >
@@ -20,7 +20,6 @@ page {
     }
     includeCSS {
         blogIntegration = EXT:blog/Resources/Public/Css/integration.min.css
-        blogIntegration
     }
 }
 [end]

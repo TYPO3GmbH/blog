@@ -4,7 +4,10 @@
         <header/>
         <body>
             <trans-unit id="pages.doktype.blog-post">
-                <source>Blog post</source>
+                <source>Blog Post</source>
+            </trans-unit>
+            <trans-unit id="pages.doktype.blog-page">
+                <source>Blog Page</source>
             </trans-unit>
         </body>
     </file>

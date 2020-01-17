@@ -12,10 +12,13 @@ if (!defined('TYPO3_MODE')) {
 }
 
 call_user_func(function () {
-    $blogDocType = \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST;
 
     // Add new page type:
-    $GLOBALS['PAGES_TYPES'][$blogDocType] = [
+    $GLOBALS['PAGES_TYPES'][\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST] = [
+        'type' => 'web',
+        'allowedTables' => '*',
+    ];
+    $GLOBALS['PAGES_TYPES'][\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE] = [
         'type' => 'web',
         'allowedTables' => '*',
     ];
@@ -40,6 +43,7 @@ call_user_func(function () {
         'plugin-blog-tag' => 'EXT:blog/Resources/Public/Icons/plugin-blog-tag.svg',
         'record-blog-author' => 'EXT:blog/Resources/Public/Icons/record-blog-author.svg',
         'record-blog-comment' => 'EXT:blog/Resources/Public/Icons/record-blog-comment.svg',
+        'record-blog-page' => 'EXT:blog/Resources/Public/Icons/record-blog-page.svg',
         'record-blog-post' => 'EXT:blog/Resources/Public/Icons/record-blog-post.svg',
         'record-blog-tag' => 'EXT:blog/Resources/Public/Icons/record-blog-tag.svg',
         'record-folder-contains-blog' => 'EXT:blog/Resources/Public/Icons/record-folder-contains-blog.svg',
@@ -55,9 +59,9 @@ call_user_func(function () {
     }
 
     // Allow backend users to drag and drop the new page type:
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
-        'options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . $blogDocType . ')'
-    );
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
+        options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST . ')
+    ');
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');
 
