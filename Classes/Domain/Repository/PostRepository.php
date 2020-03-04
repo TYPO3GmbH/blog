@@ -207,7 +207,7 @@ class PostRepository extends Repository
             $startDate = new \DateTimeImmutable(sprintf('%d-%d-1 00:00:00', $year, $month));
             $endDate = new \DateTimeImmutable(sprintf('%d-%d-%d 23:59:59', $year, $month, (int)$startDate->format('t')));
         } else {
-            $startDate = new \DateTimeImmutable(sprintf('%d-1-1 00:00:00', $month));
+            $startDate = new \DateTimeImmutable(sprintf('%d-1-1 00:00:00', $year));
             $endDate = new \DateTimeImmutable(sprintf('%d-12-31 23:59:59', $year));
         }
         $constraints[] = $query->greaterThanOrEqual('publish_date', $startDate->getTimestamp());
