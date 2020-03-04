@@ -9,6 +9,7 @@ module.exports = {
     mode: 'production',
     entry: {
         frontend: './Resources/Private/Scss/frontend/frontend.scss',
+        integration: './Resources/Private/Scss/frontend/integration.scss',
         backend: './Resources/Private/Scss/backend/backend.scss',
         Datatables: './Resources/Private/JavaScript/backend/Datatables.js',
         MassUpdate: './Resources/Private/JavaScript/backend/MassUpdate.js',

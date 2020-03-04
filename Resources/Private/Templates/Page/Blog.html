@@ -1,24 +1,41 @@
 <f:layout name="Default" />
 <f:section name="Main">
 
-    <div class="container mb-5">
-        <div class="row">
-            <div class="col-sm-12 col-lg-7 mt-5">
-                <f:if condition="{data.doktype} == 137">
-                    <f:cObject typoscriptObjectPath="tt_content.list.20.blog_header" />
-                </f:if>
+    <div class="container">
+        <div class="blog-container">
+            <main class="blog-main">
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-header',
+                        list_type: 'blog_header'
+                    }" table="tt_content"/>
                 <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{colPos: '0'}" />
-                <f:if condition="{data.doktype} == 137">
-                    <f:cObject typoscriptObjectPath="tt_content.list.20.blog_footer" />
-                    <f:cObject typoscriptObjectPath="tt_content.list.20.blog_authors" />
-                    <f:cObject typoscriptObjectPath="tt_content.list.20.blog_comments" />
-                    <f:cObject typoscriptObjectPath="tt_content.list.20.blog_commentform" />
-                    <f:cObject typoscriptObjectPath="tt_content.list.20.blog_relatedposts" />
-                </f:if>
-            </div>
-            <div class="col-sm-12 col-lg-4 mt-5 ml-auto">
-                <f:cObject typoscriptObjectPath="tt_content.list.20.blog_sidebar" />
-            </div>
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-footer',
+                        list_type: 'blog_footer'
+                    }" table="tt_content"/>
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-authors',
+                        list_type: 'blog_authors'
+                    }" table="tt_content"/>
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-comments',
+                        list_type: 'blog_comments'
+                    }" table="tt_content"/>
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-commentform',
+                        list_type: 'blog_commentform'
+                    }" table="tt_content"/>
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-relatedposts',
+                        list_type: 'blog_relatedposts'
+                    }" table="tt_content"/>
+            </main>
+            <aside class="blog-sidebar">
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-sidebar',
+                        list_type: 'blog_sidebar'
+                    }" table="tt_content"/>
+            </aside>
         </div>
     </div>
 
