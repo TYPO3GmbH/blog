@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\RootlineUtility;
 
 class SetupService
 {
@@ -46,26 +47,20 @@ class SetupService
                     ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogUid, \PDO::PARAM_INT)))
                     ->execute()
                     ->fetchColumn();
+                $rootline = array_reverse(GeneralUtility::makeInstance(RootlineUtility::class, $blogUid)->get());
                 $setups[$blogUid] = [
                     'uid' => $blogUid,
                     'title' => $title,
+                    'path' => implode(' / ', array_map(function ($page) {
+                        return $page['title'];
+                    }, $rootline)),
+                    'rootline' => $rootline,
                     'articleCount' => $blogRootPage['cnt'],
                 ];
             }
         }
 
         return $setups;
-    }
-
-    public function getBlogRecordAsArray(int $uid): array
-    {
-        $queryBuilder = $this->getQueryBuilderForTable('pages');
-        return $queryBuilder
-            ->select('*')
-            ->from('pages')
-            ->where($queryBuilder->expr()->eq('uid', $uid))
-            ->execute()
-            ->fetch();
     }
 
     public function createBlogSetup(array $data): bool

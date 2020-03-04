@@ -1,3 +1,7 @@
+<html
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+>
 <f:layout name="Backend" />
 <f:section name="Intro">
     <h1><f:translate key="backend.headline.setup_wizard" /></h1>
@@ -6,20 +10,38 @@
 <f:section name="Content">
     <f:if condition="{f:count() -> blogSetups} > 0">
         <f:then>
-            <div class="table-fit">
-                <table class="table">
+
+            <table class="table table-striped table-hover dataTables" data-columns='[{"type": "string"}, {"type": "num"}, {"type": "string"}]'>
+                <thead>
                     <tr>
-                        <th><f:translate key="backend.table.blog" /></th>
-                        <th><f:translate key="backend.table.articles" /></th>
+                        <th><span><f:translate key="backend.table.blog" /></span></th>
+                        <th><span><f:translate key="backend.table.articles" /></span></th>
+                        <th></th>
                     </tr>
+                </thead>
+                <tbody>
                     <f:for each="{blogSetups}" as="blog">
                         <tr>
-                            <td>{blog.title}</td>
-                            <td>{blog.articleCount}</td>
+                            <td class="col-title col-responsive nowrap">
+                                <a href="{be:moduleLink(route: 'web_list', arguments: '{id: blog.uid}')}">
+                                    <core:icon identifier="record-folder-contains-blog" />
+                                    {blog.path}
+                                </a>
+                            </td>
+                            <td data-order="{blog.articleCount}">{blog.articleCount}</td>
+                            <td class="col-control nowrap">
+                                <a class="btn btn-sm btn-default" href="{be:moduleLink(route: 'blog_BlogBlogPosts', arguments: '{tx_blog_blog_blogblogposts: {blogSetup: blog.uid}}')}">
+                                    <core:icon identifier="record-blog-post" /> Posts
+                                </a>
+                                <a class="btn btn-sm btn-default" href="{be:moduleLink(route: 'blog_BlogBlogComments', arguments: '{tx_blog_blog_blogblogcomments: {blogSetup: blog.uid}}')}">
+                                    <core:icon identifier="record-blog-comment" /> Comments
+                                </a>
+                            </td>
                         </tr>
                     </f:for>
-                </table>
-            </div>
+                </tbody>
+            </table>
+
             <f:render partial="Backend/CreateWizard" arguments="{_all}" />
             <f:render partial="Backend/UrlSetup" arguments="{_all}" />
         </f:then>
@@ -31,3 +53,4 @@
         </f:else>
     </f:if>
 </f:section>
+</html>

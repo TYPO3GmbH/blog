@@ -218,10 +218,10 @@
                 <source>Actions</source>
             </trans-unit>
             <trans-unit id="backend.table.title" xml:space="preserve">
-                <source>Articles</source>
+                <source>Title</source>
             </trans-unit>
             <trans-unit id="backend.table.author" xml:space="preserve">
-                <source>Author</source>
+                <source>Authors</source>
             </trans-unit>
             <trans-unit id="backend.table.categories" xml:space="preserve">
                 <source>Categories</source>

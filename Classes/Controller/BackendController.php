@@ -105,6 +105,7 @@ class BackendController extends ActionController
 
     public function initializeSetupWizardAction(): void
     {
+        $this->initializeDataTables();
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
     }
 

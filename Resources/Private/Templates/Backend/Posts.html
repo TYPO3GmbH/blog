@@ -8,7 +8,7 @@
     <f:if condition="{f:count() -> posts} > 0">
         <f:then>
 
-            <table class="table table-striped table-bordered dataTables" data-columns='[{"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "num"}]'>
+            <table class="table table-striped table-hover dataTables" data-columns='[{"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "num"}]'>
                 <thead>
                     <tr>
                         <th><f:translate key="backend.table.title" /></th>
@@ -21,23 +21,63 @@
                 <tbody>
                     <f:for each="{posts}" as="post">
                         <tr>
-                            <td data-search="{post.title}" data-filter="{post.title}"><blogvh:link.be.post post="{post}" /></td>
-                            <td data-search="{post.authors.0.name}" data-filter="{post.authors.0.name}">{post.authors.0.name}</td>
-                            <td>
-                                <f:if condition="{post.categories}">
-                                    <ul class="list-inline">
-                                        <f:for each="{post.categories}" as="category"><li><blogvh:link.be.category category="{category}" /></li></f:for>
-                                    </ul>
-                                </f:if>
+
+                            <td class="nowrap" data-search="{post.title}" data-filter="{post.title}">
+                                <blogvh:link.be.post post="{post}">
+                                    <core:icon identifier="record-blog-post" />
+                                    {post.title}
+                                </blogvh:link.be.post>
                             </td>
-                            <td>
-                                <f:if condition="{post.tags}">
-                                    <ul class="list-inline">
-                                        <f:for each="{post.tags}" as="tag"><li><blogvh:link.be.tag tag="{tag}" /></li></f:for>
-                                    </ul>
-                                </f:if>
+
+                            <f:variable name="authorString" value="" />
+                            <f:if condition="{post.authors}">
+                                <f:for each="{post.authors}" as="author" iteration="{iteration}">
+                                    <f:variable name="authorString" value="{authorString}{author.name}" />
+                                    <f:if condition="{iteration.isLast}">
+                                        <f:else><f:variable name="authorString" value="{authorString}," /></f:else>
+                                    </f:if>
+                                </f:for>
+                            </f:if>
+                            <td class="nowrap" data-search="{authorString}" data-filter="{authorString}">
+                                <f:for each="{post.authors}" as="author" iteration="iteration">
+                                    <blogvh:link.be.author author="{author}" /><f:if condition="{iteration.isLast}"><f:else>, </f:else></f:if>
+                                </f:for>
                             </td>
-                            <td data-order="{f:format.date(format: 'U', date: post.publishDate)}"><f:format.date format="d.m.Y">{post.publishDate}</f:format.date></td>
+
+                            <f:variable name="categoryString" value="" />
+                            <f:if condition="{post.categories}">
+                                <f:for each="{post.categories}" as="category" iteration="{iteration}">
+                                    <f:variable name="categoryString" value="{categoryString}{category.title}" />
+                                    <f:if condition="{iteration.isLast}">
+                                        <f:else><f:variable name="categoryString" value="{categoryString}, " /></f:else>
+                                    </f:if>
+                                </f:for>
+                            </f:if>
+                            <td data-search="{categoryString}" data-filter="{categoryString}">
+                                <f:for each="{post.categories}" as="category" iteration="iteration">
+                                    <blogvh:link.be.category category="{category}" class="label label-info" />
+                                </f:for>
+                            </td>
+
+                            <f:variable name="tagString" value="" />
+                            <f:if condition="{post.tags}">
+                                <f:for each="{post.tags}" as="tag" iteration="{iteration}">
+                                    <f:variable name="tagString" value="{tagString}{tag.title}" />
+                                    <f:if condition="{iteration.isLast}">
+                                        <f:else><f:variable name="tagString" value="{tagString}," /></f:else>
+                                    </f:if>
+                                </f:for>
+                            </f:if>
+                            <td data-search="{tagString}" data-filter="{tagString}">
+                                <f:for each="{post.tags}" as="tag" iteration="iteration">
+                                    <blogvh:link.be.tag tag="{tag}" class="label label-info" />
+                                </f:for>
+                            </td>
+
+                            <td data-order="{f:format.date(format: 'U', date: post.publishDate)}">
+                                <f:format.date format="d.m.Y">{post.publishDate}</f:format.date>
+                            </td>
+
                         </tr>
                     </f:for>
                 </tbody>
