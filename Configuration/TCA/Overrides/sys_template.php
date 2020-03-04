@@ -22,3 +22,8 @@ if (!defined('TYPO3_MODE')) {
     'Configuration/TypoScript/Standalone/',
     'TYPO3 Blog: Standalone'
 );
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+    'blog',
+    'Configuration/TypoScript/Static/',
+    'TYPO3 Blog: Expert'
+);
