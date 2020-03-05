@@ -10,15 +10,15 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
-                    <settings.lists.posts.numberOfLatestItems>
+                    <settings.latestPosts.limit>
                         <TCEforms>
-                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:flexform.maximumDisplayedItems</label>
+                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:flexform.latestPosts.limit</label>
                             <config>
                                 <type>input</type>
                                 <eval>int</eval>
                             </config>
                         </TCEforms>
-                    </settings.lists.posts.numberOfLatestItems>
+                    </settings.latestPosts.limit>
                 </el>
             </ROOT>
         </sDEF>

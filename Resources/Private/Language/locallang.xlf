@@ -458,11 +458,11 @@
             <trans-unit id="constantEditor.lists.posts.maximumDisplayedItems" xml:space="preserve">
                 <source>Maximum displayed items:Maximum number of posts to be displayed (0 = no limit).</source>
             </trans-unit>
-            <trans-unit id="constantEditor.lists.posts.numberOfLatestItems" xml:space="preserve">
-                <source>Amount of items to show in overview of latest posts.</source>
-            </trans-unit>
             <trans-unit id="constantEditor.lists.posts.dateFormat" xml:space="preserve">
                 <source>Date format:The format for the list items (default: %d.%m.%Y).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.latestPosts.limit" xml:space="preserve">
+                <source>Limit:The limit of displayed items (default: 3).</source>
             </trans-unit>
             <trans-unit id="constantEditor.relatedPosts.limit" xml:space="preserve">
                 <source>Limit:The limit of displayed items (default: 5).</source>
