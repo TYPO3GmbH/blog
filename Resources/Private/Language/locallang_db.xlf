@@ -268,10 +268,10 @@
                 <source>Posts</source>
             </trans-unit>
 
-            <trans-unit id="display_flexform.sheet_general" xml:space="preserve">
+            <trans-unit id="flexform.sheet_general" xml:space="preserve">
                 <source>General</source>
             </trans-unit>
-            <trans-unit id="display_flexform.maximumDisplayedItems" xml:space="preserve">
+            <trans-unit id="flexform.maximumDisplayedItems" xml:space="preserve">
                 <source>Amount of items to show in overview of latest posts</source>
             </trans-unit>
         </body>
