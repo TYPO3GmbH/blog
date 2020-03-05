@@ -168,6 +168,7 @@ class PostController extends ActionController
         $maximumItems = (int) ($this->settings['lists']['posts']['numberOfLatestItems'] ?: 3);
         $posts = $this->postRepository->findAllWithLimit($maximumItems);
 
+        $this->view->assign('type', 'latest');
         $this->view->assign('posts', $posts);
     }
 
