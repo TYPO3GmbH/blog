@@ -3,21 +3,16 @@
         <langDisable>1</langDisable>
     </meta>
     <sheets>
-
         <sDEF>
             <ROOT>
                 <TCEforms>
-                    <sheetTitle>
-                        LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:display_flexform.sheet_general
-                    </sheetTitle>
+                    <sheetTitle>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:display_flexform.sheet_general</sheetTitle>
                 </TCEforms>
                 <type>array</type>
                 <el>
                     <settings.lists.posts.numberOfLatestItems>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:display_flexform.maximumDisplayedItems
-                            </label>
+                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:display_flexform.maximumDisplayedItems</label>
                             <config>
                                 <type>input</type>
                                 <eval>int</eval>
@@ -27,6 +22,5 @@
                 </el>
             </ROOT>
         </sDEF>
-
     </sheets>
 </T3DataStructure>
