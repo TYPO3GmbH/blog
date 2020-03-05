@@ -1,4 +1,6 @@
-<f:spaceless>
+<f:layout name="Post" />
+<f:section name="Content">
+
     <f:if condition="{post.authors}">
         <div class="postauthors">
             <f:for each="{post.authors}" as="author">
@@ -6,4 +8,5 @@
             </f:for>
         </div>
     </f:if>
-</f:spaceless>
+
+</f:section>

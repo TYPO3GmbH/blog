@@ -14,6 +14,7 @@ use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -95,17 +96,15 @@ class Post extends AbstractEntity
     protected $tags;
 
     /**
-     * Sharing enabled flag for this blog post. This flag can be used in views to enable sharing tools.
-     *
-     * @var bool
-     */
-    protected $sharingEnabled;
-
-    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Extbase\ORM\Lazy
      */
     protected $media;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     */
+    protected $featuredImage;
 
     /**
      * @var int
@@ -398,24 +397,6 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @return bool
-     */
-    public function isSharingEnabled(): bool
-    {
-        return $this->sharingEnabled;
-    }
-
-    /**
-     * @param bool $sharingEnabled
-     * @return Post
-     */
-    public function setSharingEnabled(bool $sharingEnabled): self
-    {
-        $this->sharingEnabled = $sharingEnabled;
-        return $this;
-    }
-
-    /**
      * @return ObjectStorage
      */
     public function getTags(): ObjectStorage
@@ -469,6 +450,22 @@ class Post extends AbstractEntity
     public function setMedia(ObjectStorage $media): self
     {
         $this->media = $media;
+        return $this;
+    }
+
+    public function getFeaturedImage(): ?FileReference
+    {
+        $featuredImage = $this->featuredImage;
+        if (!empty($featuredImage) && $featuredImage !== 0) {
+            return $featuredImage;
+        } else {
+            return null;
+        }
+    }
+
+    public function setFeaturedImage(?FileReference $featuredImage): self
+    {
+        $this->featuredImage = $featuredImage ?? 0;
         return $this;
     }
 

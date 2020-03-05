@@ -1,0 +1,27 @@
+/**
+ * Components
+ */
+@import "components/page";
+@import "components/metagroup";
+@import "components/author";
+@import "components/badge";
+@import "components/icons";
+@import "components/image";
+@import "components/comment";
+@import "components/list";
+@import "components/pagination";
+@import "components/taglist";
+@import "components/widget";
+@import "components/widgetlist";
+
+/**
+ * Misc
+ */
+.alert__title {
+    font-weight: bold;
+}
+.alert__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}

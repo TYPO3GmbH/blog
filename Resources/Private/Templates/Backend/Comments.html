@@ -1,55 +1,59 @@
-<f:layout name="BackendWeb" />
+<f:layout name="Backend" />
 <f:section name="Intro">
     <h1><f:translate key="backend.headline.comments" /></h1>
-    <p class="lead"><f:translate key="backend.lead.comments" /></p>
+    <p><f:translate key="backend.lead.comments" /></p>
 </f:section>
 <f:section name="Content">
     <f:render partial="Backend/BlogFilter" arguments="{blogSetups: blogSetups, activeBlogSetup: activeBlogSetup, action: 'comments'}" />
     <f:render partial="Backend/CommentsFilter" arguments="{_all}" />
     <f:if condition="{f:count() -> comments} > 0">
         <f:then>
-            <div class="table-fit">
-                <f:form class="form-inline" action="updateCommentStatus">
-                    <f:form.hidden name="filter" value="{activeFilter}" />
-                    <f:form.hidden name="blogSetup" value="{activeBlogSetup}" />
-                    <table class="table table-striped table-bordered table-comments dataTables" data-columns='[{"searchable": false, "orderable": false}, {"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "num"}]'>
-                        <thead>
+            <f:form class="form-inline" action="updateCommentStatus">
+                <f:form.hidden name="filter" value="{activeFilter}" />
+                <f:form.hidden name="blogSetup" value="{activeBlogSetup}" />
+                <table class="table table-striped table-hover table-comments dataTables" data-columns='[{"searchable": false, "orderable": false}, {"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "num"}]'>
+                    <thead>
+                        <tr>
+                            <th><f:translate key="backend.table.actions" /></th>
+                            <th data-filter="true"><f:translate key="backend.table.author" /></th>
+                            <th><f:translate key="backend.table.comment" /></th>
+                            <th data-filter="true"><f:translate key="backend.table.post" /></th>
+                            <th><f:translate key="backend.table.date" /></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <f:for each="{comments}" as="comment">
                             <tr>
-                                <th><f:translate key="backend.table.actions" /></th>
-                                <th data-filter="true"><f:translate key="backend.table.author" /></th>
-                                <th><f:translate key="backend.table.comment" /></th>
-                                <th data-filter="true"><f:translate key="backend.table.post" /></th>
-                                <th><f:translate key="backend.table.date" /></th>
+                                <td class="actions">
+                                    <f:render section="Actions" arguments="{_all}" />
+                                </td>
+                                <td data-search="{comment.name}" data-filter="{comment.name}">
+                                    {comment.name}
+                                </td>
+                                <td>{comment.comment}</td>
+                                <td data-search="{comment.post.title}" data-filter="{comment.post.title}">
+                                    <f:if condition="{comment.post}">
+                                        <f:then><blogvh:link.be.post post="{comment.post}" /></f:then>
+                                        <f:else><f:translate key="backend.message.nopost" /></f:else>
+                                    </f:if>
+                                </td>
+                                <td data-order="{f:format.date(format: 'U', date: comment.crdate)}">
+                                    <f:format.date format="d.m.Y">{comment.crdate}</f:format.date>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <f:for each="{comments}" as="comment">
-                                <tr>
-                                    <td class="actions"><f:render section="Actions" arguments="{_all}" /></td>
-                                    <td data-search="{comment.name}" data-filter="{comment.name}"><strong>{comment.name}</strong></td>
-                                    <td>{comment.comment}</td>
-                                    <td data-search="{comment.post.title}" data-filter="{comment.post.title}">
-                                        <f:if condition="{comment.post}">
-                                            <f:then><blogvh:link.be.post post="{comment.post}" /></f:then>
-                                            <f:else><f:translate key="backend.message.nopost" /></f:else>
-                                        </f:if>
-                                    </td>
-                                    <td data-order="{f:format.date(format: 'U', date: comment.crdate)}"><f:format.date format="d.m.Y">{comment.crdate}</f:format.date></td>
-                                </tr>
-                            </f:for>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th colspan="5">
-                                    <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="approve" disabled="true"><f:translate key="action.multiple.approve" /></f:form.button>
-                                    <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="decline" disabled="true"><f:translate key="action.multiple.decline" /></f:form.button>
-                                    <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="delete" disabled="true"><f:translate key="action.multiple.delete" /></f:form.button>
-                                </th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </f:form>
-            </div>
+                        </f:for>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="5">
+                                <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="approve" disabled="true"><f:translate key="action.multiple.approve" /></f:form.button>
+                                <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="decline" disabled="true"><f:translate key="action.multiple.decline" /></f:form.button>
+                                <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="delete" disabled="true"><f:translate key="action.multiple.delete" /></f:form.button>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </f:form>
         </f:then>
         <f:else>
             <f:be.infobox state="-1" title="{f:translate(key: 'backend.warning')}">

@@ -32,7 +32,9 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-tag.svg',
+        'typeicon_classes' => [
+            'default' => 'record-blog-tag'
+        ],
         'searchFields' => 'uid,title',
     ],
     'interface' => [
@@ -84,7 +86,6 @@ return [
         'slug' => [
             'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_tag.slug',
-            'displayCond' => 'USER:' . \TYPO3\CMS\Core\Compatibility\PseudoSiteTcaDisplayCondition::class . '->isInPseudoSite:pages:false',
             'config' => [
                 'type' => 'slug',
                 'generatorOptions' => [

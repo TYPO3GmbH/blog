@@ -27,8 +27,13 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-author.svg',
-        'searchFields' => 'uid,name,title'
+        'typeicon_classes' => [
+            'default' => 'record-blog-author'
+        ],
+        'searchFields' => 'uid,name,title',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l18n_parent',
+        'transOrigDiffSourceField' => 'l18n_diffsource',
     ],
     'interface' => [
         'showRecordFieldList' => '
@@ -94,11 +99,12 @@ return [
                 'size' => 30,
                 'eval' => 'required',
             ],
+            'l10n_display' => 'defaultAsReadonly',
+            'l10n_mode' => 'exclude',
         ],
         'slug' => [
             'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.slug',
-            'displayCond' => 'USER:' . \TYPO3\CMS\Core\Compatibility\PseudoSiteTcaDisplayCondition::class . '->isInPseudoSite:pages:false',
             'config' => [
                 'type' => 'slug',
                 'generatorOptions' => [
@@ -110,7 +116,9 @@ return [
                 'fallbackCharacter' => '-',
                 'eval' => 'uniqueInSite',
                 'default' => ''
-            ]
+            ],
+            'l10n_display' => 'defaultAsReadonly',
+            'l10n_mode' => 'exclude',
         ],
         'avatar_provider' => [
             'exclude' => 0,
@@ -125,38 +133,34 @@ return [
                     ['Image', \T3G\AgencyPack\Blog\AvatarProvider\ImageProvider::class],
                 ],
             ],
+            'l10n_mode' => 'exclude',
         ],
         'image' => [
             'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.image',
             'displayCond' => 'FIELD:avatar_provider:=:T3G\AgencyPack\Blog\AvatarProvider\ImageProvider',
-            'overrideChildTca' => [
-                'types' => [
-                    '0' => [
-                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'image',
+                [
+                    'appearance' => [
+                        'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
                     ],
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette',
+                    'overrideChildTca' => [
+                        'types' => [
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
+                                    crop,
+                                    --palette--;;filePalette
+                                '
+                            ],
+                        ],
                     ],
-                ]
-            ],
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', [
-                'appearance' => [
-                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
+                    'minitems' => 0,
+                    'maxitems' => 1,
                 ],
-                'maxitems' => 1,
-                // custom configuration for displaying fields in the overlay/reference table
-                // to use the imageoverlayPalette instead of the basicoverlayPalette
-                'foreign_match_fields' => [
-                    'fieldname' => 'image',
-                    'tablenames' => 'tx_blog_domain_model_author',
-                    'table_local' => 'sys_file',
-                ],
-            ], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            ),
+            'l10n_mode' => 'exclude',
         ],
         'title' => [
             'exclude' => 0,
@@ -175,6 +179,7 @@ return [
                 'size' => 30,
                 'eval' => 'domainname',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'email' => [
             'exclude' => 0,
@@ -184,6 +189,7 @@ return [
                 'size' => 30,
                 'eval' => 'required,email',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'location' => [
             'exclude' => 0,
@@ -193,6 +199,7 @@ return [
                 'size' => 30,
                 'eval' => '',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'twitter' => [
             'exclude' => 0,
@@ -202,6 +209,7 @@ return [
                 'size' => 30,
                 'eval' => '',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'linkedin' => [
             'exclude' => 0,
@@ -211,6 +219,7 @@ return [
                 'size' => 30,
                 'eval' => '',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'xing' => [
             'exclude' => 0,
@@ -220,6 +229,7 @@ return [
                 'size' => 30,
                 'eval' => '',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'profile' => [
             'exclude' => 0,
@@ -229,6 +239,7 @@ return [
                 'size' => 30,
                 'eval' => '',
             ],
+            'l10n_mode' => 'exclude',
         ],
         'bio' => [
             'exclude' => 0,
@@ -243,13 +254,15 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'multiple' => 1,
+                'multiple' => 0,
                 'foreign_table' => 'pages',
+                'foreign_table_where' => 'AND {#pages}.{#doktype}=' . \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST . ' AND {#pages}.{#sys_language_uid} IN (-1,0)',
                 'MM' => 'tx_blog_post_author_mm',
-                'MM_opposite_field' => 'posts',
+                'MM_opposite_field' => 'authors',
                 'minitems' => 0,
-                'maxitems' => 100000,
+                'maxitems' => 99999,
             ],
+            'l10n_mode' => 'exclude',
         ],
         'details_page' => [
             'exclude' => 1,
@@ -262,8 +275,43 @@ return [
                 'maxitems' => 1,
                 'minitems' => 0,
                 'default' => 0
-            ]
+            ],
+            'l10n_mode' => 'exclude',
         ]
+    ],
+    'sys_language_uid' => [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
+        'config' => [
+            'type' => 'select',
+            'default' => 0,
+            'renderType' => 'selectSingle',
+            'foreign_table' => 'sys_language',
+            'foreign_table_where' => 'ORDER BY sys_language.title',
+            'items' => [
+                ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
+                ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0],
+            ],
+        ],
+    ],
+    'l18n_parent' => [
+        'displayCond' => 'FIELD:sys_language_uid:>:0',
+        'exclude' => 1,
+        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
+        'config' => [
+            'type' => 'select',
+            'renderType' => 'selectSingle',
+            'items' => [
+                ['', 0],
+            ],
+            'foreign_table' => 'tx_blog_domain_model_author',
+            'foreign_table_where' => 'AND tx_blog_domain_model_author.pid=###CURRENT_PID### AND tx_blog_domain_model_author.sys_language_uid IN (-1,0)',
+        ],
+    ],
+    'l18n_diffsource' => [
+        'config' => [
+            'type' => 'passthrough',
+        ],
     ],
     'types' => [
         0 => [

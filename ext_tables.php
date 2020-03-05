@@ -24,28 +24,25 @@ call_user_func(function () {
     $icons = [
         'actions-approve' => 'EXT:blog/Resources/Public/Icons/actions-approve.svg',
         'actions-decline' => 'EXT:blog/Resources/Public/Icons/actions-decline.svg',
-        'blog-link-wizard' => 'EXT:blog/Resources/Public/Icons/blog-link-wizard.svg',
-        'apps-pagetree-folder-contains-blog' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-folder-contains-blog.svg',
-        'apps-pagetree-blog' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog.svg',
-        'apps-pagetree-blog-author' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-author.svg',
-        'apps-pagetree-blog-category' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-category.svg',
-        'apps-pagetree-blog-comment' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment.svg',
-        'apps-pagetree-blog-comment-approved' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment-approved.svg',
-        'apps-pagetree-blog-comment-blocked' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment-blocked.svg',
-        'apps-pagetree-blog-comment-todo' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment-todo.svg',
-        'apps-pagetree-blog-post' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-post.svg',
-        'apps-pagetree-blog-tag' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-tag.svg',
+        'module-blog' => 'EXT:blog/Resources/Public/Icons/module-blog.svg',
         'plugin-blog-archive' => 'EXT:blog/Resources/Public/Icons/plugin-blog-archive.svg',
         'plugin-blog-authorposts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-authorposts.svg',
         'plugin-blog-authors' => 'EXT:blog/Resources/Public/Icons/plugin-blog-authors.svg',
         'plugin-blog-category' => 'EXT:blog/Resources/Public/Icons/plugin-blog-category.svg',
         'plugin-blog-commentform' => 'EXT:blog/Resources/Public/Icons/plugin-blog-commentform.svg',
         'plugin-blog-comments' => 'EXT:blog/Resources/Public/Icons/plugin-blog-comments.svg',
+        'plugin-blog-header' => 'EXT:blog/Resources/Public/Icons/plugin-blog-header.svg',
+        'plugin-blog-footer' => 'EXT:blog/Resources/Public/Icons/plugin-blog-footer.svg',
         'plugin-blog-metadata' => 'EXT:blog/Resources/Public/Icons/plugin-blog-metadata.svg',
         'plugin-blog-posts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-posts.svg',
         'plugin-blog-relatedposts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-relatedposts.svg',
         'plugin-blog-sidebar' => 'EXT:blog/Resources/Public/Icons/plugin-blog-sidebar.svg',
         'plugin-blog-tag' => 'EXT:blog/Resources/Public/Icons/plugin-blog-tag.svg',
+        'record-blog-author' => 'EXT:blog/Resources/Public/Icons/record-blog-author.svg',
+        'record-blog-comment' => 'EXT:blog/Resources/Public/Icons/record-blog-comment.svg',
+        'record-blog-post' => 'EXT:blog/Resources/Public/Icons/record-blog-post.svg',
+        'record-blog-tag' => 'EXT:blog/Resources/Public/Icons/record-blog-tag.svg',
+        'record-folder-contains-blog' => 'EXT:blog/Resources/Public/Icons/record-folder-contains-blog.svg',
 
     ];
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
@@ -136,38 +133,75 @@ call_user_func(function () {
         'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_relatedposts.title',
         'plugin-blog-relatedposts'
     );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
+        'Header',
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_header.title',
+        'plugin-blog-header'
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
+        'Footer',
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_footer.title',
+        'plugin-blog-footer'
+    );
 
     if (TYPO3_MODE === 'BE') {
-        // Module Web > Blog
+        // Module Blog
+        $firstKey = array_key_first($GLOBALS['TBE_MODULES']);
+        $firstValue = array_shift($GLOBALS['TBE_MODULES']);
+        $GLOBALS['TBE_MODULES'] = array_merge([$firstKey => $firstValue, 'blog' => ''], $GLOBALS['TBE_MODULES']);
+        $GLOBALS['TBE_MODULES']['_configuration']['blog'] = [
+            'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog.xlf',
+            'name' => 'web',
+            'iconIdentifier' => 'module-blog'
+        ];
+
+        // Module Blog > Posts
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
             'T3G.AgencyPack.Blog',
-            'web',
-            'tx_Blog',
-            'bottom',
+            'blog',
+            'blog_posts',
+            '',
             [
-                'Backend' => 'posts, comments, updateCommentStatus',
+                'Backend' => 'posts',
             ],
             [
+                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_posts.xlf',
+                'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-posts.svg',
                 'access' => 'user,group',
-                'icon' => 'EXT:blog/Resources/Public/Icons/module-blog.svg',
-                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf',
             ]
         );
-        unset($GLOBALS['TBE_MODULES']['_configuration']['web_BlogTxBlog']['navigationComponentId']);
 
-        // Module System > Web
+        // Module Blog > Comments
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
             'T3G.AgencyPack.Blog',
-            'system',
-            'tx_Blog',
-            'top',
+            'blog',
+            'blog_comments',
+            '',
+            [
+                'Backend' => 'comments, updateCommentStatus',
+            ],
+            [
+                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_comments.xlf',
+                'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-comments.svg',
+                'access' => 'user,group',
+            ]
+        );
+
+        // Module Blog > Setup
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+            'T3G.AgencyPack.Blog',
+            'blog',
+            'blog_setup',
+            '',
             [
                 'Backend' => 'setupWizard, createBlog',
             ],
             [
+                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_setup.xlf',
+                'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-setup.svg',
                 'access' => 'admin',
-                'icon' => 'EXT:blog/Resources/Public/Icons/module-blog.svg',
-                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf',
             ]
         );
     }

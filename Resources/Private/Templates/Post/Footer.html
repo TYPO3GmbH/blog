@@ -1,0 +1,12 @@
+<f:layout name="Post" />
+<f:section name="Content">
+
+    <footer class="postfooter">
+        <f:if condition="{settings.meta.postfooter.enable}">
+            <div class="postfooter__meta">
+                <f:render partial="Meta/PostFooter" arguments="{_all}" />
+            </div>
+        </f:if>
+    </footer>
+
+</f:section>

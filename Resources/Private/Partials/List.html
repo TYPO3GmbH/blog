@@ -1,4 +1,4 @@
-<div class="tx-blog-post-list {class}">
+<div class="postlist{f:if(condition: type, then: ' postlist--{type}')}">
     <f:if condition="{posts}">
         <f:then>
             <f:if condition="{posts->f:count()} > {settings.lists.pagination.itemsPerPage}">

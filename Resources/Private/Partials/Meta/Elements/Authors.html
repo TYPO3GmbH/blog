@@ -1,0 +1,24 @@
+<f:variable name="name">authors</f:variable>
+<f:variable name="icon"><f:render partial="General/BlogIcons" section="Author" optional="true" /></f:variable>
+<f:variable name="prefix"><f:translate key="meta.authors.author"/></f:variable>
+
+<f:if condition="{post.authors}">
+    <f:if condition="{post.authors} > 1">
+        <f:variable name="prefix"><f:translate key="meta.author.authors"/></f:variable>
+    </f:if>
+    <f:render partial="Meta/Rendering/Item" arguments="{name: name, icon: icon, prefix: prefix}" contentAs="content">
+        <ul class="postmetagroup__list">
+            <f:for each="{post.authors}" as="author">
+                <li>
+                    <f:render section="ProfileLink" arguments="{author: authors}" contentAs="content">{author.name}</f:render>
+                </li>
+            </f:for>
+        </ul>
+    </f:render>
+</f:if>
+<f:section name="ProfileLink">
+    <f:if condition="{author.profile}">
+        <f:then><a rel="author" href="{author.profile}"><span itemprop="name">{content}</span></a></f:then>
+        <f:else><span itemprop="name">{content}</span></f:else>
+    </f:if>
+</f:section>

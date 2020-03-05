@@ -35,8 +35,3 @@ Categorizing and Tagging
 Use categories and tags to add meta information to your blog posts. Let your users explore your posts based on their interests
 navigating via tags or categories to find similar entries. Add posts from the same category to your posts to get your readers
 to read even more.
-
-
-Be social - share your posts
-----------------------------
-Enable sharing in the commonly used social networks by enabling a single checkbox.

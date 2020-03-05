@@ -3,6 +3,10 @@
     <file t3:id="1557352031" source-language="en" datatype="plaintext" original="messages" date="2019-05-08T21:47:12Z" product-name="blog">
         <header/>
         <body>
+            <trans-unit id="blog-folder">
+                <source>Blog</source>
+            </trans-unit>
+
             <trans-unit id="wizard.group.blog" xml:space="preserve">
                 <source>Blog</source>
             </trans-unit>
@@ -49,11 +53,23 @@
             <trans-unit id="plugin.blog_sidebar.description" xml:space="preserve">
                 <source>The sidebar contains links enabling the user to quickly navigate your blog. It shows an overview of recent posts and comments, categories, tags and archive links.</source>
             </trans-unit>
+            <trans-unit id="plugin.blog_header.title" xml:space="preserve">
+                <source>Blog: Header</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_header.description" xml:space="preserve">
+                <source>Displays post header</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_footer.title" xml:space="preserve">
+                <source>Blog: Footer</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_footer.description" xml:space="preserve">
+                <source>Displays post footer</source>
+            </trans-unit>
             <trans-unit id="plugin.blog_metadata.title" xml:space="preserve">
-                <source>Blog: Metadata</source>
+                <source>Blog: Metadata (Deprecated, will be removed with v11)</source>
             </trans-unit>
             <trans-unit id="plugin.blog_metadata.description" xml:space="preserve">
-                <source>Displays post meta data, like date, tags, category, sharing links...</source>
+                <source>Displays post meta data, like date, tags, category...</source>
             </trans-unit>
             <trans-unit id="plugin.blog_commentform.title" xml:space="preserve">
                 <source>Blog: Comment Form</source>
@@ -80,6 +96,9 @@
                 <source>Based on the categories and tags of the current post, it will show a list of related posts. This overview should only be placed on a Blog detail page.</source>
             </trans-unit>
 
+            <trans-unit id="pages.featured_image" xml:space="preserve">
+                <source>Featured Image</source>
+            </trans-unit>
             <trans-unit id="pages.comments_active" xml:space="preserve">
                 <source>Comments enabled</source>
             </trans-unit>
@@ -109,9 +128,6 @@
             </trans-unit>
             <trans-unit id="pages.authors" xml:space="preserve">
                 <source>Authors</source>
-            </trans-unit>
-            <trans-unit id="pages.sharing_enabled" xml:space="preserve">
-                <source>Sharing enabled (show sharing links)</source>
             </trans-unit>
             <trans-unit id="pages.tabs.blog" xml:space="preserve">
                 <source>Blog</source>

@@ -83,6 +83,7 @@ class CommentController extends ActionController
                 $this->blogCacheService->addTagToPage('tx_blog_comment_' . $comment->getUid());
             }
             $this->view->assign('comments', $comments);
+            $this->view->assign('post', $post);
         }
     }
 }

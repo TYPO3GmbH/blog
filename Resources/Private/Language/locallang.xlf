@@ -4,6 +4,14 @@
         <header/>
         <body>
 
+            <!-- General -->
+            <trans-unit id="general.message.configuration_error.title" xml:space="preserve">
+                <source>A possible configuration error was detected.</source>
+            </trans-unit>
+            <trans-unit id="general.message.configuration_error.single_no_post" xml:space="preserve">
+                <source>No matching post could be obtained. Make sure that this plugin is only used on a post.</source>
+            </trans-unit>
+
             <!-- Headline -->
             <trans-unit id="headline.commentform" xml:space="preserve">
                 <source>Write comment</source>
@@ -61,13 +69,13 @@
 
             <!-- Message -->
             <trans-unit id="message.no_comments" xml:space="preserve">
-                <source>No comments</source>
+                <source>No Comments</source>
             </trans-unit>
             <trans-unit id="message.comment" xml:space="preserve">
-                <source>%s comment</source>
+                <source>%s Comment</source>
             </trans-unit>
             <trans-unit id="message.comments" xml:space="preserve">
-                <source>%s comments</source>
+                <source>%s Comments</source>
             </trans-unit>
             <trans-unit id="message.comments_closed" xml:space="preserve">
                 <source>Comments closed</source>
@@ -92,6 +100,45 @@
             </trans-unit>
 
             <!-- Meta -->
+            <trans-unit id="meta.authors.author" xml:space="preserve">
+                <source>Author</source>
+            </trans-unit>
+            <trans-unit id="meta.authors.author" xml:space="preserve">
+                <source>Authors</source>
+            </trans-unit>
+            <trans-unit id="meta.categories.category" xml:space="preserve">
+                <source>Category</source>
+            </trans-unit>
+            <trans-unit id="meta.categories.categories" xml:space="preserve">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="meta.tags.tag" xml:space="preserve">
+                <source>Tag</source>
+            </trans-unit>
+            <trans-unit id="meta.tags.tags" xml:space="preserve">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="meta.published.published" xml:space="preserve">
+                <source>Published</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.comments" xml:space="preserve">
+                <source>Comments</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.has_comment" xml:space="preserve">
+                <source>%s Comment</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.has_comments" xml:space="preserve">
+                <source>%s Comments</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.start_conversation" xml:space="preserve">
+                <source>Start the Conversation</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.join_conversation" xml:space="preserve">
+                <source>Join the Conversation</source>
+            </trans-unit>
+            <trans-unit id="meta.comments.view_conversation" xml:space="preserve">
+                <source>View the Conversation</source>
+            </trans-unit>
             <trans-unit id="meta.title.listPostsByDate" xml:space="preserve">
                 <source>All blog posts in ###MONTH_NAME### ###YEAR###</source>
             </trans-unit>
@@ -171,10 +218,10 @@
                 <source>Actions</source>
             </trans-unit>
             <trans-unit id="backend.table.title" xml:space="preserve">
-                <source>Articles</source>
+                <source>Title</source>
             </trans-unit>
             <trans-unit id="backend.table.author" xml:space="preserve">
-                <source>Author</source>
+                <source>Authors</source>
             </trans-unit>
             <trans-unit id="backend.table.categories" xml:space="preserve">
                 <source>Categories</source>
@@ -237,6 +284,12 @@
             <trans-unit id="constantEditor.blog" xml:space="preserve">
                 <source>TYPO3 Blog</source>
             </trans-unit>
+            <trans-unit id="constantEditor.customcategory.post" xml:space="preserve">
+                <source>TYPO3 Blog: Post</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customcategory.list" xml:space="preserve">
+                <source>TYPO3 Blog: List</source>
+            </trans-unit>
             <trans-unit id="constantEditor.blog_100_uids" xml:space="preserve">
                 <source>Page ID settings</source>
             </trans-unit>
@@ -245,6 +298,30 @@
             </trans-unit>
             <trans-unit id="constantEditor.blog_120_lists" xml:space="preserve">
                 <source>Listings</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customsubcategory.post" xml:space="preserve">
+                <source>Post</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customsubcategory.post.featuredimage" xml:space="preserve">
+                <source>Featured Image</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customsubcategory.post.header" xml:space="preserve">
+                <source>Post Header</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customsubcategory.post.footer" xml:space="preserve">
+                <source>Post Footer</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customsubcategory.list.featuredimage" xml:space="preserve">
+                <source>Featured Image</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customsubcategory.list.element" xml:space="preserve">
+                <source>Element</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customsubcategory.list.element.header" xml:space="preserve">
+                <source>Element Header</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customsubcategory.list.element.footer" xml:space="preserve">
+                <source>Element Footer</source>
             </trans-unit>
             <trans-unit id="constantEditor.blog_130_widgets" xml:space="preserve">
                 <source>Widgets</source>
@@ -354,6 +431,18 @@
             <trans-unit id="constantEditor.CommentAddedNotification.admin.email" xml:space="preserve">
                 <source>Admin mail:Global admin (receiver) email address for notifications</source>
             </trans-unit>
+            <trans-unit id="constantEditor.post.featuredImage.width" xml:space="preserve">
+                <source>Width</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.post.featuredImage.height" xml:space="preserve">
+                <source>Height</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.lists.featuredImage.width" xml:space="preserve">
+                <source>Width</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.lists.featuredImage.height" xml:space="preserve">
+                <source>Height</source>
+            </trans-unit>
             <trans-unit id="constantEditor.lists.pagination.itemsPerPage" xml:space="preserve">
                 <source>Number of post that should be displayed per page</source>
             </trans-unit>
@@ -413,6 +502,43 @@
             </trans-unit>
             <trans-unit id="constantEditor.widgets.archive.monthDateFormat" xml:space="preserve">
                 <source>Month format:The format of the month (default: %B).</source>
+            </trans-unit>
+
+            <trans-unit id="constantEditor.meta.header.enable" xml:space="preserve">
+                <source>Display meta information in the header</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.footer.enable" xml:space="preserve">
+                <source>Display meta information in the footer</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.modifier" xml:space="preserve">
+                <source>Meta information display style</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.modifier.condensed" xml:space="preserve">
+                <source>Condensed</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.modifier.extended" xml:space="preserve">
+                <source>Extended</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.modifier.simple" xml:space="preserve">
+                <source>Simple</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.elements.authors.enable" xml:space="preserve">
+                <source>Show authors in the meta section</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.elements.categories.enable" xml:space="preserve">
+                <source>Show categories in the meta section</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.elements.tags.enable" xml:space="preserve">
+                <source>Show tags in the meta section</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.elements.published.enable" xml:space="preserve">
+                <source>Show the publish date in the meta section</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.elements.published.format" xml:space="preserve">
+                <source>Published date format: Default: %d.%m.%Y</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.elements.comments.enable" xml:space="preserve">
+                <source>Show comments in the meta section</source>
             </trans-unit>
 
             <!-- Feed -->

@@ -2,9 +2,9 @@
 <f:section name="Content">
     <f:if condition="{category}">
         <f:then>
-            <h1 class="page-title">
-                <span><f:translate key="headline.category" arguments="{0: category.title}" /></span>
-                <blogvh:link.category rss="true" category="{category}">
+            <h1 class="page__title">
+                <span class="page__titletext"><f:translate key="headline.category" arguments="{0: category.title}" /></span>
+                <blogvh:link.category class="page__titlelink" rss="true" category="{category}">
                     <span class="blogicon"><f:render partial="General/SocialIcons" section="Rss" optional="true" /></span>
                 </blogvh:link.category>
             </h1>
@@ -17,8 +17,8 @@
             <f:render partial="List" arguments="{_all}" />
         </f:then>
         <f:else>
-            <h1 class="page-title">
-                <span><f:translate key="headline.categories" /></span>
+            <h1 class="page__title">
+                <span class="page__titletext"><f:translate key="headline.categories" /></span>
             </h1>
             <ul class="list-inline">
                 <f:for each="{categories}" as="category">

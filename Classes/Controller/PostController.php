@@ -19,7 +19,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
-use T3G\AgencyPack\Blog\Service\MetaService;
+use T3G\AgencyPack\Blog\Service\MetaTagService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
@@ -153,6 +153,7 @@ class PostController extends ActionController
             ? $this->postRepository->findAll()
             : $this->postRepository->findAllWithLimit($maximumItems);
 
+        $this->view->assign('type', 'recent');
         $this->view->assign('posts', $posts);
     }
 
@@ -187,12 +188,11 @@ class PostController extends ActionController
         } else {
             $dateTime = new \DateTimeImmutable(sprintf('%d-%d-1', $year, $month ?? 1));
             $posts = $this->postRepository->findByMonthAndYear($year, $month);
-            $this->view->assignMultiple([
-                'month' => $month,
-                'year' => $year,
-                'timestamp' => $dateTime->getTimestamp(),
-                'posts' => $posts,
-            ]);
+            $this->view->assign('type', 'bydate');
+            $this->view->assign('month', $month);
+            $this->view->assign('year', $year);
+            $this->view->assign('timestamp', $dateTime->getTimestamp());
+            $this->view->assign('posts', $posts);
             $title = str_replace([
                 '###MONTH###',
                 '###MONTH_NAME###',
@@ -202,8 +202,8 @@ class PostController extends ActionController
                 $dateTime->format('F'),
                 $year,
             ], LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
-            MetaService::set(MetaService::META_TITLE, $title);
-            MetaService::set(MetaService::META_DESCRIPTION, LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
+            MetaTagService::set(MetaTagService::META_TITLE, (string) $title);
+            MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
         }
     }
 
@@ -230,18 +230,18 @@ class PostController extends ActionController
 
         if ($category) {
             $posts = $this->postRepository->findAllByCategory($category);
+            $this->view->assign('type', 'bycategory');
             $this->view->assign('posts', $posts);
             $this->view->assign('category', $category);
-            MetaService::set(MetaService::META_TITLE, $category->getTitle());
-            MetaService::set(MetaService::META_DESCRIPTION, $category->getDescription());
-            MetaService::set(MetaService::META_CATEGORIES, [$category->getTitle()]);
+            MetaTagService::set(MetaTagService::META_TITLE, (string) $category->getTitle());
+            MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $category->getDescription());
         } else {
             $this->view->assign('categories', $this->categoryRepository->findAll());
         }
     }
 
     /**
-     * Show a list of posts by given category.
+     * Show a list of posts by given author.
      *
      * @param Author|null $author
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
@@ -251,10 +251,11 @@ class PostController extends ActionController
     {
         if ($author) {
             $posts = $this->postRepository->findAllByAuthor($author);
+            $this->view->assign('type', 'byauthor');
             $this->view->assign('posts', $posts);
             $this->view->assign('author', $author);
-            MetaService::set(MetaService::META_TITLE, $author->getName());
-            MetaService::set(MetaService::META_DESCRIPTION, $author->getBio());
+            MetaTagService::set(MetaTagService::META_TITLE, (string) $author->getName());
+            MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $author->getBio());
         } else {
             $this->view->assign('authors', $this->authorRepository->findAll());
         }
@@ -271,11 +272,11 @@ class PostController extends ActionController
     {
         if ($tag) {
             $posts = $this->postRepository->findAllByTag($tag);
+            $this->view->assign('type', 'bytag');
             $this->view->assign('posts', $posts);
             $this->view->assign('tag', $tag);
-            MetaService::set(MetaService::META_TITLE, $tag->getTitle());
-            MetaService::set(MetaService::META_DESCRIPTION, $tag->getDescription());
-            MetaService::set(MetaService::META_TAGS, [$tag->getTitle()]);
+            MetaTagService::set(MetaTagService::META_TITLE, (string) $tag->getTitle());
+            MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $tag->getDescription());
         } else {
             $this->view->assign('tags', $this->tagRepository->findAll());
         }
@@ -289,14 +290,53 @@ class PostController extends ActionController
     }
 
     /**
-     * Metadata action: output meta information of blog post.
+     * Header action: output the header of blog post.
      *
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
+    public function headerAction(): void
+    {
+        $post = $this->postRepository->findCurrentPost();
+        $this->view->assign('post', $post);
+        if ($post instanceof Post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
+    }
+
+    /**
+     * Footer action: output the footer of blog post.
+     *
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function footerAction(): void
+    {
+        $post = $this->postRepository->findCurrentPost();
+        $this->view->assign('post', $post);
+        if ($post instanceof Post) {
+            $this->blogCacheService->addTagsForPost($post);
+        }
+    }
+
+    /**
+     * Metadata action: output meta information of blog post.
+     *
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     *
+     * @deprecated
+     */
     public function metadataAction(): void
     {
+        trigger_error(
+            'Using \T3G\AgencyPack\Blog\Controller\PostController::metadataAction is deprecated. Use headerAction or footerAction instead.',
+            E_USER_DEPRECATED
+        );
+
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
@@ -334,7 +374,8 @@ class PostController extends ActionController
             (int)$this->settings['relatedPosts']['tagMultiplier'],
             (int)$this->settings['relatedPosts']['limit']
         );
-        $this->view->assign('currentPost', $post);
+        $this->view->assign('type', 'related');
+        $this->view->assign('post', $post);
         $this->view->assign('posts', $posts);
     }
 

@@ -59,7 +59,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
             ->setUseCacheHash(true);
         if ($rssFormat) {
             $uriBuilder
-                ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_archive.']['typeNum']);
+                ->setTargetPageType((int)$this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_archive.']['typeNum']);
         }
         $uri = $uriBuilder->uriFor('listPostsByDate', $arguments, 'Post', 'Blog', 'Archive');
         if ($uri !== '') {

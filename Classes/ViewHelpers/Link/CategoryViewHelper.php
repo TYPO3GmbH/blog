@@ -56,7 +56,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
             ->setUseCacheHash(true);
         if ($rssFormat) {
             $uriBuilder
-                ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_category.']['typeNum']);
+                ->setTargetPageType((int)$this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_category.']['typeNum']);
         }
         $uri = $uriBuilder->uriFor('listPostsByCategory', $arguments, 'Post', 'Blog', 'Category');
 

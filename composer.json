@@ -43,19 +43,24 @@
     },
     "extra": {
         "typo3/cms": {
-            "cms-package-dir": "{$vendor-dir}/typo3/cms",
-            "web-dir": ".build/web"
+            "extension-key": "blog",
+            "web-dir": ".build/web",
+            "app-dir": ".build"
         }
     },
     "scripts": {
+        "t3g:test:php:lint": [
+            "phplint"
+        ],
         "t3g:test:php:unit": [
-            "phpunit -c Build/UnitTests.xml --log-junit logs/phpunit.xml"
+            "phpunit -c Build/UnitTests.xml"
         ],
         "t3g:test": [
+            "@t3g:test:php:lint",
             "@t3g:test:php:unit"
         ],
         "t3g:cgl": [
-            "php-cs-fixer fix --format=junit > logs/php-cs-fixer.xml"
+            "php-cs-fixer --diff -v fix"
         ],
         "post-autoload-dump": [
             "mkdir -p .build/web/typo3conf/ext/",
@@ -70,26 +75,29 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "psr/http-message": "^1.0",
-        "typo3/cms-backend": "^9.5.5 || 10.0.*@dev",
-        "typo3/cms-core": "^9.5.5 || 10.0.*@dev",
-        "typo3/cms-extbase": "^9.5.5 || 10.0.*@dev",
-        "typo3/cms-extensionmanager": "^9.5.5 || 10.0.*@dev",
-        "typo3/cms-fluid": "^9.5.5 || 10.0.*@dev",
-        "typo3/cms-form": "^9.5.5 || 10.0.*@dev",
-        "typo3/cms-frontend": "^9.5.5 || 10.0.*@dev",
-        "typo3/cms-install": "^9.5.5 || 10.0.*@dev",
+        "typo3/cms-backend": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-core": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-extbase": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-extensionmanager": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-fluid": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-form": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-frontend": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-install": "^9.5.5 || ^10.0 || 10.*@dev",
         "typo3fluid/fluid": "^2.6"
     },
     "require-dev": {
-        "typo3/cms-belog": "^9.5.5 || 10.0.*@dev",
-        "typo3/cms-filelist": "^9.5.5 || 10.0.*@dev",
-        "typo3/cms-lowlevel": "^9.5.5 || 10.0.*@dev",
-        "typo3/cms-tstemplate": "^9.5.5 || 10.0.*@dev",
-        "typo3/cms-rte-ckeditor": "^9.5.5 || 10.0.*@dev",
+        "typo3/cms-belog": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-seo": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-filelist": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-lowlevel": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-setup": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-tstemplate": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-rte-ckeditor": "^9.5.5 || ^10.0 || 10.*@dev",
         "friendsofphp/php-cs-fixer": "^2.14",
         "roave/security-advisories": "dev-master",
         "t3g/blog-template-test": "^1.0",
         "typo3/testing-framework": "^4.9 || ^5.0",
-        "bk2k/extension-helper": "^1.0"
+        "bk2k/extension-helper": "^1.0",
+        "overtrue/phplint": "^1.1"
     }
 }
