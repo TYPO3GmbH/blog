@@ -8,35 +8,45 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        typo3: [^9.5, ^10.0, dev-master]
-        php: ['7.2', '7.3']
+        typo3: [^9.5, ^10.3, dev-master]
+        php: ['7.2', '7.3', '7.4']
 
     steps:
-    - uses: actions/checkout@v1
 
-    - name: Set up PHP Version
-      run: |
-        sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
-        php -v
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Update Composer
-      run: |
-        sudo composer self-update
-        composer --version
+      - name: Set up PHP Version ${{ matrix.php }}
+        run: |
+          sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
+          php -v
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-    - name: Install dependencies
-      run: |
-        composer require typo3/cms-core:${{ matrix.typo3 }} --no-progress
-        git checkout composer.json
+      - name: Cache Composer
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ matrix.php }}-${{ matrix.typo3 }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ matrix.php }}-${{ matrix.typo3 }}-composer-
 
-    - name: CGL
-      run: composer t3g:cgl
+      - name: Validate composer.json and composer.lock
+        run: composer validate
 
-    - name: Lint PHP
-      run: composer t3g:test:php:lint
+      - name: Install dependencies with typo3/cms-core:${{ matrix.typo3 }}
+        run: |
+          composer require typo3/cms-core:${{ matrix.typo3 }} --no-progress
+          git checkout composer.json
 
-    - name: Unit Tests
-      run: composer t3g:test:php:unit
+      - name: CGL
+        run: composer t3g:cgl
+
+      - name: Lint PHP
+        run: composer t3g:test:php:lint
+
+      - name: Unit Tests
+        run: composer t3g:test:php:unit
