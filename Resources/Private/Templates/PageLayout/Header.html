@@ -1,0 +1,41 @@
+<f:if condition="{post}">
+    <div class="blog-pageheader">
+
+        <h3>Abstract</h3>
+        <f:if condition="{post.abstract}">
+            <f:then>
+                <p>{post.abstract}</p>
+            </f:then>
+            <f:else>
+                <p>{post.description}</p>
+            </f:else>
+        </f:if>
+
+        <h3>Tags</h3>
+        <ul>
+            <f:for each="{post.tags}" as="tag">
+                <li><span class="label label-info">{tag.title}</span></li>
+            </f:for>
+        </ul>
+
+        <h3>Categories</h3>
+        <ul>
+            <f:for each="{post.categories}" as="category">
+                <li><span class="label label-info">{category.title}</span></li>
+            </f:for>
+        </ul>
+
+        <h3>Authors</h3>
+        <ul>
+            <f:for each="{post.authors}" as="author">
+                <li>{author.name}</li>
+            </f:for>
+        </ul>
+
+        <blogvh:link.be.post post="{post}" action="edit" class="btn btn-default">
+            <core:icon identifier="record-blog-post" />
+            Edit Post Meta-Data
+        </blogvh:link.be.post>
+
+    </div>
+</f:if>
