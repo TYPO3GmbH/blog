@@ -154,7 +154,6 @@ plugin.tx_blog {
             }
             posts {
                 maximumDisplayedItems = {$plugin.tx_blog.settings.lists.posts.maximumDisplayedItems}
-                numberOfLatestItems = {$plugin.tx_blog.settings.lists.posts.numberOfLatestItems}
                 dateFormat = {$plugin.tx_blog.settings.lists.posts.dateFormat}
             }
         }
