@@ -108,7 +108,15 @@ To create a new blog setup, follow these steps:
        to add all root pages to :typoscript:`plugin.tx_blog.settings.storagePid`
        as a comma separated list. The first value must be the value of NEW_blogFolder
 
+4) Configure storage PIDs via PageTSConfig:
 
+.. code-block:: ts
+
+   TCEFORM.pages.tags.PAGE_TSCONFIG_ID = 
+   TCEFORM.pages.authors.PAGE_TSCONFIG_ID = 
+   TCEFORM.pages.categories.PAGE_TSCONFIG_ID = 
+
+      
 Frontend Routing Setup
 ^^^^^^^^^^^^^^^^^^^^^^
 
