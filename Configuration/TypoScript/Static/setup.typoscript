@@ -157,12 +157,19 @@ plugin.tx_blog {
                 dateFormat = {$plugin.tx_blog.settings.lists.posts.dateFormat}
             }
         }
+
+        # Latest post settings
+        latestPosts {
+            limit = {$plugin.tx_blog.settings.latestPosts.limit}
+        }
+
         # How important are categories and tags for related posts
         relatedPosts {
             limit = {$plugin.tx_blog.settings.relatedPosts.limit}
             categoryMultiplier = {$plugin.tx_blog.settings.relatedPosts.categoryMultiplier}
             tagMultiplier = {$plugin.tx_blog.settings.relatedPosts.tagMultiplier}
         }
+
         # Widget configuration section
         widgets {
             comments {
@@ -187,6 +194,7 @@ plugin.tx_blog {
                 monthDateFormat = {$plugin.tx_blog.settings.widgets.archive.monthDateFormat}
             }
         }
+
         # Comments related settings
         comments {
             # comments active in general or not
@@ -212,6 +220,7 @@ plugin.tx_blog {
                 shortname = {$plugin.tx_blog.settings.comments.disqus.shortname}
             }
         }
+
         # Authors related settings
         authors {
             # Avatar settings
@@ -227,6 +236,7 @@ plugin.tx_blog {
                 }
             }
         }
+
         # Notifications
         notifications {
             email {
@@ -241,6 +251,7 @@ plugin.tx_blog {
             }
         }
     }
+
     pageInfo.title = TEXT
     pageInfo.title {
         data = page:subtitle // page:nav_title // page:title

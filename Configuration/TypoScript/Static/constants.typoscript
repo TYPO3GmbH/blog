@@ -217,6 +217,11 @@ plugin {
                 }
             }
 
+            latestPosts {
+                # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.latestPosts.limit
+                limit = 3
+            }
+
             relatedPosts {
                 # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.relatedPosts.limit
                 limit = 5

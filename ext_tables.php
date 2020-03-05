@@ -69,6 +69,12 @@ call_user_func(function () {
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'T3G.AgencyPack.Blog',
+        'LatestPosts',
+        'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_latestposts.title',
+        'plugin-blog-posts'
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'T3G.AgencyPack.Blog',
         'Category',
         'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_category.title',
         'plugin-blog-category'

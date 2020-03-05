@@ -158,6 +158,21 @@ class PostController extends ActionController
     }
 
     /**
+     * Show a number of latest posts.
+     *
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function listLatestPostsAction(): void
+    {
+        $maximumItems = (int) ($this->settings['latestPosts']['limit'] ?: 3);
+        $posts = $this->postRepository->findAllWithLimit($maximumItems);
+
+        $this->view->assign('type', 'latest');
+        $this->view->assign('posts', $posts);
+    }
+
+    /**
      * @param int $year
      * @param int $month
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException

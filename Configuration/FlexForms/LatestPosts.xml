@@ -1,0 +1,26 @@
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:flexform.sheet_general</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.latestPosts.limit>
+                        <TCEforms>
+                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:flexform.latestPosts.limit</label>
+                            <config>
+                                <type>input</type>
+                                <eval>int</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.latestPosts.limit>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

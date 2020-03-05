@@ -461,6 +461,9 @@
             <trans-unit id="constantEditor.lists.posts.dateFormat" xml:space="preserve">
                 <source>Date format:The format for the list items (default: %d.%m.%Y).</source>
             </trans-unit>
+            <trans-unit id="constantEditor.latestPosts.limit" xml:space="preserve">
+                <source>Limit:The limit of displayed items (default: 3).</source>
+            </trans-unit>
             <trans-unit id="constantEditor.relatedPosts.limit" xml:space="preserve">
                 <source>Limit:The limit of displayed items (default: 5).</source>
             </trans-unit>
