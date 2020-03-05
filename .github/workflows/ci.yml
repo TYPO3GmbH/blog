@@ -21,18 +21,20 @@ jobs:
           sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
           php -v
 
-      - name: Get Composer Cache Directory
+      - name: Get Composer Cache Configuration
         id: composer-cache
         run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
+          echo ::set-output name=dir::$(composer config cache-files-dir)
+          echo ::set-output name=php-version::$(echo ${{ matrix.php }} | sed 's/\^//' | sed 's/\./-/')
+          echo ::set-output name=typo3-version::$(echo ${{ matrix.typo3 }} | sed 's/\^//' | sed 's/\./-/')
 
       - name: Cache Composer
         uses: actions/cache@v1
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ matrix.php }}-${{ matrix.typo3 }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ steps.composer-cache.outputs.php-version }}-${{ steps.composer-cache.outputs.typo3-version }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            ${{ matrix.php }}-${{ matrix.typo3 }}-composer-
+            ${{ steps.composer-cache.outputs.php-version }}-${{ steps.composer-cache.outputs.typo3-version }}-composer-
 
       - name: Validate composer.json and composer.lock
         run: composer validate
