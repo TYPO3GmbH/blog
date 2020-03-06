@@ -550,8 +550,26 @@
             </trans-unit>
 
             <!-- Backend PageLayout -->
+            <trans-unit id="pagelayout.section.authors" xml:space="preserve">
+                <source>Authors</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.section.published" xml:space="preserve">
+                <source>Published</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.section.categories" xml:space="preserve">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.section.tags" xml:space="preserve">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.section.featuredimage" xml:space="preserve">
+                <source>Featured Image</source>
+            </trans-unit>
             <trans-unit id="pagelayout.message.noauthor" xml:space="preserve">
                 <source>No author assigned.</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.message.nofeaturedimage" xml:space="preserve">
+                <source>No featured image assigned.</source>
             </trans-unit>
             <trans-unit id="pagelayout.message.notabstractordescription" xml:space="preserve">
                 <source>No abstract or description is added for this post.</source>

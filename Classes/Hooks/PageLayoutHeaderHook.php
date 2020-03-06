@@ -40,7 +40,11 @@ class PageLayoutHeaderHook
 
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $repository = $objectManager->get(PostRepository::class);
-        $post = $repository->findByUid($pageUid);
+        $query = $repository->createQuery();
+        $querySettings = $query->getQuerySettings();
+        $querySettings->setIgnoreEnableFields(true);
+        $repository->setDefaultQuerySettings($querySettings);
+        $post = $repository->findByUidRespectQuerySettings($pageUid);
 
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->getRenderingContext()->getTemplatePaths()->fillDefaultsByPackageName('blog');
