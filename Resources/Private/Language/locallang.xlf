@@ -103,7 +103,7 @@
             <trans-unit id="meta.authors.author" xml:space="preserve">
                 <source>Author</source>
             </trans-unit>
-            <trans-unit id="meta.authors.author" xml:space="preserve">
+            <trans-unit id="meta.authors.authors" xml:space="preserve">
                 <source>Authors</source>
             </trans-unit>
             <trans-unit id="meta.categories.category" xml:space="preserve">
@@ -237,6 +237,15 @@
             </trans-unit>
             <trans-unit id="backend.table.date" xml:space="preserve">
                 <source>Date</source>
+            </trans-unit>
+            <trans-unit id="backend.table.hidden" xml:space="preserve">
+                <source>Hidden</source>
+            </trans-unit>
+            <trans-unit id="backend.table.hidden.yes" xml:space="preserve">
+                <source>Yes</source>
+            </trans-unit>
+            <trans-unit id="backend.table.hidden.no" xml:space="preserve">
+                <source>No</source>
             </trans-unit>
             <trans-unit id="backend.comments.filter.all" xml:space="preserve">
                 <source>All</source>
@@ -503,7 +512,6 @@
             <trans-unit id="constantEditor.widgets.archive.monthDateFormat" xml:space="preserve">
                 <source>Month format:The format of the month (default: %B).</source>
             </trans-unit>
-
             <trans-unit id="constantEditor.meta.header.enable" xml:space="preserve">
                 <source>Display meta information in the header</source>
             </trans-unit>
@@ -539,6 +547,40 @@
             </trans-unit>
             <trans-unit id="constantEditor.meta.elements.comments.enable" xml:space="preserve">
                 <source>Show comments in the meta section</source>
+            </trans-unit>
+
+            <!-- Backend PageLayout -->
+            <trans-unit id="pagelayout.section.authors" xml:space="preserve">
+                <source>Authors</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.section.published" xml:space="preserve">
+                <source>Published</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.section.categories" xml:space="preserve">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.section.tags" xml:space="preserve">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.section.featuredimage" xml:space="preserve">
+                <source>Featured Image</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.message.noauthor" xml:space="preserve">
+                <source>No author assigned.</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.message.nofeaturedimage" xml:space="preserve">
+                <source>No featured image assigned.</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.message.notabstractordescription" xml:space="preserve">
+                <source>No abstract or description is added for this post.</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.button.post.edit" xml:space="preserve">
+                <source>Edit Post Meta-Data</source>
+            </trans-unit>
+
+            <!-- Extension Configuration -->
+            <trans-unit id="extensionconfiguration.disablePageLayoutHeader" xml:space="preserve">
+                <source>Disable the page layout header: The page layout header shows additional information about blog posts in the TYPO3 page and list module.</source>
             </trans-unit>
 
             <!-- Feed -->

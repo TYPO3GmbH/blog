@@ -54,6 +54,13 @@ class PostRepository extends Repository
         ];
     }
 
+    public function findByUidRespectQuerySettings(int $uid)
+    {
+        $query = $this->createQuery();
+        $query->matching($query->equals('uid', $uid));
+        return $query->execute()->getFirst();
+    }
+
     /**
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
