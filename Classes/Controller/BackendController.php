@@ -153,6 +153,11 @@ class BackendController extends ActionController
      */
     public function postsAction(int $blogSetup = null): string
     {
+        $query = $this->postRepository->createQuery();
+        $querySettings = $query->getQuerySettings();
+        $querySettings->setIgnoreEnableFields(true);
+        $this->postRepository->setDefaultQuerySettings($querySettings);
+
         return $this->render('Backend/Posts.html', [
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'activeBlogSetup' => $blogSetup,

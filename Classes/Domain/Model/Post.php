@@ -23,6 +23,11 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class Post extends AbstractEntity
 {
     /**
+     * @var bool
+     */
+    protected $hidden = false;
+
+    /**
      * The blog post doktype
      *
      * @var int
@@ -150,6 +155,16 @@ class Post extends AbstractEntity
         $this->tags = new ObjectStorage();
         $this->authors = new ObjectStorage();
         $this->media = new ObjectStorage();
+    }
+
+    public function getHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    public function isHidden(): bool
+    {
+        return $this->getHidden();
     }
 
     /**
@@ -532,5 +547,23 @@ class Post extends AbstractEntity
                 ->setCreateAbsoluteUri(true)
                 ->setTargetPageUid($this->getUid())
                 ->build();
+    }
+
+    public function getAsArray(): array
+    {
+        return $this->__toArray();
+    }
+
+    public function __toArray(): array
+    {
+        return [
+            'uid' => $this->getUid(),
+            'hidden' => $this->getHidden(),
+            'doktype' => $this->getDoktype(),
+            'title' => $this->getTitle(),
+            'subtitle' => $this->getSubtitle(),
+            'abstract' => $this->getAbstract(),
+            'description' => $this->getDescription()
+        ];
     }
 }

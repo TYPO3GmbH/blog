@@ -238,6 +238,15 @@
             <trans-unit id="backend.table.date" xml:space="preserve">
                 <source>Date</source>
             </trans-unit>
+            <trans-unit id="backend.table.hidden" xml:space="preserve">
+                <source>Hidden</source>
+            </trans-unit>
+            <trans-unit id="backend.table.hidden.yes" xml:space="preserve">
+                <source>Yes</source>
+            </trans-unit>
+            <trans-unit id="backend.table.hidden.no" xml:space="preserve">
+                <source>No</source>
+            </trans-unit>
             <trans-unit id="backend.comments.filter.all" xml:space="preserve">
                 <source>All</source>
             </trans-unit>
