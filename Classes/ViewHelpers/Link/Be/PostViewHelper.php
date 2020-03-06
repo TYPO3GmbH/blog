@@ -40,6 +40,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
 
         $this->registerArgument('post', Post::class, 'The post to link to');
         $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);
+        $this->registerArgument('action', 'string', 'action to link', false, null);
     }
 
     /**
@@ -52,7 +53,22 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         $post = $this->arguments['post'];
         $pageUid = $post !== null ? (int)$post->getUid() : 0;
 
-        $uri = (string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute('web_layout', ['id' => $pageUid]);
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        switch ($this->arguments['action']) {
+            case 'edit':
+                $uri = (string)$uriBuilder->buildUriFromRoute('record_edit', ['edit[pages][' . $pageUid . ']' => 'edit']);
+                break;
+            case 'show':
+            default:
+                $uri = (string)$uriBuilder->buildUriFromRoute('web_layout', ['id' => $pageUid]);
+                break;
+        }
+
+        $arguments = GeneralUtility::_GET();
+        $route = $arguments['route'];
+        unset($arguments['route'], $arguments['token']);
+        $uri .= '&returnUrl=' . rawurlencode((string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoutePath($route, $arguments));
+
         if ($uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;
