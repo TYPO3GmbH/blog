@@ -103,7 +103,7 @@
             <trans-unit id="meta.authors.author" xml:space="preserve">
                 <source>Author</source>
             </trans-unit>
-            <trans-unit id="meta.authors.author" xml:space="preserve">
+            <trans-unit id="meta.authors.authors" xml:space="preserve">
                 <source>Authors</source>
             </trans-unit>
             <trans-unit id="meta.categories.category" xml:space="preserve">
@@ -503,7 +503,6 @@
             <trans-unit id="constantEditor.widgets.archive.monthDateFormat" xml:space="preserve">
                 <source>Month format:The format of the month (default: %B).</source>
             </trans-unit>
-
             <trans-unit id="constantEditor.meta.header.enable" xml:space="preserve">
                 <source>Display meta information in the header</source>
             </trans-unit>
@@ -539,6 +538,17 @@
             </trans-unit>
             <trans-unit id="constantEditor.meta.elements.comments.enable" xml:space="preserve">
                 <source>Show comments in the meta section</source>
+            </trans-unit>
+
+            <!-- Backend PageLayout -->
+            <trans-unit id="pagelayout.message.noauthor" xml:space="preserve">
+                <source>No author assigned.</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.message.notabstractordescription" xml:space="preserve">
+                <source>No abstract or description is added for this post.</source>
+            </trans-unit>
+            <trans-unit id="pagelayout.button.post.edit" xml:space="preserve">
+                <source>Edit Post Meta-Data</source>
             </trans-unit>
 
             <!-- Feed -->
