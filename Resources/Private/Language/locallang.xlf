@@ -578,6 +578,11 @@
                 <source>Edit Post Meta-Data</source>
             </trans-unit>
 
+            <!-- Extension Configuration -->
+            <trans-unit id="extensionconfiguration.disablePageLayoutHeader" xml:space="preserve">
+                <source>Disable the page layout header: The page layout header shows additional information about blog posts in the TYPO3 page and list module.</source>
+            </trans-unit>
+
             <!-- Feed -->
             <trans-unit id="feed.title.listPostsByCategory" xml:space="preserve">
                 <source>Category RSS Feed</source>
