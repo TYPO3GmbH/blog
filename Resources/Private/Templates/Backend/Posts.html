@@ -8,10 +8,11 @@
     <f:if condition="{f:count() -> posts} > 0">
         <f:then>
 
-            <table class="table table-striped table-hover dataTables" data-columns='[{"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "num"}]'>
+            <table class="table table-striped table-hover dataTables" data-columns='[{"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "num"}]'>
                 <thead>
                     <tr>
                         <th><f:translate key="backend.table.title" /></th>
+                        <th data-filter="true"><f:translate key="backend.table.hidden" /></th>
                         <th data-filter="true"><f:translate key="backend.table.author" /></th>
                         <th data-filter="true"><f:translate key="backend.table.categories" /></th>
                         <th data-filter="true"><f:translate key="backend.table.tags" /></th>
@@ -24,9 +25,15 @@
 
                             <td class="nowrap" data-search="{post.title}" data-filter="{post.title}">
                                 <blogvh:link.be.post post="{post}">
-                                    <core:icon identifier="record-blog-post" />
+                                    <core:iconForRecord table="pages" row="{post.asArray}" />
                                     {post.title}
                                 </blogvh:link.be.post>
+                            </td>
+
+                            <f:variable name="hiddenString" value="{f:if(condition: post.hidden, then: 'yes', else: 'no')}" />
+                            <f:variable name="hiddenString" value="{f:translate(key: 'backend.table.hidden.{hiddenString}')}" />
+                            <td class="nowrap" data-search="{hiddenString}" data-filter="{hiddenString}">
+                                {hiddenString}
                             </td>
 
                             <f:variable name="authorString" value="" />
