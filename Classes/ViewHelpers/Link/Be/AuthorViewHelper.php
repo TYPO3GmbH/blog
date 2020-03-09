@@ -10,13 +10,12 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
 
-use T3G\AgencyPack\Blog\Domain\Model\Post;
+use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
-class PostViewHelper extends AbstractTagBasedViewHelper
+class AuthorViewHelper extends AbstractTagBasedViewHelper
 {
     public function __construct()
     {
@@ -38,43 +37,33 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute');
         $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
-        $this->registerArgument('post', Post::class, 'The post to link to');
+        $this->registerArgument('author', Author::class, 'The author to link to');
         $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);
-        $this->registerArgument('action', 'string', 'action to link', false, null);
     }
 
     /**
-     * @return string
+     * @return string Rendered page URI
+     *
      * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
+     * @throws \InvalidArgumentException
      */
     public function render(): string
     {
-        /** @var Post $post */
-        $post = $this->arguments['post'];
-        $pageUid = $post !== null ? (int)$post->getUid() : 0;
+        /** @var Author $author */
+        $author = $this->arguments['author'];
+        $authorUid = $author !== null ? (int)$author->getUid() : 0;
 
-        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        switch ($this->arguments['action']) {
-            case 'edit':
-                $uri = (string)$uriBuilder->buildUriFromRoute('record_edit', ['edit[pages][' . $pageUid . ']' => 'edit']);
-                break;
-            case 'show':
-            default:
-                $uri = (string)$uriBuilder->buildUriFromRoute('web_layout', ['id' => $pageUid]);
-                break;
-        }
-
+        $routingUriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        $uri = $routingUriBuilder->buildUriFromRoute('record_edit', ['edit[tx_blog_domain_model_author][' . $authorUid . ']' => 'edit']);
         $arguments = GeneralUtility::_GET();
         $route = $arguments['route'];
         unset($arguments['route'], $arguments['token']);
         $uri .= '&returnUrl=' . rawurlencode((string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoutePath($route, $arguments));
-
         if ($uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;
             }
-            $title = $post !== null ? $post->getTitle() : LocalizationUtility::translate('backend.message.nopost', 'blog');
-            $linkText = $this->renderChildren() ?: $title;
+            $linkText = $this->renderChildren() ?: $author->getName();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
             $result = $this->tag->render();

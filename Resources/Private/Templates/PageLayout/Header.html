@@ -1,0 +1,89 @@
+<f:if condition="{post}">
+    <div class="blog-pageheader">
+        <div class="blog-pageheader-icon">
+            <core:iconForRecord table="pages" row="{post.asArray}" size="large" />
+        </div>
+        <div class="blog-pageheader-content">
+            <div class="blog-pageheader-section">
+                <div class="blog-pageheader-section-content">
+                    <f:if condition="{post.abstract} || {post.description}">
+                        <f:then>
+                            <p>{f:if(condition: post.abstract, then: post.abstract, else: post.description)}</p>
+                        </f:then>
+                        <f:else>
+                            <p><f:translate key="pagelayout.message.notabstractordescription" extensionName="blog" /></p>
+                        </f:else>
+                    </f:if>
+                </div>
+            </div>
+            <div class="blog-pageheader-section-group">
+                <div class="blog-pageheader-section">
+                    <h3 class="blog-pageheader-section-title"><f:translate key="pagelayout.section.published" extensionName="blog" /></h3>
+                    <div class="blog-pageheader-section-content">
+                        <time datetime="{f:format.date(format: '%Y-%m-%dT%H:%M:%S-%z', date: post.publishDate)}" itemprop="datepublished">{f:format.date(format: '%d.%m.%Y - %H:%M', date: post.publishDate)}</time>
+                    </div>
+                </div>
+                <div class="blog-pageheader-section">
+                    <h3 class="blog-pageheader-section-title"><f:translate key="pagelayout.section.authors" extensionName="blog" /></h3>
+                    <div class="blog-pageheader-section-content">
+                        <f:if condition="{post.authors}">
+                            <f:then>
+                                <ul class="blog-pageheader-list-unstyled">
+                                    <f:for each="{post.authors}" as="author">
+                                        <li>{author.name}</li>
+                                    </f:for>
+                                </ul>
+                            </f:then>
+                            <f:else>
+                                <p><f:translate key="pagelayout.message.noauthor" extensionName="blog" /></p>
+                            </f:else>
+                        </f:if>
+                    </div>
+                </div>
+                <div class="blog-pageheader-section">
+                    <h3 class="blog-pageheader-section-title"><f:translate key="pagelayout.section.featuredimage" extensionName="blog" /></h3>
+                    <div class="blog-pageheader-section-content">
+                        <f:if condition="{post.featuredImage}">
+                            <f:then>
+                                <f:image class="blog-pageheader-image" image="{post.featuredImage}" alt="{post.featuredImage.alternative}" title="{post.featuredImage.title}" height="100c" width="200" />
+                            </f:then>
+                            <f:else>
+                                <p><f:translate key="pagelayout.message.nofeaturedimage" extensionName="blog" /></p>
+                            </f:else>
+                        </f:if>
+                    </div>
+                </div>
+                <f:if condition="{post.tags}">
+                    <div class="blog-pageheader-section">
+                        <h3 class="blog-pageheader-section-title"><f:translate key="pagelayout.section.tags" extensionName="blog" /></h3>
+                        <div class="blog-pageheader-section-content">
+                            <ul class="blog-pageheader-list-inline">
+                                <f:for each="{post.tags}" as="tag">
+                                    <li><span class="label label-info">{tag.title}</span></li>
+                                </f:for>
+                            </ul>
+                        </div>
+                    </div>
+                </f:if>
+                <f:if condition="{post.categories}">
+                    <div class="blog-pageheader-section">
+                        <h3 class="blog-pageheader-section-title"><f:translate key="pagelayout.section.categories" extensionName="blog" /></h3>
+                        <div class="blog-pageheader-section-content">
+                            <ul class="blog-pageheader-list-inline">
+                                <f:for each="{post.categories}" as="category">
+                                    <li><span class="label label-info">{category.title}</span></li>
+                                </f:for>
+                            </ul>
+                        </div>
+                    </div>
+                </f:if>
+            </div>
+        </div>
+        <div class="blog-pageheader-footer">
+            <blogvh:link.be.post post="{post}" action="edit" class="btn btn-default">
+                <core:icon identifier="record-blog-post" />
+                <f:translate key="pagelayout.button.post.edit" extensionName="blog" />
+            </blogvh:link.be.post>
+        </div>
+    </div>
+</f:if>

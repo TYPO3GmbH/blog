@@ -20,27 +20,6 @@
 .table-fit {
     margin-top: 1rem;
 }
-table.table a {
-    color: #e3612a;
-}
-table.table a:hover {
-    color: #e3612a;
-}
-
-/**
- * List Inline
- */
-.list-inline {
-    margin-bottom: 0;
-    li {
-        &:after {
-            content: ", ";
-        }
-        &:last-child:after {
-            content: "";
-        }
-    }
-}
 
 /**
  * List Filter

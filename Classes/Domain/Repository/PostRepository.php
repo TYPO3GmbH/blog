@@ -10,12 +10,15 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -49,6 +52,13 @@ class PostRepository extends Repository
         $this->defaultOrderings = [
             'publish_date' => QueryInterface::ORDER_DESCENDING,
         ];
+    }
+
+    public function findByUidRespectQuerySettings(int $uid)
+    {
+        $query = $this->createQuery();
+        $query->matching($query->equals('uid', $uid));
+        return $query->execute()->getFirst();
     }
 
     /**
@@ -207,7 +217,7 @@ class PostRepository extends Repository
             $startDate = new \DateTimeImmutable(sprintf('%d-%d-1 00:00:00', $year, $month));
             $endDate = new \DateTimeImmutable(sprintf('%d-%d-%d 23:59:59', $year, $month, (int)$startDate->format('t')));
         } else {
-            $startDate = new \DateTimeImmutable(sprintf('%d-1-1 00:00:00', $month));
+            $startDate = new \DateTimeImmutable(sprintf('%d-1-1 00:00:00', $year));
             $endDate = new \DateTimeImmutable(sprintf('%d-12-31 23:59:59', $year));
         }
         $constraints[] = $query->greaterThanOrEqual('publish_date', $startDate->getTimestamp());
@@ -227,21 +237,67 @@ class PostRepository extends Repository
         $pageId = $typoScriptFrontendController
             ? (int)$typoScriptFrontendController->id
             : (int)GeneralUtility::_GP('id');
+
+        $currentLanguageId = (int)GeneralUtility::makeInstance(Context::class)
+                                                ->getPropertyFromAspect('language', 'id', 0);
+
+        $post = $this->getPostWithLanguage($pageId, $currentLanguageId);
+
+        if ($post !== null) {
+            return $post;
+        }
+
+        return $this->applyLanguageFallback($pageId, $currentLanguageId);
+    }
+
+    protected function getPostWithLanguage(int $pageId, int $languageId): ?Post
+    {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
-        if ((int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('language', 'id', 0) > 0) {
+
+        if ($languageId > 0) {
             $constraints[] = $query->equals('l10n_parent', $pageId);
+            $constraints[] = $query->equals('sys_language_uid', $languageId);
         } else {
             $constraints[] = $query->equals('uid', $pageId);
         }
 
-        /** @var Post $post */
-        $post = $query
+        return $query
             ->matching($query->logicalAnd($constraints))
             ->execute()
             ->getFirst();
+    }
 
-        return $post;
+    /**
+     * @param int $pageId the uid of the page for which fallback languages should be resolved
+     * @param int $currentLanguageId the requested language, for which fallback languages should be resolved
+     * @return Post|null
+     */
+    protected function applyLanguageFallback(int $pageId, int $currentLanguageId): ?Post
+    {
+        $currentSite = $this->getCurrentSite();
+        if ($currentSite) {
+            /** @var SiteLanguage $languageConfiguration */
+            $languageConfiguration = $currentSite->getAllLanguages()[$currentLanguageId];
+            // check the whole language-fallback chain
+            $fallbacks = $languageConfiguration->getFallbackLanguageIds();
+            foreach ($fallbacks as $fallbackLanguageId) {
+                $post = $this->getPostWithLanguage($pageId, $fallbackLanguageId);
+                if ($post !== null) {
+                    return $post;
+                }
+            }
+        }
+        return null;
+    }
+
+    protected function getCurrentSite(): ?Site
+    {
+        if ($GLOBALS['TYPO3_REQUEST'] instanceof ServerRequestInterface
+            && $GLOBALS['TYPO3_REQUEST']->getAttribute('site') instanceof Site) {
+            return $GLOBALS['TYPO3_REQUEST']->getAttribute('site');
+        }
+        return null;
     }
 
     /**

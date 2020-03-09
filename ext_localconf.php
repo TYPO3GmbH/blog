@@ -11,11 +11,33 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-// Include TsConfig
+/***************
+ * Make the extension configuration accessible
+ */
+$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+    \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+);
+$blogConfiguration = $extensionConfiguration->get('blog');
+
+/***************
+ * PageTS
+ */
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TsConfig/Page/All.tsconfig">');
 
-// Register "blogvh" as global fluid namespace
+/***************
+ * Register "blogvh" as global fluid namespace
+ */
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['blogvh'][] = 'T3G\\AgencyPack\\Blog\\ViewHelpers';
+
+/***************
+ * Register page layout hooks to display additional information for posts.
+ */
+if (!(bool) $blogConfiguration['disablePageLayoutHeader']) {
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/db_layout.php']['drawHeaderHook'][]
+        = \T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook::class . '->drawHeader';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['recordlist/Modules/Recordlist/index.php']['drawHeaderHook'][]
+        = \T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook::class . '->drawHeader';
+}
 
 call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -23,6 +45,13 @@ call_user_func(function () {
         'Posts',
         [
             'Post' => 'listRecentPosts',
+        ]
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
+        'LatestPosts',
+        [
+            'Post' => 'listLatestPosts',
         ]
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(

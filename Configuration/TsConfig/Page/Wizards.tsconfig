@@ -14,6 +14,15 @@ mod.wizards.newContentElement.wizardItems.blog {
                 list_type = blog_posts
             }
         }
+        blog_latestposts {
+            iconIdentifier = plugin-blog-posts
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_latestposts.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_latestposts.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_latestposts
+            }
+        }
         blog_category {
             iconIdentifier = plugin-blog-category
             title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_category.title
