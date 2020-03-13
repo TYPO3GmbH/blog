@@ -21,4 +21,10 @@ page {
         # cat=blog_standalone/blog_110_templates; type=string; label=Template Root Path: Path to templates
         templateRootPath = EXT:blog/Resources/Private/Templates/Page/
     }
+    theme {
+        copyright {
+            # cat=blog_standalone/blog_110_copyright; type=string; label=Copyright Text
+            text = Running with <a href="http://www.typo3.org" rel="noopener" target="_blank">TYPO3</a> and <a href="https://github.com/typo3gmbh/blog" rel="noopener" target="_blank">TYPO3 Blog</a>.
+        }
+    }
 }

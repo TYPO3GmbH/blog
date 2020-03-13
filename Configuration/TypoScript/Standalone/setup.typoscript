@@ -44,7 +44,7 @@ page {
     typeNum = 0
     10 = FLUIDTEMPLATE
     10 {
-        templateName = Blog
+        templateName = BlogList
         templateRootPaths {
             0 = EXT:blog/Resources/Private/Templates/Page/
             1 = {$page.fluidtemplate.templateRootPath}
@@ -72,14 +72,21 @@ page {
         variables {
             siteTitle = TEXT
             siteTitle.data = TSFE:tmpl|setup|sitetitle
+            copyright = TEXT
+            copyright.value = {$page.theme.copyright}
+        }
+        settings {
+            theme {
+                copyright {
+                    text = {$page.theme.copyright.text}
+                }
+            }
         }
     }
 
     includeCSS {
         bootstrap = https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css
         bootstrap.external = 1
-        blogStandalone = EXT:blog/Resources/Public/Css/standalone.min.css
-        blogStandalone.forceOnTop = 1
     }
 
     includeJSFooterlibs {
@@ -91,3 +98,11 @@ page {
         bootstrap.external = 1
     }
 }
+
+[blog.isPost()]
+page {
+    10 {
+        templateName = BlogPost
+    }
+}
+[end]

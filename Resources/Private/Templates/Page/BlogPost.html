@@ -1,0 +1,65 @@
+<f:layout name="Default" />
+<f:section name="Main">
+
+    <div class="container">
+        <div class="blogcontainer">
+            <main class="blogcontainer-main">
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-header',
+                        list_type: 'blog_header',
+                        CType: 'list',
+                        layout: '0',
+                        frame_class: 'default'
+                    }" table="tt_content"/>
+                <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{
+                        colPos: '0'
+                    }" />
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-footer',
+                        list_type: 'blog_footer',
+                        CType: 'list',
+                        layout: '0',
+                        frame_class: 'default'
+                    }" table="tt_content"/>
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-authors',
+                        list_type: 'blog_authors',
+                        CType: 'list',
+                        layout: '0',
+                        frame_class: 'default'
+                    }" table="tt_content"/>
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-comments',
+                        list_type: 'blog_comments',
+                        CType: 'list',
+                        layout: '0',
+                        frame_class: 'default'
+                    }" table="tt_content"/>
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-commentform',
+                        list_type: 'blog_commentform',
+                        CType: 'list',
+                        layout: '0',
+                        frame_class: 'default'
+                    }" table="tt_content"/>
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-relatedposts',
+                        list_type: 'blog_relatedposts',
+                        CType: 'list',
+                        layout: '0',
+                        frame_class: 'default'
+                    }" table="tt_content"/>
+            </main>
+            <aside class="blogcontainer-sidebar">
+                <f:cObject typoscriptObjectPath="tt_content.list" data="{
+                        uid: '-blog-sidebar',
+                        list_type: 'blog_sidebar',
+                        CType: 'list',
+                        layout: '0',
+                        frame_class: 'default'
+                    }" table="tt_content"/>
+            </aside>
+        </div>
+    </div>
+
+</f:section>

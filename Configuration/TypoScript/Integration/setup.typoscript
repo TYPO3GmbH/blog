@@ -10,7 +10,7 @@
 page {
     10 {
         templateName >
-        templateName = Blog
+        templateName = BlogList
         layoutRootPaths {
             -1579272243 = EXT:blog/Resources/Private/Layouts/Page/
         }
@@ -18,8 +18,13 @@ page {
             -1579272243 = EXT:blog/Resources/Private/Templates/Page/
         }
     }
-    includeCSS {
-        blogIntegration = EXT:blog/Resources/Public/Css/integration.min.css
+}
+[end]
+
+[blog.isPost()]
+page {
+    10 {
+        templateName = BlogPost
     }
 }
 [end]
