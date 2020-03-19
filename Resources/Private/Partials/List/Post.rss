@@ -14,6 +14,12 @@
     </f:if>
     <guid><blogvh:link.post post="{post}" returnUri="true" createAbsoluteUri="true" /></guid>
     <description><f:if condition="{post.abstract}"><f:then>{post.abstract}</f:then><f:else>{post.description}</f:else></f:if></description>
+    <f:if condition="{post.featuredImage}">
+        <enclosure
+            length="{post.featuredImage.originalResource.size}"
+            type="{post.featuredImage.originalResource.mimeType}"
+            url="{f:uri.image(image: post.featuredImage, absolute: '1')}" />
+    </f:if>
 </item>
 </f:spaceless>
 </html>
