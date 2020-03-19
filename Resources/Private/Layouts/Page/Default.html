@@ -1,0 +1,53 @@
+<header class="mb-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">{siteTitle}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <f:for each="{mainnavigation}" as="item">
+                        <li class="nav-item{f:if(condition: item.active, then: ' active')}">
+                            <a class="nav-link" href="{item.link}"><span>{item.title}</span></a>
+                        </li>
+                    </f:for>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<f:render section="Main" />
+
+<footer class="bg-light mt-4 py-3">
+    <f:if condition="{languagenavigation}">
+        <div class="container">
+            <ul class="nav justify-content-center">
+                <f:for each="{languagenavigation}" as="item">
+                    <li class="nav-item">
+                        <f:if condition="{item.available}">
+                            <f:then>
+                                <a class="nav-link{f:if(condition: item.active, then: ' active')}{f:if(condition: item.available, else: ' disabled')}" href="{item.link}" hreflang="{item.hreflang}" title="{item.title}">
+                                    <span>{item.navigationTitle}</span>
+                                </a>
+                            </f:then>
+                            <f:else>
+                                <span class="nav-link{f:if(condition: item.active, then: ' active')}{f:if(condition: item.available, else: ' disabled')}">
+                                    <span>{item.navigationTitle}</span>
+                                </span>
+                            </f:else>
+                        </f:if>
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+    </f:if>
+    <f:if condition="{settings.theme.copyright.text}">
+        <div class="container">
+            <p class="text-center m-0 py-2">
+                {settings.theme.copyright.text -> f:format.raw()}
+            </p>
+        </div>
+    </f:if>
+</footer>

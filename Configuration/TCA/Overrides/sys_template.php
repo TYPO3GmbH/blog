@@ -11,5 +11,19 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-// Add static template
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('blog', 'Configuration/TypoScript/Static/', 'TYPO3 Blog');
+// Add static templates
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+    'blog',
+    'Configuration/TypoScript/Integration/',
+    'TYPO3 Blog: Integration'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+    'blog',
+    'Configuration/TypoScript/Standalone/',
+    'TYPO3 Blog: Standalone'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+    'blog',
+    'Configuration/TypoScript/Static/',
+    'TYPO3 Blog: Expert'
+);

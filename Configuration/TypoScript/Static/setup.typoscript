@@ -265,8 +265,8 @@ plugin.tx_blog {
 ### PAGE ###
 ############
 page.includeCSSLibs {
-    blog = EXT:blog/Resources/Public/Css/frontend.min.css
-    blog {
+    blogFrontend = EXT:blog/Resources/Public/Css/frontend.min.css
+    blogFrontend {
         forceOnTop = 1
     }
 }

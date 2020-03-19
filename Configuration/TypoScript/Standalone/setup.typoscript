@@ -3,7 +3,7 @@
 ######################
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:fluid_styled_content/Configuration/TypoScript/setup.typoscript">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Static/setup.typoscript">
-
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Shared/setup.typoscript">
 
 ################################################
 #### DYNAMIC CONTENT LIB FOR USAGE IN FLUID ####
@@ -44,10 +44,19 @@ page {
     typeNum = 0
     10 = FLUIDTEMPLATE
     10 {
-        templateName = Default
-        templateRootPaths.0 = EXT:blog_template_test/Resources/Private/Templates/Page/
-        partialRootPaths.0 = EXT:blog_template_test/Resources/Private/Partials/Page/
-        layoutRootPaths.0 = EXT:blog_template_test/Resources/Private/Layouts/Page/
+        templateName = BlogList
+        templateRootPaths {
+            0 = EXT:blog/Resources/Private/Templates/Page/
+            1 = {$page.fluidtemplate.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:blog/Resources/Private/Partials/Page/
+            1 = {$page.fluidtemplate.partialRootPath}
+        }
+        layoutRootPaths {
+            0 = EXT:blog/Resources/Private/Layouts/Page/
+            1 = {$page.fluidtemplate.layoutRootPath}
+        }
         dataProcessing {
             10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
             10 {
@@ -63,20 +72,37 @@ page {
         variables {
             siteTitle = TEXT
             siteTitle.data = TSFE:tmpl|setup|sitetitle
+            copyright = TEXT
+            copyright.value = {$page.theme.copyright}
+        }
+        settings {
+            theme {
+                copyright {
+                    text = {$page.theme.copyright.text}
+                }
+            }
         }
     }
 
     includeCSS {
-        bootstrap = https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css
+        bootstrap = https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css
         bootstrap.external = 1
     }
 
     includeJSFooterlibs {
-        jquery = https://code.jquery.com/jquery-3.3.1.slim.min.js
+        jquery = https://code.jquery.com/jquery-3.4.1.slim.min.js
         jquery.external = 1
-        popper = https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js
+        popper = https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js
         popper.external = 1
-        bootstrap = https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js
+        bootstrap = https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js
         bootstrap.external = 1
     }
 }
+
+[blog.isPost()]
+page {
+    10 {
+        templateName = BlogPost
+    }
+}
+[end]

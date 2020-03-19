@@ -299,6 +299,9 @@
             <trans-unit id="constantEditor.customcategory.list" xml:space="preserve">
                 <source>TYPO3 Blog: List</source>
             </trans-unit>
+            <trans-unit id="constantEditor.customcategory.standalone" xml:space="preserve">
+                <source>TYPO3 Blog: Standalone</source>
+            </trans-unit>
             <trans-unit id="constantEditor.blog_100_uids" xml:space="preserve">
                 <source>Page ID settings</source>
             </trans-unit>
