@@ -10,6 +10,7 @@ module.exports = {
     entry: {
         frontend: './Resources/Private/Scss/frontend/frontend.scss',
         backend: './Resources/Private/Scss/backend/backend.scss',
+        pagelayout: './Resources/Private/Scss/backend/pagelayout.scss',
         Datatables: './Resources/Private/JavaScript/backend/Datatables.js',
         MassUpdate: './Resources/Private/JavaScript/backend/MassUpdate.js',
         SetupWizard: './Resources/Private/JavaScript/backend/SetupWizard.js',
