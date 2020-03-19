@@ -1,4 +1,4 @@
-<html xmlns:dc="http://purl.org/dc/elements/1.1/">
+<html xmlns:dc="http://purl.org/dc/elements/1.1/" data-namespace-typo3-fluid="true">
 <f:spaceless>
 <item>
     <title>{post.title}</title>
