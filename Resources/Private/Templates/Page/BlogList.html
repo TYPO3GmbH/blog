@@ -9,15 +9,16 @@
                     }" />
             </main>
             <aside class="blogcontainer-sidebar">
-                <f:cObject typoscriptObjectPath="tt_content.list" data="{
-                        uid: '-blog-sidebar',
-                        list_type: 'blog_sidebar',
-                        CType: 'list',
-                        layout: '0',
-                        frame_class: 'default'
-                    }" table="tt_content"/>
+                <f:render section="renderPlugin" arguments="{listType: 'blog_sidebar'}" />
             </aside>
         </div>
     </div>
 
 </f:section>
+<f:section name="renderPlugin">
+
+    {blogvh:data.contentListOptions(listType: listType)}
+    <f:cObject typoscriptObjectPath="tt_content.list" data="{contentObjectData}" table="tt_content"/>
+
+</f:section>
+

@@ -4,62 +4,24 @@
     <div class="container">
         <div class="blogcontainer">
             <main class="blogcontainer-main">
-                <f:cObject typoscriptObjectPath="tt_content.list" data="{
-                        uid: '-blog-header',
-                        list_type: 'blog_header',
-                        CType: 'list',
-                        layout: '0',
-                        frame_class: 'default'
-                    }" table="tt_content"/>
-                <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{
-                        colPos: '0'
-                    }" />
-                <f:cObject typoscriptObjectPath="tt_content.list" data="{
-                        uid: '-blog-footer',
-                        list_type: 'blog_footer',
-                        CType: 'list',
-                        layout: '0',
-                        frame_class: 'default'
-                    }" table="tt_content"/>
-                <f:cObject typoscriptObjectPath="tt_content.list" data="{
-                        uid: '-blog-authors',
-                        list_type: 'blog_authors',
-                        CType: 'list',
-                        layout: '0',
-                        frame_class: 'default'
-                    }" table="tt_content"/>
-                <f:cObject typoscriptObjectPath="tt_content.list" data="{
-                        uid: '-blog-comments',
-                        list_type: 'blog_comments',
-                        CType: 'list',
-                        layout: '0',
-                        frame_class: 'default'
-                    }" table="tt_content"/>
-                <f:cObject typoscriptObjectPath="tt_content.list" data="{
-                        uid: '-blog-commentform',
-                        list_type: 'blog_commentform',
-                        CType: 'list',
-                        layout: '0',
-                        frame_class: 'default'
-                    }" table="tt_content"/>
-                <f:cObject typoscriptObjectPath="tt_content.list" data="{
-                        uid: '-blog-relatedposts',
-                        list_type: 'blog_relatedposts',
-                        CType: 'list',
-                        layout: '0',
-                        frame_class: 'default'
-                    }" table="tt_content"/>
+                <f:render section="renderPlugin" arguments="{listType: 'blog_header'}" />
+                <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{colPos: '0'}" />
+                <f:render section="renderPlugin" arguments="{listType: 'blog_footer'}" />
+                <f:render section="renderPlugin" arguments="{listType: 'blog_authors'}" />
+                <f:render section="renderPlugin" arguments="{listType: 'blog_comments'}" />
+                <f:render section="renderPlugin" arguments="{listType: 'blog_commentform'}" />
+                <f:render section="renderPlugin" arguments="{listType: 'blog_relatedposts'}" />
             </main>
             <aside class="blogcontainer-sidebar">
-                <f:cObject typoscriptObjectPath="tt_content.list" data="{
-                        uid: '-blog-sidebar',
-                        list_type: 'blog_sidebar',
-                        CType: 'list',
-                        layout: '0',
-                        frame_class: 'default'
-                    }" table="tt_content"/>
+                <f:render section="renderPlugin" arguments="{listType: 'blog_sidebar'}" />
             </aside>
         </div>
     </div>
+
+</f:section>
+<f:section name="renderPlugin">
+
+    {blogvh:data.contentListOptions(listType: listType)}
+    <f:cObject typoscriptObjectPath="tt_content.list" data="{contentObjectData}" table="tt_content"/>
 
 </f:section>

@@ -3,7 +3,7 @@
 ######################
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:fluid_styled_content/Configuration/TypoScript/setup.typoscript">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Static/setup.typoscript">
-
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Shared/setup.typoscript">
 
 ################################################
 #### DYNAMIC CONTENT LIB FOR USAGE IN FLUID ####
