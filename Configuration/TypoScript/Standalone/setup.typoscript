@@ -70,6 +70,8 @@ page {
             }
         }
         variables {
+            rootPage = TEXT
+            rootPage.data = leveluid:0
             siteTitle = TEXT
             siteTitle.data = TSFE:tmpl|setup|sitetitle
             copyright = TEXT
