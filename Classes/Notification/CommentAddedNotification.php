@@ -12,7 +12,7 @@ namespace T3G\AgencyPack\Blog\Notification;
 
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
-use T3G\AgencyPack\Blog\Messaging\MailMessage;
+use T3G\AgencyPack\Blog\Mail\MailContent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -42,8 +42,8 @@ class CommentAddedNotification extends AbstractNotification
         /** @var Post $post */
         $post = $this->data['post'];
 
-        $mailMessage = GeneralUtility::makeInstance(MailMessage::class);
-        return $mailMessage->render('CommentAdded', [
+        $mailContent = GeneralUtility::makeInstance(MailContent::class);
+        return $mailContent->render('CommentAdded', [
             'comment' => $comment,
             'post' => $post
         ]);

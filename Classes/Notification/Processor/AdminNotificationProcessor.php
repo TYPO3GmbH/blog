@@ -10,9 +10,9 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Notification\Processor;
 
+use T3G\AgencyPack\Blog\Mail\MailMessage;
 use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
 use T3G\AgencyPack\Blog\Notification\NotificationInterface;
-use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -50,7 +50,7 @@ class AdminNotificationProcessor implements ProcessorInterface
             $mail = GeneralUtility::makeInstance(MailMessage::class);
             $mail
                 ->setSubject($notification->getTitle())
-                ->setBody($notification->getMessage(), 'text/html')
+                ->setBody($notification->getMessage())
                 ->setFrom([$settings['notifications']['email']['senderMail'] => $settings['notifications']['email']['senderName']])
                 ->setTo($emailAddresses)
                 ->send();
