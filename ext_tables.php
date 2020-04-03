@@ -151,15 +151,34 @@ call_user_func(function () {
     );
 
     if (TYPO3_MODE === 'BE') {
+
         // Module Blog
-        $firstKey = array_key_first($GLOBALS['TBE_MODULES']);
-        $firstValue = array_shift($GLOBALS['TBE_MODULES']);
-        $GLOBALS['TBE_MODULES'] = array_merge([$firstKey => $firstValue, 'blog' => ''], $GLOBALS['TBE_MODULES']);
-        $GLOBALS['TBE_MODULES']['_configuration']['blog'] = [
-            'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog.xlf',
-            'name' => 'web',
-            'iconIdentifier' => 'module-blog'
-        ];
+        if (version_compare(
+            \TYPO3\CMS\Core\Utility\VersionNumberUtility::getNumericTypo3Version(),
+            '10.4.0',
+            'lt'
+        )) {
+            $firstKey = array_key_first($GLOBALS['TBE_MODULES']);
+            $firstValue = array_shift($GLOBALS['TBE_MODULES']);
+            $GLOBALS['TBE_MODULES'] = array_merge([$firstKey => $firstValue, 'blog' => ''], $GLOBALS['TBE_MODULES']);
+            $GLOBALS['TBE_MODULES']['_configuration']['blog'] = [
+                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog.xlf',
+                'name' => 'blog',
+                'iconIdentifier' => 'module-blog'
+            ];
+        } else {
+            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
+                'blog',
+                '',
+                'after:web',
+                null,
+                [
+                    'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog.xlf',
+                    'name' => 'blog',
+                    'iconIdentifier' => 'module-blog',
+                ]
+            );
+        }
 
         // Module Blog > Posts
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
