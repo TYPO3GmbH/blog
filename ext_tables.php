@@ -44,6 +44,7 @@ call_user_func(function () {
         'record-blog-author' => 'EXT:blog/Resources/Public/Icons/record-blog-author.svg',
         'record-blog-comment' => 'EXT:blog/Resources/Public/Icons/record-blog-comment.svg',
         'record-blog-page' => 'EXT:blog/Resources/Public/Icons/record-blog-page.svg',
+        'record-blog-page-root' => 'EXT:blog/Resources/Public/Icons/record-blog-page-root.svg',
         'record-blog-post' => 'EXT:blog/Resources/Public/Icons/record-blog-post.svg',
         'record-blog-tag' => 'EXT:blog/Resources/Public/Icons/record-blog-tag.svg',
         'record-folder-contains-blog' => 'EXT:blog/Resources/Public/Icons/record-folder-contains-blog.svg',

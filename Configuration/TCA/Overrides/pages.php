@@ -51,6 +51,8 @@ $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-
     [
         'ctrl' => [
             'typeicon_classes' => [
+                (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE => 'record-blog-page',
+                (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE . '-root' => 'record-blog-page-root',
                 (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST => 'record-blog-post',
             ],
         ],
