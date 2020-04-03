@@ -101,6 +101,6 @@ class MailMessage
             $this->mailMessage->setBody($this->getBody(), 'text/html');
         }
 
-        return $this->mailMessage->send();
+        return (bool) $this->mailMessage->send();
     }
 }
