@@ -42,8 +42,10 @@ if (!(bool) $blogConfiguration['disablePageLayoutHeader']) {
 /***************
  * Overwrite create site configuration hook to include blog pages
  */
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][\TYPO3\CMS\Core\Hooks\CreateSiteConfiguration::class]
-    = \T3G\AgencyPack\Blog\Hooks\CreateSiteConfigurationHook::class;
+if (class_exists('TYPO3\CMS\Core\Hooks\CreateSiteConfiguration')) {
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][\TYPO3\CMS\Core\Hooks\CreateSiteConfiguration::class]
+        = \T3G\AgencyPack\Blog\Hooks\CreateSiteConfigurationHook::class;
+}
 
 call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
