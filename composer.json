@@ -82,6 +82,7 @@
     },
     "require-dev": {
         "typo3/cms-belog": "^9.5.5 || ^10.0 || 10.*@dev",
+        "typo3/cms-beuser": "^9.5.5 || ^10.0 || 10.*@dev",
         "typo3/cms-seo": "^9.5.5 || ^10.0 || 10.*@dev",
         "typo3/cms-filelist": "^9.5.5 || ^10.0 || 10.*@dev",
         "typo3/cms-fluid-styled-content": "^9.5.5 || ^10.0 || 10.*@dev",
