@@ -84,7 +84,6 @@ return [
             ],
         ],
         'hidden' => [
-            'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
@@ -92,7 +91,6 @@ return [
             ],
         ],
         'name' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.name',
             'config' => [
                 'type' => 'input',
@@ -103,7 +101,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'slug' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.slug',
             'config' => [
                 'type' => 'slug',
@@ -121,7 +118,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'avatar_provider' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.avatar_provider',
             'onChange' => 'reload',
             'config' => [
@@ -136,7 +132,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'image' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.image',
             'displayCond' => 'FIELD:avatar_provider:=:T3G\AgencyPack\Blog\AvatarProvider\ImageProvider',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
@@ -163,7 +158,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'title' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.title',
             'config' => [
                 'type' => 'input',
@@ -172,7 +166,6 @@ return [
             ],
         ],
         'website' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.website',
             'config' => [
                 'type' => 'input',
@@ -182,7 +175,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'email' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.email',
             'config' => [
                 'type' => 'input',
@@ -192,7 +184,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'location' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.location',
             'config' => [
                 'type' => 'input',
@@ -202,7 +193,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'twitter' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.twitter',
             'config' => [
                 'type' => 'input',
@@ -212,7 +202,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'linkedin' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.linkedin',
             'config' => [
                 'type' => 'input',
@@ -222,7 +211,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'xing' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.xing',
             'config' => [
                 'type' => 'input',
@@ -232,7 +220,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'profile' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.profile',
             'config' => [
                 'type' => 'input',
@@ -242,7 +229,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'bio' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_author.bio',
             'config' => [
                 'type' => 'text',
@@ -265,7 +251,6 @@ return [
             'l10n_mode' => 'exclude',
         ],
         'details_page' => [
-            'exclude' => 1,
             'label' => $ll . 'tx_blog_domain_model_author.details_page',
             'config' => [
                 'type' => 'group',
@@ -280,7 +265,6 @@ return [
         ]
     ],
     'sys_language_uid' => [
-        'exclude' => 1,
         'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
         'config' => [
             'type' => 'select',
@@ -296,7 +280,6 @@ return [
     ],
     'l18n_parent' => [
         'displayCond' => 'FIELD:sys_language_uid:>:0',
-        'exclude' => 1,
         'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
         'config' => [
             'type' => 'select',

@@ -86,7 +86,6 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
             ],
         ],
         'comments_active' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.comments_active',
             'config' => [
                 'type' => 'check',
@@ -94,7 +93,6 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
             ],
         ],
         'comments' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.comments',
             'config' => [
                 'type' => 'inline',
@@ -115,7 +113,6 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
             ],
         ],
         'crdate_month' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.crdate_month',
             'config' => [
                 'type' => 'input',
@@ -126,7 +123,6 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
             ],
         ],
         'crdate_year' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.crdate_year',
             'config' => [
                 'type' => 'input',
@@ -137,7 +133,6 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
             ],
         ],
         'archive_date' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.archive_date',
             'config' => [
                 'type' => 'input',
@@ -151,7 +146,6 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
             ],
         ],
         'publish_date' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.publish_date',
             'config' => [
                 'type' => 'input',
@@ -165,7 +159,6 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
             ],
         ],
         'tags' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.tags',
             'config' => [
                 'type' => 'select',
@@ -185,7 +178,6 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
             ],
         ],
         'authors' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.authors',
             'config' => [
                 'type' => 'select',
@@ -202,7 +194,6 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
             ],
         ],
         'featured_image' => [
-            'exclude' => true,
             'label' => $ll . 'pages.featured_image',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'featured_image',
