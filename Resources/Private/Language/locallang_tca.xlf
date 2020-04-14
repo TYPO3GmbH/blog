@@ -9,6 +9,12 @@
             <trans-unit id="pages.doktype.blog-page">
                 <source>Blog Page</source>
             </trans-unit>
+            <trans-unit id="sys_category.record_type.default">
+                <source>Default</source>
+            </trans-unit>
+            <trans-unit id="sys_category.record_type.blog">
+                <source>Blog Category</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

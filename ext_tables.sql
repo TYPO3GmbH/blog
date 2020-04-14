@@ -49,6 +49,7 @@ CREATE TABLE tx_blog_tag_pages_mm (
 # Table structure for table 'sys_category'
 #
 CREATE TABLE sys_category (
+  record_type int(11) unsigned DEFAULT '1' NOT NULL,
   slug varchar(2048),
   content text,
   posts int(11) DEFAULT '0' NOT NULL

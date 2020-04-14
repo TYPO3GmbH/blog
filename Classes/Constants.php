@@ -13,8 +13,14 @@ namespace T3G\AgencyPack\Blog;
 class Constants
 {
     /**
-     * Named constants for "magic numbers" of the field doktype.
+     * Named constants for "magic numbers" of the field pages.doktype.
      */
     public const DOKTYPE_BLOG_POST = 137;
     public const DOKTYPE_BLOG_PAGE = 138;
+
+    /**
+     * Named constants for "magic numbers" of the field sys_category.category_type.
+     */
+    public const CATEGORY_TYPE_DEFAULT = 1;
+    public const CATEGORY_TYPE_BLOG = 100;
 }
