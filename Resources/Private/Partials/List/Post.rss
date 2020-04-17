@@ -1,8 +1,25 @@
-{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+<html xmlns:dc="http://purl.org/dc/elements/1.1/" data-namespace-typo3-fluid="true">
+<f:spaceless>
 <item>
-   <title>{post.title}</title>
-   <description><f:if condition="{post.abstract}"><f:then>{post.abstract}</f:then><f:else>{post.description}</f:else></f:if></description>
-   <link><blog:link.post post="{post}" returnUri="true" createAbsoluteUri="true" /></link>
-   <pubDate><f:format.date date="{post.publishDate}" format="r" /></pubDate>
-   <guid><blog:link.post post="{post}" returnUri="true" createAbsoluteUri="true" /></guid>
+    <title>{post.title}</title>
+    <link><blogvh:link.post post="{post}" returnUri="true" createAbsoluteUri="true" /></link>
+    <f:if condition="{settings.comments.active} && {post.commentsActive}">
+        <comments><blogvh:link.post post="{post}" section="comments" returnUri="true" createAbsoluteUri="true" /></comments>
+    </f:if>
+    <pubDate><f:format.date date="{post.publishDate}" format="r" /></pubDate>
+    <f:if condition="{post.authors}">
+        <f:for each="{post.authors}" as="author">
+            <dc:creator>{author.name}</dc:creator>
+        </f:for>
+    </f:if>
+    <guid><blogvh:link.post post="{post}" returnUri="true" createAbsoluteUri="true" /></guid>
+    <description><f:if condition="{post.abstract}"><f:then>{post.abstract}</f:then><f:else>{post.description}</f:else></f:if></description>
+    <f:if condition="{post.featuredImage}">
+        <enclosure
+            length="{post.featuredImage.originalResource.size}"
+            type="{post.featuredImage.originalResource.mimeType}"
+            url="{f:uri.image(image: post.featuredImage, absolute: '1')}" />
+    </f:if>
 </item>
+</f:spaceless>
+</html>

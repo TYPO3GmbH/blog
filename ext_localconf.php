@@ -11,12 +11,55 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
+/***************
+ * Make the extension configuration accessible
+ */
+$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+    \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+);
+$blogConfiguration = $extensionConfiguration->get('blog');
+
+/***************
+ * PageTS
+ */
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TsConfig/Page/All.tsconfig">');
+
+/***************
+ * Register "blogvh" as global fluid namespace
+ */
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['blogvh'][] = 'T3G\\AgencyPack\\Blog\\ViewHelpers';
+
+/***************
+ * Register page layout hooks to display additional information for posts.
+ */
+if (!(bool) $blogConfiguration['disablePageLayoutHeader']) {
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/db_layout.php']['drawHeaderHook'][]
+        = \T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook::class . '->drawHeader';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['recordlist/Modules/Recordlist/index.php']['drawHeaderHook'][]
+        = \T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook::class . '->drawHeader';
+}
+
+/***************
+ * Overwrite create site configuration hook to include blog pages
+ */
+if (class_exists('TYPO3\CMS\Core\Hooks\CreateSiteConfiguration')) {
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][\TYPO3\CMS\Core\Hooks\CreateSiteConfiguration::class]
+        = \T3G\AgencyPack\Blog\Hooks\CreateSiteConfigurationHook::class;
+}
+
 call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
         'Posts',
         [
             'Post' => 'listRecentPosts',
+        ]
+    );
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
+        'LatestPosts',
+        [
+            'Post' => 'listLatestPosts',
         ]
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -60,10 +103,10 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'CommentForm',
         [
-            'Comment' => 'form, addComment',
+            'Comment' => 'form',
         ],
         [
-            'Comment' => 'form, addComment',
+            'Comment' => 'form',
         ]
     );
 
@@ -72,6 +115,22 @@ call_user_func(function () {
         'Comments',
         [
             'Comment' => 'comments',
+        ]
+    );
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
+        'Header',
+        [
+            'Post' => 'header',
+        ]
+    );
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'T3G.AgencyPack.Blog',
+        'Footer',
+        [
+            'Post' => 'footer',
         ]
     );
 
@@ -179,15 +238,7 @@ call_user_func(function () {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class]
     = \T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class;
 
-    // Register Social Image Wizard
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1506942138] = [
-        'nodeName' => 'BlogSocialImageWizard',
-        'priority' => 20,
-        'class' => \T3G\AgencyPack\Blog\Form\Wizards\SocialWizard::class
-    ];
-
-    // Register Social Image Wizard
+    // Register Static Database Mapper
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['BlogStaticDatabaseMapper'] =
         \T3G\AgencyPack\Blog\Routing\Aspect\StaticDatabaseMapper::class;

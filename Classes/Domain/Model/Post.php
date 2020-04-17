@@ -10,9 +10,11 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
+use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -20,6 +22,18 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Post extends AbstractEntity
 {
+    /**
+     * @var bool
+     */
+    protected $hidden = false;
+
+    /**
+     * The blog post doktype
+     *
+     * @var int
+     */
+    protected $doktype = Constants::DOKTYPE_BLOG_POST;
+
     /**
      * The blog post title.
      *
@@ -87,17 +101,15 @@ class Post extends AbstractEntity
     protected $tags;
 
     /**
-     * Sharing enabled flag for this blog post. This flag can be used in views to enable sharing tools.
-     *
-     * @var bool
-     */
-    protected $sharingEnabled;
-
-    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Extbase\ORM\Lazy
      */
     protected $media;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     */
+    protected $featuredImage;
 
     /**
      * @var int
@@ -108,6 +120,16 @@ class Post extends AbstractEntity
      * @var int
      */
     protected $publishDate;
+
+    /**
+     * @var int
+     */
+    protected $crdateMonth = 0;
+
+    /**
+     * @var int
+     */
+    protected $crdateYear = 0;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Author>
@@ -133,6 +155,24 @@ class Post extends AbstractEntity
         $this->tags = new ObjectStorage();
         $this->authors = new ObjectStorage();
         $this->media = new ObjectStorage();
+    }
+
+    public function getHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    public function isHidden(): bool
+    {
+        return $this->getHidden();
+    }
+
+    /**
+     * @return int
+     */
+    public function getDoktype(): ?int
+    {
+        return $this->doktype;
     }
 
     /**
@@ -372,24 +412,6 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @return bool
-     */
-    public function isSharingEnabled(): bool
-    {
-        return $this->sharingEnabled;
-    }
-
-    /**
-     * @param bool $sharingEnabled
-     * @return Post
-     */
-    public function setSharingEnabled(bool $sharingEnabled): self
-    {
-        $this->sharingEnabled = $sharingEnabled;
-        return $this;
-    }
-
-    /**
      * @return ObjectStorage
      */
     public function getTags(): ObjectStorage
@@ -446,6 +468,22 @@ class Post extends AbstractEntity
         return $this;
     }
 
+    public function getFeaturedImage(): ?FileReference
+    {
+        $featuredImage = $this->featuredImage;
+        if (!empty($featuredImage) && $featuredImage !== 0) {
+            return $featuredImage;
+        } else {
+            return null;
+        }
+    }
+
+    public function setFeaturedImage(?FileReference $featuredImage): self
+    {
+        $this->featuredImage = $featuredImage ?? 0;
+        return $this;
+    }
+
     /**
      * @return int
      */
@@ -483,6 +521,22 @@ class Post extends AbstractEntity
     }
 
     /**
+     * @return int
+     */
+    public function getCrdateMonth(): int
+    {
+        return $this->crdateMonth;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCrdateYear(): int
+    {
+        return $this->crdateYear;
+    }
+
+    /**
      * @return string
      * @throws \InvalidArgumentException
      */
@@ -493,5 +547,23 @@ class Post extends AbstractEntity
                 ->setCreateAbsoluteUri(true)
                 ->setTargetPageUid($this->getUid())
                 ->build();
+    }
+
+    public function getAsArray(): array
+    {
+        return $this->__toArray();
+    }
+
+    public function __toArray(): array
+    {
+        return [
+            'uid' => $this->getUid(),
+            'hidden' => $this->getHidden(),
+            'doktype' => $this->getDoktype(),
+            'title' => $this->getTitle(),
+            'subtitle' => $this->getSubtitle(),
+            'abstract' => $this->getAbstract(),
+            'description' => $this->getDescription()
+        ];
     }
 }

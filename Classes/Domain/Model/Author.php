@@ -73,11 +73,6 @@ class Author extends AbstractEntity
     /**
      * @var string
      */
-    protected $googleplus = '';
-
-    /**
-     * @var string
-     */
     protected $linkedin = '';
 
     /**
@@ -290,24 +285,6 @@ class Author extends AbstractEntity
     /**
      * @return string
      */
-    public function getGoogleplus(): ?string
-    {
-        return $this->googleplus;
-    }
-
-    /**
-     * @param string $googleplus
-     * @return Author
-     */
-    public function setGoogleplus(string $googleplus): self
-    {
-        $this->googleplus = $googleplus;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
     public function getLinkedin(): ?string
     {
         return $this->linkedin;
@@ -431,5 +408,23 @@ class Author extends AbstractEntity
     {
         $this->detailsPage = $page;
         return $this;
+    }
+
+    /**
+     * Function to get all unique tags from all posts of the author.
+     *
+     * @return array $tags
+     */
+    public function getAllTags(): array
+    {
+        $uniqueTags = [];
+        foreach ($this->getPosts() as $post) {
+            foreach ($post->getTags() as $tag) {
+                if (!array_key_exists($tag->getUid(), $uniqueTags)) {
+                    $uniqueTags[$tag->getUid()] = $tag;
+                }
+            }
+        }
+        return $uniqueTags;
     }
 }

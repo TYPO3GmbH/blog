@@ -30,7 +30,7 @@ class DatabasePublishDateUpdate implements UpgradeWizardInterface
      */
     public function getIdentifier(): string
     {
-        return self::class;
+        return 'T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate';
     }
 
     /**
@@ -105,6 +105,12 @@ class DatabasePublishDateUpdate implements UpgradeWizardInterface
      */
     public function updateNecessary(): bool
     {
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
+        $tableColumns = $connection->getSchemaManager()->listTableColumns('pages');
+        if (!isset($tableColumns['publish_date'])) {
+            return false;
+        }
+
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('pages');
         $queryBuilder->getRestrictions()->removeAll();

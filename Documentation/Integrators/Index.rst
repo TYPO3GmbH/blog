@@ -26,8 +26,8 @@ Settings (plugin.tx_blog.settings)
    authorUid_                               UID of the author page                 int             0
    storagePid_                              UID of the storage folder              int             0
    sidebarWidgets_                          List of active sidebar widgets         array           see description
-   `list.posts.maximumDisplayedItems`_      Maximum posts to be displayed in list  int             0
-   `list.posts.dateFormat`_                 The date format for post lists         string          %d.%m.%Y
+   `lists.posts.maximumDisplayedItems`_     Maximum posts to be displayed in list  int             0
+   `lists.posts.dateFormat`_                The date format for post lists         string          %d.%m.%Y
    widgets_                                 Widget specific configuration          array           see description
    `relatedPosts.limit`_                    Number of related posts to show        int             5
    `relatedPosts.categoryMultiplier`_       Weight of a matching category          int             1
@@ -160,12 +160,12 @@ sidebarWidgets
 
 .. _tsListPostsMmaximumDisplayedItems:
 
-list.posts.maximumDisplayedItems
-""""""""""""""""""""""""""""""""
+lists.posts.maximumDisplayedItems
+"""""""""""""""""""""""""""""""""
 .. container:: table-row
 
    Property
-         list.posts.maximumDisplayedItems
+         lists.posts.maximumDisplayedItems
    Data type
          int
    Description
@@ -174,12 +174,12 @@ list.posts.maximumDisplayedItems
 
 .. _tsListPostDateFormat:
 
-list.posts.dateFormat
-"""""""""""""""""""""
+lists.posts.dateFormat
+""""""""""""""""""""""
 .. container:: table-row
 
    Property
-         list.posts.dateFormat
+         lists.posts.dateFormat
    Data type
          string
    Description

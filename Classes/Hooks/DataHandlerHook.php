@@ -54,10 +54,10 @@ class DataHandlerHook
                 ->execute()
                 ->fetch();
             if (!empty($record)) {
-                $timestamp = $record['publish_date'] ?? time();
+                $timestamp = (int) (!empty($record['publish_date']) ? $record['publish_date'] : time());
                 $queryBuilder
                     ->update($table)
-                    ->set('publish_date', $record['publish_date'])
+                    ->set('publish_date', $timestamp)
                     ->set('crdate_month', date('n', (int)$timestamp))
                     ->set('crdate_year', date('Y', (int)$timestamp))
                     ->where($queryBuilder->expr()->eq('uid', (int)$id))

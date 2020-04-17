@@ -103,9 +103,14 @@ class WidgetController extends ActionController
 
     public function tagsAction(): void
     {
+        $requestParameters = GeneralUtility::_GP('tx_blog_tag');
+        $currentTag = 0;
+        if (!empty($requestParameters['tag'])) {
+            $currentTag = (int)$requestParameters['tag'];
+        }
         $limit = (int)$this->settings['widgets']['tags']['limit'] ?: 20;
-        $minSize = (int)$this->settings['widgets']['tags']['minSize'] ?: 10;
-        $maxSize = (int)$this->settings['widgets']['tags']['maxSize'] ?: 10;
+        $minSize = (int)$this->settings['widgets']['tags']['minSize'] ?: 100;
+        $maxSize = (int)$this->settings['widgets']['tags']['maxSize'] ?: 100;
         $tags = $this->tagRepository->findTopByUsage($limit);
         $minimumCount = null;
         $maximumCount = 0;
@@ -132,6 +137,7 @@ class WidgetController extends ActionController
             $this->blogCacheService->addTagToPage('tx_blog_tag_' . (int)$tag['uid']);
         }
         $this->view->assign('tags', $tags);
+        $this->view->assign('currentTag', $currentTag);
     }
 
     /**

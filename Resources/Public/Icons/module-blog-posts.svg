@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.6, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+<path fill="#5BA34F" d="M0,0h64v64H0V0z"/>
+<rect x="20" y="18" fill="#FFFFFF" width="28" height="28"/>
+<rect x="34" y="22" fill="#333333" width="10" height="4"/>
+<rect x="34" y="28" opacity="0.25" fill="#333333" enable-background="new    " width="10" height="2"/>
+<rect x="34" y="32" opacity="0.25" fill="#333333" enable-background="new    " width="10" height="2"/>
+<rect x="24" y="36" opacity="0.25" fill="#333333" enable-background="new    " width="20" height="2"/>
+<rect x="24" y="40" opacity="0.25" fill="#333333" enable-background="new    " width="20" height="2"/>
+<rect x="24" y="22" opacity="0.75" fill="#5BA34F" enable-background="new    " width="8" height="12"/>
+<rect x="16" y="22" fill="#FFFFFF" width="4" height="24"/>
+<rect x="18" y="22" opacity="0.75" fill="#5BA34F" enable-background="new    " width="2" height="24"/>
+</svg>

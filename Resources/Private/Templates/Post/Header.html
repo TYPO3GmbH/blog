@@ -1,0 +1,18 @@
+<f:layout name="Post" />
+<f:section name="Content">
+
+    <header class="postheader">
+        <f:if condition="{post.featuredImage}">
+            <div class="postheader__featuredimage">
+                <f:render partial="General/FeaturedImage" arguments="{image: post.featuredImage, settings: settings.post.featuredImage}" />
+            </div>
+        </f:if>
+        <h1 class="postheader__title">{post.title}</h1>
+        <f:if condition="{settings.meta.postheader.enable}">
+            <div class="postheader__meta">
+                <f:render partial="Meta/PostHeader" arguments="{_all}" />
+            </div>
+        </f:if>
+    </header>
+
+</f:section>

@@ -96,7 +96,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
             ->setArguments($additionalParams);
         if ($rssFormat) {
             $uriBuilder
-                ->setTargetPageType($this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_author.']['typeNum']);
+                ->setTargetPageType((int)$this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_author.']['typeNum']);
         }
 
         return $uriBuilder;

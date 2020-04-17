@@ -1,7 +1,12 @@
-<f:if condition="{post.authors}">
-	<div class="tx-blog-authors">
-		<f:for each="{post.authors}" as="author">
-			<f:render partial="Post/Author" arguments="{_all}" />
-		</f:for>
-	</div>
-</f:if>
+<f:layout name="Post" />
+<f:section name="Content">
+
+    <f:if condition="{post.authors}">
+        <div class="postauthors">
+            <f:for each="{post.authors}" as="author">
+                <f:render partial="Post/Author" arguments="{_all}" />
+            </f:for>
+        </div>
+    </f:if>
+
+</f:section>

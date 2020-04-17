@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
-	<file t3:id="1466420469" source-language="en" datatype="plaintext" original="messages" date="2016-06-20T13:01:00Z" product-name="blog">
-		<header/>
-		<body>
-			<trans-unit id="pages.doktype.blog-post">
-				<source>Blog post</source>
-			</trans-unit>
+    <file t3:id="1557352033" source-language="en" datatype="plaintext" original="messages" date="2019-05-08T21:47:12Z" product-name="blog">
+        <header/>
+        <body>
+            <trans-unit id="pages.doktype.blog-post">
+                <source>Blog Post</source>
+            </trans-unit>
+            <trans-unit id="pages.doktype.blog-page">
+                <source>Blog Page</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

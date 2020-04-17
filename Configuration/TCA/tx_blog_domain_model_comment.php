@@ -28,7 +28,9 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-comment.svg',
+        'typeicon_classes' => [
+            'default' => 'record-blog-comment'
+        ],
         'searchFields' => 'uid,comment,name,email',
     ],
     'interface' => [
@@ -54,7 +56,6 @@ return [
             ],
         ],
         'hidden' => [
-            'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
@@ -63,7 +64,6 @@ return [
         ],
         // author not implemented yet
         'author' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_comment.author',
             'config' => [
                 'type' => 'group',
@@ -80,7 +80,6 @@ return [
             ],
         ],
         'name' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_comment.name',
             'config' => [
                 'type' => 'input',
@@ -89,7 +88,6 @@ return [
             ],
         ],
         'url' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_comment.url',
             'config' => [
                 'type' => 'input',
@@ -98,7 +96,6 @@ return [
             ],
         ],
         'email' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_comment.email',
             'config' => [
                 'type' => 'input',
@@ -107,7 +104,6 @@ return [
             ],
         ],
         'comment' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_comment.comment',
             'config' => [
                 'type' => 'text',
@@ -116,7 +112,6 @@ return [
             ],
         ],
         'post_language_id' => [
-            'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
             'config' => [
                 'type' => 'select',
@@ -130,7 +125,6 @@ return [
             ],
         ],
         'status' => [
-            'exclude' => 1,
             'label' => $ll . 'tx_blog_domain_model_comment.status',
             'config' => [
                 'type' => 'select',

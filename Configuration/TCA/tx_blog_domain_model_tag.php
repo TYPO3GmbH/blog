@@ -32,7 +32,9 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog/Resources/Public/Icons/apps-pagetree-blog-tag.svg',
+        'typeicon_classes' => [
+            'default' => 'record-blog-tag'
+        ],
         'searchFields' => 'uid,title',
     ],
     'interface' => [
@@ -65,7 +67,6 @@ return [
             ],
         ],
         'hidden' => [
-            'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
@@ -73,7 +74,6 @@ return [
             ],
         ],
         'title' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_tag.title',
             'config' => [
                 'type' => 'input',
@@ -82,9 +82,7 @@ return [
             ],
         ],
         'slug' => [
-            'exclude' => 0,
             'label' => $ll . 'tx_blog_domain_model_tag.slug',
-            'displayCond' => 'USER:' . \TYPO3\CMS\Core\Compatibility\PseudoSiteTcaDisplayCondition::class . '->isInPseudoSite:pages:false',
             'config' => [
                 'type' => 'slug',
                 'generatorOptions' => [
@@ -99,14 +97,12 @@ return [
             ]
         ],
         'description' => [
-            'exclude' => 1,
             'label' => $ll . 'tx_blog_domain_model_tag.description',
             'config' => [
                 'type' => 'text',
             ],
         ],
         'content' => [
-            'exclude' => 1,
             'label' => $ll . 'tx_blog_domain_model_tag.content',
             'config' => [
                 'type' => 'inline',
@@ -138,7 +134,6 @@ return [
             ],
         ],
         'sys_language_uid' => [
-            'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
             'config' => [
                 'type' => 'select',
@@ -154,7 +149,6 @@ return [
         ],
         'l18n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',

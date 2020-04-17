@@ -1,12 +1,11 @@
-{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
-
 <f:layout name="Widget" />
-
-<f:section name="content">
-    <h3 class="widget-title"><f:translate key="headline.tags"/></h3>
-    <div class="tags">
-    <f:for each="{tags}" as="tag">
-        <blog:link.tag tag="{tag.tagObject}" style="font-size: {tag.size}%" class="label label-default label-tag" />
-    </f:for>
-    </div>
+<f:section name="Title"><f:translate key="headline.tags" /></f:section>
+<f:section name="Content">
+    <ul class="blogwidgetlist blogwidgetlist--tags">
+        <f:for each="{tags}" as="tag">
+            <li class="blogwidgetlist__item{f:if(condition: '{currentTag} == {tag.uid}', then: ' blogwidgetlist__item--active')}">
+                <blogvh:link.tag class="blogbadge" tag="{tag.tagObject}" style="font-size: {tag.size}%" />
+            </li>
+        </f:for>
+    </ul>
 </f:section>

@@ -1,21 +1,24 @@
-<f:if condition="{settings.comments.active}">
-	<h3 class="comment-title" id="comments">
-		<f:translate key="headline.comments"/>
-	</h3>
-	<f:if condition="{settings.comments.disqus._typoScriptNodeValue} !== '1'">
-		<f:if condition="{comments}">
-			<f:then>
-				<div class="comments" itemscope itemtype="http://schema.org/UserComments">
-					<f:for each="{comments}" as="comment">
-						<f:render partial="Comments/Comment" arguments="{comment: comment}"/>
-					</f:for>
-				</div>
-			</f:then>
-			<f:else>
-				<p>
-					<f:translate key="message.no_comments"/>
-				</p>
-			</f:else>
-		</f:if>
-	</f:if>
-</f:if>
+<f:layout name="Post" />
+<f:section name="Content">
+
+    <f:if condition="{settings.comments.active}">
+        <div class="postcomments">
+            <h3 class="postcomments__title" id="comments"><f:translate key="headline.comments"/></h3>
+            <f:if condition="{settings.comments.disqus._typoScriptNodeValue} !== '1'">
+                <f:if condition="{comments}">
+                    <f:then>
+                        <div class="postcomments__list">
+                            <f:for each="{comments}" as="comment">
+                                <f:render partial="Comments/Comment" arguments="{comment: comment}"/>
+                            </f:for>
+                        </div>
+                    </f:then>
+                    <f:else>
+                        <p><f:translate key="message.no_comments"/></p>
+                    </f:else>
+                </f:if>
+            </f:if>
+        </div>
+    </f:if>
+
+</f:section>

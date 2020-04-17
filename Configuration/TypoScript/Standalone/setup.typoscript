@@ -1,0 +1,110 @@
+######################
+#### DEPENDENCIES ####
+######################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:fluid_styled_content/Configuration/TypoScript/setup.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Static/setup.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Shared/setup.typoscript">
+
+################################################
+#### DYNAMIC CONTENT LIB FOR USAGE IN FLUID ####
+################################################
+lib.dynamicContent = COA
+lib.dynamicContent {
+    5 = LOAD_REGISTER
+    5 {
+        colPos.cObject = TEXT
+        colPos.cObject {
+            field = colPos
+            ifEmpty.cObject = TEXT
+            ifEmpty.cObject {
+                value.current = 1
+                ifEmpty = 0
+            }
+        }
+    }
+    20 = CONTENT
+    20 {
+        table = tt_content
+        select {
+            includeRecordsWithoutDefaultTranslation = 1
+            orderBy = sorting
+            where = {#colPos}={register:colPos}
+            where.insertData = 1
+        }
+    }
+    90 = RESTORE_REGISTER
+}
+
+
+##############
+#### PAGE ####
+##############
+page = PAGE
+page {
+    typeNum = 0
+    10 = FLUIDTEMPLATE
+    10 {
+        templateName = BlogList
+        templateRootPaths {
+            0 = EXT:blog/Resources/Private/Templates/Page/
+            1 = {$page.fluidtemplate.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:blog/Resources/Private/Partials/Page/
+            1 = {$page.fluidtemplate.partialRootPath}
+        }
+        layoutRootPaths {
+            0 = EXT:blog/Resources/Private/Layouts/Page/
+            1 = {$page.fluidtemplate.layoutRootPath}
+        }
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+            10 {
+                levels = 2
+                includeSpacer = 1
+                as = mainnavigation
+            }
+            20 = TYPO3\CMS\Frontend\DataProcessing\LanguageMenuProcessor
+            20 {
+                as = languagenavigation
+            }
+        }
+        variables {
+            rootPage = TEXT
+            rootPage.data = leveluid:0
+            siteTitle = TEXT
+            siteTitle.data = TSFE:tmpl|setup|sitetitle
+            copyright = TEXT
+            copyright.value = {$page.theme.copyright}
+        }
+        settings {
+            theme {
+                copyright {
+                    text = {$page.theme.copyright.text}
+                }
+            }
+        }
+    }
+
+    includeCSS {
+        bootstrap = https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css
+        bootstrap.external = 1
+    }
+
+    includeJSFooterlibs {
+        jquery = https://code.jquery.com/jquery-3.4.1.slim.min.js
+        jquery.external = 1
+        popper = https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js
+        popper.external = 1
+        bootstrap = https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js
+        bootstrap.external = 1
+    }
+}
+
+[blog.isPost()]
+page {
+    10 {
+        templateName = BlogPost
+    }
+}
+[end]

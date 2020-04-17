@@ -14,9 +14,7 @@ if (!defined('TYPO3_MODE')) {
 $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
 $temporaryColumns = [
     'slug' => [
-        'exclude' => 0,
         'label' => $ll . 'sys_category.slug',
-        'displayCond' => 'USER:' . \TYPO3\CMS\Core\Compatibility\PseudoSiteTcaDisplayCondition::class . '->isInPseudoSite:pages:false',
         'config' => [
             'type' => 'slug',
             'generatorOptions' => [
@@ -31,7 +29,6 @@ $temporaryColumns = [
         ]
     ],
     'content' => [
-        'exclude' => 1,
         'label' => $ll . 'sys_category.content',
         'config' => [
             'type' => 'inline',
@@ -58,7 +55,6 @@ $temporaryColumns = [
         ],
     ],
     'posts' => [
-        'exclude' => 1,
         'label' => $ll . 'sys_category.posts',
         'config' => [
             'type' => 'group',

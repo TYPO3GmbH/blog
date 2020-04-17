@@ -1,0 +1,13 @@
+/**
+ * Badge
+ */
+.blogbadge {
+    display: inline-block;
+    padding: .5em;
+    border-radius: 2px;
+    border: 1px solid;
+    line-height: 1em;
+    &:hover {
+        text-decoration: none;
+    }
+}

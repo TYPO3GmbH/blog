@@ -19,9 +19,7 @@ use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
@@ -102,12 +100,12 @@ class BackendController extends ActionController
 
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/Tooltip');
-        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/bootstrap.min.css', 'stylesheet', 'all', '', false);
-        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/backend.css', 'stylesheet', 'all', '', false);
+        $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/backend.min.css', 'stylesheet', 'all', '', false);
     }
 
     public function initializeSetupWizardAction(): void
     {
+        $this->initializeDataTables();
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
     }
 
@@ -124,21 +122,9 @@ class BackendController extends ActionController
 
     protected function initializeDataTables(): void
     {
-        $blogPath = ExtensionManagementUtility::extPath('blog', 'Resources/Public/JavaScript/');
-        $blogPath = PathUtility::getAbsoluteWebPath($blogPath);
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
-        $pageRenderer->addRequireJsConfiguration([
-            'paths' => [
-                'datatables_bootstrap' => $blogPath . 'dataTables.bootstrap.min'
-            ],
-            'map' => [
-                '*' => [
-                    'datatables.net' => 'datatables',
-                ]
-            ]
-        ]);
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/DataTables');
-        $pageRenderer->addCssFile('../typo3conf/ext/blog/Resources/Public/Css/dataTables.bootstrap.min.css', 'stylesheet', 'all', '', false);
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/Datatables');
+        $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/Datatables.min.css', 'stylesheet', 'all', '', false);
     }
 
     /**
@@ -167,6 +153,11 @@ class BackendController extends ActionController
      */
     public function postsAction(int $blogSetup = null): string
     {
+        $query = $this->postRepository->createQuery();
+        $querySettings = $query->getQuerySettings();
+        $querySettings->setIgnoreEnableFields(true);
+        $this->postRepository->setDefaultQuerySettings($querySettings);
+
         return $this->render('Backend/Posts.html', [
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'activeBlogSetup' => $blogSetup,

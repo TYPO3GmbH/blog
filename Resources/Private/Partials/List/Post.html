@@ -1,13 +1,18 @@
-{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
-<div class="post">
-    <h2 itemprop="name"><blog:link.post post="{post}" /></h2>
-    <f:render partial="Post/Meta" arguments="{_all}" />
+<article class="postlist__post">
+    <f:if condition="{post.featuredImage}">
+        <blogvh:link.post post="{post}" class="postlist__featuredimage" additionalAttributes="{aria-hidden: 'true'}" tabindex="-1">
+            <f:render partial="General/FeaturedImage" arguments="{image: post.featuredImage, settings: settings.lists.featuredImage}" />
+        </blogvh:link.post>
+    </f:if>
+    <h2 class="postlist__posttitle" itemprop="name"><blogvh:link.post post="{post}" /></h2>
+    <f:render partial="Meta/ListHeader" arguments="{_all}" />
     <f:if condition="{post.abstract}">
         <f:then>
-            <p itemprop="description">{post.abstract}</p>
+            <p class="postlist__postdescription" itemprop="description">{post.abstract}</p>
         </f:then>
         <f:else>
-            <p itemprop="description">{post.description}</p>
+            <p class="postlist__postdescription" itemprop="description">{post.description}</p>
         </f:else>
     </f:if>
-</div>
+    <f:render partial="Meta/ListFooter" arguments="{_all}" />
+</article>

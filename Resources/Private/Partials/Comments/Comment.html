@@ -1,20 +1,26 @@
-{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
-
-<div class="media comment comment-wrap">
-    <div class="media-left">
-        <div class="comment-avatar">
-            <blog:gravatar email="{comment.email}" />
+<f:spaceless>
+    <article id="comment-{comment.uid}" class="postcomment" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
+        <div class="postcomment__avatar">
+            <blogvh:gravatar class="postcomment__avatarimage" email="{comment.email}" />
         </div>
-    </div>
-    <div class="media-body">
+        <div class="postcomment__body">
+            <div class="postcomment__author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <f:render section="CommentUrl" arguments="{_all}" contentAs="content">{comment.name}</f:render>
+            </div>
+            <div class="postcomment__time">
+                <time datetime="{comment.crdate -> f:format.date(format: '%Y-%m-%d')}" itemprop="dateCreated"><f:format.date format="{settings.comments.date.format}">{comment.crdate}</f:format.date></time>
+            </div>
+            <div class="postcomment__comment" itemprop="text">
+                <blogvh:format.nl2p>{comment.comment}</blogvh:format.nl2p>
+            </div>
+        </div>
+    </article>
+    <f:section name="CommentUrl">
         <f:if condition="{comment.url}">
             <f:then>
-                <cite itemprop="name" class="author"><span itemprop="commentTime"><f:format.date format="d.m.Y">{comment.crdate}</f:format.date></span> | <f:link.external uri="{comment.url}" target="_blank" rel="external nofollow" class="url">{comment.name}</f:link.external></cite>
+                <f:link.external uri="{comment.url}" target="_blank" rel="external nofollow"><span itemprop="name">{content}</span></f:link.external>
             </f:then>
-            <f:else>
-                <cite itemprop="name" class="author"><span itemprop="commentTime"><f:format.date format="d.m.Y">{comment.crdate}</f:format.date></span> | {comment.name}</cite>
-            </f:else>
+            <f:else><span itemprop="name">{content}</span></f:else>
         </f:if>
-        <p itemprop="commentText" class="content"><f:format.nl2br>{comment.comment}</f:format.nl2br></p>
-    </div>
-</div>
+    </f:section>
+</f:spaceless>

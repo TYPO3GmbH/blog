@@ -1,97 +1,90 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers">
-
 <div class="hidden">
     <span id="author">{postData.authors.0}</span>
     <img src="/{postData.image}" id="posterImage">
-  </div>
-  <div>
+</div>
+<div>
     <div class="row" id="waitState" style="display: none;">
-      <div class="col-xs-12 text-center">
-        <core:icon identifier="spinner-circle" size="large" />
-      </div>
+        <div class="col-xs-12 text-center">
+            <core:icon identifier="spinner-circle" size="large" />
+        </div>
     </div>
     <div class="row" id="basePanel" data-source-filter="{dataSourceFilter}" data-source-skin="{dataSourceSkin}" data-table="{postData.table}" data-uid="{postData.uid}">
-
-      <div class="col-xs-12">
-            <textarea class="watch form-control" id="title"
-                      placeholder="Type here...">{postData.title}</textarea>
-      </div>
-      <div class="col-xs-12 col-md-6">
-        <div class="t3js-canvas-container" data-identifier="facebook">
-          <h3>Facebook / Twitter / Google Plus</h3>
-          <div class="preview">
-            <canvas id="preview-facebook" class="canvas" width="512" height="256"></canvas>
-          </div>
-          <hr/>
-          <div class="adjustment-sliders form-horizontal">
-            <div class="form-group">
-              <label class="col-sm-3">Font Size</label>
-              <div class="col-sm-7">
-                <input class="form-control t3js-font-size" type="range" value="40" min="20" max="40" step="1">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3">Image Scale</label>
-              <div class="col-sm-7">
-                <input class="form-control t3js-image-scale" type="range" value="0.5" min="0.1" max="1.5" step="0.01">
-              </div>
-            </div>
-          </div>
-          <a href="#" class="btn btn-default js-download-link"><i class="fa fa-download"></i> Download</a>
-          <a href="#" class="btn btn-primary js-save-link"><i class="fa fa-floppy-o"></i> Save in record</a>
+        <div class="col-xs-12">
+            <textarea class="watch form-control" id="title" placeholder="Type here...">{postData.title}</textarea>
         </div>
-      </div>
-      <div class="col-xs-12 col-md-6">
-        <div class="t3js-canvas-container" data-identifier="linkedin">
-          <h3>LinkedIn</h3>
-          <div class="preview">
-            <canvas id="preview-linkedin" class="canvas" width="358" height="256"></canvas>
-          </div>
-          <hr/>
-          <div class="adjustment-sliders form-horizontal">
-            <div class="form-group">
-              <label class="col-sm-3">Font Size</label>
-              <div class="col-sm-7">
-                <input class="form-control t3js-font-size" type="range" value="40" min="20" max="40" step="1">
-              </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="t3js-canvas-container" data-identifier="facebook">
+                <h3>Facebook / Twitter / Google Plus</h3>
+                <div class="preview">
+                    <canvas id="preview-facebook" class="canvas" width="512" height="256"></canvas>
+                </div>
+                <hr>
+                <div class="adjustment-sliders form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3">Font Size</label>
+                        <div class="col-sm-7">
+                            <input class="form-control t3js-font-size" type="range" value="40" min="20" max="40" step="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3">Image Scale</label>
+                        <div class="col-sm-7">
+                            <input class="form-control t3js-image-scale" type="range" value="0.5" min="0.1" max="1.5" step="0.01">
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-default js-download-link"><core:icon identifier="actions-download" alternativeMarkupIdentifier="inline" /> Download</a>
+                <a href="#" class="btn btn-primary js-save-link"><core:icon identifier="actions-save" alternativeMarkupIdentifier="inline" /> Save in record</a>
             </div>
-            <div class="form-group">
-              <label class="col-sm-3">Image Scale</label>
-              <div class="col-sm-7">
-                <input class="form-control t3js-image-scale" type="range" value="0.5" min="0.1" max="1.5" step="0.01">
-              </div>
-            </div>
-          </div>
-          <a href="#" class="btn btn-default js-download-link"><i class="fa fa-download"></i> Download</a>
-          <a href="#" class="btn btn-primary js-save-link"><i class="fa fa-floppy-o"></i> Save in record</a>
         </div>
-      </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="t3js-canvas-container" data-identifier="linkedin">
+                <h3>LinkedIn</h3>
+                <div class="preview">
+                    <canvas id="preview-linkedin" class="canvas" width="358" height="256"></canvas>
+                </div>
+                <hr>
+                <div class="adjustment-sliders form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3">Font Size</label>
+                        <div class="col-sm-7">
+                            <input class="form-control t3js-font-size" type="range" value="40" min="20" max="40" step="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3">Image Scale</label>
+                        <div class="col-sm-7">
+                            <input class="form-control t3js-image-scale" type="range" value="0.5" min="0.1" max="1.5" step="0.01">
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-default js-download-link"><core:icon identifier="actions-download" alternativeMarkupIdentifier="inline" /> Download</a>
+                <a href="#" class="btn btn-primary js-save-link"><core:icon identifier="actions-save" alternativeMarkupIdentifier="inline" /> Save in record</a>
+            </div>
+        </div>
     </div>
     <div class="row" id="savePanelStep1" style="display: none;">
-      <div class="col-xs-12">
-        <h2>Image has been saved</h2>
-        <p><a href="#" target="_blank" rel="noopener" class="t3js-file-link"><span class="t3js-filepath"></span></a>
-        </p>
-        <h3>Should we connect the image to a field in this record?</h3>
-        <p class="lead">Choose one of the following fields.</p>
-        <ul class="t3js-list-of-fields"></ul>
-        <a href="#" class="btn btn-primary js-go-back"><i class="fa fa-arrow-left"></i> go back</a>
-      </div>
+        <div class="col-xs-12">
+            <h2>Image has been saved</h2>
+            <p><a href="#" target="_blank" rel="noopener" class="t3js-file-link"><span class="t3js-filepath"></span></a></p>
+            <h3>Should we connect the image to a field in this record?</h3>
+            <p class="lead">Choose one of the following fields.</p>
+            <ul class="t3js-list-of-fields"></ul>
+            <a href="#" class="btn btn-primary js-go-back">Back</a>
+        </div>
     </div>
     <div class="row" id="savePanelStep2" style="display: none;">
-      <div class="col-xs-12">
-        <h2>The selected fields contains images</h2>
-        <p class="lead">Please choose one option</p>
-        <table class="t3js-list-of-relations table table-striped table-hover"><tbody></tbody></table>
-        <a href="#" class="btn btn-primary js-go-back"><i class="fa fa-arrow-left"></i> go back</a>
-      </div>
+        <div class="col-xs-12">
+            <h2>The selected fields contains images</h2>
+            <p class="lead">Please choose one option</p>
+            <table class="t3js-list-of-relations table table-striped table-hover"><tbody></tbody></table>
+            <a href="#" class="btn btn-primary js-go-back">Back</a>
+        </div>
     </div>
     <div class="row" id="savePanelStep3" style="display: none;">
-      <div class="col-xs-12">
-        <h2>Image has been connected</h2>
-        <a href="#" class="btn btn-primary js-go-back"><i class="fa fa-arrow-left"></i> go back</a>
-      </div>
+        <div class="col-xs-12">
+            <h2>Image has been connected</h2>
+            <a href="#" class="btn btn-primary js-go-back">Back</a>
+        </div>
     </div>
-  </div>
-</html>
+</div>

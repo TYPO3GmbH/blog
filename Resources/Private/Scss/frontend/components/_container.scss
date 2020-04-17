@@ -1,0 +1,10 @@
+.blogcontainer {
+    display: grid;
+    grid-column-gap: 40px;
+}
+
+@media (min-width: 992px) {
+    .blogcontainer {
+        grid-template-columns: 1fr 300px;
+    }
+}

@@ -108,7 +108,15 @@ To create a new blog setup, follow these steps:
        to add all root pages to :typoscript:`plugin.tx_blog.settings.storagePid`
        as a comma separated list. The first value must be the value of NEW_blogFolder
 
+4) Configure storage PIDs via PageTSConfig:
 
+.. code-block:: ts
+
+   TCEFORM.pages.tags.PAGE_TSCONFIG_ID = 
+   TCEFORM.pages.authors.PAGE_TSCONFIG_ID = 
+   TCEFORM.pages.categories.PAGE_TSCONFIG_ID = 
+
+      
 Frontend Routing Setup
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -208,7 +216,7 @@ categories, tags and archive links.
 
 Metadata
 """"""""
-Displays post meta data, like date, tags, category, sharing links...
+Displays post meta data, like date, tags, category...
 
 
 Authors
@@ -242,12 +250,6 @@ Tags are blog specific records. Creating a new tag works in the same way as crea
 * Click on the page where you want to create the new tag
 * Enter a title for the tag
 * Click "Save"
-
-
-Enable sharing
---------------
-
-To enable sharing go to the page properties of your blog entry and set the check box "Sharing enabled"
 
 
 AvatarProvider

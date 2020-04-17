@@ -11,6 +11,11 @@
 .gitignore export-ignore
 .travis.yaml export-ignore
 
+# Build
+package.json export-ignore
+webpack.config.js export-ignore
+yarn.lock export-ignore
+
 # Enforce checkout with linux lf consistent over all plattforms
 *.xml text eol=lf
 *.html text eol=lf

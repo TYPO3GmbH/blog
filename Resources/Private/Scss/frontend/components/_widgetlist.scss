@@ -1,0 +1,51 @@
+/**
+ * Widget List
+ */
+.blogwidgetlist {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    .blogwidgetlist {
+        padding-left: 1rem;
+    }
+}
+.blogwidgetlist__itemcount {
+    margin-left: .25rem;
+    &:before {
+        content: '(';
+    }
+    &:after {
+        content: ')';
+    }
+}
+.blogwidgetlist__itemauthor {
+    font-weight: bold;
+}
+
+/**
+ * Widget Tags
+ */
+.blogwidgetlist--tags {
+    margin: -.25rem!important;
+    .blogwidgetlist__item {
+        display: inline-block;
+        vertical-align: middle;
+        margin: .25rem;
+    }
+}
+
+/**
+ * Widget Comments
+ */
+.blogwidgetlist--recentcomments {
+    .blogwidgetlist__item + .blogwidgetlist__item {
+        margin-top: 1rem;
+    }
+    .blogwidgetlist__itemtext {
+        margin-bottom: .25rem;
+    }
+    .blogwidgetlist__itemauthoron {
+        margin-left: .25rem;
+        margin-right: .25rem;
+    }
+}

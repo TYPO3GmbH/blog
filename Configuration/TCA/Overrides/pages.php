@@ -11,49 +11,81 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
+$ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
+
+// Add folder configuration
 $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
-    0 => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod.xlf:blog-folder',
+    0 => $ll . 'blog-folder',
     1 => 'blog',
-    2 => 'apps-pagetree-folder-contains-blog',
+    2 => 'record-folder-contains-blog',
 ];
+$GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-folder-contains-blog';
 
-$GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'apps-pagetree-folder-contains-blog';
+// Add new page types as possible select item:
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
+    'pages',
+    'doktype',
+    [
+        'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
+        (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
+        'record-blog-post',
+    ],
+    '1',
+    'after'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
+    'pages',
+    'doktype',
+    [
+        'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-page',
+        (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE,
+        'record-blog-page',
+    ],
+    (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
+    'after'
+);
 
-call_user_func(function () {
-    $blogDocType = \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST;
-
-    // Add new page type as possible select item:
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
-        'pages',
-        'doktype',
-        [
-            'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
-            $blogDocType,
-            'apps-pagetree-blog-post',
+// Add icon for new page types:
+\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
+    $GLOBALS['TCA']['pages'],
+    [
+        'ctrl' => [
+            'typeicon_classes' => [
+                (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE => 'record-blog-page',
+                (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE . '-root' => 'record-blog-page-root',
+                (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST => 'record-blog-post',
+            ],
         ],
-        '1',
-        'after'
-    );
-
-    // Add icon for new page type:
-    \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
-        $GLOBALS['TCA']['pages'],
-        [
-            'ctrl' => [
-                'typeicon_classes' => [
-                    $blogDocType => 'apps-pagetree-blog-post',
-                ],
+        'types' => [
+            (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST => $GLOBALS['TCA']['pages']['types'][\TYPO3\CMS\Frontend\Page\PageRepository::DOKTYPE_DEFAULT],
+        ],
+    ]
+);
+\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
+    $GLOBALS['TCA']['pages'],
+    [
+        'ctrl' => [
+            'typeicon_classes' => [
+                (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE => 'record-blog-page',
             ],
-            'types' => [
-                (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST => $GLOBALS['TCA']['pages']['types'][\TYPO3\CMS\Frontend\Page\PageRepository::DOKTYPE_DEFAULT],
-            ],
-        ]
-    );
+        ],
+        'types' => [
+            (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE => $GLOBALS['TCA']['pages']['types'][\TYPO3\CMS\Frontend\Page\PageRepository::DOKTYPE_DEFAULT],
+        ],
+    ]
+);
 
-    $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
-    $temporaryColumns = [
+// Register fields
+$GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
+    $GLOBALS['TCA']['pages']['columns'],
+    [
+        'crdate' => [
+            'label' => 'crdate',
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
         'comments_active' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.comments_active',
             'config' => [
                 'type' => 'check',
@@ -61,7 +93,6 @@ call_user_func(function () {
             ],
         ],
         'comments' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.comments',
             'config' => [
                 'type' => 'inline',
@@ -81,16 +112,7 @@ call_user_func(function () {
                 ],
             ],
         ],
-        'sharing_enabled' => [
-            'exclude' => 1,
-            'label' => $ll . 'pages.sharing_enabled',
-            'config' => [
-                'type' => 'check',
-                'default' => '1',
-            ],
-        ],
         'crdate_month' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.crdate_month',
             'config' => [
                 'type' => 'input',
@@ -101,7 +123,6 @@ call_user_func(function () {
             ],
         ],
         'crdate_year' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.crdate_year',
             'config' => [
                 'type' => 'input',
@@ -112,7 +133,6 @@ call_user_func(function () {
             ],
         ],
         'archive_date' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.archive_date',
             'config' => [
                 'type' => 'input',
@@ -120,10 +140,12 @@ call_user_func(function () {
                 'size' => '13',
                 'eval' => 'datetime',
                 'default' => '0',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
             ],
         ],
         'publish_date' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.publish_date',
             'config' => [
                 'type' => 'input',
@@ -131,10 +153,12 @@ call_user_func(function () {
                 'size' => '13',
                 'eval' => 'datetime',
                 'default' => '0',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
             ],
         ],
         'tags' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.tags',
             'config' => [
                 'type' => 'select',
@@ -148,52 +172,58 @@ call_user_func(function () {
                 'foreign_table_where' => 'AND tx_blog_domain_model_tag.sys_language_uid IN (0,-1) AND tx_blog_domain_model_tag.pid = ###PAGE_TSCONFIG_ID### ORDER BY tx_blog_domain_model_tag.title ASC',
                 'MM' => 'tx_blog_tag_pages_mm',
                 'enableMultiSelectFilterTextfield' => 1,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
             ],
         ],
         'authors' => [
-            'exclude' => 1,
             'label' => $ll . 'pages.authors',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'multiple' => 1,
+                'multiple' => 0,
                 'foreign_table' => 'tx_blog_domain_model_author',
+                'foreign_table_where' => 'AND tx_blog_domain_model_author.sys_language_uid IN (0,-1) AND tx_blog_domain_model_author.pid = ###PAGE_TSCONFIG_ID### ORDER BY tx_blog_domain_model_author.name ASC',
                 'MM' => 'tx_blog_post_author_mm',
                 'minitems' => 0,
                 'maxitems' => 99999,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
             ],
         ],
-    ];
+        'featured_image' => [
+            'label' => $ll . 'pages.featured_image',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'featured_image',
+                [
+                    'minitems' => 0,
+                    'maxitems' => 1,
+                    'behaviour' => [
+                        'allowLanguageSynchronization' => true
+                    ]
+                ],
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            ),
+        ],
+    ]
+);
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-        'blog',
-        'Configuration/PageTS/SocialImageWizard.tsconfig',
-        'Blog: SocialImageWizard'
-    );
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
-        'pages',
-        $temporaryColumns
-    );
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TCA']['pages']['types'][\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST]['columnsOverrides'] = [
-        'categories' => [
-            'config' => [
-                'foreign_table_where' => ' AND sys_category.pid = ###PAGE_TSCONFIG_ID### ' .
-                    $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where']
-            ]
+/** @noinspection UnsupportedStringOffsetOperationsInspection */
+$GLOBALS['TCA']['pages']['types'][\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST]['columnsOverrides'] = [
+    'categories' => [
+        'config' => [
+            'foreign_table_where' => ' AND sys_category.pid = ###PAGE_TSCONFIG_ID### ' .
+                $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where']
         ]
-    ];
+    ]
+];
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'publish_date', 'publish_date, crdate_month, crdate_year');
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
-        'pages',
-        '--div--;' . $ll . 'pages.tabs.blog,
-        --palette--;' . $ll . 'pages.palettes.publish_date;publish_date, archive_date, tags, authors, comments_active, comments, sharing_enabled',
-        (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
-    );
-
-    // Register Social Image Wizard
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TCA']['pages']['ctrl']['container']['inline']['fieldWizard']['BlogSocialImageWizard']['renderType'] = 'BlogSocialImageWizard';
-});
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'publish_date', 'publish_date, crdate_month, crdate_year');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+    'pages',
+    '--div--;' . $ll . 'pages.tabs.blog,
+    --palette--;' . $ll . 'pages.palettes.publish_date;publish_date, featured_image, archive_date, tags, authors, comments_active, comments',
+    (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
+);

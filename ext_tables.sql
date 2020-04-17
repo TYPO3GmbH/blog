@@ -74,6 +74,7 @@ CREATE TABLE tx_blog_domain_model_comment (
   sorting int(11) DEFAULT '0' NOT NULL,
   deleted tinyint(4) DEFAULT '0' NOT NULL,
   hidden tinyint(4) DEFAULT '0' NOT NULL,
+
   author int(11) DEFAULT '0' NOT NULL,
   name varchar(100) DEFAULT '' NOT NULL,
   url varchar(255) DEFAULT '' NOT NULL,
@@ -93,8 +94,8 @@ CREATE TABLE tx_blog_domain_model_comment (
 # Table structure for table 'pages'
 #
 CREATE TABLE pages (
+  featured_image int(11) unsigned DEFAULT '0' NOT NULL,
   comments_active tinyint(4) DEFAULT '1' NOT NULL,
-  sharing_enabled tinyint(4) DEFAULT '1' NOT NULL,
   publish_date int(11) DEFAULT '0' NOT NULL,
   archive_date int(11) DEFAULT '0' NOT NULL,
   crdate_month int(11) DEFAULT '0' NOT NULL,
@@ -127,7 +128,6 @@ CREATE TABLE tx_blog_domain_model_author (
   avatar_provider varchar(255) DEFAULT '' NOT NULL,
 
   twitter varchar(255) DEFAULT '' NOT NULL,
-  googleplus varchar(255) DEFAULT '' NOT NULL,
   linkedin varchar(255) DEFAULT '' NOT NULL,
   xing varchar(255) DEFAULT '' NOT NULL,
   profile varchar(255) DEFAULT '' NOT NULL,

@@ -1,0 +1,127 @@
+################################
+#### CONTENT ELEMENT WIZARD ####
+################################
+mod.wizards.newContentElement.wizardItems.blog {
+    after = common, menu, special, forms, plugins
+    header = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:wizard.group.blog
+    elements {
+        blog_posts {
+            iconIdentifier = plugin-blog-posts
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_posts.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_posts.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_posts
+            }
+        }
+        blog_latestposts {
+            iconIdentifier = plugin-blog-posts
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_latestposts.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_latestposts.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_latestposts
+            }
+        }
+        blog_category {
+            iconIdentifier = plugin-blog-category
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_category.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_category.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_category
+            }
+        }
+        blog_authorposts {
+            iconIdentifier = plugin-blog-authorposts
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authorposts.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authorposts.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_authorposts
+            }
+        }
+        blog_tag {
+            iconIdentifier = plugin-blog-tag
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_tag.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_tag.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_tag
+            }
+        }
+        blog_archive {
+            iconIdentifier = plugin-blog-archive
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_archive.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_archive.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_archive
+            }
+        }
+        blog_sidebar {
+            iconIdentifier = plugin-blog-sidebar
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_sidebar.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_sidebar.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_sidebar
+            }
+        }
+        blog_header {
+            iconIdentifier = plugin-blog-header
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_header.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_header.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_header
+            }
+        }
+        blog_footer {
+            iconIdentifier = plugin-blog-footer
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_footer.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_footer.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_footer
+            }
+        }
+        blog_commentform {
+            iconIdentifier = plugin-blog-commentform
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_commentform.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_commentform.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_commentform
+            }
+        }
+        blog_comments {
+            iconIdentifier = plugin-blog-comments
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_comments.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_comments.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_comments
+            }
+        }
+        blog_authors {
+            iconIdentifier = plugin-blog-authors
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authors.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authors.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_authors
+            }
+        }
+        blog_relatedposts {
+            iconIdentifier = plugin-blog-relatedposts
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_relatedposts.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_relatedposts.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_relatedposts
+            }
+        }
+    }
+    show = *
+}

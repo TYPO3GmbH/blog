@@ -14,6 +14,18 @@
 # customsubcategory=blog_150_authors=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_150_authors
 # customsubcategory=blog_160_notifications=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_160_notifications
 
+# customcategory=blog_post=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.post
+# customsubcategory=100_blog_post=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.post
+# customsubcategory=101_blog_post_featuredImage=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.post.featuredimage
+# customsubcategory=110_blog_post_header=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.post.header
+# customsubcategory=120_blog_post_footer=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.post.footer
+
+# customcategory=blog_list=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.list
+# customsubcategory=100_blog_list_featuredimage=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.featuredimage
+# customsubcategory=200_blog_list_element=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.element
+# customsubcategory=210_blog_list_element_header=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.element.header
+# customsubcategory=220_blog_list_element_footer=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.element.footer
+
 plugin {
     tx_blog {
         view {
@@ -48,7 +60,145 @@ plugin {
             # cat=blog/blog_100_uids; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.storagePid
             storagePid = 0
 
+            meta {
+                postheader {
+                    # cat=blog_post/110_blog_post_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
+                    enable = 1
+                    # cat=blog_post/110_blog_post_header; type=options[simple, condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
+                    modifier = simple
+                    elements {
+                        authors {
+                            # cat=blog_post/110_blog_post_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
+                            enable = 1
+                        }
+                        categories {
+                            # cat=blog_post/110_blog_post_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
+                            enable = 0
+                        }
+                        tags {
+                            # cat=blog_post/110_blog_post_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
+                            enable = 0
+                        }
+                        published {
+                            # cat=blog_post/110_blog_post_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
+                            enable = 1
+                            # cat=blog_post/110_blog_post_header; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
+                            format = %d.%m.%Y
+                        }
+                        comments {
+                            # cat=blog_post/110_blog_post_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
+                            enable = 1
+                        }
+                    }
+                }
+                postfooter {
+                    # cat=blog_post/120_blog_post_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.footer.enable
+                    enable = 1
+                    # cat=blog_post/120_blog_post_footer; type=options[simple, condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
+                    modifier = simple
+                    elements {
+                        authors {
+                            # cat=blog_post/120_blog_post_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
+                            enable = 0
+                        }
+                        categories {
+                            # cat=blog_post/120_blog_post_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
+                            enable = 1
+                        }
+                        tags {
+                            # cat=blog_post/120_blog_post_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
+                            enable = 1
+                        }
+                        published {
+                            # cat=blog_post/120_blog_post_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
+                            enable = 0
+                            # cat=blog_post/120_blog_post_footer; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
+                            format = %d.%m.%Y
+                        }
+                        comments {
+                            # cat=blog_post/120_blog_post_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
+                            enable = 0
+                        }
+                    }
+                }
+                listheader {
+                    # cat=blog_list/210_blog_list_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
+                    enable = 1
+                    # cat=blog_list/210_blog_list_element_header; type=options[simple, condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
+                    modifier = simple
+                    elements {
+                        authors {
+                            # cat=blog_list/210_blog_list_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
+                            enable = 0
+                        }
+                        categories {
+                            # cat=blog_list/210_blog_list_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
+                            enable = 0
+                        }
+                        tags {
+                            # cat=blog_list/210_blog_list_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
+                            enable = 0
+                        }
+                        published {
+                            # cat=blog_list/210_blog_list_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
+                            enable = 1
+                            # cat=blog_list/210_blog_list_element_header; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
+                            format = %d.%m.%Y
+                        }
+                        comments {
+                            # cat=blog_list/210_blog_list_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
+                            enable = 1
+                        }
+                    }
+                }
+                listfooter {
+                    # cat=blog_list/220_blog_list_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.footer.enable
+                    enable = 1
+                    # cat=blog_list/220_blog_list_element_footer; type=options[simple, condensed, extended]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
+                    modifier = simple
+                    elements {
+                        authors {
+                            # cat=blog_list/220_blog_list_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
+                            enable = 1
+                        }
+                        categories {
+                            # cat=blog_list/220_blog_list_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
+                            enable = 0
+                        }
+                        tags {
+                            # cat=blog_list/220_blog_list_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
+                            enable = 1
+                        }
+                        published {
+                            # cat=blog_list/220_blog_list_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
+                            enable = 0
+                            # cat=blog_list/220_blog_list_element_footer; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
+                            format = %d.%m.%Y
+                        }
+                        comments {
+                            # cat=blog_list/220_blog_list_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
+                            enable = 0
+                        }
+                    }
+                }
+            }
+
+            post {
+                featuredImage {
+                    # cat=blog_post/101_blog_post_featuredImage; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.width
+                    width = 1140
+                    # cat=blog_post/101_blog_post_featuredImage; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.height
+                    height = 400c
+                }
+            }
+
             lists {
+                featuredImage {
+                    # cat=blog_list/100_blog_list_featuredimage; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.width
+                    width = 1140
+                    # cat=blog_list/100_blog_list_featuredimage; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.height
+                    height = 400c
+                }
                 pagination {
                     # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.pagination.itemsPerPage
                     itemsPerPage = 10
@@ -65,6 +215,11 @@ plugin {
                     # cat=blog/blog_120_lists; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.dateFormat
                     dateFormat = %d.%m.%Y
                 }
+            }
+
+            latestPosts {
+                # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.latestPosts.limit
+                limit = 3
             }
 
             relatedPosts {
@@ -91,7 +246,7 @@ plugin {
                     # cat=blog/blog_133_widgets_tags; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.tags.minSize
                     minSize = 100
                     # cat=blog/blog_133_widgets_tags; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.tags.maxSize
-                    maxSize = 200
+                    maxSize = 100
                 }
                 archive {
                     # cat=blog/blog_134_widgets_archive; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.showCounter
@@ -115,6 +270,11 @@ plugin {
                 # cat=blog/blog_140_comments; type=options[0,1,-1]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.respectPostLanguageId
                 respectPostLanguageId = 1
 
+                date {
+                    # cat=blog/blog_140_comments; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.date.format
+                    format = %B %e, %Y
+                }
+
                 # cat=blog/blog_140_comments; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.disqus
                 disqus = 0
                 disqus {
@@ -136,7 +296,7 @@ plugin {
                 avatar {
                     provider {
                         # cat=blog/blog_150_authors; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.size
-                        size = 64
+                        size = 72
                         # cat=blog/blog_150_authors; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.default
                         default = mm
                         # cat=blog/blog_150_authors; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.rating
