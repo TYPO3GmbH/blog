@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        typo3: [^9.5, ^10.3, dev-master]
+        typo3: [^9.5, ^10.4]
         php: ['7.2', '7.3', '7.4']
 
     steps:
