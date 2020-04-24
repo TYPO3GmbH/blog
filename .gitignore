@@ -20,5 +20,6 @@ node_modules/
 var/
 config/
 
-# CGL Fixer
+# Cache
 .php_cs.cache
+.phplint.cache
