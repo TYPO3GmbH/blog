@@ -1,21 +1,22 @@
 <f:if condition="!{metatype}"><f:variable name="metatype" value="default" /></f:if>
-<f:variable name="modifier" value="{settings.meta.{metatype}.modifier}" />
-<f:if condition="{settings.meta.{metatype}.enable}">
+<f:variable name="metaSettings" value="{settings.meta.{metatype}}" />
+<f:variable name="modifier" value="{metaSettings.modifier}" />
+<f:if condition="{metaSettings.enable}">
     <f:render partial="Meta/Rendering/Group" arguments="{_all}" contentAs="content">
-        <f:if condition="{settings.meta.{metatype}.elements.authors.enable}">
+        <f:if condition="{metaSettings.elements.authors.enable}">
             <f:render partial="Meta/Elements/Authors" arguments="{_all}" />
         </f:if>
-        <f:if condition="{settings.meta.{metatype}.elements.categories.enable}">
+        <f:if condition="{metaSettings.elements.categories.enable}">
             <f:render partial="Meta/Elements/Categories" arguments="{_all}" />
         </f:if>
-        <f:if condition="{settings.meta.{metatype}.elements.tags.enable}">
+        <f:if condition="{metaSettings.elements.tags.enable}">
             <f:render partial="Meta/Elements/Tags" arguments="{_all}" />
         </f:if>
-        <f:if condition="{settings.meta.{metatype}.elements.published.enable}">
-            <f:variable name="publishDateFormat" value="{settings.meta.{metatype}.elements.published.format}" />
+        <f:if condition="{metaSettings.elements.published.enable}">
+            <f:variable name="publishDateFormat" value="{metaSettings.elements.published.format}" />
             <f:render partial="Meta/Elements/Published" arguments="{_all}" />
         </f:if>
-        <f:if condition="{settings.meta.{metatype}.elements.comments.enable}">
+        <f:if condition="{metaSettings.elements.comments.enable}">
             <f:render partial="Meta/Elements/Comments" arguments="{_all}" />
         </f:if>
     </f:render>

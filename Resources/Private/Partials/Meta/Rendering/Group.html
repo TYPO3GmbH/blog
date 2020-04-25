@@ -1,3 +1,4 @@
-<div class="postmetagroup postmetagroup--{settings.meta.{metatype}.modifier} postmetagroup--type-{metatype}">
+<f:variable name="metaSettings" value="{settings.meta.{metatype}}" />
+<div class="postmetagroup postmetagroup--{metaSettings.modifier} postmetagroup--type-{metatype}">
     {content -> f:format.raw()}
 </div>
