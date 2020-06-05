@@ -40,6 +40,14 @@ if (!(bool) $blogConfiguration['disablePageLayoutHeader']) {
 }
 
 /***************
+ * Register new form data provider
+ */
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][\T3G\AgencyPack\Blog\Backend\FormDataProvider\CategoryDefaultValueProvider::class] = [
+    'depends' => [\TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew::class],
+    'after' => [\TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew::class],
+];
+
+/***************
  * Overwrite create site configuration hook to include blog pages
  */
 if (class_exists('TYPO3\CMS\Core\Hooks\CreateSiteConfiguration')) {
@@ -231,6 +239,9 @@ call_user_func(function () {
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class]
         = \T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class;
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategoryTypeUpdate::class]
+    = \T3G\AgencyPack\Blog\Updates\CategoryTypeUpdate::class;
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class]
         = \T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class;
