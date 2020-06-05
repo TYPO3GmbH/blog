@@ -49,14 +49,14 @@ class PostRepository extends Repository
         $query = $this->createQuery();
 
         $this->defaultConstraints[] = $query->equals('doktype', Constants::DOKTYPE_BLOG_POST);
-		if (GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId() === 0) {
-			$this->defaultConstraints[] = $query->logicalOr([
-				$query->equals('l18n_cfg', 0),
-				$query->equals('l18n_cfg', 2)
-			]);
-		} else {
-			$this->defaultConstraints[] = $query->lessThan('l18n_cfg', 2);
-		}
+        if (GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId() === 0) {
+            $this->defaultConstraints[] = $query->logicalOr([
+                $query->equals('l18n_cfg', 0),
+                $query->equals('l18n_cfg', 2)
+            ]);
+        } else {
+            $this->defaultConstraints[] = $query->lessThan('l18n_cfg', 2);
+        }
         $this->defaultOrderings = [
             'publish_date' => QueryInterface::ORDER_DESCENDING,
         ];
