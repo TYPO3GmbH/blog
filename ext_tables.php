@@ -47,6 +47,7 @@ call_user_func(function () {
         'record-blog-page-root' => 'EXT:blog/Resources/Public/Icons/record-blog-page-root.svg',
         'record-blog-post' => 'EXT:blog/Resources/Public/Icons/record-blog-post.svg',
         'record-blog-tag' => 'EXT:blog/Resources/Public/Icons/record-blog-tag.svg',
+        'record-blog-category' => 'EXT:blog/Resources/Public/Icons/record-blog-category.svg',
         'record-folder-contains-blog' => 'EXT:blog/Resources/Public/Icons/record-folder-contains-blog.svg',
 
     ];

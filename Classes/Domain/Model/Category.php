@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
+use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
@@ -17,6 +18,11 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Category extends AbstractEntity
 {
+    /**
+     * @var int
+     */
+    protected $recordType = Constants::CATEGORY_TYPE_BLOG;
+
     /**
      * @var string
      * @Extbase\Validate("NotEmpty")
@@ -76,6 +82,14 @@ class Category extends AbstractEntity
         /** @extensionScannerIgnoreLine */
         $this->content = new ObjectStorage();
         $this->posts = new ObjectStorage();
+    }
+
+    /**
+     * @return int
+     */
+    public function getRecordType(): ?int
+    {
+        return $this->recordType;
     }
 
     /**

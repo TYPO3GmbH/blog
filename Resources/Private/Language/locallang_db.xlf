@@ -251,6 +251,9 @@
                 <source>Blog data</source>
             </trans-unit>
 
+            <trans-unit id="sys_category.record_type" xml:space="preserve">
+                <source>Record Type</source>
+            </trans-unit>
             <trans-unit id="sys_category.content" xml:space="preserve">
                 <source>Content</source>
             </trans-unit>

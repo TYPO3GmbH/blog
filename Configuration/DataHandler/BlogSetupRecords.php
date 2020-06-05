@@ -135,10 +135,12 @@ $data['tt_content']['NEW_BlogPostContentFirst'] = [
 // Categories
 $data['sys_category']['NEW_blogCategoryRoot'] = [
     'pid' => 'NEW_blogFolder',
+    'record_type' => \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_BLOG,
     'title' => 'Blog',
 ];
 $data['sys_category']['NEW_blogCategoryTYPO3'] = [
     'pid' => 'NEW_blogFolder',
+    'record_type' => \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_BLOG,
     'parent' => 'NEW_blogCategoryRoot',
     'title' => 'TYPO3',
 ];
