@@ -30,7 +30,7 @@ routeEnhancers:
           page: '@widget_0/currentPage'
     defaultController: 'Post::listPostsByDate'
     requirements:
-      year: '[0-9]{1..4}'
+      year: '[0-9]{1,4}'
       month: '[a-z]+'
       page: '\d+'
     aspects:
