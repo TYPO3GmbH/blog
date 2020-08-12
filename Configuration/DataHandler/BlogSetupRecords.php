@@ -158,7 +158,7 @@ $data['tx_blog_domain_model_author']['NEW_blogAuthor'] = [
     'location' => 'Düsseldorf',
     'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim ornare nisi vitae.',
     'website' => 'https://typo3.com/',
-    'email' => 'info@typo3.com',
+    'email' => 'noreply@typo3.com',
     'twitter' => 'typo3',
 ];
 
@@ -168,7 +168,7 @@ $data['tx_blog_domain_model_comment']['NEW_blogComment'] = [
     'status' => 10,
     'name' => 'TYPO3 Inc Team',
     'url' => 'https://typo3.com/',
-    'email' => 'info@typo3.com',
+    'email' => 'noreply@typo3.com',
     'comment' => 'Quisque vulputate, mauris eget tempus luctus, lorem ipsum interdum lorem, vitae maximus nulla est vel urna. In hac habitasse platea dictumst. Fusce lorem est, interdum vitae maximus sed, volutpat quis felis. Proin commodo velit sed rhoncus ornare. Ut a magna vitae est condimentum volutpat et ac ipsum. Nulla facilisi. Integer ut euismod felis. Aenean blandit eros neque.'
 ];
 
