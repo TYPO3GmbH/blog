@@ -145,7 +145,7 @@ class Author extends AbstractEntity
         if ($this->avatar === null) {
             $this->avatar = $this->getAvatarProvider();
         }
-        return $this->avatar->getAvatarUrl($this);
+        return $this->avatar->getAvatarUrl($this->getEmail());
     }
 
     /**

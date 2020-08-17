@@ -11,31 +11,99 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\AvatarProvider;
 
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
-use T3G\AgencyPack\Blog\Domain\Model\Author;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
-class GravatarProvider implements AvatarProviderInterface
+class GravatarProvider implements AvatarProviderInterface, SingletonInterface
 {
-    public function getAvatarUrl(Author $author): string
+    /**
+     * @var GravatarUriBuilderInterface
+     */
+    private $gravatarUriBuilder;
+
+    /**
+     * @var AvatarResourceResolverInterface
+     */
+    private $avatarResourceResolver;
+
+    /**
+     * @var CacheManager
+     */
+    private $cacheManager;
+
+    /**
+     * @var bool
+     */
+    private $proxyGravatarImage;
+
+    final public function __construct(
+        GravatarUriBuilderInterface $gravatarUriBuilder,
+        AvatarResourceResolverInterface $avatarResourceResolver,
+        CacheManager $cacheManager
+    ) {
+        $this->gravatarUriBuilder = $gravatarUriBuilder;
+        $this->avatarResourceResolver = $avatarResourceResolver;
+        $this->cacheManager = $cacheManager;
+
+        $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)
+            ->get('blog');
+
+        $this->proxyGravatarImage = (bool)($extensionConfiguration['proxyGravatarImage'] ?? false);
+        $this->proxyGravatarImage = true;
+    }
+
+    public function getAvatarUrl(string $email): string
     {
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
         $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
-        $defaultSize = 32;
-        $defaultDefault = 'mm';
-        $defaultRating = 'g';
-        $size = ($settings['authors']['avatar']['provider']['size'] ?? $defaultSize) ?: $defaultSize;
-        $default = ($settings['authors']['avatar']['provider']['default'] ?? $defaultDefault) ?: $defaultDefault;
-        $rating = ($settings['authors']['avatar']['provider']['rating'] ?? $defaultRating) ?: $defaultRating;
+        $size = !empty($size = (string)($settings['authors']['avatar']['provider']['size'] ?? '')) ? null : (int)$size;
+        $rating = !empty($rating = (string)($settings['authors']['avatar']['provider']['rating'] ?? '')) ? null : $rating;
+        $default = !empty($default = (string)($settings['authors']['avatar']['provider']['default'] ?? '')) ? null : $default;
 
-        $avatarUrl = 'https://www.gravatar.com/avatar/' . md5($author->getEmail())
-            . '?s=' . $size
-            . '&d=' . urlencode($default)
-            . '&r=' . $rating;
+        $gravatarUri = $this->gravatarUriBuilder->getUri(
+            $email,
+            $size,
+            $rating,
+            $default
+        );
 
-        return $avatarUrl;
+        if (!$this->proxyGravatarImage) {
+            return (string)$gravatarUri;
+        }
+
+        $gravatar = $this->avatarResourceResolver->resolve($gravatarUri);
+
+        if ($gravatar === null) {
+            // something went wrong, no need to deal with caching
+            return '';
+        }
+
+        $fileType = substr($gravatar->getContentType(), (int)strrpos($gravatar->getContentType(), '/') + 1);
+        $filePath = Environment::getPublicPath() . '/typo3temp/assets/t3g/blog/gravatar/' . md5($gravatar->getContent()) . '.' . $fileType;
+
+        $absoluteWebPath = PathUtility::getAbsoluteWebPath($filePath);
+
+        if (file_exists($filePath)) {
+            if (hash_equals(md5_file($filePath), md5($gravatar->getContent()))) {
+                return $absoluteWebPath;
+            }
+
+            unlink($filePath);
+        }
+
+        $errorMessage = GeneralUtility::writeFileToTypo3tempDir($filePath, $gravatar->getContent());
+        if ($errorMessage !== null && !file_exists($filePath)) {
+            throw new \RuntimeException($errorMessage, 1597674070);
+        }
+
+        return $absoluteWebPath;
     }
 }

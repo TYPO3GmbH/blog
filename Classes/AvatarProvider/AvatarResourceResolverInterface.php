@@ -8,9 +8,11 @@ declare(strict_types = 1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog;
+namespace T3G\AgencyPack\Blog\AvatarProvider;
 
-interface AvatarProviderInterface
+use Psr\Http\Message\UriInterface;
+
+interface AvatarResourceResolverInterface
 {
-    public function getAvatarUrl(string $email): string;
+    public function resolve(UriInterface $uri): ?AvatarResource;
 }
