@@ -14,5 +14,5 @@ use T3G\AgencyPack\Blog\Domain\Model\Author;
 
 interface AvatarProviderInterface
 {
-    public function getAvatarUrl(Author $email): string;
+    public function getAvatarUrl(Author $author): string;
 }
