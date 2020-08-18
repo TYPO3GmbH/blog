@@ -12,7 +12,6 @@ namespace T3G\AgencyPack\Blog\AvatarProvider;
 
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
-use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -34,23 +33,16 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
     private $avatarResourceResolver;
 
     /**
-     * @var CacheManager
-     */
-    private $cacheManager;
-
-    /**
      * @var bool
      */
     private $proxyGravatarImage;
 
     final public function __construct(
         GravatarUriBuilderInterface $gravatarUriBuilder,
-        AvatarResourceResolverInterface $avatarResourceResolver,
-        CacheManager $cacheManager
+        AvatarResourceResolverInterface $avatarResourceResolver
     ) {
         $this->gravatarUriBuilder = $gravatarUriBuilder;
         $this->avatarResourceResolver = $avatarResourceResolver;
-        $this->cacheManager = $cacheManager;
 
         $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)
             ->get('blog');
