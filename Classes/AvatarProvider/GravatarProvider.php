@@ -44,10 +44,7 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
      */
     private $proxyGravatarImage;
 
-    final public function __construct(/*
-        GravatarUriBuilderInterface $gravatarUriBuilder,
-        AvatarResourceResolverInterface $avatarResourceResolver
-    */)
+    final public function __construct()
     {
         $this->gravatarUriBuilder = GeneralUtility::makeInstance(
             GravatarUriBuilder::class,
