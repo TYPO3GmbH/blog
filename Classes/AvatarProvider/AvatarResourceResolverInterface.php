@@ -14,5 +14,5 @@ use Psr\Http\Message\UriInterface;
 
 interface AvatarResourceResolverInterface
 {
-    public function resolve(UriInterface $uri): ?AvatarResource;
+    public function resolve(UriInterface $uri): AvatarResource;
 }

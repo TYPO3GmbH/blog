@@ -11,6 +11,7 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\AvatarProvider;
 
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
+use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
@@ -58,7 +59,7 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         $this->proxyGravatarImage = true;
     }
 
-    public function getAvatarUrl(string $email): string
+    public function getAvatarUrl(Author $author): string
     {
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
@@ -69,7 +70,7 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         $default = !empty($default = (string)($settings['authors']['avatar']['provider']['default'] ?? '')) ? null : $default;
 
         $gravatarUri = $this->gravatarUriBuilder->getUri(
-            $email,
+            $author->getEmail(),
             $size,
             $rating,
             $default

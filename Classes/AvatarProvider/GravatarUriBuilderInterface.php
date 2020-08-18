@@ -14,9 +14,5 @@ use Psr\Http\Message\UriInterface;
 
 interface GravatarUriBuilderInterface
 {
-    public const DEFAULT_SIZE = 256;
-    public const DEFAULT_RATING = 'g';
-    public const DEFAULT_DEFAULT = 'mm';
-
     public function getUri(string $email, ?int $size = null, ?string $rating = null, ?string $default = null): UriInterface;
 }

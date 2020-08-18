@@ -13,21 +13,24 @@ namespace T3G\AgencyPack\Blog\AvatarProvider;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 
-class GravatarUriBuilder implements GravatarUriBuilderInterface
+final class GravatarUriBuilder implements GravatarUriBuilderInterface
 {
     private const BASE_URI = 'https://www.gravatar.com/';
+    private const DEFAULT_SIZE = 72;
+    private const DEFAULT_RATING = 'g';
+    private const DEFAULT_DEFAULT = 'mm';
 
     /**
      * @var UriFactoryInterface
      */
     private $uriFactory;
 
-    final public function __construct(UriFactoryInterface $uriFactory)
+    public function __construct(UriFactoryInterface $uriFactory)
     {
         $this->uriFactory = $uriFactory;
     }
 
-    final public function getUri(string $email, ?int $size = null, ?string $rating = null, ?string $default = null): UriInterface
+    public function getUri(string $email, ?int $size = null, ?string $rating = null, ?string $default = null): UriInterface
     {
         $emailHash = md5($email);
         $queryData = [

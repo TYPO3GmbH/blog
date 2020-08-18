@@ -94,6 +94,27 @@ class Comment extends AbstractEntity
     protected $status;
 
     /**
+     * @var string
+     */
+    protected $avatarUrl = '';
+
+    /**
+     * @return string
+     */
+    public function getAvatarUrl(): string
+    {
+        return $this->avatarUrl;
+    }
+
+    /**
+     * @param string $avatarUrl
+     */
+    public function setAvatarUrl(string $avatarUrl): void
+    {
+        $this->avatarUrl = $avatarUrl;
+    }
+
+    /**
      * @return FrontendUser
      */
     public function getAuthor(): ?FrontendUser

@@ -10,7 +10,9 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog;
 
+use T3G\AgencyPack\Blog\Domain\Model\Author;
+
 interface AvatarProviderInterface
 {
-    public function getAvatarUrl(string $email): string;
+    public function getAvatarUrl(Author $email): string;
 }

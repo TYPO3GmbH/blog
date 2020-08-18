@@ -14,15 +14,11 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\UriInterface;
-use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerAwareTrait;
 
-class GravatarResourceResolver implements AvatarResourceResolverInterface, LoggerAwareInterface
+final class GravatarResourceResolver implements AvatarResourceResolverInterface
 {
-    protected const HTTP_METHOD = 'GET';
+    private const HTTP_METHOD = 'GET';
     private const HTTP_OK_STATUS_CODE = 200;
-
-    use LoggerAwareTrait;
 
     /**
      * @var ClientInterface
@@ -34,7 +30,7 @@ class GravatarResourceResolver implements AvatarResourceResolverInterface, Logge
      */
     private $requestFactory;
 
-    final public function __construct(
+    public function __construct(
         ClientInterface $client,
         RequestFactoryInterface $requestFactory
     ) {
@@ -42,25 +38,23 @@ class GravatarResourceResolver implements AvatarResourceResolverInterface, Logge
         $this->requestFactory = $requestFactory;
     }
 
-    final public function resolve(UriInterface $uri): ?AvatarResource
+    /**
+     * @throws ClientExceptionInterface
+     * @throws \RuntimeException
+     */
+    public function resolve(UriInterface $uri): AvatarResource
     {
         $request = $this->requestFactory->createRequest(static::HTTP_METHOD, $uri);
-        try {
-            $response = $this->client->sendRequest($request);
-        } catch (ClientExceptionInterface $e) {
-            $this->logger->error($e->getMessage(), []);
-            return null;
-        }
+        $response = $this->client->sendRequest($request);
 
         if ($response->getStatusCode() !== self::HTTP_OK_STATUS_CODE) {
-            $this->logger->error(sprintf(
+            throw new \RuntimeException(sprintf(
                 'HTTP request "%s %s" returned non 200 status code "%d %s"',
                 static::HTTP_METHOD,
                 (string)$uri,
                 $response->getStatusCode(),
                 $response->getReasonPhrase()
             ));
-            return null;
         }
 
         $response->getBody()->rewind();

@@ -15,3 +15,7 @@ services:
 
     T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider:
         public: true
+
+    T3G\AgencyPack\Blog\Controller\CommentController:
+        arguments:
+            $avatarProvider: '@T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider'
