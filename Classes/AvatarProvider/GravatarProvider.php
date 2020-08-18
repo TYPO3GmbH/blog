@@ -72,9 +72,9 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
             return (string)$gravatarUri;
         }
 
-        $gravatar = $this->avatarResourceResolver->resolve($gravatarUri);
-
-        if ($gravatar === null) {
+        try {
+            $gravatar = $this->avatarResourceResolver->resolve($gravatarUri);
+        } catch (\Throwable $e) {
             // something went wrong, no need to deal with caching
             return '';
         }
