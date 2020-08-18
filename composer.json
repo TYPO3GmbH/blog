@@ -78,7 +78,9 @@
         "typo3/cms-form": "^9.5.5 || ^10.0 || 10.*@dev",
         "typo3/cms-frontend": "^9.5.5 || ^10.0 || 10.*@dev",
         "typo3/cms-install": "^9.5.5 || ^10.0 || 10.*@dev",
-        "typo3fluid/fluid": "^2.6"
+        "typo3fluid/fluid": "^2.6",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0"
     },
     "require-dev": {
         "typo3/cms-belog": "^9.5.5 || ^10.0 || 10.*@dev",
