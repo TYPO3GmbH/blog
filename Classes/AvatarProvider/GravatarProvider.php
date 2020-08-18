@@ -12,15 +12,15 @@ namespace T3G\AgencyPack\Blog\AvatarProvider;
 
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
+use T3G\AgencyPack\Blog\Http\Client;
+use T3G\AgencyPack\Blog\Http\RequestFactory;
+use T3G\AgencyPack\Blog\Http\UriFactory;
 use T3G\AgencyPack\Blog\Service\Avatar\AvatarResourceResolverInterface;
 use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarResourceResolver;
 use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarUriBuilder;
 use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarUriBuilderInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
-use TYPO3\CMS\Core\Http\Client;
-use TYPO3\CMS\Core\Http\RequestFactory;
-use TYPO3\CMS\Core\Http\UriFactory;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
