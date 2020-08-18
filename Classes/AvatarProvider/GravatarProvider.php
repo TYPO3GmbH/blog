@@ -79,7 +79,7 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
             return '';
         }
 
-        $fileType = substr($gravatar->getContentType(), (int)strrpos($gravatar->getContentType(), '/') + 1);
+        $fileType = $this->deriveFileTypeFromContentType($gravatar->getContentType());
         $filePath = Environment::getPublicPath() . '/typo3temp/assets/t3g/blog/gravatar/' . md5($gravatar->getContent()) . '.' . $fileType;
 
         $absoluteWebPath = PathUtility::getAbsoluteWebPath($filePath);
@@ -98,5 +98,10 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         }
 
         return $absoluteWebPath;
+    }
+
+    private function deriveFileTypeFromContentType(string $contentType): string
+    {
+        return substr($contentType, (int)strrpos($contentType, '/') + 1);
     }
 }
