@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Controller;
 
+use T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider;
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
@@ -41,9 +42,11 @@ class CommentController extends ActionController
      */
     private $avatarProvider;
 
-    public function __construct(
-        AvatarProviderInterface $avatarProvider
-    ) {
+    /**
+     * @param GravatarProvider $avatarProvider
+     */
+    public function injectGravatarProvider(GravatarProvider $avatarProvider): void
+    {
         $this->avatarProvider = $avatarProvider;
     }
 

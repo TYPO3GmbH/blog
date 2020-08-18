@@ -13,9 +13,14 @@ namespace T3G\AgencyPack\Blog\AvatarProvider;
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Service\Avatar\AvatarResourceResolverInterface;
+use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarResourceResolver;
+use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarUriBuilder;
 use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarUriBuilderInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Http\Client;
+use TYPO3\CMS\Core\Http\RequestFactory;
+use TYPO3\CMS\Core\Http\UriFactory;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -39,12 +44,20 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
      */
     private $proxyGravatarImage;
 
-    final public function __construct(
+    final public function __construct(/*
         GravatarUriBuilderInterface $gravatarUriBuilder,
         AvatarResourceResolverInterface $avatarResourceResolver
-    ) {
-        $this->gravatarUriBuilder = $gravatarUriBuilder;
-        $this->avatarResourceResolver = $avatarResourceResolver;
+    */)
+    {
+        $this->gravatarUriBuilder = GeneralUtility::makeInstance(
+            GravatarUriBuilder::class,
+            GeneralUtility::makeInstance(UriFactory::class)
+        );
+        $this->avatarResourceResolver = GeneralUtility::makeInstance(
+            GravatarResourceResolver::class,
+            GeneralUtility::makeInstance(Client::class, GeneralUtility::makeInstance(\GuzzleHttp\Client::class)),
+            GeneralUtility::makeInstance(RequestFactory::class)
+        );
 
         /** @var ExtensionConfiguration $extensionConfiguration */
         $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
