@@ -10,10 +10,6 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Controller;
 
-use T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider;
-use T3G\AgencyPack\Blog\AvatarProviderInterface;
-use T3G\AgencyPack\Blog\Domain\Model\Author;
-use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
@@ -36,19 +32,6 @@ class CommentController extends ActionController
      * @var CacheService
      */
     protected $blogCacheService;
-
-    /**
-     * @var AvatarProviderInterface
-     */
-    private $avatarProvider;
-
-    /**
-     * @param GravatarProvider $avatarProvider
-     */
-    public function injectGravatarProvider(GravatarProvider $avatarProvider): void
-    {
-        $this->avatarProvider = $avatarProvider;
-    }
 
     /**
      * @param PostRepository $postRepository
@@ -96,10 +79,6 @@ class CommentController extends ActionController
         if ($post instanceof Post) {
             $comments = $this->commentService->getCommentsByPost($post);
             foreach ($comments as $comment) {
-                /** @var Comment $comment */
-                $avatarUrl = $this->avatarProvider->getAvatarUrl((new Author())->setEmail($comment->getEmail()));
-                $comment->setAvatarUrl($avatarUrl);
-
                 $this->blogCacheService->addTagToPage('tx_blog_comment_' . $comment->getUid());
             }
             $this->view->assign('comments', $comments);
