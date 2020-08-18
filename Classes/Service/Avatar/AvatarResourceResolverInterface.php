@@ -8,15 +8,12 @@ declare(strict_types = 1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog\AvatarProvider;
+namespace T3G\AgencyPack\Blog\Service\Avatar;
 
 use Psr\Http\Message\UriInterface;
+use T3G\AgencyPack\Blog\DataTransferObject\AvatarResource;
 
-interface AvatarResource
+interface AvatarResourceResolverInterface
 {
-    public function getUri(): UriInterface;
-
-    public function getContentType(): string;
-
-    public function getContent(): string;
+    public function resolve(UriInterface $uri): AvatarResource;
 }

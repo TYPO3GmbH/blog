@@ -8,12 +8,15 @@ declare(strict_types = 1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog\AvatarProvider;
+namespace T3G\AgencyPack\Blog\Service\Avatar\Gravatar;
 
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\UriInterface;
+use T3G\AgencyPack\Blog\DataTransferObject\AvatarResource;
+use T3G\AgencyPack\Blog\DataTransferObject\Gravatar;
+use T3G\AgencyPack\Blog\Service\Avatar\AvatarResourceResolverInterface;
 
 final class GravatarResourceResolver implements AvatarResourceResolverInterface
 {

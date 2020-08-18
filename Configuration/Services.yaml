@@ -4,14 +4,17 @@ services:
         autoconfigure: true
         public: false
 
-    T3G\AgencyPack\Blog\:
-        resource: '../Classes/*'
+    T3G\AgencyPack\Blog\Domain\Repository\:
+        resource: '../Classes/Domain/Repository/*'
 
-    T3G\AgencyPack\Blog\AvatarProvider\AvatarResourceResolverInterface:
-        class: T3G\AgencyPack\Blog\AvatarProvider\GravatarResourceResolver
+    T3G\AgencyPack\Blog\Service\:
+        resource: '../Classes/Service/*'
 
-    T3G\AgencyPack\Blog\AvatarProvider\GravatarUriBuilderInterface:
-        class: T3G\AgencyPack\Blog\AvatarProvider\GravatarUriBuilder
+    T3G\AgencyPack\Blog\Service\Avatar\AvatarResourceResolverInterface:
+        class: T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarResourceResolver
+
+    T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarUriBuilderInterface:
+        class: T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarUriBuilder
 
     T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider:
         public: true

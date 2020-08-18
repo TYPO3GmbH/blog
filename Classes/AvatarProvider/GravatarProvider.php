@@ -12,6 +12,8 @@ namespace T3G\AgencyPack\Blog\AvatarProvider;
 
 use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
+use T3G\AgencyPack\Blog\Service\Avatar\AvatarResourceResolverInterface;
+use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarUriBuilderInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\SingletonInterface;

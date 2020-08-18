@@ -8,7 +8,7 @@ declare(strict_types = 1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog\AvatarProvider;
+namespace T3G\AgencyPack\Blog\DataTransferObject;
 
 use Psr\Http\Message\UriInterface;
 
