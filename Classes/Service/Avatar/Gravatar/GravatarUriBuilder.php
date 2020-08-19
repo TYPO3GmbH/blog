@@ -16,9 +16,6 @@ use Psr\Http\Message\UriInterface;
 final class GravatarUriBuilder implements GravatarUriBuilderInterface
 {
     private const BASE_URI = 'https://www.gravatar.com/';
-    private const DEFAULT_SIZE = 72;
-    private const DEFAULT_RATING = 'g';
-    private const DEFAULT_DEFAULT = 'mm';
 
     /**
      * @var UriFactoryInterface
@@ -33,11 +30,19 @@ final class GravatarUriBuilder implements GravatarUriBuilderInterface
     public function getUri(string $email, ?int $size = null, ?string $rating = null, ?string $default = null): UriInterface
     {
         $emailHash = md5($email);
-        $queryData = [
-            's' => $size ?? static::DEFAULT_SIZE,
-            'r' => $rating ?? static::DEFAULT_RATING,
-            'd' => $default ?? static::DEFAULT_DEFAULT,
-        ];
+
+        $queryData = [];
+        if ($size !== null) {
+            $queryData['s'] = (string)$size;
+        }
+
+        if ($rating !== null) {
+            $queryData['r'] = $rating;
+        }
+
+        if ($default !== null) {
+            $queryData['d'] = $default;
+        }
 
         return $this->uriFactory->createUri(self::BASE_URI)
             ->withPath('avatar/' . $emailHash)
