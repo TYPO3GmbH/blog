@@ -585,6 +585,9 @@
             <trans-unit id="extensionconfiguration.disablePageLayoutHeader" xml:space="preserve">
                 <source>Disable the page layout header: The page layout header shows additional information about blog posts in the TYPO3 page and list module.</source>
             </trans-unit>
+            <trans-unit id="extensionconfiguration.enableGravatarProxy" xml:space="preserve">
+                <source>Enables the proxying of gravatar images which means that calls to gravatar.com will be done server side instead of client side.</source>
+            </trans-unit>
 
             <!-- Feed -->
             <trans-unit id="feed.title.listPostsByCategory" xml:space="preserve">
