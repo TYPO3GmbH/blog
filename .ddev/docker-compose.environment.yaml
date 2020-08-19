@@ -4,3 +4,7 @@ services:
   web:
     environment:
       - TYPO3_CONTEXT=Development
+      - typo3DatabaseHost=db
+      - typo3DatabaseName=t3func
+      - typo3DatabasePassword=root
+      - typo3DatabaseUsername=root

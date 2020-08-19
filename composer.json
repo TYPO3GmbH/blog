@@ -52,11 +52,14 @@
         "t3g:test:php:unit": [
             "phpunit -c Build/UnitTests.xml --log-junit logs/phpunit.xml"
         ],
+        "t3g:test:php:functional": [
+            "phpunit -c Build/FunctionalTests.xml"
+        ],
         "t3g:test": [
             "@t3g:test:php:unit"
         ],
         "t3g:cgl": [
-            "php-cs-fixer fix --format=junit > logs/php-cs-fixer.xml"
+            "php-cs-fixer --diff -v fix"
         ],
         "post-autoload-dump": [
             "mkdir -p .build/web/typo3conf/ext/",
@@ -76,7 +79,9 @@
         "typo3/cms-fluid": "^9.5.1",
         "typo3/cms-frontend": "^9.5.1",
         "typo3/cms-install": "^9.5.1",
-        "typo3fluid/fluid": "^2.5.0"
+        "typo3fluid/fluid": "^2.5.0",
+        "psr/http-factory": "^1.0",
+        "psr/http-client": "^1.0"
     },
     "require-dev": {
         "typo3/cms-belog": "^9.5.1",

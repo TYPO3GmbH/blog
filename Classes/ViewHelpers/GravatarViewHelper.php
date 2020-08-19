@@ -10,6 +10,9 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers;
 
+use T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider;
+use T3G\AgencyPack\Blog\Domain\Model\Author;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class GravatarViewHelper extends AbstractTagBasedViewHelper
@@ -41,13 +44,12 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
      */
     public function render(): string
     {
+        /** @var GravatarProvider $gravatarProvider */
+        $gravatarProvider = GeneralUtility::makeInstance(GravatarProvider::class);
+        $src = $gravatarProvider->getAvatarUrl((new Author())->setEmail($this->arguments['email']));
+
         $size = (int)$this->arguments['size'];
-        $default = '';
-        if ($this->arguments['default'] !== null) {
-            $default = '&d=' . urlencode($this->arguments['default']);
-        }
-        $url = 'https://www.gravatar.com/avatar/' . md5($this->arguments['email']) . '?s=' . $size . $default;
-        $this->tag->addAttribute('src', $url);
+        $this->tag->addAttribute('src', $src);
         $this->tag->addAttribute('width', $size);
         $this->tag->addAttribute('height', $size);
 
