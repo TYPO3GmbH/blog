@@ -42,7 +42,7 @@ jobs:
         run: composer t3g:test:php:unit
 
       - name: Functional Tests
-        run: php .build/bin/phpunit -c Build/FunctionalTests.xml --colors;
+        run: composer t3g:test:php:functional;
         env:
           typo3DatabaseHost: 127.0.0.1
           typo3DatabaseName: t3func

@@ -49,6 +49,9 @@
         "t3g:test:php:unit": [
             "phpunit -c Build/UnitTests.xml"
         ],
+        "t3g:test:php:functional": [
+            "phpunit -c Build/FunctionalTests.xml"
+        ],
         "t3g:test": [
             "@t3g:test:php:lint",
             "@t3g:test:php:unit"
