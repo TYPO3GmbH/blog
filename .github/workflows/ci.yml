@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   build:
@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         typo3: [^9.5, ^10.4]
-        php: ['7.2', '7.3', '7.4']
+        php: [ '7.2', '7.3', '7.4' ]
 
     steps:
       - name: Start database server
@@ -38,13 +38,48 @@ jobs:
       - name: Lint PHP
         run: composer t3g:test:php:lint
 
-      - name: Unit Tests
+      - name: Unit Tests without coverage
+        if: matrix.typo3 == '^9.5'
         run: composer t3g:test:php:unit
 
-      - name: Functional Tests
-        run: composer t3g:test:php:functional;
+      - name: Unit Tests with coverage
+        if: matrix.typo3 == '^10.4'
+        run: composer t3g:test:php:unit:cover
+
+      - name: Functional Tests without coverage
+        run: composer t3g:test:php:functional
+        if: matrix.typo3 == '^9.5'
         env:
           typo3DatabaseHost: 127.0.0.1
           typo3DatabaseName: t3func
           typo3DatabasePassword: root
           typo3DatabaseUsername: root
+
+      - name: Functional Tests with coverage
+        run: composer t3g:test:php:functional:cover
+        if: matrix.typo3 == '^10.4'
+        env:
+          typo3DatabaseHost: 127.0.0.1
+          typo3DatabaseName: t3func
+          typo3DatabasePassword: root
+          typo3DatabaseUsername: root
+
+      - name: Upload coverage results to Coveralls
+        if: matrix.typo3 == '^10.4'
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_PARALLEL: true
+          COVERALLS_FLAG_NAME: php-${{ matrix.php }}
+        run: |
+          composer global require twinh/php-coveralls --no-progress --no-suggest --no-interaction
+          /home/runner/.composer/vendor/bin/php-coveralls --coverage_clover=var/log/junit/coverage-unit.xml --coverage_clover=var/log/junit/coverage-functional.xml -vvv --json_path=var/log/coveralls-upload.json
+
+  coveralls-finish:
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
