@@ -52,6 +52,14 @@
         "t3g:test:php:functional": [
             "phpunit -c Build/FunctionalTests.xml"
         ],
+        "t3g:test:php:unit:cover": [
+            "Composer\\Config::disableProcessTimeout",
+            "mkdir -p var/log/junit/ && phpunit -c Build/UnitTests.xml --log-junit var/log/junit/phpunit.xml --coverage-clover var/log/junit/coverage-unit.xml"
+        ],
+        "t3g:test:php:functional:cover": [
+            "Composer\\Config::disableProcessTimeout",
+            "mkdir -p var/log/junit/ && .build/bin/phpunit -c Build/FunctionalTests.xml --log-junit var/log/junit/phpunit.xml --coverage-clover var/log/junit/coverage-functional.xml"
+        ],
         "t3g:test": [
             "@t3g:test:php:lint",
             "@t3g:test:php:unit"

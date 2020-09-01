@@ -38,8 +38,8 @@ class GravatarProviderTest extends FunctionalTestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['blog']['enableGravatarProxy'] = '1';
 
         $gravatarProvider = new GravatarProvider();
-        self::assertSame(
-            'typo3temp/assets/t3g/blog/gravatar/9de8c28c6028de09355431e6435015a5.jpeg',
+        self::assertStringStartsWith(
+            'typo3temp/assets/t3g/blog/gravatar/',
             $gravatarProvider->getAvatarUrl((new Author())->setEmail('name@host.tld'))
         );
     }
