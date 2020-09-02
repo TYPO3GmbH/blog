@@ -30,7 +30,7 @@ class DatabaseMonthYearUpdate implements UpgradeWizardInterface
      */
     public function getIdentifier(): string
     {
-        return 'T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate';
+        return self::class;
     }
 
     /**
