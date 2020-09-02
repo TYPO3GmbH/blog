@@ -33,9 +33,6 @@ return [
         ],
         'searchFields' => 'uid,comment,name,email',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'hidden,author,name,email,comment',
-    ],
     'columns' => [
         'pid' => [
             'label' => 'pid',
