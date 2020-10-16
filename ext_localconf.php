@@ -247,7 +247,10 @@ call_user_func(function () {
         = \T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class;
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class]
-    = \T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class;
+        = \T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class;
+    /** @noinspection UnsupportedStringOffsetOperationsInspection */
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate::class]
+        = \T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate::class;
 
     // Register Static Database Mapper
     /** @noinspection UnsupportedStringOffsetOperationsInspection */
