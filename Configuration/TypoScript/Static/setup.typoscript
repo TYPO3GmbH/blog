@@ -12,16 +12,34 @@ plugin.tx_blog {
         storagePid = {$plugin.tx_blog.settings.storagePid}
     }
     view {
-        templateRootPaths.0 = {$plugin.tx_blog.view.templateRootPaths}
-        partialRootPaths.0 = {$plugin.tx_blog.view.partialRootPaths}
-        layoutRootPaths.0 = {$plugin.tx_blog.view.layoutRootPaths}
+        templateRootPaths {
+            0 = EXT:blog/Resources/Private/Templates/
+            1 = {$plugin.tx_blog.view.templateRootPaths}
+        }
+        partialRootPaths {
+            0 = EXT:blog/Resources/Private/Partials/
+            1 = {$plugin.tx_blog.view.partialRootPaths}
+        }
+        layoutRootPaths {
+            0 = EXT:blog/Resources/Private/Layouts/
+            1 = {$plugin.tx_blog.view.layoutRootPaths}
+        }
         widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = EXT:blog/Resources/Private/Templates
 
         # Emails
         emails {
-            templateRootPaths.0 = {$plugin.tx_blog.view.emails.templateRootPaths}
-            partialRootPaths.0 = {$plugin.tx_blog.view.emails.partialRootPaths}
-            layoutRootPaths.0 = {$plugin.tx_blog.view.emails.layoutRootPaths}
+            templateRootPaths {
+                0 = EXT:blog/Resources/Private/Mails/Templates/
+                1 = {$plugin.tx_blog.view.emails.templateRootPaths}
+            }
+            partialRootPaths {
+                0 = EXT:blog/Resources/Private/Mails/Partials/
+                1 = {$plugin.tx_blog.view.emails.partialRootPaths}
+            }
+            layoutRootPaths {
+                0 = EXT:blog/Resources/Private/Mails/Layouts/
+                1 = {$plugin.tx_blog.view.emails.layoutRootPaths}
+            }
         }
     }
     settings {
