@@ -368,6 +368,9 @@
             <trans-unit id="constantEditor.view.layoutRootPaths" xml:space="preserve">
                 <source>Layout Root Path: Path to layout folder</source>
             </trans-unit>
+            <trans-unit id="constantEditor.view.widget.templateRootPath" xml:space="preserve">
+                <source>Widget-Template Root Path: Path to templates folder</source>
+            </trans-unit>
             <trans-unit id="constantEditor.view.emails.templateRootPath" xml:space="preserve">
                 <source>Email-Template Root Path: Path to templates folder</source>
             </trans-unit>
