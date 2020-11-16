@@ -5,6 +5,7 @@
 # customsubcategory=blog_100_uids=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_100_uids
 # customsubcategory=blog_110_templates=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_110_templates
 # customsubcategory=blog_120_lists=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_120_lists
+# customsubcategory=blog_120_lists_archive=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_120_lists_archive
 # customsubcategory=blog_130_widgets=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_130_widgets
 # customsubcategory=blog_131_widgets_comments=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_131_widgets_comments
 # customsubcategory=blog_132_widgets_recent_posts=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_132_widgets_recent_posts
@@ -220,6 +221,15 @@ plugin {
                     # cat=blog/blog_120_lists; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.dateFormat
                     dateFormat = %d.%m.%Y
                 }
+            }
+
+            archive {
+                # cat=blog/blog_120_lists_archive; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.archive.showCounter
+                showCounter = 1
+                # cat=blog/blog_120_lists_archive; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.archive.yearDateFormat
+                yearDateFormat = %Y
+                # cat=blog/blog_120_lists_archive; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.archive.monthDateFormat
+                monthDateFormat = %B
             }
 
             latestPosts {

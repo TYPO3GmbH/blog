@@ -1,0 +1,17 @@
+/**
+ * Linklist
+ */
+ .bloglinklist {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.bloglinklist__itemcount {
+    margin-left: .25rem;
+    &:before {
+        content: '(';
+    }
+    &:after {
+        content: ')';
+    }
+}

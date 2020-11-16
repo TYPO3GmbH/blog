@@ -1,0 +1,19 @@
+<div class="bloglist__item bloglist__item--archiveyear">
+    <h2 class="bloglist__title" itemprop="name">
+        <blogvh:link.archive year="{year}" title="{year}">{year}</blogvh:link.archive>
+    </h2>
+    <div class="bloglist__content">
+        <ul class="bloglinklist">
+            <f:for each="{months}" as="month">
+                <li class="bloglinklist__item">
+                    <blogvh:link.archive class="bloglinklist__itemlink" year="{year}" month="{month.month}" title="{f:format.date(format: '{settings.archive.monthDateFormat} {settings.archive.yearDateFormat}', date: month.timestamp)}">
+                        <span class="bloglinklist__itemtitle">{f:format.date(format: '{settings.archive.monthDateFormat}', date: month.timestamp)}</span>
+                        <f:if condition="{settings.archive.showCounter} == 1">
+                            <span class="bloglinklist__itemcount">{month.count}</span>
+                        </f:if>
+                    </blogvh:link.archive>
+                </li>
+            </f:for>
+        </ul>
+    </div>
+</div>

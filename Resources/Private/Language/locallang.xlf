@@ -22,6 +22,9 @@
             <trans-unit id="headline.category" xml:space="preserve">
                 <source>Posts of category: %s</source>
             </trans-unit>
+            <trans-unit id="headline.category.simple" xml:space="preserve">
+                <source>Category</source>
+            </trans-unit>
             <trans-unit id="headline.categories" xml:space="preserve">
                 <source>Categories</source>
             </trans-unit>
@@ -37,11 +40,17 @@
             <trans-unit id="headline.author" xml:space="preserve">
                 <source>Posts by %s</source>
             </trans-unit>
+            <trans-unit id="headline.author.simple" xml:space="preserve">
+                <source>Author</source>
+            </trans-unit>
             <trans-unit id="headline.authors" xml:space="preserve">
                 <source>Authors</source>
             </trans-unit>
             <trans-unit id="headline.tag" xml:space="preserve">
                 <source>Posts tagged with %s</source>
+            </trans-unit>
+            <trans-unit id="headline.tag.simple" xml:space="preserve">
+                <source>Tag</source>
             </trans-unit>
             <trans-unit id="headline.tags" xml:space="preserve">
                 <source>Tags</source>
@@ -311,6 +320,9 @@
             <trans-unit id="constantEditor.blog_120_lists" xml:space="preserve">
                 <source>Listings</source>
             </trans-unit>
+            <trans-unit id="constantEditor.blog_120_lists_archive" xml:space="preserve">
+                <source>Listings: Archive</source>
+            </trans-unit>
             <trans-unit id="constantEditor.customsubcategory.post" xml:space="preserve">
                 <source>Post</source>
             </trans-unit>
@@ -516,6 +528,15 @@
                 <source>Year format:The format of the year (default: %Y).</source>
             </trans-unit>
             <trans-unit id="constantEditor.widgets.archive.monthDateFormat" xml:space="preserve">
+                <source>Month format:The format of the month (default: %B).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.archive.showCounter" xml:space="preserve">
+                <source>Show counter:If enabled, the count of posts is visible (default: 1).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.archive.yearDateFormat" xml:space="preserve">
+                <source>Year format:The format of the year (default: %Y).</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.archive.monthDateFormat" xml:space="preserve">
                 <source>Month format:The format of the month (default: %B).</source>
             </trans-unit>
             <trans-unit id="constantEditor.meta.header.enable" xml:space="preserve">

@@ -2,35 +2,48 @@
 <f:section name="Content">
     <f:if condition="{author}">
         <f:then>
-            <h1 class="page__title">
-                <span class="page__titletext"><f:translate key="headline.author" arguments="{0: author.name}" /></span>
-                <blogvh:link.author class="page__titlelink" rss="true" author="{author}">
-                    <span class="blogicon"><f:render partial="General/SocialIcons" section="Rss" optional="true" /></span>
-                </blogvh:link.author>
-            </h1>
-            <div class="taxonomy-description">
-                <p>{author.bio}</p>
-            </div>
-            <f:if condition="{author.allTags}">
-                <div class="taxonomy-tags">
-                    <ul class="blogtaglist">
-                        <f:for each="{author.allTags}" as="tag">
-                            <li class="blogtaglist__item"><blogvh:link.tag class="blogbadge" tag="{tag}"/></li>
-                        </f:for>
-                    </ul>
-                </div>
-            </f:if>
+
+            <header class="blogarchiveheader blogarchiveheader--author">
+                <h1 class="blogarchiveheader__title">
+                    <span class="blogarchiveheader__titletext">
+                        <f:translate key="headline.author.simple" />:
+                        {author.name}
+                    </span>
+                    <blogvh:link.author class="blogarchiveheader__titlelink" rss="true" author="{author}">
+                        <span class="blogicon"><f:render partial="General/SocialIcons" section="Rss" optional="true" /></span>
+                    </blogvh:link.author>
+                </h1>
+                <f:if condition="{author.bio}">
+                    <div class="blogarchiveheader__description">
+                        <p>{author.bio}</p>
+                    </div>
+                </f:if>
+                <f:if condition="{author.allTags}">
+                    <div class="blogarchiveheader__taxonomy blogarchiveheader__taxonomy--tags">
+                        <ul class="blogtaglist">
+                            <f:for each="{author.allTags}" as="tag">
+                                <li class="blogtaglist__item"><blogvh:link.tag class="blogbadge" tag="{tag}"/></li>
+                            </f:for>
+                        </ul>
+                    </div>
+                </f:if>
+            </header>
             <f:render partial="List" arguments="{_all}" />
+
         </f:then>
         <f:else>
-            <h1 class="page__title">
-                <span class="page__titletext"><f:translate key="headline.authors" /></span>
-            </h1>
-            <ul class="list-inline">
+
+            <header class="blogarchiveheader blogarchiveheader--authors">
+                <h1 class="blogarchiveheader__title">
+                    <span class="blogarchiveheader__titletext"><f:translate key="headline.authors" /></span>
+                </h1>
+            </header>
+            <div class="bloglist bloglist--authors">
                 <f:for each="{authors}" as="author">
-                    <li><blogvh:link.author author="{author}" /></li>
+                    <f:render partial="List/Author" arguments="{_all}" />
                 </f:for>
-            </ul>
+            </div>
+
         </f:else>
     </f:if>
 </f:section>

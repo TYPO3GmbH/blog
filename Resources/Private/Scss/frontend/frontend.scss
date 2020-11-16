@@ -1,19 +1,23 @@
 /**
  * Components
  */
-@import "components/container";
-@import "components/page";
-@import "components/metagroup";
-@import "components/author";
-@import "components/badge";
-@import "components/icons";
-@import "components/image";
-@import "components/comment";
-@import "components/list";
-@import "components/pagination";
-@import "components/taglist";
-@import "components/widget";
-@import "components/widgetlist";
+@import "components/blog/container";
+@import "components/blog/list";
+@import "components/blog/archive";
+@import "components/blog/badge";
+@import "components/blog/icons";
+@import "components/blog/image";
+@import "components/blog/linklist";
+@import "components/blog/pagination";
+@import "components/blog/taglist";
+@import "components/blog/widget";
+@import "components/blog/widgetlist";
+
+@import "components/post/author";
+@import "components/post/comment";
+@import "components/post/list";
+@import "components/post/metagroup";
+
 
 /**
  * Misc

@@ -1,0 +1,8 @@
+<div class="bloglist__item bloglist__item--tag">
+    <h2 class="bloglist__title" itemprop="name"><blogvh:link.tag tag="{tag}" /></h2>
+    <f:if condition="{tag.description}">
+        <p class="bloglist__description" itemprop="description">
+            <f:format.crop maxCharacters="250" append="&nbsp;[...]">{tag.description}</f:format.crop>
+        </p>
+    </f:if>
+</div>

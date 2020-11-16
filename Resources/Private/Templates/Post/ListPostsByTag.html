@@ -2,29 +2,44 @@
 <f:section name="Content">
     <f:if condition="{tag}">
         <f:then>
-            <h1 class="page__title">
-                <span class="page__titletext"><f:translate key="headline.tag" arguments="{0: tag.title}" /></span>
-                <blogvh:link.tag class="page__titlelink" rss="true" tag="{tag}">
-                    <span class="blogicon"><f:render partial="General/SocialIcons" section="Rss" optional="true" /></span>
-                </blogvh:link.tag>
-            </h1>
-            <div class="taxonomy-description">
-                <p>{tag.description}</p>
-                <f:if condition="{tag.content}">
-                    <f:cObject typoscriptObjectPath="lib.blog.contentElementRendering">{tag.contentElementUidList}</f:cObject>
-                </f:if>
-            </div>
+
+            <header class="blogarchiveheader blogarchiveheader--tag">
+                <h1 class="blogarchiveheader__title">
+                    <span class="page__titletext">
+                        <f:translate key="headline.tag.simple" />:
+                        {tag.title}
+                    </span>
+                    <blogvh:link.tag class="page__titlelink" rss="true" tag="{tag}">
+                        <span class="blogicon"><f:render partial="General/SocialIcons" section="Rss" optional="true" /></span>
+                    </blogvh:link.tag>
+                </h1>
+                <div class="blogarchiveheader__description">
+                    <p>{tag.description}</p>
+                </div>
+            </header>
             <f:render partial="List" arguments="{_all}" />
+            <f:if condition="{tag.content}">
+                <footer class="blogarchivefooter blogarchivefooter--tag">
+                    <f:cObject typoscriptObjectPath="lib.blog.contentElementRendering">{tag.contentElementUidList}</f:cObject>
+                </footer>
+            </f:if>
+
         </f:then>
         <f:else>
-            <h1 class="page__title">
-                <span class="page__titletext"><f:translate key="headline.tags" /></span>
-            </h1>
-            <ul class="list-inline">
+
+            <header class="blogarchiveheader blogarchiveheader--tags">
+                <h1 class="blogarchiveheader__title">
+                    <span class="blogarchiveheader__titletext">
+                        <f:translate key="headline.tags" />
+                    </span>
+                </h1>
+            </header>
+            <div class="bloglist bloglist--tag">
                 <f:for each="{tags}" as="tag">
-                    <li><blogvh:link.tag tag="{tag}" /></li>
+                    <f:render partial="List/Tag" arguments="{_all}" />
                 </f:for>
-            </ul>
+            </div>
+
         </f:else>
     </f:if>
 </f:section>

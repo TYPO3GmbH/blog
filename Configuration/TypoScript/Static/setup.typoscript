@@ -183,6 +183,13 @@ plugin.tx_blog {
             }
         }
 
+        # Archive settings
+        archive {
+            showCounter = {$plugin.tx_blog.settings.archive.showCounter}
+            yearDateFormat = {$plugin.tx_blog.settings.archive.yearDateFormat}
+            monthDateFormat = {$plugin.tx_blog.settings.archive.monthDateFormat}
+        }
+
         # Latest post settings
         latestPosts {
             limit = {$plugin.tx_blog.settings.latestPosts.limit}
