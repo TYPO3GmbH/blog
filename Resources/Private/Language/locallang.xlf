@@ -182,6 +182,18 @@
             <trans-unit id="list.no_posts.message" xml:space="preserve">
                 <source>This list contains no blog posts.</source>
             </trans-unit>
+            <trans-unit id="list.backlink.authors" xml:space="preserve">
+                <source>Back to Authors</source>
+            </trans-unit>
+            <trans-unit id="list.backlink.categories" xml:space="preserve">
+                <source>Back to Categories</source>
+            </trans-unit>
+            <trans-unit id="list.backlink.tags" xml:space="preserve">
+                <source>Back to Tags</source>
+            </trans-unit>
+            <trans-unit id="list.backlink.archive" xml:space="preserve">
+                <source>Back to Archive</source>
+            </trans-unit>
 
             <!-- Backend -->
             <trans-unit id="backend.headline.setup_wizard" xml:space="preserve">

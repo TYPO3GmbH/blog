@@ -18,9 +18,20 @@
                 </div>
             </header>
             <f:render partial="List" arguments="{_all}" />
-            <f:if condition="{category.content}">
+            <f:if condition="{settings.categoryUid} || {category.content}">
                 <footer class="blogarchivefooter blogarchivefooter--category">
-                    <f:cObject typoscriptObjectPath="lib.blog.contentElementRendering">{category.contentElementUidList}</f:cObject>
+                    <f:if condition="{settings.categoryUid}">
+                        <div class="blogarchivefooter__backlink">
+                            <f:link.page pageUid="{settings.categoryUid}">
+                                <f:translate key="list.backlink.categories" />
+                            </f:link.page>
+                        </div>
+                    </f:if>
+                    <f:if condition="{category.content}">
+                        <div class="blogarchivefooter__content">
+                            <f:cObject typoscriptObjectPath="lib.blog.contentElementRendering">{category.contentElementUidList}</f:cObject>
+                        </div>
+                    </f:if>
                 </footer>
             </f:if>
 

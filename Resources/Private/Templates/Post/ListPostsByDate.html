@@ -15,6 +15,15 @@
                 </h1>
             </header>
             <f:render partial="List" arguments="{_all}" />
+            <f:if condition="{settings.authorUid}">
+                <footer class="blogarchivefooter blogarchivefooter--archive">
+                    <div class="blogarchivefooter__backlink">
+                        <f:link.page pageUid="{settings.archiveUid}">
+                            <f:translate key="list.backlink.archive" />
+                        </f:link.page>
+                    </div>
+                </footer>
+            </f:if>
 
         </f:then>
         <f:else>
