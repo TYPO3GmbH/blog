@@ -185,14 +185,26 @@
             <trans-unit id="list.backlink.authors" xml:space="preserve">
                 <source>Back to Authors</source>
             </trans-unit>
+            <trans-unit id="list.show.author" xml:space="preserve">
+                <source>Show Author</source>
+            </trans-unit>
             <trans-unit id="list.backlink.categories" xml:space="preserve">
                 <source>Back to Categories</source>
+            </trans-unit>
+            <trans-unit id="list.show.category" xml:space="preserve">
+                <source>Show Category</source>
             </trans-unit>
             <trans-unit id="list.backlink.tags" xml:space="preserve">
                 <source>Back to Tags</source>
             </trans-unit>
+            <trans-unit id="list.show.tag" xml:space="preserve">
+                <source>Show Tag</source>
+            </trans-unit>
             <trans-unit id="list.backlink.archive" xml:space="preserve">
                 <source>Back to Archive</source>
+            </trans-unit>
+            <trans-unit id="list.show.archive" xml:space="preserve">
+                <source>Show Archive</source>
             </trans-unit>
 
             <!-- Backend -->

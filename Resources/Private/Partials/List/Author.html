@@ -1,8 +1,13 @@
 <div class="bloglist__item bloglist__item--author">
-    <h2 class="bloglist__title" itemprop="name"><blogvh:link.author author="{author}" /></h2>
+    <h2 class="bloglist__title" itemprop="name">
+        <blogvh:link.author author="{author}" />
+    </h2>
     <f:if condition="{author.bio}">
         <p class="bloglist__description" itemprop="description">
-            <f:format.crop maxCharacters="250" append="&nbsp;[...]">{author.bio}</f:format.crop>
+            <f:format.crop maxCharacters="200" append="&nbsp;[...]">{author.bio}</f:format.crop>
         </p>
     </f:if>
+    <blogvh:link.author class="bloglist__link" author="{author}">
+        <f:translate key="list.show.author" />
+    </blogvh:link.author>
 </div>

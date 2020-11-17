@@ -1,8 +1,13 @@
 <div class="bloglist__item bloglist__item--category">
-    <h2 class="bloglist__title" itemprop="name"><blogvh:link.category category="{category}" /></h2>
+    <h2 class="bloglist__title" itemprop="name">
+        <blogvh:link.category category="{category}" />
+    </h2>
     <f:if condition="{category.description}">
         <p class="bloglist__description" itemprop="description">
-            <f:format.crop maxCharacters="250" append="&nbsp;[...]">{category.description}</f:format.crop>
+            <f:format.crop maxCharacters="200" append="&nbsp;[...]">{category.description}</f:format.crop>
         </p>
     </f:if>
+    <blogvh:link.category class="bloglist__link" category="{category}">
+        <f:translate key="list.show.category" />
+    </blogvh:link.category>
 </div>
