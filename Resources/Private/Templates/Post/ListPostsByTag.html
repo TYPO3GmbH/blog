@@ -20,14 +20,16 @@
             <f:render partial="List" arguments="{_all}" />
             <f:if condition="{settings.tagUid} || {tag.content}">
                 <footer class="blogarchivefooter blogarchivefooter--tag">
-                    <f:if condition="{tag.content}">
-                        <f:cObject typoscriptObjectPath="lib.blog.contentElementRendering">{tag.contentElementUidList}</f:cObject>
-                    </f:if>
                     <f:if condition="{settings.tagUid}">
                         <div class="blogarchivefooter__backlink">
                             <f:link.page pageUid="{settings.tagUid}">
                                 <f:translate key="list.backlink.tags" />
                             </f:link.page>
+                        </div>
+                    </f:if>
+                    <f:if condition="{tag.content}">
+                        <div class="blogarchivefooter__content">
+                            <f:cObject typoscriptObjectPath="lib.blog.contentElementRendering">{tag.contentElementUidList}</f:cObject>
                         </div>
                     </f:if>
                 </footer>
