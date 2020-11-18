@@ -62,8 +62,8 @@
         </div>
     </div>
     <f:section name="ProfileLink">
-        <f:if condition="{author.profile}">
-            <f:then><a rel="author" href="{author.profile}"><span itemprop="name">{content}</span></a></f:then>
+        <f:if condition="{author.detailsPage} || {settings.authorUid}">
+            <f:then><blogvh:link.author rel="author" author="{author}"><span itemprop="name">{content}</span></blogvh:link.author></f:then>
             <f:else><span itemprop="name">{content}</span></f:else>
         </f:if>
     </f:section>

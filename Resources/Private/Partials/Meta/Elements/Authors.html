@@ -10,15 +10,15 @@
         <ul class="postmetagroup__list">
             <f:for each="{post.authors}" as="author">
                 <li>
-                    <f:render section="ProfileLink" arguments="{author: authors}" contentAs="content">{author.name}</f:render>
+                    <f:render section="ProfileLink" arguments="{author: author}" contentAs="content">{author.name}</f:render>
                 </li>
             </f:for>
         </ul>
     </f:render>
 </f:if>
 <f:section name="ProfileLink">
-    <f:if condition="{author.profile}">
-        <f:then><a rel="author" href="{author.profile}"><span itemprop="name">{content}</span></a></f:then>
+    <f:if condition="{author.detailsPage} || {settings.authorUid}">
+        <f:then><blogvh:link.author rel="author" author="{author}"><span itemprop="name">{content}</span></blogvh:link.author></f:then>
         <f:else><span itemprop="name">{content}</span></f:else>
     </f:if>
 </f:section>
