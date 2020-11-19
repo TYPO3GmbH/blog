@@ -72,6 +72,10 @@ plugin.tx_blog {
                 elements {
                     authors {
                         enable = {$plugin.tx_blog.settings.meta.postheader.elements.authors.enable}
+                        avatar {
+                            enable = {$plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.enable}
+                            size = {$plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.size}
+                        }
                     }
                     categories {
                         enable = {$plugin.tx_blog.settings.meta.postheader.elements.categories.enable}
@@ -94,6 +98,10 @@ plugin.tx_blog {
                 elements {
                     authors {
                         enable = {$plugin.tx_blog.settings.meta.postfooter.elements.authors.enable}
+                        avatar {
+                            enable = {$plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.enable}
+                            size = {$plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.size}
+                        }
                     }
                     categories {
                         enable = {$plugin.tx_blog.settings.meta.postfooter.elements.categories.enable}
@@ -116,6 +124,10 @@ plugin.tx_blog {
                 elements {
                     authors {
                         enable = {$plugin.tx_blog.settings.meta.listheader.elements.authors.enable}
+                        avatar {
+                            enable = {$plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.enable}
+                            size = {$plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.size}
+                        }
                     }
                     categories {
                         enable = {$plugin.tx_blog.settings.meta.listheader.elements.categories.enable}
@@ -138,6 +150,10 @@ plugin.tx_blog {
                 elements {
                     authors {
                         enable = {$plugin.tx_blog.settings.meta.listfooter.elements.authors.enable}
+                        avatar {
+                            enable = {$plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.enable}
+                            size = {$plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.size}
+                        }
                     }
                     categories {
                         enable = {$plugin.tx_blog.settings.meta.listfooter.elements.categories.enable}

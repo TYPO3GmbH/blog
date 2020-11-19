@@ -587,6 +587,12 @@
             <trans-unit id="constantEditor.meta.elements.authors.enable" xml:space="preserve">
                 <source>Show authors in the meta section</source>
             </trans-unit>
+            <trans-unit id="constantEditor.meta.elements.authors.avatar.enable" xml:space="preserve">
+                <source>Enable author avatars in the meta section</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.meta.elements.authors.avatar.size" xml:space="preserve">
+                <source>Size of the author avatars:The size in px for the author avatar</source>
+            </trans-unit>
             <trans-unit id="constantEditor.meta.elements.categories.enable" xml:space="preserve">
                 <source>Show categories in the meta section</source>
             </trans-unit>

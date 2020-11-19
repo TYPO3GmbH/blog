@@ -9,7 +9,11 @@
     <f:render partial="Meta/Rendering/Item" arguments="{name: name, icon: icon, prefix: prefix}" contentAs="content">
         <ul class="postmetagroup__list">
             <f:for each="{post.categories}" as="postCategory">
-                <li><blogvh:link.category category="{postCategory}" /></li>
+                <li>
+                    <span class="postmetagroup__listitem">
+                        <span class="postmetagroup__listtext"><blogvh:link.category category="{postCategory}" /></span>
+                    </span>
+                </li>
             </f:for>
         </ul>
     </f:render>

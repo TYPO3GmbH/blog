@@ -3,14 +3,21 @@
 <f:variable name="prefix"><f:translate key="meta.authors.author"/></f:variable>
 
 <f:if condition="{post.authors}">
-    <f:if condition="{post.authors} > 1">
-        <f:variable name="prefix"><f:translate key="meta.author.authors"/></f:variable>
+    <f:if condition="{post.authors -> f:count()} > 1">
+        <f:variable name="prefix"><f:translate key="meta.authors.authors"/></f:variable>
     </f:if>
     <f:render partial="Meta/Rendering/Item" arguments="{name: name, icon: icon, prefix: prefix}" contentAs="content">
         <ul class="postmetagroup__list">
             <f:for each="{post.authors}" as="author">
                 <li>
-                    <f:render section="ProfileLink" arguments="{author: author}" contentAs="content">{author.name}</f:render>
+                    <span class="postmetagroup__listitem">
+                        <f:if condition="{avatarSettings.enable}">
+                            <f:variable name="avatarsize" value="{avatarSettings.size as integer}" />
+                            <f:if condition="{avatarsize}"><f:else><f:variable name="avatarsize" value="24" /></f:else></f:if>
+                            <span class="postmetagroup__listprefix"><img class="postmetagroup__listavatar" height="{avatarsize}" width="{avatarsize}" src="{author.avatar}" itemprop="image"></span>
+                        </f:if>
+                        <span class="postmetagroup__listtext" data-prefix="{f:translate(key:'meta.authors.author')}"><f:render section="ProfileLink" arguments="{author: author}" contentAs="content">{author.name}</f:render></span>
+                    </span>
                 </li>
             </f:for>
         </ul>

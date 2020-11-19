@@ -37,8 +37,21 @@
         &:not(:last-child):after {
             display: inline;
             content: ', ';
+            margin-right: .25rem;
         }
     }
+}
+.postmetagroup__listitem {
+    display: inline-flex;
+    align-items: center;
+}
+.postmetagroup__listprefix {
+    margin-right: .25rem;
+    line-height: 1;
+}
+.postmetagroup__listavatar {
+    display: inline-block;
+    border-radius: 50%;
 }
 
 /**
