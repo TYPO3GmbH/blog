@@ -12,11 +12,6 @@
 .postcomment__avatar {
     margin-right: 1rem;
 }
-.postcomment__avatarimage {
-    display: block;
-    border-radius: 50%;
-    overflow: hidden;
-}
 .postcomment__body {
     flex-grow: 1;
     > *:last-child {
