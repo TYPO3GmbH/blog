@@ -73,9 +73,11 @@ class CommentFormFactory extends AbstractFormFactory
         $emailField->addValidator($objectManager->get(NotEmptyValidator::class));
         $emailField->addValidator($objectManager->get(EmailAddressValidator::class));
 
-        $urlField = $page->createElement('url', 'Text');
-        $urlField->setLabel(LocalizationUtility::translate('form.comment.url', 'blog'));
-        $urlField->addValidator($objectManager->get(UrlValidator::class));
+        if ((bool) trim($blogSettings['comments']['urls'])) {
+            $urlField = $page->createElement('url', 'Text');
+            $urlField->setLabel(LocalizationUtility::translate('form.comment.url', 'blog'));
+            $urlField->addValidator($objectManager->get(UrlValidator::class));
+        }
 
         $commentField = $page->createElement('comment', 'Textarea');
         $commentField->setLabel(LocalizationUtility::translate('form.comment.comment', 'blog'));

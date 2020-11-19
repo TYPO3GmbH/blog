@@ -280,6 +280,10 @@ plugin {
             comments {
                 # cat=blog/blog_140_comments; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.active
                 active = 1
+                features {
+                    # cat=blog/blog_140_comments; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.features.urls
+                    urls = 0
+                }
                 # cat=blog/blog_140_comments; type=options[0,1,2]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.moderation
                 moderation = 0
                 # cat=blog/blog_140_comments; type=options[0,1,-1]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.respectPostLanguageId

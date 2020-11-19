@@ -422,6 +422,9 @@
             <trans-unit id="constantEditor.comments.active" xml:space="preserve">
                 <source>Enable Comments:Activate comments as a general feature</source>
             </trans-unit>
+            <trans-unit id="constantEditor.comments.features.urls" xml:space="preserve">
+                <source>Enable Urls:Activate the url field in the comment form and output the submitted url</source>
+            </trans-unit>
             <trans-unit id="constantEditor.comments.moderation" xml:space="preserve">
                 <source>Comments moderation mode:0 = no moderation, 1 = moderation active, 2 = moderation only on first comment</source>
             </trans-unit>

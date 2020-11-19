@@ -16,7 +16,7 @@
         </div>
     </article>
     <f:section name="CommentUrl">
-        <f:if condition="{comment.url}">
+        <f:if condition="{comment.url} && {settings.comments.features.urls}">
             <f:then>
                 <f:link.external uri="{comment.url}" target="_blank" rel="external nofollow"><span itemprop="name">{content}</span></f:link.external>
             </f:then>

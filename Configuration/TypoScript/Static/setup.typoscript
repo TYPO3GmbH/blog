@@ -231,6 +231,9 @@ plugin.tx_blog {
         comments {
             # comments active in general or not
             active = {$plugin.tx_blog.settings.comments.active}
+            features {
+                urls = {$plugin.tx_blog.settings.comments.features.urls}
+            }
             # comments moderation mode, 0 = no moderation, 1 = moderation active, 2 = moderation only on first comment
             moderation = {$plugin.tx_blog.settings.comments.moderation}
             # Respect post_language_id, 0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)
