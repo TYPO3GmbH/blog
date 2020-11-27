@@ -98,7 +98,7 @@ class CommentFormFactory extends AbstractFormFactory
         $form->addFinisher($commentFinisher);
 
         $redirectFinisher = $objectManager->get(RedirectFinisher::class);
-        $redirectFinisher->setOption('pageUid', $this->getTypoScriptFrontendController()->id);
+        $redirectFinisher->setOption('pageUid', (string)$this->getTypoScriptFrontendController()->id);
         $form->addFinisher($redirectFinisher);
 
         $this->triggerFormBuildingFinished($form);
