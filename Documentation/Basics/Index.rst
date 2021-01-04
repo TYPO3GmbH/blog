@@ -35,3 +35,24 @@ Categorizing and Tagging
 Use categories and tags to add meta information to your blog posts. Let your users explore your posts based on their interests
 navigating via tags or categories to find similar entries. Add posts from the same category to your posts to get your readers
 to read even more.
+
+
+Dedicated featured image
+------------------------
+Since v10 the featured image field will now be the preferred way to set an article image. Since the media field could contain any asset the new featured image field is dedicated to images.
+
+Latest post plugin with configurable limit
+------------------------------------------
+Since v10 a plugin is introduced called the latest posts. You can specify the
+the number of items to show or set the amount by TypoScript.
+
+
+Integration and Standalone Mode
+-------------------------------
+Since v10 the blog features three different modes - expert, standalone and integration.
+It should now be more easy than ever to get your TYPO3 blog up and running.
+
+
+Post information in backend page header
+---------------------------------------
+The TYPO3 page and the list module now show additional information for blog posts. Information that was previously hidden in the page settings is now visible to the editor. The new information bar is enabled by default but can be disabled in the extension settings.
