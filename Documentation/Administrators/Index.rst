@@ -2,79 +2,8 @@ Blogging for Administrators
 ===========================
 
 
-Installation
-------------
-
-The extension needs to be installed as any other extension of TYPO3 CMS:
-
-#. Switch to the module “Extension Manager”.
-
-#. Get the extension
-
-   #. **Get it from the Extension Manager:** Press the “Retrieve/Update”
-      button and search for the extension key *blog* and import the
-      extension from the repository.
-
-   #. **Get it from typo3.org:** You can always get current version from
-      `https://typo3.org/extensions/repository/view/blog/current/
-      <https://typo3.org/extensions/repository/view/blog/current/>`_ by
-      downloading either the t3x or zip version. Upload
-      the file afterwards in the Extension Manager.
-
-   #. **Use composer**: Use `composer require T3G/blog`.
-
-
-Latest version from git
------------------------
-You can get the latest version from git by using the git command:
-
-.. code-block:: bash
-
-   git clone https://github.com/TYPO3GmbH/blog.git
-
-
 Setup
 -----
-
-Use the Setup Wizard
-^^^^^^^^^^^^^^^^^^^^
-
-The Setup Wizard creates the recommended pagetree and it will add all configurations and plugins you need.
-
-To create a new blog setup, follow these steps:
-
-1. Click on the blog module in the backend
-2. Click on the "SetupWizard" tab
-3. Click on the "Setup a new blog" button
-
-.. figure:: ../Images/Backend/setup_wizard_1.png
-
-   Create a new blog setup structure
-
-4. Enter a title for the blog setup
-5. If the extension "blog_template" is installed, you can use the provided template by enabling the checkbox.
-   If the extension "blog_template" is **not** installed, you can install and use it by enabling the checkbox.
-6. Click on the "Setup" button, to create the blog setup.
-
-.. figure:: ../Images/Backend/setup_wizard_2.png
-
-   Modal with setup options
-
-7. If the success message appears, the setup is done. Go to your page tree (maybe reload the tree) and you will see the generated page structure.
-
-.. figure:: ../Images/Backend/setup_wizard_3.png
-
-   The generated page structure
-
-The Setup Wizard creates the following pages for you:
-
-- Rootpage (hidden by default, contains the TypoScript and PageTS-Config)
-- > Data (a folder to hold categories, authors and tags, but also blog posts are possible)
-- > Category (this page is used to show blog posts, related to single category, or a category overview)
-- > Tag (this page is used to show blog posts, related to single tag, or a tag overview)
-- > Archive (this page is the archive, it lists all blog posts by given date (month and year, or year only)
-- > First blog post (yes, a first blog post, as an example)
-
 
 Setup without Wizard
 ^^^^^^^^^^^^^^^^^^^^
@@ -112,11 +41,11 @@ To create a new blog setup, follow these steps:
 
 .. code-block:: ts
 
-   TCEFORM.pages.tags.PAGE_TSCONFIG_ID = 
-   TCEFORM.pages.authors.PAGE_TSCONFIG_ID = 
-   TCEFORM.pages.categories.PAGE_TSCONFIG_ID = 
+   TCEFORM.pages.tags.PAGE_TSCONFIG_ID =
+   TCEFORM.pages.authors.PAGE_TSCONFIG_ID =
+   TCEFORM.pages.categories.PAGE_TSCONFIG_ID =
 
-      
+
 Frontend Routing Setup
 ^^^^^^^^^^^^^^^^^^^^^^
 

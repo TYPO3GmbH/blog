@@ -19,6 +19,8 @@ TYPO3 Blog Extension
    :glob:
 
    Basics/Index
+   Installation/Index
+   Setup/Index
    Administrators/Index
    Integrators/Index
    Editors/Index
