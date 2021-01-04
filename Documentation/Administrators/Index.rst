@@ -8,19 +8,23 @@ Setup
 Setup without Wizard
 ^^^^^^^^^^^^^^^^^^^^
 
+This is the setup method you will need in order to integrate the Blog extension into an existing site. If you want a standalone Blog and do not have an existing site, please go with the Setup Wizard instructions in the prior section.
+
 To create a new blog setup, follow these steps:
 
-1) Create the following page structure:
+Step 1. Create the following page structure:
 
-- Rootpage (contains the TypoScript and PageTS-Config)
-- > Data (a folder to hold categories, authors and tags, but also blog posts are possible)
-- > Category (this page is used to show blog posts, related to single category, or a category overview)
-- > Tag (this page is used to show blog posts, related to single tag, or a tag overview)
-- > Archive (this page is the archive, it lists all blog posts by given date (month and year, or year only)
+.. image:: ../Images/Backend/pagetree_no_wizard.png
 
-2) Add at least the TypoScript template which is provided by the extension
+In the picture above, the existing site is represented by the pages with ids 1 through 5.
 
-3) Configure the page ids in the constants:
+* A standard page (id = 6) is the root page of the blog tree. It holds the Page TSconfig.
+* Data (a folder to hold categories, authors and tags, but also blog posts are possible)
+* Category (this page is used to show blog posts, related to single category, or a category overview)
+* Tag (this page is used to show blog posts, related to single tag, or a tag overview)
+* Archive (this page is the archive, it lists all blog posts by given date (month and year, or year only
+
+Step 2. Configure the page ids in the constants. This constants go either in the constants of the root template (id=1) or, even better, in the constants.typoscript file in the sitepackage.
 
 .. code-block:: ts
 
@@ -31,19 +35,22 @@ To create a new blog setup, follow these steps:
    plugin.tx_blog.settings.archiveUid = NEW_blogArchivePage
    plugin.tx_blog.settings.storagePid = NEW_blogFolder
 
-.. note::
+Step 3. In the template of the root page of the site (id=1), include the static template. Please go with either Integration or Expert template.
 
-       If you have multiple folder or root pages for your blog posts your have
-       to add all root pages to :typoscript:`plugin.tx_blog.settings.storagePid`
-       as a comma separated list. The first value must be the value of NEW_blogFolder
+Frontend view of blog post list.
 
-4) Configure storage PIDs via PageTSConfig:
+Backend view of blog post list.
+Step 4. The root page of the blog tree, in this case the page with id = 6, will carry the Page TSconfig entries. These point all to the storage folder, in this case id = 7.
 
 .. code-block:: ts
 
-   TCEFORM.pages.tags.PAGE_TSCONFIG_ID =
-   TCEFORM.pages.authors.PAGE_TSCONFIG_ID =
-   TCEFORM.pages.categories.PAGE_TSCONFIG_ID =
+   TCEFORM.pages.tags.PAGE_TSCONFIG_ID = 7
+   TCEFORM.pages.authors.PAGE_TSCONFIG_ID = 7
+   TCEFORM.pages.categories.PAGE_TSCONFIG_ID = 7
+
+This rounds up the manual installation method.
+
+**Note:** If you have multiple folder or root pages for your blog posts your have to add all root pages to :typoscript:`plugin.tx_blog.settings.storagePid` as a comma separated list. The first value must be the value of NEW_blogFolder
 
 
 Frontend Routing Setup

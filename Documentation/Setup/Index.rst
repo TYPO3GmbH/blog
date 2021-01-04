@@ -50,3 +50,5 @@ The Setup Wizard created the following pages for you:
 - Tag (this page is used to show blog posts, related to single tag, or a tag overview)
 - Archive (this page is the archive, it lists all blog posts by given date (month and year, or year only)
 - First blog post (yes, a first blog post, as an example)
+
+The Setup Wizard performs a fully configured standalone instance of the Blog extension. If you already have an existenig site, you might dislike the result of having an additional and unplanned root page. In that case you should read about the manual setup in the next section.
