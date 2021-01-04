@@ -66,3 +66,24 @@ Set a details page for an author
 1. Go to the properties page of an author
 2. Click on the "Blog data" tab
 3. Set a details page for the author to link to as it's details page
+
+
+Create a blog category (since v10)
+----------------------------------
+
+1. Go to your system folder with the records of your blog data
+2. Click on the “Create new record” plus icon
+3. Select “category” in the system records
+4. Choose the record type “blog category”
+
+.. figure:: ../Images/HowTo/6_create-blog-category.png
+
+
+Create a featured image (since v10)
+-----------------------------------
+
+1. Edit page properties
+2. Click on the “Blog” tab
+3. Create a “Featured Image” as new relation or select & upload a file
+
+**NOTE:** The featured image will be displayed in all blog lists. Since v10 it has also been shown in the RSS feed. The “Blog: Header” plugin is available to display it in the blog post.
