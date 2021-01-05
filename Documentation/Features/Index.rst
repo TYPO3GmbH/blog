@@ -2,9 +2,9 @@
 
 .. _Features:
 
-==========================
-Features and Basic Concept
-==========================
+========
+Features
+========
 
 The main goal for this blog extension was to use TYPO3s core concepts and elements to provide a full-blown blog that
 users of TYPO3 can instantly understand and use.

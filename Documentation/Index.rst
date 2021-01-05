@@ -15,6 +15,7 @@ TYPO3 Blog Extension
    Use all your favorite and well-known elements to create a full-blown blog with ease.
 
 .. toctree::
+   :titlesonly:
    :maxdepth: 2
    :glob:
 

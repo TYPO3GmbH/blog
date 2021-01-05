@@ -39,6 +39,19 @@ Prerequisites:
          # Constants
          <INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Integration/constants.typoscript">
 
+      .. tip::
+
+         It is recommended to use the "Integration" template to use the prepared page
+         templates for lists and posts. These are using the layout "Default" and the
+         section "Main" of your Template.
+
+         If your "Page-Template/-Sections" named differently, please overwrite the blog
+         templates in your sitepackage. Check the used templates below and adapt them
+         to your own needs.
+
+         - `BlogList <https://github.com/TYPO3GmbH/blog/blob/master/Resources/Private/Templates/Page/BlogList.html>`__
+         - `BlogPost <https://github.com/TYPO3GmbH/blog/blob/master/Resources/Private/Templates/Page/BlogPost.html>`__
+
    3. Create Blog Pages
 
       1. Right click the page you want the Blog to list below
