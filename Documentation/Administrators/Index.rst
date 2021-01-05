@@ -150,7 +150,7 @@ This plugin is new. It allows to configure how many of the latest news shall be 
 
 Header and Footer
 """""""""""""""""
-These two plugins are also new. They are meant to be used solely inside a post and if you apply these plugins in different context, you will get an error message in the frontend. All meta data is now displayed with either of the two plugins or through a combination of both.
+These two plugins are also new. They are meant to be used solely inside a post and if you apply these plugins in a different context, you will get an error message in the frontend. All meta data is now displayed with either one of the two plugins or through a combination of both.
 
 
 Metadata
@@ -204,4 +204,4 @@ But you can also implement your own AvatarProvider:
 1. Create a class which implements the AvatarProviderInterface.
 2. Add your provider to the TCA field “avatar_provider” to make it selectable in the author record
 
-**Note:** Since v10 the proxying of gravatar loading is used which means that TYPO3 downloads the gravatar, stores it on the filesystem and delivers the image locally from typo3temp. This is a privacy related and useful if users didn't give their consent for fetching gravatars client side.
+**Note:** Since v10 the proxying of gravatar loading is used which means that TYPO3 downloads the gravatar, stores it on the filesystem and delivers the image locally from typo3temp. This is privacy related and useful if users didn't give their consent for fetching gravatars client side.
