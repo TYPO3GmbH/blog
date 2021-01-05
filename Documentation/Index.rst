@@ -26,3 +26,4 @@ TYPO3 Blog Extension
    Editors/Index
    FAQ/Index
    Changelog/Index
+   Upgrading/Index

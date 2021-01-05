@@ -4,9 +4,8 @@
 Feature: #EXTBLOG-56 - Add Backend Module for comment management
 ================================================================
 
-See https://jira.typo3.com/browse/EXTBLOG-56
-
-See https://jira.typo3.com/browse/TE-15
+- See https://jira.typo3.com/browse/EXTBLOG-56
+- See https://jira.typo3.com/browse/TE-15
 
 Description
 ===========

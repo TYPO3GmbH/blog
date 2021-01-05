@@ -10,6 +10,16 @@ Changes in version 9.0.0
    :local:
    :depth: 1
 
+Important Changes
+^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+   :glob:
+
+   Important-*
+
 Breaking Changes
 ^^^^^^^^^^^^^^^^
 

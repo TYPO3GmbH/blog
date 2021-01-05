@@ -23,5 +23,4 @@ Migration
 
 Use the new method :php:`CommentRepository::findActiveComments()`
 
-
 .. index:: PHP-API

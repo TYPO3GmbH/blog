@@ -1,4 +1,3 @@
-
 .. include:: ../../Includes.txt
 
 Changes in version 1.3.0
@@ -7,35 +6,46 @@ Changes in version 1.3.0
 **Table of contents**
 
 .. contents::
-:local:
+   :local:
    :depth: 1
+
+
+Important Changes
+^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+   :glob:
+
+   Important-*
 
 Breaking Changes
 ^^^^^^^^^^^^^^^^
 
 .. toctree::
-:maxdepth: 1
-      :titlesonly:
-      :glob:
+   :maxdepth: 1
+   :titlesonly:
+   :glob:
 
-      Breaking-*
+   Breaking-*
 
 Features
 ^^^^^^^^
 
 .. toctree::
-:maxdepth: 1
-      :titlesonly:
-      :glob:
+   :maxdepth: 1
+   :titlesonly:
+   :glob:
 
-      Feature-*
+   Feature-*
 
 Deprecation
 ^^^^^^^^^^^
 
 .. toctree::
-:maxdepth: 1
-      :titlesonly:
-      :glob:
+   :maxdepth: 1
+   :titlesonly:
+   :glob:
 
-      Deprecation-*
+   Deprecation-*
