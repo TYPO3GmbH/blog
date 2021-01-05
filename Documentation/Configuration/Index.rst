@@ -1,10 +1,10 @@
 .. include:: ../Includes.txt
 
-.. _Integrators:
+.. _Configuration:
 
-========================
-Blogging for Integrators
-========================
+=============
+Configuration
+=============
 
 
 TypoScript Reference

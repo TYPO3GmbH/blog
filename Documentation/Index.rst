@@ -22,8 +22,8 @@ TYPO3 Blog Extension
    Features/Index
    Installation/Index
    Setup/Index
-   Administrators/Index
-   Integrators/Index
+   Configuration/Index
+   Plugins/Index
    Editors/Index
    FAQ/Index
    Changelog/Index

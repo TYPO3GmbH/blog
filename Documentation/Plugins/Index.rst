@@ -1,10 +1,10 @@
 .. include:: ../Includes.txt
 
-.. _Administrators:
+.. _Plugins:
 
-===========================
-Blogging for Administrators
-===========================
+=======
+Plugins
+=======
 
 
 Plugin types
