@@ -1,5 +1,6 @@
 .. include:: ../../Includes.txt
 
+========================
 Changes in version 8.7.0
 ========================
 

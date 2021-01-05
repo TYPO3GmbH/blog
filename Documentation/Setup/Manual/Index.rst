@@ -1,5 +1,7 @@
 .. include:: ../../Includes.txt
 
+.. _SetupManual:
+
 ============
 Manual Setup
 ============

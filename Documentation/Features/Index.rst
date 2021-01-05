@@ -1,3 +1,8 @@
+.. include:: ../Includes.txt
+
+.. _Features:
+
+==========================
 Features and Basic Concept
 ==========================
 

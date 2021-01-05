@@ -1,3 +1,7 @@
+.. include:: ../Includes.txt
+
+.. _Features:
+
 ============
 Installation
 ============

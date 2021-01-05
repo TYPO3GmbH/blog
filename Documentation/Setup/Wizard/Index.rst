@@ -1,6 +1,6 @@
 .. include:: ../../Includes.txt
 
-.. setup-wizard:
+.. _SetupWizard:
 
 ============
 Setup Wizard

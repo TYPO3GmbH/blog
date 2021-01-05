@@ -1,3 +1,8 @@
+.. include:: ../Includes.txt
+
+.. _Administrators:
+
+===========================
 Blogging for Administrators
 ===========================
 

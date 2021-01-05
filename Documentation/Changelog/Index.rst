@@ -1,6 +1,8 @@
-
 .. include:: ../Includes.txt
 
+.. _Changelog:
+
+=========
 Changelog
 =========
 
