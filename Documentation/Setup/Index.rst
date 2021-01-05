@@ -31,11 +31,11 @@ The Setup Wizard helps you to start your new TYPO3 blog in just a few steps!
 
 6. Enable your Blog
 
+   .. figure:: ../Images/Setup/setup-6.png
+
    1. Select the Page module
    2. Right click on your Blog
    3. Enable the Page
-
-   .. figure:: ../Images/Setup/setup-6.png
 
 7. Explore your Blog
 
