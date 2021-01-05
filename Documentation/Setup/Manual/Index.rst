@@ -29,12 +29,12 @@ Prerequisites:
 
       **Option B:** Add nessesary includes to your sitepackage
 
-      .. code-block:: ts
+      .. code-block:: typoscript
 
          # Setup
          <INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Integration/setup.typoscript">
 
-      .. code-block:: ts
+      .. code-block:: typoscript
 
          # Constants
          <INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Integration/constants.typoscript">
@@ -79,45 +79,99 @@ Prerequisites:
 
       .. image:: manual-3-4.png
 
-   4. Configure the page ids in the constants. This constants go either in the constants of the root template (id=1) or, even better, in the constants.typoscript file in the sitepackage.
+   4. Configure the page ids in the typoscript constants
 
-      .. code-block:: ts
+      These go either in the root template record or in the constants file of your sitepackage.
+
+      .. code-block:: typoscript
          :linenos:
 
-         plugin.tx_blog.settings.blogUid     = NEW_blogRoot
-         plugin.tx_blog.settings.categoryUid = NEW_blogCategoryPage
-         plugin.tx_blog.settings.authorUid   = NEW_blogAuthorPage
-         plugin.tx_blog.settings.tagUid      = NEW_blogTagPage
-         plugin.tx_blog.settings.archiveUid  = NEW_blogArchivePage
-         plugin.tx_blog.settings.storagePid  = NEW_blogFolder
+         plugin.tx_blog.settings.blogUid     = ID_of_Page_Blog
+         plugin.tx_blog.settings.categoryUid = ID_of_Page_Categories
+         plugin.tx_blog.settings.authorUid   = ID_of_Page_Authors
+         plugin.tx_blog.settings.tagUid      = ID_of_Page_Tags
+         plugin.tx_blog.settings.archiveUid  = ID_of_Page_Archive
+         plugin.tx_blog.settings.storagePid  = ID_of_Page_Data
 
-   5. In the template of the root page of the site (id=1), include the static template. Please go with either Integration or Expert template.
+      .. tip::
 
-      Frontend view of blog post list.
-      Backend view of blog post list.
+         1. If you hover with your mouse over a page in the pagetree the tooltip will reveal the **"ID"** of that page
+         2. You can use the constant editor in the template module and select **"TYPO3 BLOG"**
+         3. You find all relevant page configuration in the Section **"Page ID settings"**
 
-   6. The root page of the blog tree, in this case the page with id = 6, will carry the Page TSconfig entries. These point all to the storage folder, in this case id = 7.
+      .. image:: manual-4.png
 
-      .. code-block:: ts
+   5. Configure the PageTS to point the blog to the storage folder "Data"
+
+      .. code-block:: typoscript
          :linenos:
 
-         TCEFORM.pages.tags.PAGE_TSCONFIG_ID       = 7
-         TCEFORM.pages.authors.PAGE_TSCONFIG_ID    = 7
-         TCEFORM.pages.categories.PAGE_TSCONFIG_ID = 7
+         TCEFORM.pages.tags.PAGE_TSCONFIG_ID       = ID_of_Page_Data
+         TCEFORM.pages.authors.PAGE_TSCONFIG_ID    = ID_of_Page_Data
+         TCEFORM.pages.categories.PAGE_TSCONFIG_ID = ID_of_Page_Data
 
-   7. Frontend Routing
+      **Option A:**
+      Add the configuration to the root page
 
-      The extension provides a frontend route enhancer configuration that you can include it in your site configuration.
+      1. Select the page module
+      2. Select and edit your root page
+      3. Select the resources tab
+      4. Add the "Page TSconfig" configuration
+
+      .. image:: manual-5.png
+
+      **Option B:**
+      Add configuration to your Page TSconfig in your Sitepackage
+
+   6. Frontend Routing
+
+      The extension provides a frontend route enhancer configuration that
+      you can include it in your site configuration.
 
       .. code-block:: yaml
          :linenos:
 
          imports:
-         - { resource: "EXT:blog/Configuration/Routes/Default.yaml" }
+            - { resource: "EXT:blog/Configuration/Routes/Default.yaml" }
 
-      Feel free to modify or enhance this configuration, feedback is welcome.
+      .. tip::
 
-This rounds up the manual installation method.
+         You can find your site configuration in **./config/sites/<identifier>/config.yaml**
+
+   7. Add Plugins to Blog Pages
+
+      Example: Blog Listing
+
+      1. Select the Page module
+      2. Select the Blog page
+      3. Click the Button to add content
+
+      .. image:: manual-7-1.png
+
+      4. Select the "Blog" tab
+      5. Add plugin "Blog: List of posts"
+
+      .. image:: manual-7-2.png
+
+      +--------------+-------------------------+
+      | Page         | Plugin                  |
+      +==============+=========================+
+      | Blog         | Blog List of posts      |
+      +==============+=========================+
+      | Authors      | Blog List by author     |
+      +==============+=========================+
+      | Categories   | Blog List by category   |
+      +=============+==========================+
+      | Tags         | Blog List by tags       |
+      +==============+=========================+
+      | Archive      | Blog Archive            |
+      +==============+=========================+
+
+   8. Congratulations
+
+      Your blog is now ready, please read on in the capters about "how to add a blog post" and learn more about configuration options.
+
+      .. image:: manual-8.png
 
 .. note::
 
