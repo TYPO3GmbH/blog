@@ -6,14 +6,10 @@
 Setup Wizard
 ============
 
-The Setup Wizard created the following pages for you:
-
-- Rootpage (hidden by default, contains the TypoScript and PageTS-Config)
-- Data (a folder to hold categories, authors and tags, but also blog posts are possible)
-- Category (this page is used to show blog posts, related to single category, or a category overview)
-- Tag (this page is used to show blog posts, related to single tag, or a tag overview)
-- Archive (this page is the archive, it lists all blog posts by given date (month and year, or year only)
-- First blog post (yes, a first blog post, as an example)
+The Setup Wizard creates a fully configured **standalone** instance of the TYPO3 
+Blog Extension. If you already have an existing site, you might dislike the result
+of having an additional and unplanned root page. In that case, please read the 
+:ref:`Manual Setup <SetupManual>` instructions.
 
 .. rst-class:: bignums
 

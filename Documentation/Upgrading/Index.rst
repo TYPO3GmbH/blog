@@ -328,7 +328,7 @@ labels have been introduced that you are now also able to customize to your need
 New labels:
 
 * pagination.aria.label: Page navigation
-* pagination.next -> Next
+* pagination.next: Next
 * pagination.previous: Previous
 * pagination.aria.current.page: Current page, page %s
 * pagination.aria.goto.page: Go to page %s

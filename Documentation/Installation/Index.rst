@@ -1,6 +1,6 @@
 .. include:: ../Includes.txt
 
-.. _Features:
+.. _Installation:
 
 ============
 Installation
