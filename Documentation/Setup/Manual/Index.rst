@@ -153,28 +153,22 @@ Prerequisites:
 
       .. image:: manual-7-2.png
 
-      +--------------+-------------------------+
-      | Page         | Plugin                  |
-      +==============+=========================+
-      | Blog         | Blog List of posts      |
-      +==============+=========================+
-      | Authors      | Blog List by author     |
-      +==============+=========================+
-      | Categories   | Blog List by category   |
-      +=============+==========================+
-      | Tags         | Blog List by tags       |
-      +==============+=========================+
-      | Archive      | Blog Archive            |
-      +==============+=========================+
+      +------------+------------------------+
+      | Page       | Plugin                 |
+      +============+========================+
+      | Blog       | Blog: List of posts    |
+      +------------+------------------------+
+      | Authors    | Blog: List by author   |
+      +------------+------------------------+
+      | Categories | Blog: List by category |
+      +------------+------------------------+
+      | Tags       | Blog: List by tag      |
+      +------------+------------------------+
+      | Archive    | Blog: Archive          |
+      +------------+------------------------+
 
    8. Congratulations
 
       Your blog is now ready, please read on in the capters about "how to add a blog post" and learn more about configuration options.
 
       .. image:: manual-8.png
-
-.. note::
-
-   If you have multiple folder or root pages for your blog posts your have to
-   add all root pages to :typoscript:`plugin.tx_blog.settings.storagePid` as a
-   comma separated list. The first value must be the value of NEW_blogFolder
