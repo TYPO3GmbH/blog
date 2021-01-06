@@ -6,150 +6,177 @@
 Plugins
 =======
 
-
-Plugin types
-------------
+.. figure:: plugins-teaser.png
 
 The following plugins are available after installing the extension.
 
+.. contents::
+   :local:
+   :depth: 2
 
-List of Posts by Date
-^^^^^^^^^^^^^^^^^^^^^
+.. _BlogPagePlugins:
 
-Displays a list of blog posts ordered by date. All non-hidden, non-deleted and non-archived posts are shown in the list.
+Blog Page Plugins
+=================
 
-.. figure:: ../Images/Frontend/list.png
-   :scale: 50%
+Blog page plugins are usually used in conjunction with a sidebar,
+it is recommended to provide a separate template for these pages.
 
-   Frontend view of blog post list.
+Example:
 
-.. figure:: ../Images/Plugins/list.png
+.. code-block:: html
 
-   Backend view of blog post list.
+   <f:layout name="Default" />
+   <f:section name="Main">
 
+      <div class="container">
+         <div class="blogcontainer">
+               <main class="blogcontainer-main" role="main">
+                  <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{
+                           colPos: '0'
+                     }" />
+               </main>
+               <aside class="blogcontainer-sidebar">
+                  <f:render section="renderPlugin" arguments="{listType: 'blog_sidebar'}" />
+               </aside>
+         </div>
+      </div>
 
-List by Tag
-^^^^^^^^^^^^
+   </f:section>
+   <f:section name="renderPlugin">
 
-Allows the users to show all posts tagged with a specific keyword.
+      {blogvh:data.contentListOptions(listType: listType)}
+      <f:cObject typoscriptObjectPath="tt_content.list" data="{contentObjectData}" table="tt_content"/>
 
-.. image:: ../Images/Plugins/byTags.png
-
-
-List by Category
-^^^^^^^^^^^^^^^^
-
-If you add this element and you have selected a category on the categories tab, it will show an overview of posts for
-that category. If you have no categories selected, it will show an overview of categories.
-
-.. image:: ../Images/Plugins/byCategory.png
-
-
-List by Author
-^^^^^^^^^^^^^^
-
-Displays all posts belonging to the chosen author.
-
-.. image:: ../Images/Plugins/byAuthor.png
-
-
-List of related posts
-^^^^^^^^^^^^^^^^^^^^^
-
-Based on the categories and tags of the current post, it will show a list of related posts. This overview should only be
-placed on a Blog detail page.
-
-.. image:: ../Images/Plugins/relatedPosts.png
+   </f:section>
 
 
-Archive
-^^^^^^^
+List of posts
+-------------
 
-The archive plugin displays all posts categorized by year and month.
-
-.. image:: ../Images/Plugins/archive.png
-
-
-Other plugin types
-^^^^^^^^^^^^^^^^^^
-
-Additionally to the list plugin types there are several others meant to give you the maximum flexibility. If you are using the
-templates included in the extension you won't need them as they represent parts you'd normally want to have at fixed positions
-in your templates. For special circumstances we provide these plugins as standalone versions so you can use them in every
-way you want:
-
-
-Sidebar
-"""""""
-
-The sidebar contains links enabling the user to quickly navigate your blog. It shows an overview of recent posts and comments,
-categories, tags and archive links.
-
-.. figure:: ../Images/Frontend/sidebar.png
-   :scale: 50%
-
-   Sidebar of a blog
+Displays a list of blog posts ordered by date. All non-hidden, non-deleted and
+non-archived posts are shown in the list.
 
 
 Latest posts
-""""""""""""
-This plugin is new. It allows to configure how many of the latest news shall be displayed in a list with the same format as the list of posts plugin.
+------------
+
+Displays a number of latest posts. You can specify the amount of items yourself.
 
 
-Header and Footer
-"""""""""""""""""
-These two plugins are also new. They are meant to be used solely inside a post and if you apply these plugins in a different context, you will get an error message in the frontend. All meta data is now displayed with either one of the two plugins or through a combination of both.
+List by category
+----------------
+
+If you add this element and you have selected a category on the categories tab,
+it will show an overview of posts for that category. If you have no categories
+selected, it will show an overview of categories.
 
 
-Metadata
-""""""""
-This plugin is the old way of dealing with metadata and is currently deprecated. You are recommended to use Header and/or Footer to display meta data, like date, tags and category. The metadata plugin wil be removed in the upcoming version of the Blog extension.
+List by author
+--------------
+
+Displays all posts belonging to the chosen author.
+
+
+List by tags
+------------
+
+Allows the users to show all posts tagged with a specific keyword.
+
+
+Archive
+-------
+
+The archive plugin displays all posts categorized by year and month.
+
+
+.. _BlogPostPlugins:
+
+Blog Post Plugins
+=================
+
+If possible, do **not** add the following plugins manually on each blog post.
+Provide them via a Dedicated Page Template, so your editor can concentrate on the content.
+
+Example:
+
+.. code-block:: html
+
+   <f:layout name="Default" />
+   <f:section name="Main">
+
+      <div class="container">
+         <div class="blogcontainer">
+               <main class="blogcontainer-main" role="main">
+                  <f:render section="renderPlugin" arguments="{listType: 'blog_header'}" />
+                  <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{colPos: '0'}" />
+                  <f:render section="renderPlugin" arguments="{listType: 'blog_footer'}" />
+                  <f:render section="renderPlugin" arguments="{listType: 'blog_authors'}" />
+                  <f:render section="renderPlugin" arguments="{listType: 'blog_comments'}" />
+                  <f:render section="renderPlugin" arguments="{listType: 'blog_commentform'}" />
+                  <f:render section="renderPlugin" arguments="{listType: 'blog_relatedposts'}" />
+               </main>
+               <aside class="blogcontainer-sidebar">
+                  <f:render section="renderPlugin" arguments="{listType: 'blog_sidebar'}" />
+               </aside>
+         </div>
+      </div>
+
+   </f:section>
+   <f:section name="renderPlugin">
+
+      {blogvh:data.contentListOptions(listType: listType)}
+      <f:cObject typoscriptObjectPath="tt_content.list" data="{contentObjectData}" table="tt_content"/>
+
+   </f:section>
+
+
+Header
+------
+
+Displays post header
+
+
+Footer
+------
+
+Displays post footer
+
+
+Comment Form
+------------
+
+Displays the comment form for a post.
+
+
+Comments
+-------
+
+Displays the comments for a post.
 
 
 Authors
-"""""""
-Displays post authors, like name, title, avatar, social links...
+-------
+Displays post authors, like name, title, avatar, social links..
 
 
-Comments / Comment Form
-"""""""""""""""""""""""
+Related Posts
+-------------
 
-Displays the comment form and comments to a post - be aware that commenting in general has to be globally enabled and the
-respective post should have the commenting flag set.
-
-
-Creating Categories and Tags
-----------------------------
-
-Categories are the default TYPO3 categories you probably already know.
-
-Create a new category:
-
-* Go to the list module
-* Click on the page where you want to create the new category
-* Click on the "new record" button on the top and choose category
-* Enter a title for the category and choose a possible parent
-* Click "Save"
-
-Tags are blog specific records. Creating a new tag works in the same way as creating categories does:
-
-* Go to list module
-* Click on the page where you want to create the new tag
-* Enter a title for the tag
-* Click "Save"
-
-Enable sharing
---------------
-No implementation is provided by the blog extension itself. Of course you can still use an extension like the Shariff implementation for TYPO3 in your custom templates.
+Based on the categories and tags of the current post, it will show a list of
+related posts. This overview should only be placed on a Blog detail page.
 
 
-AvatarProvider
---------------
-The default AvatarProvider is the GravatarProvider, this means the avatar of an author is received from gravatar.com. The extension provides also an ImageProvider for local stored images.
+Shared Plugins
+==============
 
-But you can also implement your own AvatarProvider:
 
-1. Create a class which implements the AvatarProviderInterface.
-2. Add your provider to the TCA field “avatar_provider” to make it selectable in the author record
+Sidebar
+-------
 
-**Note:** Since v10 the proxying of gravatar loading is used which means that TYPO3 downloads the gravatar, stores it on the filesystem and delivers the image locally from typo3temp. This is privacy related and useful if users didn't give their consent for fetching gravatars client side.
+The sidebar contains links enabling the user to quickly navigate your blog. It
+shows an overview of recent posts and comments, categories, tags and archive
+links.
+
+- :ref:`Usage on Blog Pages <BlogPagePlugins>`
+- :ref:`Usage on Blog Posts <BlogPostPlugins>`
