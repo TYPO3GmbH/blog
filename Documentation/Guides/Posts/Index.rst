@@ -9,83 +9,88 @@ Posts
 Create a new post
 -----------------
 
-To create a new post, follow these steps:
+.. rst-class:: bignums
 
-1. Click on the page module
-2. Click on the plus icon on top of the page tree
-3. Drag the blog entry page type into the page tree to where you want to create your new post
+   1. Create blog post
 
+      .. figure:: create-post-1.png
 
-.. figure:: 1_create_new_post.png
+         Create a new blog post page
 
-   Create a new blog post page
+      1. Click on the page module
+      2. Click on the plus icon on top of the page tree
+      3. Drag the blog post into your data folder
 
-4. Click on your page in the page tree
-5. Click on edit page properties
+   2. Edit your blog post
 
-.. figure:: 2_create_new_post.png
+      .. figure:: create-post-2.png
 
-   Go to page properties
+      1. Select the blog post you created
+      2. Click "Edit Post Meta-Data" or the edit button in the page header
 
+   3. Check the title of your blog post
 
-6. Make sure your blog post page is not disabled
+      .. figure:: create-post-3.png
 
-.. figure:: 3_page_properties_access.png
+      1. Select the "General" tab
+      2. Edit the title of your blog post
 
-   Access settings: Enable your entry
+   4. Adjust publish date and feature image
 
-7. Click on tab "Blog"
-8. Choose tags for your blog post
-9. Choose if you want to enable comments
-10. Define an archive date if your want to remove a blog post by given date from the main list (not for tag, category, date or archive lists)
+      .. figure:: create-post-4.png
 
-.. note::
+      1. Click the "Blog" tab
+      2. Adjust the publish date if nessesary
+      3. Upload a new image for your blog post or select an existing one
 
-   If you want to add categories do so with the normal TYPO3 categories (Tab: Categories)
+      .. note::
 
-.. figure:: 4_edit_blog_entry_settings.png
-
-   Blog entry settings
-
-
-Add content to your post
--------------------------
-
-11. Add content elements to your blog post page
-
-.. note::
-
-   You can add all kinds of content elements that you are using on the rest of your web site, too. The blog itself doesn't
-   provide any special elements for the content of your blog entry as sticking close to the rest of your website ensures a
-   consistent look and feel for your visitors.
-
-.. figure:: 5_add_content.png
+         The featured image will be displayed in all blog lists and in the RSS feed.
+         The "Blog: Header" plugin is available to display it in the blog post.
 
 
-Set a details page for an author
---------------------------------
+   5. Save your changes and close the post meta data interface
 
-1. Go to the properties page of an author
-2. Click on the "Blog data" tab
-3. Set a details page for the author to link to as it's details page
+      .. figure:: create-post-5.png
 
+      1. Save your changes
+      2. Close the post meta data interface
 
-Create a blog category (since v10)
-----------------------------------
+   6. Add content blocks to your post
 
-1. Go to your system folder with the records of your blog data
-2. Click on the “Create new record” plus icon
-3. Select “category” in the system records
-4. Choose the record type “blog category”
+      .. figure:: create-post-6-1.png
 
-.. figure:: 6_create-blog-category.png
+      1. Click the "Add content" Button
 
+      .. figure:: create-post-6-2.png
 
-Create a featured image (since v10)
------------------------------------
+      2. Select any content block you want to insert, for example "Regular Text Element"
 
-1. Edit page properties
-2. Click on the “Blog” tab
-3. Create a “Featured Image” as new relation or select & upload a file
+      .. figure:: create-post-6-3.png
 
-**NOTE:** The featured image will be displayed in all blog lists. Since v10 it has also been shown in the RSS feed. The “Blog: Header” plugin is available to display it in the blog post.
+      3. Insert content for your block
+      4. Save the content
+      5. Close the content block
+
+      .. tip::
+
+         You can add all kinds of content elements that you are using on the rest of your web site, too. The blog itself doesn't
+         provide any special elements for the content of your blog entry as sticking close to the rest of your website ensures a
+         consistent look and feel for your visitors.
+
+   7. Enable your blog post
+
+      .. figure:: create-post-7-1.png
+
+      1. Right click on the post you want to enable
+      2. Click on "Enable"
+
+   8. View your Blog Post
+
+      .. figure:: create-post-8-1.png
+
+         Click on the "View" Button in the document header
+
+      .. figure:: create-post-8-1.png
+
+      Congratulations you published your blog post
