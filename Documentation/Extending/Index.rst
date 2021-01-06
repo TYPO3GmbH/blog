@@ -6,30 +6,6 @@
 Extending
 =========
 
-Creating Categories and Tags
-----------------------------
-
-Categories are the default TYPO3 categories you probably already know.
-
-Create a new category:
-
-* Go to the list module
-* Click on the page where you want to create the new category
-* Click on the "new record" button on the top and choose category
-* Enter a title for the category and choose a possible parent
-* Click "Save"
-
-Tags are blog specific records. Creating a new tag works in the same way as creating categories does:
-
-* Go to list module
-* Click on the page where you want to create the new tag
-* Enter a title for the tag
-* Click "Save"
-
-Enable sharing
---------------
-No implementation is provided by the blog extension itself. Of course you can still use an extension like the Shariff implementation for TYPO3 in your custom templates.
-
 
 AvatarProvider
 --------------

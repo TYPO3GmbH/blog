@@ -1,8 +1,8 @@
 .. include:: ../../Includes.txt
 
-========================
-Changes in version 9.0.0
-========================
+======
+v9.0.0
+======
 
 **Table of contents**
 
@@ -39,13 +39,3 @@ Features
    :glob:
 
    Feature-*
-
-Deprecation
-^^^^^^^^^^^
-
-.. toctree::
-   :maxdepth: 1
-   :titlesonly:
-   :glob:
-
-   Deprecation-*

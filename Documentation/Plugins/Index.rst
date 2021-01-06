@@ -150,7 +150,7 @@ Displays the comment form for a post.
 
 
 Comments
--------
+--------
 
 Displays the comments for a post.
 

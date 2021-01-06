@@ -1,10 +1,10 @@
-.. include:: ../Includes.txt
+.. include:: ../../Includes.txt
 
-.. _UpgradingBlogFrom9x:
+.. _Migrationv10.0.0:
 
-=========================
-Upgrading from blog 9.x.x
-=========================
+====================
+Migrating to v10.0.0
+====================
 
 Template overrides
 ------------------
@@ -13,20 +13,20 @@ If you are upgrading from blog 9.x.x and you are overriding default
 templates with templates in your sitepackage, please make sure that
 if you have code like this:
 
-.. code-block:: ts
+.. code-block:: html
 
    <f:render section="content" arguments="{_all}" />
 
 you replace it with:
 
-.. code-block:: ts
+.. code-block:: html
 
    <f:render section="Content" arguments="{_all}" />
 
 If you neglect to correct this situation before executing the upgrade on
 the blog extension, you will see the follwing error message:
 
-.. figure:: ../Images/Upgrading/template_override_error.png
+.. figure:: template_override_error.png
 
 
 Dedicated featured image provided
@@ -37,7 +37,7 @@ image. Since the media field could contain any asset the new featured image
 field is dedicated to images. You can configure the width and height through
 typoscript constants.
 
-.. code-block:: ts
+.. code-block:: typoscript
 
    plugin.tx_blog.settings.post.featuredImage.width = 1140
    plugin.tx_blog.settings.post.featuredImage.height= 400c
@@ -63,7 +63,7 @@ adjust your configuration.
 
 TsConfig Example:
 
-.. code-block:: ts
+.. code-block:: typoscript
 
    TCEFORM.pages.authors.PAGE_TSCONFIG_ID = 59
 
@@ -71,7 +71,7 @@ TsConfig Example:
 Fontawesome dependency removed
 ------------------------------
 
-All Icons are now delivered by default as svgs and are rendered inline, 
+All Icons are now delivered by default as svgs and are rendered inline,
 this makes them easy to style and adjust. New templates have been introduced
 that only delivers the markup for the icons. This can be overwritten if you
 want to exchange the icons used. Default avatar size was also slightly
@@ -99,8 +99,8 @@ Introduce blog categories
 The behavior of blog categories is now streamlined with categories that
 can be selected within the page records. Without touching or limiting
 normal categories. Blog categories only show other blog categories within
-the parent selector box, that are created in the same directory. 
-Note: SEO content is only available for blog categories, not (anymore) 
+the parent selector box, that are created in the same directory.
+Note: SEO content is only available for blog categories, not (anymore)
 for default categories.
 
 
@@ -124,7 +124,7 @@ without the need to touch the templates at all. This set is now replacing
 all current usages of the metadata. The old metadata plugin will now throw
 a deprecation message and is planned to be removed with Version 11. Instead
 of using the old one, there are now two new plugins for post header and post
-footer that can be configured individually through TypoScript constants. 
+footer that can be configured individually through TypoScript constants.
 
 While the post header plugin will also render the post title, the post footer
 will only render the metadata for now. Also, the list rendering of posts has
@@ -150,7 +150,7 @@ this in the constant editor.
 
 Example Configuration for the postheader position:
 
-.. code-block:: ts
+.. code-block:: typoscript
    :linenos:
 
    plugin.tx_blog.settings.meta.postheader {
@@ -210,12 +210,12 @@ translations are fetched automaticly, if available
 Limit tags to configured storage pid
 
 Listing of tags is now restricted to the configured storage pid. If you want
-to use tags from additional storages please adjust your configuration 
+to use tags from additional storages please adjust your configuration
 accordingly.
 
 TypoScript Constants Example:
 
-.. code-block:: ts
+.. code-block:: typoscript
 
    plugin.tx_blog.settings.storagePid = 0,666
 
@@ -238,8 +238,8 @@ New list rendering (modernized)
 To provide more flexibility, all default post list templates have been reworked.
 They all now share a common markup with modifiers for the different plugins.
 
-In previous versions the templates were already listening to a variable class, 
-but it was never set nor could could it be set without overriding the templates. 
+In previous versions the templates were already listening to a variable class,
+but it was never set nor could could it be set without overriding the templates.
 All controller that render lists are now assigning a variable named type to these
 templates.
 
@@ -263,23 +263,23 @@ Templates changed:
 New widget rendering (modernized)
 ---------------------------------
 
-The widget rendering has been completely reworked and is now more easy to 
+The widget rendering has been completely reworked and is now more easy to
 customize without overwriting the templates. Title rendering has been moved to
-the main layout, you can now use the new section "Title" to set the widget 
-title. If you have overwritten the widget templates or added new ones that 
+the main layout, you can now use the new section "Title" to set the widget
+title. If you have overwritten the widget templates or added new ones that
 makes use of the "Widgets" layout you need to add this new section.
 
 Migration:
 
 remove:
 
-.. code-block:: ts
+.. code-block:: typoscript
 
    <h3 class="widget-title">[TITLE]</h3>
 
 add:
 
-.. code-block:: ts
+.. code-block:: typoscript
 
    <f:section name="Title">[TITLE]</f:section>
 
@@ -321,7 +321,7 @@ New pagination rendering (modernized)
 
 The pagination rendering has been completely reworked and is now more easy to
 customize without overwriting the templates. Bootstrap specific markup has been
-removed. In addition to a new template, a11y has been enhanced. We are now 
+removed. In addition to a new template, a11y has been enhanced. We are now
 providing descriptive labels for the pagination entries. A set of new language
 labels have been introduced that you are now also able to customize to your needs.
 
@@ -462,5 +462,5 @@ Exclude fields dropped
 ----------------------
 
 All backend users now are NOT prevented from editing the field unless they are
-members of a backend user group with this field added as an 
+members of a backend user group with this field added as an
 “Allowed Excludefield” (or “admin” user).

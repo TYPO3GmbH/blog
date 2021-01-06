@@ -22,10 +22,10 @@ TYPO3 Blog Extension
    Features/Index
    Installation/Index
    Setup/Index
+   Guides/Index
    Configuration/Index
    Plugins/Index
-   Editors/Index
    Extending/Index
    FAQ/Index
    Changelog/Index
-   Upgrading/Index
+   Migration/Index

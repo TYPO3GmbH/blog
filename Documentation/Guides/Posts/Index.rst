@@ -1,13 +1,10 @@
-.. include:: ../Includes.txt
+.. include:: ../../Includes.txt
 
-.. _Editors:
+.. _GuidePosts:
 
-====================
-Blogging for Editors
-====================
-
-For this how to we are assuming that you are already comfortable working with TYPO3 as an editor and know your way around
-the TYPO3 backend.
+=====
+Posts
+=====
 
 Create a new post
 -----------------
@@ -19,21 +16,21 @@ To create a new post, follow these steps:
 3. Drag the blog entry page type into the page tree to where you want to create your new post
 
 
-.. figure:: ../Images/HowTo/1_create_new_post.png
+.. figure:: 1_create_new_post.png
 
    Create a new blog post page
 
 4. Click on your page in the page tree
 5. Click on edit page properties
 
-.. figure:: ../Images/HowTo/2_create_new_post.png
+.. figure:: 2_create_new_post.png
 
    Go to page properties
 
 
 6. Make sure your blog post page is not disabled
 
-.. figure:: ../Images/HowTo/3_page_properties_access.png
+.. figure:: 3_page_properties_access.png
 
    Access settings: Enable your entry
 
@@ -46,7 +43,7 @@ To create a new post, follow these steps:
 
    If you want to add categories do so with the normal TYPO3 categories (Tab: Categories)
 
-.. figure:: ../Images/HowTo/4_edit_blog_entry_settings.png
+.. figure:: 4_edit_blog_entry_settings.png
 
    Blog entry settings
 
@@ -62,7 +59,7 @@ Add content to your post
    provide any special elements for the content of your blog entry as sticking close to the rest of your website ensures a
    consistent look and feel for your visitors.
 
-.. figure:: ../Images/HowTo/5_add_content.png
+.. figure:: 5_add_content.png
 
 
 Set a details page for an author
@@ -81,7 +78,7 @@ Create a blog category (since v10)
 3. Select “category” in the system records
 4. Choose the record type “blog category”
 
-.. figure:: ../Images/HowTo/6_create-blog-category.png
+.. figure:: 6_create-blog-category.png
 
 
 Create a featured image (since v10)

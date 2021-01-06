@@ -2,9 +2,9 @@
 
 .. _FAQ:
 
-==========================
-Frequently Asked Questions
-==========================
+===
+FAQ
+===
 
 .. contents::
       :local:
