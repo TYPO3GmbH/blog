@@ -1,0 +1,16 @@
+.. include:: ../../Includes.txt
+
+===================================================================
+Feature: Add function to get all tags of all articles by one author
+===================================================================
+
+Description
+===========
+
+This change adds the list of tags an author has blog posts written for to the output of an author detail page.
+
+
+Change
+======
+
+https://github.com/TYPO3GmbH/blog/commit/c79856ce93974d9be4ac6e44c28a4ec206c06f75

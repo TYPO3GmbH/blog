@@ -6,27 +6,43 @@
 Migrating to v10.0.0
 ====================
 
-Template overrides
+.. contents::
+   :local:
+   :depth: 2
+
+Templates Sections
 ------------------
 
-If you are upgrading from blog 9.x.x and you are overriding default
-templates with templates in your sitepackage, please make sure that
-if you have code like this:
+Section, partial and layout names are recommended to be uppercase and
+are now renamed to follow best practices. If you have customized
+templates please ensure you check the casing of your section names.
+
+* actions => Actions
+* content => Content
+* intro => Intro
+* paginator => Paginator
+
+Migration Example:
+
+**Old**
 
 .. code-block:: html
 
    <f:render section="content" arguments="{_all}" />
 
-you replace it with:
+**New**
 
 .. code-block:: html
 
    <f:render section="Content" arguments="{_all}" />
 
+
 If you neglect to correct this situation before executing the upgrade on
 the blog extension, you will see the follwing error message:
 
 .. figure:: template_override_error.png
+
+   Oops, an error occurred! Section "content" does not exist.
 
 
 Dedicated featured image provided
