@@ -42,7 +42,7 @@
             "app-dir": ".build"
         },
         "branch-alias": {
-            "dev-master": "10.0.x-dev"
+            "dev-master": "11.0.x-dev"
         }
     },
     "scripts": {
