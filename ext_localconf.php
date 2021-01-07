@@ -12,6 +12,16 @@ if (!defined('TYPO3_MODE')) {
 }
 
 /***************
+ * Load Dependencies
+ */
+if (!class_exists('Psr\Http\Client\ClientInterface') ||
+    !class_exists('Psr\Http\Message\RequestInterface') ||
+    !class_exists('Psr\Http\Message\RequestFactoryInterface')
+) {
+    require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('blog') . '/Resources/Private/PHP/vendor/autoload.php';
+}
+
+/***************
  * Make the extension configuration accessible
  */
 $extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
