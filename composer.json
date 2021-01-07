@@ -40,6 +40,9 @@
             "extension-key": "blog",
             "web-dir": ".build/web",
             "app-dir": ".build"
+        },
+        "branch-alias": {
+            "dev-master": "10.0.x-dev"
         }
     },
     "scripts": {
