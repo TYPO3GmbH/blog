@@ -5,10 +5,10 @@
 .DS_Store
 
 # Composer
-vendor/
-bin/
-logs/
-composer.lock
+/vendor/
+/bin/
+/logs/
+/composer.lock
 
 # Build stuff
 .build/
