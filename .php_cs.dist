@@ -66,6 +66,5 @@ return PhpCsFixer\Config::create()
         PhpCsFixer\Finder::create()
             ->exclude('.build')
             ->exclude('var')
-            ->exclude('Resources/Private/PHP')
             ->in(__DIR__)
     );
