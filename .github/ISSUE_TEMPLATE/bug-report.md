@@ -9,8 +9,9 @@ labels:
 
 ## Prerequisites
 
-* [ ] Can you reproduce the problem on TYPO3 v8.7 LTS
 * [ ] Can you reproduce the problem on TYPO3 v9.5 LTS
+* [ ] Can you reproduce the problem on TYPO3 v10.4 LTS
+* [ ] Can you reproduce the problem on TYPO3 v11.x
 * [ ] Did you [perform a cursory search](https://github.com/issues?utf8=%E2%9C%93&q=is%3Aissue+repo%3ATYPO3GmbH%2Fblog) to see if your bug or feature is already reported?
 
 ## Description

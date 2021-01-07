@@ -8,11 +8,12 @@ This blog extension uses TYPO3s core concepts and elements to provide a full-blo
 
 | Version  | TYPO3                 | PHP      |
 |----------|-----------------------|----------|
-| master   | ^9.5.5 or ^10.4       | ^7.2     |
-| v9.1.x   | ^9.5.1                | ^7.2     |
-| v9.0.x   | ^9.5.1                | ^7.2     |
-| v8.7.x   | ^8.7.0                | >=7.0.0  |
-| v7.6.x   | ^7.6.0                | >=5.5.0  |
+| master   | ^10.4 or ^11.0        | ^7.2     |
+| v10.0.x  |  ^9.5 or ^10.4        | ^7.2     |
+| v9.1.x   |  ^9.5                 | ^7.2     |
+| v9.0.x   |  ^9.5                 | ^7.2     |
+| v8.7.x   |  ^8.7                 | >=7.0.0  |
+| v7.6.x   |  ^7.6                 | >=5.5.0  |
 
 ## License
 GPL-2.0-or-later

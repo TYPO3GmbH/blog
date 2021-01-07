@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        typo3: [ ^9.5, ^10.4 ]
+        typo3: [ ^10.4, ^11.0 ]
         php: [ '7.2', '7.3', '7.4' ]
 
     steps:
@@ -49,7 +49,7 @@ jobs:
         run: composer t3g:test:php:lint
 
       - name: Unit Tests without coverage
-        if: matrix.typo3 == '^9.5'
+        if: matrix.typo3 != '^10.4'
         run: composer t3g:test:php:unit
 
       - name: Unit Tests with coverage
@@ -58,7 +58,7 @@ jobs:
 
       - name: Functional Tests without coverage
         run: composer t3g:test:php:functional
-        if: matrix.typo3 == '^9.5'
+        if: matrix.typo3 != '^10.4'
         env:
           typo3DatabaseHost: 127.0.0.1
           typo3DatabaseName: t3func
