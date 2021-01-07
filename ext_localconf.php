@@ -60,42 +60,42 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'Posts',
         [
-            'Post' => 'listRecentPosts',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listRecentPosts',
         ]
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
         'LatestPosts',
         [
-            'Post' => 'listLatestPosts',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listLatestPosts',
         ]
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
         'Category',
         [
-            'Post' => 'listPostsByCategory',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByCategory',
         ]
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
         'AuthorPosts',
         [
-            'Post' => 'listPostsByAuthor',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByAuthor',
         ]
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
         'Tag',
         [
-            'Post' => 'listPostsByTag',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByTag',
         ]
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'T3G.AgencyPack.Blog',
         'Archive',
         [
-            'Post' => 'listPostsByDate',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByDate',
         ]
     );
 
@@ -103,7 +103,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'Sidebar',
         [
-            'Post' => 'sidebar',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'sidebar',
         ]
     );
 
@@ -111,10 +111,10 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'CommentForm',
         [
-            'Comment' => 'form',
+            \T3G\AgencyPack\Blog\Controller\CommentController::class => 'form',
         ],
         [
-            'Comment' => 'form',
+            \T3G\AgencyPack\Blog\Controller\CommentController::class => 'form',
         ]
     );
 
@@ -122,7 +122,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'Comments',
         [
-            'Comment' => 'comments',
+            \T3G\AgencyPack\Blog\Controller\CommentController::class => 'comments',
         ]
     );
 
@@ -130,7 +130,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'Header',
         [
-            'Post' => 'header',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'header',
         ]
     );
 
@@ -138,7 +138,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'Footer',
         [
-            'Post' => 'footer',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'footer',
         ]
     );
 
@@ -146,7 +146,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'Metadata',
         [
-            'Post' => 'metadata',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'metadata',
         ]
     );
 
@@ -154,7 +154,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'Authors',
         [
-            'Post' => 'authors',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'authors',
         ]
     );
 
@@ -162,7 +162,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'RelatedPosts',
         [
-            'Post' => 'relatedPosts',
+            \T3G\AgencyPack\Blog\Controller\PostController::class => 'relatedPosts',
         ]
     );
 
@@ -171,7 +171,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'RecentPostsWidget',
         [
-            'Widget' => 'recentPosts',
+            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'recentPosts',
         ]
     );
 
@@ -179,7 +179,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'CategoryWidget',
         [
-            'Widget' => 'categories',
+            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'categories',
         ]
     );
 
@@ -187,7 +187,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'TagWidget',
         [
-            'Widget' => 'tags',
+            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'tags',
         ]
     );
 
@@ -195,7 +195,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'CommentsWidget',
         [
-            'Widget' => 'comments',
+            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'comments',
         ]
     );
 
@@ -203,7 +203,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'ArchiveWidget',
         [
-            'Widget' => 'archive',
+            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'archive',
         ]
     );
 
@@ -211,7 +211,7 @@ call_user_func(function () {
         'T3G.AgencyPack.Blog',
         'FeedWidget',
         [
-            'Widget' => 'feed',
+            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'feed',
         ]
     );
 
