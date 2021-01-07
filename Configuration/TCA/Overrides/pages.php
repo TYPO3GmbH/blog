@@ -57,7 +57,7 @@ $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-
             ],
         ],
         'types' => [
-            (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST => $GLOBALS['TCA']['pages']['types'][\TYPO3\CMS\Frontend\Page\PageRepository::DOKTYPE_DEFAULT],
+            (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST => $GLOBALS['TCA']['pages']['types'][\TYPO3\CMS\Core\Domain\Repository\PageRepository::DOKTYPE_DEFAULT],
         ],
     ]
 );
@@ -70,7 +70,7 @@ $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-
             ],
         ],
         'types' => [
-            (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE => $GLOBALS['TCA']['pages']['types'][\TYPO3\CMS\Frontend\Page\PageRepository::DOKTYPE_DEFAULT],
+            (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE => $GLOBALS['TCA']['pages']['types'][\TYPO3\CMS\Core\Domain\Repository\PageRepository::DOKTYPE_DEFAULT],
         ],
     ]
 );

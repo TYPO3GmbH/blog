@@ -24,7 +24,7 @@ $data['pages']['NEW_blogFolder'] = [
     'pid' => 'NEW_blogRoot',
     'hidden' => 0,
     'title' => 'Data',
-    'doktype' => \TYPO3\CMS\Frontend\Page\PageRepository::DOKTYPE_SYSFOLDER,
+    'doktype' => \TYPO3\CMS\Core\Domain\Repository\PageRepository::DOKTYPE_SYSFOLDER,
     'module' => 'blog'
 ];
 $data['pages']['NEW_blogCategoryPage'] = [
