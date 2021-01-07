@@ -70,7 +70,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
             $result = $this->renderChildren();
         }
 
-        return $result;
+        return (string)$result;
     }
 
     /**
