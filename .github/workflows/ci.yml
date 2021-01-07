@@ -17,14 +17,14 @@ jobs:
       - name: Start database server
         run: sudo /etc/init.d/mysql start
 
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Set up PHP Version ${{ matrix.php }}
+      - name: Set up PHP version ${{ matrix.php }}
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          tools: composer:v2
+          tools: composer:v2, php-cs-fixer
 
       - name: Environment Check
         run: |
@@ -43,7 +43,7 @@ jobs:
         run: composer info
 
       - name: CGL
-        run: composer t3g:cgl
+        run: php-cs-fixer fix --dry-run --verbose
 
       - name: Lint PHP
         run: composer t3g:test:php:lint
