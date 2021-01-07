@@ -16,9 +16,10 @@ composer.lock
 .ddev/**/*.txt
 .ddev/commands/
 Build/.phpunit.result.cache
+Documentation-*
+config/
 node_modules/
 var/
-config/
 
 # Cache
 .php_cs.cache

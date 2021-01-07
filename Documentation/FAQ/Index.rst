@@ -1,5 +1,10 @@
-Frequently Asked Questions
-==========================
+.. include:: ../Includes.txt
+
+.. _FAQ:
+
+===
+FAQ
+===
 
 .. contents::
       :local:

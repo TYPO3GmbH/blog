@@ -9,7 +9,8 @@ See https://jira.typo3.com/browse/EXTBLOG-62
 Description
 ===========
 
-The lists plug-in will now use the setting ``lists.posts.maximumDisplayedItems`` for recent posts to limit the number of recent items to be displayed.
+The lists plug-in will now use the setting ``lists.posts.maximumDisplayedItems`` 
+for recent posts to limit the number of recent items to be displayed.
 
 Default value is ``0``, which means there is no limit (there is no impact on previous behaviour).
 

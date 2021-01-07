@@ -15,9 +15,9 @@ use_dns_when_possible: true
 composer_version: "2"
 
 
-# This config.yaml was created with ddev version v1.16.0-alpha9
-# webimage: drud/ddev-webserver:20201026_hardened
-# dbimage: drud/ddev-dbserver-mariadb-10.2:20201026_hardened
+# This config.yaml was created with ddev version v1.16.5
+# webimage: drud/ddev-webserver:v1.16.3
+# dbimage: drud/ddev-dbserver-mariadb-10.2:v1.16.0
 # dbaimage: phpmyadmin:5
 # However we do not recommend explicitly wiring these images into the
 # config.yaml as they may break future versions of ddev.

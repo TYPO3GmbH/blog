@@ -4,14 +4,15 @@
 Feature: #EXTBLOG-53 - Add SPAM protection to comment form
 ==========================================================
 
-See https://jira.typo3.com/browse/EXTBLOG-53
-
-See https://jira.typo3.com/browse/TE-12
+- See https://jira.typo3.com/browse/EXTBLOG-53
+- See https://jira.typo3.com/browse/TE-12
 
 Description
 ===========
 
-The comment form use a honeypot field as spam protection. This means a new field is added to the comment form which must not be filled out. The field is set to hidden by JavaScript and only bots will fill out this field.
+The comment form use a honeypot field as spam protection. This means a new 
+field is added to the comment form which must not be filled out. The field
+is set to hidden by JavaScript and only bots will fill out this field.
 
 
 Impact

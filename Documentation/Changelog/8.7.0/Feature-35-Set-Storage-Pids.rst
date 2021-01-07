@@ -25,7 +25,7 @@ You can now set a storage pid where the blog posts are saved. This can be done b
 
 .. note::
 
-        All plugins which list blog posts will first check if there are any TypoScript or plugin setting for the storage pid.
-        If there are no storage pids set, it will scan the rootline of the page the plugin is on if there are any blog posts.
+   All plugins which list blog posts will first check if there are any TypoScript or plugin setting for the storage pid.
+   If there are no storage pids set, it will scan the rootline of the page the plugin is on if there are any blog posts.
 
 .. index:: TypoScript, Frontend

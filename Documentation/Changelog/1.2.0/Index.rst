@@ -1,24 +1,14 @@
-
 .. include:: ../../Includes.txt
 
-Changes in version 1.2.0
-========================
+======
+v1.2.0
+======
 
 **Table of contents**
 
 .. contents::
    :local:
    :depth: 1
-
-Breaking Changes
-^^^^^^^^^^^^^^^^
-
-.. toctree::
-   :maxdepth: 1
-   :titlesonly:
-   :glob:
-
-   Breaking-*
 
 Features
 ^^^^^^^^

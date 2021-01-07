@@ -4,9 +4,8 @@
 Deprecation: #EXTBLOG-57 - Add author relations
 ===============================================
 
-See https://jira.typo3.com/browse/EXTBLOG-57
-
-See https://jira.typo3.com/browse/TE-21
+- See https://jira.typo3.com/browse/EXTBLOG-57
+- See https://jira.typo3.com/browse/TE-21
 
 Description
 ===========

@@ -342,7 +342,7 @@ plugin {
                         size = 72
                         # cat=blog/blog_150_authors; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.default
                         default = mm
-                        # cat=blog/blog_150_authors; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.rating
+                        # cat=blog/blog_150_authors; type=options[g, pg, r, x]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.rating
                         rating = g
                     }
                 }

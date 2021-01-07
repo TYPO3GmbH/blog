@@ -455,6 +455,9 @@
             <trans-unit id="constantEditor.authors.avatar.provider.default" xml:space="preserve">
                 <source>Author Avatar Default:The default image for an author avatar</source>
             </trans-unit>
+            <trans-unit id="constantEditor.authors.avatar.provider.rating" xml:space="preserve">
+                <source>Define the gravatar rating for images: g = suitable for display on all websites with any audience type | pg = may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence | r = may contain such things as harsh profanity, intense violence, nudity, or hard drug use | x = may contain hardcore sexual imagery or extremely disturbing violence.The default image for an author avatar</source>
+            </trans-unit>
             <trans-unit id="constantEditor.blogUid" xml:space="preserve">
                 <source>List posts UID:Location of the "Blog: List of posts" plugin. This page UID is the root page for the blog. All blog post pages are located below this page.</source>
             </trans-unit>
