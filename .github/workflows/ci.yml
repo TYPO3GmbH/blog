@@ -11,7 +11,15 @@ jobs:
       fail-fast: false
       matrix:
         typo3: [ ^10.4, ^11.0 ]
-        php: [ '7.2', '7.3', '7.4' ]
+        php: [ '7.4' ]
+        include:
+          - typo3: ^10.4
+            php: '7.4'
+            coverage: true
+          - typo3: ^10.4
+            php: '7.2'
+          - typo3: ^10.4
+            php: '7.3'
 
     steps:
       - name: Start database server
