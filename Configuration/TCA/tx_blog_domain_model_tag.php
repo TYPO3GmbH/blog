@@ -37,16 +37,6 @@ return [
         ],
         'searchFields' => 'uid,title',
     ],
-    'interface' => [
-        'showRecordFieldList' => '
-            hidden,
-            title,
-            slug,
-            sys_language_uid,
-            l18n_parent,
-            l18n_diffsource
-        ',
-    ],
     'columns' => [
         'pid' => [
             'label' => 'pid',

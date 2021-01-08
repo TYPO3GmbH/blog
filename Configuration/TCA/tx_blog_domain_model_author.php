@@ -35,24 +35,6 @@ return [
         'transOrigPointerField' => 'l18n_parent',
         'transOrigDiffSourceField' => 'l18n_diffsource',
     ],
-    'interface' => [
-        'showRecordFieldList' => '
-            hidden,
-            name,
-            slug,
-            image,
-            title,
-            website,
-            email,
-            location,
-            twitter,
-            linkedin,
-            xing,
-            profile,
-            bio,
-            posts
-        ',
-    ],
     'palettes' => [
         'palette_access' => [
             'showitem' => 'hidden'

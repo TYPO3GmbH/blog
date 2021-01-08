@@ -171,7 +171,6 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
                 'foreign_table' => 'tx_blog_domain_model_tag',
                 'foreign_table_where' => 'AND tx_blog_domain_model_tag.sys_language_uid IN (0,-1) AND tx_blog_domain_model_tag.pid = ###PAGE_TSCONFIG_ID### ORDER BY tx_blog_domain_model_tag.title ASC',
                 'MM' => 'tx_blog_tag_pages_mm',
-                'enableMultiSelectFilterTextfield' => 1,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
                 ]
