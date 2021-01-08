@@ -55,8 +55,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         }
         $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $uriBuilder->reset()
-            ->setTargetPageUid($pageUid)
-            ->setUseCacheHash(true);
+            ->setTargetPageUid($pageUid);
         if ($rssFormat) {
             $uriBuilder
                 ->setTargetPageType((int)$this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_archive.']['typeNum']);

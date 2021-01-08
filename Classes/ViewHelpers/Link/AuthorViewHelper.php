@@ -92,7 +92,6 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
-            ->setUseCacheHash(true)
             ->setArguments($additionalParams);
         if ($rssFormat) {
             $uriBuilder
