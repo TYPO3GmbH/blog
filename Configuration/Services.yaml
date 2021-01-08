@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    T3G\AgencyPack\Blog\:
+        resource: '../Classes/*'
