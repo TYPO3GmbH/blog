@@ -51,7 +51,7 @@ class CommentViewHelper extends AbstractTagBasedViewHelper
     {
         /** @var Comment $comment */
         $comment = $this->arguments['comment'];
-        $commentUid = $comment !== null ? (int)$comment->getUid() : 0;
+        $commentUid = (int)$comment->getUid();
 
         $routingUriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uri = $routingUriBuilder->buildUriFromRoute('record_edit', ['edit[tx_blog_domain_model_comment][' . $commentUid . ']' => 'edit']);

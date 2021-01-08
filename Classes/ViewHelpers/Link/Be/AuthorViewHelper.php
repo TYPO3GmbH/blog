@@ -51,7 +51,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
     {
         /** @var Author $author */
         $author = $this->arguments['author'];
-        $authorUid = $author !== null ? (int)$author->getUid() : 0;
+        $authorUid = (int)$author->getUid();
 
         $routingUriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uri = $routingUriBuilder->buildUriFromRoute('record_edit', ['edit[tx_blog_domain_model_author][' . $authorUid . ']' => 'edit']);

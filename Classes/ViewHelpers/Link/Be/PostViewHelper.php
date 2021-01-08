@@ -51,7 +51,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     {
         /** @var Post $post */
         $post = $this->arguments['post'];
-        $pageUid = $post !== null ? (int)$post->getUid() : 0;
+        $pageUid = (int)$post->getUid();
 
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         switch ($this->arguments['action']) {

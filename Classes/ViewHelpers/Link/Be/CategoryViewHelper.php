@@ -51,7 +51,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
     {
         /** @var Category $category */
         $category = $this->arguments['category'];
-        $categoryUid = $category !== null ? (int)$category->getUid() : 0;
+        $categoryUid = (int)$category->getUid();
 
         $routingUriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uri = $routingUriBuilder->buildUriFromRoute('record_edit', ['edit[sys_category][' . $categoryUid . ']' => 'edit']);

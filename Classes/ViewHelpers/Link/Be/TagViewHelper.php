@@ -51,7 +51,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
     {
         /** @var Tag $tag */
         $tag = $this->arguments['tag'];
-        $tagUid = $tag !== null ? (int)$tag->getUid() : 0;
+        $tagUid = (int)$tag->getUid();
 
         $routingUriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uri = $routingUriBuilder->buildUriFromRoute('record_edit', ['edit[tx_blog_domain_model_tag][' . $tagUid . ']' => 'edit']);
