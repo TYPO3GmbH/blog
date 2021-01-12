@@ -84,7 +84,7 @@ class CommentFormFactory extends AbstractFormFactory
         $commentField->addValidator($objectManager->get(NotEmptyValidator::class));
         $commentField->addValidator($objectManager->get(StringLengthValidator::class, ['minimum' => 5]));
 
-        $explanationText = $page->createElement('headline', 'StaticText');
+        $explanationText = $page->createElement('explanation', 'StaticText');
         $explanationText->setProperty('text', LocalizationUtility::translate('label.required.field', 'blog') . ' ' . LocalizationUtility::translate('label.required.field.explanation', 'blog'));
 
         if ($captcha['enable'] && $captcha['sitekey'] && $captcha['secret']) {
