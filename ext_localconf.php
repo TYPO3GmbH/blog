@@ -32,7 +32,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['blogvh'][] = 'T3G\\Ag
 /***************
  * Register page layout hooks to display additional information for posts.
  */
-if (!(bool) $blogConfiguration['disablePageLayoutHeader']) {
+if (!(bool)$blogConfiguration['disablePageLayoutHeader']) {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/db_layout.php']['drawHeaderHook'][]
         = \T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook::class . '->drawHeader';
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['recordlist/Modules/Recordlist/index.php']['drawHeaderHook'][]
@@ -55,213 +55,215 @@ if (class_exists('TYPO3\CMS\Core\Hooks\CreateSiteConfiguration')) {
         = \T3G\AgencyPack\Blog\Hooks\CreateSiteConfigurationHook::class;
 }
 
-call_user_func(function () {
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'Posts',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listRecentPosts',
-        ]
-    );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'LatestPosts',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listLatestPosts',
-        ]
-    );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'Category',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByCategory',
-        ]
-    );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'AuthorPosts',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByAuthor',
-        ]
-    );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'Tag',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByTag',
-        ]
-    );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'Archive',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByDate',
-        ]
-    );
+call_user_func(
+    function () {
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'Posts',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'listRecentPosts',
+            ]
+        );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'LatestPosts',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'listLatestPosts',
+            ]
+        );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'Category',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByCategory',
+            ]
+        );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'AuthorPosts',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByAuthor',
+            ]
+        );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'Tag',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByTag',
+            ]
+        );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'Archive',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByDate',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'Sidebar',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'sidebar',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'Sidebar',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'sidebar',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'CommentForm',
-        [
-            \T3G\AgencyPack\Blog\Controller\CommentController::class => 'form',
-        ],
-        [
-            \T3G\AgencyPack\Blog\Controller\CommentController::class => 'form',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'CommentForm',
+            [
+                \T3G\AgencyPack\Blog\Controller\CommentController::class => 'form',
+            ],
+            [
+                \T3G\AgencyPack\Blog\Controller\CommentController::class => 'form',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'Comments',
-        [
-            \T3G\AgencyPack\Blog\Controller\CommentController::class => 'comments',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'Comments',
+            [
+                \T3G\AgencyPack\Blog\Controller\CommentController::class => 'comments',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'Header',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'header',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'Header',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'header',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'Footer',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'footer',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'Footer',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'footer',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'Metadata',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'metadata',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'Metadata',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'metadata',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'Authors',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'authors',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'Authors',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'authors',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'RelatedPosts',
-        [
-            \T3G\AgencyPack\Blog\Controller\PostController::class => 'relatedPosts',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'RelatedPosts',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'relatedPosts',
+            ]
+        );
 
-    // Widgets
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'RecentPostsWidget',
-        [
-            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'recentPosts',
-        ]
-    );
+        // Widgets
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'RecentPostsWidget',
+            [
+                \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'recentPosts',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'CategoryWidget',
-        [
-            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'categories',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'CategoryWidget',
+            [
+                \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'categories',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'TagWidget',
-        [
-            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'tags',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'TagWidget',
+            [
+                \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'tags',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'CommentsWidget',
-        [
-            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'comments',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'CommentsWidget',
+            [
+                \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'comments',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'ArchiveWidget',
-        [
-            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'archive',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'ArchiveWidget',
+            [
+                \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'archive',
+            ]
+        );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'T3G.AgencyPack.Blog',
-        'FeedWidget',
-        [
-            \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'feed',
-        ]
-    );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'FeedWidget',
+            [
+                \T3G\AgencyPack\Blog\Controller\WidgetController::class => 'feed',
+            ]
+        );
 
-    $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
-    $dispatcher->connect(
-        \TYPO3\CMS\Extensionmanager\Utility\InstallUtility::class,
-        'afterExtensionInstall',
-        \T3G\AgencyPack\Blog\Hooks\ExtensionUpdate::class,
-        'afterExtensionInstall'
-    );
+        $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
+        $dispatcher->connect(
+            \TYPO3\CMS\Extensionmanager\Utility\InstallUtility::class,
+            'afterExtensionInstall',
+            \T3G\AgencyPack\Blog\Hooks\ExtensionUpdate::class,
+            'afterExtensionInstall'
+        );
 
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['Blog'] =
-        \T3G\AgencyPack\Blog\Hooks\DataHandlerHook::class;
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['Blog'] =
+            \T3G\AgencyPack\Blog\Hooks\DataHandlerHook::class;
 
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate']
-        = \T3G\AgencyPack\Blog\Updates\DatabaseMonthYearUpdate::class;
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate']
-        = \T3G\AgencyPack\Blog\Updates\DatabasePublishDateUpdate::class;
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate']
-        = \T3G\AgencyPack\Blog\Updates\AvatarProviderUpdate::class;
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class]
-        = \T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class;
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategoryTypeUpdate::class]
-    = \T3G\AgencyPack\Blog\Updates\CategoryTypeUpdate::class;
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class]
-        = \T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class;
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class]
-        = \T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class;
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate::class]
-        = \T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate::class;
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate']
+            = \T3G\AgencyPack\Blog\Updates\DatabaseMonthYearUpdate::class;
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate']
+            = \T3G\AgencyPack\Blog\Updates\DatabasePublishDateUpdate::class;
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate']
+            = \T3G\AgencyPack\Blog\Updates\AvatarProviderUpdate::class;
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class]
+            = \T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class;
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategoryTypeUpdate::class]
+            = \T3G\AgencyPack\Blog\Updates\CategoryTypeUpdate::class;
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class]
+            = \T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class;
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class]
+            = \T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class;
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate::class]
+            = \T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate::class;
 
-    // Register Static Database Mapper
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['BlogStaticDatabaseMapper'] =
-        \T3G\AgencyPack\Blog\Routing\Aspect\StaticDatabaseMapper::class;
+        // Register Static Database Mapper
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['BlogStaticDatabaseMapper'] =
+            \T3G\AgencyPack\Blog\Routing\Aspect\StaticDatabaseMapper::class;
 
-    // Register Notification visitors
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'][\T3G\AgencyPack\Blog\Notification\CommentAddedNotification::class][]
-        = \T3G\AgencyPack\Blog\Notification\Processor\AdminNotificationProcessor::class;
-    /** @noinspection UnsupportedStringOffsetOperationsInspection */
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'][\T3G\AgencyPack\Blog\Notification\CommentAddedNotification::class][]
-        = \T3G\AgencyPack\Blog\Notification\Processor\AuthorNotificationProcessor::class;
-});
+        // Register Notification visitors
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'][\T3G\AgencyPack\Blog\Notification\CommentAddedNotification::class][]
+            = \T3G\AgencyPack\Blog\Notification\Processor\AdminNotificationProcessor::class;
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'][\T3G\AgencyPack\Blog\Notification\CommentAddedNotification::class][]
+            = \T3G\AgencyPack\Blog\Notification\Processor\AuthorNotificationProcessor::class;
+    }
+);

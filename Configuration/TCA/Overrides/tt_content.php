@@ -12,7 +12,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'Posts',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_posts.title',
     'plugin-blog-posts'
@@ -20,7 +20,7 @@ if (!defined('TYPO3_MODE')) {
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_posts'] = 'select_key';
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'LatestPosts',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_latestposts.title',
     'plugin-blog-posts'
@@ -32,7 +32,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['blog_latestp
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'Category',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_category.title',
     'plugin-blog-category'
@@ -40,14 +40,14 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['blog_latestp
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_category'] = 'select_key';
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'AuthorPosts',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authorposts.title',
     'plugin-blog-authorposts'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'Tag',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_tag.title',
     'plugin-blog-tag'
@@ -55,7 +55,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_cat
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_tag'] = 'select_key';
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'Archive',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_archive.title',
     'plugin-blog-archive'
@@ -63,7 +63,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_tag
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_archive'] = 'select_key';
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'Sidebar',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_sidebar.title',
     'plugin-blog-sidebar'
@@ -71,7 +71,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_arc
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_sidebar'] = 'recursive,select_key,pages';
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'Metadata',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_metadata.title',
     'plugin-blog-metadata'
@@ -79,7 +79,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_sid
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_metadata'] = 'recursive,select_key,pages';
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'CommentForm',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_commentform.title',
     'plugin-blog-commentform'
@@ -87,7 +87,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_met
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_commentform'] = 'recursive,select_key,pages';
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'Comments',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_comments.title',
     'plugin-blog-comments'
@@ -95,28 +95,28 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_com
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_comments'] = 'recursive,select_key,pages';
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'Authors',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authors.title',
     'plugin-blog-authors'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'RelatedPosts',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_relatedposts.title',
     'plugin-blog-relatedposts'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'Header',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_header.title',
     'plugin-blog-header'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'T3G.AgencyPack.Blog',
+    'Blog',
     'Footer',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_footer.title',
     'plugin-blog-footer'

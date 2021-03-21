@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
@@ -21,8 +22,10 @@ use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\MetaTagService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
+use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -126,6 +129,7 @@ class PostController extends ActionController
                     break;
                 default:
             }
+
             $feedData = [
                 'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
                 'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
@@ -146,7 +150,7 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listRecentPostsAction(): void
+    public function listRecentPostsAction(): ResponseInterface
     {
         $maximumItems = (int) ($this->settings['lists']['posts']['maximumDisplayedItems'] ?? 0);
         $posts = (0 === $maximumItems)
@@ -155,6 +159,7 @@ class PostController extends ActionController
 
         $this->view->assign('type', 'recent');
         $this->view->assign('posts', $posts);
+        return $this->htmlResponse();
     }
 
     /**
@@ -163,13 +168,14 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listLatestPostsAction(): void
+    public function listLatestPostsAction(): ResponseInterface
     {
         $maximumItems = (int) ($this->settings['latestPosts']['limit'] ?: 3);
         $posts = $this->postRepository->findAllWithLimit($maximumItems);
 
         $this->view->assign('type', 'latest');
         $this->view->assign('posts', $posts);
+        return $this->htmlResponse();
     }
 
     /**
@@ -181,7 +187,7 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @throws \Exception
      */
-    public function listPostsByDateAction(int $year = null, int $month = null): void
+    public function listPostsByDateAction(int $year = null, int $month = null): ResponseInterface
     {
         if ($year === null) {
             $posts = $this->postRepository->findMonthsAndYearsWithPosts();
@@ -206,6 +212,7 @@ class PostController extends ActionController
             MetaTagService::set(MetaTagService::META_TITLE, (string) $title);
             MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
         }
+        return $this->htmlResponse();
     }
 
     /**
@@ -215,7 +222,7 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPostsByCategoryAction(Category $category = null): void
+    public function listPostsByCategoryAction(Category $category = null): ResponseInterface
     {
         if ($category === null) {
             $categories = $this->categoryRepository->getByReference(
@@ -239,6 +246,7 @@ class PostController extends ActionController
         } else {
             $this->view->assign('categories', $this->categoryRepository->findAll());
         }
+        return $this->htmlResponse();
     }
 
     /**
@@ -248,7 +256,7 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPostsByAuthorAction(Author $author = null): void
+    public function listPostsByAuthorAction(Author $author = null): ResponseInterface
     {
         if ($author) {
             $posts = $this->postRepository->findAllByAuthor($author);
@@ -260,6 +268,7 @@ class PostController extends ActionController
         } else {
             $this->view->assign('authors', $this->authorRepository->findAll());
         }
+        return $this->htmlResponse();
     }
 
     /**
@@ -269,7 +278,7 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPostsByTagAction(Tag $tag = null): void
+    public function listPostsByTagAction(Tag $tag = null): ResponseInterface
     {
         if ($tag) {
             $posts = $this->postRepository->findAllByTag($tag);
@@ -281,13 +290,15 @@ class PostController extends ActionController
         } else {
             $this->view->assign('tags', $this->tagRepository->findAll());
         }
+        return $this->htmlResponse();
     }
 
     /**
      * Sidebar action.
      */
-    public function sidebarAction(): void
+    public function sidebarAction(): ResponseInterface
     {
+        return $this->htmlResponse();
     }
 
     /**
@@ -297,13 +308,14 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function headerAction(): void
+    public function headerAction(): ResponseInterface
     {
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
             $this->blogCacheService->addTagsForPost($post);
         }
+        return $this->htmlResponse();
     }
 
     /**
@@ -313,13 +325,14 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function footerAction(): void
+    public function footerAction(): ResponseInterface
     {
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
             $this->blogCacheService->addTagsForPost($post);
         }
+        return $this->htmlResponse();
     }
 
     /**
@@ -331,7 +344,7 @@ class PostController extends ActionController
      *
      * @deprecated
      */
-    public function metadataAction(): void
+    public function metadataAction(): ResponseInterface
     {
         trigger_error(
             'Using \T3G\AgencyPack\Blog\Controller\PostController::metadataAction is deprecated. Use headerAction or footerAction instead.',
@@ -343,6 +356,7 @@ class PostController extends ActionController
         if ($post instanceof Post) {
             $this->blogCacheService->addTagsForPost($post);
         }
+        return $this->htmlResponse();
     }
 
     /**
@@ -352,13 +366,14 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function authorsAction(): void
+    public function authorsAction(): ResponseInterface
     {
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
             $this->blogCacheService->addTagsForPost($post);
         }
+        return $this->htmlResponse();
     }
 
     /**
@@ -367,7 +382,7 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function relatedPostsAction(): void
+    public function relatedPostsAction(): ResponseInterface
     {
         $post = $this->postRepository->findCurrentPost();
         $posts = $this->postRepository->findRelatedPosts(
@@ -378,6 +393,7 @@ class PostController extends ActionController
         $this->view->assign('type', 'related');
         $this->view->assign('post', $post);
         $this->view->assign('posts', $posts);
+        return $this->htmlResponse();
     }
 
     /**

@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
@@ -151,18 +152,22 @@ class BackendController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function postsAction(int $blogSetup = null): string
+    public function postsAction(int $blogSetup = null): ResponseInterface
     {
         $query = $this->postRepository->createQuery();
         $querySettings = $query->getQuerySettings();
         $querySettings->setIgnoreEnableFields(true);
         $this->postRepository->setDefaultQuerySettings($querySettings);
 
-        return $this->render('Backend/Posts.html', [
+        $html = $this->render('Backend/Posts.html', [
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'activeBlogSetup' => $blogSetup,
             'posts' => $this->postRepository->findAllByPid($blogSetup),
         ]);
+        $response = $this->responseFactory->createResponse()
+            ->withHeader('Content-Type', 'text/html; charset=utf-8');
+        $response->getBody()->write($html ?? $this->view->render());
+        return $response;
     }
 
     /**
@@ -175,9 +180,9 @@ class BackendController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      * @throws \InvalidArgumentException
      */
-    public function commentsAction(string $filter = null, int $blogSetup = null): string
+    public function commentsAction(string $filter = null, int $blogSetup = null): ResponseInterface
     {
-        return $this->render('Backend/Comments.html', [
+        $html = $this->render('Backend/Comments.html', [
             'activeFilter' => $filter,
             'activeBlogSetup' => $blogSetup,
             'commentCounts' => [
@@ -190,6 +195,10 @@ class BackendController extends ActionController
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'comments' => $this->commentRepository->findAllByFilter($filter, $blogSetup),
         ]);
+        $response = $this->responseFactory->createResponse()
+            ->withHeader('Content-Type', 'text/html; charset=utf-8');
+        $response->getBody()->write($html ?? $this->view->render());
+        return $response;
     }
 
     /**
