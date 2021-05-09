@@ -22,9 +22,12 @@ use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\MetaTagService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Exception;
+use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -133,6 +136,7 @@ class PostController extends ActionController
             $feedData = [
                 'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
                 'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
+                // @todo use request language instead
                 'language' => $this->getTypoScriptFontendController()->sys_language_isocode,
                 'link' => $this->uriBuilder->getRequest()->getRequestUri(),
                 'date' => date('r'),
@@ -147,18 +151,28 @@ class PostController extends ActionController
     /**
      * Show a list of recent posts.
      *
+     * @param int $currentPage
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listRecentPostsAction(): ResponseInterface
+    public function listRecentPostsAction(int $currentPage = 1): ResponseInterface
     {
         $maximumItems = (int) ($this->settings['lists']['posts']['maximumDisplayedItems'] ?? 0);
+        $itemsPerPage = (int) ($this->settings['lists']['pagination']['itemsPerPage'] ?? 10);
         $posts = (0 === $maximumItems)
             ? $this->postRepository->findAll()
             : $this->postRepository->findAllWithLimit($maximumItems);
 
+        $paginator = null;
+        $pagination = null;
+        if (count($posts) > $itemsPerPage) {
+            $paginator = new QueryResultPaginator($posts, $currentPage, $itemsPerPage);
+            $pagination = new SimplePagination($paginator);
+        }
         $this->view->assign('type', 'recent');
         $this->view->assign('posts', $posts);
+        $this->view->assign('pagination', $pagination);
+        $this->view->assign('paginator', $paginator);
         return $this->htmlResponse();
     }
 
