@@ -24,7 +24,9 @@ use T3G\AgencyPack\Blog\Service\MetaTagService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Exception;
+use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
@@ -136,9 +138,8 @@ class PostController extends ActionController
             $feedData = [
                 'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
                 'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
-                // @todo use request language instead
-                'language' => $this->getTypoScriptFontendController()->sys_language_isocode,
-                'link' => $this->uriBuilder->getRequest()->getRequestUri(),
+                'language' => $this->getSiteLanguage()->getTwoLetterIsoCode(),
+                'link' => $this->getRequestUrl(),
                 'date' => date('r'),
             ];
             $this->view->assign('feed', $feedData);
@@ -416,5 +417,17 @@ class PostController extends ActionController
     protected function getTypoScriptFontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
+    }
+
+    private function getSiteLanguage(): ?SiteLanguage
+    {
+        return $GLOBALS['TYPO3_REQUEST']->getAttribute('language');
+    }
+
+    private function getRequestUrl(): string
+    {
+        /** @var NormalizedParams $normalizedParams */
+        $normalizedParams = $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams');
+        return $normalizedParams->getRequestUrl();
     }
 }
