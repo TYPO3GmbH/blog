@@ -76,7 +76,7 @@ class CacheService
     public function flushCacheByTags(array $tags): void
     {
         GeneralUtility::makeInstance(CacheManager::class)
-            ->getCache('cache_pages')
+            ->getCache('pages')
             ->flushByTags($tags);
     }
 

@@ -138,11 +138,11 @@ class BackendController extends ActionController
      *
      * @throws \BadFunctionCallException
      */
-    public function setupWizardAction(): string
+    public function setupWizardAction(): ResponseInterface
     {
-        return $this->render('Backend/SetupWizard.html', [
+        return $this->htmlResponse($this->render('Backend/SetupWizard.html', [
             'blogSetups' => $this->setupService->determineBlogSetups(),
-        ]);
+        ]));
     }
 
     /**
