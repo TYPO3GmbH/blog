@@ -11,27 +11,19 @@ if (!defined('TYPO3')) {
     die('Access denied.');
 }
 
-/***************
- * Make the extension configuration accessible
- */
+// Make the extension configuration accessible
 $extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
     \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
 );
 $blogConfiguration = $extensionConfiguration->get('blog');
 
-/***************
- * PageTS
- */
+// PageTS
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TsConfig/Page/All.tsconfig">');
 
-/***************
- * Register "blogvh" as global fluid namespace
- */
+// Register "blogvh" as global fluid namespace
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['blogvh'][] = 'T3G\\AgencyPack\\Blog\\ViewHelpers';
 
-/***************
- * Register page layout hooks to display additional information for posts.
- */
+// Register page layout hooks to display additional information for posts.
 if (!(bool)$blogConfiguration['disablePageLayoutHeader']) {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/db_layout.php']['drawHeaderHook'][]
         = \T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook::class . '->drawHeader';
@@ -39,17 +31,13 @@ if (!(bool)$blogConfiguration['disablePageLayoutHeader']) {
         = \T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook::class . '->drawHeader';
 }
 
-/***************
- * Register new form data provider
- */
+// Register new form data provider
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][\T3G\AgencyPack\Blog\Backend\FormDataProvider\CategoryDefaultValueProvider::class] = [
     'depends' => [\TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew::class],
     'after' => [\TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew::class],
 ];
 
-/***************
- * Overwrite create site configuration hook to include blog pages
- */
+// Overwrite create site configuration hook to include blog pages
 if (class_exists('TYPO3\CMS\Core\Hooks\CreateSiteConfiguration')) {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][\TYPO3\CMS\Core\Hooks\CreateSiteConfiguration::class]
         = \T3G\AgencyPack\Blog\Hooks\CreateSiteConfigurationHook::class;

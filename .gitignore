@@ -22,5 +22,5 @@ node_modules/
 var/
 
 # Cache
-.php_cs.cache
+.php-cs-fixer.cache
 .phplint.cache

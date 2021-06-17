@@ -106,9 +106,9 @@
         "typo3/cms-setup": "^10.4 || 11.*.*@dev",
         "typo3/cms-tstemplate": "^10.4 || 11.*.*@dev",
         "typo3/cms-rte-ckeditor": "^10.4 || 11.*.*@dev",
-        "friendsofphp/php-cs-fixer": "^2.17",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "typo3/testing-framework": "^4.15 || ^5.0 || ^6.4",
-        "bk2k/bootstrap-package": "*",
+        "bk2k/bootstrap-package": "^12@dev",
         "bk2k/extension-helper": "^1.0",
         "overtrue/phplint": "^2.3"
     }
