@@ -7,6 +7,9 @@
  * LICENSE file that was distributed with this source code.
  */
 
+use T3G\AgencyPack\Blog\Constants;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+
 $data = [];
 
 // Pages
@@ -14,7 +17,7 @@ $data['pages']['NEW_blogRoot'] = [
     'pid' => 0,
     'hidden' => 1,
     'title' => 'Blog',
-    'doktype' => \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE,
+    'doktype' => Constants::DOKTYPE_BLOG_PAGE,
     'is_siteroot' => 1,
     'TSconfig' => 'TCEFORM.pages.tags.PAGE_TSCONFIG_ID = NEW_blogFolder
 TCEFORM.pages.authors.PAGE_TSCONFIG_ID = NEW_blogFolder
@@ -24,38 +27,38 @@ $data['pages']['NEW_blogFolder'] = [
     'pid' => 'NEW_blogRoot',
     'hidden' => 0,
     'title' => 'Data',
-    'doktype' => \TYPO3\CMS\Core\Domain\Repository\PageRepository::DOKTYPE_SYSFOLDER,
+    'doktype' => PageRepository::DOKTYPE_SYSFOLDER,
     'module' => 'blog'
 ];
 $data['pages']['NEW_blogCategoryPage'] = [
     'pid' => '-NEW_blogFolder',
     'hidden' => 0,
     'title' => 'Category',
-    'doktype' => \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE,
+    'doktype' => Constants::DOKTYPE_BLOG_PAGE,
 ];
 $data['pages']['NEW_blogTagPage'] = [
     'pid' => '-NEW_blogCategoryPage',
     'hidden' => 0,
     'title' => 'Tag',
-    'doktype' => \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE,
+    'doktype' => Constants::DOKTYPE_BLOG_PAGE,
 ];
 $data['pages']['NEW_blogAuthorPage'] = [
     'pid' => '-NEW_blogTagPage',
     'hidden' => 0,
     'title' => 'Author',
-    'doktype' => \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE,
+    'doktype' => Constants::DOKTYPE_BLOG_PAGE,
 ];
 $data['pages']['NEW_blogArchivePage'] = [
     'pid' => '-NEW_blogAuthorPage',
     'hidden' => 0,
     'title' => 'Archive',
-    'doktype' => \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE,
+    'doktype' => Constants::DOKTYPE_BLOG_PAGE,
 ];
 $data['pages']['NEW_firstBlogPostPage'] = [
     'pid' => 'NEW_blogFolder',
     'hidden' => 0,
     'title' => 'First blog post',
-    'doktype' => \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
+    'doktype' => Constants::DOKTYPE_BLOG_POST,
     'abstract' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut consectetur quam. Ut rutrum augue libero, non rhoncus libero imperdiet vel. Pellentesque libero orci, porttitor sed dui vel, tempus sodales ex. Sed placerat lobortis tellus at tempus.'
 ];
 
@@ -135,12 +138,12 @@ $data['tt_content']['NEW_BlogPostContentFirst'] = [
 // Categories
 $data['sys_category']['NEW_blogCategoryRoot'] = [
     'pid' => 'NEW_blogFolder',
-    'record_type' => \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_BLOG,
+    'record_type' => Constants::CATEGORY_TYPE_BLOG,
     'title' => 'Blog',
 ];
 $data['sys_category']['NEW_blogCategoryTYPO3'] = [
     'pid' => 'NEW_blogFolder',
-    'record_type' => \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_BLOG,
+    'record_type' => Constants::CATEGORY_TYPE_BLOG,
     'parent' => 'NEW_blogCategoryRoot',
     'title' => 'TYPO3',
 ];

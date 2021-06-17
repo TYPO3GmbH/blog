@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Mail;
 
+use Symfony\Component\Mime\Email;
 use TYPO3\CMS\Core\Mail\MailMessage as CoreMailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -95,7 +96,7 @@ class MailMessage
         $this->mailMessage->setFrom($this->getFrom());
         $this->mailMessage->setTo($this->getTo());
 
-        if ($this->mailMessage instanceof \Symfony\Component\Mime\Email) {
+        if ($this->mailMessage instanceof Email) {
             $this->mailMessage->html($this->getBody());
         } else {
             $this->mailMessage->setBody($this->getBody(), 'text/html');
