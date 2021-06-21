@@ -66,7 +66,6 @@ $data['pages']['NEW_firstBlogPostPage'] = [
 $data['sys_template']['NEW_SysTemplate'] = [
     'pid' => 'NEW_blogRoot',
     'title' => 'Blog',
-    'sitetitle' => 'Blog with TYPO3',
     'root' => 1,
     'clear' => 3,
     'include_static_file' => 'EXT:blog/Configuration/TypoScript/Standalone/',

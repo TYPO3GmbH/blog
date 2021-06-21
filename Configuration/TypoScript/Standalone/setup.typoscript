@@ -73,7 +73,7 @@ page {
             rootPage = TEXT
             rootPage.data = leveluid:0
             siteTitle = TEXT
-            siteTitle.data = TSFE:tmpl|setup|sitetitle
+            siteTitle.data = siteLanguage:websiteTitle//site:websiteTitle//site:identifier
             copyright = TEXT
             copyright.value = {$page.theme.copyright}
         }
