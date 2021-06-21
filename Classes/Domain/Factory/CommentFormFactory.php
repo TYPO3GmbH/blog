@@ -95,11 +95,15 @@ class CommentFormFactory extends AbstractFormFactory
 
         // Finisher
         $commentFinisher = $objectManager->get(CommentFormFinisher::class);
-        $commentFinisher->setFinisherIdentifier(CommentFormFinisher::class);
+        if (method_exists($commentFinisher, 'setFinisherIdentifier')) {
+            $commentFinisher->setFinisherIdentifier(CommentFormFinisher::class);
+        }
         $form->addFinisher($commentFinisher);
 
         $redirectFinisher = $objectManager->get(RedirectFinisher::class);
-        $redirectFinisher->setFinisherIdentifier(RedirectFinisher::class);
+        if (method_exists($redirectFinisher, 'setFinisherIdentifier')) {
+            $redirectFinisher->setFinisherIdentifier(RedirectFinisher::class);
+        }
         $redirectFinisher->setOption('pageUid', (string)$this->getTypoScriptFrontendController()->id);
         $form->addFinisher($redirectFinisher);
 
