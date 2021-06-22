@@ -26,6 +26,7 @@
     border: 1px solid;
     .blogpagination__item--disabled  & {
         pointer-events: none;
+        user-select: none;
         cursor: auto;
     }
 }

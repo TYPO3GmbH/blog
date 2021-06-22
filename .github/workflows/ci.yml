@@ -57,11 +57,11 @@ jobs:
       - name: Info
         run: composer info
 
-      - name: CGL
-        run: php-cs-fixer fix --dry-run --verbose
-
       - name: Lint PHP
         run: composer t3g:test:php:lint
+
+      - name: CGL
+        run: php-cs-fixer fix --dry-run --verbose
 
       - name: Unit Tests without coverage
         if: matrix.typo3 != '^10.4'

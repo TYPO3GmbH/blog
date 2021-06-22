@@ -1,32 +1,35 @@
 <div class="postlist{f:if(condition: type, then: ' postlist--{type}')}">
-    <f:if condition="{posts}">
+
+    <f:if condition="{pagination} && {pagination.paginatedItems}">
         <f:then>
-            <f:if condition="{paginator}">
-                <f:then>
-                    <f:render section="PaginatePosts" arguments="{_all}" />
-                </f:then>
-                <f:else>
-                    <f:render section="ListPosts" arguments="{posts: posts}" />
-                </f:else>
+
+            <f:if condition="{settings.lists.pagination.insertAbove}">
+                <f:render partial="Pagination/Pagination" arguments="{pagination: pagination}" />
             </f:if>
+            <f:for each="{pagination.paginatedItems}" iteration="iterator" as="post">
+                <blogvh:cache post="{post}" />
+                <f:render partial="List/Post" arguments="{_all}" />
+            </f:for>
+            <f:if condition="{settings.lists.pagination.insertBelow}">
+                <f:render partial="Pagination/Pagination" arguments="{pagination: pagination}" />
+            </f:if>
+
         </f:then>
+        <f:else if="{posts}">
+
+            <f:for each="{posts}" iteration="iterator" as="post">
+                <blogvh:cache post="{post}" />
+                <f:render partial="List/Post" arguments="{_all}" />
+            </f:for>
+
+        </f:else>
         <f:else>
+
             <div class="alert alert-info" role="alert">
                 <strong><f:translate key="list.no_posts.title" /></strong><br><f:translate key="list.no_posts.message" />
             </div>
+
         </f:else>
     </f:if>
+
 </div>
-<f:section name="PaginatePosts">
-    <f:for each="{paginator.paginatedItems}" iteration="iterator" as="post">
-        <blogvh:cache post="{post}" />
-        <f:render partial="List/Post" arguments="{_all}" />
-    </f:for>
-    <f:render partial="Utility/Paginator.html" arguments="{pagination: pagination, pages: pages, paginator: paginator}" />
-</f:section>
-<f:section name="ListPosts">
-    <f:for each="{posts}" as="post">
-        <blogvh:cache post="{post}" />
-        <f:render partial="List/Post" arguments="{_all}" />
-    </f:for>
-</f:section>

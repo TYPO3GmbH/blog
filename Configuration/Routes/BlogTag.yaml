@@ -14,7 +14,7 @@ routeEnhancers:
         _controller: 'Post::listPostsByTag'
         _arguments:
           tag_title: tag
-          page: '@widget_0/currentPage'
+          page: 'currentPage'
     defaultController: 'Post::listPostsByTag'
     requirements:
       tag_title: '^[a-z0-9].*$'

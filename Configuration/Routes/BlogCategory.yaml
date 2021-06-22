@@ -14,7 +14,7 @@ routeEnhancers:
         _controller: 'Post::listPostsByCategory'
         _arguments:
           category_title: category
-          page: '@widget_0/currentPage'
+          page: 'currentPage'
     defaultController: 'Post::listPostsByCategory'
     requirements:
       category_title: '^[a-z0-9].*$'

@@ -14,7 +14,7 @@ routeEnhancers:
         _controller: 'Post::listPostsByAuthor'
         _arguments:
           author_title: author
-          page: '@widget_0/currentPage'
+          page: 'currentPage'
     defaultController: 'Post::listPostsByAuthor'
     requirements:
       author_title: '^[a-z0-9].*$'

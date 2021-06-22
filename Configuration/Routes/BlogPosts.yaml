@@ -8,7 +8,7 @@ routeEnhancers:
         routePath: '/page-{page}'
         _controller: 'Post::listRecentPosts'
         _arguments:
-          page: '@widget_0/currentPage'
+          page: 'currentPage'
     defaultController: 'Post::listRecentPosts'
     requirements:
       page: '\d+'

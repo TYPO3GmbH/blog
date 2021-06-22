@@ -25,14 +25,6 @@ plugin.tx_blog {
             1 = {$plugin.tx_blog.view.layoutRootPaths}
         }
 
-        # Widget
-        widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper {
-            templateRootPaths {
-                0 = EXT:blog/Resources/Private/Templates
-                1 = {$plugin.tx_blog.view.widget.templateRootPaths}
-            }
-        }
-
         # Emails
         emails {
             templateRootPaths {
