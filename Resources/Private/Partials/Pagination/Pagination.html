@@ -1,0 +1,72 @@
+<nav class="blogpagination" role="navigation" aria-label="{f:translate(key: 'pagination.aria.label', extensionName: 'Blog')}">
+    <ul class="blogpagination__list">
+
+        <f:if condition="{pagination.previousPageNumber}">
+            <li class="blogpagination__item blogpagination__item--previous">
+                <f:variable name="ariaLabel"><f:translate key="pagination.aria.goto.previous" extensionName="Blog" /></f:variable>
+                <a class="blogpagination__link" href="{f:uri.action(arguments: {currentPage: pagination.previousPageNumber}, addQueryString: 1)}" aria-label="{ariaLabel}" rel="prev" >
+                    <span class="blogpagination__itemtitle"><f:translate key="pagination.previous" extensionName="Blog" /></span>
+                </a>
+            </li>
+        </f:if>
+
+        <f:if condition="{pagination.lessPages}">
+            <li class="blogpagination__item blogpagination__item--first">
+                <f:variable name="ariaLabel"><f:translate key="pagination.aria.goto.page" arguments="{0: pagination.firstPageNumber}" extensionName="Blog" /></f:variable>
+                <a class="blogpagination__link" href="{f:uri.action(arguments: {currentPage: pagination.firstPageNumber}, addQueryString: 1)}" aria-label="{ariaLabel}">
+                    <span class="blogpagination__itemtitle">{pagination.firstPageNumber}</span>
+                </a>
+            </li>
+            <li class="blogpagination__item blogpagination__item--disabled blogpagination__item--ellipsis">
+                <a href="javascript:void();" tabindex="-1" aria-hidden="true" class="blogpagination__link">
+                    <span class="blogpagination__itemtitle">…</span>
+                </a>
+            </li>
+        </f:if>
+
+        <f:for each="{pagination.displayPageNumbers}" as="pageNumber">
+            <f:if condition="{pageNumber} == {pagination.currentPageNumber}">
+                <f:then>
+                    <li class="blogpagination__item blogpagination__item--active">
+                        <f:variable name="ariaLabel"><f:translate key="pagination.aria.current.page" arguments="{0: pageNumber}" extensionName="Blog" /></f:variable>
+                        <a class="blogpagination__link" href="{f:uri.action(arguments: {currentPage: pageNumber}, addQueryString: 1)}" aria-label="{ariaLabel}" aria-current="true">
+                            <span class="blogpagination__itemtitle">{pageNumber}</span>
+                        </a>
+                    </li>
+                </f:then>
+                <f:else>
+                    <li class="blogpagination__item">
+                        <f:variable name="ariaLabel"><f:translate key="pagination.aria.goto.page" arguments="{0: pageNumber}" extensionName="Blog" /></f:variable>
+                        <a class="blogpagination__link" href="{f:uri.action(arguments: {currentPage: pageNumber}, addQueryString: 1)}" aria-label="{ariaLabel}">
+                            <span class="blogpagination__itemtitle">{pageNumber}</span>
+                        </a>
+                    </li>
+                </f:else>
+            </f:if>
+        </f:for>
+
+        <f:if condition="{pagination.morePages}">
+            <li class="blogpagination__item blogpagination__item--disabled blogpagination__item--ellipsis">
+                <a href="javascript:void();" tabindex="-1" aria-hidden="true" class="blogpagination__link">
+                    <span class="blogpagination__itemtitle">…</span>
+                </a>
+            </li>
+            <li class="blogpagination__item blogpagination__item--last">
+                <f:variable name="ariaLabel"><f:translate key="pagination.aria.goto.page" arguments="{0: pagination.lastPageNumber}" extensionName="Blog" /></f:variable>
+                <a class="blogpagination__link" href="{f:uri.action(arguments: {currentPage: pagination.lastPageNumber}, addQueryString: 1)}" aria-label="{ariaLabel}">
+                    <span class="blogpagination__itemtitle">{pagination.lastPageNumber}</span>
+                </a>
+            </li>
+        </f:if>
+
+        <f:if condition="{pagination.nextPageNumber}">
+            <li class="blogpagination__item blogpagination__item--next">
+                <f:variable name="ariaLabel"><f:translate key="pagination.aria.goto.next" extensionName="BootstrapPackage" /></f:variable>
+                <a class="blogpagination__link" href="{f:uri.action(arguments: {currentPage: pagination.nextPageNumber}, addQueryString: 1)}" aria-label="{ariaLabel}" rel="next">
+                    <span class="blogpagination__itemtitle"><f:translate key="pagination.next" extensionName="Blog" /></span>
+                </a>
+            </li>
+        </f:if>
+
+    </ul>
+</nav>

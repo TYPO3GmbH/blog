@@ -19,15 +19,16 @@ use T3G\AgencyPack\Blog\Domain\Repository\AuthorRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
+use T3G\AgencyPack\Blog\Pagination\BlogPagination;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\MetaTagService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
 use TYPO3\CMS\Core\Http\NormalizedParams;
-use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -156,21 +157,14 @@ class PostController extends ActionController
     public function listRecentPostsAction(int $currentPage = 1): ResponseInterface
     {
         $maximumItems = (int) ($this->settings['lists']['posts']['maximumDisplayedItems'] ?? 0);
-        $itemsPerPage = (int) ($this->settings['lists']['pagination']['itemsPerPage'] ?? 10);
         $posts = (0 === $maximumItems)
             ? $this->postRepository->findAll()
             : $this->postRepository->findAllWithLimit($maximumItems);
+        $pagination = $this->getPagination($posts, $currentPage);
 
-        $paginator = null;
-        $pagination = null;
-        if (count($posts) > $itemsPerPage) {
-            $paginator = new QueryResultPaginator($posts, $currentPage, $itemsPerPage);
-            $pagination = new SimplePagination($paginator);
-        }
         $this->view->assign('type', 'recent');
         $this->view->assign('posts', $posts);
         $this->view->assign('pagination', $pagination);
-        $this->view->assign('paginator', $paginator);
         return $this->htmlResponse();
     }
 
@@ -193,13 +187,14 @@ class PostController extends ActionController
     /**
      * @param int $year
      * @param int $month
+     * @param int $currentPage
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @throws \Exception
      */
-    public function listPostsByDateAction(int $year = null, int $month = null): ResponseInterface
+    public function listPostsByDateAction(int $year = null, int $month = null, int $currentPage = 1): ResponseInterface
     {
         if ($year === null) {
             $posts = $this->postRepository->findMonthsAndYearsWithPosts();
@@ -207,11 +202,13 @@ class PostController extends ActionController
         } else {
             $dateTime = new \DateTimeImmutable(sprintf('%d-%d-1', $year, $month ?? 1));
             $posts = $this->postRepository->findByMonthAndYear($year, $month);
+            $pagination = $this->getPagination($posts, $currentPage);
             $this->view->assign('type', 'bydate');
             $this->view->assign('month', $month);
             $this->view->assign('year', $year);
             $this->view->assign('timestamp', $dateTime->getTimestamp());
             $this->view->assign('posts', $posts);
+            $this->view->assign('pagination', $pagination);
             $title = str_replace([
                 '###MONTH###',
                 '###MONTH_NAME###',
@@ -231,10 +228,11 @@ class PostController extends ActionController
      * Show a list of posts by given category.
      *
      * @param Category|null $category
+     * @param int $currentPage
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPostsByCategoryAction(Category $category = null): ResponseInterface
+    public function listPostsByCategoryAction(Category $category = null, int $currentPage = 1): ResponseInterface
     {
         if ($category === null) {
             $categories = $this->categoryRepository->getByReference(
@@ -250,8 +248,10 @@ class PostController extends ActionController
 
         if ($category) {
             $posts = $this->postRepository->findAllByCategory($category);
+            $pagination = $this->getPagination($posts, $currentPage);
             $this->view->assign('type', 'bycategory');
             $this->view->assign('posts', $posts);
+            $this->view->assign('pagination', $pagination);
             $this->view->assign('category', $category);
             MetaTagService::set(MetaTagService::META_TITLE, (string) $category->getTitle());
             MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $category->getDescription());
@@ -265,15 +265,18 @@ class PostController extends ActionController
      * Show a list of posts by given author.
      *
      * @param Author|null $author
+     * @param int $currentPage
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPostsByAuthorAction(Author $author = null): ResponseInterface
+    public function listPostsByAuthorAction(Author $author = null, int $currentPage = 1): ResponseInterface
     {
         if ($author) {
             $posts = $this->postRepository->findAllByAuthor($author);
+            $pagination = $this->getPagination($posts, $currentPage);
             $this->view->assign('type', 'byauthor');
             $this->view->assign('posts', $posts);
+            $this->view->assign('pagination', $pagination);
             $this->view->assign('author', $author);
             MetaTagService::set(MetaTagService::META_TITLE, (string) $author->getName());
             MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $author->getBio());
@@ -287,15 +290,18 @@ class PostController extends ActionController
      * Show a list of posts by given tag.
      *
      * @param Tag|null $tag
+     * @param int $currentPage
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPostsByTagAction(Tag $tag = null): ResponseInterface
+    public function listPostsByTagAction(Tag $tag = null, int $currentPage = 1): ResponseInterface
     {
         if ($tag) {
             $posts = $this->postRepository->findAllByTag($tag);
+            $pagination = $this->getPagination($posts, $currentPage);
             $this->view->assign('type', 'bytag');
             $this->view->assign('posts', $posts);
+            $this->view->assign('pagination', $pagination);
             $this->view->assign('tag', $tag);
             MetaTagService::set(MetaTagService::META_TITLE, (string) $tag->getTitle());
             MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $tag->getDescription());
@@ -426,5 +432,17 @@ class PostController extends ActionController
         /** @var NormalizedParams $normalizedParams */
         $normalizedParams = $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams');
         return $normalizedParams->getRequestUrl();
+    }
+
+    protected function getPagination(QueryResultInterface $objects, int $currentPage = 1): ?BlogPagination
+    {
+        $maximumNumberOfLinks = (int) ($this->settings['lists']['pagination']['maximumNumberOfLinks'] ?? 0);
+        $itemsPerPage = 10;
+        if ($this->request->getFormat() === 'html') {
+            $itemsPerPage = (int) ($this->settings['lists']['pagination']['itemsPerPage'] ?? 10);
+        }
+
+        $paginator = new QueryResultPaginator($objects, $currentPage, $itemsPerPage);
+        return new BlogPagination($paginator, $maximumNumberOfLinks);
     }
 }
