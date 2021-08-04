@@ -25,11 +25,6 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_pos
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_latestposts.title',
     'plugin-blog-posts'
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['blog_latestposts'] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    'blog_latestposts',
-    'FILE:EXT:blog/Configuration/FlexForms/LatestPosts.xml'
-);
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'Blog',
