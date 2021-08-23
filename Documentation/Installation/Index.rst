@@ -21,7 +21,7 @@ Install TYPO3 Blog Extension like any other TYPO3 extension.
    .. code-block:: bash
 
       cd typo3conf/ext/
-      git clone git@github.com:TYPO3GmbH/blog.git
+      git clone git://github.com/TYPO3GmbH/blog.git
 
 
 3. Extension Manager
