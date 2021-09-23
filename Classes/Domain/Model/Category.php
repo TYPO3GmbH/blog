@@ -40,11 +40,6 @@ class Category extends AbstractEntity
     protected $description = '';
 
     /**
-     * @var string
-     */
-    protected $icon = '';
-
-    /**
      * @var \T3G\AgencyPack\Blog\Domain\Model\Category
      * @Extbase\ORM\Lazy
      */
@@ -141,28 +136,6 @@ class Category extends AbstractEntity
     public function setDescription(string $description): self
     {
         $this->description = $description;
-        return $this;
-    }
-
-    /**
-     * Returns the icon.
-     *
-     * @return string $icon
-     */
-    public function getIcon(): ?string
-    {
-        return $this->icon;
-    }
-
-    /**
-     * Sets the icon.
-     *
-     * @param string $icon
-     * @return Category
-     */
-    public function setIcon(string $icon): self
-    {
-        $this->icon = $icon;
         return $this;
     }
 
