@@ -10,7 +10,7 @@
         <ul class="postmetagroup__list">
             <f:for each="{post.categories}" as="postCategory">
                 <li>
-                    <span class="postmetagroup__listitem">
+                    <span class="postmetagroup__listitem" data-blog-category="{postCategory.uid}">
                         <span class="postmetagroup__listtext"><blogvh:link.category category="{postCategory}" /></span>
                     </span>
                 </li>

@@ -3,7 +3,7 @@
 <f:section name="Content">
     <ul class="blogwidgetlist blogwidgetlist--recentcomments">
         <f:for each="{comments}" as="comment">
-            <li class="blogwidgetlist__item">
+            <li class="blogwidgetlist__item" data-blog-comment="{comment.uid}">
                 <p class="blogwidgetlist__itemtext"><f:format.crop maxCharacters="100" append="&nbsp;[...]">{comment.comment}</f:format.crop></p>
                 <span class="blogwidgetlist__itemauthor">{comment.name}</span>
                 <span class="blogwidgetlist__itemauthoron"><f:translate key="widget.recentcomments.on" /></span>

@@ -3,7 +3,7 @@
 <f:section name="Content">
     <ul class="blogwidgetlist blogwidgetlist--recentposts">
         <f:for each="{posts}" as="post">
-            <li class="blogwidgetlist__item">
+            <li class="blogwidgetlist__item" data-blog-post="{post.uid}">
                 <blogvh:link.post class="blogwidgetlist__itemlink" title="{post.title}" post="{post}">
                     <span class="blogwidgetlist__itemtitle">{post.title}</span>
                 </blogvh:link.post>

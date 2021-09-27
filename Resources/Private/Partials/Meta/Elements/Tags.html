@@ -10,7 +10,7 @@
         <ul class="postmetagroup__list">
             <f:for each="{post.tags}" as="postTag">
                 <li>
-                    <span class="postmetagroup__listitem">
+                    <span class="postmetagroup__listitem" data-blog-tag="{postTag.uid}">
                         <span class="postmetagroup__listtext"><blogvh:link.tag tag="{postTag}" /></span>
                     </span>
                 </li>

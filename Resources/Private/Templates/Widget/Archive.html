@@ -5,9 +5,9 @@
     <f:if condition="{years}">
         <f:if condition="{settings.widgets.archive.groupByYear} == 1">
             <f:then>
-                <ul data-archive-type="year" class="blogwidgetlist blogwidgetlist--archive">
+                <ul data-blog-archive-type="year" data-archive-type="year" class="blogwidgetlist blogwidgetlist--archive">
                     <f:for each="{years}" key="year" as="months">
-                        <li class="blogwidgetlist__item blogwidgetlist__item--year">
+                        <li class="blogwidgetlist__item blogwidgetlist__item--year" data-blog-archive-year="{year}">
                             <blogvh:link.archive class="blogwidgetlist__itemlink" year="{year}" title="{year}">
                                 <span class="blogwidgetlist__itemtitle">{year}</span>
                                 <f:if condition="{settings.widgets.archive.showCounter}">
@@ -17,7 +17,7 @@
                                 </f:if>
                             </blogvh:link.archive>
                             <f:if condition="{settings.widgets.archive.groupByMonth}">
-                                <ul data-archive-type="month" class="blogwidgetlist blogwidgetlist--archive">
+                                <ul data-blog-archive-type="month" data-archive-type="month" class="blogwidgetlist blogwidgetlist--archive">
                                     <f:for each="{months}" as="month">
                                         <f:render section="Month" arguments="{settings: settings, year: year, month: month}" />
                                     </f:for>
@@ -28,7 +28,7 @@
                 </ul>
             </f:then>
             <f:else>
-                <ul data-archive-type="month" class="blogwidgetlist blogwidgetlist--archive">
+                <ul data-blog-archive-type="month" data-archive-type="month" class="blogwidgetlist blogwidgetlist--archive">
                     <f:for each="{years}" key="year" as="months">
                         <f:for each="{months}" as="month">
                             <f:render section="Month" arguments="{settings: settings, year: year, month: month}" />
@@ -40,7 +40,7 @@
     </f:if>
 </f:section>
 <f:section name="Month">
-    <li class="blogwidgetlist__item blogwidgetlist__item--month">
+    <li class="blogwidgetlist__item blogwidgetlist__item--month" data-blog-archive-year="{year}" data-blog-archive-month="{month.month}">
         <blogvh:link.archive class="blogwidgetlist__itemlink" year="{year}" month="{month.month}" title="{f:format.date(format: '{settings.widgets.archive.monthDateFormat} {settings.widgets.archive.yearDateFormat}', date: month.timestamp)}">
             <f:if condition="{settings.widgets.archive.groupByYear} == 1">
                 <f:then>
