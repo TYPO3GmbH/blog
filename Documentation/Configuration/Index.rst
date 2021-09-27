@@ -1009,7 +1009,7 @@ Post Header
 Property                                                                  Type                                            Default
 ========================================================================= =============================================== ===========
 plugin.tx_blog.settings.meta.postheader.enable_                           boolean                                         1
-plugin.tx_blog.settings.meta.postheader.modifier_                         options[simple, condensed, extended, modern]    simple
+plugin.tx_blog.settings.meta.postheader.modifier_                         options[simple,condensed,extended,modern]       simple
 plugin.tx_blog.settings.meta.postheader.elements.authors.enable_          boolean                                         1
 plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.enable_   boolean                                         0
 plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.size_     int+                                            20
@@ -1042,7 +1042,7 @@ plugin.tx_blog.settings.meta.postheader.modifier
    Property
      plugin.tx_blog.settings.meta.postheader.modifier
    Data type
-     options[simple, condensed, extended, modern]
+     options[simple,condensed,extended,modern]
    Default
      simple
    Description
@@ -1169,7 +1169,7 @@ Post Footer
 Property                                                                  Type                                            Default
 ========================================================================= =============================================== ===========
 plugin.tx_blog.settings.meta.postfooter.enable_                           boolean                                         1
-plugin.tx_blog.settings.meta.postfooter.modifier_                         options[simple, condensed, extended, modern]    simple
+plugin.tx_blog.settings.meta.postfooter.modifier_                         options[simple,condensed,extended,modern]       simple
 plugin.tx_blog.settings.meta.postfooter.elements.authors.enable_          boolean                                         0
 plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.enable_   boolean                                         0
 plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.size_     int+                                            20
@@ -1202,7 +1202,7 @@ plugin.tx_blog.settings.meta.postfooter.modifier
    Property
      plugin.tx_blog.settings.meta.postfooter.modifier
    Data type
-     options[simple, condensed, extended, modern]
+     options[simple,condensed,extended,modern]
    Default
      simple
    Description
@@ -1370,7 +1370,7 @@ Element Header
 Property                                                                  Type                                            Default
 ========================================================================= =============================================== ===========
 plugin.tx_blog.settings.meta.listheader.enable_                           boolean                                         1
-plugin.tx_blog.settings.meta.listheader.modifier_                         options[simple, condensed, extended, modern]    simple
+plugin.tx_blog.settings.meta.listheader.modifier_                         options[simple,condensed,extended,modern]       simple
 plugin.tx_blog.settings.meta.listheader.elements.authors.enable_          boolean                                         0
 plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.enable_   boolean                                         0
 plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.size_     int+                                            20
@@ -1403,7 +1403,7 @@ plugin.tx_blog.settings.meta.listheader.modifier
    Property
      plugin.tx_blog.settings.meta.listheader.modifier
    Data type
-     options[simple, condensed, extended, modern]
+     options[simple,condensed,extended,modern]
    Default
      simple
    Description
@@ -1530,7 +1530,7 @@ Element Footer
 Property                                                                  Type                                            Default
 ========================================================================= =============================================== ===========
 plugin.tx_blog.settings.meta.listfooter.enable_                           boolean                                         1
-plugin.tx_blog.settings.meta.listfooter.modifier_                         options[simple, condensed, extended, modern]    simple
+plugin.tx_blog.settings.meta.listfooter.modifier_                         options[simple,condensed,extended,modern]       simple
 plugin.tx_blog.settings.meta.listfooter.elements.authors.enable_          boolean                                         1
 plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.enable_   boolean                                         0
 plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.size_     int+                                            20
@@ -1563,7 +1563,7 @@ plugin.tx_blog.settings.meta.listfooter.modifier
    Property
      plugin.tx_blog.settings.meta.listfooter.modifier
    Data type
-     options[simple, condensed, extended, modern]
+     options[simple,condensed,extended,modern]
    Default
      simple
    Description
