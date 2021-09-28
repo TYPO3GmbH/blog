@@ -28,11 +28,11 @@ SetupWizard.initialize = function() {
                 text: $element.data('button-ok-text') || 'OK',
                 btnClass: 'btn-primary',
                 trigger: function(evt) {
-                    Modal.currentModal.trigger('modal-dismiss');
                     self.location.href = $element.attr('href')
                         .replace('%40title', Modal.currentModal.find('input[name="title"]').val())
                         .replace('%40template', Modal.currentModal.find('input[name="template"]:checked').length)
                         .replace('%40install', Modal.currentModal.find('input[name="install"]:checked').length);
+                    Modal.currentModal.trigger('modal-dismiss');
                 }
             }
         ];
