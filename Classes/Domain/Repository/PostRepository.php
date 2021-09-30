@@ -87,19 +87,21 @@ class PostRepository extends Repository
             $constraints[] = $query->in('uid', $repositoryDemand->getPosts());
         } else {
             if ($repositoryDemand->getCategories() !== []) {
-                $uidConstraints = [];
+                $categoriesConstraints = [];
                 foreach ($repositoryDemand->getCategories() as $category) {
-                    $uidConstraints[] = $query->equals('categories.uid', $category->getUid());
+                    $categoriesConstraints[] = $query->equals('categories.uid', $category->getUid());
                 }
-
-                $logicalConjunction = $repositoryDemand->getCategoriesConjunction() === Constants::REPOSITORY_CONJUNCTION_AND ? 'logicalAnd' : 'logicalOr';
-                $constraints[] = $query->{$logicalConjunction}($uidConstraints);
+                $categoriesConjunction = $repositoryDemand->getCategoriesConjunction() === Constants::REPOSITORY_CONJUNCTION_AND ? 'logicalAnd' : 'logicalOr';
+                $constraints[] = $query->{$categoriesConjunction}($categoriesConstraints);
             }
-
             if ($repositoryDemand->getTags() !== []) {
-                $constraints[] = $query->in('tags.uid', array_keys($repositoryDemand->getTags()));
+                $tagsContstraints = [];
+                foreach ($repositoryDemand->getTags() as $tag) {
+                    $tagsContstraints[] = $query->equals('tags.uid', $tag->getUid());
+                }
+                $tagsConjunction = $repositoryDemand->getTagsConjunction() === Constants::REPOSITORY_CONJUNCTION_AND ? 'logicalAnd' : 'logicalOr';
+                $constraints[] = $query->{$tagsConjunction}($tagsContstraints);
             }
-
             if (($ordering = $repositoryDemand->getOrdering()) !== []) {
                 $query->setOrderings([$ordering['field'] => $ordering['direction']]);
             }
@@ -110,9 +112,6 @@ class PostRepository extends Repository
         if (($limit = $repositoryDemand->getLimit()) > 0) {
             $query->setLimit($limit);
         }
-        if (($offset = $repositoryDemand->getOffset()) > 0) {
-            $query->setOffset($offset);
-        }
 
         /** @var Post[] $result */
         $result = $query->execute()->toArray();
@@ -120,11 +119,9 @@ class PostRepository extends Repository
         if ($repositoryDemand->getPosts() !== []) {
             // Sort manually selected posts by defined order in group field
             $sortedPosts = array_flip($repositoryDemand->getPosts());
-
             foreach ($result as $post) {
                 $sortedPosts[$post->getUid()] = $post;
             }
-
             $result = array_values($sortedPosts);
         }
 

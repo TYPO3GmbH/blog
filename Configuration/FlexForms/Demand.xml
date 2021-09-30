@@ -25,6 +25,7 @@
                             </config>
                         </TCEforms>
                     </settings.demand.posts>
+
                     <settings.demand.categories>
                         <TCEforms>
                             <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categories</label>
@@ -65,6 +66,38 @@
                         </TCEforms>
                     </settings.demand.categoriesConjunction>
 
+                    <settings.demand.tags>
+                        <TCEforms>
+                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tags</label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectMultipleSideBySide</renderType>
+                                <foreign_table>tx_blog_domain_model_tag</foreign_table>
+                                <foreign_table_where>AND ({#tx_blog_domain_model_tag}.{#sys_language_uid} = 0 OR {#tx_blog_domain_model_tag}.{#l18n_parent} = 0) AND {#tx_blog_domain_model_tag}.{#pid} = ###PAGE_TSCONFIG_ID###</foreign_table_where>
+                            </config>
+                        </TCEforms>
+                    </settings.demand.tags>
+
+                    <settings.demand.tagsConjunction>
+                        <TCEforms>
+                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction</label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction.AND</numIndex>
+                                        <numIndex index="1">AND</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction.OR</numIndex>
+                                        <numIndex index="1">OR</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.demand.tagsConjunction>
+
                     <settings.demand.sortBy>
                         <TCEforms>
                             <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortBy</label>
@@ -104,18 +137,6 @@
                             </config>
                         </TCEforms>
                     </settings.demand.sortDirection>
-
-                    <settings.demand.tags>
-                        <TCEforms>
-                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tags</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectMultipleSideBySide</renderType>
-                                <foreign_table>tx_blog_domain_model_tag</foreign_table>
-                                <foreign_table_where>AND ({#tx_blog_domain_model_tag}.{#sys_language_uid} = 0 OR {#tx_blog_domain_model_tag}.{#l18n_parent} = 0) AND {#tx_blog_domain_model_tag}.{#pid} = ###PAGE_TSCONFIG_ID###</foreign_table_where>
-                            </config>
-                        </TCEforms>
-                    </settings.demand.tags>
 
                     <settings.demand.limit>
                         <TCEforms>

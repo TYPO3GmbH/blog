@@ -37,6 +37,11 @@ class PostRepositoryDemand
     protected $tags = [];
 
     /**
+     * @var string
+     */
+    protected $tagsConjunction = Constants::REPOSITORY_CONJUNCTION_AND;
+
+    /**
      * @var array{field: string, direction: string}
      */
     protected $ordering = [];
@@ -118,10 +123,18 @@ class PostRepositoryDemand
         return $this;
     }
 
+    /**
+     * @return Tag[]
+     */
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
     public function addTag(Tag $tag): self
     {
         if (!isset($this->tags[$tag->getUid()])) {
-            $this->categories[$tag->getUid()] = $tag;
+            $this->tags[$tag->getUid()] = $tag;
         }
         return $this;
     }
@@ -133,11 +146,21 @@ class PostRepositoryDemand
     }
 
     /**
-     * @return Tag[]
+     * @return string
      */
-    public function getTags(): array
+    public function getTagsConjunction(): string
     {
-        return $this->tags;
+        return $this->tagsConjunction;
+    }
+
+    public function setTagsConjunction(string $tagsConjunction): self
+    {
+        if ($tagsConjunction === Constants::REPOSITORY_CONJUNCTION_AND
+            || $tagsConjunction === Constants::REPOSITORY_CONJUNCTION_OR) {
+            $this->tagsConjunction = $tagsConjunction;
+        }
+
+        return $this;
     }
 
     /**
@@ -162,17 +185,6 @@ class PostRepositoryDemand
     public function setLimit(int $limit): self
     {
         $this->limit = $limit;
-        return $this;
-    }
-
-    public function getOffset(): int
-    {
-        return $this->offset;
-    }
-
-    public function setOffset(int $offset): self
-    {
-        $this->offset = $offset;
         return $this;
     }
 }

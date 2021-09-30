@@ -302,7 +302,7 @@
             </trans-unit>
             <trans-unit id="settings.demand.categoriesConjunction.OR" xml:space="preserve">
                 <source>Require any category set (OR)</source>
-            </trans-unit>
+            </trans-unit>´
             <trans-unit id="settings.demand.sortBy" xml:space="preserve">
                 <source>Sort blog posts by</source>
             </trans-unit>
@@ -317,6 +317,15 @@
             </trans-unit>
             <trans-unit id="settings.demand.tags" xml:space="preserve">
                 <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.tagsConjunction" xml:space="preserve">
+                <source>Tag Conjunction</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.tagsConjunction.AND" xml:space="preserve">
+                <source>Require all tags set (AND)</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.tagsConjunction.OR" xml:space="preserve">
+                <source>Require any tags set (OR)</source>
             </trans-unit>
             <trans-unit id="settings.demand.limit" xml:space="preserve">
                 <source>Limit of posts</source>
