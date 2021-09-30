@@ -52,11 +52,6 @@ class PostRepositoryDemand
     protected $limit = 0;
 
     /**
-     * @var int
-     */
-    protected $offset = 0;
-
-    /**
      * @return int[]
      */
     public function getPosts(): array

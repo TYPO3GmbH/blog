@@ -46,6 +46,10 @@ class PostRepositoryDemandFactory
             $demand->addTag($tag);
         }
 
+        if (in_array($settings['tagsConjunction'] ?? null, [Constants::REPOSITORY_CONJUNCTION_AND, Constants::REPOSITORY_CONJUNCTION_OR], true)) {
+            $demand->setTagsConjunction($settings['tagsConjunction']);
+        }
+
         if (isset($GLOBALS['TCA']['pages']['columns'][$settings['sortBy']])) {
             $direction = strtoupper($settings['sortDirection'] ?? 'ASC');
             if (!in_array($direction, ['ASC', 'DESC'], true)) {

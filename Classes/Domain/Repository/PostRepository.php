@@ -95,12 +95,12 @@ class PostRepository extends Repository
                 $constraints[] = $query->{$categoriesConjunction}($categoriesConstraints);
             }
             if ($repositoryDemand->getTags() !== []) {
-                $tagsContstraints = [];
+                $tagsConstraints = [];
                 foreach ($repositoryDemand->getTags() as $tag) {
-                    $tagsContstraints[] = $query->equals('tags.uid', $tag->getUid());
+                    $tagsConstraints[] = $query->equals('tags.uid', $tag->getUid());
                 }
                 $tagsConjunction = $repositoryDemand->getTagsConjunction() === Constants::REPOSITORY_CONJUNCTION_AND ? 'logicalAnd' : 'logicalOr';
-                $constraints[] = $query->{$tagsConjunction}($tagsContstraints);
+                $constraints[] = $query->{$tagsConjunction}($tagsConstraints);
             }
             if (($ordering = $repositoryDemand->getOrdering()) !== []) {
                 $query->setOrderings([$ordering['field'] => $ordering['direction']]);
@@ -122,7 +122,7 @@ class PostRepository extends Repository
             foreach ($result as $post) {
                 $sortedPosts[$post->getUid()] = $post;
             }
-            $result = array_values($sortedPosts);
+            $result = array_values(array_filter($sortedPosts));
         }
 
         return $result;
