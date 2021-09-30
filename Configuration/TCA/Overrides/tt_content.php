@@ -105,7 +105,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_com
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['blog_demandedposts'] = 'pi_flexform';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
     'blog_demandedposts',
-    'FILE:EXT:blog/Configuration/FlexForms/Demand.xml',
+    'FILE:EXT:blog/Configuration/FlexForms/Demand.xml'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(

@@ -12,11 +12,17 @@ namespace T3G\AgencyPack\Blog\DataTransferObject;
 
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
+use T3G\AgencyPack\Blog\Domain\Model\Tag;
 
 class PostRepositoryDemand
 {
     /**
-     * @var array
+     * @var int[]
+     */
+    protected $posts = [];
+
+    /**
+     * @var Category[]
      */
     protected $categories = [];
 
@@ -26,26 +32,49 @@ class PostRepositoryDemand
     protected $categoriesConjunction = Constants::REPOSITORY_CONJUNCTION_AND;
 
     /**
-     * @param Category $category
-     * @return PostRepositoryDemand
+     * @var Tag[]
      */
-    public function addCategory(Category $category): self
+    protected $tags = [];
+
+    /**
+     * @var array{field: string, direction: string}
+     */
+    protected $ordering = [];
+
+    /**
+     * @var int
+     */
+    protected $limit = 0;
+
+    /**
+     * @var int
+     */
+    protected $offset = 0;
+
+    /**
+     * @return int[]
+     */
+    public function getPosts(): array
     {
-        if (!isset($this->categories[$category->getUid()])) {
-            $this->categories[$category->getUid()] = $category;
-        }
-        return $this;
+        return $this->posts;
     }
 
     /**
-     * @param Category $category
-     * @return PostRepositoryDemand
+     * @param int[] $posts
      */
-    public function removeCategory(Category $category): self
+    public function setPosts(array $posts): self
     {
-        if (isset($this->categories[$category->getUid()])) {
-            unset($this->categories[$category->getUid()]);
+        $this->posts = array_filter(array_map('intval', array_unique($posts)));
+
+        return $this;
+    }
+
+    public function addPost(int $uid): self
+    {
+        if (!in_array($uid, $this->posts)) {
+            $this->posts[] = $uid;
         }
+
         return $this;
     }
 
@@ -57,17 +86,17 @@ class PostRepositoryDemand
         return $this->categories;
     }
 
-    /**
-     * @param string $categoriesConjunction
-     * @return PostRepositoryDemand
-     */
-    public function setCategoriesConjunction(string $categoriesConjunction)
+    public function addCategory(Category $category): self
     {
-        if ($categoriesConjunction === Constants::REPOSITORY_CONJUNCTION_AND
-            || $categoriesConjunction === Constants::REPOSITORY_CONJUNCTION_OR) {
-            $this->categoriesConjunction = $categoriesConjunction;
+        if (!isset($this->categories[$category->getUid()])) {
+            $this->categories[$category->getUid()] = $category;
         }
+        return $this;
+    }
 
+    public function removeCategory(Category $category): self
+    {
+        unset($this->categories[$category->getUid()]);
         return $this;
     }
 
@@ -77,5 +106,73 @@ class PostRepositoryDemand
     public function getCategoriesConjunction(): string
     {
         return $this->categoriesConjunction;
+    }
+
+    public function setCategoriesConjunction(string $categoriesConjunction): self
+    {
+        if ($categoriesConjunction === Constants::REPOSITORY_CONJUNCTION_AND
+            || $categoriesConjunction === Constants::REPOSITORY_CONJUNCTION_OR) {
+            $this->categoriesConjunction = $categoriesConjunction;
+        }
+
+        return $this;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!isset($this->tags[$tag->getUid()])) {
+            $this->categories[$tag->getUid()] = $tag;
+        }
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        unset($this->tags[$tag->getUid()]);
+        return $this;
+    }
+
+    /**
+     * @return Tag[]
+     */
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getOrdering(): array
+    {
+        return $this->ordering;
+    }
+
+    public function setOrdering(string $fieldName, string $direction): self
+    {
+        $this->ordering = ['field' => $fieldName, 'direction' => $direction];
+        return $this;
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function setLimit(int $limit): self
+    {
+        $this->limit = $limit;
+        return $this;
+    }
+
+    public function getOffset(): int
+    {
+        return $this->offset;
+    }
+
+    public function setOffset(int $offset): self
+    {
+        $this->offset = $offset;
+        return $this;
     }
 }

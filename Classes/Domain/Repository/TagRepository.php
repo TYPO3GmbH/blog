@@ -43,6 +43,16 @@ class TagRepository extends Repository
         );
     }
 
+    public function findByUids(array $uids)
+    {
+        $query = $this->createQuery();
+        $query->matching(
+            $query->in('uid', $uids)
+        );
+
+        return $query->execute();
+    }
+
     /**
      * @param int $limit
      *

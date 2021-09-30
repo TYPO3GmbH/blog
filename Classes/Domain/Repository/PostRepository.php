@@ -29,7 +29,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ComparisonInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -74,12 +73,62 @@ class PostRepository extends Repository
 
     /**
      * @param PostRepositoryDemand $repositoryDemand;
-     * @return QueryResultInterface
+     * @return Post[]
      */
-    public function findByRepositoryDemand(PostRepositoryDemand $repositoryDemand): QueryResultInterface
+    public function findByRepositoryDemand(PostRepositoryDemand $repositoryDemand): array
     {
         $query = $this->createQuery();
-        return $query->execute();
+
+        $constraints = [
+            $query->equals('doktype', Constants::DOKTYPE_BLOG_POST)
+        ];
+
+        if ($repositoryDemand->getPosts() !== []) {
+            $constraints[] = $query->in('uid', $repositoryDemand->getPosts());
+        } else {
+            if ($repositoryDemand->getCategories() !== []) {
+                $uidConstraints = [];
+                foreach ($repositoryDemand->getCategories() as $category) {
+                    $uidConstraints[] = $query->equals('categories.uid', $category->getUid());
+                }
+
+                $logicalConjunction = $repositoryDemand->getCategoriesConjunction() === Constants::REPOSITORY_CONJUNCTION_AND ? 'logicalAnd' : 'logicalOr';
+                $constraints[] = $query->{$logicalConjunction}($uidConstraints);
+            }
+
+            if ($repositoryDemand->getTags() !== []) {
+                $constraints[] = $query->in('tags.uid', array_keys($repositoryDemand->getTags()));
+            }
+
+            if (($ordering = $repositoryDemand->getOrdering()) !== []) {
+                $query->setOrderings([$ordering['field'] => $ordering['direction']]);
+            }
+        }
+
+        $query->matching($query->logicalAnd($constraints));
+
+        if (($limit = $repositoryDemand->getLimit()) > 0) {
+            $query->setLimit($limit);
+        }
+        if (($offset = $repositoryDemand->getOffset()) > 0) {
+            $query->setOffset($offset);
+        }
+
+        /** @var Post[] $result */
+        $result = $query->execute()->toArray();
+
+        if ($repositoryDemand->getPosts() !== []) {
+            // Sort manually selected posts by defined order in group field
+            $sortedPosts = array_flip($repositoryDemand->getPosts());
+
+            foreach ($result as $post) {
+                $sortedPosts[$post->getUid()] = $post;
+            }
+
+            $result = array_values($sortedPosts);
+        }
+
+        return $result;
     }
 
     /**

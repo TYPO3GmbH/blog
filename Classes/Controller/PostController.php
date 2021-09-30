@@ -19,23 +19,19 @@ use T3G\AgencyPack\Blog\Domain\Repository\AuthorRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
+use T3G\AgencyPack\Blog\Factory\PostRepositoryDemandFactory;
 use T3G\AgencyPack\Blog\Pagination\BlogPagination;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\MetaTagService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
 use TYPO3\CMS\Core\Http\NormalizedParams;
-use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
-use TYPO3\CMS\Core\Utility\ArrayUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use T3G\AgencyPack\Blog\DataTransferObject\PostRepositoryDemand;
 
 class PostController extends ActionController
 {
@@ -63,6 +59,11 @@ class PostController extends ActionController
      * @var CacheService
      */
     protected $blogCacheService;
+
+    /**
+     * @var PostRepositoryDemandFactory
+     */
+    protected $postRepositoryDemandFactory;
 
     /**
      * @param CategoryRepository $categoryRepository
@@ -104,9 +105,9 @@ class PostController extends ActionController
         $this->blogCacheService = $cacheService;
     }
 
-    protected function initializeAction()
+    public function injectPostRepositoryDemandFactory(PostRepositoryDemandFactory $postRepositoryDemandFactory): void
     {
-        $this->mergeSettings();
+        $this->postRepositoryDemandFactory = $postRepositoryDemandFactory;
     }
 
     /**
@@ -187,12 +188,12 @@ class PostController extends ActionController
      */
     public function listByDemandAction(int $currentPage = 1): ResponseInterface
     {
-        $repositoryDemand = new PostRepositoryDemand();
+        $repositoryDemand = $this->postRepositoryDemandFactory->createFromSettings($this->settings['demand'] ?? []);
 
         $this->view->assign('type', 'demand');
         $this->view->assign('demand', $repositoryDemand);
-        $this->view->assign('posts', $posts);
-        $this->view->assign('pagination', $pagination);
+        $this->view->assign('posts', $this->postRepository->findByRepositoryDemand($repositoryDemand));
+        $this->view->assign('pagination', []);
         return $this->htmlResponse();
     }
 
@@ -472,44 +473,5 @@ class PostController extends ActionController
 
         $paginator = new QueryResultPaginator($objects, $currentPage, $itemsPerPage);
         return new BlogPagination($paginator, $maximumNumberOfLinks);
-    }
-
-    protected function mergeSettings(): void
-    {
-        // Only process calls initiated from plugins
-        if (!isset($this->configurationManager->getContentObject()->data['list_type'])) {
-            return;
-        }
-
-        // Restore TypoScript Settings
-        $typoScriptSettings = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
-            'blog',
-            $this->configurationManager->getContentObject()->data['list_type']
-        );
-        $this->settings = $typoScriptSettings;
-
-        // Overwrite non empty flexform values
-        $flexFormService = GeneralUtility::makeInstance(FlexFormService::class);
-        $flexFormData = $flexFormService->convertFlexFormContentToArray($this->configurationManager->getContentObject()->data['pi_flexform']);
-        $flexFormData = $this->removeEmptyValuesFromArray($flexFormData['settings'] ?? []);
-
-        // Write new Data
-        ArrayUtility::mergeRecursiveWithOverrule($this->settings, $flexFormData);
-    }
-
-    protected function removeEmptyValuesFromArray($processingData): array
-    {
-        $data = [];
-        foreach ($processingData as $key => $value) {
-            if (is_string($value) && trim($value) !== '') {
-                $data[$key] = trim($value);
-            } elseif (is_array($value)) {
-                if (count($value = $this->removeEmptyValuesFromArray($value)) > 0) {
-                    $data[$key] = $value;
-                }
-            }
-        }
-        return $data;
     }
 }
