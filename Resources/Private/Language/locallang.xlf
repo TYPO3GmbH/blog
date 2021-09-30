@@ -766,6 +766,14 @@
                 <source>Go to previous page</source>
             </trans-unit>
 
+            <!-- Settings -->
+            <trans-unit id="settings.noTranslationHintMessage.title" xml:space="preserve">
+                <source>No settings here</source>
+            </trans-unit>
+            <trans-unit id="settings.noTranslationHintMessage.description" xml:space="preserve">
+                <source>This configuration cannot get changed while being in a translated record.</source>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

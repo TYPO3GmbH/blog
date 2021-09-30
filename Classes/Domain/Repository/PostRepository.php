@@ -12,6 +12,7 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
 
 use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Constants;
+use T3G\AgencyPack\Blog\DataTransferObject\PostRepositoryDemand;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
@@ -28,6 +29,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ComparisonInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -68,6 +70,16 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         $query->matching($query->equals('uid', $uid));
         return $query->execute()->getFirst();
+    }
+
+    /**
+     * @param PostRepositoryDemand $repositoryDemand;
+     * @return QueryResultInterface
+     */
+    public function findByRepositoryDemand(PostRepositoryDemand $repositoryDemand): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        return $query->execute();
     }
 
     /**

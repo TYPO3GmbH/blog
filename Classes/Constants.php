@@ -23,4 +23,7 @@ class Constants
      */
     public const CATEGORY_TYPE_DEFAULT = 1;
     public const CATEGORY_TYPE_BLOG = 100;
+
+    public const REPOSITORY_CONJUNCTION_OR = 'OR';
+    public const REPOSITORY_CONJUNCTION_AND = 'AND';
 }

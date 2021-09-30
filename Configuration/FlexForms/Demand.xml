@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>sheetTitle</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+
+                    <settings._noTranslationHintMessage>
+                        <TCEforms>
+                            <label>LLL:EXT:blog/Resources/Private/Language/locallang.xlf:settings.noTranslationHintMessage.title</label>
+                            <description>LLL:EXT:blog/Resources/Private/Language/locallang.xlf:settings.noTranslationHintMessage.description</description>
+                            <displayCond>FIELD:parentRec.sys_language_uid:!=:0</displayCond>
+                            <config>
+                                <type>none</type>
+                            </config>
+                        </TCEforms>
+                    </settings._noTranslationHintMessage>
+
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

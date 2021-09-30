@@ -17,6 +17,12 @@
             <trans-unit id="plugin.blog_posts.description" xml:space="preserve">
                 <source>Displays a list of blog posts ordered by date. All non-hidden, non-deleted and non-archived posts are shown in the list.</source>
             </trans-unit>
+            <trans-unit id="plugin.blog_demandedposts.title" xml:space="preserve">
+                <source>Blog: List of posts by demand configuration</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_demandedposts.description" xml:space="preserve">
+                <source>Displays a list of blog posts depending on your demand configuration.</source>
+            </trans-unit>
             <trans-unit id="plugin.blog_latestposts.title" xml:space="preserve">
                 <source>Blog: Latest posts</source>
             </trans-unit>
