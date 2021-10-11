@@ -134,6 +134,7 @@
                                         <numIndex index="1">DESC</numIndex>
                                     </numIndex>
                                 </items>
+                                <default>DESC</default>
                             </config>
                         </TCEforms>
                     </settings.demand.sortDirection>
