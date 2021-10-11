@@ -144,6 +144,7 @@
                             <config>
                                 <type>input</type>
                                 <eval>int+</eval>
+                                <default>4</default>
                             </config>
                         </TCEforms>
                     </settings.demand.limit>

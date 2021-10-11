@@ -1,0 +1,18 @@
+<article class="postteaser__post" data-blog-tag="{f:if(condition: post.tags, then: post.tags.0.uid, else: 0)}" data-blog-category="{f:if(condition: post.categories, then: post.categories.0.uid, else: 0)}">
+    <f:if condition="{post.featuredImage}">
+        <blogvh:link.post post="{post}" class="postteaser__featuredimage" additionalAttributes="{aria-hidden: 'true'}" tabindex="-1">
+            <f:render partial="General/FeaturedImage" arguments="{image: post.featuredImage, settings: settings.teaser.featuredImage}" />
+        </blogvh:link.post>
+    </f:if>
+    <h2 class="postteaser__posttitle" itemprop="name"><blogvh:link.post post="{post}" /></h2>
+    <f:render partial="Meta/TeaserHeader" arguments="{_all}" />
+    <f:if condition="{post.abstract}">
+        <f:then>
+            <p class="postteaser__postdescription" itemprop="description">{post.abstract}</p>
+        </f:then>
+        <f:else>
+            <p class="postteaser__postdescription" itemprop="description">{post.description}</p>
+        </f:else>
+    </f:if>
+    <f:render partial="Meta/TeaserFooter" arguments="{_all}" />
+</article>

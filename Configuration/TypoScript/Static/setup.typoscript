@@ -162,6 +162,58 @@ plugin.tx_blog {
                     }
                 }
             }
+            teaserheader {
+                enable = {$plugin.tx_blog.settings.meta.teaserheader.enable}
+                modifier = {$plugin.tx_blog.settings.meta.teaserheader.modifier}
+                elements {
+                    authors {
+                        enable = {$plugin.tx_blog.settings.meta.teaserheader.elements.authors.enable}
+                        avatar {
+                            enable = {$plugin.tx_blog.settings.meta.teaserheader.elements.authors.avatar.enable}
+                            size = {$plugin.tx_blog.settings.meta.teaserheader.elements.authors.avatar.size}
+                        }
+                    }
+                    categories {
+                        enable = {$plugin.tx_blog.settings.meta.teaserheader.elements.categories.enable}
+                    }
+                    tags {
+                        enable = {$plugin.tx_blog.settings.meta.teaserheader.elements.tags.enable}
+                    }
+                    published {
+                        enable = {$plugin.tx_blog.settings.meta.teaserheader.elements.published.enable}
+                        format = {$plugin.tx_blog.settings.meta.teaserheader.elements.published.format}
+                    }
+                    comments {
+                        enable = {$plugin.tx_blog.settings.meta.teaserheader.elements.comments.enable}
+                    }
+                }
+            }
+            teaserfooter {
+                enable = {$plugin.tx_blog.settings.meta.teaserfooter.enable}
+                modifier = {$plugin.tx_blog.settings.meta.teaserfooter.modifier}
+                elements {
+                    authors {
+                        enable = {$plugin.tx_blog.settings.meta.teaserfooter.elements.authors.enable}
+                        avatar {
+                            enable = {$plugin.tx_blog.settings.meta.teaserfooter.elements.authors.avatar.enable}
+                            size = {$plugin.tx_blog.settings.meta.teaserfooter.elements.authors.avatar.size}
+                        }
+                    }
+                    categories {
+                        enable = {$plugin.tx_blog.settings.meta.teaserfooter.elements.categories.enable}
+                    }
+                    tags {
+                        enable = {$plugin.tx_blog.settings.meta.teaserfooter.elements.tags.enable}
+                    }
+                    published {
+                        enable = {$plugin.tx_blog.settings.meta.teaserfooter.elements.published.enable}
+                        format = {$plugin.tx_blog.settings.meta.teaserfooter.elements.published.format}
+                    }
+                    comments {
+                        enable = {$plugin.tx_blog.settings.meta.teaserfooter.elements.comments.enable}
+                    }
+                }
+            }
             default < .listheader
         }
 
@@ -188,6 +240,14 @@ plugin.tx_blog {
             posts {
                 maximumDisplayedItems = {$plugin.tx_blog.settings.lists.posts.maximumDisplayedItems}
                 dateFormat = {$plugin.tx_blog.settings.lists.posts.dateFormat}
+            }
+        }
+
+        # Teaser post related settings
+        teaser {
+            featuredImage {
+                width = {$plugin.tx_blog.settings.teaser.featuredImage.width}
+                height = {$plugin.tx_blog.settings.teaser.featuredImage.height}
             }
         }
 

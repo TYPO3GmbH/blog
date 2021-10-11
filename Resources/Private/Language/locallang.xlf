@@ -332,6 +332,9 @@
             <trans-unit id="constantEditor.customcategory.list" xml:space="preserve">
                 <source>TYPO3 Blog: List</source>
             </trans-unit>
+            <trans-unit id="constantEditor.customcategory.teaser" xml:space="preserve">
+                <source>TYPO3 Blog: Teaser</source>
+            </trans-unit>
             <trans-unit id="constantEditor.customcategory.standalone" xml:space="preserve">
                 <source>TYPO3 Blog: Standalone</source>
             </trans-unit>
@@ -371,6 +374,14 @@
             <trans-unit id="constantEditor.customsubcategory.list.element.footer" xml:space="preserve">
                 <source>Element Footer</source>
             </trans-unit>
+
+            <trans-unit id="constantEditor.customsubcategory.teaser.element.header" xml:space="preserve">
+                <source>Element Header</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customsubcategory.teaser.element.footer" xml:space="preserve">
+                <source>Element Footer</source>
+            </trans-unit>
+
             <trans-unit id="constantEditor.blog_130_widgets" xml:space="preserve">
                 <source>Widgets</source>
             </trans-unit>
