@@ -182,11 +182,10 @@ class PostController extends ActionController
     /**
      * Show a list of posts for a selected category.
      *
-     * @param int $currentPage
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listByDemandAction(int $currentPage = 1): ResponseInterface
+    public function listByDemandAction(): ResponseInterface
     {
         $repositoryDemand = $this->postRepositoryDemandFactory->createFromSettings($this->settings['demand'] ?? []);
 
