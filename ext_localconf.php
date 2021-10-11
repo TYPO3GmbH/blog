@@ -52,6 +52,15 @@ call_user_func(
                 \T3G\AgencyPack\Blog\Controller\PostController::class => 'listRecentPosts',
             ]
         );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Blog',
+            'DemandedPosts',
+            [
+                \T3G\AgencyPack\Blog\Controller\PostController::class => 'listByDemand',
+            ]
+        );
+
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'Blog',
             'LatestPosts',
@@ -59,6 +68,7 @@ call_user_func(
                 \T3G\AgencyPack\Blog\Controller\PostController::class => 'listLatestPosts',
             ]
         );
+
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'Blog',
             'Category',
@@ -66,6 +76,7 @@ call_user_func(
                 \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByCategory',
             ]
         );
+
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'Blog',
             'AuthorPosts',
@@ -73,6 +84,7 @@ call_user_func(
                 \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByAuthor',
             ]
         );
+
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'Blog',
             'Tag',
@@ -80,6 +92,7 @@ call_user_func(
                 \T3G\AgencyPack\Blog\Controller\PostController::class => 'listPostsByTag',
             ]
         );
+
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'Blog',
             'Archive',

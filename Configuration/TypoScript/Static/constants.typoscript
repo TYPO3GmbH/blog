@@ -27,6 +27,10 @@
 # customsubcategory=210_blog_list_element_header=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.element.header
 # customsubcategory=220_blog_list_element_footer=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.element.footer
 
+# customcategory=blog_teaser=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.teaser
+# customsubcategory=310_blog_teaser_element_header=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.teaser.element.header
+# customsubcategory=320_blog_teaser_element_footer=LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.teaser.element.footer
+
 plugin {
     tx_blog {
         view {
@@ -206,6 +210,78 @@ plugin {
                         }
                     }
                 }
+                teaserheader {
+                    # cat=blog_teaser/310_blog_teaser_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
+                    enable = 1
+                    # cat=blog_teaser/310_blog_teaser_element_header; type=options[simple,condensed,extended,modern]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
+                    modifier = simple
+                    elements {
+                        authors {
+                            # cat=blog_teaser/310_blog_teaser_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
+                            enable = 1
+                            avatar {
+                                # cat=blog_teaser/310_blog_teaser_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.enable
+                                enable = 0
+                                # cat=blog_teaser/310_blog_teaser_element_header; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.size
+                                size = 20
+                            }
+                        }
+                        categories {
+                            # cat=blog_teaser/310_blog_teaser_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
+                            enable = 0
+                        }
+                        tags {
+                            # cat=blog_teaser/310_blog_teaser_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
+                            enable = 0
+                        }
+                        published {
+                            # cat=blog_teaser/310_blog_teaser_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
+                            enable = 1
+                            # cat=blog_teaser/310_blog_teaser_element_header; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
+                            format = %d.%m.%Y
+                        }
+                        comments {
+                            # cat=blog_teaser/310_blog_teaser_element_header; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
+                            enable = 0
+                        }
+                    }
+                }
+                teaserfooter {
+                    # cat=blog_teaser/320_blog_teaser_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.footer.enable
+                    enable = 0
+                    # cat=blog_teaser/320_blog_teaser_element_footer; type=options[simple,condensed,extended,modern]; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
+                    modifier = simple
+                    elements {
+                        authors {
+                            # cat=blog_teaser/320_blog_teaser_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
+                            enable = 0
+                            avatar {
+                                # cat=blog_teaser/320_blog_teaser_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.enable
+                                enable = 0
+                                # cat=blog_teaser/320_blog_teaser_element_footer; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.size
+                                size = 20
+                            }
+                        }
+                        categories {
+                            # cat=blog_teaser/320_blog_teaser_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
+                            enable = 0
+                        }
+                        tags {
+                            # cat=blog_teaser/320_blog_teaser_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
+                            enable = 0
+                        }
+                        published {
+                            # cat=blog_teaser/320_blog_teaser_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
+                            enable = 0
+                            # cat=blog_teaser/320_blog_teaser_element_footer; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
+                            format = %d.%m.%Y
+                        }
+                        comments {
+                            # cat=blog_teaser/320_blog_teaser_element_footer; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
+                            enable = 0
+                        }
+                    }
+                }
             }
 
             post {
@@ -242,6 +318,15 @@ plugin {
                 }
             }
 
+            teaser {
+                featuredImage {
+                    # cat=blog_teaser/100_blog_list_featuredimage; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.width
+                    width = 1140
+                    # cat=blog_teaser/100_blog_list_featuredimage; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.height
+                    height = 400c
+                }
+            }
+
             archive {
                 # cat=blog/blog_120_lists_archive; type=boolean; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.archive.showCounter
                 showCounter = 1
@@ -258,7 +343,7 @@ plugin {
 
             relatedPosts {
                 # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.relatedPosts.limit
-                limit = 5
+                limit = 4
                 # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.relatedPosts.categoryMultiplier
                 categoryMultiplier = 1
                 # cat=blog/blog_120_lists; type=int+; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.relatedPosts.tagMultiplier

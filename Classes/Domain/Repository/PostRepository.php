@@ -12,6 +12,7 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
 
 use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Constants;
+use T3G\AgencyPack\Blog\DataTransferObject\PostRepositoryDemand;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
@@ -68,6 +69,65 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         $query->matching($query->equals('uid', $uid));
         return $query->execute()->getFirst();
+    }
+
+    /**
+     * @param PostRepositoryDemand $repositoryDemand;
+     * @return Post[]
+     */
+    public function findByRepositoryDemand(PostRepositoryDemand $repositoryDemand): array
+    {
+        $query = $this->createQuery();
+
+        $constraints = [
+            $query->equals('doktype', Constants::DOKTYPE_BLOG_POST)
+        ];
+
+        if ($repositoryDemand->getPosts() !== []) {
+            $constraints[] = $query->in('uid', $repositoryDemand->getPosts());
+        } else {
+            if ($repositoryDemand->getCategories() !== []) {
+                $categoriesConstraints = [];
+                foreach ($repositoryDemand->getCategories() as $category) {
+                    $categoriesConstraints[] = $query->equals('categories.uid', $category->getUid());
+                }
+                $categoriesConjunction = $repositoryDemand->getCategoriesConjunction() === Constants::REPOSITORY_CONJUNCTION_AND ? 'logicalAnd' : 'logicalOr';
+                $constraints[] = $query->{$categoriesConjunction}($categoriesConstraints);
+            }
+            if ($repositoryDemand->getTags() !== []) {
+                $tagsConstraints = [];
+                foreach ($repositoryDemand->getTags() as $tag) {
+                    $tagsConstraints[] = $query->equals('tags.uid', $tag->getUid());
+                }
+                $tagsConjunction = $repositoryDemand->getTagsConjunction() === Constants::REPOSITORY_CONJUNCTION_AND ? 'logicalAnd' : 'logicalOr';
+                $constraints[] = $query->{$tagsConjunction}($tagsConstraints);
+            }
+            if (($ordering = $repositoryDemand->getOrdering()) !== []) {
+                $query->setOrderings([$ordering['field'] => $ordering['direction']]);
+            }
+        }
+
+        $query->matching($query->logicalAnd($constraints));
+
+        if (($limit = $repositoryDemand->getLimit()) > 0) {
+            $query->setLimit($limit);
+        }
+
+        /** @var Post[] $result */
+        $result = $query->execute()->toArray();
+
+        if ($repositoryDemand->getPosts() !== []) {
+            // Sort manually selected posts by defined order in group field
+            $sortedPosts = array_flip($repositoryDemand->getPosts());
+            foreach ($result as $post) {
+                $sortedPosts[$post->getUid()] = $post;
+            }
+            $result = array_values(array_filter($sortedPosts, function ($value) {
+                return $value instanceof Post;
+            }));
+        }
+
+        return $result;
     }
 
     /**

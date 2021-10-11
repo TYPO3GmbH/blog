@@ -1,0 +1,6 @@
+<div class="postteaser{f:if(condition: type, then: ' postteaser--{type}')}" data-blog-postcount="{posts -> f:count()}">
+    <f:for each="{posts}" iteration="iterator" as="post">
+        <blogvh:cache post="{post}" />
+        <f:render partial="Teaser/Post" arguments="{_all}" />
+    </f:for>
+</div>

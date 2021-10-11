@@ -1,6 +1,6 @@
 <f:if condition="{image}">
-    <f:variable name="height" value="{f:if(condition: settings.height, then: settings.height, else: '1140')}" />
-    <f:variable name="width" value="{f:if(condition: settings.width, then: settings.width, else: '400c')}" />
+    <f:variable name="height" value="{f:if(condition: settings.height, then: settings.height, else: '400c')}" />
+    <f:variable name="width" value="{f:if(condition: settings.width, then: settings.width, else: '1140')}" />
     <figure class="blogimage blogimage--featured">
         <f:image image="{image}" alt="{image.alternative}" title="{image.title}" height="{height}" width="{width}" />
     </figure>

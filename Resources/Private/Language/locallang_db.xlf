@@ -17,6 +17,12 @@
             <trans-unit id="plugin.blog_posts.description" xml:space="preserve">
                 <source>Displays a list of blog posts ordered by date. All non-hidden, non-deleted and non-archived posts are shown in the list.</source>
             </trans-unit>
+            <trans-unit id="plugin.blog_demandedposts.title" xml:space="preserve">
+                <source>Blog: List of posts by demand configuration</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_demandedposts.description" xml:space="preserve">
+                <source>Displays a list of blog posts depending on your demand configuration.</source>
+            </trans-unit>
             <trans-unit id="plugin.blog_latestposts.title" xml:space="preserve">
                 <source>Blog: Latest posts</source>
             </trans-unit>
@@ -276,6 +282,59 @@
             </trans-unit>
             <trans-unit id="flexform.latestPosts.limit" xml:space="preserve">
                 <source>Amount of items to show in overview of latest posts</source>
+            </trans-unit>
+
+            <!-- Settings -->
+            <trans-unit id="settings.demand.posts" xml:space="preserve">
+                <source>Blog posts</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.posts.description" xml:space="preserve">
+                <source>Blog posts are mutually exclusive to categories and tags. If blog posts are selected, any set categories, tags and sorting settings are ignored!</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.categories" xml:space="preserve">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.categoriesConjunction" xml:space="preserve">
+                <source>Category Conjunction</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.categoriesConjunction.AND" xml:space="preserve">
+                <source>Require all categories set (AND)</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.categoriesConjunction.OR" xml:space="preserve">
+                <source>Require any category set (OR)</source>
+            </trans-unit>´
+            <trans-unit id="settings.demand.sortBy" xml:space="preserve">
+                <source>Sort blog posts by</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.sortDirection" xml:space="preserve">
+                <source>Sorting direction</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.sortDirection.ASC" xml:space="preserve">
+                <source>Ascending</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.sortDirection.DESC" xml:space="preserve">
+                <source>Descending</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.tags" xml:space="preserve">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.tagsConjunction" xml:space="preserve">
+                <source>Tag Conjunction</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.tagsConjunction.AND" xml:space="preserve">
+                <source>Require all tags set (AND)</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.tagsConjunction.OR" xml:space="preserve">
+                <source>Require any tags set (OR)</source>
+            </trans-unit>
+            <trans-unit id="settings.demand.limit" xml:space="preserve">
+                <source>Limit of posts</source>
+            </trans-unit>
+            <trans-unit id="settings.noTranslationHintMessage.title" xml:space="preserve">
+                <source>No settings here</source>
+            </trans-unit>
+            <trans-unit id="settings.noTranslationHintMessage.description" xml:space="preserve">
+                <source>This configuration cannot get changed while being in a translated record.</source>
             </trans-unit>
         </body>
     </file>

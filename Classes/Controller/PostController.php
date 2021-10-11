@@ -19,6 +19,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\AuthorRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
+use T3G\AgencyPack\Blog\Factory\PostRepositoryDemandFactory;
 use T3G\AgencyPack\Blog\Pagination\BlogPagination;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\MetaTagService;
@@ -60,6 +61,11 @@ class PostController extends ActionController
     protected $blogCacheService;
 
     /**
+     * @var PostRepositoryDemandFactory
+     */
+    protected $postRepositoryDemandFactory;
+
+    /**
      * @param CategoryRepository $categoryRepository
      */
     public function injectCategoryRepository(CategoryRepository $categoryRepository): void
@@ -97,6 +103,11 @@ class PostController extends ActionController
     public function injectBlogCacheService(CacheService $cacheService): void
     {
         $this->blogCacheService = $cacheService;
+    }
+
+    public function injectPostRepositoryDemandFactory(PostRepositoryDemandFactory $postRepositoryDemandFactory): void
+    {
+        $this->postRepositoryDemandFactory = $postRepositoryDemandFactory;
     }
 
     /**
@@ -165,6 +176,23 @@ class PostController extends ActionController
         $this->view->assign('type', 'recent');
         $this->view->assign('posts', $posts);
         $this->view->assign('pagination', $pagination);
+        return $this->htmlResponse();
+    }
+
+    /**
+     * Show a list of posts for a selected category.
+     *
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function listByDemandAction(): ResponseInterface
+    {
+        $repositoryDemand = $this->postRepositoryDemandFactory->createFromSettings($this->settings['demand'] ?? []);
+
+        $this->view->assign('type', 'demand');
+        $this->view->assign('demand', $repositoryDemand);
+        $this->view->assign('posts', $this->postRepository->findByRepositoryDemand($repositoryDemand));
+        $this->view->assign('pagination', []);
         return $this->htmlResponse();
     }
 
