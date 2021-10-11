@@ -42,7 +42,7 @@ class PostRepositoryDemand
     protected $tagsConjunction = Constants::REPOSITORY_CONJUNCTION_AND;
 
     /**
-     * @var array{field: string, direction: string}
+     * @var string[]
      */
     protected $ordering = [];
 

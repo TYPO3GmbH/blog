@@ -18,7 +18,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class PostRepositoryDemandFactory
 {
+    /**
+     * @var CategoryRepository;
+     */
     private $categoryRepository;
+
+    /**
+     * @var TagRepository;
+     */
     private $tagRepository;
 
     public function __construct(
