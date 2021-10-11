@@ -122,7 +122,9 @@ class PostRepository extends Repository
             foreach ($result as $post) {
                 $sortedPosts[$post->getUid()] = $post;
             }
-            $result = array_values(array_filter($sortedPosts));
+            $result = array_values(array_filter($sortedPosts, function ($value) {
+                return $value instanceof Post;
+            }));
         }
 
         return $result;
