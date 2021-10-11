@@ -16,7 +16,9 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
-# ReST-Files
 [*.rst]
 indent_style = space
 indent_size = 3
+
+[*.neon]
+indent_style = tab
