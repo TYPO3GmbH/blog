@@ -12,6 +12,7 @@ namespace T3G\AgencyPack\Blog\Domain\Factory;
 
 use T3G\AgencyPack\Blog\Domain\Finisher\CommentFormFinisher;
 use T3G\AgencyPack\Blog\Domain\Validator\GoogleCaptchaValidator;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -43,9 +44,13 @@ class CommentFormFactory extends AbstractFormFactory
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $formConfigurationService = $objectManager->get(ConfigurationService::class);
         $prototypeConfiguration = $formConfigurationService->getPrototypeConfiguration($prototypeName);
-        $prototypeConfiguration['formElementsDefinition']['GoogleCaptcha'] = [
-            'implementationClassName' => 'TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement'
-        ];
+        $prototypeConfiguration['formElementsDefinition']['BlogGoogleCaptcha'] = $prototypeConfiguration['formElementsDefinition']['BlogGoogleCaptcha'] ?? [];
+        ArrayUtility::mergeRecursiveWithOverrule(
+            $prototypeConfiguration['formElementsDefinition']['BlogGoogleCaptcha'],
+            [
+                'implementationClassName' => 'TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement'
+            ]
+        );
 
         $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
         $blogSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
@@ -58,7 +63,7 @@ class CommentFormFactory extends AbstractFormFactory
         $form->setRenderingOption('controllerAction', 'form');
         $form->setRenderingOption('submitButtonLabel', LocalizationUtility::translate('form.comment.submit', 'blog'));
         $renderingOptions = $form->getRenderingOptions();
-        $renderingOptions['partialRootPaths'][] = 'EXT:blog/Resources/Private/Partials/Form/';
+        $renderingOptions['partialRootPaths'][-1634043971] = 'EXT:blog/Resources/Private/Partials/Form/';
         $form->setRenderingOption('partialRootPaths', $renderingOptions['partialRootPaths']);
 
         $page = $form->createPage('commentform');
@@ -88,7 +93,7 @@ class CommentFormFactory extends AbstractFormFactory
         $explanationText->setProperty('text', LocalizationUtility::translate('label.required.field', 'blog') . ' ' . LocalizationUtility::translate('label.required.field.explanation', 'blog'));
 
         if ($captcha['enable'] && $captcha['sitekey'] && $captcha['secret']) {
-            $captchaField = $page->createElement('captcha', 'GoogleCaptcha');
+            $captchaField = $page->createElement('captcha', 'BlogGoogleCaptcha');
             $captchaField->setProperty('sitekey', $captcha['sitekey']);
             $captchaField->addValidator($objectManager->get(GoogleCaptchaValidator::class));
         }
