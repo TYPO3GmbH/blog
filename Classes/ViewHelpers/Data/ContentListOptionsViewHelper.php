@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Data;
 
+use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -45,7 +46,7 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
         $data = array_merge(
             $listTypeConfiguration,
             [
-                'uid' => '-' . str_replace('_', '-', $arguments['listType']),
+                'uid' => Constants::LISTTYPE_TO_FAKE_UID_MAPPING[$arguments['listType']] ?? 0,
                 'list_type' => (string) $arguments['listType'] ?? '',
                 'CType' => 'list',
                 'layout' => $listTypeConfiguration['layout'] ?? '0',
