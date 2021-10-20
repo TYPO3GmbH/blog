@@ -45,7 +45,7 @@
                     <div class="blog-pageheader-section-content">
                         <f:if condition="{post.featuredImage}">
                             <f:then>
-                                <f:image class="blog-pageheader-image" image="{post.featuredImage}" alt="{post.featuredImage.alternative}" title="{post.featuredImage.title}" height="100c" width="200" />
+                                <f:image loading="lazy" class="blog-pageheader-image" image="{post.featuredImage}" alt="{post.featuredImage.alternative}" title="{post.featuredImage.title}" height="100c" width="200" />
                             </f:then>
                             <f:else>
                                 <p><f:translate key="pagelayout.message.nofeaturedimage" extensionName="blog" /></p>

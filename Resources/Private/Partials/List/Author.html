@@ -2,7 +2,7 @@
     <div class="bloglist__image">
         <f:variable name="avatarsize" value="{settings.authors.avatar.provider.size as integer}" />
         <f:if condition="{avatarsize}"><f:else><f:variable name="avatarsize" value="32" /></f:else></f:if>
-        <img class="bloglist__imageavatar blogavatar" height="{avatarsize}" width="{avatarsize}" src="{author.avatar}" itemprop="image">
+        <img loading="lazy" class="bloglist__imageavatar blogavatar" height="{avatarsize}" width="{avatarsize}" src="{author.avatar}" itemprop="image">
     </div>
     <h2 class="bloglist__title" itemprop="name">
         <blogvh:link.author author="{author}" />
