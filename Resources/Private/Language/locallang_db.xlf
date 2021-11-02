@@ -229,6 +229,9 @@
             <trans-unit id="tx_blog_domain_model_author.xing" xml:space="preserve">
                 <source>XING profile URL</source>
             </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.instagram" xml:space="preserve">
+                <source>Instagram profile URL</source>
+            </trans-unit>
             <trans-unit id="tx_blog_domain_model_author.profile" xml:space="preserve">
                 <source>Author profile URL (used for schema.org markup)</source>
             </trans-unit>

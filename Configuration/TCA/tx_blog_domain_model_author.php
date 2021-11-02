@@ -200,6 +200,15 @@ return [
             ],
             'l10n_mode' => 'exclude',
         ],
+        'instagram' => [
+            'label' => $ll . 'tx_blog_domain_model_author.instagram',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => '',
+            ],
+            'l10n_mode' => 'exclude',
+        ],
         'profile' => [
             'label' => $ll . 'tx_blog_domain_model_author.profile',
             'config' => [
@@ -292,6 +301,7 @@ return [
                     twitter,
                     linkedin,
                     xing,
+                    instagram,
                     profile,
                 --div--;' . $ll . 'tx_blog_domain_model_author.tab_blog,
                     posts,

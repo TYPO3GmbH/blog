@@ -83,6 +83,11 @@ class Author extends AbstractEntity
     /**
      * @var string
      */
+    protected $instagram = '';
+
+    /**
+     * @var string
+     */
     protected $profile = '';
 
     /**
@@ -315,6 +320,24 @@ class Author extends AbstractEntity
     public function setXing(string $xing): self
     {
         $this->xing = $xing;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    /**
+     * @param string $instagram
+     * @return Author
+     */
+    public function setInstagram(string $instagram): self
+    {
+        $this->instagram = $instagram;
         return $this;
     }
 
