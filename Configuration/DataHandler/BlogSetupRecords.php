@@ -21,7 +21,10 @@ $data['pages']['NEW_blogRoot'] = [
     'is_siteroot' => 1,
     'TSconfig' => 'TCEFORM.pages.tags.PAGE_TSCONFIG_ID = NEW_blogFolder
 TCEFORM.pages.authors.PAGE_TSCONFIG_ID = NEW_blogFolder
-TCEFORM.pages.categories.PAGE_TSCONFIG_ID = NEW_blogFolder',
+TCEFORM.pages.categories.PAGE_TSCONFIG_ID = NEW_blogFolder
+TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.authors.PAGE_TSCONFIG_ID = NEW_blogFolder
+TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.tags.PAGE_TSCONFIG_ID = NEW_blogFolder
+TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.categories.PAGE_TSCONFIG_ID = NEW_blogFolder',
 ];
 $data['pages']['NEW_blogFolder'] = [
     'pid' => 'NEW_blogRoot',
