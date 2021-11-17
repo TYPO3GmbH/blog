@@ -156,19 +156,22 @@
             </trans-unit>
 
             <!-- Author -->
-            <trans-unit id="author.aboutTheAuthor"  xml:space="preserve">
+            <trans-unit id="author.aboutTheAuthor" xml:space="preserve">
                 <source>About the Author</source>
             </trans-unit>
-            <trans-unit id="author.social.website"  xml:space="preserve">
+            <trans-unit id="author.social.website" xml:space="preserve">
                 <source>Website</source>
             </trans-unit>
-            <trans-unit id="author.social.twitter"  xml:space="preserve">
+            <trans-unit id="author.social.twitter" xml:space="preserve">
                 <source>Twitter</source>
             </trans-unit>
-            <trans-unit id="author.social.linkedin"  xml:space="preserve">
+            <trans-unit id="author.social.instagram" xml:space="preserve">
+                <source>Instagram</source>
+            </trans-unit>
+            <trans-unit id="author.social.linkedin" xml:space="preserve">
                 <source>LinkedIn</source>
             </trans-unit>
-            <trans-unit id="author.social.xing"  xml:space="preserve">
+            <trans-unit id="author.social.xing" xml:space="preserve">
                 <source>Xing</source>
             </trans-unit>
             <trans-unit id="author.more.posts" xml:space="preserve">

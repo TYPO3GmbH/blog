@@ -33,6 +33,14 @@
                             <span class="postauthor__sociallinklabel"><f:translate key="author.social.twitter" /></span>
                         </a>
                     </f:if>
+                    <f:if condition="{author.instagram}">
+                        <a href="{author.instagram}" class="postauthor__sociallink postauthor__sociallink--instagram" target="_blank" itemprop="url">
+                            <span class="postauthor__sociallinkicon postauthor__sociallinkicon--instagram">
+                                <span class="blogicon"><f:render partial="General/SocialIcons" section="Instagram" optional="true" /></span>
+                            </span>
+                            <span class="postauthor__sociallinklabel"><f:translate key="author.social.instagram" /></span>
+                        </a>
+                    </f:if>
                     <f:if condition="{author.linkedin}">
                         <a href="{author.linkedin}" class="postauthor__sociallink postauthor__sociallink--linkedin" target="_blank" itemprop="url">
                             <span class="postauthor__sociallinkicon postauthor__sociallinkicon--linkedin">
