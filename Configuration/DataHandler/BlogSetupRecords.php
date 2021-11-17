@@ -162,6 +162,7 @@ $data['tx_blog_domain_model_author']['NEW_blogAuthor'] = [
     'website' => 'https://typo3.com/',
     'email' => 'noreply@typo3.com',
     'twitter' => 'typo3',
+    'instagram' => 'https://www.instagram.com/typo3_official/',
 ];
 
 // Comment
