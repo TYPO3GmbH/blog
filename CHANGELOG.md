@@ -1,3 +1,19 @@
+# 10.0.1
+
+## TASK
+
+- [TASK] Add services configuration (#179) ca71e11
+- [TASK] Move plugin registration to TCA overrides (#169) 15da587
+
+## BUGFIX
+
+- [BUGFIX] Ensure that custom categories are restricted to default language 694fb21
+- [BUGFIX] Use interface_exists instead of class_exists for PSR Interface check in ext_localconf.php 3020ced
+- [BUGFIX] Wait for DOM being ready before initializing DataTables e0a3b2a
+- [BUGFIX] Update vulnerable npm development modules b7ab3e7
+- [BUGFIX] Setup mysql server in docker container 6c9d1d6
+- [BUGFIX] Check for pages in extended TCA for sys_category f458dd4
+
 # 10.0.0
 
 ## BREAKING
