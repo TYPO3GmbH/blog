@@ -70,7 +70,7 @@ class SetupService
 
         $result = false;
         if (file_exists($blogSetup)) {
-            /* @noinspection PhpIncludeInspection */
+            // @noinspection PhpIncludeInspection
             $blogSetup = require $blogSetup;
             if ($title !== null) {
                 $blogSetup['pages']['NEW_blogRoot']['title'] = $title;
@@ -99,7 +99,7 @@ class SetupService
 
                 $blogSetupRelations = GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRelations.php');
                 if (file_exists($blogSetupRelations)) {
-                    /* @noinspection PhpIncludeInspection */
+                    // @noinspection PhpIncludeInspection
                     $blogSetupRelations = require $blogSetupRelations;
                     $blogSetupRelations = $this->replaceNewUids($blogSetupRelations);
                     $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
