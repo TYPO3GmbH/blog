@@ -1,3 +1,65 @@
+# 11.0.0
+
+## BREAKING
+
+- [!!!][TASK] Drop unused archive template 3ba6b84
+- [!!!][TASK] Allow TYPO3 version 11.0 and drop support vor 9.5 39666d5
+
+## FEATURE
+
+- [FEATURE] Add Instagram profile URL (#229) 00feddf
+- [FEATURE] Add demand plugin (#227) 66f4c33
+
+## TASK
+
+- [TASK] Enable lazy loading for all images 6a48fee
+- [TASK] Set default sorting to desc for demand plugin 655d1cd
+- [TASK] Add neon files to editorconfig fe03be4
+- [TASK] Disable xdebug by default for dev environment 9841a34
+- [TASK] Update dependencies b3dd5c0
+- [!!!][TASK] Drop unused archive template 3ba6b84
+- [TASK] Expose more data as attributes 0bffba7
+- [TASK] Remove never used icon within category model b190186
+- [TASK] Use SiteConfiguration for website title in standalone mode 8e66e97
+- [TASK] Update ddev a869f5a
+- [TASK] Update frontend dependencies ceac221
+- [TASK] Add compatibility for TYPO3 v11 (#199) a2f6293
+- [TASK] Rename comment form explanation hint (#182) cd8a00a
+- [TASK] Remove unreachable else because ternary operator condition is always true 8767b93
+- [TASK] Add services configuration (#179) 40f4bca
+- [TASK] Remove outdated TCA definitions (#165) 7609ba5
+- [TASK] Move plugin registration to TCA overrides (#169) 7e186b0
+- [TASK] Drop manual cache hash config from link generation cc64bbc
+- [TASK] Use php version 7.4 bba1992
+- [TASK] Remove compat packages for v9.5 3f9d4ca
+- [TASK] Include 7.2 and 7.3 only on v10.4 163a5c0
+- [!!!][TASK] Allow TYPO3 version 11.0 and drop support vor 9.5 39666d5
+
+## BUGFIX
+
+- [BUGFIX] Ensure that custom categories are restricted to default language 76b2505
+- [BUGFIX] Add missing tsconfig settings for demand plugin cb2c710
+- [BUGFIX] Dont use strings as uid for fake content elements (#228) 333e663
+- [BUGFIX] Allow to overwrite properties of google captcha 1cb46c7
+- [BUGFIX] Cleanup Annotations 497ea2c
+- [BUGFIX] Ensure modal is closed after install is triggered a9103df
+- [BUGFIX] Cleanup indention in postcss.config aa9ba6c
+- [BUGFIX] Ensure constant editor shows selected option values b808d42
+- [BUGFIX] Drop latest post flexform config to have typoscript settings respected 99be165
+- [BUGFIX] Correct Pagination (#210) ca37059
+- [BUGFIX] Ensure setFinisherIdentifier is defined 9ac8cb3
+- [BUGFIX] Wait for DOM being ready before initializing DataTables a161258
+- [BUGFIX] Update vulnerable npm development modules 60aef51
+- [BUGFIX] Setup mysql server in docker container ef72282
+- [BUGFIX] Check for pages in extended TCA for sys_category d61c41d
+- [BUGFIX] Use full qualified class names for controller references 81552dc
+- [BUGFIX] Avoid deprecation call for PageRepository 9e2bd7a
+- [BUGFIX] Correct composer version constraints 9bfb8cd
+
+## MISC
+
+- Bump tar from 6.1.0 to 6.1.3 5ee8713
+
 # 10.0.0
 
 ## BREAKING
