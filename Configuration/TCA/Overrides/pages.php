@@ -206,6 +206,13 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
                 $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
             ),
         ],
+        'categories' => [
+            'config' => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
+            ]
+        ]
     ]
 );
 
@@ -213,8 +220,7 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
 $GLOBALS['TCA']['pages']['types'][\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST]['columnsOverrides'] = [
     'categories' => [
         'config' => [
-            'foreign_table_where' => ' AND sys_category.pid = ###PAGE_TSCONFIG_ID### ' .
-                $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where']
+            'foreign_table_where' => 'AND sys_category.sys_language_uid IN (0,-1) AND sys_category.pid = ###PAGE_TSCONFIG_ID###',
         ]
     ]
 ];
