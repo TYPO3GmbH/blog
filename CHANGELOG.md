@@ -1,3 +1,9 @@
+# 11.0.2
+
+## BUGFIX
+
+- [BUGFIX] Correct upper constraint in ext_emconf 592ac88
+
 # 11.0.1
 
 ## BUGFIX
