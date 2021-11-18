@@ -8,7 +8,8 @@ This blog extension uses TYPO3s core concepts and elements to provide a full-blo
 
 | Version  | TYPO3                 | PHP      |
 |----------|-----------------------|----------|
-| master   | ^10.4 or ^11.0        | ^7.2     |
+| master   | ^11.5                 | ^7.4     |
+| v11.0.x  | ^10.4 or ^11.5        | ^7.2     |
 | v10.0.x  |  ^9.5 or ^10.4        | ^7.2     |
 | v9.1.x   |  ^9.5                 | ^7.2     |
 | v9.0.x   |  ^9.5                 | ^7.2     |
