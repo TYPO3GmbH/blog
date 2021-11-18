@@ -10,7 +10,6 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Controller;
 
-use Psr\Http\Message\ResponseInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
@@ -61,22 +60,16 @@ class CommentController extends ActionController
 
     /**
      * Show comment form.
-     *
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function formAction(): ResponseInterface
+    public function formAction()
     {
         $this->view->assign('post', $this->postRepository->findCurrentPost());
-        return $this->htmlResponse();
     }
 
     /**
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * Show comments
      */
-    public function commentsAction(): ResponseInterface
+    public function commentsAction()
     {
         $post = $this->postRepository->findCurrentPost();
         if ($post instanceof Post) {
@@ -87,6 +80,5 @@ class CommentController extends ActionController
             $this->view->assign('comments', $comments);
             $this->view->assign('post', $post);
         }
-        return $this->htmlResponse();
     }
 }
