@@ -10,8 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        typo3: [ ^11.0 ]
-        php: [ '7.4' ]
+        typo3: ['^11.5']
+        php: ['7.4']
         mysql: ['5.7']
 
     steps:
