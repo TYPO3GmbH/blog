@@ -1,3 +1,10 @@
+# 11.0.1
+
+## BUGFIX
+
+- [BUGFIX] Ensure compatibility between v10 and v11 (#231) ac6d864
+- [BUGFIX] Correct dependencies 7340478
+
 # 11.0.0
 
 ## BREAKING
