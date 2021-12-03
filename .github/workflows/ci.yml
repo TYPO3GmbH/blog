@@ -75,7 +75,7 @@ jobs:
           COVERALLS_PARALLEL: true
           COVERALLS_FLAG_NAME: php-${{ matrix.php }}
         run: |
-          composer global require twinh/php-coveralls --no-progress --no-suggest --no-interaction
+          composer global require php-coveralls/php-coveralls --no-progress --no-suggest --no-interaction
           /home/runner/.composer/vendor/bin/php-coveralls --coverage_clover=var/log/junit/coverage-unit.xml --coverage_clover=var/log/junit/coverage-functional.xml -vvv --json_path=var/log/coveralls-upload.json
 
   coveralls-finish:
