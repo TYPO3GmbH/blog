@@ -1,0 +1,16 @@
+includes:
+	- .build/vendor/phpstan/phpstan-phpunit/extension.neon
+	- .build/vendor/friendsoftypo3/phpstan-typo3/extension.neon
+
+parameters:
+	level: max
+	reportUnmatchedIgnoredErrors: true
+	checkMissingIterableValueType: false
+
+	paths:
+		- %currentWorkingDirectory%/Classes/
+		- %currentWorkingDirectory%/Tests/
+
+	ignoreErrors:
+		- "#^Cannot call method fetch\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
+		- "#^Cannot call method fetchColumn\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"

@@ -70,6 +70,15 @@
         "t3g:cgl": [
             "php-cs-fixer --diff -v fix"
         ],
+        "t3g:phpstan": [
+            "phpstan analyze --configuration phpstan.neon"
+        ],
+        "t3g:phpstan:github": [
+            "phpstan analyze --configuration phpstan.neon --error-format=github"
+        ],
+        "t3g:phpstan:base-line": [
+            "phpstan analyze --configuration phpstan.neon --generate-baseline phpstan-baseline.neon"
+        ],
         "post-autoload-dump": [
             "mkdir -p .build/web/typo3conf/ext/",
             "[ -L .build/web/typo3conf/ext/blog ] || ln -snvf ../../../../. .build/web/typo3conf/ext/blog"
@@ -110,6 +119,10 @@
         "typo3/testing-framework": "^6.4",
         "bk2k/bootstrap-package": "^12",
         "bk2k/extension-helper": "^1.0",
-        "overtrue/phplint": "^2.4"
+        "overtrue/phplint": "^2.4",
+        "phpstan/phpstan": "^0.12.89",
+        "friendsoftypo3/phpstan-typo3": "^0.6.0",
+        "phpstan/phpstan-phpunit": "^0.12.17",
+        "phpstan/phpstan-deprecation-rules": "^0.12.6"
     }
 }

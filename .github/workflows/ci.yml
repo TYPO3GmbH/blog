@@ -58,6 +58,9 @@ jobs:
       - name: CGL
         run: php-cs-fixer fix --dry-run --verbose
 
+      - name: PHPStan
+        run: composer t3g:phpstan:github
+
       - name: Unit Tests with coverage
         run: composer t3g:test:php:unit:cover
 
