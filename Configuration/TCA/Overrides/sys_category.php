@@ -53,7 +53,7 @@ $GLOBALS['TCA']['sys_category']['types'][\T3G\AgencyPack\Blog\Constants::CATEGOR
             'foreign_table_where' => '' .
                 ' AND sys_category.record_type = ' . (string) \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_BLOG . ' ' .
                 ' AND sys_category.pid = ###CURRENT_PID### ' .
-                $GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where']
+                ($GLOBALS['TCA']['pages']['columns']['categories']['config']['foreign_table_where'] ?? '')
         ]
     ]
 ];
