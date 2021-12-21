@@ -36,10 +36,10 @@ class ArchiveUtility
     {
         $archiveData = [];
         foreach ($data as $result) {
-            if (empty($archiveData[$result['year']])) {
+            if (empty($archiveData[$result['year'] ?? null])) {
                 $archiveData[$result['year']] = [];
             }
-            $dateTime = new \DateTimeImmutable(sprintf('%d-%d-1', (int)$result['year'], (int)$result['month']));
+            $dateTime = new \DateTimeImmutable(sprintf('%d-%d-1', (int)($result['year'] ?? 0), (int)($result['month'] ?? 0)));
             $result['timestamp'] = $dateTime->getTimestamp();
             $archiveData[$result['year']][] = $result;
         }
