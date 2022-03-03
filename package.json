@@ -9,20 +9,20 @@
         "last 2 versions"
     ],
     "devDependencies": {
-        "autoprefixer": "^10.3.6",
-        "css-loader": "^6.3.0",
-        "mini-css-extract-plugin": "^2.3.0",
-        "node-sass": "^6.0.1",
+        "autoprefixer": "^10.4.2",
+        "css-loader": "^6.6.0",
+        "mini-css-extract-plugin": "^2.5.3",
+        "node-sass": "^7.0.1",
         "optimize-css-assets-webpack-plugin": "^6.0.1",
-        "postcss-loader": "^6.1.1",
-        "sass-loader": "^12.1.0",
-        "terser-webpack-plugin": "^5.2.4",
-        "webpack": "^5.54.0",
-        "webpack-cli": "^4.8.0",
+        "postcss-loader": "^6.2.1",
+        "sass-loader": "^12.6.0",
+        "terser-webpack-plugin": "^5.3.1",
+        "webpack": "^5.69.1",
+        "webpack-cli": "^4.9.2",
         "webpack-fix-style-only-entries": "^0.6.1"
     },
     "dependencies": {
-        "datatables.net": "^1.11.3",
-        "datatables.net-bs": "^1.11.3"
+        "datatables.net": "^1.11.5",
+        "datatables.net-bs": "^1.11.5"
     }
 }
