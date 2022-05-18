@@ -19,12 +19,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class PostRepositoryDemandFactory
 {
     /**
-     * @var CategoryRepository;
+     * @var CategoryRepository
      */
     private $categoryRepository;
 
     /**
-     * @var TagRepository;
+     * @var TagRepository
      */
     private $tagRepository;
 
