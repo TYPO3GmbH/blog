@@ -30,7 +30,7 @@ class DatabasePublishDateUpdate implements UpgradeWizardInterface
      */
     public function getIdentifier(): string
     {
-        return 'T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate';
+        return self::class;
     }
 
     /**
