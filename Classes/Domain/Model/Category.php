@@ -46,6 +46,11 @@ class Category extends AbstractEntity
     protected $parent;
 
     /**
+     * @var int
+     */
+    protected $sorting;
+
+    /**
      * The additional content of the category. Used to enrich the SEO rating of category pages.
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Content>
@@ -163,6 +168,22 @@ class Category extends AbstractEntity
     {
         $this->parent = $parent;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSorting(): int
+    {
+        return $this->sorting;
+    }
+
+    /**
+     * @param int $sorting
+     */
+    public function setSorting(int $sorting): void
+    {
+        $this->sorting = $sorting;
     }
 
     /**
