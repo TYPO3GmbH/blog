@@ -68,7 +68,6 @@ call_user_func(function () {
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');
 
-    if (TYPO3_MODE === 'BE') {
         // Main Blog
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
             'blog',
@@ -126,5 +125,4 @@ call_user_func(function () {
                 'access' => 'admin',
             ]
         );
-    }
 });

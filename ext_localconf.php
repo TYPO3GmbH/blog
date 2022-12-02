@@ -217,13 +217,16 @@ call_user_func(
             ]
         );
 
-        $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
-        $dispatcher->connect(
-            \TYPO3\CMS\Extensionmanager\Utility\InstallUtility::class,
-            'afterExtensionInstall',
-            \T3G\AgencyPack\Blog\Hooks\ExtensionUpdate::class,
-            'afterExtensionInstall'
-        );
+        if ((\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class))->getMajorVersion() < 12) {
+            $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
+            $dispatcher->connect(
+                \TYPO3\CMS\Extensionmanager\Utility\InstallUtility::class,
+                'afterExtensionInstall',
+                \T3G\AgencyPack\Blog\Hooks\ExtensionUpdate::class,
+                'afterExtensionInstall'
+            );
+        }
+
 
         /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['Blog'] =

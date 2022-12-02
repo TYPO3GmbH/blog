@@ -91,7 +91,7 @@ class CategoryTypeUpdate implements UpgradeWizardInterface
                 )
             )
             ->execute()
-            ->fetchColumn(0);
+            ->fetchOne();
 
         return (bool)$elementCount;
     }

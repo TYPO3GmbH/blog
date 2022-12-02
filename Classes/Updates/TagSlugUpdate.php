@@ -84,7 +84,7 @@ class TagSlugUpdate implements UpgradeWizardInterface
                     $queryBuilder->expr()->isNull($this->slugField)
                 )
             )
-            ->execute()->fetchColumn(0);
+            ->execute()->fetchOne();
 
         return (bool)$elementCount;
     }

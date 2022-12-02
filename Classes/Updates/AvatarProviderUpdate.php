@@ -102,7 +102,7 @@ class AvatarProviderUpdate implements UpgradeWizardInterface
             ->where(
                 $queryBuilder->expr()->eq('avatar_provider', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR))
             )
-            ->execute()->fetchColumn(0);
+            ->execute()->fetchOne();
         return (bool)$elementCount;
     }
 
