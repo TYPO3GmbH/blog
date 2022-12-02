@@ -60,6 +60,12 @@ class BackendController extends ActionController
      * @var CacheService
      */
     protected $blogCacheService;
+    private \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer;
+    public function __construct(\TYPO3\CMS\Core\Imaging\IconFactory $iconFactory, \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer)
+    {
+        $this->iconFactory = $iconFactory;
+        $this->pageRenderer = $pageRenderer;
+    }
 
     /**
      * @param SetupService $setupService
@@ -96,10 +102,10 @@ class BackendController extends ActionController
     public function initializeAction(): void
     {
         $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
-        $this->iconFactory = $this->moduleTemplate->getIconFactory();
+        $this->iconFactory = $this->iconFactory;
         $this->buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
 
-        $pageRenderer = $this->moduleTemplate->getPageRenderer();
+        $pageRenderer = $this->pageRenderer;
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/Tooltip');
         $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/backend.min.css', 'stylesheet', 'all', '', false);
     }
@@ -107,7 +113,7 @@ class BackendController extends ActionController
     public function initializeSetupWizardAction(): void
     {
         $this->initializeDataTables();
-        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
+        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
     }
 
     public function initializePostsAction(): void
@@ -118,12 +124,12 @@ class BackendController extends ActionController
     public function initializeCommentsAction(): void
     {
         $this->initializeDataTables();
-        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('TYPO3/CMS/Blog/MassUpdate');
+        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/MassUpdate');
     }
 
     protected function initializeDataTables(): void
     {
-        $pageRenderer = $this->moduleTemplate->getPageRenderer();
+        $pageRenderer = $this->pageRenderer;
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/Datatables');
         $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/Datatables.min.css', 'stylesheet', 'all', '', false);
     }
@@ -253,7 +259,7 @@ class BackendController extends ActionController
         if ($this->setupService->createBlogSetup($data)) {
             $this->addFlashMessage('Your blog setup has been created.', 'Congratulation');
         } else {
-            $this->addFlashMessage('Sorry, your blog setup could not be created.', 'An error occurred', FlashMessage::ERROR);
+            $this->addFlashMessage('Sorry, your blog setup could not be created.', 'An error occurred', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
         }
         $this->redirect('setupWizard');
     }

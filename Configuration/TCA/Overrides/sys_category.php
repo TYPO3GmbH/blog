@@ -108,7 +108,6 @@ $GLOBALS['TCA']['sys_category']['columns'] = array_replace_recursive(
             'config' => [
                 'type' => 'group',
                 'size' => 5,
-                'internal_type' => 'db',
                 'allowed' => 'pages',
                 'foreign_table' => 'pages',
                 'MM' => 'sys_category_record_mm',

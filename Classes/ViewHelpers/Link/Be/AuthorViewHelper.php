@@ -27,7 +27,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
      * Arguments initialization.
      *
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments(): void
     {

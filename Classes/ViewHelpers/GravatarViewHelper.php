@@ -26,7 +26,7 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
     /**
      * Arguments Initialization.
      *
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments(): void

@@ -244,7 +244,6 @@ return [
             'label' => $ll . 'tx_blog_domain_model_author.details_page',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'pages',
                 'size' => 1,
                 'maxitems' => 1,

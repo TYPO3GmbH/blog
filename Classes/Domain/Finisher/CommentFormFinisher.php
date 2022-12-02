@@ -33,17 +33,17 @@ class CommentFormFinisher extends AbstractFinisher
         CommentService::STATE_ERROR => [
             'title' => 'message.addComment.error.title',
             'text' => 'message.addComment.error.text',
-            'severity' => FlashMessage::ERROR,
+            'severity' => \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
         ],
         CommentService::STATE_MODERATION => [
             'title' => 'message.addComment.moderation.title',
             'text' => 'message.addComment.moderation.text',
-            'severity' => FlashMessage::INFO,
+            'severity' => \TYPO3\CMS\Core\Messaging\AbstractMessage::INFO,
         ],
         CommentService::STATE_SUCCESS => [
             'title' => 'message.addComment.success.title',
             'text' => 'message.addComment.success.text',
-            'severity' => FlashMessage::OK,
+            'severity' => \TYPO3\CMS\Core\Messaging\AbstractMessage::OK,
         ],
     ];
 
