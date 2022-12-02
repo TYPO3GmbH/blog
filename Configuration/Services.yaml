@@ -6,3 +6,9 @@ services:
 
     T3G\AgencyPack\Blog\:
         resource: '../Classes/*'
+
+    T3G\AgencyPack\Blog\Domain\Factory\CommentFormFactory:
+        public: true
+
+    T3G\AgencyPack\Blog\Notification\Processor:
+        public: true

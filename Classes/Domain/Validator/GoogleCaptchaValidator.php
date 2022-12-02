@@ -12,10 +12,10 @@ namespace T3G\AgencyPack\Blog\Domain\Validator;
 
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use TYPO3\CMS\Core\Http\RequestFactory;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class GoogleCaptchaValidator extends AbstractValidator
 {
@@ -25,9 +25,13 @@ class GoogleCaptchaValidator extends AbstractValidator
     {
         $action = 'form';
         $controller = 'Comment';
-        $settings = GeneralUtility::makeInstance(ObjectManager::class)
-            ->get(ConfigurationManagerInterface::class)
-            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+        $settings = [];
+        $frontendController = $this->getTypoScriptFrontendController();
+        if ($frontendController instanceof TypoScriptFrontendController) {
+            $settings = $frontendController->tmpl->setup['plugin.']['tx_blog.']['settings.'] ?? [];
+            $typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
+            $settings = $typoScriptService->convertTypoScriptArrayToPlainArray($settings);
+        }
         $requestData = GeneralUtility::_GPmerged('tx_blog_commentform');
 
         if (
@@ -59,5 +63,10 @@ class GoogleCaptchaValidator extends AbstractValidator
                 }
             }
         }
+    }
+
+    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 }

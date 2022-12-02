@@ -18,6 +18,9 @@ return [
     \T3G\AgencyPack\Blog\Domain\Model\Category::class => [
         'tableName' => 'sys_category',
     ],
+    \T3G\AgencyPack\Blog\Domain\Model\FrontendUser::class => [
+        'tableName' => 'fe_users',
+    ],
     \T3G\AgencyPack\Blog\Domain\Model\Comment::class => [
         'tableName' => 'tx_blog_domain_model_comment',
         'properties' => [

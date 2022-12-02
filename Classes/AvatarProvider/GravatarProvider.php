@@ -24,8 +24,7 @@ use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class GravatarProvider implements AvatarProviderInterface, SingletonInterface
 {
@@ -63,13 +62,15 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
 
     public function getAvatarUrl(Author $author): string
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
-        $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+        $settings = [];
+        $frontendController = self::getTypoScriptFrontendController();
+        if ($frontendController instanceof TypoScriptFrontendController) {
+            $settings = $frontendController->tmpl->setup['plugin.']['tx_blog.']['settings.'] ?? [];
+        }
 
-        $size = empty($size = (string)($settings['authors']['avatar']['provider']['size'] ?? '')) ? null : (int)$size;
-        $rating = empty($rating = (string)($settings['authors']['avatar']['provider']['rating'] ?? '')) ? null : $rating;
-        $default = empty($default = (string)($settings['authors']['avatar']['provider']['default'] ?? '')) ? null : $default;
+        $size = empty($size = (string)($settings['authors.']['avatar.']['provider.']['size'] ?? '')) ? null : (int)$size;
+        $rating = empty($rating = (string)($settings['authors.']['avatar.']['provider.']['rating'] ?? '')) ? null : $rating;
+        $default = empty($default = (string)($settings['authors.']['avatar.']['provider.']['default'] ?? '')) ? null : $default;
 
         $gravatarUri = $this->gravatarUriBuilder->getUri(
             $author->getEmail(),
@@ -113,5 +114,10 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
     private function deriveFileTypeFromContentType(string $contentType): string
     {
         return substr($contentType, (int)strrpos($contentType, '/') + 1);
+    }
+
+    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 }

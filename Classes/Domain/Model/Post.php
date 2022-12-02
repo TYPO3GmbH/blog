@@ -17,7 +17,6 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Post extends AbstractEntity
@@ -375,9 +374,7 @@ class Post extends AbstractEntity
      */
     public function getActiveComments()
     {
-        return GeneralUtility::makeInstance(ObjectManager::class)
-            ->get(CommentRepository::class)
-            ->findAllByPost($this);
+        return (GeneralUtility::makeInstance(CommentRepository::class))->findAllByPost($this);
     }
 
     /**
@@ -542,8 +539,7 @@ class Post extends AbstractEntity
      */
     public function getUri(): string
     {
-        return GeneralUtility::makeInstance(ObjectManager::class)
-            ->get(UriBuilder::class)
+        return (GeneralUtility::makeInstance(UriBuilder::class))
                 ->setCreateAbsoluteUri(true)
                 ->setTargetPageUid($this->getUid())
                 ->build();

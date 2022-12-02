@@ -14,10 +14,9 @@ use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Core\Imaging\ImageManipulation\CropVariantCollection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Service\ImageService;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class ImageProvider implements AvatarProviderInterface
 {
@@ -26,13 +25,14 @@ class ImageProvider implements AvatarProviderInterface
         $image = $author->getImage();
         if ($image instanceof FileReference) {
             $defaultSize = 32;
-            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+            $settings = [];
+            $frontendController = self::getTypoScriptFrontendController();
+            if ($frontendController instanceof TypoScriptFrontendController) {
+                $settings = $frontendController->tmpl->setup['plugin.']['tx_blog.']['settings.'] ?? [];
+            }
+            $size = ($settings['authors.']['avatar.']['provider.']['size'] ?? $defaultSize) ?: $defaultSize;
 
-            $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
-            $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
-            $size = ($settings['authors']['avatar']['provider']['size'] ?? $defaultSize) ?: $defaultSize;
-
-            $imageService = $objectManager->get(ImageService::class);
+            $imageService = GeneralUtility::makeInstance(ImageService::class);
             $image = $imageService->getImage('', $image, false);
 
             if ($image->hasProperty('crop') && $image->getProperty('crop')) {
@@ -52,5 +52,10 @@ class ImageProvider implements AvatarProviderInterface
             return $imageService->getImageUri($processedImage);
         }
         return '';
+    }
+
+    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 }

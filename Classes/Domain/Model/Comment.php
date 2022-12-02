@@ -10,7 +10,6 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Comment extends AbstractEntity
@@ -23,7 +22,7 @@ class Comment extends AbstractEntity
     /**
      * The author of the comment.
      *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     * @var FrontendUser
      */
     protected $author;
 

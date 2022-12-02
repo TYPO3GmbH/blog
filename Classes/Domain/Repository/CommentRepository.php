@@ -23,25 +23,27 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class CommentRepository extends Repository
 {
-    /**
-     * @var ConfigurationManagerInterface
-     */
-    protected $configurationManager;
+    protected ConfigurationManagerInterface $configurationManager;
+    protected array $settings = [];
 
-    /**
-     * @var array
-     */
-    protected $settings;
+    public function __construct(ConfigurationManagerInterface $configurationManager)
+    {
+        parent::__construct();
+        $this->configurationManager = $configurationManager;
+    }
 
     /**
      * @throws \InvalidArgumentException
      */
     public function initializeObject(): void
     {
-        $this->configurationManager = $this->objectManager->get(ConfigurationManagerInterface::class);
         $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $querySettings = GeneralUtility::makeInstance(
+            Typo3QuerySettings::class,
+            GeneralUtility::makeInstance(Context::class),
+            $this->configurationManager
+        );
         // don't add the pid constraint
         $querySettings->setRespectStoragePage(false);
         $this->setDefaultQuerySettings($querySettings);
@@ -63,7 +65,7 @@ class CommentRepository extends Repository
         $constraints = [];
         $constraints[] = $query->equals('post', $post->getUid());
         $constraints = $this->fillConstraintsBySettings($query, $constraints);
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -75,7 +77,7 @@ class CommentRepository extends Repository
     public function findAllByFilter(string $filter = null, int $blogSetup = null)
     {
         $query = $this->createQuery();
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $querySettings = $query->getQuerySettings();
         $querySettings->setRespectStoragePage(false);
         $query->setQuerySettings($querySettings);
 
@@ -103,7 +105,7 @@ class CommentRepository extends Repository
             $constraints[] = $query->in('pid', $this->getPostPidsByRootPid($blogSetup));
         }
         if (!empty($constraints)) {
-            return $query->matching($query->logicalAnd($constraints))->execute();
+            return $query->matching($query->logicalAnd(...$constraints))->execute();
         }
 
         return $this->findAll();
@@ -132,7 +134,7 @@ class CommentRepository extends Repository
                 $constraints[] = $query->in('pid', $storagePids);
             }
         }
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -149,7 +151,7 @@ class CommentRepository extends Repository
             ->where($queryBuilder->expr()->eq('doktype', Constants::DOKTYPE_BLOG_POST))
             ->andWhere($queryBuilder->expr()->eq('pid', $blogRootPid))
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
         $result = [];
         foreach ($rows as $row) {
             $result[] = $row['uid'];
@@ -181,27 +183,27 @@ class CommentRepository extends Repository
             : 0;
         if ($respectPostLanguageId) {
             /** @noinspection PhpUnhandledExceptionInspection */
-            $constraints[] = $query->logicalOr([
+            $constraints[] = $query->logicalOr(
                 $query->equals('postLanguageId', GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId()),
                 $query->equals('postLanguageId', -1),
-            ]);
+            );
         }
 
         $tstamp = time();
-        $constraints[] = $query->logicalAnd([
-            $query->logicalOr([
+        $constraints[] = $query->logicalAnd(
+            $query->logicalOr(
                 $query->equals('post.starttime', 0),
                 $query->lessThanOrEqual('post.starttime', $tstamp)
-            ]),
-            $query->logicalOr([
+            ),
+            $query->logicalOr(
                 $query->equals('post.endtime', 0),
                 $query->greaterThanOrEqual('post.endtime', $tstamp)
-            ])
-        ]);
-        $constraints[] = $query->logicalAnd([
+            )
+        );
+        $constraints[] = $query->logicalAnd(
             $query->equals('post.hidden', 0),
             $query->equals('post.deleted', 0)
-        ]);
+        );
         return $constraints;
     }
 }

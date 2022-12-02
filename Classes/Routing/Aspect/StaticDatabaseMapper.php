@@ -145,6 +145,6 @@ class StaticDatabaseMapper implements StaticMappableAspectInterface, \Countable
             }
         }
 
-        return array_map('strval', array_column($queryBuilder->execute()->fetchAll(), $this->field));
+        return array_map('strval', array_column($queryBuilder->execute()->fetchAllAssociative(), $this->field));
     }
 }

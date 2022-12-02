@@ -79,7 +79,7 @@ class DatabaseMonthYearUpdate implements UpgradeWizardInterface
                 )
             )
             ->execute();
-        while ($record = $statement->fetch()) {
+        while ($record = $statement->fetchAssociative()) {
             $timestamp = $record['crdate'] ?? time();
             $queryBuilder = $connection->createQueryBuilder();
             $queryBuilder->update('pages')

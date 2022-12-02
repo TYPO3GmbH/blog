@@ -90,7 +90,7 @@ class FeaturedImageUpdate implements UpgradeWizardInterface, RepeatableInterface
             ->execute();
 
         $records = [];
-        while ($record = $statement->fetch()) {
+        while ($record = $statement->fetchAssociative()) {
             $records[$record['uid']] = $record;
         }
 
@@ -116,7 +116,7 @@ class FeaturedImageUpdate implements UpgradeWizardInterface, RepeatableInterface
             ->execute();
 
         $records = [];
-        while ($record = $statement->fetch()) {
+        while ($record = $statement->fetchAssociative()) {
             $records[$record['uid']] = $record;
         }
 

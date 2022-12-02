@@ -115,7 +115,7 @@ class AuthorSlugUpdate implements UpgradeWizardInterface
         $hasToBeUniqueInPid = in_array('uniqueInPid', $evalInfo, true);
         $slugHelper = GeneralUtility::makeInstance(SlugHelper::class, $this->table, $this->slugField, $fieldConfig);
 
-        while ($record = $statement->fetch()) {
+        while ($record = $statement->fetchAssociative()) {
             $recordId = (int)$record['uid'];
             $pid = (int)$record['pid'];
 

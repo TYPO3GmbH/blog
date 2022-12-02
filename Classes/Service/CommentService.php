@@ -135,10 +135,10 @@ class CommentService
     {
         $query = $this->commentRepository->createQuery();
         return $query->matching(
-            $query->logicalAnd([
+            $query->logicalAnd(
                 $query->equals('email', $comment->getEmail()),
                 $query->equals('status', Comment::STATUS_APPROVED)
-            ])
+            )
         )->execute()->count() > 0;
     }
 

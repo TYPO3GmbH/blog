@@ -18,12 +18,14 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class TagRepository extends Repository
 {
-    /**
-     * Plugin settings
-     *
-     * @var array $pluginSettings
-     */
-    protected $pluginSettings;
+    protected array $pluginSettings = [];
+    protected ConfigurationManagerInterface $configurationManager;
+
+    public function __construct(ConfigurationManagerInterface $configurationManager)
+    {
+        parent::__construct();
+        $this->configurationManager = $configurationManager;
+    }
 
     /**
      * Initializes the repository.
@@ -36,9 +38,7 @@ class TagRepository extends Repository
             'title' => QueryInterface::ORDER_ASCENDING,
         ];
 
-        /** @var ConfigurationManagerInterface $configurationManager */
-        $configurationManager = $this->objectManager->get(ConfigurationManagerInterface::class);
-        $this->pluginSettings = $configurationManager->getConfiguration(
+        $this->pluginSettings = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
         );
     }
@@ -81,7 +81,7 @@ class TagRepository extends Repository
 
         $result = $queryBuilder
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         $rows = [];
         foreach ($result as $row) {

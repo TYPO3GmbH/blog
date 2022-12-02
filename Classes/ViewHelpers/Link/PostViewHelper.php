@@ -11,6 +11,8 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
 use T3G\AgencyPack\Blog\Domain\Model\Post;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class PostViewHelper extends AbstractTagBasedViewHelper
@@ -50,7 +52,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         $post = $this->arguments['post'];
         $section = $this->arguments['section'] ?: '';
         $pageUid = (int) $post->getUid();
-        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
         $uri = $uriBuilder->reset()
             ->setTargetPageUid($pageUid)

@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -19,6 +20,14 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class CategoryRepository extends Repository
 {
+    protected ConfigurationManagerInterface $configurationManager;
+
+    public function __construct(ConfigurationManagerInterface $configurationManager)
+    {
+        parent::__construct();
+        $this->configurationManager = $configurationManager;
+    }
+
     /**
      * Initializes the repository.
      *
@@ -28,9 +37,12 @@ class CategoryRepository extends Repository
     {
         // @TODO: It looks like extbase ignore storage settings for sys_category.
         // @TODO: this hack set the storage handling for sys_category table.
-        $configurationManager = $this->objectManager->get(ConfigurationManagerInterface::class);
-        $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+        $querySettings = GeneralUtility::makeInstance(
+            Typo3QuerySettings::class,
+            GeneralUtility::makeInstance(Context::class),
+            $this->configurationManager
+        );
         $querySettings->setRespectStoragePage(true);
         $querySettings->setStoragePageIds(GeneralUtility::trimExplode(',', $settings['storagePid']));
 
@@ -70,7 +82,7 @@ class CategoryRepository extends Repository
                 $queryBuilder->expr()->eq('fieldname', $queryBuilder->createNamedParameter($field)),
                 $queryBuilder->expr()->eq('uid_foreign', $queryBuilder->createNamedParameter($uid))
             );
-        $categories = array_column($queryBuilder->execute()->fetchAll(), 'uid_local');
+        $categories = array_column($queryBuilder->execute()->fetchAllAssociative(), 'uid_local');
 
         if (!empty($categories)) {
             $query = $this->createQuery();
@@ -82,9 +94,7 @@ class CategoryRepository extends Repository
             $conditions[] = $query->in('uid', $categories);
 
             return $query->matching(
-                $query->logicalAnd(
-                    $conditions
-                )
+                $query->logicalAnd(...$conditions)
             )->execute();
         }
 

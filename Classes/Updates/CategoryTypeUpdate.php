@@ -75,7 +75,7 @@ class CategoryTypeUpdate implements UpgradeWizardInterface
             )
             ->execute();
         $pages = [];
-        while ($pageRecord = $pagesStatement->fetch()) {
+        while ($pageRecord = $pagesStatement->fetchAssociative()) {
             $pages[] = $pageRecord['uid'];
         }
 
@@ -114,7 +114,7 @@ class CategoryTypeUpdate implements UpgradeWizardInterface
             )
             ->execute();
         $pages = [];
-        while ($pageRecord = $pagesStatement->fetch()) {
+        while ($pageRecord = $pagesStatement->fetchAssociative()) {
             $pages[] = $pageRecord['uid'];
         }
 
@@ -131,7 +131,7 @@ class CategoryTypeUpdate implements UpgradeWizardInterface
             )
             ->execute();
 
-        while ($categoryRecord = $categoryStatement->fetch()) {
+        while ($categoryRecord = $categoryStatement->fetchAssociative()) {
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_category');
             $queryBuilder
                 ->update('sys_category')

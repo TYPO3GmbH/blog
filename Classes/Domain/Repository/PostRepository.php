@@ -34,17 +34,25 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class PostRepository extends Repository
 {
-    /**
-     * @var array
-     */
-    protected $defaultConstraints = [];
+    protected array $defaultConstraints = [];
+    protected ConfigurationManagerInterface $configurationManager;
+
+    public function __construct(ConfigurationManagerInterface $configurationManager)
+    {
+        parent::__construct();
+        $this->configurationManager = $configurationManager;
+    }
 
     /**
      * @throws \Exception
      */
     public function initializeObject(): void
     {
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $querySettings = GeneralUtility::makeInstance(
+            Typo3QuerySettings::class,
+            GeneralUtility::makeInstance(Context::class),
+            $this->configurationManager
+        );
         // don't add the pid constraint
         $querySettings->setRespectStoragePage(false);
         $this->setDefaultQuerySettings($querySettings);
@@ -52,10 +60,10 @@ class PostRepository extends Repository
 
         $this->defaultConstraints[] = $query->equals('doktype', Constants::DOKTYPE_BLOG_POST);
         if (GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId() === 0) {
-            $this->defaultConstraints[] = $query->logicalOr([
+            $this->defaultConstraints[] = $query->logicalOr(
                 $query->equals('l18n_cfg', 0),
                 $query->equals('l18n_cfg', 2)
-            ]);
+            );
         } else {
             $this->defaultConstraints[] = $query->lessThan('l18n_cfg', 2);
         }
@@ -100,14 +108,14 @@ class PostRepository extends Repository
                     $tagsConstraints[] = $query->equals('tags.uid', $tag->getUid());
                 }
                 $tagsConjunction = $repositoryDemand->getTagsConjunction() === Constants::REPOSITORY_CONJUNCTION_AND ? 'logicalAnd' : 'logicalOr';
-                $constraints[] = $query->{$tagsConjunction}($tagsConstraints);
+                $constraints[] = $query->{$tagsConjunction}(...$tagsConstraints);
             }
             if (($ordering = $repositoryDemand->getOrdering()) !== []) {
                 $query->setOrderings([$ordering['field'] => $ordering['direction']]);
             }
         }
 
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(...$constraints));
 
         if (($limit = $repositoryDemand->getLimit()) > 0) {
             $query->setLimit($limit);
@@ -153,10 +161,10 @@ class PostRepository extends Repository
         if ($blogSetup !== null) {
             $existingConstraint = $query->getConstraint();
             $additionalConstraint = $query->equals('pid', $blogSetup);
-            $query->matching($query->logicalAnd([
+            $query->matching($query->logicalAnd(
                 $existingConstraint,
                 $additionalConstraint
-            ]));
+            ));
         }
 
         return $query->execute();
@@ -190,12 +198,12 @@ class PostRepository extends Repository
         if ($storagePidConstraint instanceof ComparisonInterface) {
             $constraints[] = $storagePidConstraint;
         }
-        $constraints[] = $query->logicalOr([
+        $constraints[] = $query->logicalOr(
             $query->equals('archiveDate', 0),
             $query->greaterThanOrEqual('archiveDate', time()),
-        ]);
+        );
 
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(...$constraints));
 
         return $query;
     }
@@ -216,7 +224,7 @@ class PostRepository extends Repository
         }
         $constraints[] = $query->contains('authors', $author);
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -235,7 +243,7 @@ class PostRepository extends Repository
             $constraints[] = $storagePidConstraint;
         }
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -254,7 +262,7 @@ class PostRepository extends Repository
             $constraints[] = $storagePidConstraint;
         }
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -284,7 +292,7 @@ class PostRepository extends Repository
         $constraints[] = $query->greaterThanOrEqual('publish_date', $startDate->getTimestamp());
         $constraints[] = $query->lessThanOrEqual('publish_date', $endDate->getTimestamp());
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -324,7 +332,7 @@ class PostRepository extends Repository
         }
 
         return $query
-            ->matching($query->logicalAnd($constraints))
+            ->matching($query->logicalAnd(...$constraints))
             ->execute()
             ->getFirst();
     }
@@ -377,7 +385,7 @@ class PostRepository extends Repository
         }
         $constraints[] = $query->greaterThan('crdateMonth', 0);
         $constraints[] = $query->greaterThan('crdateYear', 0);
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(...$constraints));
         $posts = $query->execute(true);
 
         $result = [];
@@ -475,8 +483,7 @@ class PostRepository extends Repository
      */
     protected function getStoragePidsFromTypoScript(): array
     {
-        $configurationManager = $this->objectManager->get(ConfigurationManager::class);
-        $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 
         return GeneralUtility::intExplode(',', $settings['persistence']['storagePid']);
     }

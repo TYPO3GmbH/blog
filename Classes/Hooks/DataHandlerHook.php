@@ -52,7 +52,7 @@ class DataHandlerHook
                 ->from($table)
                 ->where($queryBuilder->expr()->eq('uid', (int)$id))
                 ->execute()
-                ->fetch();
+                ->fetchAssociative();
             if (!empty($record)) {
                 $timestamp = (int) (!empty($record['publish_date'] ?? 0) ? $record['publish_date'] : time());
                 $queryBuilder

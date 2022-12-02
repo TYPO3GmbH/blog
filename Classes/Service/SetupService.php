@@ -36,7 +36,7 @@ class SetupService
             ->where($queryBuilder->expr()->eq('doktype', $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, \PDO::PARAM_INT)))
             ->groupBy('pid')
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
         foreach ($blogRootPages as $blogRootPage) {
             $blogUid = $blogRootPage['pid'];
             if (!array_key_exists($blogUid, $setups)) {
@@ -91,7 +91,7 @@ class SetupService
                     ->from('pages')
                     ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogRootUid, \PDO::PARAM_INT)))
                     ->execute()
-                    ->fetch();
+                    ->fetchAssociative();
                 $queryBuilder->update('pages')
                     ->set('TSconfig', str_replace('NEW_blogFolder', $blogFolderUid, $record['TSconfig']))
                     ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogRootUid, \PDO::PARAM_INT)))
@@ -120,7 +120,7 @@ class SetupService
                     ->from('sys_template')
                     ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($sysTemplateUid, \PDO::PARAM_INT)))
                     ->execute()
-                    ->fetch();
+                    ->fetchAssociative();
                 $queryBuilder
                     ->update('sys_template')
                     ->set('constants', str_replace(

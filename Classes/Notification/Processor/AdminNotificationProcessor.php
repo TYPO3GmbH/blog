@@ -13,12 +13,13 @@ namespace T3G\AgencyPack\Blog\Notification\Processor;
 use T3G\AgencyPack\Blog\Mail\MailMessage;
 use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
 use T3G\AgencyPack\Blog\Notification\NotificationInterface;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class AdminNotificationProcessor implements ProcessorInterface
 {
+
     /**
      * Process the notification
      *
@@ -41,9 +42,13 @@ class AdminNotificationProcessor implements ProcessorInterface
     protected function processCommentAddNotification(NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
-        $settings = GeneralUtility::makeInstance(ObjectManager::class)
-            ->get(ConfigurationManagerInterface::class)
-            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+        $settings = [];
+        $frontendController = $this->getTypoScriptFrontendController();
+        if ($frontendController instanceof TypoScriptFrontendController) {
+            $settings = $frontendController->tmpl->setup['plugin.']['tx_blog.']['settings.'] ?? [];
+            $typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
+            $settings = $typoScriptService->convertTypoScriptArrayToPlainArray($settings);
+        }
 
         if ((int)$settings['notifications'][$notificationId]['admin']['_typoScriptNodeValue'] === 1) {
             $emailAddresses = GeneralUtility::trimExplode(',', $settings['notifications'][$notificationId]['admin']['email']);
@@ -55,5 +60,10 @@ class AdminNotificationProcessor implements ProcessorInterface
                 ->setTo($emailAddresses)
                 ->send();
         }
+    }
+
+    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 }

@@ -10,10 +10,10 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Mail;
 
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class MailContent
 {
@@ -48,17 +48,25 @@ class MailContent
      */
     protected function getFluidTemplateObject($template) : StandaloneView
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $settings = $objectManager
-            ->get(ConfigurationManagerInterface::class)
-            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'blog');
         $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setLayoutRootPaths($settings['view']['emails']['layoutRootPaths']);
-        $view->setPartialRootPaths($settings['view']['emails']['partialRootPaths']);
-        $view->setTemplateRootPaths($settings['view']['emails']['templateRootPaths']);
+        $settings = [];
+        $frontendController = $this->getTypoScriptFrontendController();
+        if ($frontendController instanceof TypoScriptFrontendController) {
+            $settings = $frontendController->tmpl->setup['plugin.']['tx_blog.'] ?? [];
+            $typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
+            $settings = $typoScriptService->convertTypoScriptArrayToPlainArray($settings);
+        }
+
+        $view->setLayoutRootPaths($settings['view']['emails']['layoutRootPaths'] ?? []);
+        $view->setPartialRootPaths($settings['view']['emails']['partialRootPaths'] ?? []);
+        $view->setTemplateRootPaths($settings['view']['emails']['templateRootPaths'] ?? []);
         $view->setTemplate($template);
-        $view->getRequest()->setControllerExtensionName('blog');
 
         return $view;
+    }
+
+    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 }

@@ -69,7 +69,7 @@ class AvatarProviderUpdate implements UpgradeWizardInterface
                 $queryBuilder->expr()->eq('avatar_provider', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR))
             )
             ->execute();
-        while ($record = $statement->fetch()) {
+        while ($record = $statement->fetchAssociative()) {
             $queryBuilder = $connection->createQueryBuilder();
             $queryBuilder->update('tx_blog_domain_model_author')
                 ->where(
