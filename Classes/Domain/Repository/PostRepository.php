@@ -37,9 +37,8 @@ class PostRepository extends Repository
     protected array $defaultConstraints = [];
     protected ConfigurationManagerInterface $configurationManager;
 
-    public function __construct(ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
     {
-        parent::__construct();
         $this->configurationManager = $configurationManager;
     }
 

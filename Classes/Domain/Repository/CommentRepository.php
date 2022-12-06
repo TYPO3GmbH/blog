@@ -26,9 +26,8 @@ class CommentRepository extends Repository
     protected ConfigurationManagerInterface $configurationManager;
     protected array $settings = [];
 
-    public function __construct(ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
     {
-        parent::__construct();
         $this->configurationManager = $configurationManager;
     }
 

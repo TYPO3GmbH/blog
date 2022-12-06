@@ -111,9 +111,9 @@ class PostController extends ActionController
     }
 
     /**
-     * @param ViewInterface $view
+     * @param ViewInterface|\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
      */
-    protected function initializeView(ViewInterface $view): void
+    protected function initializeView($view): void
     {
         if ($this->request->getFormat() === 'rss') {
             $action = '.' . $this->request->getControllerActionName();

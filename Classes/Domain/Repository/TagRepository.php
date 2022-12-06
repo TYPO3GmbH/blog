@@ -21,9 +21,8 @@ class TagRepository extends Repository
     protected array $pluginSettings = [];
     protected ConfigurationManagerInterface $configurationManager;
 
-    public function __construct(ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
     {
-        parent::__construct();
         $this->configurationManager = $configurationManager;
     }
 

@@ -22,9 +22,8 @@ class CategoryRepository extends Repository
 {
     protected ConfigurationManagerInterface $configurationManager;
 
-    public function __construct(ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
     {
-        parent::__construct();
         $this->configurationManager = $configurationManager;
     }
 
