@@ -24,10 +24,11 @@ $blogConfiguration = $extensionConfiguration->get('blog');
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['blogvh'][] = 'T3G\\AgencyPack\\Blog\\ViewHelpers';
 
 // Register page layout hooks to display additional information for posts.
-if (!(bool)$blogConfiguration['disablePageLayoutHeader']) {
+if (
+    !(bool)$blogConfiguration['disablePageLayoutHeader'] &&
+    (\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class))->getMajorVersion() < 12
+) {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/db_layout.php']['drawHeaderHook'][]
-        = \T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook::class . '->drawHeader';
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['recordlist/Modules/Recordlist/index.php']['drawHeaderHook'][]
         = \T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook::class . '->drawHeader';
 }
 

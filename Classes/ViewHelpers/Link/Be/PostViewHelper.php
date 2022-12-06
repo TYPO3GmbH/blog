@@ -57,15 +57,16 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         switch ($this->arguments['action']) {
             case 'edit':
                 $uri = (string)$uriBuilder->buildUriFromRoute('record_edit', ['edit[pages][' . $pageUid . ']' => 'edit']);
+                $route = '/module/web/list';
                 break;
             case 'show':
             default:
                 $uri = (string)$uriBuilder->buildUriFromRoute('web_layout', ['id' => $pageUid]);
+                $route = '/module/web/layout';
                 break;
         }
 
         $arguments = GeneralUtility::_GET();
-        $route = $arguments['route'];
         unset($arguments['route'], $arguments['token']);
         $uri .= '&returnUrl=' . rawurlencode((string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoutePath($route, $arguments));
 
