@@ -130,7 +130,7 @@ class DatabaseMonthYearUpdate implements UpgradeWizardInterface
                 )
             )
             ->execute()
-            ->fetchColumn();
+            ->fetchOne();
         return (bool)$elementCount;
     }
 

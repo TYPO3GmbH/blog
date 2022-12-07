@@ -2,12 +2,16 @@
     xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
     xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
 >
-<f:layout name="Backend" />
+<f:layout name="{layout}" />
 <f:section name="Intro">
     <h1><f:translate key="backend.headline.setup_wizard" /></h1>
     <p><f:translate key="backend.lead.blogs" /></p>
 </f:section>
 <f:section name="Content">
+    <f:flashMessages />
+    <div class="intro">
+        <f:render section="Intro" arguments="{_all}" />
+    </div>
     <f:if condition="{f:count() -> blogSetups} > 0">
         <f:then>
 

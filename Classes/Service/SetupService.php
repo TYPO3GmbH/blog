@@ -46,7 +46,7 @@ class SetupService
                     ->from('pages')
                     ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogUid, \PDO::PARAM_INT)))
                     ->execute()
-                    ->fetchColumn();
+                    ->fetchOne();
                 $rootline = array_reverse(GeneralUtility::makeInstance(RootlineUtility::class, $blogUid)->get());
                 $setups[$blogUid] = [
                     'uid' => $blogUid,

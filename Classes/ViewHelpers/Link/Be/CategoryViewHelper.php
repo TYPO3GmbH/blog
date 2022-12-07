@@ -10,8 +10,10 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Core\Routing\Route;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
@@ -56,9 +58,11 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         $routingUriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uri = $routingUriBuilder->buildUriFromRoute('record_edit', ['edit[sys_category][' . $categoryUid . ']' => 'edit']);
         $arguments = GeneralUtility::_GET();
-        $route = $arguments['route'];
+        $request = $this->getRequest();
+        /** @var Route $route */
+        $route = $request->getAttribute('route');
         unset($arguments['route'], $arguments['token']);
-        $uri .= '&returnUrl=' . rawurlencode((string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoutePath($route, $arguments));
+        $uri .= '&returnUrl=' . rawurlencode((string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute($route->getOption('_identifier'), $arguments));
         if ($uri !== '') {
             if ($this->arguments['returnUri']) {
                 return $uri;
@@ -72,5 +76,10 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         }
 
         return $result;
+    }
+
+    protected function getRequest(): ?ServerRequestInterface
+    {
+        return $GLOBALS['TYPO3_REQUEST'];
     }
 }

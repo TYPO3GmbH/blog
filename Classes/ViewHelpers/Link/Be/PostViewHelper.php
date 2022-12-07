@@ -10,9 +10,12 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Core\Routing\Route;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
@@ -57,18 +60,19 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         switch ($this->arguments['action']) {
             case 'edit':
                 $uri = (string)$uriBuilder->buildUriFromRoute('record_edit', ['edit[pages][' . $pageUid . ']' => 'edit']);
-                $route = '/module/web/list';
                 break;
             case 'show':
             default:
                 $uri = (string)$uriBuilder->buildUriFromRoute('web_layout', ['id' => $pageUid]);
-                $route = '/module/web/layout';
                 break;
         }
 
+        $request = $this->getRequest();
+        /** @var Route $route */
+        $route = $request->getAttribute('route');
         $arguments = GeneralUtility::_GET();
         unset($arguments['route'], $arguments['token']);
-        $uri .= '&returnUrl=' . rawurlencode((string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoutePath($route, $arguments));
+        $uri .= '&returnUrl=' . rawurlencode((string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute($route->getOption('_identifier'), $arguments));
 
         if ($uri !== '') {
             if ($this->arguments['returnUri']) {
@@ -84,5 +88,10 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         }
 
         return $result;
+    }
+
+    protected function getRequest(): ?ServerRequestInterface
+    {
+        return $GLOBALS['TYPO3_REQUEST'];
     }
 }

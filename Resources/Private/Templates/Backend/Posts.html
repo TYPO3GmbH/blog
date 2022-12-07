@@ -1,9 +1,13 @@
-<f:layout name="Backend" />
+<f:layout name="{layout}" />
 <f:section name="Intro">
     <h1><f:translate key="backend.headline.posts" /></h1>
     <p><f:translate key="backend.lead.posts" /></p>
 </f:section>
 <f:section name="Content">
+    <f:flashMessages />
+    <div class="intro">
+        <f:render section="Intro" arguments="{_all}" />
+    </div>
     <f:render partial="Backend/BlogFilter" arguments="{blogSetups: blogSetups, activeBlogSetup: activeBlogSetup, action: 'posts'}" />
     <f:if condition="{f:count() -> posts} > 0">
         <f:then>
@@ -62,7 +66,7 @@
                             </f:if>
                             <td data-search="{categoryString}" data-filter="{categoryString}">
                                 <f:for each="{post.categories}" as="category" iteration="iteration">
-                                    <blogvh:link.be.category category="{category}" class="label label-info" />
+                                    <blogvh:link.be.category category="{category}" class="badge badge-info" />
                                 </f:for>
                             </td>
 
@@ -77,7 +81,7 @@
                             </f:if>
                             <td data-search="{tagString}" data-filter="{tagString}">
                                 <f:for each="{post.tags}" as="tag" iteration="iteration">
-                                    <blogvh:link.be.tag tag="{tag}" class="label label-info" />
+                                    <blogvh:link.be.tag tag="{tag}" class="badge badge-info" />
                                 </f:for>
                             </td>
 

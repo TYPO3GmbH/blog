@@ -28,6 +28,9 @@ call_user_func(function () {
         'actions-approve' => 'EXT:blog/Resources/Public/Icons/actions-approve.svg',
         'actions-decline' => 'EXT:blog/Resources/Public/Icons/actions-decline.svg',
         'module-blog' => 'EXT:blog/Resources/Public/Icons/module-blog.svg',
+        'module-blog-posts' => 'EXT:blog/Resources/Public/Icons/module-blog-posts.svg',
+        'module-blog-comments' => 'EXT:blog/Resources/Public/Icons/module-blog-comments.svg',
+        'module-blog-setup' => 'EXT:blog/Resources/Public/Icons/module-blog-setup.svg',
         'plugin-blog-archive' => 'EXT:blog/Resources/Public/Icons/plugin-blog-archive.svg',
         'plugin-blog-authorposts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-authorposts.svg',
         'plugin-blog-authors' => 'EXT:blog/Resources/Public/Icons/plugin-blog-authors.svg',
@@ -66,7 +69,8 @@ call_user_func(function () {
         options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST . ')
     ');
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');
+    if ((\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class))->getMajorVersion() < 12) {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');
 
         // Main Blog
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
@@ -125,4 +129,5 @@ call_user_func(function () {
                 'access' => 'admin',
             ]
         );
+    }
 });

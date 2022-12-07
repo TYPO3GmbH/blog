@@ -127,7 +127,7 @@ class DatabasePublishDateUpdate implements UpgradeWizardInterface
                 )
             )
             ->execute()
-            ->fetchColumn();
+            ->fetchOne();
         return (bool)$elementCount;
     }
 
