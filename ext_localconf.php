@@ -147,14 +147,6 @@ call_user_func(
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'Blog',
-            'Metadata',
-            [
-                \T3G\AgencyPack\Blog\Controller\PostController::class => 'metadata',
-            ]
-        );
-
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            'Blog',
             'Authors',
             [
                 \T3G\AgencyPack\Blog\Controller\PostController::class => 'authors',
