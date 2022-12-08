@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types = 1);
 
 /*
@@ -8,37 +9,28 @@ declare(strict_types = 1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog\Hooks;
+namespace T3G\AgencyPack\Blog\Listener;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Package\Event\AfterPackageActivationEvent;
 use TYPO3\CMS\Core\Registry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extensionmanager\Utility\InstallUtility;
 
-class ExtensionUpdate
+class AfterPackageActivation
 {
-    /**
-     * available updates
-     * @var array
-     */
-    protected $updates = [
-        'migrateCommentsStatus'
-    ];
+    private const LEGACY_CLASSNAME = 'T3G\AgencyPack\Blog\Hooks\ExtensionUpdate';
 
-    /**
-     * @param string $extensionKey
-     * @param InstallUtility $installUtilityInstance
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function afterExtensionInstall($extensionKey, InstallUtility $installUtilityInstance): void
+    protected array $updates = ['migrateCommentsStatus'];
+
+    public function __invoke(AfterPackageActivationEvent $e)
     {
+        $extensionKey = $e->getPackageKey();
         if ($extensionKey !== 'blog') {
             return;
         }
 
         $registry = GeneralUtility::makeInstance(Registry::class);
-        $appliedUpdates = $registry->get(__CLASS__, 'updates', []);
+        $appliedUpdates = $registry->get(self::LEGACY_CLASSNAME, 'updates', []);
         foreach ($this->updates as $update) {
             if (!isset($appliedUpdates[$update])) {
                 $result = $this->$update();
@@ -47,12 +39,9 @@ class ExtensionUpdate
                 }
             }
         }
-        $registry->set(__CLASS__, 'updates', $appliedUpdates);
+        $registry->set(self::LEGACY_CLASSNAME, 'updates', $appliedUpdates);
     }
 
-    /**
-     * @return bool
-     */
     protected function migrateCommentsStatus(): bool
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)

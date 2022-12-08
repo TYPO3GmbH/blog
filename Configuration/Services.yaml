@@ -17,12 +17,16 @@ services:
     T3G\AgencyPack\Blog\Listener\RenderAdditionalContentToRecordList:
         tags:
             - name: event.listener
-              identifier: 'tx-blog-render-additional-content-to-record-list'
+              identifier: 't3g/blog/render-additional-content-to-record-list'
     T3G\AgencyPack\Blog\Listener\RenderAdditionalContentToRecordListV11:
         tags:
             - name: event.listener
-              identifier: 'tx-blog-render-additional-content-to-record-list-v11'
+              identifier: 't3g/blog/render-additional-content-to-record-list-v11'
     T3G\AgencyPack\Blog\Listener\ModifyPageLayoutContent:
         tags:
             - name: event.listener
-              identifier: 'tx-blog-modify-page-module-content'
+              identifier: 't3g/blog/modify-page-module-content'
+    T3G\AgencyPack\Blog\Listener\AfterPackageActivation:
+        tags:
+            - name: event.listener
+              identifier: 't3g/blog/after-package-activation'
