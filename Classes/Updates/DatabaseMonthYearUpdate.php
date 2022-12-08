@@ -14,7 +14,7 @@ use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use /** @noinspection PhpInternalEntityUsedInspection */
-    TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
+TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**

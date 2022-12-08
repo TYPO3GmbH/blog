@@ -19,7 +19,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class AdminNotificationProcessor implements ProcessorInterface
 {
-
     /**
      * Process the notification
      *

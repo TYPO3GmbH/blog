@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use /** @noinspection PhpInternalEntityUsedInspection */
-    TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
+TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 class AvatarProviderUpdate implements UpgradeWizardInterface

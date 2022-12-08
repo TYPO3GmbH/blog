@@ -15,7 +15,6 @@ use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Routing\Route;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class CommentViewHelper extends AbstractTagBasedViewHelper

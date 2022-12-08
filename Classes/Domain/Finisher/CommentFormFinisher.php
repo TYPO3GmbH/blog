@@ -20,7 +20,6 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Service\ExtensionService;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher;
@@ -33,14 +32,12 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class CommentFormFinisher extends AbstractFinisher
 {
-
     protected FlashMessageService $flashMessageService;
     protected PostRepository $postRepository;
     protected CacheService $cacheService;
     protected CommentService $commentService;
     protected TypoScriptService $typoScriptService;
     protected ExtensionService $extensionService;
-
 
     public function injectFlashMessageService(FlashMessageService $flashMessageService): void
     {

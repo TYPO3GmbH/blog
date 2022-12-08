@@ -21,7 +21,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class AuthorNotificationProcessor implements ProcessorInterface
 {
-
     /**
      * Process the notification
      *

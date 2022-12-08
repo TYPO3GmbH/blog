@@ -12,7 +12,6 @@ if (!defined('TYPO3')) {
 }
 
 call_user_func(function () {
-
     // Add new page type:
     $GLOBALS['PAGES_TYPES'][\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST] = [
         'type' => 'web',

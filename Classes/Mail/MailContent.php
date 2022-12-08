@@ -17,7 +17,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class MailContent
 {
-
     /**
      * @param string $template
      * @param array $arguments

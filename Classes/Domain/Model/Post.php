@@ -374,7 +374,7 @@ class Post extends AbstractEntity
      */
     public function getActiveComments()
     {
-        return (GeneralUtility::makeInstance(CommentRepository::class))->findAllByPost($this);
+        return GeneralUtility::makeInstance(CommentRepository::class)->findAllByPost($this);
     }
 
     /**
@@ -539,7 +539,7 @@ class Post extends AbstractEntity
      */
     public function getUri(): string
     {
-        return (GeneralUtility::makeInstance(UriBuilder::class))
+        return GeneralUtility::makeInstance(UriBuilder::class)
                 ->setCreateAbsoluteUri(true)
                 ->setTargetPageUid($this->getUid())
                 ->build();

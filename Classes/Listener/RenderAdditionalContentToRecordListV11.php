@@ -12,9 +12,9 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Listener;
 
 use T3G\AgencyPack\Blog\Backend\View\BlogPostHeaderContentRenderer;
-use TYPO3\CMS\Recordlist\Event\RenderAdditionalContentToRecordListEvent;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Recordlist\Event\RenderAdditionalContentToRecordListEvent;
 
 class RenderAdditionalContentToRecordListV11
 {

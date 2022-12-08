@@ -82,5 +82,4 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
     {
         return $GLOBALS['TYPO3_REQUEST'];
     }
-
 }
