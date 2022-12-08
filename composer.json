@@ -114,6 +114,7 @@
         "typo3/testing-framework": "^6.4",
         "bk2k/bootstrap-package": "^12",
         "bk2k/extension-helper": "^1.0",
-        "overtrue/phplint": "^2.4"
+        "overtrue/phplint": "^2.4",
+        "phpspec/prophecy": "^1.16"
     }
 }
