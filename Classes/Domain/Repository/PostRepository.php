@@ -483,7 +483,7 @@ class PostRepository extends Repository
     {
         $settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 
-        return GeneralUtility::intExplode(',', $settings['persistence']['storagePid']);
+        return GeneralUtility::intExplode(',', (string)($settings['persistence']['storagePid'] ?? ''));
     }
 
     /**
