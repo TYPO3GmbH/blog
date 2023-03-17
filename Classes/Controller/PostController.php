@@ -117,26 +117,26 @@ class PostController extends ActionController
     {
         parent::initializeView($view);
         if ($this->request->getFormat() === 'rss') {
-            $action = '.' . $this->request->getControllerActionName();
+            $action = $this->request->getControllerActionName();
             $arguments = [];
             switch ($action) {
-                case '.listPostsByCategory':
+                case 'listPostsByCategory':
                     if (isset($this->arguments['category'])) {
                         $arguments[] = $this->arguments['category']->getValue()->getTitle();
                     }
                     break;
-                case '.listPostsByDate':
+                case 'listPostsByDate':
                     $arguments[] = (int)$this->arguments['year']->getValue();
                     if (isset($this->arguments['month'])) {
                         $arguments[] = (int)$this->arguments['month']->getValue();
                     }
                     break;
-                case '.listPostsByTag':
+                case 'listPostsByTag':
                     if (isset($this->arguments['tag'])) {
                         $arguments[] = $this->arguments['tag']->getValue()->getTitle();
                     }
                     break;
-                case '.listPostsByAuthor':
+                case 'listPostsByAuthor':
                     if (isset($this->arguments['author'])) {
                         $arguments[] = $this->arguments['author']->getValue()->getName();
                     }
@@ -145,8 +145,8 @@ class PostController extends ActionController
             }
 
             $feedData = [
-                'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
-                'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
+                'title' => LocalizationUtility::translate('feed.title.' . $action, 'blog', $arguments),
+                'description' => LocalizationUtility::translate('feed.description.' . $action, 'blog', $arguments),
                 'language' => $this->getSiteLanguage()->getTwoLetterIsoCode(),
                 'link' => $this->getRequestUrl(),
                 'date' => date('r'),
