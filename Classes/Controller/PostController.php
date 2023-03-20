@@ -141,7 +141,9 @@ class PostController extends ActionController
                         $arguments[] = $this->arguments['author']->getValue()->getName();
                     }
                     break;
-                default:
+                case ([] !== ($this->settings['demand'] ?? [])):
+                    $this->actionMethodName = 'listByDemandAction';
+                    break;
             }
 
             $feedData = [
@@ -185,19 +187,22 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listByDemandAction(): ResponseInterface
+    public function listByDemandAction(int $currentPage = 1): ResponseInterface
     {
         $repositoryDemand = $this->postRepositoryDemandFactory->createFromSettings($this->settings['demand'] ?? []);
         $posts = $this->postRepository->findByRepositoryDemand($repositoryDemand);
 
         if ([] !== $repositoryDemand->getPosts()) {
             $posts = $this->sortPostsByManualOrder($posts, $repositoryDemand->getPosts());
+            $pagination = [];
+        } else {
+            $pagination = $this->getPagination($posts, $currentPage);
         }
 
         $this->view->assign('type', 'demand');
         $this->view->assign('demand', $repositoryDemand);
         $this->view->assign('posts', $posts);
-        $this->view->assign('pagination', []);
+        $this->view->assign('pagination', $pagination);
 
         return $this->htmlResponse();
     }
