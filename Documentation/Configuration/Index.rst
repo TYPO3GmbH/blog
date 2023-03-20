@@ -1683,3 +1683,20 @@ plugin.tx_blog.settings.meta.listfooter.elements.comments.enable
    Description
      **Show comments in the meta section:**
 
+TYPO3 Blog: RSS Feed
+--------------------
+
+Custom configuration
+^^^^^^^^^^^^^^^^^^^^
+
+You can modify the rss feed configuration by setting the `PostRepositoryDemand` DTO via TypoScript for the rss feed pagetype
+
+.. code-block:: typoscript
+
+[getTSFE().type == 200]
+    plugin.tx_blog.settings.demand {
+        categories = 15,153,158,151,16,87,251,88,18,22,89,19
+        categoriesConjunction = OR
+        ordering = publish_date DESC
+    }
+[end]
