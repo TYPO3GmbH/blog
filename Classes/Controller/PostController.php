@@ -188,11 +188,17 @@ class PostController extends ActionController
     public function listByDemandAction(): ResponseInterface
     {
         $repositoryDemand = $this->postRepositoryDemandFactory->createFromSettings($this->settings['demand'] ?? []);
+        $posts = $this->postRepository->findByRepositoryDemand($repositoryDemand);
+
+        if ([] !== $repositoryDemand->getPosts()) {
+            $posts = $this->sortPostsByManualOrder($posts, $repositoryDemand->getPosts());
+        }
 
         $this->view->assign('type', 'demand');
         $this->view->assign('demand', $repositoryDemand);
-        $this->view->assign('posts', $this->postRepository->findByRepositoryDemand($repositoryDemand));
+        $this->view->assign('posts', $posts);
         $this->view->assign('pagination', []);
+
         return $this->htmlResponse();
     }
 
@@ -472,5 +478,24 @@ class PostController extends ActionController
 
         $paginator = new QueryResultPaginator($objects, $currentPage, $itemsPerPage);
         return new BlogPagination($paginator, $maximumNumberOfLinks);
+    }
+
+    /**
+     * @param Post[] $posts
+     * @param int[] $postUids
+     *
+     * @return Post[]
+     */
+    protected function sortPostsByManualOrder(array $posts, array $postUids): array
+    {
+        // Sort manually selected posts by defined order in group field
+        $sortedPosts = array_flip($postUids);
+        foreach ($posts as $post) {
+            $sortedPosts[$post->getUid()] = $post;
+        }
+
+        return array_values(array_filter($sortedPosts, static function ($value) {
+            return $value instanceof Post;
+        }));
     }
 }
