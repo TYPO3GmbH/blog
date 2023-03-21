@@ -346,10 +346,7 @@ class PostController extends ActionController
     protected function getPagination(QueryResultInterface $objects, int $currentPage = 1): ?BlogPagination
     {
         $maximumNumberOfLinks = (int) ($this->settings['lists']['pagination']['maximumNumberOfLinks'] ?? 0);
-        $itemsPerPage = 10;
-        if ($this->request->getFormat() === 'html') {
-            $itemsPerPage = (int) ($this->settings['lists']['pagination']['itemsPerPage'] ?? 10);
-        }
+        $itemsPerPage = (int) ($this->settings['lists']['pagination']['itemsPerPage'] ?? 10);
 
         $paginator = new QueryResultPaginator($objects, $currentPage, $itemsPerPage);
         return new BlogPagination($paginator, $maximumNumberOfLinks);
