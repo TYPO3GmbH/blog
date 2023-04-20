@@ -31,7 +31,7 @@ class PageLayoutHeaderHook
         $pageInfo = BackendUtility::readPageAccess($pageUid, $GLOBALS['BE_USER']->getPagePermsClause(Permission::PAGE_SHOW));
 
         // Early exit for non-blog pages
-        if ($pageInfo['doktype'] !== Constants::DOKTYPE_BLOG_POST) {
+        if (($pageInfo['doktype'] ?? 0) !== Constants::DOKTYPE_BLOG_POST) {
             return '';
         }
 

@@ -24,7 +24,7 @@ class NotificationManager
     {
         $notificationRegistry = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'] ?? [];
         foreach ($notificationRegistry as $notificationId => $visitorClassNames) {
-            if (!\is_array($this->visitorsRegistry[$notificationId])) {
+            if (!\is_array($this->visitorsRegistry[$notificationId] ?? null)) {
                 $this->visitorsRegistry[$notificationId] = [];
             }
             foreach ($visitorClassNames as $visitorClassName) {
@@ -40,7 +40,7 @@ class NotificationManager
     public function notify(NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
-        if (\is_array($this->visitorsRegistry[$notificationId])) {
+        if (\is_array($this->visitorsRegistry[$notificationId] ?? null)) {
             foreach ($this->visitorsRegistry[$notificationId] as $visitorClassName) {
                 $instance = GeneralUtility::makeInstance($visitorClassName);
                 if ($instance instanceof ProcessorInterface) {
