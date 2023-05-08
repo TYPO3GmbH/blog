@@ -33,7 +33,11 @@
         "bin-dir": ".build/bin",
         "discard-changes": true,
         "optimize-autoloader": true,
-        "vendor-dir": ".build/vendor"
+        "vendor-dir": ".build/vendor",
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        }
     },
     "extra": {
         "typo3/cms": {
