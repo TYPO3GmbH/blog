@@ -17,8 +17,8 @@ jobs:
       fail-fast: false
       matrix:
         typo3: ['^11.5']
-        php: ['7.4', '8.0']
-        mysql: ['5.7']
+        php: ['7.4', '8.0', '8.1', '8.2']
+        mysql: ['5.7', '8.0']
 
     steps:
       - name: Checkout Code
