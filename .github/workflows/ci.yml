@@ -68,23 +68,3 @@ jobs:
           typo3DatabaseName: t3func
           typo3DatabasePassword: root
           typo3DatabaseUsername: root
-
-      - name: Upload coverage results to Coveralls
-        if: matrix.php != '8.0'
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERALLS_PARALLEL: true
-          COVERALLS_FLAG_NAME: php-${{ matrix.php }}
-        run: |
-          composer global require php-coveralls/php-coveralls --no-progress --no-suggest --no-interaction
-          /home/runner/.composer/vendor/bin/php-coveralls --coverage_clover=var/log/junit/coverage-unit.xml --coverage_clover=var/log/junit/coverage-functional.xml -vvv --json_path=var/log/coveralls-upload.json
-
-  coveralls-finish:
-    needs: [ build ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          parallel-finished: true
