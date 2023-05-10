@@ -1,0 +1,13 @@
+"pages",,,,,,
+,uid,pid,doktype,title,featured_image,media
+,3,2,137,Blog Post 1,0,1
+,4,2,137,Blog Post 2,0,1
+,5,1,1,Not a Post 1,0,1
+,6,1,1,Not a Post 2,0,1
+,,,,,,
+"sys_file_reference",,,,,,
+,uid,tablenames,fieldname,uid_foreign,,
+,1,pages,media,5,,
+,2,pages,media,6,,
+,3,pages,media,3,,
+,4,pages,media,4,,

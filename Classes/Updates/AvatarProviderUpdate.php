@@ -11,112 +11,44 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Updates;
 
 use T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
-class AvatarProviderUpdate implements UpgradeWizardInterface
+final class AvatarProviderUpdate extends AbstractUpdate implements UpgradeWizardInterface
 {
     /**
-     * Return the identifier for this wizard
-     * This should be the same string as used in the ext_localconf class registration
-     *
-     * @return string
+     * @var string
      */
-    public function getIdentifier(): string
-    {
-        return self::class;
-    }
+    protected $title = 'EXT:blog: Migrate AvatarProvider';
 
     /**
-     * Return the speaking name of this wizard
-     *
-     * @return string
+     * @var string
      */
-    public function getTitle(): string
+    protected $table = 'tx_blog_domain_model_author';
+
+    public function updateNecessary(): bool
     {
-        return '[EXT:blog] Migrate AvatarProvider';
+        $records = $this->getAffectedRecords();
+        return (bool) count($records);
     }
 
-    /**
-     * Return the description for this wizard
-     *
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return '';
-    }
-
-    /**
-     * Execute the update
-     *
-     * Called when a wizard reports that an update is necessary
-     *
-     * @return bool
-     */
     public function executeUpdate(): bool
     {
-        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_blog_domain_model_author');
-        $queryBuilder = $connection->createQueryBuilder();
-        $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
-        $statement = $queryBuilder->select('uid', 'avatar_provider')
-            ->from('tx_blog_domain_model_author')
-            ->where(
-                $queryBuilder->expr()->eq('avatar_provider', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR))
-            )
-            ->execute();
-        while ($record = $statement->fetch()) {
-            $queryBuilder = $connection->createQueryBuilder();
-            $queryBuilder->update('tx_blog_domain_model_author')
-                ->where(
-                    $queryBuilder->expr()->eq(
-                        'uid',
-                        $queryBuilder->createNamedParameter($record['uid'], \PDO::PARAM_INT)
-                    )
-                )
-                ->set('avatar_provider', $queryBuilder->createNamedParameter(GravatarProvider::class, \PDO::PARAM_STR), false);
-            $databaseQueries[] = $queryBuilder->getSQL();
-            $queryBuilder->execute();
+        $records = $this->getAffectedRecords();
+        foreach ($records as $record) {
+            $this->updateRecord($this->table, (int) $record['uid'], [
+                'avatar_provider' => GravatarProvider::class
+            ]);
         }
+
         return true;
     }
 
-    /**
-     * Is an update necessary?
-     *
-     * Is used to determine whether a wizard needs to be run.
-     * Check if data for migration exists.
-     *
-     * @return bool
-     */
-    public function updateNecessary(): bool
+    private function getAffectedRecords(): array
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_blog_domain_model_author');
-        $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
-        $elementCount = $queryBuilder->count('uid')
-            ->from('tx_blog_domain_model_author')
-            ->where(
-                $queryBuilder->expr()->eq('avatar_provider', $queryBuilder->createNamedParameter('', \PDO::PARAM_STR))
-            )
-            ->execute()->fetchColumn(0);
-        return (bool)$elementCount;
-    }
+        $queryBuilder = $this->createQueryBuilder($this->table);
+        $criteria = [$this->createEqualStringCriteria($queryBuilder, 'avatar_provider', '')];
+        $records = $this->getRecordsByCriteria($queryBuilder, $this->table, $criteria);
 
-    /**
-     * Returns an array of class names of Prerequisite classes
-     *
-     * This way a wizard can define dependencies like "database up-to-date" or
-     * "reference index updated"
-     *
-     * @return string[]
-     */
-    public function getPrerequisites(): array
-    {
-        return [
-            DatabaseUpdatedPrerequisite::class
-        ];
+        return $records;
     }
 }

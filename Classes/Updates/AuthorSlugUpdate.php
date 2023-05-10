@@ -10,112 +10,39 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Updates;
 
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\DataHandling\Model\RecordStateFactory;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
-/**
- * AuthorSlugUpdate
- */
-class AuthorSlugUpdate implements UpgradeWizardInterface
+final class AuthorSlugUpdate extends AbstractUpdate implements UpgradeWizardInterface
 {
+    /**
+     * @var string
+     */
+    protected $title = 'EXT:blog: Generate Path-Segments for Authors';
+
     /**
      * @var string
      */
     protected $table = 'tx_blog_domain_model_author';
 
-    /**
-     * @var string
-     */
-    protected $slugField = 'slug';
-
-    /**
-    * @return string
-    */
-    public function getIdentifier(): string
-    {
-        return self::class;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return '[EXT:blog] Generate Path-Segments for Authors';
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return '';
-    }
-
-    /**
-     * @return array
-     */
-    public function getPrerequisites(): array
-    {
-        return [
-            DatabaseUpdatedPrerequisite::class
-        ];
-    }
-
-    /**
-     * @return bool
-     */
     public function updateNecessary(): bool
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($this->table);
-        $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
-
-        $elementCount = $queryBuilder
-            ->count('uid')
-            ->from($this->table)
-            ->where(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->eq($this->slugField, $queryBuilder->createNamedParameter('')),
-                    $queryBuilder->expr()->isNull($this->slugField)
-                )
-            )
-            ->execute()->fetchColumn(0);
-
-        return (bool)$elementCount;
+        $records = $this->getAffectedRecords();
+        return (bool) count($records);
     }
 
-    /**
-     * @return bool
-     */
     public function executeUpdate(): bool
     {
-        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($this->table);
-        $queryBuilder = $connection->createQueryBuilder();
-        $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
-
-        $statement = $queryBuilder
-            ->select('*')
-            ->from($this->table)
-            ->where(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->eq($this->slugField, $queryBuilder->createNamedParameter('')),
-                    $queryBuilder->expr()->isNull($this->slugField)
-                )
-            )
-            ->execute();
-
-        $fieldConfig = $GLOBALS['TCA'][$this->table]['columns'][$this->slugField]['config'];
+        $fieldConfig = $GLOBALS['TCA'][$this->table]['columns']['slug']['config'];
         $evalInfo = !empty($fieldConfig['eval']) ? GeneralUtility::trimExplode(',', $fieldConfig['eval'], true) : [];
         $hasToBeUniqueInSite = in_array('uniqueInSite', $evalInfo, true);
         $hasToBeUniqueInPid = in_array('uniqueInPid', $evalInfo, true);
-        $slugHelper = GeneralUtility::makeInstance(SlugHelper::class, $this->table, $this->slugField, $fieldConfig);
+        $slugHelper = GeneralUtility::makeInstance(SlugHelper::class, $this->table, 'slug', $fieldConfig);
 
-        while ($record = $statement->fetch()) {
+        $records = $this->getAffectedRecords();
+        foreach ($records as $record) {
             $recordId = (int)$record['uid'];
             $pid = (int)$record['pid'];
 
@@ -130,19 +57,23 @@ class AuthorSlugUpdate implements UpgradeWizardInterface
             }
 
             // Update Record
-            $queryBuilder = $connection->createQueryBuilder();
-            $queryBuilder
-                ->update($this->table)
-                ->where(
-                    $queryBuilder->expr()->eq(
-                        'uid',
-                        $queryBuilder->createNamedParameter($record['uid'], \PDO::PARAM_INT)
-                    )
-                )
-                ->set('slug', $slug);
-            $queryBuilder->execute();
+            $this->updateRecord($this->table, $recordId, [
+                'slug' => $slug
+            ]);
         }
 
         return true;
+    }
+
+    private function getAffectedRecords(): array
+    {
+        $queryBuilder = $this->createQueryBuilder($this->table);
+        $criteria = [
+            $this->createEqualStringCriteria($queryBuilder, 'slug', ''),
+            $this->createIsNullCriteria($queryBuilder, 'slug')
+        ];
+        $records = $this->getRecordsByCriteria($queryBuilder, $this->table, $criteria, AbstractUpdate::CONDITION_OR);
+
+        return $records;
     }
 }
