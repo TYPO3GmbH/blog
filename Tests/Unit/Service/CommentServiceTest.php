@@ -20,25 +20,25 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class CommentServiceTest extends UnitTestCase
 {
-    protected $resetSingletonInstances = true;
+    protected bool $resetSingletonInstances = true;
 
     /**
      * @var PostRepository
      */
-    protected $postRepositoryProphecy;
+    protected $postRepositoryMock;
 
     /**
      * @var CommentService
      */
     protected $commentService;
 
-    public function initialize()
+    public function initialize(): void
     {
-        $GLOBALS['TSFE'] = $this->prophesize(TypoScriptFrontendController::class)->reveal();
-        $this->postRepositoryProphecy = $this->prophesize(PostRepository::class);
+        $GLOBALS['TSFE'] =  $this->getMockBuilder(TypoScriptFrontendController::class)->disableOriginalConstructor()->getMock();
+        $this->postRepositoryMock = $this->getMockBuilder(PostRepository::class)->disableOriginalConstructor()->getMock();
         $this->commentService = new CommentService();
-        $this->commentService->injectPostRepository($this->postRepositoryProphecy->reveal());
-        $this->commentService->injectPersistenceManager($this->prophesize(PersistenceManager::class)->reveal());
+        $this->commentService->injectPostRepository($this->postRepositoryMock);
+        $this->commentService->injectPersistenceManager($this->getMockBuilder(PersistenceManager::class)->disableOriginalConstructor()->getMock());
     }
 
     /**
@@ -120,15 +120,16 @@ class CommentServiceTest extends UnitTestCase
     {
         $this->initialize();
 
+        $this->postRepositoryMock
+            ->expects(self::once())
+            ->method('update');
+
         $post = new Post();
         $post->_setProperty('uid', 1);
         $comment = new Comment();
-
         $settings = ['active' => 1, 'moderation' => 0];
 
         $this->commentService->injectSettings($settings);
         $this->commentService->addComment($post, $comment);
-
-        $this->postRepositoryProphecy->update($post)->shouldHaveBeenCalled();
     }
 }

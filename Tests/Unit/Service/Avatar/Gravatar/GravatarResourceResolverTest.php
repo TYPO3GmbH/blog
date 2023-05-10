@@ -10,7 +10,6 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Tests\Unit\Service\Avatar\Gravatar;
 
-use Prophecy\Argument;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 use T3G\AgencyPack\Blog\Http\RequestFactory;
@@ -23,16 +22,24 @@ class GravatarResourceResolverTest extends UnitTestCase
 {
     public function testResolveReturnsProperResponse(): void
     {
-        $response = $this->prophesize(ResponseInterface::class);
-        $response->getStatusCode()->willReturn(200);
-        $response->getBody()->willReturn(new Stream('php://temp'));
-        $response->getHeaderLine(Argument::exact('Content-Type'))->willReturn('image/jpeg');
+        $response = $this->getMockBuilder(ResponseInterface::class)->getMock();
+        $response->expects(self::any())
+            ->method('getStatusCode')
+            ->willReturn(200);
+        $response->expects(self::any())
+            ->method('getBody')
+            ->willReturn(new Stream('php://temp'));
+        $response->expects(self::any())
+            ->method('getHeaderLine')
+            ->willReturn('image/jpeg');
 
-        $client = $this->prophesize(ClientInterface::class);
-        $client->sendRequest(Argument::cetera())->willReturn($response->reveal());
+        $client = $this->getMockBuilder(ClientInterface::class)->getMock();
+        $client->expects(self::any())
+            ->method('sendRequest')
+            ->willReturn($response);
 
         $gravatarResourceResolver = new GravatarResourceResolver(
-            $client->reveal(),
+            $client,
             new RequestFactory()
         );
 
@@ -48,15 +55,21 @@ class GravatarResourceResolverTest extends UnitTestCase
     {
         $this->expectException(\RuntimeException::class);
 
-        $response = $this->prophesize(ResponseInterface::class);
-        $response->getStatusCode()->willReturn(404);
-        $response->getReasonPhrase()->willReturn('Not Found');
+        $response = $this->getMockBuilder(ResponseInterface::class)->getMock();
+        $response->expects(self::any())
+            ->method('getStatusCode')
+            ->willReturn(404);
+        $response->expects(self::any())
+            ->method('getReasonPhrase')
+            ->willReturn('Not Found');
 
-        $client = $this->prophesize(ClientInterface::class);
-        $client->sendRequest(Argument::cetera())->willReturn($response->reveal());
+        $client = $this->getMockBuilder(ClientInterface::class)->getMock();
+        $client->expects(self::any())
+            ->method('sendRequest')
+            ->willReturn($response);
 
         $gravatarResourceResolver = new GravatarResourceResolver(
-            $client->reveal(),
+            $client,
             new RequestFactory()
         );
 
@@ -66,16 +79,24 @@ class GravatarResourceResolverTest extends UnitTestCase
 
     public function testResolveReturnsResponseWithEmptyContentTypeHeader(): void
     {
-        $response = $this->prophesize(ResponseInterface::class);
-        $response->getStatusCode()->willReturn(200);
-        $response->getBody()->willReturn(new Stream('php://temp'));
-        $response->getHeaderLine(Argument::exact('Content-Type'))->willReturn('');
+        $response = $this->getMockBuilder(ResponseInterface::class)->getMock();
+        $response->expects(self::any())
+            ->method('getStatusCode')
+            ->willReturn(200);
+        $response->expects(self::any())
+            ->method('getBody')
+            ->willReturn(new Stream('php://temp'));
+        $response->expects(self::any())
+            ->method('getHeaderLine')
+            ->willReturn('');
 
-        $client = $this->prophesize(ClientInterface::class);
-        $client->sendRequest(Argument::cetera())->willReturn($response->reveal());
+        $client = $this->getMockBuilder(ClientInterface::class)->getMock();
+        $client->expects(self::any())
+            ->method('sendRequest')
+            ->willReturn($response);
 
         $gravatarResourceResolver = new GravatarResourceResolver(
-            $client->reveal(),
+            $client,
             new RequestFactory()
         );
 
