@@ -217,25 +217,29 @@ call_user_func(
             ]
         );
 
+        // Hooks
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['Blog'] =
             \T3G\AgencyPack\Blog\Hooks\DataHandlerHook::class;
 
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate']
-            = \T3G\AgencyPack\Blog\Updates\DatabaseMonthYearUpdate::class;
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate']
-            = \T3G\AgencyPack\Blog\Updates\DatabasePublishDateUpdate::class;
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate']
+        // Upgrades
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class]
+            = \T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\AvatarProviderUpdate::class]
             = \T3G\AgencyPack\Blog\Updates\AvatarProviderUpdate::class;
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class]
             = \T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class;
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategoryTypeUpdate::class]
             = \T3G\AgencyPack\Blog\Updates\CategoryTypeUpdate::class;
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class]
-            = \T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class;
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class]
-            = \T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CommentStatusUpdate::class]
+            = \T3G\AgencyPack\Blog\Updates\CommentStatusUpdate::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\DatabaseMonthYearUpdate::class]
+            = \T3G\AgencyPack\Blog\Updates\DatabaseMonthYearUpdate::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\DatabasePublishDateUpdate::class]
+            = \T3G\AgencyPack\Blog\Updates\DatabasePublishDateUpdate::class;
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate::class]
             = \T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class]
+            = \T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class;
 
         // Register Static Database Mapper
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['BlogStaticDatabaseMapper'] =
