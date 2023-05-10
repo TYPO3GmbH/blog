@@ -20,6 +20,7 @@ Documentation-*
 config/
 node_modules/
 var/
+*.cache
 
 # Cache
 .php-cs-fixer.cache
