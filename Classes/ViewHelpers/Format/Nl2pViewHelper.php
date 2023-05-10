@@ -23,20 +23,11 @@ class Nl2pViewHelper extends AbstractViewHelper
      */
     protected $escapeOutput = false;
 
-    /**
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     */
     public function initializeArguments(): void
     {
         $this->registerArgument('value', 'string', 'string to format');
     }
 
-    /**
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
-     * @return string
-     */
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
         $data = explode('<br>', nl2br($renderChildrenClosure(), false));

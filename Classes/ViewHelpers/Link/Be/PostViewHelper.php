@@ -24,12 +24,6 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         parent::__construct();
     }
 
-    /**
-     * Arguments initialization.
-     *
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
@@ -43,10 +37,6 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         $this->registerArgument('action', 'string', 'action to link', false, null);
     }
 
-    /**
-     * @return string
-     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
-     */
     public function render(): string
     {
         /** @var Post $post */
@@ -74,7 +64,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
                 return $uri;
             }
             $title = $post !== null ? $post->getTitle() : LocalizationUtility::translate('backend.message.nopost', 'blog');
-            $linkText = $this->renderChildren() ?: $title;
+            $linkText = $this->renderChildren() ?? $title;
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
             $result = $this->tag->render();

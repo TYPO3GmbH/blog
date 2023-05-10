@@ -21,12 +21,6 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         parent::__construct();
     }
 
-    /**
-     * Arguments initialization.
-     *
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
@@ -38,9 +32,6 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
     }
 
-    /**
-     * @return string Rendered page URI
-     */
     public function render(): string
     {
         $rssFormat = (bool)$this->arguments['rss'];
@@ -59,7 +50,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         }
         $uri = $uriBuilder->uriFor('listPostsByTag', $arguments, 'Post', 'Blog', 'Tag');
         if ($uri !== '') {
-            $linkText = $this->renderChildren() ?: $tag->getTitle();
+            $linkText = $this->renderChildren() ?? $tag->getTitle();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
             $result = $this->tag->render();

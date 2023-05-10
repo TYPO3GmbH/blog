@@ -30,7 +30,7 @@ class ImageProvider implements AvatarProviderInterface
 
             $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
             $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
-            $size = ($settings['authors']['avatar']['provider']['size'] ?? $defaultSize) ?: $defaultSize;
+            $size = ($settings['authors']['avatar']['provider']['size'] ?? $defaultSize) ?? $defaultSize;
 
             $imageService = $objectManager->get(ImageService::class);
             $image = $imageService->getImage('', $image, false);

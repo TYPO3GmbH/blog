@@ -22,12 +22,6 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         parent::__construct();
     }
 
-    /**
-     * Arguments initialization.
-     *
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
@@ -39,9 +33,6 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
     }
 
-    /**
-     * @return string Rendered page URI
-     */
     public function render(): string
     {
         $rssFormat = (bool)$this->arguments['rss'];
@@ -109,7 +100,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
     protected function buildAnchorTag(string $uri, Author $author)
     {
         if ($uri !== '') {
-            $linkText = $this->renderChildren() ?: $author->getName();
+            $linkText = $this->renderChildren() ?? $author->getName();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
             return $this->tag->render();

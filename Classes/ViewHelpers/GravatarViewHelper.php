@@ -23,12 +23,6 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
         parent::__construct();
     }
 
-    /**
-     * Arguments Initialization.
-     *
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
@@ -39,9 +33,6 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
         $this->registerArgument('default', 'string', 'The default image for the gravatar, use complete url or one of the default keys');
     }
 
-    /**
-     * @return string the HTML <img>-Tag of the gravatar
-     */
     public function render(): string
     {
         /** @var GravatarProvider $gravatarProvider */

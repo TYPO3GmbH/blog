@@ -22,20 +22,12 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
 {
     use CompileWithContentArgumentAndRenderStatic;
 
-    /**
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     */
     public function initializeArguments(): void
     {
         $this->registerArgument('as', 'string', 'Name of variable to create.');
         $this->registerArgument('listType', 'string', 'Plugin Type to Render', true);
     }
 
-    /**
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
-     */
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);

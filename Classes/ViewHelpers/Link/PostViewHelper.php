@@ -21,12 +21,6 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         parent::__construct();
     }
 
-    /**
-     * Arguments initialization.
-     *
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
@@ -41,14 +35,11 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);
     }
 
-    /**
-     * @return string Rendered page URI
-     */
     public function render(): string
     {
         /** @var Post $post */
         $post = $this->arguments['post'];
-        $section = $this->arguments['section'] ?: '';
+        $section = $this->arguments['section'] ?? '';
         $pageUid = (int) $post->getUid();
         $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
@@ -61,7 +52,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
             if ($this->arguments['returnUri']) {
                 return htmlspecialchars($uri, ENT_QUOTES | ENT_HTML5);
             }
-            $linkText = $this->renderChildren() ?: $post->getTitle();
+            $linkText = $this->renderChildren() ?? $post->getTitle();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
             $result = $this->tag->render();

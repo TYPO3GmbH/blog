@@ -23,12 +23,6 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         parent::__construct();
     }
 
-    /**
-     * Arguments initialization.
-     *
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
@@ -41,12 +35,6 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);
     }
 
-    /**
-     * @return string Rendered page URI
-     *
-     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
-     * @throws \InvalidArgumentException
-     */
     public function render(): string
     {
         /** @var Category $category */
@@ -63,7 +51,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
             if ($this->arguments['returnUri']) {
                 return $uri;
             }
-            $linkText = $this->renderChildren() ?: $category->getTitle();
+            $linkText = $this->renderChildren() ?? $category->getTitle();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
             $result = $this->tag->render();

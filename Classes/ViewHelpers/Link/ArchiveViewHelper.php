@@ -20,12 +20,6 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         parent::__construct();
     }
 
-    /**
-     * Arguments initialization.
-     *
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
@@ -38,9 +32,6 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
     }
 
-    /**
-     * @return string Rendered page URI
-     */
     public function render(): string
     {
         $rssFormat = (bool)$this->arguments['rss'];
