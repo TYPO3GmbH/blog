@@ -14,7 +14,6 @@
                             <description>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.posts.description</description>
                             <config>
                                 <type>group</type>
-                                <internal_type>db</internal_type>
                                 <allowed>pages</allowed>
                                 <size>10</size>
                                 <suggestOptions>
