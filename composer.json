@@ -32,6 +32,7 @@
     "config": {
         "bin-dir": ".build/bin",
         "discard-changes": true,
+        "sort-packages": true,
         "optimize-autoloader": true,
         "vendor-dir": ".build/vendor",
         "allow-plugins": {
@@ -87,6 +88,8 @@
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "ext-pdo": "*",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0",
         "psr/http-message": "^1.0",
         "typo3/cms-backend": "^11.5",
         "typo3/cms-core": "^11.5",
@@ -96,24 +99,22 @@
         "typo3/cms-form": "^11.5",
         "typo3/cms-frontend": "^11.5",
         "typo3/cms-install": "^11.5",
-        "typo3fluid/fluid": "^2.6",
-        "psr/http-client": "^1.0",
-        "psr/http-factory": "^1.0"
+        "typo3fluid/fluid": "^2.6"
     },
     "require-dev": {
+        "bk2k/bootstrap-package": "^13.0",
+        "bk2k/extension-helper": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.14",
+        "overtrue/phplint": "^2.4",
         "typo3/cms-belog": "^11.5",
         "typo3/cms-beuser": "^11.5",
-        "typo3/cms-seo": "^11.5",
         "typo3/cms-filelist": "^11.5",
         "typo3/cms-fluid-styled-content": "^11.5",
         "typo3/cms-lowlevel": "^11.5",
+        "typo3/cms-rte-ckeditor": "^11.5",
+        "typo3/cms-seo": "^11.5",
         "typo3/cms-setup": "^11.5",
         "typo3/cms-tstemplate": "^11.5",
-        "typo3/cms-rte-ckeditor": "^11.5",
-        "friendsofphp/php-cs-fixer": "^3.1",
-        "typo3/testing-framework": "^6.4",
-        "bk2k/bootstrap-package": "^13.0",
-        "bk2k/extension-helper": "^2.0",
-        "overtrue/phplint": "^2.4"
+        "typo3/testing-framework": "^6.4"
     }
 }

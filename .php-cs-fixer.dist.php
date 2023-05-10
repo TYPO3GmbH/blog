@@ -40,7 +40,7 @@ return (new PhpCsFixer\Config())
             ]
         ],
         'no_leading_import_slash' => true,
-        'no_trailing_comma_in_singleline_array' => true,
+        'no_trailing_comma_in_singleline' => true,
         'no_singleline_whitespace_before_semicolons' => true,
         'no_unused_imports' => true,
         'concat_space' => ['spacing' => 'one'],
@@ -67,5 +67,8 @@ return (new PhpCsFixer\Config())
     ->setFinder(
         PhpCsFixer\Finder::create()
             ->exclude('.build')
+            ->exclude('config')
+            ->exclude('node_modules')
+            ->exclude('var')
             ->in(__DIR__)
     );

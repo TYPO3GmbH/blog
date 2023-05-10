@@ -21,7 +21,6 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class AuthorNotificationProcessor implements ProcessorInterface
 {
-
     /**
      * Process the notification
      *

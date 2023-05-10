@@ -17,7 +17,6 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 
 class MailContent
 {
-
     /**
      * @param string $template
      * @param array $arguments
