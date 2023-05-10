@@ -105,7 +105,7 @@
         "bk2k/bootstrap-package": "^13.0",
         "bk2k/extension-helper": "^2.0",
         "friendsofphp/php-cs-fixer": "^3.14",
-        "overtrue/phplint": "^2.4",
+        "overtrue/phplint": "^3.4 || ^9.0",
         "typo3/cms-belog": "^11.5",
         "typo3/cms-beuser": "^11.5",
         "typo3/cms-filelist": "^11.5",
