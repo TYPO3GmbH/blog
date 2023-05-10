@@ -90,7 +90,6 @@ class TagRepository extends Repository
         }
 
         // Shuffle tags, ordering is only to get the top used tags
-        /** @noinspection NonSecureShuffleUsageInspection */
         shuffle($rows);
         return $rows;
     }

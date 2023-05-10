@@ -217,45 +217,33 @@ call_user_func(
             ]
         );
 
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['Blog'] =
             \T3G\AgencyPack\Blog\Hooks\DataHandlerHook::class;
 
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\DatabaseMonthYearUpdate']
             = \T3G\AgencyPack\Blog\Updates\DatabaseMonthYearUpdate::class;
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\DatabasePublishDateUpdate']
             = \T3G\AgencyPack\Blog\Updates\DatabasePublishDateUpdate::class;
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['T3G\AgencyPack\Blog\Install\Updates\AvatarProviderUpdate']
             = \T3G\AgencyPack\Blog\Updates\AvatarProviderUpdate::class;
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class]
             = \T3G\AgencyPack\Blog\Updates\CategorySlugUpdate::class;
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\CategoryTypeUpdate::class]
             = \T3G\AgencyPack\Blog\Updates\CategoryTypeUpdate::class;
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class]
             = \T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate::class;
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class]
             = \T3G\AgencyPack\Blog\Updates\TagSlugUpdate::class;
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate::class]
             = \T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate::class;
 
         // Register Static Database Mapper
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['BlogStaticDatabaseMapper'] =
             \T3G\AgencyPack\Blog\Routing\Aspect\StaticDatabaseMapper::class;
 
         // Register Notification visitors
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'][\T3G\AgencyPack\Blog\Notification\CommentAddedNotification::class][]
             = \T3G\AgencyPack\Blog\Notification\Processor\AdminNotificationProcessor::class;
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Blog']['notificationRegistry'][\T3G\AgencyPack\Blog\Notification\CommentAddedNotification::class][]
             = \T3G\AgencyPack\Blog\Notification\Processor\AuthorNotificationProcessor::class;
     }

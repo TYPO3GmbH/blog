@@ -269,7 +269,6 @@ class PostController extends ActionController
             );
 
             if (!empty($categories)) {
-                /** @noinspection CallableParameterUseCaseInTypeContextInspection */
                 $category = $categories->getFirst();
             }
         }

@@ -180,7 +180,6 @@ class CommentRepository extends Repository
             ? (int)$this->settings['comments']['respectPostLanguageId']
             : 0;
         if ($respectPostLanguageId) {
-            /** @noinspection PhpUnhandledExceptionInspection */
             $constraints[] = $query->logicalOr([
                 $query->equals('postLanguageId', GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId()),
                 $query->equals('postLanguageId', -1),
