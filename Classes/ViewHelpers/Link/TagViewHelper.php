@@ -11,6 +11,8 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class TagViewHelper extends AbstractTagBasedViewHelper
@@ -41,7 +43,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         $arguments = [
             'tag' => $tag->getUid(),
         ];
-        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid);
         if ($rssFormat) {

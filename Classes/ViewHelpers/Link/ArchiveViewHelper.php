@@ -10,6 +10,8 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class ArchiveViewHelper extends AbstractTagBasedViewHelper
@@ -44,7 +46,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         if ($month > 0) {
             $arguments['month'] = $month;
         }
-        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid);
         if ($rssFormat) {
