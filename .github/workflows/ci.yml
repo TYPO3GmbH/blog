@@ -9,61 +9,83 @@ on:
   pull_request:
 
 jobs:
-  build:
-
+  build-php:
+    name: Build PHP
     runs-on: ubuntu-latest
-
     strategy:
       fail-fast: false
       matrix:
-        typo3: ['^11.5']
+        typo3: ['^11']
         php: ['7.4', '8.0', '8.1', '8.2']
-        mysql: ['5.7', '8.0']
+        mysql: ['5.7']
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+      - id: checkout
+        name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Set up MySQL ${{ matrix.mysql }}
+      - id: setup_mysql
+        name: Set up MySQL ${{ matrix.mysql }}
         uses: mirromutth/mysql-action@v1.1
         with:
           mysql version: ${{ matrix.mysql }}
           mysql root password: 'root'
 
-      - name: Set up PHP version ${{ matrix.php }}
+      - id: setup_php
+        name: Set up PHP version ${{ matrix.php }}
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
           tools: composer:v2, php-cs-fixer
 
-      - name: Environment Check
+      - id: composer-cache-vars
+        name: Composer Cache Vars
         run: |
-          php --version
-          composer --version
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+          echo "timestamp=$(date +"%s")" >> $GITHUB_OUTPUT
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+      - id: composer-cache-dependencies
+        name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache-vars.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ matrix.php }}-${{ matrix.typo3 }}-${{ steps.composer-cache-vars.outputs.timestamp }}
+          restore-keys: |
+            ${{ runner.os }}-composer-${{ matrix.php }}-${{ matrix.typo3 }}-
+            ${{ runner.os }}-composer-${{ matrix.php }}-
+            ${{ runner.os }}-composer-
 
-      - name: Install dependencies with typo3/cms-core:${{ matrix.typo3 }}
+      - id: install
+        name: Install
         run: |
           composer require typo3/cms-core:${{ matrix.typo3 }} --no-progress
           git checkout composer.json
 
-      - name: Info
-        run: composer info
+      - id: lint
+        name: Lint
+        if: ${{ always() && steps.install.conclusion == 'success' }}
+        run: |
+          composer t3g:test:php:lint
 
-      - name: Lint PHP
-        run: composer t3g:test:php:lint
+      - id: cgl
+        name: CGL
+        if: ${{ always() && steps.install.conclusion == 'success' }}
+        run: |
+          php-cs-fixer fix --dry-run --verbose
 
-      - name: CGL
-        run: php-cs-fixer fix --dry-run --verbose
+      - id: tests_unit
+        name: Unit Tests
+        if: ${{ always() && steps.install.conclusion == 'success' }}
+        run: |
+          composer t3g:test:php:unit
 
-      - name: Unit Tests with coverage
-        run: composer t3g:test:php:unit:cover
-
-      - name: Functional Tests with coverage
-        run: composer t3g:test:php:functional:cover
+      - id: tests_functional
+        name: Functional Tests
+        if: ${{ always() && steps.install.conclusion == 'success' }}
+        run: |
+          composer t3g:test:php:functional
         env:
+          COMPOSER_PROCESS_TIMEOUT: 1200
           typo3DatabaseHost: 127.0.0.1
           typo3DatabaseName: t3func
           typo3DatabasePassword: root

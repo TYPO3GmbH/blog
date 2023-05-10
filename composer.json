@@ -41,16 +41,19 @@
         }
     },
     "extra": {
-        "typo3/cms": {
-            "extension-key": "blog",
-            "web-dir": ".build/web",
-            "app-dir": ".build"
-        },
         "branch-alias": {
             "dev-master": "12.0.x-dev"
+        },
+        "typo3/cms": {
+            "extension-key": "blog",
+            "web-dir": ".build/public"
         }
     },
     "scripts": {
+        "post-autoload-dump": [
+            "[ -d .build/public/_assets ] || mkdir -p .build/public/typo3conf/ext/",
+            "[ -d .build/public/_assets ] || [ -L .build/public/typo3conf/ext/blog ] || ln -snvf ../../../../. .build/public/typo3conf/ext/blog"
+        ],
         "t3g:test:php:lint": [
             "phplint"
         ],
@@ -60,24 +63,12 @@
         "t3g:test:php:functional": [
             "phpunit -c Build/FunctionalTests.xml"
         ],
-        "t3g:test:php:unit:cover": [
-            "Composer\\Config::disableProcessTimeout",
-            "mkdir -p var/log/junit/ && phpunit -c Build/UnitTests.xml --log-junit var/log/junit/phpunit.xml --coverage-clover var/log/junit/coverage-unit.xml"
-        ],
-        "t3g:test:php:functional:cover": [
-            "Composer\\Config::disableProcessTimeout",
-            "mkdir -p var/log/junit/ && .build/bin/phpunit -c Build/FunctionalTests.xml --log-junit var/log/junit/phpunit.xml --coverage-clover var/log/junit/coverage-functional.xml"
-        ],
         "t3g:test": [
             "@t3g:test:php:lint",
             "@t3g:test:php:unit"
         ],
         "t3g:cgl": [
             "php-cs-fixer --diff -v fix"
-        ],
-        "post-autoload-dump": [
-            "mkdir -p .build/web/typo3conf/ext/",
-            "[ -L .build/web/typo3conf/ext/blog ] || ln -snvf ../../../../. .build/web/typo3conf/ext/blog"
         ]
     },
     "suggest": {
