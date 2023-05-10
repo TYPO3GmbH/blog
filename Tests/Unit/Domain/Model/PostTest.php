@@ -22,7 +22,7 @@ class PostTest extends UnitTestCase
     /**
      * @test
      */
-    public function doktypeEqualsConstant()
+    public function doktypeEqualsConstant(): void
     {
         $post = new Post();
         self::assertEquals(Constants::DOKTYPE_BLOG_POST, $post->getDoktype());
