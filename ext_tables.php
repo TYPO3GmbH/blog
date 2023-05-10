@@ -67,63 +67,61 @@ call_user_func(function () {
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');
 
-    if (TYPO3_MODE === 'BE') {
-        // Main Blog
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
-            'blog',
-            '',
-            'after:web',
-            null,
-            [
-                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog.xlf',
-                'name' => 'blog',
-                'iconIdentifier' => 'module-blog',
-            ]
-        );
-        // Module Blog > Posts
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-            'Blog',
-            'blog',
-            'blog_posts',
-            '',
-            [
-                \T3G\AgencyPack\Blog\Controller\BackendController::class => 'posts',
-            ],
-            [
-                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_posts.xlf',
-                'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-posts.svg',
-                'access' => 'user,group',
-            ]
-        );
-        // Module Blog > Comments
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-            'Blog',
-            'blog',
-            'blog_comments',
-            '',
-            [
-                \T3G\AgencyPack\Blog\Controller\BackendController::class => 'comments, updateCommentStatus',
-            ],
-            [
-                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_comments.xlf',
-                'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-comments.svg',
-                'access' => 'user,group',
-            ]
-        );
-        // Module Blog > Setup
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-            'Blog',
-            'blog',
-            'blog_setup',
-            '',
-            [
-                \T3G\AgencyPack\Blog\Controller\BackendController::class => 'setupWizard, createBlog',
-            ],
-            [
-                'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_setup.xlf',
-                'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-setup.svg',
-                'access' => 'admin',
-            ]
-        );
-    }
+    // Main Blog
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
+        'blog',
+        '',
+        'after:web',
+        null,
+        [
+            'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog.xlf',
+            'name' => 'blog',
+            'iconIdentifier' => 'module-blog',
+        ]
+    );
+    // Module Blog > Posts
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+        'Blog',
+        'blog',
+        'blog_posts',
+        '',
+        [
+            \T3G\AgencyPack\Blog\Controller\BackendController::class => 'posts',
+        ],
+        [
+            'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_posts.xlf',
+            'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-posts.svg',
+            'access' => 'user,group',
+        ]
+    );
+    // Module Blog > Comments
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+        'Blog',
+        'blog',
+        'blog_comments',
+        '',
+        [
+            \T3G\AgencyPack\Blog\Controller\BackendController::class => 'comments, updateCommentStatus',
+        ],
+        [
+            'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_comments.xlf',
+            'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-comments.svg',
+            'access' => 'user,group',
+        ]
+    );
+    // Module Blog > Setup
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+        'Blog',
+        'blog',
+        'blog_setup',
+        '',
+        [
+            \T3G\AgencyPack\Blog\Controller\BackendController::class => 'setupWizard, createBlog',
+        ],
+        [
+            'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_setup.xlf',
+            'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-setup.svg',
+            'access' => 'admin',
+        ]
+    );
 });
