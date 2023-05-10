@@ -5,12 +5,12 @@ routeEnhancers:
     plugin: Category
     routes:
       -
-        routePath: '/category/{category_title}'
+        routePath: '/{category_title}'
         _controller: 'Post::listPostsByCategory'
         _arguments:
           category_title: category
       -
-        routePath: '/category/{category_title}/page-{page}'
+        routePath: '/{category_title}/page-{page}'
         _controller: 'Post::listPostsByCategory'
         _arguments:
           category_title: category

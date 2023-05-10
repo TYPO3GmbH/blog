@@ -5,12 +5,12 @@ routeEnhancers:
     plugin: AuthorPosts
     routes:
       -
-        routePath: '/author/{author_title}'
+        routePath: '/{author_title}'
         _controller: 'Post::listPostsByAuthor'
         _arguments:
           author_title: author
       -
-        routePath: '/author/{author_title}/page-{page}'
+        routePath: '/{author_title}/page-{page}'
         _controller: 'Post::listPostsByAuthor'
         _arguments:
           author_title: author

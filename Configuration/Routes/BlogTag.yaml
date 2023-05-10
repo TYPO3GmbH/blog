@@ -5,12 +5,12 @@ routeEnhancers:
     plugin: Tag
     routes:
       -
-        routePath: '/tag/{tag_title}'
+        routePath: '/{tag_title}'
         _controller: 'Post::listPostsByTag'
         _arguments:
           tag_title: tag
       -
-        routePath: '/tag/{tag_title}/page-{page}'
+        routePath: '/{tag_title}/page-{page}'
         _controller: 'Post::listPostsByTag'
         _arguments:
           tag_title: tag

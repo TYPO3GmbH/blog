@@ -5,24 +5,24 @@ routeEnhancers:
     plugin: Archive
     routes:
       -
-        routePath: '/archive/{year}'
+        routePath: '/{year}'
         _controller: 'Post::listPostsByDate'
         _arguments:
           year: year
       -
-        routePath: '/archive/{year}/page-{page}'
+        routePath: '/{year}/page-{page}'
         _controller: 'Post::listPostsByDate'
         _arguments:
           year: year
           page: 'currentPage'
       -
-        routePath: '/archive/{year}/{month}'
+        routePath: '/{year}/{month}'
         _controller: 'Post::listPostsByDate'
         _arguments:
           year: year
           month: month
       -
-        routePath: '/archive/{year}/{month}/page-{page}'
+        routePath: '/{year}/{month}/page-{page}'
         _controller: 'Post::listPostsByDate'
         _arguments:
           year: year
