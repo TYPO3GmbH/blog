@@ -14,8 +14,7 @@ use T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use /** @noinspection PhpInternalEntityUsedInspection */
-    TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
+use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 class AvatarProviderUpdate implements UpgradeWizardInterface
@@ -116,7 +115,6 @@ class AvatarProviderUpdate implements UpgradeWizardInterface
      */
     public function getPrerequisites(): array
     {
-        /** @noinspection PhpInternalEntityUsedInspection */
         return [
             DatabaseUpdatedPrerequisite::class
         ];
