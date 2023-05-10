@@ -22,7 +22,6 @@ CREATE TABLE tx_blog_domain_model_tag (
   t3ver_move_id int(11) DEFAULT '0' NOT NULL,
   sys_language_uid int(11) DEFAULT '0' NOT NULL,
   l18n_parent int(11) DEFAULT '0' NOT NULL,
-  l18n_diffsource mediumblob NOT NULL,
   title tinytext,
   slug varchar(2048),
   description text,
