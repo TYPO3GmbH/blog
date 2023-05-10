@@ -25,7 +25,7 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
     /**
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('as', 'string', 'Name of variable to create.');
         $this->registerArgument('listType', 'string', 'Plugin Type to Render', true);

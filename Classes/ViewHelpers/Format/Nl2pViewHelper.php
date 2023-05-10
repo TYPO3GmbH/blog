@@ -26,7 +26,7 @@ class Nl2pViewHelper extends AbstractViewHelper
     /**
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('value', 'string', 'string to format');
     }
