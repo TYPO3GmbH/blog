@@ -381,30 +381,6 @@ class PostController extends ActionController
     }
 
     /**
-     * Metadata action: output meta information of blog post.
-     *
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     *
-     * @deprecated
-     */
-    public function metadataAction(): ResponseInterface
-    {
-        trigger_error(
-            'Using \T3G\AgencyPack\Blog\Controller\PostController::metadataAction is deprecated. Use headerAction or footerAction instead.',
-            E_USER_DEPRECATED
-        );
-
-        $post = $this->postRepository->findCurrentPost();
-        $this->view->assign('post', $post);
-        if ($post instanceof Post) {
-            $this->blogCacheService->addTagsForPost($post);
-        }
-        return $this->htmlResponse();
-    }
-
-    /**
      * Authors action: output author information of blog post.
      *
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException

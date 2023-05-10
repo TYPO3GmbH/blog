@@ -36,7 +36,6 @@ call_user_func(function () {
         'plugin-blog-demandedposts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-demandedposts.svg',
         'plugin-blog-header' => 'EXT:blog/Resources/Public/Icons/plugin-blog-header.svg',
         'plugin-blog-footer' => 'EXT:blog/Resources/Public/Icons/plugin-blog-footer.svg',
-        'plugin-blog-metadata' => 'EXT:blog/Resources/Public/Icons/plugin-blog-metadata.svg',
         'plugin-blog-posts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-posts.svg',
         'plugin-blog-relatedposts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-relatedposts.svg',
         'plugin-blog-sidebar' => 'EXT:blog/Resources/Public/Icons/plugin-blog-sidebar.svg',

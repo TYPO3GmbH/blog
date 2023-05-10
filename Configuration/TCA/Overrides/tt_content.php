@@ -67,14 +67,6 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_sid
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'Blog',
-    'Metadata',
-    'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_metadata.title',
-    'plugin-blog-metadata'
-);
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_metadata'] = 'recursive,select_key,pages';
-
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Blog',
     'CommentForm',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_commentform.title',
     'plugin-blog-commentform'

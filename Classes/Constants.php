@@ -58,7 +58,6 @@ class Constants
         'blog_comments'             => -1600000008,
         'blog_header'               => -1600000009,
         'blog_footer'               => -1600000010,
-        'blog_metadata'             => -1600000011,
         'blog_authors'              => -1600000012,
         'blog_relatedposts'         => -1600000013,
         'blog_recentpostswidget'    => -1600000014,
