@@ -58,22 +58,6 @@ return [
                 'default' => 0,
             ],
         ],
-        // author not implemented yet
-        'author' => [
-            'label' => $ll . 'tx_blog_domain_model_comment.author',
-            'config' => [
-                'type' => 'group',
-                'allowed' => 'fe_users',
-                'size' => 1,
-                'maxitems' => 1,
-                'minitems' => '0',
-                'fieldWizard' => [
-                    'recordsOverview' => [
-                        'disabled' => true
-                    ]
-                ]
-            ],
-        ],
         'name' => [
             'label' => $ll . 'tx_blog_domain_model_comment.name',
             'config' => [

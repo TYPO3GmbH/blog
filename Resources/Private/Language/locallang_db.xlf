@@ -135,9 +135,6 @@
             <trans-unit id="tx_blog_domain_model_comment" xml:space="preserve">
                 <source>Blog: Comment</source>
             </trans-unit>
-            <trans-unit id="tx_blog_domain_model_comment.author" xml:space="preserve">
-                <source>Author (FE-User)</source>
-            </trans-unit>
             <trans-unit id="tx_blog_domain_model_comment.name" xml:space="preserve">
                 <source>Name</source>
             </trans-unit>

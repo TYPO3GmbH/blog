@@ -10,7 +10,6 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Comment extends AbstractEntity
@@ -19,13 +18,6 @@ class Comment extends AbstractEntity
     public const STATUS_APPROVED = 10;
     public const STATUS_DECLINED = 50;
     public const STATUS_DELETED = 90;
-
-    /**
-     * The author of the comment.
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
-     */
-    protected $author;
 
     /**
      * The name of the comment author.
@@ -92,25 +84,6 @@ class Comment extends AbstractEntity
      * @var int
      */
     protected $status;
-
-    /**
-     * @return FrontendUser
-     */
-    public function getAuthor(): ?FrontendUser
-    {
-        return $this->author;
-    }
-
-    /**
-     * @param FrontendUser $author
-     *
-     * @return Comment
-     */
-    public function setAuthor(FrontendUser $author): self
-    {
-        $this->author = $author;
-        return $this;
-    }
 
     /**
      * @return string
