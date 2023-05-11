@@ -6,3 +6,6 @@ services:
 
   T3G\AgencyPack\Blog\:
     resource: '../Classes/*'
+
+  T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook:
+    public: true
