@@ -94,6 +94,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setArguments($additionalParams);
+        $uriBuilder->setRequest($this->renderingContext->getRequest());
         if ($rssFormat) {
             $uriBuilder
                 ->setTargetPageType((int)$this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_author.']['typeNum']);

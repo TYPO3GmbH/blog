@@ -55,6 +55,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
             ->setTargetPageUid($pageUid);
+        $uriBuilder->setRequest($this->renderingContext->getRequest());
         if ($rssFormat) {
             $uriBuilder
                 ->setTargetPageType((int)$this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_tag.']['typeNum']);
