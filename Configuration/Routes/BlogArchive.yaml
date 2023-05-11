@@ -4,25 +4,21 @@ routeEnhancers:
     extension: Blog
     plugin: Archive
     routes:
-      -
-        routePath: '/archive/{year}'
+      - routePath: '/archive/{year}'
         _controller: 'Post::listPostsByDate'
         _arguments:
           year: year
-      -
-        routePath: '/archive/{year}/page-{page}'
+      - routePath: '/archive/{year}/page-{page}'
         _controller: 'Post::listPostsByDate'
         _arguments:
           year: year
           page: 'currentPage'
-      -
-        routePath: '/archive/{year}/{month}'
+      - routePath: '/archive/{year}/{month}'
         _controller: 'Post::listPostsByDate'
         _arguments:
           year: year
           month: month
-      -
-        routePath: '/archive/{year}/{month}/page-{page}'
+      - routePath: '/archive/{year}/{month}/page-{page}'
         _controller: 'Post::listPostsByDate'
         _arguments:
           year: year
@@ -57,8 +53,7 @@ routeEnhancers:
           november: 11
           december: 12
         localeMap:
-          -
-            locale: 'de_.*'
+          - locale: 'de_.*'
             map:
               januar: 1
               februar: 2
@@ -72,8 +67,7 @@ routeEnhancers:
               oktober: 10
               november: 11
               dezember: 12
-          -
-            locale: 'fr_.*'
+          - locale: 'fr_.*'
             map:
               janvier: 1
               fevrier: 2
