@@ -24,7 +24,6 @@ use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class GravatarProvider implements AvatarProviderInterface, SingletonInterface
 {
@@ -62,8 +61,7 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
 
     public function getAvatarUrl(Author $author, int $size): string
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
         $rating = empty($rating = (string)($settings['authors']['avatar']['provider']['rating'] ?? '')) ? null : $rating;

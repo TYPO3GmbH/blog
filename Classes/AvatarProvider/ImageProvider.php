@@ -14,7 +14,6 @@ use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Core\Imaging\ImageManipulation\CropVariantCollection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Service\ImageService;
 
 class ImageProvider implements AvatarProviderInterface
@@ -23,8 +22,7 @@ class ImageProvider implements AvatarProviderInterface
     {
         $image = $author->getImage();
         if ($image instanceof FileReference) {
-            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-            $imageService = $objectManager->get(ImageService::class);
+            $imageService = GeneralUtility::makeInstance(ImageService::class);
             $image = $imageService->getImage('', $image, false);
 
             if ($image->hasProperty('crop') && $image->getProperty('crop')) {
