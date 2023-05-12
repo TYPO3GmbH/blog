@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace TYPO3\CMS\Install\Tests\Functional\Updates;
+namespace T3G\AgencyPack\Blog\Tests\Functional\Updates;
 
 use T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
