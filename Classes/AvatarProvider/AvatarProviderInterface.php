@@ -8,11 +8,11 @@ declare(strict_types = 1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog;
+namespace T3G\AgencyPack\Blog\AvatarProvider;
 
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 
 interface AvatarProviderInterface
 {
-    public function getAvatarUrl(Author $author): string;
+    public function getAvatarUrl(Author $author, int $size): string;
 }

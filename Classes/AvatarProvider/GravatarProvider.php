@@ -10,7 +10,6 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\AvatarProvider;
 
-use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Http\Client;
 use T3G\AgencyPack\Blog\Http\RequestFactory;
@@ -61,13 +60,12 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         $this->proxyGravatarImage = (bool)($extensionConfiguration->get('blog', 'enableGravatarProxy') ?? false);
     }
 
-    public function getAvatarUrl(Author $author): string
+    public function getAvatarUrl(Author $author, int $size): string
     {
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
         $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
-        $size = empty($size = (string)($settings['authors']['avatar']['provider']['size'] ?? '')) ? null : (int)$size;
         $rating = empty($rating = (string)($settings['authors']['avatar']['provider']['rating'] ?? '')) ? null : $rating;
         $default = empty($default = (string)($settings['authors']['avatar']['provider']['default'] ?? '')) ? null : $default;
 

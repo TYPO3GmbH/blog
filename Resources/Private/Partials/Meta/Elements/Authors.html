@@ -14,7 +14,7 @@
                         <f:if condition="{avatarSettings.enable}">
                             <f:variable name="avatarsize" value="{avatarSettings.size as integer}" />
                             <f:if condition="{avatarsize}"><f:else><f:variable name="avatarsize" value="24" /></f:else></f:if>
-                            <span class="postmetagroup__listprefix"><img loading="lazy" class="postmetagroup__listavatar blogavatar" height="{avatarsize}" width="{avatarsize}" src="{author.avatar}" itemprop="image"></span>
+                            <span class="postmetagroup__listprefix"><img loading="lazy" class="postmetagroup__listavatar blogavatar" height="{avatarsize}" width="{avatarsize}" src="{blogvh:uri.avatar(author: author, size: avatarsize)}" itemprop="image"></span>
                         </f:if>
                         <span class="postmetagroup__listtext" data-prefix="{f:translate(key:'meta.authors.author')}"><f:render section="ProfileLink" arguments="{author: author}" contentAs="content">{author.name}</f:render></span>
                     </span>

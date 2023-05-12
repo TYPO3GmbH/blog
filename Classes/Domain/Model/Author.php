@@ -11,7 +11,7 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
 use T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider;
-use T3G\AgencyPack\Blog\AvatarProviderInterface;
+use T3G\AgencyPack\Blog\AvatarProvider\AvatarProviderInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
@@ -145,12 +145,12 @@ class Author extends AbstractEntity
     /**
      * @return string
      */
-    public function getAvatar(): string
+    public function getAvatar(int $size = 64): string
     {
         if ($this->avatar === null) {
             $this->avatar = $this->getAvatarProvider();
         }
-        return $this->avatar->getAvatarUrl($this);
+        return $this->avatar->getAvatarUrl($this, $size);
     }
 
     /**
@@ -177,6 +177,16 @@ class Author extends AbstractEntity
     public function getSlug(): ?string
     {
         return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return Author
+     */
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+        return $this;
     }
 
     /**

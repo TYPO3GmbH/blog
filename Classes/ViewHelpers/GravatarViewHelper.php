@@ -29,16 +29,18 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
         $this->registerUniversalTagAttributes();
         $this->registerTagAttribute('alt', 'string', 'Alternative Text for the image');
         $this->registerArgument('email', 'string', 'The email address to resolve the gravatar for', true);
-        $this->registerArgument('size', 'int', 'The size of the gravatar, ranging from 1 to 512', false, 65);
+        $this->registerArgument('size', 'int', 'The size of the gravatar, ranging from 1 to 512', false, 64);
     }
 
     public function render(): string
     {
+        $author = (new Author())->setEmail($this->arguments['email']);
+        $size = (int)$this->arguments['size'];
+
         /** @var GravatarProvider $gravatarProvider */
         $gravatarProvider = GeneralUtility::makeInstance(GravatarProvider::class);
-        $src = $gravatarProvider->getAvatarUrl((new Author())->setEmail($this->arguments['email']));
+        $src = $gravatarProvider->getAvatarUrl($author, $size);
 
-        $size = (int)$this->arguments['size'];
         $this->tag->addAttribute('src', $src);
         $this->tag->addAttribute('width', $size);
         $this->tag->addAttribute('height', $size);

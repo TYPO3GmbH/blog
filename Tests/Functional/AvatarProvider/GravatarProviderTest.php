@@ -22,10 +22,11 @@ class GravatarProviderTest extends FunctionalTestCase
 
     public function testGetAvatarUrlReturnsOriginalGravatarComUrl(): void
     {
+        $author = (new Author())->setEmail('name@host.tld');
         $gravatarProvider = new GravatarProvider();
         self::assertSame(
-            'https://www.gravatar.com/avatar/71803b16fcdb8ac77611d0a977b20164',
-            $gravatarProvider->getAvatarUrl((new Author())->setEmail('name@host.tld'))
+            'https://www.gravatar.com/avatar/71803b16fcdb8ac77611d0a977b20164?s=64',
+            $gravatarProvider->getAvatarUrl($author, 64)
         );
     }
 
@@ -33,10 +34,11 @@ class GravatarProviderTest extends FunctionalTestCase
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['blog']['enableGravatarProxy'] = '1';
 
+        $author = (new Author())->setEmail('name@host.tld');
         $gravatarProvider = new GravatarProvider();
-        self::assertStringStartsWith(
-            'typo3temp/assets/t3g/blog/gravatar/',
-            $gravatarProvider->getAvatarUrl((new Author())->setEmail('name@host.tld'))
+        self::assertSame(
+            'typo3temp/assets/t3g/blog/gravatar/11d0c74f2bb828428a2653332dee06ea.jpeg',
+            $gravatarProvider->getAvatarUrl($author, 64)
         );
     }
 }
