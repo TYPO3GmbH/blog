@@ -30,7 +30,6 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
         $this->registerTagAttribute('alt', 'string', 'Alternative Text for the image');
         $this->registerArgument('email', 'string', 'The email address to resolve the gravatar for', true);
         $this->registerArgument('size', 'int', 'The size of the gravatar, ranging from 1 to 512', false, 65);
-        $this->registerArgument('default', 'string', 'The default image for the gravatar, use complete url or one of the default keys');
     }
 
     public function render(): string
