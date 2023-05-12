@@ -16,13 +16,9 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class GravatarProviderTest extends FunctionalTestCase
 {
-    protected function setUp(): void
-    {
-        $this->coreExtensionsToLoad[] = 'extbase';
-        $this->testExtensionsToLoad[] = 'typo3conf/ext/blog';
-
-        parent::setUp();
-    }
+    protected array $testExtensionsToLoad = [
+        'typo3conf/ext/blog'
+    ];
 
     public function testGetAvatarUrlReturnsOriginalGravatarComUrl(): void
     {
