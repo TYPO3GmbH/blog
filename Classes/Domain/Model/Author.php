@@ -10,8 +10,8 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Model;
 
-use T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider;
 use T3G\AgencyPack\Blog\AvatarProvider\AvatarProviderInterface;
+use T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
