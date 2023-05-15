@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace TYPO3\CMS\Fluid\Tests\Functional\ViewHelpers\Format;
+namespace T3G\AgencyPack\Blog\Tests\Functional\ViewHelpers\Uri;
 
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
