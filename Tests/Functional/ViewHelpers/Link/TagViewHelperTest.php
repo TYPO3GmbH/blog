@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog\Tests\Functional\ViewHelpers;
+namespace T3G\AgencyPack\Blog\Tests\Functional\ViewHelpers\Link;
 
 use T3G\AgencyPack\Blog\Tests\Functional\SiteBasedTestCase;
 use TYPO3\CMS\Core\Database\ConnectionPool;
