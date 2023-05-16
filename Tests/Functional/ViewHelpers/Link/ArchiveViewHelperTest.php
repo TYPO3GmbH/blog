@@ -29,7 +29,7 @@ final class ArchiveViewHelperTest extends SiteBasedTestCase
             'pages',
             [
                 'uid' => 100,
-                'pid' => self::STORAGE_PID,
+                'pid' => self::STORAGE_UID,
                 'doktype' => Constants::DOKTYPE_BLOG_POST,
                 'crdate_year' => 2023,
                 'crdate_month' => 5,

@@ -29,7 +29,7 @@ final class CategoryViewHelperTest extends SiteBasedTestCase
             'sys_category',
             [
                 'uid' => 100,
-                'pid' => self::STORAGE_PID,
+                'pid' => self::STORAGE_UID,
                 'record_type' => Constants::CATEGORY_TYPE_BLOG,
                 'title' => 'Blog',
                 'slug' => 'blog'

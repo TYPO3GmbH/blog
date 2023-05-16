@@ -13,7 +13,6 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Data;
 use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
@@ -30,9 +29,7 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
 
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $settings = $objectManager
-            ->get(ConfigurationManagerInterface::class)
+        $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'blog');
         $listTypeConfiguration = $settings['settings']['contentListOptions'][$arguments['listType']] ?? [];
         $data = array_merge(

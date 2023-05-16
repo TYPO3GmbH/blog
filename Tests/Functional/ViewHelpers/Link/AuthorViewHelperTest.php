@@ -28,7 +28,7 @@ final class AuthorViewHelperTest extends SiteBasedTestCase
             'tx_blog_domain_model_author',
             [
                 'uid' => 100,
-                'pid' => self::STORAGE_PID,
+                'pid' => self::STORAGE_UID,
                 'name' => 'TYPO3 Inc Team',
                 'slug' => 'typo3-inc-team'
             ]

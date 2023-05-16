@@ -29,7 +29,7 @@ final class PostViewHelperTest extends SiteBasedTestCase
             'pages',
             [
                 'uid' => 100,
-                'pid' => self::STORAGE_PID,
+                'pid' => self::STORAGE_UID,
                 'doktype' => Constants::DOKTYPE_BLOG_POST,
                 'title' => 'First blog post',
                 'slug' => '/first-blog-post'

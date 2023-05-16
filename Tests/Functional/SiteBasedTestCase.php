@@ -20,7 +20,8 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 abstract class SiteBasedTestCase extends FunctionalTestCase
 {
     const BASE_URL = 'https://test.typo3.com/';
-    const STORAGE_PID = 2;
+    const ROOT_UID = 1;
+    const STORAGE_UID = 2;
 
     protected array $coreExtensionsToLoad = [
         'fluid_styled_content'
@@ -102,10 +103,6 @@ abstract class SiteBasedTestCase extends FunctionalTestCase
             [
                 'uid' => 9999,
                 'pid' => 9999,
-                'root' => 0,
-                'clear' => 0,
-                'include_static_file' => '',
-                'constants' => '',
                 'config' => implode("\n", [
                     'page >',
                     'page = PAGE',

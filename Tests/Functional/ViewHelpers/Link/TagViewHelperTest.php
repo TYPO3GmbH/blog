@@ -28,7 +28,7 @@ final class TagViewHelperTest extends SiteBasedTestCase
             'tx_blog_domain_model_tag',
             [
                 'uid' => 100,
-                'pid' => self::STORAGE_PID,
+                'pid' => self::STORAGE_UID,
                 'title' => 'TYPO3',
                 'slug' => 'typo3'
             ]
