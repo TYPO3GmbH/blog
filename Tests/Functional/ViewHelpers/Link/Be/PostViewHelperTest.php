@@ -15,6 +15,8 @@ use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -54,6 +56,11 @@ final class PostViewHelperTest extends FunctionalTestCase
 
     public static function renderDataProvider(): array
     {
+        $expectedReturnUrl = '/';
+        if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
+            $expectedReturnUrl = '%2F';
+        }
+
         return [
             'simple' => [
                 '<blogvh:link.be.post post="{post}" />',
@@ -61,7 +68,7 @@ final class PostViewHelperTest extends FunctionalTestCase
             ],
             'action edit' => [
                 '<blogvh:link.be.post post="{post}" action="edit" />',
-                '<a href="/typo3/record/edit?token=dummyToken&amp;edit%5Bpages%5D%5B123%5D=edit&amp;returnUrl=%2F">Demo</a>',
+                '<a href="/typo3/record/edit?token=dummyToken&amp;edit%5Bpages%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Demo</a>',
             ],
             'target' => [
                 '<blogvh:link.be.post post="{post}" target="_blank" />',

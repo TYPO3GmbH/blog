@@ -15,6 +15,8 @@ use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -54,34 +56,39 @@ final class CommentViewHelperTest extends FunctionalTestCase
 
     public static function renderDataProvider(): array
     {
+        $expectedReturnUrl = '/';
+        if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
+            $expectedReturnUrl = '%2F';
+        }
+
         return [
             'simple' => [
                 '<blogvh:link.be.comment comment="{comment}" />',
-                '<a href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=%2F">Lipsum</a>',
+                '<a href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Lipsum</a>',
             ],
             'target' => [
                 '<blogvh:link.be.comment comment="{comment}" target="_blank" />',
-                '<a target="_blank" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=%2F">Lipsum</a>',
+                '<a target="_blank" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Lipsum</a>',
             ],
             'itemprop' => [
                 '<blogvh:link.be.comment comment="{comment}" itemprop="name" />',
-                '<a itemprop="name" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=%2F">Lipsum</a>',
+                '<a itemprop="name" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Lipsum</a>',
             ],
             'rel' => [
                 '<blogvh:link.be.comment comment="{comment}" rel="noreferrer" />',
-                '<a rel="noreferrer" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=%2F">Lipsum</a>',
+                '<a rel="noreferrer" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Lipsum</a>',
             ],
             'returnUri' => [
                 '<blogvh:link.be.comment comment="{comment}" returnUri="1" />',
-                '/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=%2F',
+                '/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '',
             ],
             'content' => [
                 '<blogvh:link.be.comment comment="{comment}">Hello</blogvh:link.be.comment>',
-                '<a href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=%2F">Hello</a>',
+                '<a href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Hello</a>',
             ],
             'class' => [
                 '<blogvh:link.be.comment comment="{comment}" class="class" />',
-                '<a class="class" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=%2F">Lipsum</a>',
+                '<a class="class" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_comment%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Lipsum</a>',
             ],
         ];
     }
