@@ -42,7 +42,6 @@ class MetaTagService
                 break;
             default:
                 throw new \InvalidArgumentException('The type "' . $type . '" is not supported.', 1562020008);
-                break;
         }
     }
 

@@ -71,7 +71,7 @@ class PostRepositoryDemand
 
     public function addPost(int $uid): self
     {
-        if (!in_array($uid, $this->posts)) {
+        if (!in_array($uid, $this->posts, true)) {
             $this->posts[] = $uid;
         }
 
