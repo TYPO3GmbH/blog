@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -17,11 +18,10 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class CommentViewHelper extends AbstractTagBasedViewHelper
 {
-    public function __construct()
-    {
-        $this->tagName = 'a';
-        parent::__construct();
-    }
+    /**
+     * @var string
+     */
+    protected $tagName = 'a';
 
     public function initializeArguments(): void
     {
@@ -31,7 +31,7 @@ class CommentViewHelper extends AbstractTagBasedViewHelper
         $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute');
         $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
-        $this->registerArgument('comment', Comment::class, 'The comment to link to');
+        $this->registerArgument('comment', Comment::class, 'The comment to link to', true);
         $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);
     }
 
@@ -39,26 +39,28 @@ class CommentViewHelper extends AbstractTagBasedViewHelper
     {
         /** @var Comment $comment */
         $comment = $this->arguments['comment'];
-        $commentUid = (int)$comment->getUid();
 
-        $routingUriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $uri = $routingUriBuilder->buildUriFromRoute('record_edit', ['edit[tx_blog_domain_model_comment][' . $commentUid . ']' => 'edit']);
-        $arguments = GeneralUtility::_GET();
-        $route = $arguments['route'];
-        unset($arguments['route'], $arguments['token']);
-        $uri .= '&returnUrl=' . rawurlencode((string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoutePath($route, $arguments));
-        if ($uri !== '') {
-            if ($this->arguments['returnUri']) {
-                return $uri;
-            }
-            $linkText = $this->renderChildren() ?? $comment->getComment();
-            $this->tag->addAttribute('href', $uri);
-            $this->tag->setContent($linkText);
-            $result = $this->tag->render();
-        } else {
-            $result = $this->renderChildren();
+        $request = $this->getRequest();
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+
+        $params = [
+            'edit' => ['tx_blog_domain_model_comment' => [$comment->getUid() => 'edit']],
+            'returnUrl' => $request->getAttribute('normalizedParams')->getRequestUri(),
+        ];
+        $uri = (string)$uriBuilder->buildUriFromRoute('record_edit', $params);
+        if (isset($this->arguments['returnUri']) && $this->arguments['returnUri'] === true) {
+            return htmlspecialchars($uri, ENT_QUOTES | ENT_HTML5);
         }
 
-        return $result;
+        $linkText = $this->renderChildren() ?? $comment->getComment();
+        $this->tag->addAttribute('href', $uri);
+        $this->tag->setContent($linkText);
+
+        return $this->tag->render();
+    }
+
+    protected function getRequest(): ?ServerRequestInterface
+    {
+        return $GLOBALS['TYPO3_REQUEST'];
     }
 }
