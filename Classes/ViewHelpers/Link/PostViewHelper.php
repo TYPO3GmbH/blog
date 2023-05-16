@@ -46,12 +46,13 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
         $uri = $uriBuilder->reset()
+            ->setRequest($this->renderingContext->getRequest())
             ->setTargetPageUid($pageUid)
             ->setSection($section)
             ->setCreateAbsoluteUri($createAbsoluteUri)
             ->build();
         if ($uri !== '') {
-            if ($this->arguments['returnUri']) {
+            if (isset($this->arguments['returnUri']) && $this->arguments['returnUri'] === true) {
                 return htmlspecialchars($uri, ENT_QUOTES | ENT_HTML5);
             }
             $linkText = $this->renderChildren() ?? $post->getTitle();

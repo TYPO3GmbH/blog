@@ -45,6 +45,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         ];
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
+            ->setRequest($this->renderingContext->getRequest())
             ->setTargetPageUid($pageUid);
         if ($rssFormat) {
             $uriBuilder
