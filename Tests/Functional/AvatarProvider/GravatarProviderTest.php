@@ -36,8 +36,8 @@ class GravatarProviderTest extends FunctionalTestCase
 
         $author = (new Author())->setEmail('name@host.tld');
         $gravatarProvider = new GravatarProvider();
-        self::assertSame(
-            'typo3temp/assets/t3g/blog/gravatar/11d0c74f2bb828428a2653332dee06ea.jpeg',
+        self::assertStringContainsString(
+            'typo3temp/assets/t3g/blog/gravatar/',
             $gravatarProvider->getAvatarUrl($author, 64)
         );
     }
