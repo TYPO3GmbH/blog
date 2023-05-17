@@ -92,7 +92,7 @@ class SetupService
                     ->execute()
                     ->fetch();
                 $queryBuilder->update('pages')
-                    ->set('TSconfig', str_replace('NEW_blogFolder', $blogFolderUid, $record['TSconfig']))
+                    ->set('TSconfig', str_replace('NEW_blogFolder', (string)$blogFolderUid, $record['TSconfig']))
                     ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogRootUid, \PDO::PARAM_INT)))
                     ->execute();
 
@@ -141,14 +141,14 @@ class SetupService
         foreach ($setup as $key => &$value) {
             if (strpos($key, 'NEW') !== false) {
                 foreach ($this->recordUidArray as $newId => $uid) {
-                    $key = str_replace($newId, $uid, $key);
+                    $key = str_replace($newId, (string)$uid, $key);
                 }
             }
             if (\is_array($value)) {
                 $value = $this->replaceNewUids($value);
             } elseif (strpos($value, 'NEW') !== false) {
                 foreach ($this->recordUidArray as $newId => $uid) {
-                    $value = str_replace($newId, $uid, $value);
+                    $value = str_replace($newId, (string)$uid, $value);
                 }
             }
             $newSetup[$key] = $value;
