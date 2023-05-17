@@ -15,25 +15,10 @@ use TYPO3\CMS\Core\Pagination\PaginatorInterface;
 
 final class BlogPagination implements PaginationInterface
 {
-    /**
-     * @var int
-     */
-    protected $maximumNumberOfLinks = 10;
-
-    /**
-     * @var int
-     */
-    protected $displayRangeStart = 0;
-
-    /**
-     * @var int
-     */
-    protected $displayRangeEnd = 0;
-
-    /**
-     * @var PaginatorInterface
-     */
-    protected $paginator;
+    protected int $maximumNumberOfLinks = 10;
+    protected int $displayRangeStart = 0;
+    protected int $displayRangeEnd = 0;
+    protected PaginatorInterface $paginator;
 
     public function __construct(PaginatorInterface $paginator, int $maximumNumberOfLinks = 10)
     {
@@ -79,7 +64,7 @@ final class BlogPagination implements PaginationInterface
 
     public function getCurrentPageNumber(): int
     {
-        return $this->paginator->getCurrentPageNumber() ?? 1;
+        return $this->paginator->getCurrentPageNumber();
     }
 
     public function getNextPageNumber(): ?int
