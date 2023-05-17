@@ -73,6 +73,13 @@ jobs:
         run: |
           php-cs-fixer fix --dry-run --verbose
 
+      - id: phpstan
+        name: PHPStan
+        continue-on-error: true
+        if: ${{ always() && steps.install.conclusion == 'success' }}
+        run: |
+          composer t3g:test:php:phpstan -- --error-format=github
+
       - id: tests_unit
         name: Unit Tests
         if: ${{ always() && steps.install.conclusion == 'success' }}
