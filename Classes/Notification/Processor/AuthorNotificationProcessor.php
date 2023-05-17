@@ -17,17 +17,10 @@ use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
 use T3G\AgencyPack\Blog\Notification\NotificationInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class AuthorNotificationProcessor implements ProcessorInterface
 {
-    /**
-     * Process the notification
-     *
-     * @param NotificationInterface $notification
-     * @throws \InvalidArgumentException
-     */
-    public function process(NotificationInterface $notification)
+    public function process(NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
 
@@ -36,16 +29,10 @@ class AuthorNotificationProcessor implements ProcessorInterface
         }
     }
 
-    /**
-     * @param NotificationInterface $notification
-     * @throws \InvalidArgumentException
-     */
     protected function processCommentAddNotification(NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
-
-        $settings = GeneralUtility::makeInstance(ObjectManager::class)
-            ->get(ConfigurationManagerInterface::class)
+        $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
         /** @var Post $post */
@@ -56,7 +43,7 @@ class AuthorNotificationProcessor implements ProcessorInterface
                 $mail = GeneralUtility::makeInstance(MailMessage::class);
                 $mail
                     ->setSubject($notification->getTitle())
-                    ->setBody($notification->getMessage(), 'text/html')
+                    ->setBody($notification->getMessage())
                     ->setFrom([$settings['notifications']['email']['senderMail'] => $settings['notifications']['email']['senderName']])
                     ->setTo([$author->getEmail()])
                     ->send();

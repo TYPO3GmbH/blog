@@ -15,17 +15,10 @@ use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
 use T3G\AgencyPack\Blog\Notification\NotificationInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class AdminNotificationProcessor implements ProcessorInterface
 {
-    /**
-     * Process the notification
-     *
-     * @param NotificationInterface $notification
-     * @throws \InvalidArgumentException
-     */
-    public function process(NotificationInterface $notification)
+    public function process(NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
 
@@ -34,15 +27,10 @@ class AdminNotificationProcessor implements ProcessorInterface
         }
     }
 
-    /**
-     * @param NotificationInterface $notification
-     * @throws \InvalidArgumentException
-     */
     protected function processCommentAddNotification(NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
-        $settings = GeneralUtility::makeInstance(ObjectManager::class)
-            ->get(ConfigurationManagerInterface::class)
+        $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
         if ((int)$settings['notifications'][$notificationId]['admin']['_typoScriptNodeValue'] === 1) {

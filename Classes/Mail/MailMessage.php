@@ -10,36 +10,16 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Mail;
 
-use Symfony\Component\Mime\Email;
 use TYPO3\CMS\Core\Mail\MailMessage as CoreMailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class MailMessage
 {
-    /**
-     * @var CoreMailMessage
-     */
-    protected $mailMessage;
-
-    /**
-     * @var string
-     */
-    protected $subject;
-
-    /**
-     * @var string
-     */
-    protected $body;
-
-    /**
-     * @var array
-     */
-    protected $from;
-
-    /**
-     * @var array
-     */
-    protected $to;
+    protected CoreMailMessage $mailMessage;
+    protected string $subject;
+    protected string $body;
+    protected array $from;
+    protected array $to;
 
     public function __construct()
     {
@@ -95,12 +75,7 @@ class MailMessage
         $this->mailMessage->setSubject($this->getSubject());
         $this->mailMessage->setFrom($this->getFrom());
         $this->mailMessage->setTo($this->getTo());
-
-        if ($this->mailMessage instanceof Email) {
-            $this->mailMessage->html($this->getBody());
-        } else {
-            $this->mailMessage->setBody($this->getBody(), 'text/html');
-        }
+        $this->mailMessage->html($this->getBody());
 
         return (bool) $this->mailMessage->send();
     }
