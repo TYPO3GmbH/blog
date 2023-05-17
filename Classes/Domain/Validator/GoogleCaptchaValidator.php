@@ -33,10 +33,10 @@ class GoogleCaptchaValidator extends AbstractValidator
         if (
             // this validator is called multiple times, if the first success,
             // the global variable is set, else validate the re-captcha
-            empty($GLOBALS['google_recaptcha'])
+            ($GLOBALS['google_recaptcha'] ?? null) === null
             // check if we create a new comment, else we don't need a validation
-            && (!empty($requestData['action']) && $requestData['action'] === $action)
-            && (!empty($requestData['controller']) && $requestData['controller'] === $controller)
+            && (!(bool)($requestData['action'] ?? null) && $requestData['action'] === $action)
+            && (!(bool)($requestData['controller'] ?? null) && $requestData['controller'] === $controller)
             // check if google re-captcha is active, else we don't need a validation
             && (int) $settings['comments']['google_recaptcha']['_typoScriptNodeValue'] === 1
         ) {

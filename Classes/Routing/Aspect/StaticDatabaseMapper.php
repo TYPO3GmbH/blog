@@ -139,7 +139,7 @@ class StaticDatabaseMapper implements StaticMappableAspectInterface, \Countable
             $queryBuilder->groupBy($this->groupBy);
         }
 
-        if (!empty($this->where)) {
+        if (count($this->where) > 0) {
             foreach ($this->where as $key => $value) {
                 $queryBuilder->andWhere($key, $queryBuilder->createNamedParameter($value));
             }

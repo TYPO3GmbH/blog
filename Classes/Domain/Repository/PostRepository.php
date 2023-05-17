@@ -503,11 +503,11 @@ class PostRepository extends Repository
     protected function getPidsForConstraints(): array
     {
         // only add non empty pids (pid 0 will be removed as well
-        $pids = array_filter($this->getStoragePidsFromTypoScript(), function ($v) {
-            return !empty($v);
+        $pids = array_filter($this->getStoragePidsFromTypoScript(), function ($value) {
+            return $value !== '' && (int) $value !== 0;
         });
 
-        if (\count($pids) === 0) {
+        if (count($pids) === 0) {
             $rootLine = GeneralUtility::makeInstance(RootlineUtility::class, $this->getTypoScriptFrontendController()->id)->get();
             foreach ($rootLine as $value) {
                 $pids[] = $value['uid'];

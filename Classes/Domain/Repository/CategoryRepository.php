@@ -72,7 +72,7 @@ class CategoryRepository extends Repository
             );
         $categories = array_column($queryBuilder->execute()->fetchAll(), 'uid_local');
 
-        if (!empty($categories)) {
+        if (count($categories) > 0) {
             $query = $this->createQuery();
             $querySettings = $query->getQuerySettings();
             $querySettings->setRespectStoragePage(false);

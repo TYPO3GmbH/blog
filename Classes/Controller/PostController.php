@@ -268,7 +268,7 @@ class PostController extends ActionController
                 $this->configurationManager->getContentObject()->data['uid']
             );
 
-            if (!empty($categories)) {
+            if (count($categories) > 0) {
                 $category = $categories->getFirst();
             }
         }

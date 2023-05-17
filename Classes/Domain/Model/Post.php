@@ -469,7 +469,7 @@ class Post extends AbstractEntity
     public function getFeaturedImage(): ?FileReference
     {
         $featuredImage = $this->featuredImage;
-        if (!empty($featuredImage) && $featuredImage !== 0) {
+        if (($featuredImage !== null) && $featuredImage !== 0) {
             return $featuredImage;
         } else {
             return null;

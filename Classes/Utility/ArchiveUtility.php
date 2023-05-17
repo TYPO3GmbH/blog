@@ -36,7 +36,7 @@ class ArchiveUtility
     {
         $archiveData = [];
         foreach ($data as $result) {
-            if (empty($archiveData[$result['year'] ?? null])) {
+            if (($archiveData[$result['year'] ?? null] ?? null) === null) {
                 $archiveData[$result['year']] = [];
             }
             $dateTime = new \DateTimeImmutable(sprintf('%d-%d-1', (int)($result['year'] ?? 0), (int)($result['month'] ?? 0)));

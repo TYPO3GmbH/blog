@@ -36,7 +36,7 @@ final class AuthorSlugUpdate extends AbstractUpdate implements UpgradeWizardInte
     public function executeUpdate(): bool
     {
         $fieldConfig = $GLOBALS['TCA'][$this->table]['columns']['slug']['config'];
-        $evalInfo = !empty($fieldConfig['eval']) ? GeneralUtility::trimExplode(',', $fieldConfig['eval'], true) : [];
+        $evalInfo = isset($fieldConfig['eval']) && $fieldConfig['eval'] !== '' ? GeneralUtility::trimExplode(',', $fieldConfig['eval'], true) : [];
         $hasToBeUniqueInSite = in_array('uniqueInSite', $evalInfo, true);
         $hasToBeUniqueInPid = in_array('uniqueInPid', $evalInfo, true);
         $slugHelper = GeneralUtility::makeInstance(SlugHelper::class, $this->table, 'slug', $fieldConfig);

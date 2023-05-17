@@ -127,7 +127,7 @@ class Author extends AbstractEntity
      */
     public function getAvatarProvider()
     {
-        return !empty($this->avatarProvider)
+        return trim($this->avatarProvider) !== ''
             ? GeneralUtility::makeInstance($this->avatarProvider)
             : GeneralUtility::makeInstance(GravatarProvider::class);
     }

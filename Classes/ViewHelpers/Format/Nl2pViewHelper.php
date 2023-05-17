@@ -32,7 +32,7 @@ class Nl2pViewHelper extends AbstractViewHelper
     {
         $data = explode('<br>', nl2br($renderChildrenClosure(), false));
         $data = array_filter($data, function ($value) {
-            return !empty(trim($value));
+            return trim($value) !== '';
         });
         return '<p>' . implode('</p><p>', $data) . '</p>';
     }

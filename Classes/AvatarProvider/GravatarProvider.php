@@ -64,8 +64,8 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
-        $rating = empty($rating = (string)($settings['authors']['avatar']['provider']['rating'] ?? '')) ? null : $rating;
-        $default = empty($default = (string)($settings['authors']['avatar']['provider']['default'] ?? '')) ? null : $default;
+        $rating = trim($rating = (string)($settings['authors']['avatar']['provider']['rating'] ?? '')) === '' ? null : $rating;
+        $default = trim($default = (string)($settings['authors']['avatar']['provider']['default'] ?? '')) === '' ? null : $default;
 
         $gravatarUri = $this->gravatarUriBuilder->getUri(
             $author->getEmail(),

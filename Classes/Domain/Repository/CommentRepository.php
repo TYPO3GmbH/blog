@@ -102,7 +102,7 @@ class CommentRepository extends Repository
         if ($blogSetup !== null) {
             $constraints[] = $query->in('pid', $this->getPostPidsByRootPid($blogSetup));
         }
-        if (!empty($constraints)) {
+        if (count($constraints) > 0) {
             return $query->matching($query->logicalAnd($constraints))->execute();
         }
 
@@ -128,7 +128,7 @@ class CommentRepository extends Repository
         }
         if ($blogSetup !== null) {
             $storagePids = $this->getPostPidsByRootPid($blogSetup);
-            if (!empty($storagePids)) {
+            if (count($storagePids) > 0) {
                 $constraints[] = $query->in('pid', $storagePids);
             }
         }

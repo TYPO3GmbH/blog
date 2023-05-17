@@ -53,8 +53,8 @@ class DataHandlerHook
                 ->where($queryBuilder->expr()->eq('uid', (int)$id))
                 ->execute()
                 ->fetch();
-            if (!empty($record)) {
-                $timestamp = (int) (!empty($record['publish_date'] ?? 0) ? $record['publish_date'] : time());
+            if ($record ?? null) {
+                $timestamp = (int) (($record['publish_date'] ?? 0) !== 0 ? $record['publish_date'] : time());
                 $queryBuilder
                     ->update($table)
                     ->set('publish_date', $timestamp)
