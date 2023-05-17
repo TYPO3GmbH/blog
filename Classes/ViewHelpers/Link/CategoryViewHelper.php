@@ -13,6 +13,7 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class CategoryViewHelper extends AbstractTagBasedViewHelper
@@ -65,10 +66,7 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         return (string)$result;
     }
 
-    /**
-     * @return mixed|\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
+    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
     }

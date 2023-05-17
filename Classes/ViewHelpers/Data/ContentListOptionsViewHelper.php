@@ -27,7 +27,7 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
         $this->registerArgument('listType', 'string', 'Plugin Type to Render', true);
     }
 
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
     {
         $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'blog');
@@ -36,7 +36,7 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
             $listTypeConfiguration,
             [
                 'uid' => Constants::LISTTYPE_TO_FAKE_UID_MAPPING[$arguments['listType']] ?? 0,
-                'list_type' => (string) $arguments['listType'] ?? '',
+                'list_type' => $arguments['listType'] ?? '',
                 'CType' => 'list',
                 'layout' => $listTypeConfiguration['layout'] ?? '0',
                 'frame_class' => $listTypeConfiguration['frame_class'] ?? 'default'
@@ -47,5 +47,7 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
         $variableProvider = $renderingContext->getVariableProvider();
         $variableProvider->remove($arguments['as']);
         $variableProvider->add($arguments['as'], $data);
+
+        return '';
     }
 }

@@ -28,7 +28,7 @@ class Nl2pViewHelper extends AbstractViewHelper
         $this->registerArgument('value', 'string', 'string to format');
     }
 
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
     {
         $data = explode('<br>', nl2br($renderChildrenClosure(), false));
         $data = array_filter($data, function ($value) {

@@ -41,9 +41,9 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
         $gravatarProvider = GeneralUtility::makeInstance(GravatarProvider::class);
         $src = $gravatarProvider->getAvatarUrl($author, $size);
 
-        $this->tag->addAttribute('src', $src);
-        $this->tag->addAttribute('width', $size);
-        $this->tag->addAttribute('height', $size);
+        $this->tag->addAttribute('src', (string) $src);
+        $this->tag->addAttribute('width', (string) $size);
+        $this->tag->addAttribute('height', (string) $size);
 
         return $this->tag->render();
     }
