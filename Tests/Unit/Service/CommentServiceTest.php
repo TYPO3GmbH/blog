@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Tests\Unit\Service;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
@@ -23,7 +24,7 @@ class CommentServiceTest extends UnitTestCase
     protected bool $resetSingletonInstances = true;
 
     /**
-     * @var PostRepository
+     * @var MockObject
      */
     protected $postRepositoryMock;
 
