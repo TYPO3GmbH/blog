@@ -13,6 +13,7 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class AuthorViewHelper extends AbstractTagBasedViewHelper
@@ -36,34 +37,24 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
-        $rssFormat = (bool)$this->arguments['rss'];
         /** @var Author $author */
         $author = $this->arguments['author'];
+        $rssFormat = (bool)$this->arguments['rss'];
 
-        if ((int)$author->getDetailsPage() > 0) {
+        if ((int)$author->getDetailsPage() > 0 && !$rssFormat) {
             return $this->buildUriFromDetailsPage($author, $rssFormat);
         }
 
         return $this->buildUriFromDefaultPage($author, $rssFormat);
     }
 
-    /**
-     * @param Author $author
-     * @param bool $rssFormat
-     * @return mixed|string
-     */
-    protected function buildUriFromDetailsPage(Author $author, bool $rssFormat)
+    protected function buildUriFromDetailsPage(Author $author, bool $rssFormat): string
     {
-        $uriBuilder = $this->getUriBuilder($author->getDetailsPage(), [], $rssFormat);
+        $uriBuilder = $this->getUriBuilder((int) $author->getDetailsPage(), [], $rssFormat);
         return $this->buildAnchorTag($uriBuilder->build(), $author);
     }
 
-    /**
-     * @param Author $author
-     * @param bool $rssFormat
-     * @return mixed|string
-     */
-    protected function buildUriFromDefaultPage(Author $author, bool $rssFormat)
+    protected function buildUriFromDefaultPage(Author $author, bool $rssFormat): string
     {
         $uriBuilder = $this->getUriBuilder((int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['authorUid'], [], $rssFormat);
         $arguments = [
@@ -72,15 +63,8 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         return $this->buildAnchorTag($uriBuilder->uriFor('listPostsByAuthor', $arguments, 'Post', 'Blog', 'AuthorPosts'), $author);
     }
 
-    /**
-     * @param int $pageUid
-     * @param array $additionalParams
-     * @param bool $rssFormat
-     * @return UriBuilder
-     */
     protected function getUriBuilder(int $pageUid, array $additionalParams, bool $rssFormat): UriBuilder
     {
-        /** @var UriBuilder $uriBuilder */
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
             ->setRequest($this->renderingContext->getRequest())
@@ -94,12 +78,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         return $uriBuilder;
     }
 
-    /**
-     * @param string $uri
-     * @param Author $author
-     * @return mixed|string
-     */
-    protected function buildAnchorTag(string $uri, Author $author)
+    protected function buildAnchorTag(string $uri, Author $author): string
     {
         if ($uri !== '') {
             $linkText = $this->renderChildren() ?? $author->getName();
@@ -111,10 +90,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         return $this->renderChildren();
     }
 
-    /**
-     * @return mixed|\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
+    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
     }
