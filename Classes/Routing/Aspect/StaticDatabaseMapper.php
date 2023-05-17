@@ -16,40 +16,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class StaticDatabaseMapper implements StaticMappableAspectInterface, \Countable
 {
-    /**
-     * @var array
-     */
-    protected $settings;
+    protected array $settings;
+    protected string $field;
+    protected string $table;
+    protected string $groupBy;
+    protected array $where;
+    protected array $values;
 
-    /**
-     * @var string
-     */
-    protected $field;
-
-    /**
-     * @var string
-     */
-    protected $table;
-
-    /**
-     * @var string
-     */
-    protected $groupBy;
-
-    /**
-     * @var array
-     */
-    protected $where;
-
-    /**
-     * @var array
-     */
-    protected $values;
-
-    /**
-     * @param array $settings
-     * @throws \InvalidArgumentException
-     */
     public function __construct(array $settings)
     {
         $field = $settings['field'] ?? null;
@@ -78,34 +51,21 @@ class StaticDatabaseMapper implements StaticMappableAspectInterface, \Countable
         $this->values = $this->buildValues();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function count(): int
     {
         return count($this->values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function generate(string $value): ?string
     {
         return $this->respondWhenInValues($value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function resolve(string $value): ?string
     {
         return $this->respondWhenInValues($value);
     }
 
-    /**
-     * @param string $value
-     * @return string|null
-     */
     protected function respondWhenInValues(string $value): ?string
     {
         if (in_array($value, $this->values, true)) {
@@ -124,7 +84,6 @@ class StaticDatabaseMapper implements StaticMappableAspectInterface, \Countable
      * to the risk of cache-flooding.
      *
      * @return string[]
-     * @throws \LengthException
      */
     protected function buildValues(): array
     {
@@ -145,6 +104,6 @@ class StaticDatabaseMapper implements StaticMappableAspectInterface, \Countable
             }
         }
 
-        return array_map('strval', array_column($queryBuilder->execute()->fetchAll(), $this->field));
+        return array_map('strval', array_column($queryBuilder->executeQuery()->fetchAllAssociative(), $this->field));
     }
 }
