@@ -68,7 +68,7 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         $default = trim($default = (string)($settings['authors']['avatar']['provider']['default'] ?? '')) === '' ? null : $default;
 
         $gravatarUri = $this->gravatarUriBuilder->getUri(
-            $author->getEmail(),
+            $author->getEmail() ?? '',
             $size,
             $rating,
             $default
@@ -91,7 +91,7 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         $absoluteWebPath = PathUtility::getAbsoluteWebPath($filePath);
 
         if (file_exists($filePath)) {
-            if (hash_equals(md5_file($filePath), md5($gravatar->getContent()))) {
+            if (hash_equals((string) md5_file($filePath), md5($gravatar->getContent()))) {
                 return $absoluteWebPath;
             }
 

@@ -110,9 +110,9 @@ class WidgetController extends ActionController
         if (!(bool)($requestParameters['tag'] ?? null)) {
             $currentTag = (int)$requestParameters['tag'];
         }
-        $limit = (int)$this->settings['widgets']['tags']['limit'] ?? 20;
-        $minSize = (int)$this->settings['widgets']['tags']['minSize'] ?? 100;
-        $maxSize = (int)$this->settings['widgets']['tags']['maxSize'] ?? 100;
+        $limit = (int)($this->settings['widgets']['tags']['limit'] ?? 20);
+        $minSize = (int)($this->settings['widgets']['tags']['minSize'] ?? 100);
+        $maxSize = (int)($this->settings['widgets']['tags']['maxSize'] ?? 100);
         $tags = $this->tagRepository->findTopByUsage($limit);
         $minimumCount = null;
         $maximumCount = 0;
@@ -150,7 +150,7 @@ class WidgetController extends ActionController
      */
     public function recentPostsAction(): ResponseInterface
     {
-        $limit = (int)$this->settings['widgets']['recentposts']['limit'] ?? 0;
+        $limit = (int)($this->settings['widgets']['recentposts']['limit'] ?? 0);
 
         $posts = $limit > 0
             ? $this->postRepository->findAllWithLimit($limit)
@@ -169,8 +169,8 @@ class WidgetController extends ActionController
      */
     public function commentsAction(): ResponseInterface
     {
-        $limit = (int)$this->settings['widgets']['comments']['limit'] ?? 5;
-        $blogSetup = (int)$this->settings['widgets']['comments']['blogSetup'] ?? null;
+        $limit = (int)($this->settings['widgets']['comments']['limit'] ?? 5);
+        $blogSetup = isset($this->settings['widgets']['comments']['blogSetup']) ? (int) $this->settings['widgets']['comments']['blogSetup'] : null;
         $comments = $this->commentRepository->findActiveComments($limit, $blogSetup);
         $this->view->assign('comments', $comments);
         foreach ($comments as $comment) {

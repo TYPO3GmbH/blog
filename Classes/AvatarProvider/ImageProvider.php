@@ -25,7 +25,8 @@ class ImageProvider implements AvatarProviderInterface
             $imageService = GeneralUtility::makeInstance(ImageService::class);
             $image = $imageService->getImage('', $image, false);
 
-            if ($image->hasProperty('crop') && $image->getProperty('crop')) {
+            $cropString = '';
+            if ($image->hasProperty('crop') && $image->getProperty('crop') !== '') {
                 $cropString = $image->getProperty('crop');
             }
             $cropVariantCollection = CropVariantCollection::create((string)$cropString);

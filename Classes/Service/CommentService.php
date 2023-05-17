@@ -113,7 +113,7 @@ class CommentService
                     break;
                 default:
             }
-            $comment->setPid($post->getUid());
+            $comment->setPid((int)$post->getUid());
             $comment->setPostLanguageId(GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId());
             $post->addComment($comment);
             $this->postRepository->update($post);
