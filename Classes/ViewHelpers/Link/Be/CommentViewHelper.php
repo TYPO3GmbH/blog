@@ -37,10 +37,16 @@ class CommentViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
+        $request = $this->getRequest();
+        if (!$request instanceof ServerRequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.be.comment needs a request implementing ServerRequestInterface.',
+                1684305292
+            );
+        }
+
         /** @var Comment $comment */
         $comment = $this->arguments['comment'];
-
-        $request = $this->getRequest();
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
         $params = [
@@ -61,6 +67,6 @@ class CommentViewHelper extends AbstractTagBasedViewHelper
 
     protected function getRequest(): ?ServerRequestInterface
     {
-        return $GLOBALS['TYPO3_REQUEST'];
+        return $GLOBALS['TYPO3_REQUEST'] ?? null;
     }
 }

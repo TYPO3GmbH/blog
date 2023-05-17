@@ -37,10 +37,16 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
+        $request = $this->getRequest();
+        if (!$request instanceof ServerRequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.be.author needs a request implementing ServerRequestInterface.',
+                1684305290
+            );
+        }
+
         /** @var Author $author */
         $author = $this->arguments['author'];
-
-        $request = $this->getRequest();
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
         $params = [
@@ -61,6 +67,6 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
 
     protected function getRequest(): ?ServerRequestInterface
     {
-        return $GLOBALS['TYPO3_REQUEST'];
+        return $GLOBALS['TYPO3_REQUEST'] ?? null;
     }
 }

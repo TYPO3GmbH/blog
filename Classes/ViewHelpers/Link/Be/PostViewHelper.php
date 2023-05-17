@@ -39,10 +39,16 @@ class PostViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
+        $request = $this->getRequest();
+        if (!$request instanceof ServerRequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.be.post needs a request implementing ServerRequestInterface.',
+                1684305293
+            );
+        }
+
         /** @var Post $post */
         $post = $this->arguments['post'];
-
-        $request = $this->getRequest();
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
         switch ($this->arguments['action']) {
@@ -72,6 +78,6 @@ class PostViewHelper extends AbstractTagBasedViewHelper
 
     protected function getRequest(): ?ServerRequestInterface
     {
-        return $GLOBALS['TYPO3_REQUEST'];
+        return $GLOBALS['TYPO3_REQUEST'] ?? null;
     }
 }

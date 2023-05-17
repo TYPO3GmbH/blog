@@ -37,10 +37,16 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
+        $request = $this->getRequest();
+        if (!$request instanceof ServerRequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.be.category needs a request implementing ServerRequestInterface.',
+                1684305291
+            );
+        }
+
         /** @var Category $category */
         $category = $this->arguments['category'];
-
-        $request = $this->getRequest();
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
         $params = [
@@ -61,6 +67,6 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
 
     protected function getRequest(): ?ServerRequestInterface
     {
-        return $GLOBALS['TYPO3_REQUEST'];
+        return $GLOBALS['TYPO3_REQUEST'] ?? null;
     }
 }

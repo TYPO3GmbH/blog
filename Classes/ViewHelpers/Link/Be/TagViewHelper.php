@@ -37,10 +37,16 @@ class TagViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
+        $request = $this->getRequest();
+        if (!$request instanceof ServerRequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.be.tag needs a request implementing ServerRequestInterface.',
+                1684305294
+            );
+        }
+
         /** @var Tag $tag */
         $tag = $this->arguments['tag'];
-
-        $request = $this->getRequest();
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
         $params = [
@@ -61,6 +67,6 @@ class TagViewHelper extends AbstractTagBasedViewHelper
 
     protected function getRequest(): ?ServerRequestInterface
     {
-        return $GLOBALS['TYPO3_REQUEST'];
+        return $GLOBALS['TYPO3_REQUEST'] ?? null;
     }
 }
