@@ -455,7 +455,7 @@
                 <source>Google Recaptcha Website-Key</source>
             </trans-unit>
             <trans-unit id="constantEditor.comments.google_recaptcha.secret_key" xml:space="preserve">
-                <source>Google Recaptcha Secrete-Key</source>
+                <source>Google Recaptcha Secret-Key</source>
             </trans-unit>
             <trans-unit id="constantEditor.comments.disqus" xml:space="preserve">
                 <source>Enable Disqus:Use disqus instead of internal comments?</source>
