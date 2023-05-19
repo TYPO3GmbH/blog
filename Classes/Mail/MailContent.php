@@ -26,7 +26,7 @@ class MailContent
     protected function getFluidTemplateObject(string $template): StandaloneView
     {
         $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
-            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'blog');
 
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setLayoutRootPaths($settings['view']['emails']['layoutRootPaths']);
