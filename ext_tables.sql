@@ -13,7 +13,7 @@ CREATE TABLE tx_blog_domain_model_tag (
 #
 CREATE TABLE sys_category (
   record_type int(11) unsigned DEFAULT '1' NOT NULL,
-  slug varchar(2048),
+  slug varchar(2048) DEFAULT '' NOT NULL,
   content text,
   posts int(11) DEFAULT '0' NOT NULL
 );
