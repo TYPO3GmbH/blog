@@ -50,7 +50,7 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         );
         $this->avatarResourceResolver = GeneralUtility::makeInstance(
             GravatarResourceResolver::class,
-            GeneralUtility::makeInstance(GuzzleClientFactory::class)->getClient(),
+            GeneralUtility::makeInstance(GuzzleClientFactory::class)::getClient(),
             GeneralUtility::makeInstance(RequestFactory::class)
         );
 
