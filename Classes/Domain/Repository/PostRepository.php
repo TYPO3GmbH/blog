@@ -423,34 +423,38 @@ class PostRepository extends Repository
 
         $currentPost = $this->findCurrentPost();
         if ($currentPost instanceof Post) {
-            foreach ($currentPost->getCategories() as $category) {
-                $postsOfCategory = $this->findAllByCategory($category);
-                /** @var Post $postOfCategory */
-                foreach ($postsOfCategory as $postOfCategory) {
-                    if ($postOfCategory->getUid() === $currentPost->getUid()) {
-                        continue;
-                    }
+            if ($categoryMultiplier > 0) {
+                foreach ($currentPost->getCategories() as $category) {
+                    $postsOfCategory = $this->findAllByCategory($category);
+                    /** @var Post $postOfCategory */
+                    foreach ($postsOfCategory as $postOfCategory) {
+                        if ($postOfCategory->getUid() === $currentPost->getUid()) {
+                            continue;
+                        }
 
-                    if (!array_key_exists($postOfCategory->getUid(), $selectedPosts)) {
-                        $selectedPosts[$postOfCategory->getUid()] = $categoryMultiplier;
-                    } else {
-                        $selectedPosts[$postOfCategory->getUid()] += $categoryMultiplier;
+                        if (!array_key_exists($postOfCategory->getUid(), $selectedPosts)) {
+                            $selectedPosts[$postOfCategory->getUid()] = $categoryMultiplier;
+                        } else {
+                            $selectedPosts[$postOfCategory->getUid()] += $categoryMultiplier;
+                        }
                     }
                 }
             }
 
-            foreach ($currentPost->getTags() as $tag) {
-                $postsOfTag = $this->findAllByTag($tag);
-                /** @var Post $postOfTag */
-                foreach ($postsOfTag as $postOfTag) {
-                    if ($postOfTag->getUid() === $currentPost->getUid()) {
-                        continue;
-                    }
+            if ($tagMultiplier > 0) {
+                foreach ($currentPost->getTags() as $tag) {
+                    $postsOfTag = $this->findAllByTag($tag);
+                    /** @var Post $postOfTag */
+                    foreach ($postsOfTag as $postOfTag) {
+                        if ($postOfTag->getUid() === $currentPost->getUid()) {
+                            continue;
+                        }
 
-                    if (!array_key_exists($postOfTag->getUid(), $selectedPosts)) {
-                        $selectedPosts[$postOfTag->getUid()] = $tagMultiplier;
-                    } else {
-                        $selectedPosts[$postOfTag->getUid()] += $tagMultiplier;
+                        if (!array_key_exists($postOfTag->getUid(), $selectedPosts)) {
+                            $selectedPosts[$postOfTag->getUid()] = $tagMultiplier;
+                        } else {
+                            $selectedPosts[$postOfTag->getUid()] += $tagMultiplier;
+                        }
                     }
                 }
             }
