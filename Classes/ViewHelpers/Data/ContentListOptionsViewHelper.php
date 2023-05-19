@@ -30,8 +30,8 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
     {
         $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
-            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'blog');
-        $listTypeConfiguration = $settings['settings']['contentListOptions'][$arguments['listType']] ?? [];
+            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+        $listTypeConfiguration = $settings['contentListOptions'][$arguments['listType']] ?? [];
         $data = array_merge(
             $listTypeConfiguration,
             [
