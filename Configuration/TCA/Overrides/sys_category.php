@@ -117,6 +117,12 @@ $GLOBALS['TCA']['sys_category']['columns'] = array_replace_recursive(
                 'maxitems' => 1000
             ],
         ],
+        'sorting' => [
+            'label' => 'Sorting (for extbase only)',
+            'config' => [
+                'type' => 'passthrough' // This allows extbase to map the sorting field
+            ]
+        ]
     ]
 );
 
