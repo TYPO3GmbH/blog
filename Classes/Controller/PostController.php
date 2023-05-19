@@ -117,36 +117,38 @@ class PostController extends ActionController
     {
         parent::initializeView($view);
         if ($this->request->getFormat() === 'rss') {
-            $action = '.' . $this->request->getControllerActionName();
+            $action = $this->request->getControllerActionName();
             $arguments = [];
             switch ($action) {
-                case '.listPostsByCategory':
+                case 'listPostsByCategory':
                     if (isset($this->arguments['category'])) {
                         $arguments[] = $this->arguments['category']->getValue()->getTitle();
                     }
                     break;
-                case '.listPostsByDate':
+                case 'listPostsByDate':
                     $arguments[] = (int)$this->arguments['year']->getValue();
                     if (isset($this->arguments['month'])) {
                         $arguments[] = (int)$this->arguments['month']->getValue();
                     }
                     break;
-                case '.listPostsByTag':
+                case 'listPostsByTag':
                     if (isset($this->arguments['tag'])) {
                         $arguments[] = $this->arguments['tag']->getValue()->getTitle();
                     }
                     break;
-                case '.listPostsByAuthor':
+                case 'listPostsByAuthor':
                     if (isset($this->arguments['author'])) {
                         $arguments[] = $this->arguments['author']->getValue()->getName();
                     }
                     break;
-                default:
+                case ([] !== ($this->settings['demand'] ?? [])):
+                    $this->actionMethodName = 'listByDemandAction';
+                    break;
             }
 
             $feedData = [
-                'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
-                'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
+                'title' => LocalizationUtility::translate('feed.title.' . $action, 'blog', $arguments),
+                'description' => LocalizationUtility::translate('feed.description.' . $action, 'blog', $arguments),
                 'language' => $this->getSiteLanguage()->getTwoLetterIsoCode(),
                 'link' => $this->getRequestUrl(),
                 'date' => date('r'),
@@ -185,14 +187,23 @@ class PostController extends ActionController
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listByDemandAction(): ResponseInterface
+    public function listByDemandAction(int $currentPage = 1): ResponseInterface
     {
         $repositoryDemand = $this->postRepositoryDemandFactory->createFromSettings($this->settings['demand'] ?? []);
+        $posts = $this->postRepository->findByRepositoryDemand($repositoryDemand);
+
+        if ([] !== $repositoryDemand->getPosts()) {
+            $posts = $this->sortPostsByManualOrder($posts, $repositoryDemand->getPosts());
+            $pagination = [];
+        } else {
+            $pagination = $this->getPagination($posts, $currentPage);
+        }
 
         $this->view->assign('type', 'demand');
         $this->view->assign('demand', $repositoryDemand);
-        $this->view->assign('posts', $this->postRepository->findByRepositoryDemand($repositoryDemand));
-        $this->view->assign('pagination', []);
+        $this->view->assign('posts', $posts);
+        $this->view->assign('pagination', $pagination);
+
         return $this->htmlResponse();
     }
 
@@ -440,12 +451,28 @@ class PostController extends ActionController
     protected function getPagination(QueryResultInterface $objects, int $currentPage = 1): ?BlogPagination
     {
         $maximumNumberOfLinks = (int) ($this->settings['lists']['pagination']['maximumNumberOfLinks'] ?? 0);
-        $itemsPerPage = 10;
-        if ($this->request->getFormat() === 'html') {
-            $itemsPerPage = (int) ($this->settings['lists']['pagination']['itemsPerPage'] ?? 10);
-        }
+        $itemsPerPage = (int) ($this->settings['lists']['pagination']['itemsPerPage'] ?? 10);
 
         $paginator = new QueryResultPaginator($objects, $currentPage, $itemsPerPage);
         return new BlogPagination($paginator, $maximumNumberOfLinks);
+    }
+
+    /**
+     * @param Post[] $posts
+     * @param int[] $postUids
+     *
+     * @return Post[]
+     */
+    protected function sortPostsByManualOrder(array $posts, array $postUids): array
+    {
+        // Sort manually selected posts by defined order in group field
+        $sortedPosts = array_flip($postUids);
+        foreach ($posts as $post) {
+            $sortedPosts[$post->getUid()] = $post;
+        }
+
+        return array_values(array_filter($sortedPosts, static function ($value) {
+            return $value instanceof Post;
+        }));
     }
 }
