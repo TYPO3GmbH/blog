@@ -21,114 +21,43 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Post extends AbstractEntity
 {
-    /**
-     * @var bool
-     */
-    protected $hidden = false;
+    protected bool $hidden = false;
+    protected int $doktype = Constants::DOKTYPE_BLOG_POST;
+    protected string $title = '';
+    protected string $subtitle = '';
+    protected string $abstract = '';
+    protected string $description = '';
+    protected bool $commentsActive = true;
+    protected int $archiveDate = 0;
+    protected int $publishDate = 0;
+    protected \DateTime $crdate;
+    protected int $crdateMonth = 0;
+    protected int $crdateYear = 0;
+    protected ?FileReference $featuredImage = null;
 
     /**
-     * The blog post doktype
-     *
-     * @var int
-     */
-    protected $doktype = Constants::DOKTYPE_BLOG_POST;
-
-    /**
-     * The blog post title.
-     *
-     * @var string
-     */
-    protected $title;
-
-    /**
-     * The blog post subtitle.
-     *
-     * @var string
-     */
-    protected $subtitle;
-
-    /**
-     * The blog post abstract (SEO, list if not empty).
-     *
-     * @var string
-     */
-    protected $abstract;
-
-    /**
-     * The blog post description (SEO, list if not empty).
-     *
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * The blog post creation date.
-     *
-     * @var \DateTime
-     */
-    protected $crdate;
-
-    /**
-     * The blog post categories.
-     *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Category>
      * @Extbase\ORM\Lazy
      */
-    protected $categories;
+    protected ObjectStorage $categories;
 
     /**
-     * Comments active flag for this blog post.
-     *
-     * @var bool
-     */
-    protected $commentsActive = false;
-
-    /**
-     * Comments of the blog post.
-     *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Comment>
      * @Extbase\ORM\Lazy
      */
-    protected $comments;
+    protected ObjectStorage $comments;
 
     /**
-     * Tags of the blog post.
-     *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Tag>
      * @Extbase\ORM\Lazy
      */
-    protected $tags;
+    protected ObjectStorage $tags;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Extbase\ORM\Lazy
      */
-    protected $media;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     */
-    protected $featuredImage;
-
-    /**
-     * @var int
-     */
-    protected $archiveDate;
-
-    /**
-     * @var int
-     */
-    protected $publishDate;
-
-    /**
-     * @var int
-     */
-    protected $crdateMonth = 0;
-
-    /**
-     * @var int
-     */
-    protected $crdateYear = 0;
+    protected ObjectStorage $media;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Author>
@@ -136,9 +65,6 @@ class Post extends AbstractEntity
      */
     protected $authors;
 
-    /**
-     * Post constructor.
-     */
     public function __construct()
     {
         $this->initializeObject();
@@ -166,28 +92,17 @@ class Post extends AbstractEntity
         return $this->getHidden();
     }
 
-    /**
-     * @return int
-     */
-    public function getDoktype(): ?int
+    public function getDoktype(): int
     {
         return $this->doktype;
     }
 
-    /**
-     * @param Author $author
-     * @return Post
-     */
     public function addAuthor(Author $author): self
     {
         $this->authors->attach($author);
         return $this;
     }
 
-    /**
-     * @param Author $author
-     * @return Post
-     */
     public function removeAuthor(Author $author): self
     {
         $this->authors->detach($author);
@@ -195,7 +110,7 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Author>
      */
     public function getAuthors(): ObjectStorage
     {
@@ -203,7 +118,7 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage $authors
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Author> $authors
      * @return Post
      */
     public function setAuthors(ObjectStorage $authors): self
@@ -212,80 +127,52 @@ class Post extends AbstractEntity
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     * @return Post
-     */
-    public function setTitle($title): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getSubtitle(): ?string
+    public function getSubtitle(): string
     {
         return $this->subtitle;
     }
 
-    /**
-     * @param $subtitle
-     * @return Post
-     */
-    public function setSubtitle($subtitle): self
+    public function setSubtitle(string $subtitle): self
     {
         $this->subtitle = $subtitle;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAbstract(): ?string
+    public function getAbstract(): string
     {
         return $this->abstract;
     }
 
-    /**
-     * @param string $abstract
-     * @return Post
-     */
-    public function setAbstract($abstract): self
+    public function setAbstract(string $abstract): self
     {
         $this->abstract = $abstract;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     * @return Post
-     */
-    public function setDescription($description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
         return $this;
     }
 
     /**
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Category>
      */
     public function getCategories(): ObjectStorage
     {
@@ -293,8 +180,7 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage $categories
-     * @return Post
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Category> $categories
      */
     public function setCategories($categories): self
     {
@@ -304,7 +190,6 @@ class Post extends AbstractEntity
 
     /**
      * @param Category $category
-     * @return Post
      */
     public function addCategory(Category $category): self
     {
@@ -314,8 +199,6 @@ class Post extends AbstractEntity
 
     /**
      * @param Category $category
-     *
-     * @return Post
      */
     public function removeCategory(Category $category): self
     {
@@ -323,44 +206,30 @@ class Post extends AbstractEntity
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getCrdate(): \DateTime
     {
         return $this->crdate;
     }
 
-    /**
-     * @param \DateTime $crdate
-     * @return Post
-     */
-    public function setCrdate($crdate): self
+    public function setCrdate(\DateTime $crdate): self
     {
         $this->crdate = $crdate;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getCommentsActive(): bool
     {
         return $this->commentsActive;
     }
 
-    /**
-     * @param bool $commentsActive
-     * @return Post
-     */
-    public function setCommentsActive($commentsActive): self
+    public function setCommentsActive(bool $commentsActive): self
     {
         $this->commentsActive = $commentsActive;
         return $this;
     }
 
     /**
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Comment>
      */
     public function getComments(): ObjectStorage
     {
@@ -369,8 +238,6 @@ class Post extends AbstractEntity
 
     /**
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function getActiveComments()
     {
@@ -379,11 +246,9 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage $comments
-     *
-     * @return Post
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Comment> $comments
      */
-    public function setComments($comments): self
+    public function setComments(ObjectStorage $comments): self
     {
         $this->comments = $comments;
         return $this;
@@ -391,7 +256,6 @@ class Post extends AbstractEntity
 
     /**
      * @param Comment $comment
-     * @return Post
      */
     public function addComment(Comment $comment): self
     {
@@ -401,7 +265,6 @@ class Post extends AbstractEntity
 
     /**
      * @param Comment $comment
-     * @return Post
      */
     public function removeComment(Comment $comment): self
     {
@@ -410,7 +273,7 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Tag>
      */
     public function getTags(): ObjectStorage
     {
@@ -418,9 +281,7 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage $tags
-     *
-     * @return Post
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Tag> $tags
      */
     public function setTags(ObjectStorage $tags): self
     {
@@ -430,7 +291,6 @@ class Post extends AbstractEntity
 
     /**
      * @param Tag $tag
-     * @return Post
      */
     public function addTag(Tag $tag): self
     {
@@ -440,7 +300,6 @@ class Post extends AbstractEntity
 
     /**
      * @param Tag $tag
-     * @return Post
      */
     public function removeTag(Tag $tag): self
     {
@@ -449,7 +308,7 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      */
     public function getMedia(): ObjectStorage
     {
@@ -458,7 +317,6 @@ class Post extends AbstractEntity
 
     /**
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $media
-     * @return Post
      */
     public function setMedia(ObjectStorage $media): self
     {
@@ -468,82 +326,53 @@ class Post extends AbstractEntity
 
     public function getFeaturedImage(): ?FileReference
     {
-        $featuredImage = $this->featuredImage;
-        if (($featuredImage !== null) && $featuredImage !== 0) {
-            return $featuredImage;
-        } else {
-            return null;
-        }
+        return $this->featuredImage;
     }
 
     public function setFeaturedImage(?FileReference $featuredImage): self
     {
-        $this->featuredImage = $featuredImage ?? 0;
+        $this->featuredImage = $featuredImage;
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getArchiveDate(): ?int
+    public function getArchiveDate(): int
     {
         return $this->archiveDate;
     }
 
-    /**
-     * @param int $archiveDate
-     * @return Post
-     */
     public function setArchiveDate(int $archiveDate): self
     {
         $this->archiveDate = $archiveDate;
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getPublishDate(): ?int
+    public function getPublishDate(): int
     {
         return $this->publishDate;
     }
 
-    /**
-     * @param int $publishDate
-     * @return Post
-     */
     public function setPublishDate(int $publishDate): self
     {
         $this->publishDate = $publishDate;
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getCrdateMonth(): int
     {
         return $this->crdateMonth;
     }
 
-    /**
-     * @return int
-     */
     public function getCrdateYear(): int
     {
         return $this->crdateYear;
     }
 
-    /**
-     * @return string
-     * @throws \InvalidArgumentException
-     */
     public function getUri(): string
     {
         return GeneralUtility::makeInstance(UriBuilder::class)
-                ->setCreateAbsoluteUri(true)
-                ->setTargetPageUid($this->getUid())
-                ->build();
+            ->setCreateAbsoluteUri(true)
+            ->setTargetPageUid((int) $this->getUid())
+            ->build();
     }
 
     public function getAsArray(): array
