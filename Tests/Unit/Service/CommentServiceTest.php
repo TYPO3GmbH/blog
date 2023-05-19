@@ -13,6 +13,7 @@ namespace T3G\AgencyPack\Blog\Tests\Unit\Service;
 use PHPUnit\Framework\MockObject\MockObject;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
+use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\CommentService;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
@@ -22,24 +23,23 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class CommentServiceTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
-
-    /**
-     * @var MockObject
-     */
-    protected $postRepositoryMock;
-
-    /**
-     * @var CommentService
-     */
-    protected $commentService;
+    protected MockObject $postRepositoryMock;
+    protected MockObject $commentRepositoryMock;
+    protected MockObject $persistenceManagerMock;
+    protected CommentService $commentService;
 
     public function initialize(): void
     {
         $GLOBALS['TSFE'] =  $this->getMockBuilder(TypoScriptFrontendController::class)->disableOriginalConstructor()->getMock();
         $this->postRepositoryMock = $this->getMockBuilder(PostRepository::class)->disableOriginalConstructor()->getMock();
-        $this->commentService = new CommentService();
-        $this->commentService->injectPostRepository($this->postRepositoryMock);
-        $this->commentService->injectPersistenceManager($this->getMockBuilder(PersistenceManager::class)->disableOriginalConstructor()->getMock());
+        $this->commentRepositoryMock = $this->getMockBuilder(CommentRepository::class)->disableOriginalConstructor()->getMock();
+        $this->persistenceManagerMock = $this->getMockBuilder(PersistenceManager::class)->disableOriginalConstructor()->getMock();
+
+        $this->commentService = new CommentService(
+            $this->postRepositoryMock,
+            $this->commentRepositoryMock,
+            $this->persistenceManagerMock
+        );
     }
 
     /**
@@ -52,7 +52,7 @@ class CommentServiceTest extends UnitTestCase
         $post = new Post();
         $post->_setProperty('uid', 1);
         $comment = new Comment();
-        $result = (new CommentService())->addComment($post, $comment);
+        $result = $this->commentService->addComment($post, $comment);
 
         self::assertSame(CommentService::STATE_ERROR, $result);
     }
@@ -67,9 +67,8 @@ class CommentServiceTest extends UnitTestCase
         $post = new Post();
         $post->_setProperty('uid', 1);
         $comment = new Comment();
-        $settings = ['active' => 1, 'moderation' => 0];
 
-        $this->commentService->injectSettings($settings);
+        $this->commentService->setSettings(['active' => 1, 'moderation' => 0]);
         $result = $this->commentService->addComment($post, $comment);
 
         self::assertEquals(0, $comment->getHidden());
@@ -86,9 +85,8 @@ class CommentServiceTest extends UnitTestCase
         $post = new Post();
         $post->_setProperty('uid', 1);
         $comment = new Comment();
-        $settings = ['active' => 1, 'moderation' => 1];
 
-        $this->commentService->injectSettings($settings);
+        $this->commentService->setSettings(['active' => 1, 'moderation' => 1]);
         $result = $this->commentService->addComment($post, $comment);
 
         self::assertEquals(Comment::STATUS_PENDING, $comment->getStatus());
@@ -106,9 +104,7 @@ class CommentServiceTest extends UnitTestCase
         $post->_setProperty('uid', 1);
         $comment = new Comment();
 
-        $settings = ['active' => 1, 'moderation' => 0];
-
-        $this->commentService->injectSettings($settings);
+        $this->commentService->setSettings(['active' => 1, 'moderation' => 0]);
         $this->commentService->addComment($post, $comment);
 
         self::assertSame($comment, $post->getComments()->current());
@@ -128,9 +124,8 @@ class CommentServiceTest extends UnitTestCase
         $post = new Post();
         $post->_setProperty('uid', 1);
         $comment = new Comment();
-        $settings = ['active' => 1, 'moderation' => 0];
 
-        $this->commentService->injectSettings($settings);
+        $this->commentService->setSettings(['active' => 1, 'moderation' => 0]);
         $this->commentService->addComment($post, $comment);
     }
 }

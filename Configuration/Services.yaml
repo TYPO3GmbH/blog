@@ -9,3 +9,6 @@ services:
 
   T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook:
     public: true
+
+  T3G\AgencyPack\Blog\Service\CommentService:
+    public: true
