@@ -10,8 +10,8 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Tests\Unit\Service\Avatar\Gravatar;
 
-use T3G\AgencyPack\Blog\Http\UriFactory;
 use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarUriBuilder;
+use TYPO3\CMS\Core\Http\UriFactory;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class GravatarUriBuilderTest extends UnitTestCase
