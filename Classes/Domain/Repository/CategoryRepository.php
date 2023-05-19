@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -19,48 +20,44 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class CategoryRepository extends Repository
 {
-    /**
-     * Initializes the repository.
-     *
-     * @throws \InvalidArgumentException
-     */
+    protected array $settings = [];
+
     public function initializeObject(): void
     {
-        // @TODO: It looks like extbase ignore storage settings for sys_category.
-        // @TODO: this hack set the storage handling for sys_category table.
-        $configurationManager = $this->objectManager->get(ConfigurationManagerInterface::class);
-        $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
-        $querySettings->setRespectStoragePage(true);
-        $querySettings->setStoragePageIds(GeneralUtility::trimExplode(',', $settings['storagePid']));
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+        $this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'blog');
 
+        $querySettings = GeneralUtility::makeInstance(
+            Typo3QuerySettings::class,
+            GeneralUtility::makeInstance(Context::class),
+            $configurationManager
+        );
+        $querySettings->setRespectStoragePage(false);
+        $querySettings->setStoragePageIds(GeneralUtility::intExplode(',', $this->settings['persistence']['storagePid']));
         $this->setDefaultQuerySettings($querySettings);
+
         $this->defaultOrderings = [
             'title' => QueryInterface::ORDER_ASCENDING,
         ];
     }
 
+    /**
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
     public function findByUids(array $uids)
     {
         $query = $this->createQuery();
-        $query->matching(
-            $query->in('uid', $uids)
-        );
+        $query->matching($query->in('uid', $uids));
 
         return $query->execute();
     }
 
     /**
-     * @param string $table
-     * @param int $uid
-     * @param string $field
      * @return array|null|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function getByReference($table, $uid, $field = 'categories')
+    public function getByReference(string $table, int $uid, string $field = 'categories')
     {
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-
         $queryBuilder = $connectionPool->getConnectionForTable('sys_category_record_mm')->createQueryBuilder();
         $queryBuilder
             ->select('uid_local')
@@ -70,7 +67,7 @@ class CategoryRepository extends Repository
                 $queryBuilder->expr()->eq('fieldname', $queryBuilder->createNamedParameter($field)),
                 $queryBuilder->expr()->eq('uid_foreign', $queryBuilder->createNamedParameter($uid))
             );
-        $categories = array_column($queryBuilder->execute()->fetchAll(), 'uid_local');
+        $categories = array_column($queryBuilder->executeQuery()->fetchAllAssociative(), 'uid_local');
 
         if (count($categories) > 0) {
             $query = $this->createQuery();
