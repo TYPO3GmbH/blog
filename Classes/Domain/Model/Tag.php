@@ -16,9 +16,9 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Tag extends AbstractEntity
 {
-    protected string $title;
-    protected string $slug;
-    protected string $description;
+    protected string $title = '';
+    protected string $slug = '';
+    protected string $description = '';
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Content>
