@@ -13,18 +13,13 @@ namespace T3G\AgencyPack\Blog\Service;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class CacheService
  */
 class CacheService
 {
-    /**
-     * @param Post $post
-     * @throws \InvalidArgumentException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     */
     public function addTagsForPost(Post $post): void
     {
         $this->addTagToPage('tx_blog_post_' . $post->getUid());
@@ -42,37 +37,21 @@ class CacheService
         }
     }
 
-    /**
-     * @param string $tag
-     */
     public function addTagToPage(string $tag): void
     {
         $this->addTagsToPage([$tag]);
     }
 
-    /**
-     * @param array $tags
-     */
     public function addTagsToPage(array $tags): void
     {
         $this->getTypoScriptFrontendController()->addCacheTags($tags);
     }
 
-    /**
-     * @param string $tag
-     * @throws \InvalidArgumentException
-     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
-     */
     public function flushCacheByTag(string $tag): void
     {
         $this->flushCacheByTags([$tag]);
     }
 
-    /**
-     * @param array $tags
-     * @throws \InvalidArgumentException
-     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
-     */
     public function flushCacheByTags(array $tags): void
     {
         GeneralUtility::makeInstance(CacheManager::class)
@@ -80,10 +59,7 @@ class CacheService
             ->flushByTags($tags);
     }
 
-    /**
-     * @return mixed|\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
+    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
     }
