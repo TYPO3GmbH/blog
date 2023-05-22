@@ -24,6 +24,7 @@ use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
 use TYPO3\CMS\Form\Domain\Factory\AbstractFormFactory;
 use TYPO3\CMS\Form\Domain\Finishers\RedirectFinisher;
 use TYPO3\CMS\Form\Domain\Model\FormDefinition;
+use TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class CommentFormFactory extends AbstractFormFactory
@@ -67,30 +68,34 @@ class CommentFormFactory extends AbstractFormFactory
         $page = $form->createPage('commentform');
 
         // Form
+        /** @var GenericFormElement $nameField */
         $nameField = $page->createElement('name', 'Text');
-        $nameField->setLabel(LocalizationUtility::translate('form.comment.name', 'blog'));
+        $nameField->setLabel((string) LocalizationUtility::translate('form.comment.name', 'blog'));
         $nameField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
 
+        /** @var GenericFormElement $emailField */
         $emailField = $page->createElement('email', 'Text');
-        $emailField->setLabel(LocalizationUtility::translate('form.comment.email', 'blog'));
+        $emailField->setLabel((string) LocalizationUtility::translate('form.comment.email', 'blog'));
         $emailField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
         $emailField->addValidator(GeneralUtility::makeInstance(EmailAddressValidator::class));
 
-        if ((bool) $blogSettings['comments']['features']['urls']) {
+        if ((bool) $settings['comments']['features']['urls']) {
+            /** @var GenericFormElement $urlField */
             $urlField = $page->createElement('url', 'Text');
-            $urlField->setLabel(LocalizationUtility::translate('form.comment.url', 'blog'));
+            $urlField->setLabel((string) LocalizationUtility::translate('form.comment.url', 'blog'));
             $urlField->addValidator(GeneralUtility::makeInstance(UrlValidator::class));
         }
 
+        /** @var GenericFormElement $commentField */
         $commentField = $page->createElement('comment', 'Textarea');
-        $commentField->setLabel(LocalizationUtility::translate('form.comment.comment', 'blog'));
+        $commentField->setLabel((string) LocalizationUtility::translate('form.comment.comment', 'blog'));
         $commentField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
         $commentField->addValidator(GeneralUtility::makeInstance(StringLengthValidator::class, ['minimum' => 5]));
 
         $explanationText = $page->createElement('explanation', 'StaticText');
         $explanationText->setProperty('text', LocalizationUtility::translate('label.required.field', 'blog') . ' ' . LocalizationUtility::translate('label.required.field.explanation', 'blog'));
 
-        if ($captcha['enable'] && $captcha['sitekey'] && $captcha['secret']) {
+        if ((bool) $captcha['enable'] === true && $captcha['sitekey'] !== '' && $captcha['secret'] !== '') {
             $captchaField = $page->createElement('captcha', 'BlogGoogleCaptcha');
             $captchaField->setProperty('sitekey', $captcha['sitekey']);
             $captchaField->addValidator(GeneralUtility::makeInstance(GoogleCaptchaValidator::class));
@@ -98,15 +103,11 @@ class CommentFormFactory extends AbstractFormFactory
 
         // Finisher
         $commentFinisher = GeneralUtility::makeInstance(CommentFormFinisher::class);
-        if (method_exists($commentFinisher, 'setFinisherIdentifier')) {
-            $commentFinisher->setFinisherIdentifier(CommentFormFinisher::class);
-        }
+        $commentFinisher->setFinisherIdentifier(CommentFormFinisher::class);
         $form->addFinisher($commentFinisher);
 
         $redirectFinisher = GeneralUtility::makeInstance(RedirectFinisher::class);
-        if (method_exists($redirectFinisher, 'setFinisherIdentifier')) {
-            $redirectFinisher->setFinisherIdentifier(RedirectFinisher::class);
-        }
+        $redirectFinisher->setFinisherIdentifier(RedirectFinisher::class);
         $redirectFinisher->setOption('pageUid', (string)$this->getTypoScriptFrontendController()->id);
         $form->addFinisher($redirectFinisher);
 
