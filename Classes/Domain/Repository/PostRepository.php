@@ -52,10 +52,10 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         $this->defaultConstraints[] = $query->equals('doktype', Constants::DOKTYPE_BLOG_POST);
         if (GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId() === 0) {
-            $this->defaultConstraints[] = $query->logicalOr([
+            $this->defaultConstraints[] = $query->logicalOr(
                 $query->equals('l18n_cfg', 0),
                 $query->equals('l18n_cfg', 2)
-            ]);
+            );
         } else {
             $this->defaultConstraints[] = $query->lessThan('l18n_cfg', 2);
         }
@@ -94,25 +94,29 @@ class PostRepository extends Repository
                 foreach ($repositoryDemand->getCategories() as $category) {
                     $categoriesConstraints[] = $query->equals('categories.uid', $category->getUid());
                 }
-                $categoriesConjunction = $repositoryDemand->getCategoriesConjunction() === Constants::REPOSITORY_CONJUNCTION_AND ? 'logicalAnd' : 'logicalOr';
-                /** @phpstan-ignore-next-line */
-                $constraints[] = $query->{$categoriesConjunction}($categoriesConstraints);
+                if ($repositoryDemand->getCategoriesConjunction() === Constants::REPOSITORY_CONJUNCTION_AND) {
+                    $constraints[] = $query->logicalAnd(...$categoriesConstraints);
+                } else {
+                    $constraints[] = $query->logicalOr(...$categoriesConstraints);
+                }
             }
             if ($repositoryDemand->getTags() !== []) {
                 $tagsConstraints = [];
                 foreach ($repositoryDemand->getTags() as $tag) {
                     $tagsConstraints[] = $query->equals('tags.uid', $tag->getUid());
                 }
-                $tagsConjunction = $repositoryDemand->getTagsConjunction() === Constants::REPOSITORY_CONJUNCTION_AND ? 'logicalAnd' : 'logicalOr';
-                /** @phpstan-ignore-next-line */
-                $constraints[] = $query->{$tagsConjunction}($tagsConstraints);
+                if ($repositoryDemand->getTagsConjunction() === Constants::REPOSITORY_CONJUNCTION_AND) {
+                    $constraints[] = $query->logicalAnd(...$tagsConstraints);
+                } else {
+                    $constraints[] = $query->logicalOr(...$tagsConstraints);
+                }
             }
             if (($ordering = $repositoryDemand->getOrdering()) !== []) {
                 $query->setOrderings([$ordering['field'] => $ordering['direction']]);
             }
         }
 
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(...$constraints));
 
         if (($limit = $repositoryDemand->getLimit()) > 0) {
             $query->setLimit($limit);
@@ -156,7 +160,7 @@ class PostRepository extends Repository
                 $constraints[] = $query->getConstraint();
             }
             $constraints[] = $query->equals('pid', $blogSetup);
-            $query->matching($query->logicalAnd($constraints));
+            $query->matching($query->logicalAnd(...$constraints));
         }
 
         return $query->execute();
@@ -181,12 +185,12 @@ class PostRepository extends Repository
         if ($storagePidConstraint instanceof ComparisonInterface) {
             $constraints[] = $storagePidConstraint;
         }
-        $constraints[] = $query->logicalOr([
+        $constraints[] = $query->logicalOr(
             $query->equals('archiveDate', 0),
-            $query->greaterThanOrEqual('archiveDate', time()),
-        ]);
+            $query->greaterThanOrEqual('archiveDate', time())
+        );
 
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(...$constraints));
 
         return $query;
     }
@@ -204,7 +208,7 @@ class PostRepository extends Repository
         }
         $constraints[] = $query->contains('authors', $author);
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -220,7 +224,7 @@ class PostRepository extends Repository
             $constraints[] = $storagePidConstraint;
         }
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -236,7 +240,7 @@ class PostRepository extends Repository
             $constraints[] = $storagePidConstraint;
         }
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -261,7 +265,7 @@ class PostRepository extends Repository
         $constraints[] = $query->greaterThanOrEqual('publish_date', $startDate->getTimestamp());
         $constraints[] = $query->lessThanOrEqual('publish_date', $endDate->getTimestamp());
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     public function findCurrentPost(): ?Post
@@ -297,7 +301,7 @@ class PostRepository extends Repository
 
         /** @var null|Post */
         $result = $query
-            ->matching($query->logicalAnd($constraints))
+            ->matching($query->logicalAnd(...$constraints))
             ->execute()
             ->getFirst();
 
@@ -341,7 +345,7 @@ class PostRepository extends Repository
         }
         $constraints[] = $query->greaterThan('crdateMonth', 0);
         $constraints[] = $query->greaterThan('crdateYear', 0);
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(...$constraints));
         $posts = $query->execute(true);
 
         $result = [];

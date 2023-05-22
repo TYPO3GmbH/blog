@@ -79,9 +79,7 @@ class CategoryRepository extends Repository
             $conditions[] = $query->in('uid', $categories);
 
             return $query->matching(
-                $query->logicalAnd(
-                    $conditions
-                )
+                $query->logicalAnd(...$conditions)
             )->execute();
         }
 
