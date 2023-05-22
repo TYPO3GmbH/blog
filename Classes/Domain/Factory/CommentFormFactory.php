@@ -12,6 +12,7 @@ namespace T3G\AgencyPack\Blog\Domain\Factory;
 
 use T3G\AgencyPack\Blog\Domain\Finisher\CommentFormFinisher;
 use T3G\AgencyPack\Blog\Domain\Validator\GoogleCaptchaValidator;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -90,7 +91,13 @@ class CommentFormFactory extends AbstractFormFactory
         $commentField = $page->createElement('comment', 'Textarea');
         $commentField->setLabel((string) LocalizationUtility::translate('form.comment.comment', 'blog'));
         $commentField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
-        $commentField->addValidator(GeneralUtility::makeInstance(StringLengthValidator::class, ['minimum' => 5]));
+        if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
+            $stringLengthValidator = GeneralUtility::makeInstance(StringLengthValidator::class, ['minimum' => 5]);
+        } else {
+            $stringLengthValidator = GeneralUtility::makeInstance(StringLengthValidator::class);
+            $stringLengthValidator->setOptions(['minimum' => 5]);
+        }
+        $commentField->addValidator($stringLengthValidator);
 
         $explanationText = $page->createElement('explanation', 'StaticText');
         $explanationText->setProperty('text', LocalizationUtility::translate('label.required.field', 'blog') . ' ' . LocalizationUtility::translate('label.required.field.explanation', 'blog'));
