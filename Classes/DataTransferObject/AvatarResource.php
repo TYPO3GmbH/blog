@@ -15,8 +15,6 @@ use Psr\Http\Message\UriInterface;
 interface AvatarResource
 {
     public function getUri(): UriInterface;
-
     public function getContentType(): string;
-
     public function getContent(): string;
 }

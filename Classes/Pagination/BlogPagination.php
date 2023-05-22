@@ -117,17 +117,11 @@ final class BlogPagination implements PaginationInterface
         return range($this->getFirstPageNumber(), $this->getLastPageNumber());
     }
 
-    /**
-     * @return int
-     */
     public function getDisplayRangeStart(): int
     {
         return $this->displayRangeStart;
     }
 
-    /**
-     * @return int
-     */
     public function getDisplayRangeEnd(): int
     {
         return $this->displayRangeEnd;
@@ -151,25 +145,16 @@ final class BlogPagination implements PaginationInterface
         return $this->getDisplayRangeEnd() < $this->getLastPageNumber();
     }
 
-    /**
-     * @return int
-     */
     public function getMaximumNumberOfLinks(): int
     {
         return $this->maximumNumberOfLinks;
     }
 
-    /**
-     * @return PaginatorInterface
-     */
     public function getPaginator(): PaginatorInterface
     {
         return $this->paginator;
     }
 
-    /**
-     * @return iterable
-     */
     public function getPaginatedItems(): iterable
     {
         return $this->paginator->getPaginatedItems();

@@ -27,20 +27,9 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class GravatarProvider implements AvatarProviderInterface, SingletonInterface
 {
-    /**
-     * @var GravatarUriBuilderInterface
-     */
-    private $gravatarUriBuilder;
-
-    /**
-     * @var AvatarResourceResolverInterface
-     */
-    private $avatarResourceResolver;
-
-    /**
-     * @var bool
-     */
-    private $proxyGravatarImage;
+    private GravatarUriBuilderInterface $gravatarUriBuilder;
+    private AvatarResourceResolverInterface $avatarResourceResolver;
+    private bool $proxyGravatarImage;
 
     final public function __construct()
     {

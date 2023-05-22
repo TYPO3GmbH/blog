@@ -15,10 +15,7 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 final class FeaturedImageUpdate extends AbstractUpdate implements UpgradeWizardInterface, RepeatableInterface
 {
-    /**
-     * @var string
-     */
-    protected $title = 'EXT:blog: Featured Image Update';
+    protected string $title = 'EXT:blog: Featured Image Update';
 
     public function updateNecessary(): bool
     {

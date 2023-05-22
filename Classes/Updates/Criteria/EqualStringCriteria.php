@@ -14,10 +14,7 @@ use TYPO3\CMS\Core\Database\Connection;
 
 class EqualStringCriteria extends AbstractCriteria implements CriteriaInterface
 {
-    /**
-     * @var string
-     */
-    protected $value;
+    protected string $value;
 
     public function setValue(string $value): self
     {

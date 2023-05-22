@@ -17,15 +17,8 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 final class AuthorSlugUpdate extends AbstractUpdate implements UpgradeWizardInterface
 {
-    /**
-     * @var string
-     */
-    protected $title = 'EXT:blog: Generate Path-Segments for Authors';
-
-    /**
-     * @var string
-     */
-    protected $table = 'tx_blog_domain_model_author';
+    protected string $title = 'EXT:blog: Generate Path-Segments for Authors';
+    protected string $table = 'tx_blog_domain_model_author';
 
     public function updateNecessary(): bool
     {

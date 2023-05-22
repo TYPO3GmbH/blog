@@ -34,10 +34,6 @@ class CommentFormFactory extends AbstractFormFactory
      * Build a FormDefinition.
      * This example build a FormDefinition manually,
      * so $configuration and $prototypeName are unused.
-     *
-     * @param array $configuration
-     * @param string $prototypeName
-     * @return FormDefinition
      */
     public function build(array $configuration, string $prototypeName = null): FormDefinition
     {

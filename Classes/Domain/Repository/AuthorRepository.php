@@ -18,11 +18,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class AuthorRepository extends Repository
 {
-    /**
-     * Initializes the repository.
-     *
-     * @throws \InvalidArgumentException
-     */
     public function initializeObject(): void
     {
         $this->defaultOrderings = [

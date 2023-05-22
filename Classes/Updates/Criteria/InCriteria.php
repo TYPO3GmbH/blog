@@ -14,10 +14,7 @@ use TYPO3\CMS\Core\Database\Connection;
 
 class InCriteria extends AbstractCriteria implements CriteriaInterface
 {
-    /**
-     * @var array
-     */
-    protected $values;
+    protected array $values;
 
     public function setValues(array $values): self
     {

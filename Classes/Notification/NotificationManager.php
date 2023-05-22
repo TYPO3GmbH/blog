@@ -15,10 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class NotificationManager
 {
-    /**
-     * @var array
-     */
-    protected $visitorsRegistry = [];
+    protected array $visitorsRegistry = [];
 
     public function __construct()
     {
@@ -33,10 +30,6 @@ class NotificationManager
         }
     }
 
-    /**
-     * @param NotificationInterface $notification
-     * @throws \InvalidArgumentException
-     */
     public function notify(NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();

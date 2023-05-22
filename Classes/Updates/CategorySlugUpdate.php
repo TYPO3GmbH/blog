@@ -17,15 +17,8 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 final class CategorySlugUpdate extends AbstractUpdate implements UpgradeWizardInterface
 {
-    /**
-     * @var string
-     */
-    protected $title = 'EXT:blog: Generate Path-Segments for Categories';
-
-    /**
-     * @var string
-     */
-    protected $table = 'sys_category';
+    protected string $title = 'EXT:blog: Generate Path-Segments for Categories';
+    protected string $table = 'sys_category';
 
     public function updateNecessary(): bool
     {

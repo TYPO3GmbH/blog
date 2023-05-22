@@ -14,10 +14,7 @@ use TYPO3\CMS\Core\Database\Connection;
 
 class EqualIntCriteria extends AbstractCriteria implements CriteriaInterface
 {
-    /**
-     * @var int
-     */
-    protected $value;
+    protected int $value;
 
     public function setValue(int $value): self
     {

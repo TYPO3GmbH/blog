@@ -22,69 +22,24 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class WidgetController extends ActionController
 {
-    /**
-     * @var CategoryRepository
-     */
-    protected $categoryRepository;
+    protected CategoryRepository $categoryRepository;
+    protected TagRepository $tagRepository;
+    protected PostRepository $postRepository;
+    protected CommentRepository $commentRepository;
+    protected CacheService $cacheService;
 
-    /**
-     * @var TagRepository
-     */
-    protected $tagRepository;
-
-    /**
-     * @var PostRepository
-     */
-    protected $postRepository;
-
-    /**
-     * @var CommentRepository
-     */
-    protected $commentRepository;
-
-    /**
-     * @var CacheService
-     */
-    protected $blogCacheService;
-
-    /**
-     * @param CategoryRepository $categoryRepository
-     */
-    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
-    {
+    public function __construct(
+        CategoryRepository $categoryRepository,
+        TagRepository $tagRepository,
+        PostRepository $postRepository,
+        CommentRepository $commentRepository,
+        CacheService $cacheService
+    ) {
         $this->categoryRepository = $categoryRepository;
-    }
-
-    /**
-     * @param TagRepository $tagRepository
-     */
-    public function injectTagRepository(TagRepository $tagRepository): void
-    {
         $this->tagRepository = $tagRepository;
-    }
-
-    /**
-     * @param PostRepository $postRepository
-     */
-    public function injectPostRepository(PostRepository $postRepository): void
-    {
         $this->postRepository = $postRepository;
-    }
-
-    /**
-     * @param CommentRepository $commentRepository
-     */
-    public function injectCommentRepository(CommentRepository $commentRepository): void
-    {
         $this->commentRepository = $commentRepository;
-    }
-
-    /**
-     * @param \T3G\AgencyPack\Blog\Service\CacheService $cacheService
-     */
-    public function injectBlogCacheService(CacheService $cacheService): void
-    {
-        $this->blogCacheService = $cacheService;
+        $this->cacheService = $cacheService;
     }
 
     public function categoriesAction(): ResponseInterface
@@ -98,7 +53,7 @@ class WidgetController extends ActionController
         $this->view->assign('categories', $categories);
         $this->view->assign('currentCategory', $currentCategory);
         foreach ($categories as $category) {
-            $this->blogCacheService->addTagToPage('tx_blog_category_' . $category->getUid());
+            $this->cacheService->addTagToPage('tx_blog_category_' . $category->getUid());
         }
         return $this->htmlResponse();
     }
@@ -136,18 +91,13 @@ class WidgetController extends ActionController
         }
         unset($tagReference);
         foreach ($tags as $tag) {
-            $this->blogCacheService->addTagToPage('tx_blog_tag_' . (int)$tag['uid']);
+            $this->cacheService->addTagToPage('tx_blog_tag_' . (int)$tag['uid']);
         }
         $this->view->assign('tags', $tags);
         $this->view->assign('currentTag', $currentTag);
         return $this->htmlResponse();
     }
 
-    /**
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
     public function recentPostsAction(): ResponseInterface
     {
         $limit = (int)($this->settings['widgets']['recentposts']['limit'] ?? 0);
@@ -157,16 +107,12 @@ class WidgetController extends ActionController
             : $this->postRepository->findAll();
 
         foreach ($posts as $post) {
-            $this->blogCacheService->addTagsForPost($post);
+            $this->cacheService->addTagsForPost($post);
         }
         $this->view->assign('posts', $posts);
         return $this->htmlResponse();
     }
 
-    /**
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
     public function commentsAction(): ResponseInterface
     {
         $limit = (int)($this->settings['widgets']['comments']['limit'] ?? 5);
@@ -174,14 +120,11 @@ class WidgetController extends ActionController
         $comments = $this->commentRepository->findActiveComments($limit, $blogSetup);
         $this->view->assign('comments', $comments);
         foreach ($comments as $comment) {
-            $this->blogCacheService->addTagToPage('tx_blog_comment_' . $comment->getUid());
+            $this->cacheService->addTagToPage('tx_blog_comment_' . $comment->getUid());
         }
         return $this->htmlResponse();
     }
 
-    /**
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     */
     public function archiveAction(): ResponseInterface
     {
         $posts = $this->postRepository->findMonthsAndYearsWithPosts();

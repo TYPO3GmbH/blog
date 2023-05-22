@@ -19,37 +19,26 @@ class PostRepositoryDemand
     /**
      * @var int[]
      */
-    protected $posts = [];
+    protected array $posts = [];
 
     /**
      * @var Category[]
      */
-    protected $categories = [];
-
-    /**
-     * @var string
-     */
-    protected $categoriesConjunction = Constants::REPOSITORY_CONJUNCTION_AND;
+    protected array $categories = [];
+    protected string $categoriesConjunction = Constants::REPOSITORY_CONJUNCTION_AND;
 
     /**
      * @var Tag[]
      */
-    protected $tags = [];
-
-    /**
-     * @var string
-     */
-    protected $tagsConjunction = Constants::REPOSITORY_CONJUNCTION_AND;
+    protected array $tags = [];
+    protected string $tagsConjunction = Constants::REPOSITORY_CONJUNCTION_AND;
 
     /**
      * @var string[]
      */
-    protected $ordering = [];
+    protected array $ordering = [];
 
-    /**
-     * @var int
-     */
-    protected $limit = 0;
+    protected int $limit = 0;
 
     /**
      * @return int[]
@@ -100,9 +89,6 @@ class PostRepositoryDemand
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getCategoriesConjunction(): string
     {
         return $this->categoriesConjunction;
@@ -140,9 +126,6 @@ class PostRepositoryDemand
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getTagsConjunction(): string
     {
         return $this->tagsConjunction;

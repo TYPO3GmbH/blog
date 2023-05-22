@@ -14,15 +14,8 @@ use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 abstract class AbstractCriteria
 {
-    /**
-     * @var QueryBuilder
-     */
-    protected $queryBuilder;
-
-    /**
-     * @var string
-     */
-    protected $field;
+    protected QueryBuilder $queryBuilder;
+    protected string $field;
 
     public function __construct(QueryBuilder $queryBuilder, string $field)
     {

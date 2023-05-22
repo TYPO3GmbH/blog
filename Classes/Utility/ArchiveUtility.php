@@ -27,10 +27,6 @@ class ArchiveUtility
      *  ]
      *  ...
      * ]
-     *
-     * @param array $data
-     * @return array
-     * @throws \Exception
      */
     public static function extractDataFromPosts(array $data): array
     {

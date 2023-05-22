@@ -26,20 +26,13 @@ abstract class AbstractUpdate
     const CONDITION_AND = 'AND';
     const CONDITION_OR = 'OR';
 
-    /**
-     * @var string
-     */
-    protected $title = '';
-
-    /**
-     * @var string
-     */
-    protected $description = '';
+    protected string $title = '';
+    protected string $description = '';
 
     /**
      * @var Connection[]
      */
-    protected $connection = [];
+    protected array $connection = [];
 
     public function getIdentifier(): string
     {

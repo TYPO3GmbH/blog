@@ -19,18 +19,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class MetaTagService
 {
-    // Page Title
     public const META_TITLE = 'title';
-
-    // Description
     public const META_DESCRIPTION = 'description';
 
-    /**
-     * @param string $type
-     * @param string $value
-     *
-     * @throws \InvalidArgumentException
-     */
     public static function set(string $type, string $value): void
     {
         switch ($type) {
@@ -45,10 +36,6 @@ class MetaTagService
         }
     }
 
-    /**
-     * @param string $value
-     * @return void
-     */
     protected static function setTitle(string $value): void
     {
         $provider = GeneralUtility::makeInstance(BlogTitleTagProvider::class);
@@ -59,10 +46,6 @@ class MetaTagService
         $twitterTitleManager->addProperty('twitter:title', $value);
     }
 
-    /**
-     * @param string $value
-     * @return void
-     */
     protected static function setDescription(string $value): void
     {
         $descriptionManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)->getManagerForProperty('description');
