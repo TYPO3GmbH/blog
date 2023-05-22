@@ -17,6 +17,7 @@ parameters:
 		- "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
 		- "#^Method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryInterface\\:\\:logicalAnd\\(\\) invoked with 2 parameters, 1 required\\.$#"
 		- "#^Method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryInterface\\:\\:logicalOr\\(\\) invoked with 2 parameters, 1 required\\.$#"
+		- "#^Dynamic call to static method TYPO3\\\\CMS\\\\Core\\\\Http\\\\Client\\\\GuzzleClientFactory\\:\\:getClient\\(\\)\\.$#"
 
 	paths:
 	- %currentWorkingDirectory%/Classes/
