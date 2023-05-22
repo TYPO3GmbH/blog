@@ -68,7 +68,7 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         $default = trim($default = (string)($settings['authors']['avatar']['provider']['default'] ?? '')) === '' ? null : $default;
 
         $gravatarUri = $this->gravatarUriBuilder->getUri(
-            $author->getEmail() ?? '',
+            $author->getEmail(),
             $size,
             $rating,
             $default
