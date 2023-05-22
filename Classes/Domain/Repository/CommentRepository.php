@@ -155,27 +155,27 @@ class CommentRepository extends Repository
             ? (bool) $this->settings['comments']['respectPostLanguageId']
             : false;
         if ($respectPostLanguageId) {
-            $constraints[] = $query->logicalOr([
+            $constraints[] = $query->logicalOr(
                 $query->equals('postLanguageId', GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId()),
-                $query->equals('postLanguageId', -1),
-            ]);
+                $query->equals('postLanguageId', -1)
+            );
         }
 
         $tstamp = time();
-        $constraints[] = $query->logicalAnd([
-            $query->logicalOr([
+        $constraints[] = $query->logicalAnd(
+            $query->logicalOr(
                 $query->equals('post.starttime', 0),
-                $query->lessThanOrEqual('post.starttime', $tstamp),
-            ]),
-            $query->logicalOr([
+                $query->lessThanOrEqual('post.starttime', $tstamp)
+            ),
+            $query->logicalOr(
                 $query->equals('post.endtime', 0),
-                $query->greaterThanOrEqual('post.endtime', $tstamp),
-            ])
-        ]);
-        $constraints[] = $query->logicalAnd([
+                $query->greaterThanOrEqual('post.endtime', $tstamp)
+            )
+        );
+        $constraints[] = $query->logicalAnd(
             $query->equals('post.hidden', 0),
             $query->equals('post.deleted', 0)
-        ]);
+        );
 
         return $constraints;
     }
