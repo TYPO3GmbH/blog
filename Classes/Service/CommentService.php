@@ -17,6 +17,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * Class CommentService.
@@ -99,10 +100,7 @@ class CommentService
         )->execute()->count() > 0;
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function getCommentsByPost(Post $post)
+    public function getCommentsByPost(Post $post): QueryResultInterface
     {
         return $this->commentRepository->findAllByPost($post);
     }

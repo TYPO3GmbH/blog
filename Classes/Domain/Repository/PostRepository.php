@@ -28,6 +28,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ComparisonInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -139,18 +140,12 @@ class PostRepository extends Repository
         return $result;
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findAll()
+    public function findAll(): QueryResultInterface
     {
         return $this->getFindAllQuery()->execute();
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findAllByPid(?int $blogSetup = null)
+    public function findAllByPid(?int $blogSetup = null): QueryResultInterface
     {
         $query = $this->getFindAllQuery();
 
@@ -166,10 +161,7 @@ class PostRepository extends Repository
         return $query->execute();
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findAllWithLimit(int $limit)
+    public function findAllWithLimit(int $limit): QueryResultInterface
     {
         $query = $this->getFindAllQuery();
         $query->setLimit($limit);
@@ -195,10 +187,7 @@ class PostRepository extends Repository
         return $query;
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findAllByAuthor(Author $author)
+    public function findAllByAuthor(Author $author): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
@@ -211,10 +200,7 @@ class PostRepository extends Repository
         return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findAllByCategory(Category $category)
+    public function findAllByCategory(Category $category): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
@@ -227,10 +213,7 @@ class PostRepository extends Repository
         return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findAllByTag(Tag $tag)
+    public function findAllByTag(Tag $tag): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
@@ -243,10 +226,7 @@ class PostRepository extends Repository
         return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findByMonthAndYear(int $year, int $month = null)
+    public function findByMonthAndYear(int $year, int $month = null): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
@@ -439,8 +419,6 @@ class PostRepository extends Repository
 
     /**
      * @return null|ComparisonInterface
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     protected function getStoragePidConstraint(): ?ComparisonInterface
     {
@@ -452,9 +430,6 @@ class PostRepository extends Repository
         return null;
     }
 
-    /**
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     */
     protected function getPidsForConstraints(): array
     {
         // only add non empty pids (pid 0 will be removed as well
@@ -472,9 +447,6 @@ class PostRepository extends Repository
         return $pids;
     }
 
-    /**
-     * @return TypoScriptFrontendController
-     */
     protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'] ?? null;

@@ -14,6 +14,7 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class TagRepository extends Repository
@@ -30,10 +31,7 @@ class TagRepository extends Repository
         ];
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findByUids(array $uids)
+    public function findByUids(array $uids): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->matching(
@@ -43,10 +41,7 @@ class TagRepository extends Repository
         return $query->execute();
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findTopByUsage(int $limit = 20)
+    public function findTopByUsage(int $limit = 20): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_blog_domain_model_tag');

@@ -19,6 +19,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class CommentRepository extends Repository
@@ -43,10 +44,7 @@ class CommentRepository extends Repository
         ];
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findAllByPost(Post $post)
+    public function findAllByPost(Post $post): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = [];
@@ -58,10 +56,7 @@ class CommentRepository extends Repository
         return $result;
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findAllByFilter(string $filter = null, int $blogSetup = null)
+    public function findAllByFilter(string $filter = null, int $blogSetup = null): QueryResultInterface
     {
         $query = $this->createQuery();
         $querySettings = $query->getQuerySettings();
@@ -95,13 +90,10 @@ class CommentRepository extends Repository
             return $query->matching($query->logicalAnd(...$constraints))->execute();
         }
 
-        return $this->findAll();
+        return $this->createQuery()->execute();
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findActiveComments(int $limit = null, int $blogSetup = null)
+    public function findActiveComments(int $limit = null, int $blogSetup = null): QueryResultInterface
     {
         $query = $this->createQuery();
 

@@ -18,6 +18,7 @@ use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 class Post extends AbstractEntity
 {
@@ -236,10 +237,7 @@ class Post extends AbstractEntity
         return $this->comments;
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function getActiveComments()
+    public function getActiveComments(): QueryResultInterface
     {
         return GeneralUtility::makeInstance(CommentRepository::class)
             ->findAllByPost($this);

@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class CategoryRepository extends Repository
@@ -41,10 +42,7 @@ class CategoryRepository extends Repository
         ];
     }
 
-    /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findByUids(array $uids)
+    public function findByUids(array $uids): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->matching($query->in('uid', $uids));
@@ -52,10 +50,7 @@ class CategoryRepository extends Repository
         return $query->execute();
     }
 
-    /**
-     * @return array|null|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function getByReference(string $table, int $uid, string $field = 'categories')
+    public function getByReference(string $table, int $uid, string $field = 'categories'): ?QueryResultInterface
     {
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
         $queryBuilder = $connectionPool->getConnectionForTable('sys_category_record_mm')->createQueryBuilder();
