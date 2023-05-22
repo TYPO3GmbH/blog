@@ -21,7 +21,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class Author extends AbstractEntity
 {
     protected string $avatarProvider = '';
-    protected ?AvatarProviderInterface $avatar = null;
     protected string $name = '';
     protected string $slug = '';
     protected string $title = '';
@@ -53,10 +52,7 @@ class Author extends AbstractEntity
         $this->posts = new ObjectStorage();
     }
 
-    /**
-     * @return AvatarProviderInterface
-     */
-    public function getAvatarProvider()
+    public function getAvatarProvider(): AvatarProviderInterface
     {
         $avatarProvider = trim($this->avatarProvider) !== ''
             ? GeneralUtility::makeInstance($this->avatarProvider)
@@ -77,10 +73,7 @@ class Author extends AbstractEntity
 
     public function getAvatar(int $size = 64): string
     {
-        if ($this->avatar === null) {
-            $this->avatar = $this->getAvatarProvider();
-        }
-        return $this->avatar->getAvatarUrl($this, $size);
+        return $this->getAvatarProvider()->getAvatarUrl($this, $size);
     }
 
     /**
