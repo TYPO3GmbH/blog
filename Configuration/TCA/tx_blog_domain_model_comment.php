@@ -31,6 +31,9 @@ return [
             'default' => 'record-blog-comment'
         ],
         'searchFields' => 'uid,comment,name,email',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'columns' => [
         'pid' => [

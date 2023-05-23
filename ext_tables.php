@@ -71,7 +71,9 @@ ExtensionManagementUtility::addUserTSConfig('
     options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . Constants::DOKTYPE_BLOG_POST . ')
 ');
 
-ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');
+if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
+    ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');
+}
 
 if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
     // Main Blog
