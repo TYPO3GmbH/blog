@@ -11,6 +11,7 @@ use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Controller\BackendController;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use TYPO3\CMS\Core\Imaging\IconRegistry;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
@@ -34,6 +35,9 @@ $icons = [
     'actions-approve' => 'EXT:blog/Resources/Public/Icons/actions-approve.svg',
     'actions-decline' => 'EXT:blog/Resources/Public/Icons/actions-decline.svg',
     'module-blog' => 'EXT:blog/Resources/Public/Icons/module-blog.svg',
+    'module-blog-posts' => 'EXT:blog/Resources/Public/Icons/module-blog-posts.svg',
+    'module-blog-comments' => 'EXT:blog/Resources/Public/Icons/module-blog-comments.svg',
+    'module-blog-setup' => 'EXT:blog/Resources/Public/Icons/module-blog-setup.svg',
     'plugin-blog-archive' => 'EXT:blog/Resources/Public/Icons/plugin-blog-archive.svg',
     'plugin-blog-authorposts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-authorposts.svg',
     'plugin-blog-authors' => 'EXT:blog/Resources/Public/Icons/plugin-blog-authors.svg',
@@ -69,63 +73,65 @@ ExtensionManagementUtility::addUserTSConfig('
 
 ExtensionManagementUtility::allowTableOnStandardPages('tx_blog_domain_model_comment');
 
-// Main Blog
-ExtensionManagementUtility::addModule(
-    'blog',
-    '',
-    'after:web',
-    null,
-    [
-        'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog.xlf',
-        'name' => 'blog',
-        'iconIdentifier' => 'module-blog',
-    ]
-);
+if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
+    // Main Blog
+    ExtensionManagementUtility::addModule(
+        'blog',
+        '',
+        'after:web',
+        null,
+        [
+            'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog.xlf',
+            'name' => 'blog',
+            'iconIdentifier' => 'module-blog',
+        ]
+    );
 
-// Module Blog > Posts
-ExtensionUtility::registerModule(
-    'Blog',
-    'blog',
-    'blog_posts',
-    '',
-    [
-        BackendController::class => 'posts',
-    ],
-    [
-        'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_posts.xlf',
-        'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-posts.svg',
-        'access' => 'user,group',
-    ]
-);
+    // Module Blog > Posts
+    ExtensionUtility::registerModule(
+        'Blog',
+        'blog',
+        'blog_posts',
+        '',
+        [
+            BackendController::class => 'posts',
+        ],
+        [
+            'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_posts.xlf',
+            'iconIdentifier' => 'module-blog-posts',
+            'access' => 'user,group',
+        ]
+    );
 
-// Module Blog > Comments
-ExtensionUtility::registerModule(
-    'Blog',
-    'blog',
-    'blog_comments',
-    '',
-    [
-        BackendController::class => 'comments, updateCommentStatus',
-    ],
-    [
-        'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_comments.xlf',
-        'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-comments.svg',
-        'access' => 'user,group',
-    ]
-);
+    // Module Blog > Comments
+    ExtensionUtility::registerModule(
+        'Blog',
+        'blog',
+        'blog_comments',
+        '',
+        [
+            BackendController::class => 'comments, updateCommentStatus',
+        ],
+        [
+            'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_comments.xlf',
+            'iconIdentifier' => 'module-blog-comments',
+            'access' => 'user,group',
+        ]
+    );
 
-// Module Blog > Setup
-ExtensionUtility::registerModule(
-    'Blog',
-    'blog',
-    'blog_setup',
-    '',
-    [
-        BackendController::class => 'setupWizard, createBlog',
-    ],
-    [
-        'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_setup.xlf',
-        'icon' => 'EXT:blog/Resources/Public/Icons/module-blog-setup.svg',
-        'access' => 'admin',
-    ]
-);
+    // Module Blog > Setup
+    ExtensionUtility::registerModule(
+        'Blog',
+        'blog',
+        'blog_setup',
+        '',
+        [
+            BackendController::class => 'setupWizard, createBlog',
+        ],
+        [
+            'labels' => 'LLL:EXT:blog/Resources/Private/Language/locallang_mod_blog_setup.xlf',
+            'iconIdentifier' => 'module-blog-setup',
+            'access' => 'admin',
+        ]
+    );
+}
