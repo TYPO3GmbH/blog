@@ -17,6 +17,7 @@ use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -157,13 +158,14 @@ class BackendController extends ActionController
         $this->redirect('comments', null, null, ['filter' => $filter, 'blogSetup' => $blogSetup]);
     }
 
-    public function createBlogAction(array $data = null): void
+    public function createBlogAction(array $data = null): ResponseInterface
     {
         if ($data !== null && $this->setupService->createBlogSetup($data)) {
             $this->addFlashMessage('Your blog setup has been created.', 'Congratulation');
         } else {
             $this->addFlashMessage('Sorry, your blog setup could not be created.', 'An error occurred', FlashMessage::ERROR);
         }
-        $this->redirect('setupWizard');
+
+        return new RedirectResponse($this->uriBuilder->reset()->uriFor('setupWizard'));
     }
 }

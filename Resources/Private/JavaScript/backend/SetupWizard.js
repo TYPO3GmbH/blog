@@ -1,42 +1,54 @@
 /**
  * Module: TYPO3/CMS/Blog/SetupWizard
  */
-import $ from "jquery";
 import Modal from "TYPO3/CMS/Backend/Modal";
 import Severity from "TYPO3/CMS/Backend/Severity";
 
-var SetupWizard = {
+const SetupWizard = {
     triggerSelector: '.t3js-setup-wizard-trigger',
     modalContentSelector: '.t3js-setup-wizard-step1 .step-content'
 };
 
 SetupWizard.initialize = function() {
-    $(document).on('click', SetupWizard.triggerSelector, function(e) {
-        e.preventDefault();
-        var $element = $(this);
-        var $content = $(SetupWizard.modalContentSelector).clone();
+    const triggerSelector = document.querySelector(SetupWizard.triggerSelector);
+    triggerSelector.addEventListener('click', (event) => {
+        event.preventDefault();
+        const element = event.target;
+        var content = document.querySelector(SetupWizard.modalContentSelector).cloneNode(true);
         var buttons = [
             {
-                text: $element.data('button-close-text') || 'Close',
+                text: element.dataset.buttonCloseText || 'Close',
                 active: true,
                 btnClass: 'btn-default',
-                trigger: function() {
-                    Modal.currentModal.trigger('modal-dismiss');
+                trigger: (event, modal) => {
+                    if (modal !== undefined) {
+                        modal.hideModal();
+                    } else {
+                        Modal.currentModal.trigger('modal-dismiss');
+                    }
                 }
             },
             {
-                text: $element.data('button-ok-text') || 'OK',
+                text: element.dataset.buttonOkText || 'OK',
                 btnClass: 'btn-primary',
-                trigger: function(evt) {
-                    self.location.href = $element.attr('href')
-                        .replace('%40title', Modal.currentModal.find('input[name="title"]').val())
-                        .replace('%40template', Modal.currentModal.find('input[name="template"]:checked').length)
-                        .replace('%40install', Modal.currentModal.find('input[name="install"]:checked').length);
-                    Modal.currentModal.trigger('modal-dismiss');
+                trigger: (event, modal) => {
+                    if (modal !== undefined) {
+                        self.location.href = element.getAttribute('href')
+                            .replace('@title', modal.querySelector('input[name="title"]').value)
+                            .replace('@template', modal.querySelectorAll('input[name="template"]:checked').length)
+                            .replace('@install', modal.querySelectorAll('input[name="install"]:checked').length)
+                        modal.hideModal();
+                    } else {
+                        self.location.href = element.getAttribute('href')
+                            .replace('%40title', Modal.currentModal.find('input[name="title"]').val())
+                            .replace('%40template', Modal.currentModal.find('input[name="template"]:checked').length)
+                            .replace('%40install', Modal.currentModal.find('input[name="install"]:checked').length);
+                        Modal.currentModal.trigger('modal-dismiss');
+                    }
                 }
             }
         ];
-        Modal.show('Blog Setup Wizard', $content, Severity.notice, buttons);
+        Modal.show('Blog Setup Wizard', content, Severity.notice, buttons);
     });
 };
 
