@@ -19,9 +19,7 @@ use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Page\PageRenderer;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 
 class BackendController extends ActionController
 {
@@ -79,9 +77,13 @@ class BackendController extends ActionController
 
     public function setupWizardAction(): ResponseInterface
     {
-        return $this->htmlResponse($this->render('Backend/SetupWizard.html', [
+        $this->view->assignMultiple([
             'blogSetups' => $this->setupService->determineBlogSetups(),
-        ]));
+        ]);
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     public function postsAction(int $blogSetup = null): ResponseInterface
@@ -91,54 +93,36 @@ class BackendController extends ActionController
         $querySettings->setIgnoreEnableFields(true);
         $this->postRepository->setDefaultQuerySettings($querySettings);
 
-        $html = $this->render('Backend/Posts.html', [
+        $this->view->assignMultiple([
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'activeBlogSetup' => $blogSetup,
             'posts' => $this->postRepository->findAllByPid($blogSetup),
         ]);
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
 
-        $response = $this->responseFactory
-            ->createResponse()
-            ->withHeader('Content-Type', 'text/html; charset=utf-8');
-        $response
-            ->getBody()
-            ->write($html);
-
-        return $response;
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     public function commentsAction(string $filter = null, int $blogSetup = null): ResponseInterface
     {
-        $comments = [
-            'all' => $this->commentRepository->findAllByFilter(null, $blogSetup),
-            'pending' => $this->commentRepository->findAllByFilter('pending', $blogSetup),
-            'approved' => $this->commentRepository->findAllByFilter('approved', $blogSetup),
-            'declined' => $this->commentRepository->findAllByFilter('declined', $blogSetup),
-            'deleted' => $this->commentRepository->findAllByFilter('deleted', $blogSetup),
-        ];
-
-        $html = $this->render('Backend/Comments.html', [
+        $this->view->assignMultiple([
             'activeFilter' => $filter,
             'activeBlogSetup' => $blogSetup,
             'commentCounts' => [
-                'all' => $comments['all']->count(),
-                'pending' => $comments['pending']->count(),
-                'approved' => $comments['approved']->count(),
-                'declined' => $comments['declined']->count(),
-                'deleted' => $comments['deleted']->count(),
+                'all' => $this->commentRepository->findAllByFilter(null, $blogSetup)->count(),
+                'pending' => $this->commentRepository->findAllByFilter('pending', $blogSetup)->count(),
+                'approved' => $this->commentRepository->findAllByFilter('approved', $blogSetup)->count(),
+                'declined' => $this->commentRepository->findAllByFilter('declined', $blogSetup)->count(),
+                'deleted' => $this->commentRepository->findAllByFilter('deleted', $blogSetup)->count(),
             ],
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'comments' => $this->commentRepository->findAllByFilter($filter, $blogSetup),
         ]);
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
 
-        $response = $this->responseFactory
-            ->createResponse()
-            ->withHeader('Content-Type', 'text/html; charset=utf-8');
-        $response
-            ->getBody()
-            ->write($html);
-
-        return $response;
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     public function updateCommentStatusAction(string $status, string $filter = null, int $blogSetup = null, array $comments = [], int $comment = null): void
@@ -181,31 +165,5 @@ class BackendController extends ActionController
             $this->addFlashMessage('Sorry, your blog setup could not be created.', 'An error occurred', FlashMessage::ERROR);
         }
         $this->redirect('setupWizard');
-    }
-
-    protected function getFluidTemplateObject(string $templateNameAndPath): StandaloneView
-    {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setLayoutRootPaths([GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Layouts')]);
-        $view->setPartialRootPaths([GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Partials')]);
-        $view->setTemplateRootPaths([GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Templates')]);
-        $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Templates/' . $templateNameAndPath));
-        $view->setControllerContext($this->getControllerContext());
-        $view->getRequest()->setControllerExtensionName('Blog');
-
-        return $view;
-    }
-
-    protected function render(string $templateNameAndPath, array $values): string
-    {
-        $view = $this->getFluidTemplateObject($templateNameAndPath);
-        $view->assign('_template', $templateNameAndPath);
-        $view->assign('action', $this->actionMethodName);
-        $view->assignMultiple($values);
-
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($view->render());
-
-        return $moduleTemplate->renderContent();
     }
 }
