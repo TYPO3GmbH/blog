@@ -30,6 +30,10 @@ class TestDataProcessor implements DataProcessorInterface
         $postRepository = GeneralUtility::makeInstance(PostRepository::class);
         $tagRepository = GeneralUtility::makeInstance(TagRepository::class);
 
+        if (!isset($processorConfiguration['data.'])) {
+            return $processedData;
+        }
+
         $result = [];
         foreach ($processorConfiguration['data.'] as $config) {
             switch ($config['type']) {
