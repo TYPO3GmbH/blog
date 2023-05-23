@@ -126,7 +126,7 @@ class BackendController extends ActionController
         return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
-    public function updateCommentStatusAction(string $status, string $filter = null, int $blogSetup = null, array $comments = [], int $comment = null): void
+    public function updateCommentStatusAction(string $status, string $filter = null, int $blogSetup = null, array $comments = [], int $comment = null): ResponseInterface
     {
         if ($comment !== null) {
             $comments['__identity'][] = $comment;
@@ -155,7 +155,8 @@ class BackendController extends ActionController
                 }
             }
         }
-        $this->redirect('comments', null, null, ['filter' => $filter, 'blogSetup' => $blogSetup]);
+
+        return new RedirectResponse($this->uriBuilder->reset()->uriFor('comments', ['filter' => $filter, 'blogSetup' => $blogSetup]));
     }
 
     public function createBlogAction(array $data = null): ResponseInterface
