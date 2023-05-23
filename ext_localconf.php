@@ -29,7 +29,9 @@ use T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate;
 use T3G\AgencyPack\Blog\Updates\TagSlugUpdate;
 use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew;
 use TYPO3\CMS\Core\Hooks\CreateSiteConfiguration;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 if (!defined('TYPO3')) {
@@ -43,10 +45,11 @@ ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:E
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['blogvh'][] = 'T3G\\AgencyPack\\Blog\\ViewHelpers';
 
 // Register page layout hooks to display additional information for posts.
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/db_layout.php']['drawHeaderHook'][]
-    = PageLayoutHeaderHook::class . '->drawHeader';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['recordlist/Modules/Recordlist/index.php']['drawHeaderHook'][]
-    = PageLayoutHeaderHook::class . '->drawHeader';
+// Replaced with T3G\AgencyPack\Blog\Listener\ModifyPageLayoutContent in v12
+if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/db_layout.php']['drawHeaderHook'][]
+       = PageLayoutHeaderHook::class . '->drawHeader';
+}
 
 // Register new form data provider
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][CategoryDefaultValueProvider::class] = [
