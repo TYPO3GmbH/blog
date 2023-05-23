@@ -22,7 +22,7 @@
                 <tbody>
                     <f:for each="{blogSetups}" as="blog">
                         <tr>
-                            <td class="col-title col-responsive nowrap">
+                            <td data-order="{blog.path}" class="col-title col-responsive nowrap">
                                 <a href="{be:moduleLink(route: 'web_list', arguments: '{id: blog.uid}')}">
                                     <core:icon identifier="record-folder-contains-blog" />
                                     {blog.path}

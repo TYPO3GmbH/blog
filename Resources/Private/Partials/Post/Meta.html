@@ -7,14 +7,14 @@
     <f:if condition="{post.categories}">
         <span class="sep">·</span>
         <f:for each="{post.categories}" as="postCategory">
-            <blogvh:link.category category="{postCategory}" class="label label-default label-category" />
+            <blogvh:link.category category="{postCategory}" class="badge badge-default badge-category" />
         </f:for>
     </f:if>
     <f:if condition="{post.tags}">
         <span class="sep">·</span>
         <span itemprop="keywords">
             <f:for each="{post.tags}" as="postTag">
-                <blogvh:link.tag tag="{postTag}" class="label label-default label-tag">
+                <blogvh:link.tag tag="{postTag}" class="badge badge-default badge-tag">
                     <span class="blogicon"><f:render partial="General/BlogIcons" section="Tag" optional="true" /></span>
                     <span>{postTag.title}</span>
                 </blogvh:link.tag>

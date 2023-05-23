@@ -23,7 +23,7 @@
                     <f:for each="{posts}" as="post">
                         <tr>
 
-                            <td class="nowrap" data-search="{post.title}" data-filter="{post.title}">
+                            <td class="nowrap" data-order="{post.title}" data-search="{post.title}" data-filter="{post.title}">
                                 <blogvh:link.be.post post="{post}">
                                     <core:iconForRecord table="pages" row="{post.asArray}" />
                                     {post.title}
@@ -32,7 +32,7 @@
 
                             <f:variable name="hiddenString" value="{f:if(condition: post.hidden, then: 'yes', else: 'no')}" />
                             <f:variable name="hiddenString" value="{f:translate(key: 'backend.table.hidden.{hiddenString}')}" />
-                            <td class="nowrap" data-search="{hiddenString}" data-filter="{hiddenString}">
+                            <td class="nowrap" data-order="{hiddenString}" data-search="{hiddenString}" data-filter="{hiddenString}">
                                 {hiddenString}
                             </td>
 
@@ -45,7 +45,7 @@
                                     </f:if>
                                 </f:for>
                             </f:if>
-                            <td class="nowrap" data-search="{authorString}" data-filter="{authorString}">
+                            <td class="nowrap" data-order="{authorString}" data-search="{authorString}" data-filter="{authorString}">
                                 <f:for each="{post.authors}" as="author" iteration="iteration">
                                     <blogvh:link.be.author author="{author}" /><f:if condition="{iteration.isLast}"><f:else>, </f:else></f:if>
                                 </f:for>
@@ -60,9 +60,9 @@
                                     </f:if>
                                 </f:for>
                             </f:if>
-                            <td data-search="{categoryString}" data-filter="{categoryString}">
+                            <td data-order="{categoryString}" data-search="{categoryString}" data-filter="{categoryString}">
                                 <f:for each="{post.categories}" as="category" iteration="iteration">
-                                    <blogvh:link.be.category category="{category}" class="label label-info" />
+                                    <blogvh:link.be.category category="{category}" class="badge badge-info" />
                                 </f:for>
                             </td>
 
@@ -75,9 +75,9 @@
                                     </f:if>
                                 </f:for>
                             </f:if>
-                            <td data-search="{tagString}" data-filter="{tagString}">
+                            <td data-order="{tagString}" data-search="{tagString}" data-filter="{tagString}">
                                 <f:for each="{post.tags}" as="tag" iteration="iteration">
-                                    <blogvh:link.be.tag tag="{tag}" class="label label-info" />
+                                    <blogvh:link.be.tag tag="{tag}" class="badge badge-info" />
                                 </f:for>
                             </td>
 

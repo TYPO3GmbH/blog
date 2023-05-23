@@ -27,11 +27,11 @@
                                 <td class="actions">
                                     <f:render section="Actions" arguments="{_all}" />
                                 </td>
-                                <td data-search="{comment.name}" data-filter="{comment.name}">
+                                <td data-order="{comment.name}" data-search="{comment.name}" data-filter="{comment.name}">
                                     {comment.name}
                                 </td>
-                                <td>{comment.comment}</td>
-                                <td data-search="{comment.post.title}" data-filter="{comment.post.title}">
+                                <td data-order="{comment.comment}">{comment.comment}</td>
+                                <td data-order="{comment.post.title}" data-search="{comment.post.title}" data-filter="{comment.post.title}">
                                     <f:if condition="{comment.post}">
                                         <f:then><blogvh:link.be.post post="{comment.post}" /></f:then>
                                         <f:else><f:translate key="backend.message.nopost" /></f:else>

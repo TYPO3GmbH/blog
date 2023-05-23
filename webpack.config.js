@@ -1,8 +1,7 @@
 "use strict";
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
@@ -28,7 +27,6 @@ module.exports = {
     optimization: {
         minimizer: [
             new TerserPlugin({}),
-            new OptimizeCSSAssetsPlugin({})
         ]
     },
     module: {
@@ -54,7 +52,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new FixStyleOnlyEntriesPlugin(),
+        new RemoveEmptyScriptsPlugin(),
         new MiniCssExtractPlugin({
             filename: '../Css/[name].min.css',
         })
