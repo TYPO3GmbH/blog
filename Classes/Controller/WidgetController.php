@@ -46,7 +46,7 @@ class WidgetController extends ActionController
     {
         $requestParameters = GeneralUtility::_GP('tx_blog_category');
         $currentCategory = 0;
-        if (!(bool)($requestParameters['category'] ?? null)) {
+        if (($requestParameters['category'] ?? null) !== null) {
             $currentCategory = (int)$requestParameters['category'];
         }
         $categories = $this->categoryRepository->findAll();
@@ -62,7 +62,7 @@ class WidgetController extends ActionController
     {
         $requestParameters = GeneralUtility::_GP('tx_blog_tag');
         $currentTag = 0;
-        if (!(bool)($requestParameters['tag'] ?? null)) {
+        if (($requestParameters['tag'] ?? null) !== null) {
             $currentTag = (int)$requestParameters['tag'];
         }
         $limit = (int)($this->settings['widgets']['tags']['limit'] ?? 20);
