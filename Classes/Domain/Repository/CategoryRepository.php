@@ -33,7 +33,6 @@ class CategoryRepository extends Repository
             GeneralUtility::makeInstance(Context::class),
             $configurationManager
         );
-        $querySettings->setRespectStoragePage(false);
         $querySettings->setStoragePageIds(GeneralUtility::intExplode(',', $this->settings['persistence']['storagePid']));
         $this->setDefaultQuerySettings($querySettings);
 
