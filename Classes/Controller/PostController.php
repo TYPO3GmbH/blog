@@ -28,11 +28,11 @@ use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3Fluid\Fluid\View\ViewInterface;
 
 class PostController extends ActionController
 {
@@ -59,9 +59,11 @@ class PostController extends ActionController
         $this->postRepositoryDemandFactory = $postRepositoryDemandFactory;
     }
 
-    protected function initializeView(ViewInterface $view): void
+    /**
+     * @param ViewInterface|\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
+     */
+    protected function initializeView($view): void
     {
-        parent::initializeView($view);
         if ($this->request->getFormat() === 'rss') {
             $action = '.' . $this->request->getControllerActionName();
             $arguments = [];
