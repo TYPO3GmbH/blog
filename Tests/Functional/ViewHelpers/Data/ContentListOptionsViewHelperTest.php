@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog\Tests\Functional\ViewHelpers\Link;
+namespace T3G\AgencyPack\Blog\Tests\Functional\ViewHelpers\Data;
 
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Tests\Functional\SiteBasedTestCase;
