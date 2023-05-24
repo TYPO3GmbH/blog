@@ -9,6 +9,7 @@ parameters:
 	level: 8
 	checkMissingIterableValueType: false
 	reportUnmatchedIgnoredErrors: false
+	checkGenericClassInNonGenericObjectType: false
 
 	ignoreErrors:
 		- "#Casting to string something that's already string.#"
