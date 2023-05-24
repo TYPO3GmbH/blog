@@ -1,30 +1,31 @@
 /**
  * Module: TYPO3/CMS/Blog/MassUpdate
  */
-import $ from 'jquery';
-
-var MassUpdate = {
-    checkboxTriggerSelector: '.t3js-check-multiple-selection',
-    checkboxSelector: '.t3js-check-multiple-selection input[type="checkbox"]',
-    actionButton: '.t3js-check-multiple-action'
+const MassUpdate = {
+    checkboxSelector: '.t3js-blog-massupdate-checkbox',
+    actionButton: '.t3js-blog-massupdate-action'
 };
 
 MassUpdate.initialize = function () {
-    $(function () {
-        $(document).on('click', MassUpdate.checkboxTriggerSelector, function() {
-            MassUpdate.updateButton();
-        });
+    const checkboxes = document.querySelectorAll(MassUpdate.checkboxSelector);
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', MassUpdate.updateButton);
     });
 };
 
 MassUpdate.updateButton = function() {
-    var active = false;
-    $(MassUpdate.checkboxSelector).each(function() {
-        if ($(this).prop('checked')) {
+    const checkboxes = document.querySelectorAll(MassUpdate.checkboxSelector);
+    const buttons = document.querySelectorAll(MassUpdate.actionButton);
+
+    let active = false;
+    checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
             active = true;
         }
     });
-    $(MassUpdate.actionButton).prop('disabled', !active);
+    buttons.forEach((button) => {
+        button.disabled = !active;
+    });
 };
 
 MassUpdate.initialize();

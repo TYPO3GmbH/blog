@@ -46,9 +46,9 @@
                     <tfoot>
                         <tr>
                             <th colspan="5">
-                                <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="approve" disabled="true"><f:translate key="action.multiple.approve" /></f:form.button>
-                                <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="decline" disabled="true"><f:translate key="action.multiple.decline" /></f:form.button>
-                                <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="delete" disabled="true"><f:translate key="action.multiple.delete" /></f:form.button>
+                                <f:form.button class="btn btn-default t3js-blog-massupdate-action" name="status" value="approve" disabled="true"><f:translate key="action.multiple.approve" /></f:form.button>
+                                <f:form.button class="btn btn-default t3js-blog-massupdate-action" name="status" value="decline" disabled="true"><f:translate key="action.multiple.decline" /></f:form.button>
+                                <f:form.button class="btn btn-default t3js-blog-massupdate-action" name="status" value="delete" disabled="true"><f:translate key="action.multiple.delete" /></f:form.button>
                             </th>
                         </tr>
                     </tfoot>
@@ -64,9 +64,9 @@
 </f:section>
 <f:section name="Actions">
     <div class="btn-group" role="group">
-        <label class="btn btn-default btn-checkbox t3js-check-multiple-selection">
-            <f:form.checkbox name="comments" multiple="true" value="{comment}" /><span class="t3-icon fa"></span>
-        </label>
+        <div class="form-check form-check-type-toggle">
+            <f:form.checkbox class="form-check-input t3js-blog-massupdate-checkbox" name="comments" multiple="true" value="{comment}" />
+        </div>
     </div>
     <div class="btn-group btn-group-actions" role="group">
         <f:switch expression="{comment.status}">
