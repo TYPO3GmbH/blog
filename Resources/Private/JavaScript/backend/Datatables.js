@@ -4,6 +4,7 @@
 import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 import '../../Scss/backend/datatables.scss'
 
+import $ from 'jquery';
 import DataTable from 'datatables.net-bs5';
 
 const datatables = document.querySelectorAll('.dataTables');
