@@ -2,6 +2,12 @@
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 
+    .sorting {
+        .form-select {
+            min-width: 120px;
+        }
+    }
+
     tfoot th {
         border-bottom: none;
     }
