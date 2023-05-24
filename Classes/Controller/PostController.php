@@ -31,7 +31,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\View\ViewInterface;
 
 class PostController extends ActionController
@@ -314,11 +313,6 @@ class PostController extends ActionController
         $this->view->assign('post', $post);
         $this->view->assign('posts', $posts);
         return $this->htmlResponse();
-    }
-
-    protected function getTypoScriptFontendController(): TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'];
     }
 
     private function getRequest(): ServerRequestInterface
