@@ -33,7 +33,6 @@ class MailContent
         $view->setPartialRootPaths($settings['view']['emails']['partialRootPaths']);
         $view->setTemplateRootPaths($settings['view']['emails']['templateRootPaths']);
         $view->setTemplate($template);
-        $view->getRequest()->setControllerExtensionName('blog');
 
         return $view;
     }
