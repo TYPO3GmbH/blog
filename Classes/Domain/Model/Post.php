@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -368,14 +369,21 @@ class Post extends AbstractEntity
 
     public function getUri(): string
     {
-        return (string) GeneralUtility::makeInstance(LinkFactory::class)->create(
-            '',
-            [
-                'parameter' => (string) $this->getUid(),
-                'forceAbsoluteUrl' => true
-            ],
-            GeneralUtility::makeInstance(ContentObjectRenderer::class)
-        )->getUrl();
+        if (class_exists(LinkFactory::class)) {
+            return (string) GeneralUtility::makeInstance(LinkFactory::class)->create(
+                '',
+                [
+                    'parameter' => (string) $this->getUid(),
+                    'forceAbsoluteUrl' => true
+                ],
+                GeneralUtility::makeInstance(ContentObjectRenderer::class)
+            )->getUrl();
+        }
+
+        return GeneralUtility::makeInstance(UriBuilder::class)
+            ->setCreateAbsoluteUri(true)
+            ->setTargetPageUid((int) $this->getUid())
+            ->build();
     }
 
     public function getAsArray(): array
