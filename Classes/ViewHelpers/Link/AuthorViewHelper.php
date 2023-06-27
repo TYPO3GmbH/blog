@@ -87,7 +87,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
             return $this->tag->render();
         }
 
-        return $this->renderChildren();
+        return (string) $this->renderChildren();
     }
 
     protected function getTypoScriptFrontendController(): TypoScriptFrontendController
