@@ -101,12 +101,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         return $uriBuilder;
     }
 
-    /**
-     * @param string $uri
-     * @param Author $author
-     * @return mixed|string
-     */
-    protected function buildAnchorTag(string $uri, Author $author)
+    protected function buildAnchorTag(string $uri, Author $author): string
     {
         if ($uri !== '') {
             $linkText = $this->renderChildren() ?: $author->getName();
@@ -115,7 +110,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
             return $this->tag->render();
         }
 
-        return $this->renderChildren();
+        return (string) $this->renderChildren();
     }
 
     /**
