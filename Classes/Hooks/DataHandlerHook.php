@@ -40,14 +40,14 @@ class DataHandlerHook
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
                 ->getQueryBuilderForTable($table);
             $queryBuilder->getRestrictions()->removeAll();
-            $record = $queryBuilder
-                ->select('*')
+            $publishDate = $queryBuilder
+                ->select('publish_date')
                 ->from($table)
                 ->where($queryBuilder->expr()->eq('uid', (int)$id))
                 ->executeQuery()
                 ->fetchOne();
-            if (isset($record)) {
-                $timestamp = (int) (($record['publish_date'] ?? 0) !== 0 ? $record['publish_date'] : time());
+            if ($publishDate !== false) {
+                $timestamp = (int) ($publishDate !== 0 ? $publishDate : time());
                 $queryBuilder
                     ->update($table)
                     ->set('publish_date', $timestamp)
