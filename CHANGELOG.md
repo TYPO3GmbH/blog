@@ -1,3 +1,13 @@
+# 12.0.1
+
+## BUGFIX
+
+- 965792c [BUGFIX] Article publish date is always replaced by current timestamp (#283)
+
+## Contributors
+
+- LeoniePhiline
+
 # 12.0.0
 
 ## BREAKING
