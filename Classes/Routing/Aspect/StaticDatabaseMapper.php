@@ -98,10 +98,8 @@ class StaticDatabaseMapper implements StaticMappableAspectInterface, \Countable
             $queryBuilder->groupBy($this->groupBy);
         }
 
-        if (count($this->where) > 0) {
-            foreach ($this->where as $key => $value) {
-                $queryBuilder->andWhere($key, $queryBuilder->createNamedParameter($value));
-            }
+        foreach ($this->where as $key => $value) {
+            $queryBuilder->andWhere($queryBuilder->expr()->eq($key, $queryBuilder->createNamedParameter($value)));
         }
 
         return array_map('strval', array_column($queryBuilder->executeQuery()->fetchAllAssociative(), $this->field));
