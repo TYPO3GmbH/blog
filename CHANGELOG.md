@@ -1,3 +1,17 @@
+# 12.0.2
+
+## TASK
+
+- c6a2a66 [TASK] Add index for `crdate` fields
+
+## BUGFIX
+
+- 4ba5e6f [BUGFIX] Build correct database query in `StaticDatabaseMapper`
+
+## Contributors
+
+- Andreas Fernandez
+
 # 12.0.1
 
 ## BUGFIX
