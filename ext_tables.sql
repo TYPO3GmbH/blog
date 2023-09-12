@@ -65,7 +65,9 @@ CREATE TABLE pages (
   crdate_year int(11) DEFAULT '0' NOT NULL,
   comments text,
   tags text,
-  authors text
+  authors text,
+
+  KEY post_crdate (crdate_year, crdate_month)
 );
 
 #
