@@ -19,7 +19,8 @@ class CategoryDefaultValueProvider implements FormDataProviderInterface
     {
         if ($result['command'] !== 'new' ||
             $result['tableName'] !== 'sys_category' ||
-            $result['parentPageRow']['module'] !== 'blog') {
+            ($result['parentPageRow']['module'] ?? null) !== 'blog')
+        {
             return $result;
         }
 
