@@ -40,7 +40,6 @@ class PostRepository extends Repository
     public function initializeObject(): void
     {
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
-        $this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'blog');
 
         $querySettings = GeneralUtility::makeInstance(
             Typo3QuerySettings::class,
@@ -414,7 +413,10 @@ class PostRepository extends Repository
 
     protected function getStoragePidsFromTypoScript(): array
     {
-        return GeneralUtility::intExplode(',', $this->settings['persistence']['storagePid']);
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+        $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+
+        return GeneralUtility::intExplode(',', $settings['persistence']['storagePid']);
     }
 
     /**
