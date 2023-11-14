@@ -53,7 +53,7 @@ class PostRepositoryDemandFactory
         if ('' !== ($settings['ordering'] ?? null)) {
             $ordering = explode(' ', $settings['ordering']);
             $demand->setOrdering($ordering[0], $ordering[1] ?? 'ASC');
-        } else if (isset($GLOBALS['TCA']['pages']['columns'][$settings['sortBy']])) {
+        } elseif (isset($GLOBALS['TCA']['pages']['columns'][$settings['sortBy']])) {
             $direction = strtoupper($settings['sortDirection'] ?? 'ASC');
             if (!in_array($direction, ['ASC', 'DESC'], true)) {
                 $direction = 'ASC';

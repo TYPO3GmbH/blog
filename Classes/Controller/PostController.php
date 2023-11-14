@@ -88,7 +88,7 @@ class PostController extends ActionController
                         $arguments[] = $this->arguments['author']->getValue()->getName();
                     }
                     break;
-                case ([] !== ($this->settings['demand'] ?? [])):
+                case [] !== ($this->settings['demand'] ?? []):
                     $this->actionMethodName = 'listByDemandAction';
                     break;
             }
