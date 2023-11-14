@@ -71,7 +71,7 @@ class CommentFormFactory extends AbstractFormFactory
         $nameField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
 
         /** @var GenericFormElement $emailField */
-        $emailField = $page->createElement('email', 'Text');
+        $emailField = $page->createElement('email', 'Email');
         $emailField->setLabel((string) LocalizationUtility::translate('form.comment.email', 'blog'));
         $emailField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
         $emailField->addValidator(GeneralUtility::makeInstance(EmailAddressValidator::class));
