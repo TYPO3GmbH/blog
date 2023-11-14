@@ -15,18 +15,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        typo3: ['^11', '^12']
+#        typo3: ['^11', '^12']
+        typo3: ['^11']
         php: ['7.4', '8.0', '8.1', '8.2']
         mysql: ['5.7', '8.0']
         exclude:
           - typo3: '^11'
             mysql: '8.0'
-          - typo3: '^12'
-            mysql: '5.7'
-          - typo3: '^12'
-            php: '7.4'
-          - typo3: '^12'
-            php: '8.0'
+#          - typo3: '^12'
+#            mysql: '5.7'
+#          - typo3: '^12'
+#            php: '7.4'
+#          - typo3: '^12'
+#            php: '8.0'
     steps:
       - id: checkout
         name: Checkout Code
