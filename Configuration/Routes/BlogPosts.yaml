@@ -4,8 +4,7 @@ routeEnhancers:
     extension: Blog
     plugin: Posts
     routes:
-      -
-        routePath: '/page-{page}'
+      - routePath: '/page-{page}'
         _controller: 'Post::listRecentPosts'
         _arguments:
           page: 'currentPage'

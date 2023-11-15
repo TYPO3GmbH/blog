@@ -16,9 +16,12 @@ use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
 use T3G\AgencyPack\Blog\Notification\NotificationManager;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\CommentService;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Service\ExtensionService;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher;
 
@@ -29,32 +32,32 @@ use TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher;
  */
 class CommentFormFinisher extends AbstractFinisher
 {
-    protected static $messages = [
+    protected static array $messages = [
         CommentService::STATE_ERROR => [
             'title' => 'message.addComment.error.title',
             'text' => 'message.addComment.error.text',
-            'severity' => FlashMessage::ERROR,
+            'severity' => AbstractMessage::ERROR,
         ],
         CommentService::STATE_MODERATION => [
             'title' => 'message.addComment.moderation.title',
             'text' => 'message.addComment.moderation.text',
-            'severity' => FlashMessage::INFO,
+            'severity' => AbstractMessage::INFO,
         ],
         CommentService::STATE_SUCCESS => [
             'title' => 'message.addComment.success.title',
             'text' => 'message.addComment.success.text',
-            'severity' => FlashMessage::OK,
+            'severity' => AbstractMessage::OK,
         ],
     ];
 
     protected function executeInternal()
     {
-        $configurationManager = $this->objectManager->get(ConfigurationManagerInterface::class);
-        $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
-        $postRepository = $this->objectManager->get(PostRepository::class);
-        $cacheService = $this->objectManager->get(CacheService::class);
-        $commentService = $this->objectManager->get(CommentService::class);
-        $commentService->injectSettings($settings['comments']);
+        $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
+            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+        $postRepository = GeneralUtility::makeInstance(PostRepository::class);
+        $cacheService = GeneralUtility::makeInstance(CacheService::class);
+        $commentService = GeneralUtility::makeInstance(CommentService::class);
+        $commentService->setSettings($settings['comments']);
 
         // Create Comment
         $values = $this->finisherContext->getFormValues();
@@ -64,17 +67,27 @@ class CommentFormFinisher extends AbstractFinisher
         $comment->setUrl($values['url'] ?? '');
         $comment->setComment($values['comment'] ?? '');
         $post = $postRepository->findCurrentPost();
+        if ($post === null) {
+            return null;
+        }
         $state = $commentService->addComment($post, $comment);
 
         // Add FlashMessage
-        $flashMessage = $this->objectManager->get(
+        $pluginNamespace = GeneralUtility::makeInstance(ExtensionService::class)->getPluginNamespace(
+            $this->finisherContext->getRequest()->getControllerExtensionName(),
+            $this->finisherContext->getRequest()->getPluginName()
+        );
+        $flashMessage = GeneralUtility::makeInstance(
             FlashMessage::class,
             LocalizationUtility::translate(self::$messages[$state]['text'], 'blog'),
             LocalizationUtility::translate(self::$messages[$state]['title'], 'blog'),
             self::$messages[$state]['severity'],
             true
         );
-        $this->finisherContext->getControllerContext()->getFlashMessageQueue()->addMessage($flashMessage);
+        $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
+        $flashMessageService
+            ->getMessageQueueByIdentifier('extbase.flashmessages.' . $pluginNamespace)
+            ->addMessage($flashMessage);
 
         if ($state !== CommentService::STATE_ERROR) {
             $comment->setCrdate(new \DateTime());
@@ -85,5 +98,7 @@ class CommentFormFinisher extends AbstractFinisher
                 ]));
             $cacheService->flushCacheByTag('tx_blog_post_' . $post->getUid());
         }
+
+        return null;
     }
 }

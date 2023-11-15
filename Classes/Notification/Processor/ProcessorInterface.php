@@ -14,11 +14,5 @@ use T3G\AgencyPack\Blog\Notification\NotificationInterface;
 
 interface ProcessorInterface
 {
-    /**
-     * Process the notification
-     *
-     * @param NotificationInterface $notification
-     * @return mixed
-     */
-    public function process(NotificationInterface $notification);
+    public function process(NotificationInterface $notification): void;
 }

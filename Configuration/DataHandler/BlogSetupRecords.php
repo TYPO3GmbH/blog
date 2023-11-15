@@ -170,7 +170,7 @@ $data['tx_blog_domain_model_author']['NEW_blogAuthor'] = [
 
 // Comment
 $data['tx_blog_domain_model_comment']['NEW_blogComment'] = [
-    'pid' => 'NEW_blogFolder',
+    'pid' => 'NEW_firstBlogPostPage',
     'status' => 10,
     'name' => 'TYPO3 Inc Team',
     'url' => 'https://typo3.com/',

@@ -17,9 +17,6 @@ use T3G\AgencyPack\Blog\Constants;
  */
 class BlogVariableProvider
 {
-    /**
-     * @return bool
-     */
     public function isPost(): bool
     {
         $page = $GLOBALS['TSFE']->page ?? [];
@@ -29,9 +26,6 @@ class BlogVariableProvider
         return false;
     }
 
-    /**
-     * @return bool
-     */
     public function isPage(): bool
     {
         $page = $GLOBALS['TSFE']->page ?? [];

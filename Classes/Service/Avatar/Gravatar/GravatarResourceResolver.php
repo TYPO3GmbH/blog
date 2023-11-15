@@ -61,7 +61,7 @@ final class GravatarResourceResolver implements AvatarResourceResolverInterface
         }
 
         $contentType = $response->getHeaderLine('Content-Type');
-        $contentType = !empty($contentType) ? $contentType : 'text/plain';
+        $contentType = $contentType !== '' ? $contentType : 'text/plain';
 
         $response->getBody()->rewind();
         return new Gravatar(

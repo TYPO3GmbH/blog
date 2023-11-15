@@ -23,35 +23,27 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
         parent::__construct();
     }
 
-    /**
-     * Arguments Initialization.
-     *
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
         $this->registerTagAttribute('alt', 'string', 'Alternative Text for the image');
         $this->registerArgument('email', 'string', 'The email address to resolve the gravatar for', true);
-        $this->registerArgument('size', 'int', 'The size of the gravatar, ranging from 1 to 512', false, 65);
-        $this->registerArgument('default', 'string', 'The default image for the gravatar, use complete url or one of the default keys');
+        $this->registerArgument('size', 'int', 'The size of the gravatar, ranging from 1 to 512', false, 64);
     }
 
-    /**
-     * @return string the HTML <img>-Tag of the gravatar
-     */
     public function render(): string
     {
+        $author = (new Author())->setEmail($this->arguments['email']);
+        $size = (int)$this->arguments['size'];
+
         /** @var GravatarProvider $gravatarProvider */
         $gravatarProvider = GeneralUtility::makeInstance(GravatarProvider::class);
-        $src = $gravatarProvider->getAvatarUrl((new Author())->setEmail($this->arguments['email']));
+        $src = $gravatarProvider->getAvatarUrl($author, $size);
 
-        $size = (int)$this->arguments['size'];
-        $this->tag->addAttribute('src', $src);
-        $this->tag->addAttribute('width', $size);
-        $this->tag->addAttribute('height', $size);
+        $this->tag->addAttribute('src', (string) $src);
+        $this->tag->addAttribute('width', (string) $size);
+        $this->tag->addAttribute('height', (string) $size);
 
         return $this->tag->render();
     }

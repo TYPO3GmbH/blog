@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link\Be;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -17,18 +18,11 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class AuthorViewHelper extends AbstractTagBasedViewHelper
 {
-    public function __construct()
-    {
-        $this->tagName = 'a';
-        parent::__construct();
-    }
-
     /**
-     * Arguments initialization.
-     *
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+     * @var string
      */
+    protected $tagName = 'a';
+
     public function initializeArguments(): void
     {
         parent::initializeArguments();
@@ -37,40 +31,42 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute');
         $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
-        $this->registerArgument('author', Author::class, 'The author to link to');
+        $this->registerArgument('author', Author::class, 'The author to link to', true);
         $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);
     }
 
-    /**
-     * @return string Rendered page URI
-     *
-     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
-     * @throws \InvalidArgumentException
-     */
     public function render(): string
     {
-        /** @var Author $author */
-        $author = $this->arguments['author'];
-        $authorUid = (int)$author->getUid();
-
-        $routingUriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $uri = $routingUriBuilder->buildUriFromRoute('record_edit', ['edit[tx_blog_domain_model_author][' . $authorUid . ']' => 'edit']);
-        $arguments = GeneralUtility::_GET();
-        $route = $arguments['route'];
-        unset($arguments['route'], $arguments['token']);
-        $uri .= '&returnUrl=' . rawurlencode((string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoutePath($route, $arguments));
-        if ($uri !== '') {
-            if ($this->arguments['returnUri']) {
-                return $uri;
-            }
-            $linkText = $this->renderChildren() ?: $author->getName();
-            $this->tag->addAttribute('href', $uri);
-            $this->tag->setContent($linkText);
-            $result = $this->tag->render();
-        } else {
-            $result = $this->renderChildren();
+        $request = $this->getRequest();
+        if (!$request instanceof ServerRequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.be.author needs a request implementing ServerRequestInterface.',
+                1684305290
+            );
         }
 
-        return $result;
+        /** @var Author $author */
+        $author = $this->arguments['author'];
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+
+        $params = [
+            'edit' => ['tx_blog_domain_model_author' => [$author->getUid() => 'edit']],
+            'returnUrl' => $request->getAttribute('normalizedParams')->getRequestUri(),
+        ];
+        $uri = (string)$uriBuilder->buildUriFromRoute('record_edit', $params);
+        if (isset($this->arguments['returnUri']) && $this->arguments['returnUri'] === true) {
+            return htmlspecialchars($uri, ENT_QUOTES | ENT_HTML5);
+        }
+
+        $linkText = $this->renderChildren() ?? $author->getName();
+        $this->tag->addAttribute('href', $uri);
+        $this->tag->setContent($linkText);
+
+        return $this->tag->render();
+    }
+
+    protected function getRequest(): ?ServerRequestInterface
+    {
+        return $GLOBALS['TYPO3_REQUEST'] ?? null;
     }
 }

@@ -1,0 +1,9 @@
+"pages",,,,,,,,
+,uid,pid,crdate,doktype,title,is_siteroot,module,TSconfig
+,1,0,1683627000,138,Blog,1,,"TCEFORM.pages.tags.PAGE_TSCONFIG_ID = 2
+TCEFORM.pages.authors.PAGE_TSCONFIG_ID = 2
+TCEFORM.pages.categories.PAGE_TSCONFIG_ID = 2
+TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.authors.PAGE_TSCONFIG_ID = 2
+TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.tags.PAGE_TSCONFIG_ID = 2
+TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.categories.PAGE_TSCONFIG_ID = 2"
+,2,1,1683627001,254,Data,0,blog,

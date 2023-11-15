@@ -31,6 +31,9 @@ return [
             'default' => 'record-blog-comment'
         ],
         'searchFields' => 'uid,comment,name,email',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'columns' => [
         'pid' => [
@@ -56,23 +59,6 @@ return [
             'config' => [
                 'type' => 'check',
                 'default' => 0,
-            ],
-        ],
-        // author not implemented yet
-        'author' => [
-            'label' => $ll . 'tx_blog_domain_model_comment.author',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'db',
-                'allowed' => 'fe_users',
-                'size' => 1,
-                'maxitems' => 1,
-                'minitems' => '0',
-                'fieldWizard' => [
-                    'recordsOverview' => [
-                        'disabled' => true
-                    ]
-                ]
             ],
         ],
         'name' => [
@@ -110,14 +96,7 @@ return [
         'post_language_id' => [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items' => [
-                    ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
-                    ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0],
-                ],
+                'type' => 'language',
             ],
         ],
         'status' => [

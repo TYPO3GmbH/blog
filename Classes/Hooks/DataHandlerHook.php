@@ -28,40 +28,33 @@ class DataHandlerHook
     private const TABLE_TAGS = 'tx_blog_domain_model_tag';
 
     /**
-     * @param string $status
-     * @param string $table
      * @param string|int $id
-     * @param array $fieldArray
-     * @param DataHandler $pObj
-     *
-     * @throws \InvalidArgumentException
-     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
-    public function processDatamap_afterDatabaseOperations($status, $table, $id, array $fieldArray, $pObj): void
+    public function processDatamap_afterDatabaseOperations(string $status, string $table, $id, array $fieldValues, DataHandler $dataHandler): void
     {
         if ($table === self::TABLE_PAGES) {
             if (!MathUtility::canBeInterpretedAsInteger($id)) {
-                $id = $pObj->substNEWwithIDs[$id];
+                $id = $dataHandler->substNEWwithIDs[$id];
             }
 
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
                 ->getQueryBuilderForTable($table);
             $queryBuilder->getRestrictions()->removeAll();
-            $record = $queryBuilder
-                ->select('*')
+            $publishDate = $queryBuilder
+                ->select('publish_date')
                 ->from($table)
                 ->where($queryBuilder->expr()->eq('uid', (int)$id))
-                ->execute()
-                ->fetch();
-            if (!empty($record)) {
-                $timestamp = (int) (!empty($record['publish_date'] ?? 0) ? $record['publish_date'] : time());
+                ->executeQuery()
+                ->fetchOne();
+            if ($publishDate !== false) {
+                $timestamp = (int) ($publishDate !== 0 ? $publishDate : time());
                 $queryBuilder
                     ->update($table)
                     ->set('publish_date', $timestamp)
                     ->set('crdate_month', date('n', (int)$timestamp))
                     ->set('crdate_year', date('Y', (int)$timestamp))
                     ->where($queryBuilder->expr()->eq('uid', (int)$id))
-                    ->execute();
+                    ->executeStatement();
             }
         }
 

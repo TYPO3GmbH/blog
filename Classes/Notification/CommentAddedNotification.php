@@ -18,22 +18,13 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class CommentAddedNotification extends AbstractNotification
 {
-    /**
-     * @return string
-     */
     public function getTitle(): string
     {
         /** @var Post $post */
         $post = $this->data['post'];
-        return sprintf(LocalizationUtility::translate('emails.CommentAddedNotification.subject', 'blog'), $post->getTitle());
+        return sprintf((string)LocalizationUtility::translate('emails.CommentAddedNotification.subject', 'blog'), $post->getTitle());
     }
 
-    /**
-     * @return string
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
-     */
     public function getMessage(): string
     {
         /** @var Comment $comment */

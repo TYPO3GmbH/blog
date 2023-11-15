@@ -16,7 +16,8 @@ use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * Class CommentService.
@@ -27,69 +28,30 @@ class CommentService
     public const STATE_MODERATION = 'moderation';
     public const STATE_SUCCESS = 'success';
 
-    /**
-     * @var PostRepository
-     */
-    protected $postRepository;
+    protected PostRepository $postRepository;
+    protected CommentRepository $commentRepository;
+    protected PersistenceManagerInterface $persistenceManager;
 
-    /**
-     * @var CommentRepository
-     */
-    protected $commentRepository;
+    public function __construct(
+        PostRepository $postRepository,
+        CommentRepository $commentRepository,
+        PersistenceManagerInterface $persistenceManager
+    ) {
+        $this->postRepository = $postRepository;
+        $this->commentRepository = $commentRepository;
+        $this->persistenceManager = $persistenceManager;
+    }
 
-    /**
-     * @var PersistenceManager
-     */
-    protected $persistenceManager;
-
-    /**
-     * @var array
-     */
-    protected $settings = [
+    protected array $settings = [
         'active' => 0,
         'moderation' => 0,
     ];
 
-    /**
-     * @param array $settings
-     */
-    public function injectSettings(array $settings): void
+    public function setSettings(array $settings): void
     {
         $this->settings = $settings;
     }
 
-    /**
-     * @param \T3G\AgencyPack\Blog\Domain\Repository\PostRepository $postRepository
-     */
-    public function injectPostRepository(PostRepository $postRepository): void
-    {
-        $this->postRepository = $postRepository;
-    }
-
-    /**
-     * @param \T3G\AgencyPack\Blog\Domain\Repository\CommentRepository $commentRepository
-     */
-    public function injectCommentRepository(CommentRepository $commentRepository): void
-    {
-        $this->commentRepository = $commentRepository;
-    }
-
-    /**
-     * @param PersistenceManager $persistenceManager
-     */
-    public function injectPersistenceManager(PersistenceManager $persistenceManager): void
-    {
-        $this->persistenceManager = $persistenceManager;
-    }
-
-    /**
-     * @param Post $post
-     * @param Comment $comment
-     * @return string
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
-     */
     public function addComment(Post $post, Comment $comment): string
     {
         $result = self::STATE_ERROR;
@@ -113,8 +75,7 @@ class CommentService
                     break;
                 default:
             }
-            $comment->setPid($post->getUid());
-            /** @noinspection PhpUnhandledExceptionInspection */
+            $comment->setPid((int)$post->getUid());
             $comment->setPostLanguageId(GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId());
             $post->addComment($comment);
             $this->postRepository->update($post);
@@ -127,28 +88,19 @@ class CommentService
     /**
      * This method checks if an comment exists for the same email
      * address in the given comment.
-     *
-     * @param Comment $comment
-     * @return bool
      */
     protected function approvedCommentExistsForSameEmail(Comment $comment): bool
     {
         $query = $this->commentRepository->createQuery();
         return $query->matching(
-            $query->logicalAnd([
+            $query->logicalAnd(
                 $query->equals('email', $comment->getEmail()),
                 $query->equals('status', Comment::STATUS_APPROVED)
-            ])
+            )
         )->execute()->count() > 0;
     }
 
-    /**
-     * @param Post $post
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public function getCommentsByPost(Post $post)
+    public function getCommentsByPost(Post $post): QueryResultInterface
     {
         return $this->commentRepository->findAllByPost($post);
     }

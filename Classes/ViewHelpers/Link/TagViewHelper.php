@@ -11,6 +11,9 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class TagViewHelper extends AbstractTagBasedViewHelper
@@ -21,12 +24,6 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         parent::__construct();
     }
 
-    /**
-     * Arguments initialization.
-     *
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
@@ -38,9 +35,6 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
     }
 
-    /**
-     * @return string Rendered page URI
-     */
     public function render(): string
     {
         $rssFormat = (bool)$this->arguments['rss'];
@@ -50,8 +44,9 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         $arguments = [
             'tag' => $tag->getUid(),
         ];
-        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
+            ->setRequest($this->renderingContext->getRequest())
             ->setTargetPageUid($pageUid);
         if ($rssFormat) {
             $uriBuilder
@@ -59,7 +54,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         }
         $uri = $uriBuilder->uriFor('listPostsByTag', $arguments, 'Post', 'Blog', 'Tag');
         if ($uri !== '') {
-            $linkText = $this->renderChildren() ?: $tag->getTitle();
+            $linkText = $this->renderChildren() ?? $tag->getTitle();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
             $result = $this->tag->render();
@@ -70,10 +65,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         return (string)$result;
     }
 
-    /**
-     * @return mixed|\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
+    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
     }

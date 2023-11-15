@@ -10,39 +10,26 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\AvatarProvider;
 
-use T3G\AgencyPack\Blog\AvatarProviderInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
-use T3G\AgencyPack\Blog\Http\Client;
-use T3G\AgencyPack\Blog\Http\RequestFactory;
-use T3G\AgencyPack\Blog\Http\UriFactory;
 use T3G\AgencyPack\Blog\Service\Avatar\AvatarResourceResolverInterface;
 use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarResourceResolver;
 use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarUriBuilder;
 use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarUriBuilderInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Http\Client\GuzzleClientFactory;
+use TYPO3\CMS\Core\Http\RequestFactory;
+use TYPO3\CMS\Core\Http\UriFactory;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class GravatarProvider implements AvatarProviderInterface, SingletonInterface
 {
-    /**
-     * @var GravatarUriBuilderInterface
-     */
-    private $gravatarUriBuilder;
-
-    /**
-     * @var AvatarResourceResolverInterface
-     */
-    private $avatarResourceResolver;
-
-    /**
-     * @var bool
-     */
-    private $proxyGravatarImage;
+    private GravatarUriBuilderInterface $gravatarUriBuilder;
+    private AvatarResourceResolverInterface $avatarResourceResolver;
+    private bool $proxyGravatarImage;
 
     final public function __construct()
     {
@@ -52,7 +39,7 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         );
         $this->avatarResourceResolver = GeneralUtility::makeInstance(
             GravatarResourceResolver::class,
-            GeneralUtility::makeInstance(Client::class, GeneralUtility::makeInstance(\GuzzleHttp\Client::class)),
+            GeneralUtility::makeInstance(GuzzleClientFactory::class)->getClient(),
             GeneralUtility::makeInstance(RequestFactory::class)
         );
 
@@ -61,15 +48,13 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         $this->proxyGravatarImage = (bool)($extensionConfiguration->get('blog', 'enableGravatarProxy') ?? false);
     }
 
-    public function getAvatarUrl(Author $author): string
+    public function getAvatarUrl(Author $author, int $size): string
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
-        $size = empty($size = (string)($settings['authors']['avatar']['provider']['size'] ?? '')) ? null : (int)$size;
-        $rating = empty($rating = (string)($settings['authors']['avatar']['provider']['rating'] ?? '')) ? null : $rating;
-        $default = empty($default = (string)($settings['authors']['avatar']['provider']['default'] ?? '')) ? null : $default;
+        $rating = trim($rating = (string)($settings['authors']['avatar']['provider']['rating'] ?? '')) === '' ? null : $rating;
+        $default = trim($default = (string)($settings['authors']['avatar']['provider']['default'] ?? '')) === '' ? null : $default;
 
         $gravatarUri = $this->gravatarUriBuilder->getUri(
             $author->getEmail(),
@@ -95,7 +80,7 @@ class GravatarProvider implements AvatarProviderInterface, SingletonInterface
         $absoluteWebPath = PathUtility::getAbsoluteWebPath($filePath);
 
         if (file_exists($filePath)) {
-            if (hash_equals(md5_file($filePath), md5($gravatar->getContent()))) {
+            if (hash_equals((string) md5_file($filePath), md5($gravatar->getContent()))) {
                 return $absoluteWebPath;
             }
 

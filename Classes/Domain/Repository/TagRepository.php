@@ -14,36 +14,24 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class TagRepository extends Repository
 {
-    /**
-     * Plugin settings
-     *
-     * @var array $pluginSettings
-     */
-    protected $pluginSettings;
+    protected array $settings = [];
 
-    /**
-     * Initializes the repository.
-     *
-     * @throws \InvalidArgumentException
-     */
     public function initializeObject(): void
     {
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+        $this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'blog');
+
         $this->defaultOrderings = [
             'title' => QueryInterface::ORDER_ASCENDING,
         ];
-
-        /** @var ConfigurationManagerInterface $configurationManager */
-        $configurationManager = $this->objectManager->get(ConfigurationManagerInterface::class);
-        $this->pluginSettings = $configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
-        );
     }
 
-    public function findByUids(array $uids)
+    public function findByUids(array $uids): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->matching(
@@ -53,13 +41,7 @@ class TagRepository extends Repository
         return $query->execute();
     }
 
-    /**
-     * @param int $limit
-     *
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     * @throws \InvalidArgumentException
-     */
-    public function findTopByUsage($limit = 20)
+    public function findTopByUsage(int $limit = 20): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_blog_domain_model_tag');
@@ -73,15 +55,15 @@ class TagRepository extends Repository
             ->setMaxResults($limit);
 
         // limitation to storage pid for multi domain purpose
-        if ($this->pluginSettings['storagePid']) {
+        if ($this->settings['persistence']['storagePid']) {
             // force storage pids as integer
-            $storagePids = GeneralUtility::intExplode(',', $this->pluginSettings['storagePid']);
+            $storagePids = GeneralUtility::intExplode(',', $this->settings['persistence']['storagePid']);
             $queryBuilder->where('t.pid IN(' . implode(',', $storagePids) . ')');
         }
 
         $result = $queryBuilder
-            ->execute()
-            ->fetchAll();
+            ->executeQuery()
+            ->fetchAllAssociative();
 
         $rows = [];
         foreach ($result as $row) {
@@ -90,7 +72,6 @@ class TagRepository extends Repository
         }
 
         // Shuffle tags, ordering is only to get the top used tags
-        /** @noinspection NonSecureShuffleUsageInspection */
         shuffle($rows);
         return $rows;
     }

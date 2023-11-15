@@ -11,89 +11,17 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Updates;
 
 use T3G\AgencyPack\Blog\Constants;
-use TYPO3\CMS\Core\Database\Connection;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
-/**
- * CategoryTypeUpdate
- */
-class CategoryTypeUpdate implements UpgradeWizardInterface
+final class CategoryTypeUpdate extends AbstractUpdate implements UpgradeWizardInterface
 {
-    /**
-    * @return string
-    */
-    public function getIdentifier(): string
-    {
-        return self::class;
-    }
+    protected string $title = 'EXT:blog: Use Blog-Type for Categories';
+    protected string $table = 'sys_category';
 
-    /**
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return '[EXT:blog] Use Blog-Type for Categories';
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return '';
-    }
-
-    /**
-     * @return array
-     */
-    public function getPrerequisites(): array
-    {
-        return [
-            DatabaseUpdatedPrerequisite::class
-        ];
-    }
-
-    /**
-     * @return bool
-     */
     public function updateNecessary(): bool
     {
-        $queryBuilderPages = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
-        $queryBuilderPages->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
-        $pagesStatement = $queryBuilderPages
-            ->select('uid')
-            ->from('pages')
-            ->where(
-                $queryBuilderPages->expr()->andX(
-                    $queryBuilderPages->expr()->eq('doktype', $queryBuilderPages->createNamedParameter(254, \PDO::PARAM_INT)),
-                    $queryBuilderPages->expr()->eq('module', $queryBuilderPages->createNamedParameter('blog'))
-                )
-            )
-            ->execute();
-        $pages = [];
-        while ($pageRecord = $pagesStatement->fetch()) {
-            $pages[] = $pageRecord['uid'];
-        }
-
-        $queryBuilderCategories = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_category');
-        $queryBuilderCategories->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
-        $elementCount = $queryBuilderCategories
-            ->count('uid')
-            ->from('sys_category')
-            ->where(
-                $queryBuilderCategories->expr()->andX(
-                    $queryBuilderCategories->expr()->eq('record_type', $queryBuilderCategories->createNamedParameter(1, \PDO::PARAM_INT)),
-                    $queryBuilderCategories->expr()->in('pid', $queryBuilderCategories->createNamedParameter($pages, Connection::PARAM_INT_ARRAY))
-                )
-            )
-            ->execute()
-            ->fetchColumn(0);
-
-        return (bool)$elementCount;
+        $records = $this->getAffectedRecords();
+        return (bool) count($records);
     }
 
     /**
@@ -101,47 +29,32 @@ class CategoryTypeUpdate implements UpgradeWizardInterface
      */
     public function executeUpdate(): bool
     {
-        $queryBuilderPages = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
-        $queryBuilderPages->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
-        $pagesStatement = $queryBuilderPages
-            ->select('uid')
-            ->from('pages')
-            ->where(
-                $queryBuilderPages->expr()->andX(
-                    $queryBuilderPages->expr()->eq('doktype', $queryBuilderPages->createNamedParameter(254, \PDO::PARAM_INT)),
-                    $queryBuilderPages->expr()->eq('module', $queryBuilderPages->createNamedParameter('blog'))
-                )
-            )
-            ->execute();
-        $pages = [];
-        while ($pageRecord = $pagesStatement->fetch()) {
-            $pages[] = $pageRecord['uid'];
-        }
-
-        $queryBuilderCategories = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_category');
-        $queryBuilderCategories->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
-        $categoryStatement = $queryBuilderCategories
-            ->select('uid', 'record_type')
-            ->from('sys_category')
-            ->where(
-                $queryBuilderCategories->expr()->andX(
-                    $queryBuilderCategories->expr()->eq('record_type', $queryBuilderCategories->createNamedParameter(Constants::CATEGORY_TYPE_DEFAULT, \PDO::PARAM_INT)),
-                    $queryBuilderCategories->expr()->in('pid', $queryBuilderCategories->createNamedParameter($pages, Connection::PARAM_INT_ARRAY))
-                )
-            )
-            ->execute();
-
-        while ($categoryRecord = $categoryStatement->fetch()) {
-            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_category');
-            $queryBuilder
-                ->update('sys_category')
-                ->where(
-                    $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter((int) $categoryRecord['uid'], \PDO::PARAM_INT))
-                )
-                ->set('record_type', Constants::CATEGORY_TYPE_BLOG);
-            $queryBuilder->execute();
+        $records = $this->getAffectedRecords();
+        foreach ($records as $record) {
+            $this->updateRecord($this->table, (int) $record['uid'], [
+                'record_type' => Constants::CATEGORY_TYPE_BLOG
+            ]);
         }
 
         return true;
+    }
+
+    private function getAffectedRecords(): array
+    {
+        $pages = array_map(
+            function ($page) {
+                return $page['uid'];
+            },
+            $this->getBlogStorageFolders()
+        );
+
+        $queryBuilder = $this->createQueryBuilder($this->table);
+        $criteria = [
+            $this->createEqualIntCriteria($queryBuilder, 'record_type', Constants::CATEGORY_TYPE_DEFAULT),
+            $this->createInCriteria($queryBuilder, 'pid', $pages)
+        ];
+        $records = $this->getRecordsByCriteria($queryBuilder, $this->table, $criteria);
+
+        return $records;
     }
 }

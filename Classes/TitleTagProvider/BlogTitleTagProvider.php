@@ -13,10 +13,7 @@ use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
 
 class BlogTitleTagProvider extends AbstractPageTitleProvider
 {
-    /**
-     * @param string $title
-     */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }

@@ -812,7 +812,7 @@ plugin.tx_blog.settings.comments.google_recaptcha.secret_key
    Data type
      string
    Description
-     **Google Recaptcha Secrete-Key:**
+     **Google Recaptcha Secret-Key:**
 
 Authors
 ^^^^^^^

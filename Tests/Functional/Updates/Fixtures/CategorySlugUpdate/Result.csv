@@ -1,0 +1,4 @@
+"sys_category",,,,
+,uid,pid,title,slug
+,1,2,Category 1,category-1
+,2,2,Category 1 / Super,category-1-super

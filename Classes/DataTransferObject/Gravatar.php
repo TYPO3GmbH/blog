@@ -14,20 +14,9 @@ use Psr\Http\Message\UriInterface;
 
 class Gravatar implements AvatarResource
 {
-    /**
-     * @var UriInterface
-     */
-    private $uri;
-
-    /**
-     * @var string
-     */
-    private $contentType;
-
-    /**
-     * @var string
-     */
-    private $content;
+    private UriInterface $uri;
+    private string $contentType;
+    private string $content;
 
     public function __construct(UriInterface $uri, string $contentType, string $content)
     {

@@ -10,51 +10,23 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Hooks;
 
-use T3G\AgencyPack\Blog\Constants;
-use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Page\PageRenderer;
-use TYPO3\CMS\Core\Type\Bitmask\Permission;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use T3G\AgencyPack\Blog\Backend\View\BlogPostHeaderContentRenderer;
 
 class PageLayoutHeaderHook
 {
+    protected BlogPostHeaderContentRenderer $blogPostHeaderContentRenderer;
+
+    public function __construct(BlogPostHeaderContentRenderer $blogPostHeaderContentRenderer)
+    {
+        $this->blogPostHeaderContentRenderer = $blogPostHeaderContentRenderer;
+    }
+
     /**
      * @return string
      */
     public function drawHeader()
     {
         $request = $GLOBALS['TYPO3_REQUEST'];
-        $pageUid = (int)($request->getParsedBody()['id'] ?? $request->getQueryParams()['id'] ?? 0);
-        $pageInfo = BackendUtility::readPageAccess($pageUid, $GLOBALS['BE_USER']->getPagePermsClause(Permission::PAGE_SHOW));
-
-        // Early exit for non-blog pages
-        if (($pageInfo['doktype'] ?? 0) !== Constants::DOKTYPE_BLOG_POST) {
-            return '';
-        }
-
-        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        $pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/pagelayout.min.css', 'stylesheet', 'all', '', false);
-
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $repository = $objectManager->get(PostRepository::class);
-        $query = $repository->createQuery();
-        $querySettings = $query->getQuerySettings();
-        $querySettings->setIgnoreEnableFields(true);
-        $repository->setDefaultQuerySettings($querySettings);
-        $post = $repository->findByUidRespectQuerySettings($pageUid);
-
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->getRenderingContext()->getTemplatePaths()->fillDefaultsByPackageName('blog');
-        $view->setTemplate('PageLayout/Header');
-        $view->assignMultiple([
-            'pageUid' => $pageUid,
-            'pageInfo' => $pageInfo,
-            'post' => $post,
-        ]);
-
-        return $view->render();
+        return $this->blogPostHeaderContentRenderer->render($request);
     }
 }

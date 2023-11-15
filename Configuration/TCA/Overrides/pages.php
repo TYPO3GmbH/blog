@@ -216,7 +216,6 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
     ]
 );
 
-/** @noinspection UnsupportedStringOffsetOperationsInspection */
 $GLOBALS['TCA']['pages']['types'][\T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST]['columnsOverrides'] = [
     'categories' => [
         'config' => [

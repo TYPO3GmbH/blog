@@ -11,6 +11,7 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Controller;
 
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
@@ -27,95 +28,41 @@ use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3Fluid\Fluid\View\ViewInterface;
 
 class PostController extends ActionController
 {
-    /**
-     * @var CategoryRepository
-     */
-    protected $categoryRepository;
+    protected PostRepository $postRepository;
+    protected AuthorRepository $authorRepository;
+    protected CategoryRepository $categoryRepository;
+    protected TagRepository $tagRepository;
+    protected CacheService $blogCacheService;
+    protected PostRepositoryDemandFactory $postRepositoryDemandFactory;
 
-    /**
-     * @var TagRepository
-     */
-    protected $tagRepository;
-
-    /**
-     * @var PostRepository
-     */
-    protected $postRepository;
-
-    /**
-     * @var AuthorRepository
-     */
-    protected $authorRepository;
-
-    /**
-     * @var CacheService
-     */
-    protected $blogCacheService;
-
-    /**
-     * @var PostRepositoryDemandFactory
-     */
-    protected $postRepositoryDemandFactory;
-
-    /**
-     * @param CategoryRepository $categoryRepository
-     */
-    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
-    {
-        $this->categoryRepository = $categoryRepository;
-    }
-
-    /**
-     * @param TagRepository $tagRepository
-     */
-    public function injectTagRepository(TagRepository $tagRepository): void
-    {
-        $this->tagRepository = $tagRepository;
-    }
-
-    /**
-     * @param PostRepository $postRepository
-     */
-    public function injectPostRepository(PostRepository $postRepository): void
-    {
+    public function __construct(
+        PostRepository $postRepository,
+        AuthorRepository $authorRepository,
+        CategoryRepository $categoryRepository,
+        TagRepository $tagRepository,
+        CacheService $blogCacheService,
+        PostRepositoryDemandFactory $postRepositoryDemandFactory
+    ) {
         $this->postRepository = $postRepository;
-    }
-
-    /**
-     * @param AuthorRepository $authorRepository
-     */
-    public function injectAuthorRepository(AuthorRepository $authorRepository): void
-    {
         $this->authorRepository = $authorRepository;
-    }
-
-    /**
-     * @param \T3G\AgencyPack\Blog\Service\CacheService $cacheService
-     */
-    public function injectBlogCacheService(CacheService $cacheService): void
-    {
-        $this->blogCacheService = $cacheService;
-    }
-
-    public function injectPostRepositoryDemandFactory(PostRepositoryDemandFactory $postRepositoryDemandFactory): void
-    {
+        $this->categoryRepository = $categoryRepository;
+        $this->tagRepository = $tagRepository;
+        $this->blogCacheService = $blogCacheService;
         $this->postRepositoryDemandFactory = $postRepositoryDemandFactory;
     }
 
     /**
-     * @param ViewInterface $view
+     * @param ViewInterface|\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
      */
-    protected function initializeView(ViewInterface $view): void
+    protected function initializeView($view): void
     {
-        parent::initializeView($view);
         if ($this->request->getFormat() === 'rss') {
             $action = $this->request->getControllerActionName();
             $arguments = [];
@@ -141,7 +88,7 @@ class PostController extends ActionController
                         $arguments[] = $this->arguments['author']->getValue()->getName();
                     }
                     break;
-                case ([] !== ($this->settings['demand'] ?? [])):
+                case [] !== ($this->settings['demand'] ?? []):
                     $this->actionMethodName = 'listByDemandAction';
                     break;
             }
@@ -156,16 +103,12 @@ class PostController extends ActionController
             $this->view->assign('feed', $feedData);
         }
 
-        /** @extensionScannerIgnoreLine */
-        $this->view->assign('data', $this->configurationManager->getContentObject()->data);
+        $contentObject = $this->configurationManager->getContentObject();
+        $this->view->assign('data', $contentObject !== null ? $contentObject->data : null);
     }
 
     /**
      * Show a list of recent posts.
-     *
-     * @param int $currentPage
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function listRecentPostsAction(int $currentPage = 1): ResponseInterface
     {
@@ -183,9 +126,6 @@ class PostController extends ActionController
 
     /**
      * Show a list of posts for a selected category.
-     *
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function listByDemandAction(int $currentPage = 1): ResponseInterface
     {
@@ -209,13 +149,10 @@ class PostController extends ActionController
 
     /**
      * Show a number of latest posts.
-     *
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function listLatestPostsAction(): ResponseInterface
     {
-        $maximumItems = (int) ($this->settings['latestPosts']['limit'] ?: 3);
+        $maximumItems = (int) ($this->settings['latestPosts']['limit'] ?? 3);
         $posts = $this->postRepository->findAllWithLimit($maximumItems);
 
         $this->view->assign('type', 'latest');
@@ -223,17 +160,7 @@ class PostController extends ActionController
         return $this->htmlResponse();
     }
 
-    /**
-     * @param int $year
-     * @param int $month
-     * @param int $currentPage
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     * @throws \Exception
-     */
-    public function listPostsByDateAction(int $year = null, int $month = null, int $currentPage = 1): ResponseInterface
+    public function listPostsByDateAction(?int $year = null, ?int $month = null, int $currentPage = 1): ResponseInterface
     {
         if ($year === null) {
             $posts = $this->postRepository->findMonthsAndYearsWithPosts();
@@ -256,7 +183,7 @@ class PostController extends ActionController
                 $month,
                 $dateTime->format('F'),
                 $year,
-            ], LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
+            ], (string) LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
             MetaTagService::set(MetaTagService::META_TITLE, (string) $title);
             MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
         }
@@ -265,27 +192,22 @@ class PostController extends ActionController
 
     /**
      * Show a list of posts by given category.
-     *
-     * @param Category|null $category
-     * @param int $currentPage
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPostsByCategoryAction(Category $category = null, int $currentPage = 1): ResponseInterface
+    public function listPostsByCategoryAction(?Category $category = null, int $currentPage = 1): ResponseInterface
     {
         if ($category === null) {
-            $categories = $this->categoryRepository->getByReference(
-                'tt_content',
-                $this->configurationManager->getContentObject()->data['uid']
-            );
-
-            if (!empty($categories)) {
-                /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-                $category = $categories->getFirst();
+            $contentObject = $this->configurationManager->getContentObject();
+            $referenceUid = $contentObject !== null ? (int) $contentObject->data['uid'] : null;
+            if ($referenceUid !== null) {
+                $categories = $this->categoryRepository->getByReference('tt_content', $referenceUid);
+                if ($categories !== null && $categories->count() > 0) {
+                    /** @var ?Category $category */
+                    $category = $categories->getFirst();
+                }
             }
         }
 
-        if ($category) {
+        if ($category !== null) {
             $posts = $this->postRepository->findAllByCategory($category);
             $pagination = $this->getPagination($posts, $currentPage);
             $this->view->assign('type', 'bycategory');
@@ -302,15 +224,10 @@ class PostController extends ActionController
 
     /**
      * Show a list of posts by given author.
-     *
-     * @param Author|null $author
-     * @param int $currentPage
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPostsByAuthorAction(Author $author = null, int $currentPage = 1): ResponseInterface
+    public function listPostsByAuthorAction(?Author $author = null, int $currentPage = 1): ResponseInterface
     {
-        if ($author) {
+        if ($author !== null) {
             $posts = $this->postRepository->findAllByAuthor($author);
             $pagination = $this->getPagination($posts, $currentPage);
             $this->view->assign('type', 'byauthor');
@@ -327,15 +244,10 @@ class PostController extends ActionController
 
     /**
      * Show a list of posts by given tag.
-     *
-     * @param Tag|null $tag
-     * @param int $currentPage
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPostsByTagAction(Tag $tag = null, int $currentPage = 1): ResponseInterface
+    public function listPostsByTagAction(?Tag $tag = null, int $currentPage = 1): ResponseInterface
     {
-        if ($tag) {
+        if ($tag !== null) {
             $posts = $this->postRepository->findAllByTag($tag);
             $pagination = $this->getPagination($posts, $currentPage);
             $this->view->assign('type', 'bytag');
@@ -360,10 +272,6 @@ class PostController extends ActionController
 
     /**
      * Header action: output the header of blog post.
-     *
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function headerAction(): ResponseInterface
     {
@@ -377,10 +285,6 @@ class PostController extends ActionController
 
     /**
      * Footer action: output the footer of blog post.
-     *
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function footerAction(): ResponseInterface
     {
@@ -393,35 +297,7 @@ class PostController extends ActionController
     }
 
     /**
-     * Metadata action: output meta information of blog post.
-     *
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     *
-     * @deprecated
-     */
-    public function metadataAction(): ResponseInterface
-    {
-        trigger_error(
-            'Using \T3G\AgencyPack\Blog\Controller\PostController::metadataAction is deprecated. Use headerAction or footerAction instead.',
-            E_USER_DEPRECATED
-        );
-
-        $post = $this->postRepository->findCurrentPost();
-        $this->view->assign('post', $post);
-        if ($post instanceof Post) {
-            $this->blogCacheService->addTagsForPost($post);
-        }
-        return $this->htmlResponse();
-    }
-
-    /**
      * Authors action: output author information of blog post.
-     *
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function authorsAction(): ResponseInterface
     {
@@ -435,9 +311,6 @@ class PostController extends ActionController
 
     /**
      * Related posts action: show related posts based on the current post
-     *
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function relatedPostsAction(): ResponseInterface
     {
@@ -453,23 +326,20 @@ class PostController extends ActionController
         return $this->htmlResponse();
     }
 
-    /**
-     * @return TypoScriptFrontendController
-     */
-    protected function getTypoScriptFontendController(): TypoScriptFrontendController
+    private function getRequest(): ServerRequestInterface
     {
-        return $GLOBALS['TSFE'];
+        return $GLOBALS['TYPO3_REQUEST'];
     }
 
-    private function getSiteLanguage(): ?SiteLanguage
+    private function getSiteLanguage(): SiteLanguage
     {
-        return $GLOBALS['TYPO3_REQUEST']->getAttribute('language');
+        return $this->getRequest()->getAttribute('language');
     }
 
     private function getRequestUrl(): string
     {
         /** @var NormalizedParams $normalizedParams */
-        $normalizedParams = $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams');
+        $normalizedParams = $this->getRequest()->getAttribute('normalizedParams');
         return $normalizedParams->getRequestUrl();
     }
 

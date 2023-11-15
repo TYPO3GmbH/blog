@@ -10,11 +10,9 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Validator;
 
-use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 class GoogleCaptchaValidator extends AbstractValidator
@@ -25,18 +23,17 @@ class GoogleCaptchaValidator extends AbstractValidator
     {
         $action = 'form';
         $controller = 'Comment';
-        $settings = GeneralUtility::makeInstance(ObjectManager::class)
-            ->get(ConfigurationManagerInterface::class)
+        $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
         $requestData = GeneralUtility::_GPmerged('tx_blog_commentform');
 
         if (
             // this validator is called multiple times, if the first success,
             // the global variable is set, else validate the re-captcha
-            empty($GLOBALS['google_recaptcha'])
+            ($GLOBALS['google_recaptcha'] ?? null) === null
             // check if we create a new comment, else we don't need a validation
-            && (!empty($requestData['action']) && $requestData['action'] === $action)
-            && (!empty($requestData['controller']) && $requestData['controller'] === $controller)
+            && (!(bool)($requestData['action'] ?? null) && $requestData['action'] === $action)
+            && (!(bool)($requestData['controller'] ?? null) && $requestData['controller'] === $controller)
             // check if google re-captcha is active, else we don't need a validation
             && (int) $settings['comments']['google_recaptcha']['_typoScriptNodeValue'] === 1
         ) {

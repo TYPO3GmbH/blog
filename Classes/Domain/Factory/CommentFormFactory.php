@@ -12,10 +12,10 @@ namespace T3G\AgencyPack\Blog\Domain\Factory;
 
 use T3G\AgencyPack\Blog\Domain\Finisher\CommentFormFinisher;
 use T3G\AgencyPack\Blog\Domain\Validator\GoogleCaptchaValidator;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
@@ -25,6 +25,7 @@ use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
 use TYPO3\CMS\Form\Domain\Factory\AbstractFormFactory;
 use TYPO3\CMS\Form\Domain\Finishers\RedirectFinisher;
 use TYPO3\CMS\Form\Domain\Model\FormDefinition;
+use TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class CommentFormFactory extends AbstractFormFactory
@@ -33,16 +34,11 @@ class CommentFormFactory extends AbstractFormFactory
      * Build a FormDefinition.
      * This example build a FormDefinition manually,
      * so $configuration and $prototypeName are unused.
-     *
-     * @param array $configuration
-     * @param string $prototypeName
-     * @return FormDefinition
      */
     public function build(array $configuration, string $prototypeName = null): FormDefinition
     {
         $prototypeName = 'standard';
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $formConfigurationService = $objectManager->get(ConfigurationService::class);
+        $formConfigurationService = GeneralUtility::makeInstance(ConfigurationService::class);
         $prototypeConfiguration = $formConfigurationService->getPrototypeConfiguration($prototypeName);
         $prototypeConfiguration['formElementsDefinition']['BlogGoogleCaptcha'] = $prototypeConfiguration['formElementsDefinition']['BlogGoogleCaptcha'] ?? [];
         ArrayUtility::mergeRecursiveWithOverrule(
@@ -52,14 +48,14 @@ class CommentFormFactory extends AbstractFormFactory
             ]
         );
 
-        $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
-        $blogSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+        $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
+            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
         $captcha = [];
-        $captcha['enable'] = (bool) ($blogSettings['comments']['google_recaptcha']['_typoScriptNodeValue'] ?? false);
-        $captcha['sitekey'] = (string) trim($blogSettings['comments']['google_recaptcha']['website_key'] ?? '');
-        $captcha['secret'] = (string) trim($blogSettings['comments']['google_recaptcha']['secret_key'] ?? '');
+        $captcha['enable'] = (bool) ($settings['comments']['google_recaptcha']['_typoScriptNodeValue'] ?? false);
+        $captcha['sitekey'] = (string) trim($settings['comments']['google_recaptcha']['website_key'] ?? '');
+        $captcha['secret'] = (string) trim($settings['comments']['google_recaptcha']['secret_key'] ?? '');
 
-        $form = $objectManager->get(FormDefinition::class, 'postcomment', $prototypeConfiguration);
+        $form = GeneralUtility::makeInstance(FormDefinition::class, 'postcomment', $prototypeConfiguration);
         $form->setRenderingOption('controllerAction', 'form');
         $form->setRenderingOption('submitButtonLabel', LocalizationUtility::translate('form.comment.submit', 'blog'));
         $renderingOptions = $form->getRenderingOptions();
@@ -69,46 +65,52 @@ class CommentFormFactory extends AbstractFormFactory
         $page = $form->createPage('commentform');
 
         // Form
+        /** @var GenericFormElement $nameField */
         $nameField = $page->createElement('name', 'Text');
-        $nameField->setLabel(LocalizationUtility::translate('form.comment.name', 'blog'));
-        $nameField->addValidator($objectManager->get(NotEmptyValidator::class));
+        $nameField->setLabel((string) LocalizationUtility::translate('form.comment.name', 'blog'));
+        $nameField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
 
+        /** @var GenericFormElement $emailField */
         $emailField = $page->createElement('email', 'Email');
-        $emailField->setLabel(LocalizationUtility::translate('form.comment.email', 'blog'));
-        $emailField->addValidator($objectManager->get(NotEmptyValidator::class));
-        $emailField->addValidator($objectManager->get(EmailAddressValidator::class));
+        $emailField->setLabel((string) LocalizationUtility::translate('form.comment.email', 'blog'));
+        $emailField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
+        $emailField->addValidator(GeneralUtility::makeInstance(EmailAddressValidator::class));
 
-        if ((bool) $blogSettings['comments']['features']['urls']) {
+        if ((bool) $settings['comments']['features']['urls']) {
+            /** @var GenericFormElement $urlField */
             $urlField = $page->createElement('url', 'Text');
-            $urlField->setLabel(LocalizationUtility::translate('form.comment.url', 'blog'));
-            $urlField->addValidator($objectManager->get(UrlValidator::class));
+            $urlField->setLabel((string) LocalizationUtility::translate('form.comment.url', 'blog'));
+            $urlField->addValidator(GeneralUtility::makeInstance(UrlValidator::class));
         }
 
+        /** @var GenericFormElement $commentField */
         $commentField = $page->createElement('comment', 'Textarea');
-        $commentField->setLabel(LocalizationUtility::translate('form.comment.comment', 'blog'));
-        $commentField->addValidator($objectManager->get(NotEmptyValidator::class));
-        $commentField->addValidator($objectManager->get(StringLengthValidator::class, ['minimum' => 5]));
+        $commentField->setLabel((string) LocalizationUtility::translate('form.comment.comment', 'blog'));
+        $commentField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
+        if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
+            $stringLengthValidator = GeneralUtility::makeInstance(StringLengthValidator::class, ['minimum' => 5]);
+        } else {
+            $stringLengthValidator = GeneralUtility::makeInstance(StringLengthValidator::class);
+            $stringLengthValidator->setOptions(['minimum' => 5]);
+        }
+        $commentField->addValidator($stringLengthValidator);
 
         $explanationText = $page->createElement('explanation', 'StaticText');
         $explanationText->setProperty('text', LocalizationUtility::translate('label.required.field', 'blog') . ' ' . LocalizationUtility::translate('label.required.field.explanation', 'blog'));
 
-        if ($captcha['enable'] && $captcha['sitekey'] && $captcha['secret']) {
+        if ((bool) $captcha['enable'] === true && $captcha['sitekey'] !== '' && $captcha['secret'] !== '') {
             $captchaField = $page->createElement('captcha', 'BlogGoogleCaptcha');
             $captchaField->setProperty('sitekey', $captcha['sitekey']);
-            $captchaField->addValidator($objectManager->get(GoogleCaptchaValidator::class));
+            $captchaField->addValidator(GeneralUtility::makeInstance(GoogleCaptchaValidator::class));
         }
 
         // Finisher
-        $commentFinisher = $objectManager->get(CommentFormFinisher::class);
-        if (method_exists($commentFinisher, 'setFinisherIdentifier')) {
-            $commentFinisher->setFinisherIdentifier(CommentFormFinisher::class);
-        }
+        $commentFinisher = GeneralUtility::makeInstance(CommentFormFinisher::class);
+        $commentFinisher->setFinisherIdentifier(CommentFormFinisher::class);
         $form->addFinisher($commentFinisher);
 
-        $redirectFinisher = $objectManager->get(RedirectFinisher::class);
-        if (method_exists($redirectFinisher, 'setFinisherIdentifier')) {
-            $redirectFinisher->setFinisherIdentifier(RedirectFinisher::class);
-        }
+        $redirectFinisher = GeneralUtility::makeInstance(RedirectFinisher::class);
+        $redirectFinisher->setFinisherIdentifier(RedirectFinisher::class);
         $redirectFinisher->setOption('pageUid', (string)$this->getTypoScriptFrontendController()->id);
         $form->addFinisher($redirectFinisher);
 
@@ -116,10 +118,7 @@ class CommentFormFactory extends AbstractFormFactory
         return $form;
     }
 
-    /**
-     * @return TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
     }

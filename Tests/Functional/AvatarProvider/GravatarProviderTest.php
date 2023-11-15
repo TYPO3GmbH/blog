@@ -16,20 +16,17 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class GravatarProviderTest extends FunctionalTestCase
 {
-    protected function setUp(): void
-    {
-        $this->coreExtensionsToLoad[] = 'extbase';
-        $this->testExtensionsToLoad[] = 'typo3conf/ext/blog';
-
-        parent::setUp();
-    }
+    protected array $testExtensionsToLoad = [
+        'typo3conf/ext/blog'
+    ];
 
     public function testGetAvatarUrlReturnsOriginalGravatarComUrl(): void
     {
+        $author = (new Author())->setEmail('name@host.tld');
         $gravatarProvider = new GravatarProvider();
         self::assertSame(
-            'https://www.gravatar.com/avatar/71803b16fcdb8ac77611d0a977b20164',
-            $gravatarProvider->getAvatarUrl((new Author())->setEmail('name@host.tld'))
+            'https://www.gravatar.com/avatar/71803b16fcdb8ac77611d0a977b20164?s=64',
+            $gravatarProvider->getAvatarUrl($author, 64)
         );
     }
 
@@ -37,10 +34,11 @@ class GravatarProviderTest extends FunctionalTestCase
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['blog']['enableGravatarProxy'] = '1';
 
+        $author = (new Author())->setEmail('name@host.tld');
         $gravatarProvider = new GravatarProvider();
-        self::assertStringStartsWith(
+        self::assertStringContainsString(
             'typo3temp/assets/t3g/blog/gravatar/',
-            $gravatarProvider->getAvatarUrl((new Author())->setEmail('name@host.tld'))
+            $gravatarProvider->getAvatarUrl($author, 64)
         );
     }
 }

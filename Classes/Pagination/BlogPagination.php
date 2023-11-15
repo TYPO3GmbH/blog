@@ -15,25 +15,10 @@ use TYPO3\CMS\Core\Pagination\PaginatorInterface;
 
 final class BlogPagination implements PaginationInterface
 {
-    /**
-     * @var int
-     */
-    protected $maximumNumberOfLinks = 10;
-
-    /**
-     * @var int
-     */
-    protected $displayRangeStart = 0;
-
-    /**
-     * @var int
-     */
-    protected $displayRangeEnd = 0;
-
-    /**
-     * @var PaginatorInterface
-     */
-    protected $paginator;
+    protected int $maximumNumberOfLinks = 10;
+    protected int $displayRangeStart = 0;
+    protected int $displayRangeEnd = 0;
+    protected PaginatorInterface $paginator;
 
     public function __construct(PaginatorInterface $paginator, int $maximumNumberOfLinks = 10)
     {
@@ -79,7 +64,7 @@ final class BlogPagination implements PaginationInterface
 
     public function getCurrentPageNumber(): int
     {
-        return $this->paginator->getCurrentPageNumber() ?? 1;
+        return $this->paginator->getCurrentPageNumber();
     }
 
     public function getNextPageNumber(): ?int
@@ -132,17 +117,11 @@ final class BlogPagination implements PaginationInterface
         return range($this->getFirstPageNumber(), $this->getLastPageNumber());
     }
 
-    /**
-     * @return int
-     */
     public function getDisplayRangeStart(): int
     {
         return $this->displayRangeStart;
     }
 
-    /**
-     * @return int
-     */
     public function getDisplayRangeEnd(): int
     {
         return $this->displayRangeEnd;
@@ -166,25 +145,16 @@ final class BlogPagination implements PaginationInterface
         return $this->getDisplayRangeEnd() < $this->getLastPageNumber();
     }
 
-    /**
-     * @return int
-     */
     public function getMaximumNumberOfLinks(): int
     {
         return $this->maximumNumberOfLinks;
     }
 
-    /**
-     * @return PaginatorInterface
-     */
     public function getPaginator(): PaginatorInterface
     {
         return $this->paginator;
     }
 
-    /**
-     * @return iterable
-     */
     public function getPaginatedItems(): iterable
     {
         return $this->paginator->getPaginatedItems();

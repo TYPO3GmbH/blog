@@ -16,32 +16,15 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Tag extends AbstractEntity
 {
-    /**
-     * The title of the tag.
-     *
-     * @var string
-     */
-    protected $title;
+    protected string $title = '';
+    protected string $slug = '';
+    protected string $description = '';
 
     /**
-     * @var string
-     */
-    protected $slug;
-
-    /**
-     * The description of the tag. Used for SEO meta description.
-     *
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * The additional content of the tag. Used to enrich the SEO rating of tag pages.
-     *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Content>
      * @Extbase\ORM\Lazy
      */
-    protected $content;
+    protected ObjectStorage $content;
 
     /**
      * Tag constructor.
@@ -51,54 +34,32 @@ class Tag extends AbstractEntity
         $this->initializeObject();
     }
 
-    /**
-     * initializeObject
-     */
     public function initializeObject(): void
     {
-        /** @extensionScannerIgnoreLine */
         $this->content = new ObjectStorage();
     }
 
-    /**
-     * @return string
-     */
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     *
-     * @return Tag
-     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getSlug(): ?string
+    public function getSlug(): string
     {
         return $this->slug;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     * @return Tag
-     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -106,36 +67,28 @@ class Tag extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Content>
      */
     public function getContent(): ObjectStorage
     {
-        /** @extensionScannerIgnoreLine */
         return $this->content;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $content
-     * @return Tag
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Content> $content
      */
     public function setContent($content): self
     {
-        /** @extensionScannerIgnoreLine */
         $this->content = $content;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getContentElementUidList(): string
     {
         $uidList = [];
         $contentElements = $this->getContent();
-        if ($contentElements) {
-            foreach ($contentElements as $contentElement) {
-                $uidList[] = $contentElement->getUid();
-            }
+        foreach ($contentElements as $contentElement) {
+            $uidList[] = $contentElement->getUid();
         }
 
         return implode(',', $uidList);

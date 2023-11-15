@@ -1,0 +1,35 @@
+.table.dataTable {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+
+    .sorting {
+        .form-select {
+            min-width: 120px;
+        }
+    }
+
+    tfoot th {
+        border-bottom: none;
+    }
+}
+
+.col-datatable-checkbox {
+    width: 16px;
+    min-width: 16px;
+    box-sizing: content-box;
+    padding-right: 0 !important;
+
+    &:after,
+    &:before {
+        display: none !important;
+    }
+}
+
+.col-datatable-actions {
+    white-space: nowrap;
+    width: 0;
+}
+
+.col-datatable-text {
+    white-space: normal !important;
+}

@@ -23,19 +23,11 @@ class CacheViewHelper extends AbstractViewHelper
         $this->registerArgument('post', Post::class, 'the post to tag', true);
     }
 
-    /**
-     * Render
-     *
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     * @return mixed|string
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
     {
         $post = $arguments['post'];
         GeneralUtility::makeInstance(CacheService::class)->addTagsForPost($post);
+
+        return '';
     }
 }

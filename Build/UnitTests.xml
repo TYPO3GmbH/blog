@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-		backupGlobals="true"
-		backupStaticAttributes="false"
-		bootstrap="../.build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php"
-		colors="true"
-		convertErrorsToExceptions="true"
-		convertWarningsToExceptions="true"
-		forceCoversAnnotation="false"
-		processIsolation="false"
-		stopOnError="false"
-		stopOnFailure="false"
-		stopOnIncomplete="false"
-		stopOnSkipped="false"
-		verbose="false"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+    backupGlobals="true"
+    bootstrap="../.build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php"
+    colors="true"
+    processIsolation="false"
+    stopOnError="false"
+    stopOnFailure="false"
+    stopOnIncomplete="false"
+    stopOnSkipped="false"
+    cacheDirectory=".phpunit.cache"
+    backupStaticProperties="false"
+    requireCoverageMetadata="false"
+    displayDetailsOnTestsThatTriggerErrors="true"
+    displayDetailsOnTestsThatTriggerNotices="true"
+    displayDetailsOnTestsThatTriggerWarnings="true"
 >
-	<testsuites>
-		<testsuite name="Blog Extension">
-			<directory>../Tests/Unit</directory>
-		</testsuite>
-	</testsuites>
-	<filter>
-		<whitelist processUncoveredFilesFromWhitelist="true">
-			<directory suffix=".php">../Classes/</directory>
-		</whitelist>
-	</filter>
+  <testsuites>
+    <testsuite name="Blog Extension">
+      <directory>../Tests/Unit</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <ini name="display_errors" value="1"/>
+    <env name="TYPO3_CONTEXT" value="Testing"/>
+  </php>
 </phpunit>

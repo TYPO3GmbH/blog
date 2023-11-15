@@ -71,12 +71,6 @@
             <trans-unit id="plugin.blog_footer.description" xml:space="preserve">
                 <source>Displays post footer</source>
             </trans-unit>
-            <trans-unit id="plugin.blog_metadata.title" xml:space="preserve">
-                <source>Blog: Metadata (Deprecated, will be removed with v11)</source>
-            </trans-unit>
-            <trans-unit id="plugin.blog_metadata.description" xml:space="preserve">
-                <source>Displays post meta data, like date, tags, category...</source>
-            </trans-unit>
             <trans-unit id="plugin.blog_commentform.title" xml:space="preserve">
                 <source>Blog: Comment Form</source>
             </trans-unit>
@@ -140,9 +134,6 @@
             </trans-unit>
             <trans-unit id="tx_blog_domain_model_comment" xml:space="preserve">
                 <source>Blog: Comment</source>
-            </trans-unit>
-            <trans-unit id="tx_blog_domain_model_comment.author" xml:space="preserve">
-                <source>Author (FE-User)</source>
             </trans-unit>
             <trans-unit id="tx_blog_domain_model_comment.name" xml:space="preserve">
                 <source>Name</source>

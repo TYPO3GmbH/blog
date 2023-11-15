@@ -11,7 +11,6 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Controller;
 
 use Psr\Http\Message\ResponseInterface;
-use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
@@ -20,50 +19,22 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class CommentController extends ActionController
 {
-    /**
-     * @var PostRepository
-     */
-    protected $postRepository;
+    protected PostRepository $postRepository;
+    protected CommentService $commentService;
+    protected CacheService $cacheService;
 
-    /**
-     * @var CommentService
-     */
-    protected $commentService;
-
-    /**
-     * @var CacheService
-     */
-    protected $blogCacheService;
-
-    /**
-     * @param PostRepository $postRepository
-     */
-    public function injectPostRepository(PostRepository $postRepository): void
-    {
+    public function __construct(
+        PostRepository $postRepository,
+        CommentService $commentService,
+        CacheService $cacheService
+    ) {
         $this->postRepository = $postRepository;
-    }
-
-    /**
-     * @param \T3G\AgencyPack\Blog\Service\CommentService $commentService
-     */
-    public function injectCommentService(CommentService $commentService): void
-    {
         $this->commentService = $commentService;
-    }
-
-    /**
-     * @param \T3G\AgencyPack\Blog\Service\CacheService $cacheService
-     */
-    public function injectBlogCacheService(CacheService $cacheService): void
-    {
-        $this->blogCacheService = $cacheService;
+        $this->cacheService = $cacheService;
     }
 
     /**
      * Show comment form.
-     *
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function formAction(): ResponseInterface
     {
@@ -71,18 +42,13 @@ class CommentController extends ActionController
         return $this->htmlResponse();
     }
 
-    /**
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
     public function commentsAction(): ResponseInterface
     {
         $post = $this->postRepository->findCurrentPost();
         if ($post instanceof Post) {
             $comments = $this->commentService->getCommentsByPost($post);
             foreach ($comments as $comment) {
-                $this->blogCacheService->addTagToPage('tx_blog_comment_' . $comment->getUid());
+                $this->cacheService->addTagToPage('tx_blog_comment_' . $comment->getUid());
             }
             $this->view->assign('comments', $comments);
             $this->view->assign('post', $post);

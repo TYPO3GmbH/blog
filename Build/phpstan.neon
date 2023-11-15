@@ -1,0 +1,27 @@
+includes:
+	- %currentWorkingDirectory%/.build/vendor/phpstan/phpstan-phpunit/extension.neon
+	- %currentWorkingDirectory%/.build/vendor/phpstan/phpstan-strict-rules/rules.neon
+	- %currentWorkingDirectory%/.build/vendor/phpstan/phpstan-deprecation-rules/rules.neon
+	- %currentWorkingDirectory%/.build/vendor/friendsoftypo3/phpstan-typo3/extension.neon
+	- %currentWorkingDirectory%/Build/phpstan-baseline.neon
+
+parameters:
+	level: 8
+	checkMissingIterableValueType: false
+	reportUnmatchedIgnoredErrors: false
+	checkGenericClassInNonGenericObjectType: false
+
+	ignoreErrors:
+		- "#Casting to string something that's already string.#"
+		- "#Casting to int something that's already int.#"
+		- "#Casting to bool something that's already bool.#"
+		- "#^Call to an undefined method TYPO3\\\\CMS\\\\Extbase\\\\Validation\\\\Validator\\\\StringLengthValidator\\:\\:setOptions\\(\\)\\.$#"
+		- "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
+		- "#^Method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryInterface\\:\\:logicalAnd\\(\\) invoked with 2 parameters, 1 required\\.$#"
+		- "#^Method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryInterface\\:\\:logicalOr\\(\\) invoked with 2 parameters, 1 required\\.$#"
+		- "#^Dynamic call to static method TYPO3\\\\CMS\\\\Core\\\\Http\\\\Client\\\\GuzzleClientFactory\\:\\:getClient\\(\\)\\.$#"
+
+	paths:
+	- %currentWorkingDirectory%/Classes/
+	- %currentWorkingDirectory%/Configuration/
+	- %currentWorkingDirectory%/Tests/

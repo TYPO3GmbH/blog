@@ -11,33 +11,63 @@
             <f:form class="form-inline" action="updateCommentStatus">
                 <f:form.hidden name="filter" value="{activeFilter}" />
                 <f:form.hidden name="blogSetup" value="{activeBlogSetup}" />
-                <table class="table table-striped table-hover table-comments dataTables" data-columns='[{"searchable": false, "orderable": false}, {"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "num"}]'>
+                <table class="table table-striped table-hover table-comments dataTables" data-columns='[{"searchable": false, "orderable": false}, {"searchable": false, "orderable": false}, {"type": "string"}, {"type": "string"}, {"type": "string"}, {"type": "num"}]'>
                     <thead>
                         <tr>
-                            <th><f:translate key="backend.table.actions" /></th>
-                            <th data-filter="true"><f:translate key="backend.table.author" /></th>
-                            <th><f:translate key="backend.table.comment" /></th>
-                            <th data-filter="true"><f:translate key="backend.table.post" /></th>
-                            <th><f:translate key="backend.table.date" /></th>
+                            <th class="col-datatable-checkbox"></th>
+                            <th class="col-datatable-actions"><f:translate key="backend.table.actions" /></th>
+                            <th class="col-datatable-author" data-filter="true"><f:translate key="backend.table.author" /></th>
+                            <th class="col-datatable-text"><f:translate key="backend.table.comment" /></th>
+                            <th class="col-datatable-post" data-filter="true"><f:translate key="backend.table.post" /></th>
+                            <th class="col-datatable-date"><f:translate key="backend.table.date" /></th>
                         </tr>
                     </thead>
                     <tbody>
                         <f:for each="{comments}" as="comment">
                             <tr>
-                                <td class="actions">
-                                    <f:render section="Actions" arguments="{_all}" />
+                                <td class="col-datatable-checkbox">
+                                    <div class="form-check form-toggle form-check-type-toggle">
+                                        <f:form.checkbox class="form-check-input t3js-blog-massupdate-checkbox" name="comments" multiple="true" value="{comment}" />
+                                    </div>
                                 </td>
-                                <td data-search="{comment.name}" data-filter="{comment.name}">
+                                <td class="col-datatable-actions">
+                                    <div class="btn-group btn-group-actions" role="group">
+                                        <f:switch expression="{comment.status}">
+                                            <f:case value="0">
+                                                <f:comment>Status: pending</f:comment>
+                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.approve')}" action="updateCommentStatus" arguments="{comment: comment, status: 'approve', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-approve" /></f:link.action>
+                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-decline" /></f:link.action>
+                                            </f:case>
+                                            <f:case value="10">
+                                                <f:comment>Status: approved</f:comment>
+                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-decline" /></f:link.action>
+                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.delete')}" action="updateCommentStatus" arguments="{comment: comment, status: 'delete', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-delete" /></f:link.action>
+                                            </f:case>
+                                            <f:case value="50">
+                                                <f:comment>Status: declined</f:comment>
+                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.approve')}" action="updateCommentStatus" arguments="{comment: comment, status: 'approve', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-approve" /></f:link.action>
+                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.delete')}" action="updateCommentStatus" arguments="{comment: comment, status: 'delete', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-delete" /></f:link.action>
+                                            </f:case>
+                                            <f:case value="90">
+                                                <f:comment>Status: deleted</f:comment>
+                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.approve')}" action="updateCommentStatus" arguments="{comment: comment, status: 'approve', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-approve" /></f:link.action>
+                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-decline" /></f:link.action>
+                                            </f:case>
+                                        </f:switch>
+                                        <blogvh:link.be.comment class="btn btn-default" title="{f:translate(key: 'action.editComment')}" comment="{comment}"><core:icon identifier="actions-open" /></blogvh:link.be.comment>
+                                    </div>
+                                </td>
+                                <td class="col-nowrap" data-order="{comment.name}" data-search="{comment.name}" data-filter="{comment.name}">
                                     {comment.name}
                                 </td>
-                                <td>{comment.comment}</td>
-                                <td data-search="{comment.post.title}" data-filter="{comment.post.title}">
+                                <td class="col-datatable-text" data-order="{comment.comment}">{comment.comment}</td>
+                                <td data-order="{comment.post.title}" data-search="{comment.post.title}" data-filter="{comment.post.title}">
                                     <f:if condition="{comment.post}">
                                         <f:then><blogvh:link.be.post post="{comment.post}" /></f:then>
                                         <f:else><f:translate key="backend.message.nopost" /></f:else>
                                     </f:if>
                                 </td>
-                                <td data-order="{f:format.date(format: 'U', date: comment.crdate)}">
+                                <td class="col-date" data-order="{f:format.date(format: 'U', date: comment.crdate)}">
                                     <f:format.date format="d.m.Y">{comment.crdate}</f:format.date>
                                 </td>
                             </tr>
@@ -45,10 +75,10 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="5">
-                                <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="approve" disabled="true"><f:translate key="action.multiple.approve" /></f:form.button>
-                                <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="decline" disabled="true"><f:translate key="action.multiple.decline" /></f:form.button>
-                                <f:form.button class="btn btn-default t3js-check-multiple-action" name="status" value="delete" disabled="true"><f:translate key="action.multiple.delete" /></f:form.button>
+                            <th colspan="6">
+                                <f:form.button class="btn btn-default t3js-blog-massupdate-action" name="status" value="approve" disabled="true"><f:translate key="action.multiple.approve" /></f:form.button>
+                                <f:form.button class="btn btn-default t3js-blog-massupdate-action" name="status" value="decline" disabled="true"><f:translate key="action.multiple.decline" /></f:form.button>
+                                <f:form.button class="btn btn-default t3js-blog-massupdate-action" name="status" value="delete" disabled="true"><f:translate key="action.multiple.delete" /></f:form.button>
                             </th>
                         </tr>
                     </tfoot>
@@ -61,36 +91,4 @@
             </f:be.infobox>
         </f:else>
     </f:if>
-</f:section>
-<f:section name="Actions">
-    <div class="btn-group" role="group">
-        <label class="btn btn-default btn-checkbox t3js-check-multiple-selection">
-            <f:form.checkbox name="comments" multiple="true" value="{comment}" /><span class="t3-icon fa"></span>
-        </label>
-    </div>
-    <div class="btn-group btn-group-actions" role="group">
-        <f:switch expression="{comment.status}">
-            <f:case value="0">
-                <f:comment>Status: pending</f:comment>
-                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.approve')}" action="updateCommentStatus" arguments="{comment: comment, status: 'approve', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-approve" /></f:link.action>
-                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-decline" /></f:link.action>
-            </f:case>
-            <f:case value="10">
-                <f:comment>Status: approved</f:comment>
-                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-decline" /></f:link.action>
-                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.delete')}" action="updateCommentStatus" arguments="{comment: comment, status: 'delete', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-delete" /></f:link.action>
-            </f:case>
-            <f:case value="50">
-                <f:comment>Status: declined</f:comment>
-                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.approve')}" action="updateCommentStatus" arguments="{comment: comment, status: 'approve', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-approve" /></f:link.action>
-                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.delete')}" action="updateCommentStatus" arguments="{comment: comment, status: 'delete', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-delete" /></f:link.action>
-            </f:case>
-            <f:case value="90">
-                <f:comment>Status: deleted</f:comment>
-                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.approve')}" action="updateCommentStatus" arguments="{comment: comment, status: 'approve', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-approve" /></f:link.action>
-                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-decline" /></f:link.action>
-            </f:case>
-        </f:switch>
-        <blogvh:link.be.comment class="btn btn-default" title="{f:translate(key: 'action.editComment')}" comment="{comment}"><core:icon identifier="actions-open" /></blogvh:link.be.comment>
-    </div>
 </f:section>

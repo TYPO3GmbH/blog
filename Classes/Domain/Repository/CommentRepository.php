@@ -19,30 +19,23 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class CommentRepository extends Repository
 {
-    /**
-     * @var ConfigurationManagerInterface
-     */
-    protected $configurationManager;
+    protected array $settings = [];
 
-    /**
-     * @var array
-     */
-    protected $settings;
-
-    /**
-     * @throws \InvalidArgumentException
-     */
     public function initializeObject(): void
     {
-        $this->configurationManager = $this->objectManager->get(ConfigurationManagerInterface::class);
-        $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+        $this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
-        // don't add the pid constraint
+        $querySettings = GeneralUtility::makeInstance(
+            Typo3QuerySettings::class,
+            GeneralUtility::makeInstance(Context::class),
+            $configurationManager
+        );
         $querySettings->setRespectStoragePage(false);
         $this->setDefaultQuerySettings($querySettings);
 
@@ -51,31 +44,22 @@ class CommentRepository extends Repository
         ];
     }
 
-    /**
-     * @param Post $post
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public function findAllByPost(Post $post)
+    public function findAllByPost(Post $post): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = [];
         $constraints[] = $query->equals('post', $post->getUid());
         $constraints = $this->fillConstraintsBySettings($query, $constraints);
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        $statement = $query->matching($query->logicalAnd(...$constraints));
+        $result = $statement->execute();
+
+        return $result;
     }
 
-    /**
-     * @param string $filter
-     * @param int $blogSetup
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public function findAllByFilter(string $filter = null, int $blogSetup = null)
+    public function findAllByFilter(string $filter = null, int $blogSetup = null): QueryResultInterface
     {
         $query = $this->createQuery();
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $querySettings = $query->getQuerySettings();
         $querySettings->setRespectStoragePage(false);
         $query->setQuerySettings($querySettings);
 
@@ -102,21 +86,14 @@ class CommentRepository extends Repository
         if ($blogSetup !== null) {
             $constraints[] = $query->in('pid', $this->getPostPidsByRootPid($blogSetup));
         }
-        if (!empty($constraints)) {
-            return $query->matching($query->logicalAnd($constraints))->execute();
+        if (count($constraints) > 0) {
+            return $query->matching($query->logicalAnd(...$constraints))->execute();
         }
 
-        return $this->findAll();
+        return $this->createQuery()->execute();
     }
 
-    /**
-     * @param int $limit
-     * @param int $blogSetup
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public function findActiveComments(int $limit = null, int $blogSetup = null)
+    public function findActiveComments(int $limit = null, int $blogSetup = null): QueryResultInterface
     {
         $query = $this->createQuery();
 
@@ -128,17 +105,14 @@ class CommentRepository extends Repository
         }
         if ($blogSetup !== null) {
             $storagePids = $this->getPostPidsByRootPid($blogSetup);
-            if (!empty($storagePids)) {
+            if (count($storagePids) > 0) {
                 $constraints[] = $query->in('pid', $storagePids);
             }
         }
-        return $query->matching($query->logicalAnd($constraints))->execute();
+
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
-    /**
-     * @param int $blogRootPid
-     * @return array
-     */
     protected function getPostPidsByRootPid(int $blogRootPid): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
@@ -148,8 +122,8 @@ class CommentRepository extends Repository
             ->from('pages')
             ->where($queryBuilder->expr()->eq('doktype', Constants::DOKTYPE_BLOG_POST))
             ->andWhere($queryBuilder->expr()->eq('pid', $blogRootPid))
-            ->execute()
-            ->fetchAll();
+            ->executeQuery()
+            ->fetchAllAssociative();
         $result = [];
         foreach ($rows as $row) {
             $result[] = $row['uid'];
@@ -158,13 +132,6 @@ class CommentRepository extends Repository
         return $result;
     }
 
-    /**
-     * @param QueryInterface $query
-     * @param array $constraints
-     * @return array
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
     public function fillConstraintsBySettings(QueryInterface $query, array $constraints): array
     {
         $respectCommentsModeration = isset($this->settings['comments']['moderation'])
@@ -177,31 +144,31 @@ class CommentRepository extends Repository
         }
 
         $respectPostLanguageId = isset($this->settings['comments']['respectPostLanguageId'])
-            ? (int)$this->settings['comments']['respectPostLanguageId']
-            : 0;
+            ? (bool) $this->settings['comments']['respectPostLanguageId']
+            : false;
         if ($respectPostLanguageId) {
-            /** @noinspection PhpUnhandledExceptionInspection */
-            $constraints[] = $query->logicalOr([
+            $constraints[] = $query->logicalOr(
                 $query->equals('postLanguageId', GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId()),
-                $query->equals('postLanguageId', -1),
-            ]);
+                $query->equals('postLanguageId', -1)
+            );
         }
 
         $tstamp = time();
-        $constraints[] = $query->logicalAnd([
-            $query->logicalOr([
+        $constraints[] = $query->logicalAnd(
+            $query->logicalOr(
                 $query->equals('post.starttime', 0),
                 $query->lessThanOrEqual('post.starttime', $tstamp)
-            ]),
-            $query->logicalOr([
+            ),
+            $query->logicalOr(
                 $query->equals('post.endtime', 0),
                 $query->greaterThanOrEqual('post.endtime', $tstamp)
-            ])
-        ]);
-        $constraints[] = $query->logicalAnd([
+            )
+        );
+        $constraints[] = $query->logicalAnd(
             $query->equals('post.hidden', 0),
             $query->equals('post.deleted', 0)
-        ]);
+        );
+
         return $constraints;
     }
 }

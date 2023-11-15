@@ -18,7 +18,7 @@ class ConstantsTest extends UnitTestCase
     /**
      * @test
      */
-    public function constantForDoktypeOfBlogPostsIsSetCorrectly()
+    public function constantForDoktypeOfBlogPostsIsSetCorrectly(): void
     {
         self::assertEquals(137, Constants::DOKTYPE_BLOG_POST);
         self::assertEquals(138, Constants::DOKTYPE_BLOG_PAGE);
