@@ -49,7 +49,7 @@ class WidgetController extends ActionController
         if (($requestParameters['category'] ?? null) !== null) {
             $currentCategory = (int)$requestParameters['category'];
         }
-        $categories = $this->categoryRepository->getByLocalPid((int) $this->settings['storagePid']);
+        $categories = $this->categoryRepository->getByLocalPid((int) $this->settings['storagePid']) ?? [];
         $this->view->assign('categories', $categories);
         $this->view->assign('currentCategory', $currentCategory);
         foreach ($categories as $category) {
