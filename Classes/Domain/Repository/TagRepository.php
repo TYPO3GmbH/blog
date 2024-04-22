@@ -35,7 +35,10 @@ class TagRepository extends Repository
     {
         $query = $this->createQuery();
         $query->matching(
-            $query->in('uid', $uids)
+            $query->logicalOr([
+                $query->in('uid', $uids),
+                $query->in('l18n_parent', $uids)
+            ])
         );
 
         return $query->execute();
