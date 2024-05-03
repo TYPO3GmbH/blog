@@ -46,7 +46,6 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
         $uri = $uriBuilder->reset()
-            ->setRequest($this->renderingContext->getRequest())
             ->setTargetPageUid($pageUid)
             ->setSection($section)
             ->setCreateAbsoluteUri($createAbsoluteUri)
