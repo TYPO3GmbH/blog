@@ -42,7 +42,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "12.0.x-dev"
+            "dev-master": "13.0.x-dev"
         },
         "typo3/cms": {
             "extension-key": "blog",
@@ -84,20 +84,20 @@
         "typo3/cms-fluid-styled-content": "Content rendering definition based on fluid"
     },
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.1",
         "ext-json": "*",
         "ext-pdo": "*",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
-        "psr/http-message": "^1.0",
-        "typo3/cms-backend": "^11.5 || ^12.4",
-        "typo3/cms-core": "^11.5 || ^12.4",
-        "typo3/cms-extbase": "^11.5 || ^12.4",
-        "typo3/cms-extensionmanager": "^11.5 || ^12.4",
-        "typo3/cms-fluid": "^11.5 || ^12.4",
-        "typo3/cms-form": "^11.5 || ^12.4",
-        "typo3/cms-frontend": "^11.5 || ^12.4",
-        "typo3/cms-install": "^11.5 || ^12.4",
+        "psr/http-message": "^2.0",
+        "typo3/cms-backend": "^12.4 || ^13.1",
+        "typo3/cms-core": "^12.4 || ^13.1",
+        "typo3/cms-extbase": "^12.4 || ^13.1",
+        "typo3/cms-extensionmanager": "^12.4 || ^13.1",
+        "typo3/cms-fluid": "^12.4 || ^13.1",
+        "typo3/cms-form": "^12.4 || ^13.1",
+        "typo3/cms-frontend": "^12.4 || ^13.1",
+        "typo3/cms-install": "^12.4 || ^13.1",
         "typo3fluid/fluid": "^2.6"
     },
     "require-dev": {
@@ -110,15 +110,15 @@
         "phpstan/phpstan-deprecation-rules": "^1.1",
         "phpstan/phpstan-phpunit": "^1.3",
         "phpstan/phpstan-strict-rules": "^1.5",
-        "typo3/cms-belog": "^11.5 || ^12.4",
-        "typo3/cms-beuser": "^11.5 || ^12.4",
-        "typo3/cms-filelist": "^11.5 || ^12.4",
-        "typo3/cms-fluid-styled-content": "^11.5 || ^12.4",
-        "typo3/cms-lowlevel": "^11.5 || ^12.4",
-        "typo3/cms-rte-ckeditor": "^11.5 || ^12.4",
-        "typo3/cms-seo": "^11.5 || ^12.4",
-        "typo3/cms-setup": "^11.5 || ^12.4",
-        "typo3/cms-tstemplate": "^11.5 || ^12.4",
-        "typo3/testing-framework": "^7.0 || ^8.0"
+        "typo3/cms-belog": "^12.4",
+        "typo3/cms-beuser": "^12.4",
+        "typo3/cms-filelist": "^12.4",
+        "typo3/cms-fluid-styled-content": "^12.4",
+        "typo3/cms-lowlevel": "^12.4",
+        "typo3/cms-rte-ckeditor": "^12.4",
+        "typo3/cms-seo": "^12.4",
+        "typo3/cms-setup": "^12.4",
+        "typo3/cms-tstemplate": "^12.4",
+        "typo3/testing-framework": "^8.0"
     }
 }

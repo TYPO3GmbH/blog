@@ -16,9 +16,9 @@ use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
 use T3G\AgencyPack\Blog\Notification\NotificationManager;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\CommentService;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Service\ExtensionService;
@@ -36,17 +36,17 @@ class CommentFormFinisher extends AbstractFinisher
         CommentService::STATE_ERROR => [
             'title' => 'message.addComment.error.title',
             'text' => 'message.addComment.error.text',
-            'severity' => AbstractMessage::ERROR,
+            'severity' => ContextualFeedbackSeverity::ERROR,
         ],
         CommentService::STATE_MODERATION => [
             'title' => 'message.addComment.moderation.title',
             'text' => 'message.addComment.moderation.text',
-            'severity' => AbstractMessage::INFO,
+            'severity' => ContextualFeedbackSeverity::INFO,
         ],
         CommentService::STATE_SUCCESS => [
             'title' => 'message.addComment.success.title',
             'text' => 'message.addComment.success.text',
-            'severity' => AbstractMessage::OK,
+            'severity' => ContextualFeedbackSeverity::OK,
         ],
     ];
 
