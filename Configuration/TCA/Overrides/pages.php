@@ -194,17 +194,15 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
         ],
         'featured_image' => [
             'label' => $ll . 'pages.featured_image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'featured_image',
-                [
-                    'minitems' => 0,
-                    'maxitems' => 1,
-                    'behaviour' => [
-                        'allowLanguageSynchronization' => true
-                    ]
-                ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
+            'config' => [
+                'type' => 'file',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'allowed' => 'common-image-types',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
+            ],
         ],
         'categories' => [
             'config' => [

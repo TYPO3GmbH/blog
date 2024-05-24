@@ -133,7 +133,7 @@ abstract class AbstractUpdate
     {
         $queryBuilder = $this->createQueryBuilder($table);
         $queryBuilder->update($table)
-            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT)));
+            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT)));
 
         foreach ($values as $field => $value) {
             $queryBuilder->set($field, $value);
