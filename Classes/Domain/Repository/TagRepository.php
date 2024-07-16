@@ -57,7 +57,7 @@ class TagRepository extends Repository
         // limitation to storage pid for multi domain purpose
         if ($this->settings['persistence']['storagePid']) {
             // force storage pids as integer
-            $storagePids = GeneralUtility::intExplode(',', $this->settings['persistence']['storagePid']);
+            $storagePids = GeneralUtility::intExplode(',', (string)$this->settings['persistence']['storagePid']);
             $queryBuilder->where('t.pid IN(' . implode(',', $storagePids) . ')');
         }
 
