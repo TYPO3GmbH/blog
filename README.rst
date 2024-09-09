@@ -53,6 +53,7 @@ Compatibility
    :header-rows: 1
 
    * -
+     - v13
      - v12
      - v11
      - v10
@@ -60,7 +61,17 @@ Compatibility
      - v8
      - v7
 
+   * - 13.0.x
+     - ✔️
+     - ✔️
+     -
+     -
+     -
+     -
+     -
+
    * - 12.0.x
+     -
      - ✔️
      - ✔️
      -
@@ -70,6 +81,7 @@ Compatibility
 
    * - 11.0.x
      -
+     -
      - ✔️
      - ✔️
      -
@@ -77,6 +89,7 @@ Compatibility
      -
 
    * - 10.0.x
+     -
      -
      -
      - ✔️
@@ -88,11 +101,13 @@ Compatibility
      -
      -
      -
+     -
      - ✔️
      -
      -
 
    * - 9.0.x
+     -
      -
      -
      -
@@ -105,10 +120,12 @@ Compatibility
      -
      -
      -
+     -
      - ✔️
      -
 
    * - 7.6.x
+     -
      -
      -
      -
