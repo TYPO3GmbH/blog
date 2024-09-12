@@ -66,5 +66,6 @@ class Constants
         'blog_commentswidget'       => -1600000017,
         'blog_archivewidget'        => -1600000018,
         'blog_feedwidget'           => -1600000019,
+        'blog_filter'               => -1600000020,
     ];
 }
