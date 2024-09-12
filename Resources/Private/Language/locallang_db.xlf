@@ -47,6 +47,12 @@
             <trans-unit id="plugin.blog_tag.description" xml:space="preserve">
                 <source>Allows the users to show all posts tagged with a specific keyword.</source>
             </trans-unit>
+            <trans-unit id="plugin.blog_filter.title" xml:space="preserve">
+                <source>Blog: List by filter</source>
+            </trans-unit>
+            <trans-unit id="plugin.blog_filter.description" xml:space="preserve">
+                <source>Allows the users to show a list of filtered posts.</source>
+            </trans-unit>
             <trans-unit id="plugin.blog_archive.title" xml:space="preserve">
                 <source>Blog: Archive</source>
             </trans-unit>

@@ -51,6 +51,7 @@ $icons = [
     'plugin-blog-relatedposts' => 'EXT:blog/Resources/Public/Icons/plugin-blog-relatedposts.svg',
     'plugin-blog-sidebar' => 'EXT:blog/Resources/Public/Icons/plugin-blog-sidebar.svg',
     'plugin-blog-tag' => 'EXT:blog/Resources/Public/Icons/plugin-blog-tag.svg',
+    'plugin-blog-filter' => 'EXT:blog/Resources/Public/Icons/plugin-blog-filter.svg',
     'record-blog-author' => 'EXT:blog/Resources/Public/Icons/record-blog-author.svg',
     'record-blog-comment' => 'EXT:blog/Resources/Public/Icons/record-blog-comment.svg',
     'record-blog-page' => 'EXT:blog/Resources/Public/Icons/record-blog-page.svg',
