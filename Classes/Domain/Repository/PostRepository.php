@@ -13,6 +13,7 @@ namespace T3G\AgencyPack\Blog\Domain\Repository;
 use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\DataTransferObject\PostRepositoryDemand;
+use T3G\AgencyPack\Blog\Domain\Filter\PostFilter;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
@@ -218,6 +219,18 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
         $constraints[] = $query->contains('tags', $tag);
+        $storagePidConstraint = $this->getStoragePidConstraint();
+        if ($storagePidConstraint instanceof ComparisonInterface) {
+            $constraints[] = $storagePidConstraint;
+        }
+
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
+    }
+
+    public function findAllByFilter(PostFilter $filter): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $constraints = array_merge($this->defaultConstraints, $filter->getConstraints($query));
         $storagePidConstraint = $this->getStoragePidConstraint();
         if ($storagePidConstraint instanceof ComparisonInterface) {
             $constraints[] = $storagePidConstraint;

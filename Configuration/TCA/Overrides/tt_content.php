@@ -59,6 +59,14 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_arc
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'Blog',
+    'Filter',
+    'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_filter.title',
+    'plugin-blog-filter'
+);
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_filter'] = 'select_key';
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'Blog',
     'Sidebar',
     'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_sidebar.title',
     'plugin-blog-sidebar'
