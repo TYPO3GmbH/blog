@@ -1,0 +1,27 @@
+/**
+ * Filter
+ */
+
+.blogfilter__categories {
+    .blogfilter__category {
+        display: inline-block;
+        &.one {
+            margin: 1rem 0 1rem 1rem;
+        }
+        &.active {
+            font-weight: bold;
+        }
+    }
+}
+
+.blogfilter__tags {
+    .blogfilter__tag {
+        display: inline-block;
+        &.one {
+            margin: 1rem 0 1rem 1rem;
+        }
+        &.active {
+            font-weight: bold;
+        }
+    }
+}
