@@ -119,6 +119,6 @@
         "typo3/cms-seo": "^12.4",
         "typo3/cms-setup": "^12.4",
         "typo3/cms-tstemplate": "^12.4",
-        "typo3/testing-framework": "^8.0"
+        "typo3/testing-framework": "^8.0 || ^9.0"
     }
 }
