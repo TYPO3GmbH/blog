@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Factory;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Finisher\CommentFormFinisher;
 use T3G\AgencyPack\Blog\Domain\Validator\GoogleCaptchaValidator;
 use TYPO3\CMS\Core\Information\Typo3Version;
@@ -35,7 +36,7 @@ class CommentFormFactory extends AbstractFormFactory
      * This example build a FormDefinition manually,
      * so $configuration and $prototypeName are unused.
      */
-    public function build(array $configuration, string $prototypeName = null): FormDefinition
+    public function build(array $configuration, ?string $prototypeName = null, ?ServerRequestInterface $request = null): FormDefinition
     {
         $prototypeName = 'standard';
         $formConfigurationService = GeneralUtility::makeInstance(ConfigurationService::class);
