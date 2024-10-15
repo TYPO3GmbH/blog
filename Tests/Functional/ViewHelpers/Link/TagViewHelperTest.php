@@ -16,6 +16,10 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 
 final class TagViewHelperTest extends SiteBasedTestCase
 {
+    protected array $coreExtensionsToLoad = [
+        'form'
+    ];
+
     /**
      * @test
      * @dataProvider renderDataProvider

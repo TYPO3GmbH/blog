@@ -23,6 +23,10 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class TagViewHelperTest extends FunctionalTestCase
 {
+    protected array $coreExtensionsToLoad = [
+        'form'
+    ];
+
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/blog'
     ];

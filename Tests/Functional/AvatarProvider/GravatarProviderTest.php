@@ -16,6 +16,10 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class GravatarProviderTest extends FunctionalTestCase
 {
+    protected array $coreExtensionsToLoad = [
+        'form'
+    ];
+
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/blog'
     ];

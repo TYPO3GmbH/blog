@@ -20,6 +20,10 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class DataHandlerHookTest extends FunctionalTestCase
 {
+    protected array $coreExtensionsToLoad = [
+        'form'
+    ];
+
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/blog'
     ];

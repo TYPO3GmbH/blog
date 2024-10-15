@@ -17,6 +17,10 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 
 final class CategoryViewHelperTest extends SiteBasedTestCase
 {
+    protected array $coreExtensionsToLoad = [
+        'form'
+    ];
+
     /**
      * @test
      * @dataProvider renderDataProvider
