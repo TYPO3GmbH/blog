@@ -17,7 +17,6 @@ use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class WidgetController extends ActionController
@@ -44,7 +43,8 @@ class WidgetController extends ActionController
 
     public function categoriesAction(): ResponseInterface
     {
-        $requestParameters = GeneralUtility::_GP('tx_blog_category');
+        // @todo allow post?
+        $requestParameters = $this->request->getQueryParams()['tx_blog_category'] ?? [];
         $currentCategory = 0;
         if (($requestParameters['category'] ?? null) !== null) {
             $currentCategory = (int)$requestParameters['category'];
@@ -60,7 +60,8 @@ class WidgetController extends ActionController
 
     public function tagsAction(): ResponseInterface
     {
-        $requestParameters = GeneralUtility::_GP('tx_blog_tag');
+        // @todo allow post?
+        $requestParameters = $this->request->getQueryParams()['tx_blog_tag'] ?? [];
         $currentTag = 0;
         if (($requestParameters['tag'] ?? null) !== null) {
             $currentTag = (int)$requestParameters['tag'];
