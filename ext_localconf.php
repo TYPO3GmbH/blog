@@ -17,15 +17,6 @@ use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
 use T3G\AgencyPack\Blog\Notification\Processor\AdminNotificationProcessor;
 use T3G\AgencyPack\Blog\Notification\Processor\AuthorNotificationProcessor;
 use T3G\AgencyPack\Blog\Routing\Aspect\StaticDatabaseMapper;
-use T3G\AgencyPack\Blog\Updates\AuthorSlugUpdate;
-use T3G\AgencyPack\Blog\Updates\AvatarProviderUpdate;
-use T3G\AgencyPack\Blog\Updates\CategorySlugUpdate;
-use T3G\AgencyPack\Blog\Updates\CategoryTypeUpdate;
-use T3G\AgencyPack\Blog\Updates\CommentStatusUpdate;
-use T3G\AgencyPack\Blog\Updates\DatabaseMonthYearUpdate;
-use T3G\AgencyPack\Blog\Updates\DatabasePublishDateUpdate;
-use T3G\AgencyPack\Blog\Updates\FeaturedImageUpdate;
-use T3G\AgencyPack\Blog\Updates\TagSlugUpdate;
 use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew;
 use TYPO3\CMS\Core\Hooks\CreateSiteConfiguration;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -218,26 +209,6 @@ ExtensionUtility::configurePlugin(
 // Hooks
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['Blog']
     = DataHandlerHook::class;
-
-// Upgrades
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][AuthorSlugUpdate::class]
-    = AuthorSlugUpdate::class;
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][AvatarProviderUpdate::class]
-    = AvatarProviderUpdate::class;
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][CategorySlugUpdate::class]
-    = CategorySlugUpdate::class;
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][CategoryTypeUpdate::class]
-    = CategoryTypeUpdate::class;
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][CommentStatusUpdate::class]
-    = CommentStatusUpdate::class;
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][DatabaseMonthYearUpdate::class]
-    = DatabaseMonthYearUpdate::class;
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][DatabasePublishDateUpdate::class]
-    = DatabasePublishDateUpdate::class;
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][FeaturedImageUpdate::class]
-    = FeaturedImageUpdate::class;
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][TagSlugUpdate::class]
-    = TagSlugUpdate::class;
 
 // Register Static Database Mapper
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['BlogStaticDatabaseMapper']
