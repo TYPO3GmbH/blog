@@ -10,10 +10,10 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class TagViewHelper extends AbstractTagBasedViewHelper
@@ -40,7 +40,12 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         $rssFormat = (bool)$this->arguments['rss'];
         /** @var Tag $tag */
         $tag = $this->arguments['tag'];
-        $pageUid = (int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['tagUid'];
+        $pageUid = (int)($this->getRequest()->getAttribute('frontend.typoscript')->getSetupTree()
+            ->getChildByName('plugin')
+            ?->getChildByName('tx_blog')
+            ?->getChildByName('settings')
+            ?->getChildByName('tagUid')
+            ?->getValue() ?? 0);
         $arguments = [
             'tag' => $tag->getUid(),
         ];
@@ -49,8 +54,13 @@ class TagViewHelper extends AbstractTagBasedViewHelper
             ->setRequest($this->renderingContext->getRequest())
             ->setTargetPageUid($pageUid);
         if ($rssFormat) {
-            $uriBuilder
-                ->setTargetPageType((int)$this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_tag.']['typeNum']);
+            $rssTypeNum = (int)(
+                $this->getRequest()->getAttribute('frontend.typoscript')->getSetupTree()
+                ->getChildByName('blog_rss_tag')
+                ?->getChildByName('typeNum')
+                ?->getValue() ?? 0
+            );
+            $uriBuilder->setTargetPageType($rssTypeNum);
         }
         $uri = $uriBuilder->uriFor('listPostsByTag', $arguments, 'Post', 'Blog', 'Tag');
         if ($uri !== '') {
@@ -65,8 +75,19 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         return (string)$result;
     }
 
-    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
+    protected function getRequest(): ServerRequestInterface
     {
-        return $GLOBALS['TSFE'];
+        $request = null;
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+        $request ??= $GLOBALS['TYPO3_REQUEST'] ?? null;
+        if (!$request instanceof ServerRequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.tag needs a request implementing ServerRequestInterface.',
+                1729082936
+            );
+        }
+        return $request;
     }
 }

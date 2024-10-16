@@ -10,10 +10,10 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class CategoryViewHelper extends AbstractTagBasedViewHelper
@@ -40,7 +40,12 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         $rssFormat = (bool)$this->arguments['rss'];
         /** @var Category $category */
         $category = $this->arguments['category'];
-        $pageUid = (int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['categoryUid'];
+        $pageUid = (int)($this->getRequest()->getAttribute('frontend.typoscript')->getSetupTree()
+            ->getChildByName('plugin')
+            ?->getChildByName('tx_blog')
+            ?->getChildByName('settings')
+            ?->getChildByName('categoryUid')
+            ?->getValue() ?? 0);
         $arguments = [
             'category' => $category->getUid(),
         ];
@@ -49,8 +54,13 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
             ->setRequest($this->renderingContext->getRequest())
             ->setTargetPageUid($pageUid);
         if ($rssFormat) {
-            $uriBuilder
-                ->setTargetPageType((int)$this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_category.']['typeNum']);
+            $rssTypeNum = (int)(
+                $this->getRequest()->getAttribute('frontend.typoscript')->getSetupTree()
+                ->getChildByName('blog_rss_category')
+                ?->getChildByName('typeNum')
+                ?->getValue() ?? 0
+            );
+            $uriBuilder->setTargetPageType($rssTypeNum);
         }
         $uri = $uriBuilder->uriFor('listPostsByCategory', $arguments, 'Post', 'Blog', 'Category');
 
@@ -66,8 +76,19 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         return (string)$result;
     }
 
-    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
+    protected function getRequest(): ServerRequestInterface
     {
-        return $GLOBALS['TSFE'];
+        $request = null;
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+        $request ??= $GLOBALS['TYPO3_REQUEST'] ?? null;
+        if (!$request instanceof ServerRequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.category needs a request implementing ServerRequestInterface.',
+                1729082935
+            );
+        }
+        return $request;
     }
 }
