@@ -18,7 +18,6 @@ use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Http\RedirectResponse;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -77,13 +76,12 @@ class BackendController extends ActionController
 
     public function setupWizardAction(): ResponseInterface
     {
-        $this->view->assignMultiple([
+        $view = $this->moduleTemplateFactory->create($this->request);
+        $view->assignMultiple([
             'blogSetups' => $this->setupService->determineBlogSetups(),
         ]);
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
 
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $view->renderResponse('Backend/SetupWizard');
     }
 
     public function postsAction(int $blogSetup = null): ResponseInterface
@@ -93,20 +91,20 @@ class BackendController extends ActionController
         $querySettings->setIgnoreEnableFields(true);
         $this->postRepository->setDefaultQuerySettings($querySettings);
 
-        $this->view->assignMultiple([
+        $view = $this->moduleTemplateFactory->create($this->request);
+        $view->assignMultiple([
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'activeBlogSetup' => $blogSetup,
             'posts' => $this->postRepository->findAllByPid($blogSetup),
         ]);
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
 
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $view->renderResponse('Backend/Posts');
     }
 
     public function commentsAction(string $filter = null, int $blogSetup = null): ResponseInterface
     {
-        $this->view->assignMultiple([
+        $view = $this->moduleTemplateFactory->create($this->request);
+        $view->assignMultiple([
             'activeFilter' => $filter,
             'activeBlogSetup' => $blogSetup,
             'commentCounts' => [
@@ -119,10 +117,8 @@ class BackendController extends ActionController
             'blogSetups' => $this->setupService->determineBlogSetups(),
             'comments' => $this->commentRepository->findAllByFilter($filter, $blogSetup),
         ]);
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
 
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $view->renderResponse('Backend/Comments');
     }
 
     public function updateCommentStatusAction(string $status, string $filter = null, int $blogSetup = null, array $comments = [], int $comment = null): ResponseInterface

@@ -1,9 +1,11 @@
-<f:layout name="Backend" />
-<f:section name="Intro">
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <f:flashMessages/>
+
     <h1><f:translate key="backend.headline.comments" /></h1>
     <p><f:translate key="backend.lead.comments" /></p>
-</f:section>
-<f:section name="Content">
+
     <f:render partial="Backend/BlogFilter" arguments="{blogSetups: blogSetups, activeBlogSetup: activeBlogSetup, action: 'comments'}" />
     <f:render partial="Backend/CommentsFilter" arguments="{_all}" />
     <f:if condition="{f:count() -> comments} > 0">

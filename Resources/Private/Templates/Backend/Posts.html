@@ -1,9 +1,11 @@
-<f:layout name="Backend" />
-<f:section name="Intro">
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <f:flashMessages/>
+
     <h1><f:translate key="backend.headline.posts" /></h1>
     <p><f:translate key="backend.lead.posts" /></p>
-</f:section>
-<f:section name="Content">
+
     <f:render partial="Backend/BlogFilter" arguments="{blogSetups: blogSetups, activeBlogSetup: activeBlogSetup, action: 'posts'}" />
     <f:if condition="{f:count() -> posts} > 0">
         <f:then>
