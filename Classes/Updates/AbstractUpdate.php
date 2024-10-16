@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Updates;
 
+use T3G\AgencyPack\Blog\Updates\Criteria\CriteriaInterface;
 use T3G\AgencyPack\Blog\Updates\Criteria\EqualIntCriteria;
 use T3G\AgencyPack\Blog\Updates\Criteria\EqualStringCriteria;
 use T3G\AgencyPack\Blog\Updates\Criteria\InCriteria;
@@ -119,9 +120,9 @@ abstract class AbstractUpdate
         $queryBuilder->select('*');
         $queryBuilder->from($table);
         if ($condition === self::CONDITION_AND) {
-            $queryBuilder->where(...$criteria);
+            $queryBuilder->where(...array_map(static fn (CriteriaInterface $criterion): string => (string)$criterion, $criteria));
         } else {
-            $queryBuilder->orWhere(...$criteria);
+            $queryBuilder->orWhere(...array_map(static fn (CriteriaInterface $criterion): string => (string)$criterion, $criteria));
         }
 
         $result = $queryBuilder->executeQuery();
