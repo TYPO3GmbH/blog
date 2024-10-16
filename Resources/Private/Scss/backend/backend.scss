@@ -29,7 +29,7 @@
     margin-top: 1.5rem;
     a,
     a:hover {
-        color: #e3612a;
+        color: var(--typo3-text-color-primary, #0060b8);
     }
     li {
         display: inline;
