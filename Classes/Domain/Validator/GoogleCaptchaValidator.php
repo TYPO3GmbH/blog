@@ -25,7 +25,10 @@ class GoogleCaptchaValidator extends AbstractValidator
         $controller = 'Comment';
         $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
-        $requestData = GeneralUtility::_GPmerged('tx_blog_commentform');
+        $request = $this->request ?? $GLOBALS['TYPO3_REQUEST'];
+        $queryArguments = $request->getQueryParams();
+        $bodyData = $request->getParsedBody();
+        $requestData = $queryArguments['tx_blog_commentform'] ?? [];
 
         if (
             // this validator is called multiple times, if the first success,
@@ -41,7 +44,7 @@ class GoogleCaptchaValidator extends AbstractValidator
                 'headers' => ['Content-type' => 'application/x-www-form-urlencoded'],
                 'query' => [
                     'secret' => $settings['comments']['google_recaptcha']['secret_key'],
-                    'response' => GeneralUtility::_GP('g-recaptcha-response'),
+                    'response' => $bodyData['g-recaptcha-response'] ?? '',
                     'remoteip' => GeneralUtility::getIndpEnv('REMOTE_ADDR')
                 ]
             ];
