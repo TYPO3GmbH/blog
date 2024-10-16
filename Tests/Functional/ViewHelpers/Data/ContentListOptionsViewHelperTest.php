@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace T3G\AgencyPack\Blog\Tests\Functional\ViewHelpers\Data;
 
+use PHPUnit\Framework\Attributes\Test;
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Tests\Functional\SiteBasedTestCase;
 
@@ -20,9 +21,7 @@ final class ContentListOptionsViewHelperTest extends SiteBasedTestCase
         'form'
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function render(): void
     {
         $this->createTestSite();
@@ -45,9 +44,7 @@ final class ContentListOptionsViewHelperTest extends SiteBasedTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function renderWithOverwrite(): void
     {
         $this->createTestSite();

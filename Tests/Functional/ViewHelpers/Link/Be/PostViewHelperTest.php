@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace T3G\AgencyPack\Blog\Tests\Functional\ViewHelpers\Link\Be;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\NormalizedParams;
@@ -39,10 +41,8 @@ final class PostViewHelperTest extends FunctionalTestCase
             ->withAttribute('normalizedParams', new NormalizedParams([], [], '', ''));
     }
 
-    /**
-     * @test
-     * @dataProvider renderDataProvider
-     */
+    #[Test]
+    #[DataProvider('renderDataProvider')]
     public function render(string $template, string $expected): void
     {
         $post = new Post();

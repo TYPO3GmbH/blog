@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace T3G\AgencyPack\Blog\Tests\Functional\ViewHelpers\Uri;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -31,10 +33,8 @@ final class AvatarViewHelperTest extends FunctionalTestCase
         'typo3conf/ext/blog'
     ];
 
-    /**
-     * @test
-     * @dataProvider renderDataProvider
-     */
+    #[Test]
+    #[DataProvider('renderDataProvider')]
     public function render(string $template, string $expected): void
     {
         $frontendTypoScript = new FrontendTypoScript(new RootNode(), [], [], []);

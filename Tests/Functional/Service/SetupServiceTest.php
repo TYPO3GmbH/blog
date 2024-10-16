@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace T3G\AgencyPack\Blog\Tests\Functional\Service;
 
+use PHPUnit\Framework\Attributes\Test;
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -37,9 +38,7 @@ final class SetupServiceTest extends FunctionalTestCase
         $GLOBALS['LANG'] = $this->get(LanguageServiceFactory::class)->createFromUserPreferences($backendUser);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function create(): void
     {
         $setupService = GeneralUtility::makeInstance(SetupService::class);
@@ -52,9 +51,7 @@ final class SetupServiceTest extends FunctionalTestCase
         self::assertEquals($rootPage['is_siteroot'], 1);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createWithName(): void
     {
         $setupService = GeneralUtility::makeInstance(SetupService::class);
@@ -67,9 +64,7 @@ final class SetupServiceTest extends FunctionalTestCase
         self::assertEquals($rootPage['is_siteroot'], 1);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function determineBlogSetups(): void
     {
         $setupService = GeneralUtility::makeInstance(SetupService::class);

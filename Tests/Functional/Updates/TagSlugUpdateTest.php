@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace T3G\AgencyPack\Blog\Tests\Functional\Updates;
 
+use PHPUnit\Framework\Attributes\Test;
 use T3G\AgencyPack\Blog\Updates\TagSlugUpdate;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -27,18 +28,14 @@ final class TagSlugUpdateTest extends FunctionalTestCase
         'typo3conf/ext/blog'
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function noUpdateNecessaryTest(): void
     {
         $subject = new TagSlugUpdate();
         self::assertFalse($subject->updateNecessary());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function updateTest(): void
     {
         $subject = new TagSlugUpdate();

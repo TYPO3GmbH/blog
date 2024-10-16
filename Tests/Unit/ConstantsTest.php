@@ -10,14 +10,13 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use T3G\AgencyPack\Blog\Constants;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ConstantsTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function constantForDoktypeOfBlogPostsIsSetCorrectly(): void
     {
         self::assertEquals(137, Constants::DOKTYPE_BLOG_POST);

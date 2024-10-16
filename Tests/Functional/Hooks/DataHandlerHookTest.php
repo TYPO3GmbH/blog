@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace T3G\AgencyPack\Blog\Tests\Functional\Service;
 
+use PHPUnit\Framework\Attributes\Test;
 use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
@@ -37,9 +38,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $GLOBALS['LANG'] = $this->get(LanguageServiceFactory::class)->createFromUserPreferences($backendUser);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function create(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/BlogBasePages.csv');
@@ -86,9 +85,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         self::assertEquals($page['crdate_year'], 2023);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function update(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/BlogBasePages.csv');

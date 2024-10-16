@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
@@ -42,9 +43,7 @@ class CommentServiceTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function inactiveCommentsReturnErrorOnAdd(): void
     {
         $this->initialize();
@@ -57,9 +56,7 @@ class CommentServiceTest extends UnitTestCase
         self::assertSame(CommentService::STATE_ERROR, $result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function activeCommentsWithoutModerationReturnSuccessOnAdd(): void
     {
         $this->initialize();
@@ -75,9 +72,7 @@ class CommentServiceTest extends UnitTestCase
         self::assertSame(CommentService::STATE_SUCCESS, $result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function activeCommentsWithModerationReturnModerationOnAdd(): void
     {
         $this->initialize();
@@ -93,9 +88,7 @@ class CommentServiceTest extends UnitTestCase
         self::assertSame(CommentService::STATE_MODERATION, $result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function commentGetsAddedToPost(): void
     {
         $this->initialize();
@@ -110,9 +103,7 @@ class CommentServiceTest extends UnitTestCase
         self::assertSame($comment, $post->getComments()->current());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function postGetsUpdatedInDatabase(): void
     {
         $this->initialize();
