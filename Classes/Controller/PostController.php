@@ -94,7 +94,7 @@ class PostController extends ActionController
             $feedData = [
                 'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
                 'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
-                'language' => $this->getSiteLanguage()->getTwoLetterIsoCode(),
+                'language' => $this->getSiteLanguage()->getLocale()->getLanguageCode(),
                 'link' => $this->getRequestUrl(),
                 'date' => date('r'),
             ];
