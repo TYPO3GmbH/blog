@@ -10,6 +10,7 @@
 use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use TYPO3\CMS\Core\Imaging\IconRegistry;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -63,7 +64,9 @@ foreach ($icons as $identifier => $path) {
     $iconRegistry->registerIcon($identifier, SvgIconProvider::class, ['source' => $path]);
 }
 
-// Allow backend users to drag and drop the new page type:
-ExtensionManagementUtility::addUserTSConfig('
-    options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . Constants::DOKTYPE_BLOG_POST . ')
-');
+// Replaced with Configuration/user.tsconfig in v13
+if ((new Typo3Version())->getMajorVersion() < 13) {
+    ExtensionManagementUtility::addUserTSConfig('
+        options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . Constants::DOKTYPE_BLOG_POST . ')
+    ');
+}

@@ -1,0 +1,3 @@
+# Allow backend users to drag and drop the new page type:
+# 137 = T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST
+options.pageTree.doktypesToShowInNewPageDragArea := addToList(137)
