@@ -10,9 +10,6 @@ services:
   T3G\AgencyPack\Blog\Domain\Factory\CommentFormFactory:
     public: true
 
-  T3G\AgencyPack\Blog\Hooks\PageLayoutHeaderHook:
-    public: true
-
   T3G\AgencyPack\Blog\Listener\RenderAdditionalContentToRecordList:
     tags:
       - name: event.listener
