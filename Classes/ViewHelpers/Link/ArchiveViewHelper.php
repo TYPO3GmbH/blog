@@ -73,7 +73,7 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         $linkText = $this->renderChildren() ?? implode('-', $arguments);
         if ($uri !== '') {
             $this->tag->addAttribute('href', $uri);
-            $this->tag->setContent($linkText);
+            $this->tag->setContent((string)$linkText);
             $result = $this->tag->render();
         } else {
             $result = $linkText;
