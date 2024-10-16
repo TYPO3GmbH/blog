@@ -1,8 +1,8 @@
 /**
  * Module: TYPO3/CMS/Blog/SetupWizard
  */
-import Modal from "TYPO3/CMS/Backend/Modal";
-import Severity from "TYPO3/CMS/Backend/Severity";
+import Modal from "@typo3/backend/modal";
+import Severity from "@typo3/backend/severity";
 
 const SetupWizard = {
     triggerSelector: '.t3js-setup-wizard-trigger',

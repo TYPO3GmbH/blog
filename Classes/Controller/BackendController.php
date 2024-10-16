@@ -49,14 +49,13 @@ class BackendController extends ActionController
 
     public function initializeAction(): void
     {
-        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/Tooltip');
         $this->pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/backend.min.css', 'stylesheet', 'all', '', false);
     }
 
     public function initializeSetupWizardAction(): void
     {
         $this->initializeDataTables();
-        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/SetupWizard');
+        $this->pageRenderer->loadJavaScriptModule('@t3g/blog/setup-wizard.js');
     }
 
     public function initializePostsAction(): void
@@ -67,13 +66,13 @@ class BackendController extends ActionController
     public function initializeCommentsAction(): void
     {
         $this->initializeDataTables();
-        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/MassUpdate');
+        $this->pageRenderer->loadJavaScriptModule('@t3g/blog/mass-update.js');
     }
 
     protected function initializeDataTables(): void
     {
-        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Blog/Datatables');
-        $this->pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/Datatables.min.css', 'stylesheet', 'all', '', false);
+        $this->pageRenderer->loadJavaScriptModule('@t3g/blog/datatables.js');
+        $this->pageRenderer->addCssFile('EXT:blog/Resources/Public/Css/datatables.min.css', 'stylesheet', 'all', '', false);
     }
 
     public function setupWizardAction(): ResponseInterface
