@@ -42,7 +42,7 @@ class BlogPostHeaderContentRenderer implements SingletonInterface
             return '';
         }
 
-        $pageUid = (int)($request->getParsedBody()['id'] ?? $request->getQueryParams()['id'] ?? 0);
+        $pageUid = (int)($request->getQueryParams()['id'] ?? 0);
         $pageInfo = BackendUtility::readPageAccess($pageUid, $GLOBALS['BE_USER']->getPagePermsClause(Permission::PAGE_SHOW));
         if (($pageInfo['doktype'] ?? 0) !== Constants::DOKTYPE_BLOG_POST) {
             return '';
