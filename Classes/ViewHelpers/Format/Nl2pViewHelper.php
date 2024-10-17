@@ -10,14 +10,10 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Format;
 
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 class Nl2pViewHelper extends AbstractViewHelper
 {
-    use CompileWithContentArgumentAndRenderStatic;
-
     /**
      * @var bool
      */
@@ -28,9 +24,9 @@ class Nl2pViewHelper extends AbstractViewHelper
         $this->registerArgument('value', 'string', 'string to format');
     }
 
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
+    public function render(): string
     {
-        $data = explode('<br>', nl2br($renderChildrenClosure(), false));
+        $data = explode('<br>', nl2br($this->renderChildren(), false));
         $data = array_filter($data, function ($value) {
             return trim($value) !== '';
         });

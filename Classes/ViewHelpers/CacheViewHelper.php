@@ -13,7 +13,6 @@ namespace T3G\AgencyPack\Blog\ViewHelpers;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class CacheViewHelper extends AbstractViewHelper
@@ -23,9 +22,9 @@ class CacheViewHelper extends AbstractViewHelper
         $this->registerArgument('post', Post::class, 'the post to tag', true);
     }
 
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
+    public function render(): string
     {
-        $post = $arguments['post'];
+        $post = $this->arguments['post'];
         GeneralUtility::makeInstance(CacheService::class)->addTagsForPost($post);
 
         return '';

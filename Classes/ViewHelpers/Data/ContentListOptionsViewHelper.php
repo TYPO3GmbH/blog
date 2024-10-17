@@ -13,22 +13,19 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Data;
 use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 class ContentListOptionsViewHelper extends AbstractViewHelper
 {
-    use CompileWithContentArgumentAndRenderStatic;
-
     public function initializeArguments(): void
     {
         $this->registerArgument('as', 'string', 'Name of variable to create.');
         $this->registerArgument('listType', 'string', 'Plugin Type to Render', true);
     }
 
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
+    public function render(): string
     {
+        $arguments = $this->arguments;
         $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
         $listTypeConfiguration = $settings['contentListOptions'][$arguments['listType']] ?? [];
@@ -44,7 +41,7 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
         );
 
         $arguments['as'] = $arguments['as'] ?? 'contentObjectData';
-        $variableProvider = $renderingContext->getVariableProvider();
+        $variableProvider = $this->renderingContext->getVariableProvider();
         $variableProvider->remove($arguments['as']);
         $variableProvider->add($arguments['as'], $data);
 
