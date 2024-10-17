@@ -24,14 +24,14 @@ $GLOBALS['TCA']['sys_category']['columns']['record_type'] = [
         'renderType' => 'selectSingle',
         'items' => [
             [
-                'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:sys_category.record_type.default',
-                (string) \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_DEFAULT,
-                $GLOBALS['TCA']['sys_category']['ctrl']['typeicon_classes']['default']
+                'label' => 'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:sys_category.record_type.default',
+                'value' => (string) \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_DEFAULT,
+                'icon' => $GLOBALS['TCA']['sys_category']['ctrl']['typeicon_classes']['default']
             ],
             [
-                'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:sys_category.record_type.blog',
-                (string) \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_BLOG,
-                'record-blog-category'
+                'label' => 'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:sys_category.record_type.blog',
+                'value' => (string) \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_BLOG,
+                'icon' => 'record-blog-category'
             ]
         ],
         'default' => (string) \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_DEFAULT
