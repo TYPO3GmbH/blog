@@ -59,7 +59,7 @@ class PostController extends ActionController
     }
 
     /**
-     * @param ViewInterface|\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
+     * @param ViewInterface $view
      */
     protected function initializeView($view): void
     {

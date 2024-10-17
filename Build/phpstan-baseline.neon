@@ -1,36 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to method addHeaderContent\\(\\) on an unknown class TYPO3\\\\CMS\\\\Backend\\\\Controller\\\\Event\\\\ModifyPageLayoutContentEvent\\.$#"
+			message: "#^Return type \\(TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryResultInterface\\) of method T3G\\\\AgencyPack\\\\Blog\\\\Domain\\\\Repository\\\\PostRepository\\:\\:findAll\\(\\) should be covariant with return type \\(iterable\\<object\\>\\) of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\RepositoryInterface\\<object\\>\\:\\:findAll\\(\\)$#"
 			count: 1
-			path: ../Classes/Listener/ModifyPageLayoutContent.php
-
-		-
-			message: "#^Call to method getRequest\\(\\) on an unknown class TYPO3\\\\CMS\\\\Backend\\\\Controller\\\\Event\\\\ModifyPageLayoutContentEvent\\.$#"
-			count: 1
-			path: ../Classes/Listener/ModifyPageLayoutContent.php
-
-		-
-			message: "#^Method T3G\\\\AgencyPack\\\\Blog\\\\Listener\\\\ModifyPageLayoutContent\\:\\:__invoke\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: ../Classes/Listener/ModifyPageLayoutContent.php
-
-		-
-			message: "#^Parameter \\$event of method T3G\\\\AgencyPack\\\\Blog\\\\Listener\\\\ModifyPageLayoutContent\\:\\:__invoke\\(\\) has invalid type TYPO3\\\\CMS\\\\Backend\\\\Controller\\\\Event\\\\ModifyPageLayoutContentEvent\\.$#"
-			count: 1
-			path: ../Classes/Listener/ModifyPageLayoutContent.php
-
-		-
-			message: "#^Call to method addContentAbove\\(\\) on an unknown class TYPO3\\\\CMS\\\\Backend\\\\Controller\\\\Event\\\\RenderAdditionalContentToRecordListEvent\\.$#"
-			count: 1
-			path: ../Classes/Listener/RenderAdditionalContentToRecordList.php
-
-		-
-			message: "#^Call to method getRequest\\(\\) on an unknown class TYPO3\\\\CMS\\\\Backend\\\\Controller\\\\Event\\\\RenderAdditionalContentToRecordListEvent\\.$#"
-			count: 1
-			path: ../Classes/Listener/RenderAdditionalContentToRecordList.php
-
-		-
-			message: "#^Parameter \\$event of method T3G\\\\AgencyPack\\\\Blog\\\\Listener\\\\RenderAdditionalContentToRecordList\\:\\:__invoke\\(\\) has invalid type TYPO3\\\\CMS\\\\Backend\\\\Controller\\\\Event\\\\RenderAdditionalContentToRecordListEvent\\.$#"
-			count: 1
-			path: ../Classes/Listener/RenderAdditionalContentToRecordList.php
+			path: ../Classes/Domain/Repository/PostRepository.php

@@ -31,6 +31,7 @@ class GravatarProviderTest extends FunctionalTestCase
 
     public function testGetAvatarUrlReturnsOriginalGravatarComUrl(): void
     {
+        /** @phpstan-ignore-next-line */
         $frontendTypoScript = new FrontendTypoScript(new RootNode(), [], [], []);
         $frontendTypoScript->setSetupArray([]);
         $request = (new ServerRequest())
@@ -49,6 +50,7 @@ class GravatarProviderTest extends FunctionalTestCase
     public function testGetAvatarUrlReturnsTypo3TempUrl(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['blog']['enableGravatarProxy'] = '1';
+        /** @phpstan-ignore-next-line */
         $frontendTypoScript = new FrontendTypoScript(new RootNode(), [], [], []);
         $frontendTypoScript->setSetupArray([]);
         $request = (new ServerRequest())

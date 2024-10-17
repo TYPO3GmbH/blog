@@ -19,7 +19,7 @@ class GoogleCaptchaValidator extends AbstractValidator
 {
     protected $acceptsEmptyValues = false;
 
-    public function isValid($value): void
+    public function isValid(mixed $value): void
     {
         $action = 'form';
         $controller = 'Comment';

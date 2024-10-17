@@ -36,6 +36,7 @@ final class GravatarViewHelperTest extends FunctionalTestCase
     #[DataProvider('renderDataProvider')]
     public function render(string $template, string $expected): void
     {
+        /** @phpstan-ignore-next-line */
         $frontendTypoScript = new FrontendTypoScript(new RootNode(), [], [], []);
         $frontendTypoScript->setSetupArray([]);
         $request = (new ServerRequest())

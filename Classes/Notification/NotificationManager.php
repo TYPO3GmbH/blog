@@ -35,6 +35,7 @@ class NotificationManager
         $notificationId = $notification->getNotificationId();
         if (\is_array($this->visitorsRegistry[$notificationId] ?? null)) {
             foreach ($this->visitorsRegistry[$notificationId] as $visitorClassName) {
+                /** @var class-string<object> $visitorClassName */
                 $instance = GeneralUtility::makeInstance($visitorClassName);
                 if ($instance instanceof ProcessorInterface) {
                     $instance->process($notification);
