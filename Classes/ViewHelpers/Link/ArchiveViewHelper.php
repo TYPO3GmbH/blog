@@ -26,9 +26,6 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link');
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('month', 'int', 'The month to link to');
         $this->registerArgument('year', 'int', 'The year to link to', true);

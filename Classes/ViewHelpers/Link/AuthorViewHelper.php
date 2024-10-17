@@ -27,9 +27,6 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link');
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('author', Author::class, 'The author to link to', true);
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
