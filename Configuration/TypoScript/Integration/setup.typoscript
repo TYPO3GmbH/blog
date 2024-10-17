@@ -1,8 +1,8 @@
 ######################
 #### DEPENDENCIES ####
 ######################
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Static/setup.typoscript">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Shared/setup.typoscript">
+@import "EXT:blog/Configuration/TypoScript/Static/setup.typoscript"
+@import "EXT:blog/Configuration/TypoScript/Shared/setup.typoscript"
 
 ###################
 #### BLOG POST ####

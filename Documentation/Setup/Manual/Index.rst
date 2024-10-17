@@ -32,12 +32,12 @@ Prerequisites:
       .. code-block:: typoscript
 
          # Setup
-         <INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Integration/setup.typoscript">
+         @import "EXT:blog/Configuration/TypoScript/Integration/setup.typoscript"
 
       .. code-block:: typoscript
 
          # Constants
-         <INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Integration/constants.typoscript">
+         @import "EXT:blog/Configuration/TypoScript/Integration/constants.typoscript"
 
       .. tip::
 

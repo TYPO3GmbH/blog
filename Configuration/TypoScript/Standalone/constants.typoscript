@@ -1,8 +1,8 @@
 ######################
 #### DEPENDENCIES ####
 ######################
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Static/constants.typoscript">
+@import "EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript"
+@import "EXT:blog/Configuration/TypoScript/Static/constants.typoscript"
 
 ##################
 ### CATEGORIES ###
