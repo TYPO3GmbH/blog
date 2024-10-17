@@ -1,3 +1,66 @@
+# 13.0.0
+
+## TASK
+
+- 0b7084a [TASK] Update deprecated github actions
+- 32754a3 [TASK] Ensure typo3fluid/fluid 2.15 is available in classic mode
+- 3aaa686 [TASK] Update version shields in README
+- 1dd7c6e [TASK] Replace INCLUDE_TYPOSCRIPT by @import
+- 3f4035d [TASK] Resolve v12 TCA deprecations
+- 321664c [TASK] Migrate deprecated phpstan options
+- f9869d0 [TASK] Resolve v12 phpstan errors
+- fa00afa [TASK] Check return type of findByUid in PostRepository
+- 3dfca4f [TASK] Replace deprecated fillDefaultsByPackageName
+- 4ca2c2e [TASK] Do not try to read id from POST body in blogpost header renderer
+- 5c559af [TASK] Replace deprecated Connection::PARAM_STR_ARRAY
+- f402b21 [TASK] Use ContextualFeedbackSeverity for v13
+- c19ad73 [TASK] Avoid renderStatic which has been deprecated
+- f6f39a1 [TASK] Remove unneeded fluid register(Universal)TagAttribute(s) calls
+- 51d2548 [TASK] Drop actions-decline icons
+- 7c4a960 [TASK] Adapt GoogleCaptchaValidator for v13
+- 3abcbe0 [TASK] Make backend styles light/dark aware for v13
+- a5db722 [TASK] Adapt WidgetController for v13
+- f6c0945 [TASK] Replace ConfigurationManager->getContentObject for v13
+- b5b5d54 [TASK] Add a workaround for too strict typing in TagBuilder
+- e37385d [TASK] Make creation wizard context aware
+- d3d8999 [TASK] Update to current backend module API
+- 85c4716 [TASK] Migrate to ES6 JavaScript modules
+- 0f98fac [TASK] Register icons via Configuration/Icons.php
+- 60eede4 [TASK] Replace getTwoLetterIsoCode
+- 52881e0 [TASK] Correct DataHandlerHookTest namespace to match psr-4
+- 4a8c0a2 [TASK] Use phpunit attributes in tests
+- 3365532 [TASK] Adapt AvatarViewHelperTest for v13
+- 0191ec4 [TASK] Adapt SiteBasedTestCase for v13
+- 73e50f5 [TASK] Adapt GravatarViewHelperTest for v13
+- 0d0f0cf [TASK] Adapt GravatarProviderTest for v13
+- 0c1760f [TASK] Replace Bootstrap::initializeLanguageObject() in tests for v13
+- 6ff3fa7 [TASK] Make AbstractUpdate v13 compatible
+- 845aae1 [TASK] Replace EMU::addPageTSConfig by Configuration/page.tsconfig
+- 2f272d2 [TASK] Register upgrade wizards via attribute
+- ee231e0 [TASK] Replace TSFE->tmp->setup by frontend.typoscript attribute
+- 160190d [TASK] Adapt CommentFormFactory for v13
+- fc1590d [TASK] Drop v11 drawHeaderHook registration
+- 8f3c9ba [TASK] Use Configuration/user.tsconfig in v13
+- 72506e5 [TASK] Replace deprecated php-cs-fixer setting function_typehint_space
+- 9dedafd [TASK] Remove outdated post-autoload-dump script
+- cf043e3 [TASK] Mark v13 as supported in ext_emconf
+- e4f0f0f [TASK] Update v13 composer dependencies
+- 964e3d5 [TASK] Use typo3/testing-framework v9
+- 02440f4 [TASK] Start v13 migration
+- 466fc12 [TASK] Update github workflows for v13
+- f6c03ac [TASK] Prepare README.rst for v13
+- 8a46930 [TASK] Provide EXT:form in functional tests
+
+## BUGFIX
+
+- 4f1fc32 [BUGFIX] Fix count view helper usage in setup wizard
+
+## Contributors
+
+- Achim Fritz
+- Benjamin Franzke
+- Benni Mack
+
 # 12.0.2
 
 ## TASK
