@@ -58,7 +58,6 @@ class BlogPostHeaderContentRenderer implements SingletonInterface
         $post = $this->postRepository->findByUidRespectQuerySettings($pageUid);
 
         $view = GeneralUtility::makeInstance(StandaloneView::class);
-        //$view->getRenderingContext()->getTemplatePaths()->fillDefaultsByPackageName('blog');
         $view->getRenderingContext()->getTemplatePaths()->setTemplateRootPaths(['EXT:blog/Resources/Private/Templates']);
         $view->setTemplate('PageLayout/Header');
         $view->assignMultiple([
