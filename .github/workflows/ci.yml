@@ -26,7 +26,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - id: setup_mysql
         name: Set up MySQL ${{ matrix.mysql }}
@@ -50,7 +50,7 @@ jobs:
 
       - id: composer-cache-dependencies
         name: Cache Composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache-vars.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ matrix.php }}-${{ matrix.typo3 }}-${{ steps.composer-cache-vars.outputs.timestamp }}
