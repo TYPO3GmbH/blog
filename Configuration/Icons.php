@@ -11,8 +11,6 @@ use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 
 // Provide icon for page tree, list view, ... :
 return array_map(static fn (string $source) => ['provider' => SvgIconProvider::class, 'source' => $source], [
-    'actions-approve' => 'EXT:blog/Resources/Public/Icons/actions-approve.svg',
-    'actions-decline' => 'EXT:blog/Resources/Public/Icons/actions-decline.svg',
     'module-blog' => 'EXT:blog/Resources/Public/Icons/module-blog.svg',
     'module-blog-posts' => 'EXT:blog/Resources/Public/Icons/module-blog-posts.svg',
     'module-blog-comments' => 'EXT:blog/Resources/Public/Icons/module-blog-comments.svg',

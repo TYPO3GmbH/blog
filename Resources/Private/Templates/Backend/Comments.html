@@ -38,11 +38,11 @@
                                             <f:case value="0">
                                                 <f:comment>Status: pending</f:comment>
                                                 <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.approve')}" action="updateCommentStatus" arguments="{comment: comment, status: 'approve', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-approve" /></f:link.action>
-                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-decline" /></f:link.action>
+                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-ban" /></f:link.action>
                                             </f:case>
                                             <f:case value="10">
                                                 <f:comment>Status: approved</f:comment>
-                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-decline" /></f:link.action>
+                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-ban" /></f:link.action>
                                                 <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.delete')}" action="updateCommentStatus" arguments="{comment: comment, status: 'delete', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-delete" /></f:link.action>
                                             </f:case>
                                             <f:case value="50">
@@ -53,7 +53,7 @@
                                             <f:case value="90">
                                                 <f:comment>Status: deleted</f:comment>
                                                 <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.approve')}" action="updateCommentStatus" arguments="{comment: comment, status: 'approve', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-approve" /></f:link.action>
-                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-decline" /></f:link.action>
+                                                <f:link.action class="btn btn-default" data="{toggle: 'tooltip', container: 'body'}" title="{f:translate(key: 'action.decline')}" action="updateCommentStatus" arguments="{comment: comment, status: 'decline', filter: activeFilter, blogSetup: activeBlogSetup}"><core:icon identifier="actions-ban" /></f:link.action>
                                             </f:case>
                                         </f:switch>
                                         <blogvh:link.be.comment class="btn btn-default" title="{f:translate(key: 'action.editComment')}" comment="{comment}"><core:icon identifier="actions-open" /></blogvh:link.be.comment>
