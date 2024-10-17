@@ -7,11 +7,13 @@ includes:
 
 parameters:
 	level: 8
-	checkMissingIterableValueType: false
 	reportUnmatchedIgnoredErrors: false
-	checkGenericClassInNonGenericObjectType: false
 
 	ignoreErrors:
+		-
+			identifier: missingType.iterableValue
+		-
+			identifier: missingType.generics
 		- "#Casting to string something that's already string.#"
 		- "#Casting to int something that's already int.#"
 		- "#Casting to bool something that's already bool.#"
