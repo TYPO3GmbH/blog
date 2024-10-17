@@ -19,6 +19,7 @@ use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class BackendController extends ActionController
@@ -159,7 +160,7 @@ class BackendController extends ActionController
         if ($data !== null && $this->setupService->createBlogSetup($data)) {
             $this->addFlashMessage('Your blog setup has been created.', 'Congratulation');
         } else {
-            $this->addFlashMessage('Sorry, your blog setup could not be created.', 'An error occurred', FlashMessage::ERROR);
+            $this->addFlashMessage('Sorry, your blog setup could not be created.', 'An error occurred', ContextualFeedbackSeverity::ERROR);
         }
 
         return new RedirectResponse($this->uriBuilder->reset()->uriFor('setupWizard'));
