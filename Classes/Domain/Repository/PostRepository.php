@@ -405,7 +405,11 @@ class PostRepository extends Repository
             if ($i === $limit) {
                 break;
             }
-            $posts->attach($this->findByUid($selectedPost));
+            $post = $this->findByUid($selectedPost);
+            if ($post === null) {
+                continue;
+            }
+            $posts->attach($post);
             $i++;
         }
 
