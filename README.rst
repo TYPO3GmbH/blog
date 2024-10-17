@@ -2,13 +2,13 @@
    :alt: Latest Stable Version
    :target: https://extensions.typo3.org/extension/blog/
 
+.. image:: https://img.shields.io/badge/TYPO3-13-orange.svg
+   :alt: TYPO3 13
+   :target: https://get.typo3.org/version/13
+
 .. image:: https://img.shields.io/badge/TYPO3-12-orange.svg
    :alt: TYPO3 12
    :target: https://get.typo3.org/version/12
-
-.. image:: https://img.shields.io/badge/TYPO3-11-orange.svg
-   :alt: TYPO3 11
-   :target: https://get.typo3.org/version/11
 
 .. image:: https://poser.pugx.org/t3g/blog/d/total
    :alt: Total Downloads
