@@ -17,8 +17,6 @@ use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Http\ServerRequest;
-use TYPO3\CMS\Core\Information\Typo3Version;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -61,9 +59,6 @@ final class CommentViewHelperTest extends FunctionalTestCase
     public static function renderDataProvider(): array
     {
         $expectedReturnUrl = '/';
-        if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
-            $expectedReturnUrl = '%2F';
-        }
 
         return [
             'simple' => [

@@ -9,10 +9,8 @@
 
 namespace T3G\AgencyPack\Blog\Tests\Functional;
 
-use TYPO3\CMS\Core\Configuration\SiteConfiguration;
 use TYPO3\CMS\Core\Configuration\SiteWriter;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -65,13 +63,7 @@ abstract class SiteBasedTestCase extends FunctionalTestCase
         ];
 
         GeneralUtility::rmdir($this->instancePath . '/typo3conf/sites/' . $identifier, true);
-        if ((new Typo3Version())->getMajorVersion() >= 13) {
-            /** @phpstan-ignore-next-line */
-            $this->get(SiteWriter::class)->write($identifier, $configuration);
-        } else {
-            /** @phpstan-ignore-next-line */
-            $this->get(SiteConfiguration::class)->write($identifier, $configuration);
-        }
+        $this->get(SiteWriter::class)->write($identifier, $configuration);
     }
 
     protected function renderFluidTemplateInTestSite(string $template, array $instructions = []): string
