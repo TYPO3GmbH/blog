@@ -1,0 +1,5 @@
+name: t3g/blog-static
+label: "TYPO3 Blog: Expert"
+dependencies:
+  - t3g/blog-shared
+  - typo3/form

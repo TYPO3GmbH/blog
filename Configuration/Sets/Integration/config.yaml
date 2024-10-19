@@ -1,0 +1,4 @@
+name: t3g/blog-integration
+label: "TYPO3 Blog: Integration"
+dependencies:
+  - t3g/blog-static

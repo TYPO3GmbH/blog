@@ -1,0 +1,5 @@
+name: t3g/blog-standalone
+label: "TYPO3 Blog: Standalone"
+dependencies:
+  - typo3/fluid-styled-content
+  - t3g/blog-static
