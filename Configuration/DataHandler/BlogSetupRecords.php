@@ -85,28 +85,23 @@ plugin.tx_blog.settings.storagePid = NEW_blogFolder',
 // Content elements
 $data['tt_content']['NEW_ListOfPosts'] = [
     'pid' => 'NEW_blogRoot',
-    'CType' => 'list',
-    'list_type' => 'blog_posts',
+    'CType' => 'blog_posts',
 ];
 $data['tt_content']['NEW_ListByCategory'] = [
     'pid' => 'NEW_blogCategoryPage',
-    'CType' => 'list',
-    'list_type' => 'blog_category',
+    'CType' => 'blog_category',
 ];
 $data['tt_content']['NEW_ListByTag'] = [
     'pid' => 'NEW_blogTagPage',
-    'CType' => 'list',
-    'list_type' => 'blog_tag',
+    'CType' => 'blog_tag',
 ];
 $data['tt_content']['NEW_ListByAuthor'] = [
     'pid' => 'NEW_blogAuthorPage',
-    'CType' => 'list',
-    'list_type' => 'blog_authorposts',
+    'CType' => 'blog_authorposts',
 ];
 $data['tt_content']['NEW_ListByDate'] = [
     'pid' => 'NEW_blogArchivePage',
-    'CType' => 'list',
-    'list_type' => 'blog_archive',
+    'CType' => 'blog_archive',
 ];
 
 // Content

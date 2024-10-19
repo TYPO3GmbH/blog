@@ -20,6 +20,7 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
     public function initializeArguments(): void
     {
         $this->registerArgument('as', 'string', 'Name of variable to create.');
+        // @todo renamee to CType
         $this->registerArgument('listType', 'string', 'Plugin Type to Render', true);
     }
 
@@ -33,8 +34,7 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
             $listTypeConfiguration,
             [
                 'uid' => Constants::LISTTYPE_TO_FAKE_UID_MAPPING[$arguments['listType']] ?? 0,
-                'list_type' => $arguments['listType'] ?? '',
-                'CType' => 'list',
+                'CType' => $arguments['listType'] ?? '',
                 'layout' => $listTypeConfiguration['layout'] ?? '0',
                 'frame_class' => $listTypeConfiguration['frame_class'] ?? 'default'
             ]

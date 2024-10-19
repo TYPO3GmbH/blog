@@ -10,8 +10,7 @@ mod.wizards.newContentElement.wizardItems.blog {
             title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_posts.title
             description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_posts.description
             tt_content_defValues {
-                CType = list
-                list_type = blog_posts
+                CType = blog_posts
             }
         }
         blog_latestposts {
@@ -19,8 +18,7 @@ mod.wizards.newContentElement.wizardItems.blog {
             title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_latestposts.title
             description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_latestposts.description
             tt_content_defValues {
-                CType = list
-                list_type = blog_latestposts
+                CType = blog_latestposts
             }
         }
         blog_category {
@@ -28,8 +26,7 @@ mod.wizards.newContentElement.wizardItems.blog {
             title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_category.title
             description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_category.description
             tt_content_defValues {
-                CType = list
-                list_type = blog_category
+                CType = blog_category
             }
         }
         blog_authorposts {
@@ -37,8 +34,7 @@ mod.wizards.newContentElement.wizardItems.blog {
             title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authorposts.title
             description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authorposts.description
             tt_content_defValues {
-                CType = list
-                list_type = blog_authorposts
+                CType = blog_authorposts
             }
         }
         blog_tag {
@@ -46,8 +42,7 @@ mod.wizards.newContentElement.wizardItems.blog {
             title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_tag.title
             description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_tag.description
             tt_content_defValues {
-                CType = list
-                list_type = blog_tag
+                CType = blog_tag
             }
         }
         blog_archive {
@@ -55,8 +50,7 @@ mod.wizards.newContentElement.wizardItems.blog {
             title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_archive.title
             description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_archive.description
             tt_content_defValues {
-                CType = list
-                list_type = blog_archive
+                CType = blog_archive
             }
         }
         blog_demandedposts {
@@ -64,8 +58,7 @@ mod.wizards.newContentElement.wizardItems.blog {
             title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_demandedposts.title
             description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_demandedposts.description
             tt_content_defValues {
-                CType = list
-                list_type = blog_demandedposts
+                CType = blog_demandedposts
             }
         }
     }

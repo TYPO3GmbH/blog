@@ -30,8 +30,7 @@ final class ContentListOptionsViewHelperTest extends SiteBasedTestCase
         $expected = json_encode(
             [
                 'uid' => Constants::LISTTYPE_TO_FAKE_UID_MAPPING['blog_header'],
-                'list_type' => 'blog_header',
-                'CType' => 'list',
+                'CType' => 'blog_header',
                 'layout' => '0',
                 'frame_class' => 'default',
             ],
@@ -64,8 +63,7 @@ final class ContentListOptionsViewHelperTest extends SiteBasedTestCase
                 'space_before_class' => 'small',
                 'frame_class' => 'secondary',
                 'uid' => Constants::LISTTYPE_TO_FAKE_UID_MAPPING['blog_header'],
-                'list_type' => 'blog_header',
-                'CType' => 'list',
+                'CType' => 'blog_header',
                 'layout' => '0',
             ],
             JSON_HEX_TAG
