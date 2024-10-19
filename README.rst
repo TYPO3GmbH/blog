@@ -6,10 +6,6 @@
    :alt: TYPO3 13
    :target: https://get.typo3.org/version/13
 
-.. image:: https://img.shields.io/badge/TYPO3-12-orange.svg
-   :alt: TYPO3 12
-   :target: https://get.typo3.org/version/12
-
 .. image:: https://poser.pugx.org/t3g/blog/d/total
    :alt: Total Downloads
    :target: https://packagist.org/packages/t3g/blog
@@ -53,6 +49,7 @@ Compatibility
    :header-rows: 1
 
    * -
+     - v14
      - v13
      - v12
      - v11
@@ -61,7 +58,18 @@ Compatibility
      - v8
      - v7
 
+   * - 14.0.x
+     - ✔️
+     - ✔️
+     -
+     -
+     -
+     -
+     -
+     -
+
    * - 13.0.x
+     -
      - ✔️
      - ✔️
      -
@@ -71,6 +79,7 @@ Compatibility
      -
 
    * - 12.0.x
+     -
      -
      - ✔️
      - ✔️
@@ -82,6 +91,7 @@ Compatibility
    * - 11.0.x
      -
      -
+     -
      - ✔️
      - ✔️
      -
@@ -89,6 +99,7 @@ Compatibility
      -
 
    * - 10.0.x
+     -
      -
      -
      -
@@ -102,11 +113,13 @@ Compatibility
      -
      -
      -
+     -
      - ✔️
      -
      -
 
    * - 9.0.x
+     -
      -
      -
      -
@@ -121,10 +134,12 @@ Compatibility
      -
      -
      -
+     -
      - ✔️
      -
 
    * - 7.6.x
+     -
      -
      -
      -
