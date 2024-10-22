@@ -1,0 +1,31 @@
+settings:
+  plugin.tx_blog.settings.blogUid:
+    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blogUid
+    description: ""
+    type: int
+    default: 0
+  plugin.tx_blog.settings.authorUid:
+    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authorUid
+    description: ""
+    type: int
+    default: 0
+  plugin.tx_blog.settings.categoryUid:
+    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.categoryUid
+    description: ""
+    type: int
+    default: 0
+  plugin.tx_blog.settings.tagUid:
+    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.tagUid
+    description: ""
+    type: int
+    default: 0
+  plugin.tx_blog.settings.archiveUid:
+    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.archiveUid
+    description: ""
+    type: int
+    default: 0
+  plugin.tx_blog.settings.storagePid:
+    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.storagePid
+    description: ""
+    type: int
+    default: 0

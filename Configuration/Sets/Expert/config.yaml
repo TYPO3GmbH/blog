@@ -1,0 +1,4 @@
+name: t3g/blog-expert
+label: "TYPO3 Blog (Expert)"
+dependencies:
+  - t3g/blog-shared

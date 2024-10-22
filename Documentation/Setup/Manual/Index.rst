@@ -21,7 +21,7 @@ Prerequisites:
 
       .. image:: manual-1.png
 
-   2. Add the static template to your existing template
+   2. Add the static template to your existing template or import a configuration set
 
       **Option A:** Add the static template to your existing template record
 
@@ -38,6 +38,18 @@ Prerequisites:
 
          # Constants
          @import "EXT:blog/Configuration/TypoScript/Integration/constants.typoscript"
+
+      **Option C:** Add the blog configuration set of your choice (TYPO3 13.4 and up)
+
+      .. image:: manual-sets.png
+
+         Either include the set in your site configuration or directly within your own set in your site extension.
+
+      .. code-block:: yaml
+            :linenos:
+
+            dependencies:
+              - t3g/blog-integration
 
       .. tip::
 
