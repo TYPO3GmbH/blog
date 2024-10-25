@@ -1,0 +1,835 @@
+categories:
+  blog:
+    label: 'TYPO3 Blog'
+  blog_post:
+    label: 'TYPO3 Blog: Post'
+  blog_list:
+    label: 'TYPO3 Blog: List'
+  blog_teaser:
+    label: 'TYPO3 Blog: Teaser'
+  blog_standalone:
+    label: 'TYPO3 Blog: Standalone'
+  blog.blog_110_templates:
+    label: Templates
+    parent: blog
+  blog.blog_100_uids:
+    label: 'Page ID settings'
+    parent: blog
+  blog_post.110_blog_post_header:
+    label: 'Post Header'
+    parent: blog_post
+  blog_post.120_blog_post_footer:
+    label: 'Post Footer'
+    parent: blog_post
+  blog_list.210_blog_list_element_header:
+    label: 'Element Header'
+    parent: blog_list
+  blog_list.220_blog_list_element_footer:
+    label: 'Element Footer'
+    parent: blog_list
+  blog_teaser.310_blog_teaser_element_header:
+    label: 'Element Header'
+    parent: blog_teaser
+  blog_teaser.320_blog_teaser_element_footer:
+    label: 'Element Footer'
+    parent: blog_teaser
+  blog_post.101_blog_post_featuredimage:
+    label: 'Featured Image'
+    parent: blog_post
+  blog_list.100_blog_list_featuredimage:
+    label: 'Featured Image'
+    parent: blog_list
+  blog.blog_120_lists:
+    label: Listings
+    parent: blog
+  blog_teaser.100_blog_list_featuredimage:
+    label: 'Featured Image'
+    parent: blog_teaser
+  blog.blog_120_lists_archive:
+    label: 'Listings: Archive'
+    parent: blog
+  blog.blog_131_widgets_comments:
+    label: 'Widget: Comment'
+    parent: blog
+  blog.blog_132_widgets_recent_posts:
+    label: 'Widget: Recent posts'
+    parent: blog
+  blog.blog_133_widgets_tags:
+    label: 'Widget: Tags'
+    parent: blog
+  blog.blog_134_widgets_archive:
+    label: 'Widget: Archive'
+    parent: blog
+  blog.blog_140_comments:
+    label: Comments
+    parent: blog
+  blog.blog_150_authors:
+    label: Authors
+    parent: blog
+  blog.blog_160_notifications:
+    label: Notifications
+    parent: blog
+  blog_standalone.blog_110_templates:
+    label: Templates
+    parent: blog_standalone
+  blog_standalone.other:
+    label: Other
+    parent: blog_standalone
+settings:
+  plugin.tx_blog.view.templateRootPaths:
+    type: string
+    default: 'EXT:blog/Resources/Private/Templates/'
+    label: 'Template Root Path'
+    description: 'Path to templates folder'
+    category: blog.blog_110_templates
+  plugin.tx_blog.view.partialRootPaths:
+    type: string
+    default: 'EXT:blog/Resources/Private/Partials/'
+    label: 'Partial Root Path'
+    description: 'Path to partial folder'
+    category: blog.blog_110_templates
+  plugin.tx_blog.view.layoutRootPaths:
+    type: string
+    default: 'EXT:blog/Resources/Private/Layouts/'
+    label: 'Layout Root Path'
+    description: 'Path to layout folder'
+    category: blog.blog_110_templates
+  plugin.tx_blog.view.emails.templateRootPaths:
+    type: string
+    default: 'EXT:blog/Resources/Private/Mails/Templates/'
+    label: 'Email-Template Root Path'
+    description: 'Path to templates folder'
+    category: blog.blog_110_templates
+  plugin.tx_blog.view.emails.partialRootPaths:
+    type: string
+    default: 'EXT:blog/Resources/Private/Mails/Partials/'
+    label: 'Email-Partial Root Path'
+    description: 'Path to partial folder'
+    category: blog.blog_110_templates
+  plugin.tx_blog.view.emails.layoutRootPaths:
+    type: string
+    default: 'EXT:blog/Resources/Private/Mails/Layouts/'
+    label: 'Email-Layout Root Path'
+    description: 'Path to layout folder'
+    category: blog.blog_110_templates
+  plugin.tx_blog.settings.blogUid:
+    type: int
+    default: 0
+    label: 'List posts UID'
+    description: 'Location of the "Blog: List of posts" plugin. This page UID is the root page for the blog. All blog post pages are located below this page.'
+    category: blog.blog_100_uids
+  plugin.tx_blog.settings.authorUid:
+    type: int
+    default: 0
+    label: 'Author UID'
+    description: 'Location of the "Blog: Author" plugin. Shows posts by author.'
+    category: blog.blog_100_uids
+  plugin.tx_blog.settings.categoryUid:
+    type: int
+    default: 0
+    label: 'List by category UID'
+    description: 'Location of the "Blog: List by category" plugin. Shows all posts from one category.'
+    category: blog.blog_100_uids
+  plugin.tx_blog.settings.tagUid:
+    type: int
+    default: 0
+    label: 'List by tags UID'
+    description: 'Location of the "Blog: List by tags" plugin. Shows all posts from one tag.'
+    category: blog.blog_100_uids
+  plugin.tx_blog.settings.archiveUid:
+    type: int
+    default: 0
+    label: 'Archive UID'
+    description: 'Location of the "Blog: Archive" plugin. Shows archived posts.'
+    category: blog.blog_100_uids
+  plugin.tx_blog.settings.storagePid:
+    type: int
+    default: 0
+    label: 'Storage folder'
+    description: 'Storage folder of all categories and tags for this blog.'
+    category: blog.blog_100_uids
+  plugin.tx_blog.settings.meta.postheader.enable:
+    type: bool
+    default: true
+    label: 'Display meta information in the header'
+    description: ''
+    category: blog_post.110_blog_post_header
+  plugin.tx_blog.settings.meta.postheader.modifier:
+    type: string
+    default: simple
+    label: 'Meta information display style'
+    description: ''
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+    category: blog_post.110_blog_post_header
+  plugin.tx_blog.settings.meta.postheader.elements.authors.enable:
+    type: bool
+    default: true
+    label: 'Show authors in the meta section'
+    description: ''
+    category: blog_post.110_blog_post_header
+  plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.enable:
+    type: bool
+    default: false
+    label: 'Enable author avatars in the meta section'
+    description: ''
+    category: blog_post.110_blog_post_header
+  plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.size:
+    type: int
+    default: 20
+    label: 'Size of the author avatars'
+    description: 'The size in px for the author avatar'
+    category: blog_post.110_blog_post_header
+  plugin.tx_blog.settings.meta.postheader.elements.categories.enable:
+    type: bool
+    default: false
+    label: 'Show categories in the meta section'
+    description: ''
+    category: blog_post.110_blog_post_header
+  plugin.tx_blog.settings.meta.postheader.elements.tags.enable:
+    type: bool
+    default: false
+    label: 'Show tags in the meta section'
+    description: ''
+    category: blog_post.110_blog_post_header
+  plugin.tx_blog.settings.meta.postheader.elements.published.enable:
+    type: bool
+    default: true
+    label: 'Show the publish date in the meta section'
+    description: ''
+    category: blog_post.110_blog_post_header
+  plugin.tx_blog.settings.meta.postheader.elements.published.format:
+    type: string
+    default: '%d.%m.%Y'
+    label: 'Published date format'
+    description: 'Default: %d.%m.%Y'
+    category: blog_post.110_blog_post_header
+  plugin.tx_blog.settings.meta.postheader.elements.comments.enable:
+    type: bool
+    default: true
+    label: 'Show comments in the meta section'
+    description: ''
+    category: blog_post.110_blog_post_header
+  plugin.tx_blog.settings.meta.postfooter.enable:
+    type: bool
+    default: true
+    label: 'Display meta information in the footer'
+    description: ''
+    category: blog_post.120_blog_post_footer
+  plugin.tx_blog.settings.meta.postfooter.modifier:
+    type: string
+    default: simple
+    label: 'Meta information display style'
+    description: ''
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+    category: blog_post.120_blog_post_footer
+  plugin.tx_blog.settings.meta.postfooter.elements.authors.enable:
+    type: bool
+    default: false
+    label: 'Show authors in the meta section'
+    description: ''
+    category: blog_post.120_blog_post_footer
+  plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.enable:
+    type: bool
+    default: false
+    label: 'Enable author avatars in the meta section'
+    description: ''
+    category: blog_post.120_blog_post_footer
+  plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.size:
+    type: int
+    default: 20
+    label: 'Size of the author avatars'
+    description: 'The size in px for the author avatar'
+    category: blog_post.120_blog_post_footer
+  plugin.tx_blog.settings.meta.postfooter.elements.categories.enable:
+    type: bool
+    default: true
+    label: 'Show categories in the meta section'
+    description: ''
+    category: blog_post.120_blog_post_footer
+  plugin.tx_blog.settings.meta.postfooter.elements.tags.enable:
+    type: bool
+    default: true
+    label: 'Show tags in the meta section'
+    description: ''
+    category: blog_post.120_blog_post_footer
+  plugin.tx_blog.settings.meta.postfooter.elements.published.enable:
+    type: bool
+    default: false
+    label: 'Show the publish date in the meta section'
+    description: ''
+    category: blog_post.120_blog_post_footer
+  plugin.tx_blog.settings.meta.postfooter.elements.published.format:
+    type: string
+    default: '%d.%m.%Y'
+    label: 'Published date format'
+    description: 'Default: %d.%m.%Y'
+    category: blog_post.120_blog_post_footer
+  plugin.tx_blog.settings.meta.postfooter.elements.comments.enable:
+    type: bool
+    default: false
+    label: 'Show comments in the meta section'
+    description: ''
+    category: blog_post.120_blog_post_footer
+  plugin.tx_blog.settings.meta.listheader.enable:
+    type: bool
+    default: true
+    label: 'Display meta information in the header'
+    description: ''
+    category: blog_list.210_blog_list_element_header
+  plugin.tx_blog.settings.meta.listheader.modifier:
+    type: string
+    default: simple
+    label: 'Meta information display style'
+    description: ''
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+    category: blog_list.210_blog_list_element_header
+  plugin.tx_blog.settings.meta.listheader.elements.authors.enable:
+    type: bool
+    default: false
+    label: 'Show authors in the meta section'
+    description: ''
+    category: blog_list.210_blog_list_element_header
+  plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.enable:
+    type: bool
+    default: false
+    label: 'Enable author avatars in the meta section'
+    description: ''
+    category: blog_list.210_blog_list_element_header
+  plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.size:
+    type: int
+    default: 20
+    label: 'Size of the author avatars'
+    description: 'The size in px for the author avatar'
+    category: blog_list.210_blog_list_element_header
+  plugin.tx_blog.settings.meta.listheader.elements.categories.enable:
+    type: bool
+    default: false
+    label: 'Show categories in the meta section'
+    description: ''
+    category: blog_list.210_blog_list_element_header
+  plugin.tx_blog.settings.meta.listheader.elements.tags.enable:
+    type: bool
+    default: false
+    label: 'Show tags in the meta section'
+    description: ''
+    category: blog_list.210_blog_list_element_header
+  plugin.tx_blog.settings.meta.listheader.elements.published.enable:
+    type: bool
+    default: true
+    label: 'Show the publish date in the meta section'
+    description: ''
+    category: blog_list.210_blog_list_element_header
+  plugin.tx_blog.settings.meta.listheader.elements.published.format:
+    type: string
+    default: '%d.%m.%Y'
+    label: 'Published date format'
+    description: 'Default: %d.%m.%Y'
+    category: blog_list.210_blog_list_element_header
+  plugin.tx_blog.settings.meta.listheader.elements.comments.enable:
+    type: bool
+    default: true
+    label: 'Show comments in the meta section'
+    description: ''
+    category: blog_list.210_blog_list_element_header
+  plugin.tx_blog.settings.meta.listfooter.enable:
+    type: bool
+    default: true
+    label: 'Display meta information in the footer'
+    description: ''
+    category: blog_list.220_blog_list_element_footer
+  plugin.tx_blog.settings.meta.listfooter.modifier:
+    type: string
+    default: simple
+    label: 'Meta information display style'
+    description: ''
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+    category: blog_list.220_blog_list_element_footer
+  plugin.tx_blog.settings.meta.listfooter.elements.authors.enable:
+    type: bool
+    default: true
+    label: 'Show authors in the meta section'
+    description: ''
+    category: blog_list.220_blog_list_element_footer
+  plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.enable:
+    type: bool
+    default: false
+    label: 'Enable author avatars in the meta section'
+    description: ''
+    category: blog_list.220_blog_list_element_footer
+  plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.size:
+    type: int
+    default: 20
+    label: 'Size of the author avatars'
+    description: 'The size in px for the author avatar'
+    category: blog_list.220_blog_list_element_footer
+  plugin.tx_blog.settings.meta.listfooter.elements.categories.enable:
+    type: bool
+    default: false
+    label: 'Show categories in the meta section'
+    description: ''
+    category: blog_list.220_blog_list_element_footer
+  plugin.tx_blog.settings.meta.listfooter.elements.tags.enable:
+    type: bool
+    default: true
+    label: 'Show tags in the meta section'
+    description: ''
+    category: blog_list.220_blog_list_element_footer
+  plugin.tx_blog.settings.meta.listfooter.elements.published.enable:
+    type: bool
+    default: false
+    label: 'Show the publish date in the meta section'
+    description: ''
+    category: blog_list.220_blog_list_element_footer
+  plugin.tx_blog.settings.meta.listfooter.elements.published.format:
+    type: string
+    default: '%d.%m.%Y'
+    label: 'Published date format'
+    description: 'Default: %d.%m.%Y'
+    category: blog_list.220_blog_list_element_footer
+  plugin.tx_blog.settings.meta.listfooter.elements.comments.enable:
+    type: bool
+    default: false
+    label: 'Show comments in the meta section'
+    description: ''
+    category: blog_list.220_blog_list_element_footer
+  plugin.tx_blog.settings.meta.teaserheader.enable:
+    type: bool
+    default: true
+    label: 'Display meta information in the header'
+    description: ''
+    category: blog_teaser.310_blog_teaser_element_header
+  plugin.tx_blog.settings.meta.teaserheader.modifier:
+    type: string
+    default: simple
+    label: 'Meta information display style'
+    description: ''
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+    category: blog_teaser.310_blog_teaser_element_header
+  plugin.tx_blog.settings.meta.teaserheader.elements.authors.enable:
+    type: bool
+    default: true
+    label: 'Show authors in the meta section'
+    description: ''
+    category: blog_teaser.310_blog_teaser_element_header
+  plugin.tx_blog.settings.meta.teaserheader.elements.authors.avatar.enable:
+    type: bool
+    default: false
+    label: 'Enable author avatars in the meta section'
+    description: ''
+    category: blog_teaser.310_blog_teaser_element_header
+  plugin.tx_blog.settings.meta.teaserheader.elements.authors.avatar.size:
+    type: int
+    default: 20
+    label: 'Size of the author avatars'
+    description: 'The size in px for the author avatar'
+    category: blog_teaser.310_blog_teaser_element_header
+  plugin.tx_blog.settings.meta.teaserheader.elements.categories.enable:
+    type: bool
+    default: false
+    label: 'Show categories in the meta section'
+    description: ''
+    category: blog_teaser.310_blog_teaser_element_header
+  plugin.tx_blog.settings.meta.teaserheader.elements.tags.enable:
+    type: bool
+    default: false
+    label: 'Show tags in the meta section'
+    description: ''
+    category: blog_teaser.310_blog_teaser_element_header
+  plugin.tx_blog.settings.meta.teaserheader.elements.published.enable:
+    type: bool
+    default: true
+    label: 'Show the publish date in the meta section'
+    description: ''
+    category: blog_teaser.310_blog_teaser_element_header
+  plugin.tx_blog.settings.meta.teaserheader.elements.published.format:
+    type: string
+    default: '%d.%m.%Y'
+    label: 'Published date format'
+    description: 'Default: %d.%m.%Y'
+    category: blog_teaser.310_blog_teaser_element_header
+  plugin.tx_blog.settings.meta.teaserheader.elements.comments.enable:
+    type: bool
+    default: false
+    label: 'Show comments in the meta section'
+    description: ''
+    category: blog_teaser.310_blog_teaser_element_header
+  plugin.tx_blog.settings.meta.teaserfooter.enable:
+    type: bool
+    default: false
+    label: 'Display meta information in the footer'
+    description: ''
+    category: blog_teaser.320_blog_teaser_element_footer
+  plugin.tx_blog.settings.meta.teaserfooter.modifier:
+    type: string
+    default: simple
+    label: 'Meta information display style'
+    description: ''
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+    category: blog_teaser.320_blog_teaser_element_footer
+  plugin.tx_blog.settings.meta.teaserfooter.elements.authors.enable:
+    type: bool
+    default: false
+    label: 'Show authors in the meta section'
+    description: ''
+    category: blog_teaser.320_blog_teaser_element_footer
+  plugin.tx_blog.settings.meta.teaserfooter.elements.authors.avatar.enable:
+    type: bool
+    default: false
+    label: 'Enable author avatars in the meta section'
+    description: ''
+    category: blog_teaser.320_blog_teaser_element_footer
+  plugin.tx_blog.settings.meta.teaserfooter.elements.authors.avatar.size:
+    type: int
+    default: 20
+    label: 'Size of the author avatars'
+    description: 'The size in px for the author avatar'
+    category: blog_teaser.320_blog_teaser_element_footer
+  plugin.tx_blog.settings.meta.teaserfooter.elements.categories.enable:
+    type: bool
+    default: false
+    label: 'Show categories in the meta section'
+    description: ''
+    category: blog_teaser.320_blog_teaser_element_footer
+  plugin.tx_blog.settings.meta.teaserfooter.elements.tags.enable:
+    type: bool
+    default: false
+    label: 'Show tags in the meta section'
+    description: ''
+    category: blog_teaser.320_blog_teaser_element_footer
+  plugin.tx_blog.settings.meta.teaserfooter.elements.published.enable:
+    type: bool
+    default: false
+    label: 'Show the publish date in the meta section'
+    description: ''
+    category: blog_teaser.320_blog_teaser_element_footer
+  plugin.tx_blog.settings.meta.teaserfooter.elements.published.format:
+    type: string
+    default: '%d.%m.%Y'
+    label: 'Published date format'
+    description: 'Default: %d.%m.%Y'
+    category: blog_teaser.320_blog_teaser_element_footer
+  plugin.tx_blog.settings.meta.teaserfooter.elements.comments.enable:
+    type: bool
+    default: false
+    label: 'Show comments in the meta section'
+    description: ''
+    category: blog_teaser.320_blog_teaser_element_footer
+  plugin.tx_blog.settings.post.featuredImage.width:
+    type: string
+    default: '1140'
+    label: Width
+    description: ''
+    category: blog_post.101_blog_post_featuredimage
+  plugin.tx_blog.settings.post.featuredImage.height:
+    type: string
+    default: 400c
+    label: Height
+    description: ''
+    category: blog_post.101_blog_post_featuredimage
+  plugin.tx_blog.settings.lists.featuredImage.width:
+    type: string
+    default: '1140'
+    label: Width
+    description: ''
+    category: blog_list.100_blog_list_featuredimage
+  plugin.tx_blog.settings.lists.featuredImage.height:
+    type: string
+    default: 400c
+    label: Height
+    description: ''
+    category: blog_list.100_blog_list_featuredimage
+  plugin.tx_blog.settings.lists.pagination.itemsPerPage:
+    type: int
+    default: 10
+    label: 'Number of post that should be displayed per page'
+    description: ''
+    category: blog.blog_120_lists
+  plugin.tx_blog.settings.lists.pagination.insertAbove:
+    type: int
+    default: 0
+    label: 'Show the pagination above the posts'
+    description: ''
+    category: blog.blog_120_lists
+  plugin.tx_blog.settings.lists.pagination.insertBelow:
+    type: int
+    default: 1
+    label: 'Show the pagination below the posts'
+    description: ''
+    category: blog.blog_120_lists
+  plugin.tx_blog.settings.lists.pagination.maximumNumberOfLinks:
+    type: int
+    default: 10
+    label: 'Maximum number of links in the pagination'
+    description: ''
+    category: blog.blog_120_lists
+  plugin.tx_blog.settings.lists.posts.maximumDisplayedItems:
+    type: int
+    default: 0
+    label: 'Maximum displayed items'
+    description: 'Maximum number of posts to be displayed (0 = no limit).'
+    category: blog.blog_120_lists
+  plugin.tx_blog.settings.lists.posts.dateFormat:
+    type: string
+    default: '%d.%m.%Y'
+    label: 'Date format'
+    description: 'The format for the list items (default: %d.%m.%Y).'
+    category: blog.blog_120_lists
+  plugin.tx_blog.settings.teaser.featuredImage.width:
+    type: string
+    default: '1140'
+    label: Width
+    description: ''
+    category: blog_teaser.100_blog_list_featuredimage
+  plugin.tx_blog.settings.teaser.featuredImage.height:
+    type: string
+    default: 400c
+    label: Height
+    description: ''
+    category: blog_teaser.100_blog_list_featuredimage
+  plugin.tx_blog.settings.archive.showCounter:
+    type: bool
+    default: true
+    label: 'Show counter'
+    description: 'If enabled, the count of posts is visible (default: 1).'
+    category: blog.blog_120_lists_archive
+  plugin.tx_blog.settings.archive.yearDateFormat:
+    type: string
+    default: '%Y'
+    label: 'Year format'
+    description: 'The format of the year (default: %Y).'
+    category: blog.blog_120_lists_archive
+  plugin.tx_blog.settings.archive.monthDateFormat:
+    type: string
+    default: '%B'
+    label: 'Month format'
+    description: 'The format of the month (default: %B).'
+    category: blog.blog_120_lists_archive
+  plugin.tx_blog.settings.latestPosts.limit:
+    type: int
+    default: 3
+    label: Limit
+    description: 'The limit of displayed items (default: 3).'
+    category: blog.blog_120_lists
+  plugin.tx_blog.settings.relatedPosts.limit:
+    type: int
+    default: 4
+    label: Limit
+    description: 'The limit of displayed items (default: 5).'
+    category: blog.blog_120_lists
+  plugin.tx_blog.settings.relatedPosts.categoryMultiplier:
+    type: int
+    default: 1
+    label: 'Category Multiplier'
+    description: 'The multiplier for categories (default: 1).'
+    category: blog.blog_120_lists
+  plugin.tx_blog.settings.relatedPosts.tagMultiplier:
+    type: int
+    default: 1
+    label: 'Tag Multiplier'
+    description: 'The multiplier for tags (default: 1).'
+    category: blog.blog_120_lists
+  plugin.tx_blog.settings.widgets.comments.limit:
+    type: int
+    default: 5
+    label: Limit
+    description: 'The limit of displayed items (default: 5).'
+    category: blog.blog_131_widgets_comments
+  plugin.tx_blog.settings.widgets.recentposts.limit:
+    type: int
+    default: 5
+    label: Limit
+    description: 'The limit of displayed items (default: 5).'
+    category: blog.blog_132_widgets_recent_posts
+  plugin.tx_blog.settings.widgets.tags.limit:
+    type: int
+    default: 20
+    label: Limit
+    description: 'The limit of displayed items (default: 20).'
+    category: blog.blog_133_widgets_tags
+  plugin.tx_blog.settings.widgets.tags.minSize:
+    type: int
+    default: 100
+    label: 'Minimum size'
+    description: 'The minimum size of the font (default: 100).'
+    category: blog.blog_133_widgets_tags
+  plugin.tx_blog.settings.widgets.tags.maxSize:
+    type: int
+    default: 100
+    label: 'Maximum size'
+    description: 'The maximum size of the font (default: 200).'
+    category: blog.blog_133_widgets_tags
+  plugin.tx_blog.settings.widgets.archive.showCounter:
+    type: bool
+    default: true
+    label: 'Show counter'
+    description: 'If enabled, the count of posts is visible (default: 1).'
+    category: blog.blog_134_widgets_archive
+  plugin.tx_blog.settings.widgets.archive.groupByYear:
+    type: bool
+    default: true
+    label: 'Group by year'
+    description: 'If enabled, the posts are grouped by year (default: 1).'
+    category: blog.blog_134_widgets_archive
+  plugin.tx_blog.settings.widgets.archive.groupByMonth:
+    type: bool
+    default: true
+    label: 'Group by month'
+    description: 'If enabled, the posts are grouped by year and month (default: 1).'
+    category: blog.blog_134_widgets_archive
+  plugin.tx_blog.settings.widgets.archive.yearDateFormat:
+    type: string
+    default: '%Y'
+    label: 'Year format'
+    description: 'The format of the year (default: %Y).'
+    category: blog.blog_134_widgets_archive
+  plugin.tx_blog.settings.widgets.archive.monthDateFormat:
+    type: string
+    default: '%B'
+    label: 'Month format'
+    description: 'The format of the month (default: %B).'
+    category: blog.blog_134_widgets_archive
+  plugin.tx_blog.settings.comments.active:
+    type: bool
+    default: true
+    label: 'Enable Comments'
+    description: 'Activate comments as a general feature'
+    category: blog.blog_140_comments
+  plugin.tx_blog.settings.comments.features.urls:
+    type: bool
+    default: false
+    label: 'Enable Urls'
+    description: 'Activate the url field in the comment form and output the submitted url'
+    category: blog.blog_140_comments
+  plugin.tx_blog.settings.comments.moderation:
+    type: string
+    default: '0'
+    label: 'Comments moderation mode'
+    description: '0 = no moderation, 1 = moderation active, 2 = moderation only on first comment'
+    enum:
+      - '0'
+      - '1'
+      - '2'
+    category: blog.blog_140_comments
+  plugin.tx_blog.settings.comments.respectPostLanguageId:
+    type: string
+    default: '1'
+    label: 'Respect post_language_id'
+    description: '0 = show all comments also on translated posts, 1 = show only comments written in current language or language all (-1)'
+    enum:
+      0: '0'
+      1: '1'
+      -1: '-1'
+    category: blog.blog_140_comments
+  plugin.tx_blog.settings.comments.date.format:
+    type: string
+    default: '%B %e, %Y'
+    label: 'Date format'
+    description: 'The format for the comments (default: %B %e, %Y).'
+    category: blog.blog_140_comments
+  plugin.tx_blog.settings.comments.disqus:
+    type: bool
+    default: false
+    label: 'Enable Disqus'
+    description: 'Use disqus instead of internal comments?'
+    category: blog.blog_140_comments
+  plugin.tx_blog.settings.comments.disqus.shortname:
+    type: string
+    default: ''
+    label: 'Disqus shortname'
+    description: 'The shortname / forum id of your disqus setup.'
+    category: blog.blog_140_comments
+  plugin.tx_blog.settings.comments.google_recaptcha:
+    type: bool
+    default: false
+    label: 'Google Recaptcha v2'
+    description: 'Enable google recaptcha for comments?'
+    category: blog.blog_140_comments
+  plugin.tx_blog.settings.comments.google_recaptcha.website_key:
+    type: string
+    default: ''
+    label: 'Google Recaptcha Website-Key'
+    description: ''
+    category: blog.blog_140_comments
+  plugin.tx_blog.settings.comments.google_recaptcha.secret_key:
+    type: string
+    default: ''
+    label: 'Google Recaptcha Secret-Key'
+    description: ''
+    category: blog.blog_140_comments
+  plugin.tx_blog.settings.authors.avatar.provider.size:
+    type: int
+    default: 72
+    label: 'Author Avatar Size'
+    description: 'The size in px for the author avatar'
+    category: blog.blog_150_authors
+  plugin.tx_blog.settings.authors.avatar.provider.default:
+    type: string
+    default: mm
+    label: 'Author Avatar Default'
+    description: 'The default image for an author avatar'
+    category: blog.blog_150_authors
+  plugin.tx_blog.settings.authors.avatar.provider.rating:
+    type: string
+    default: g
+    label: 'Define the gravatar rating for images'
+    description: 'g = suitable for display on all websites with any audience type | pg = may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence | r = may contain such things as harsh profanity, intense violence, nudity, or hard drug use | x = may contain hardcore sexual imagery or extremely disturbing violence.The default image for an author avatar'
+    enum:
+      g: g
+      pg: pg
+      r: r
+      x: x
+    category: blog.blog_150_authors
+  plugin.tx_blog.settings.notifications.email.senderName:
+    type: string
+    default: 'TYPO3 Blog'
+    label: 'Sender name'
+    description: 'Global sender name for notifications'
+    category: blog.blog_160_notifications
+  plugin.tx_blog.settings.notifications.email.senderMail:
+    type: string
+    default: no-reply@example.com
+    label: 'Sender mail'
+    description: 'Global sender email address for notifications'
+    category: blog.blog_160_notifications
+  plugin.tx_blog.settings.notifications.CommentAddedNotification.author:
+    type: bool
+    default: true
+    label: 'Author notifications'
+    description: 'Send notification to author of a blog post'
+    category: blog.blog_160_notifications
+  plugin.tx_blog.settings.notifications.CommentAddedNotification.admin:
+    type: bool
+    default: true
+    label: 'Admin notifications'
+    description: 'Send notification to admin of the blog'
+    category: blog.blog_160_notifications
+  plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.email:
+    type: string
+    default: admin@example.com
+    label: 'Admin mail'
+    description: 'Global admin (receiver) email address for notifications'
+    category: blog.blog_160_notifications
