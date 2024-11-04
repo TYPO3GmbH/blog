@@ -58,9 +58,10 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         if ($month > 0) {
             $arguments['month'] = $month;
         }
+        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
-            ->setRequest($this->renderingContext->getRequest())
+            ->setRequest($request)
             ->setTargetPageUid($pageUid);
         if ($rssFormat) {
             $uriBuilder
