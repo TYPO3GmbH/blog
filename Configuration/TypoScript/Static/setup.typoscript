@@ -440,3 +440,8 @@ blog_rss_author < blog_rss_posts
 blog_rss_author.typeNum = 250
 blog_rss_author.10 < tt_content.list.20.blog_authorposts
 blog_rss_author.10.format = rss
+
+blog_rss_filter < blog_rss_posts
+blog_rss_filter.typeNum = 260
+blog_rss_filter.10 < tt_content.list.20.blog_filter
+blog_rss_filter.10.format = rss

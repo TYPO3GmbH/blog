@@ -59,6 +59,15 @@ mod.wizards.newContentElement.wizardItems.blog {
                 list_type = blog_archive
             }
         }
+        blog_filter {
+            iconIdentifier = plugin-blog-filter
+            title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_filter.title
+            description = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_filter.description
+            tt_content_defValues {
+                CType = list
+                list_type = blog_filter
+            }
+        }
         blog_demandedposts {
             iconIdentifier = plugin-blog-demandedposts
             title = LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_demandedposts.title

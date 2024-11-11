@@ -96,6 +96,14 @@ ExtensionUtility::configurePlugin(
 
 ExtensionUtility::configurePlugin(
     'Blog',
+    'Filter',
+    [
+        PostController::class => 'listPostsByFilter',
+    ]
+);
+
+ExtensionUtility::configurePlugin(
+    'Blog',
     'Sidebar',
     [
         PostController::class => 'sidebar',
