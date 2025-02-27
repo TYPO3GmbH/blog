@@ -21,24 +21,10 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class CacheService
 {
-    private array $settings = [];
-
-    public function __construct()
-    {
-        $this->initializeObject();
-    }
-
-    public function initializeObject(): void
-    {
-        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
-        $this->settings = $configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
-            'blog'
-        );
-    }
-
     public function addTagsForPost(Post $post): void
     {
+        $settings = $this->getSettings();
+
         $this->addTagToPage('tx_blog_post_' . $post->getUid());
         foreach ($post->getAuthors() as $author) {
             $this->addTagToPage('tx_blog_author_' . $author->getUid());
@@ -49,7 +35,7 @@ class CacheService
         foreach ($post->getTags() as $tag) {
             $this->addTagToPage('tx_blog_tag_' . $tag->getUid());
         }
-        if (isset($this->settings['comments']['active']) && $this->settings['comments']['active']) {
+        if (isset($settings['comments']['active']) && $settings['comments']['active']) {
             foreach ($post->getActiveComments() as $comment) {
                 $this->addTagToPage('tx_blog_comment_' . $comment->getUid());
             }
@@ -81,5 +67,15 @@ class CacheService
     protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
+    }
+
+    protected function getSettings(): array
+    {
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+
+        return $configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            'blog'
+        );
     }
 }
