@@ -13,6 +13,7 @@ namespace T3G\AgencyPack\Blog\Service;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -20,6 +21,22 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class CacheService
 {
+    private array $settings = [];
+
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
+
+    public function initializeObject(): void
+    {
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+        $this->settings = $configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            'blog'
+        );
+    }
+
     public function addTagsForPost(Post $post): void
     {
         $this->addTagToPage('tx_blog_post_' . $post->getUid());
@@ -32,8 +49,10 @@ class CacheService
         foreach ($post->getTags() as $tag) {
             $this->addTagToPage('tx_blog_tag_' . $tag->getUid());
         }
-        foreach ($post->getActiveComments() as $comment) {
-            $this->addTagToPage('tx_blog_comment_' . $comment->getUid());
+        if (isset($this->settings['comments']['active']) && $this->settings['comments']['active']) {
+            foreach ($post->getActiveComments() as $comment) {
+                $this->addTagToPage('tx_blog_comment_' . $comment->getUid());
+            }
         }
     }
 
