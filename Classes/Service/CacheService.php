@@ -12,7 +12,6 @@ namespace T3G\AgencyPack\Blog\Service;
 
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -21,6 +20,12 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class CacheService
 {
+    public function __construct(
+        private readonly ConfigurationManagerInterface $configurationManager,
+        private readonly CacheManager $cacheManager
+    ) {
+    }
+
     public function addTagsForPost(Post $post): void
     {
         $settings = $this->getSettings();
@@ -59,7 +64,7 @@ class CacheService
 
     public function flushCacheByTags(array $tags): void
     {
-        GeneralUtility::makeInstance(CacheManager::class)
+        $this->cacheManager
             ->getCache('pages')
             ->flushByTags($tags);
     }
@@ -71,9 +76,7 @@ class CacheService
 
     protected function getSettings(): array
     {
-        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
-
-        return $configurationManager->getConfiguration(
+        return $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'blog'
         );
