@@ -12,7 +12,7 @@ namespace T3G\AgencyPack\Blog\Service;
 
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -20,8 +20,16 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class CacheService
 {
+    public function __construct(
+        private readonly ConfigurationManagerInterface $configurationManager,
+        private readonly CacheManager $cacheManager
+    ) {
+    }
+
     public function addTagsForPost(Post $post): void
     {
+        $settings = $this->getSettings();
+
         $this->addTagToPage('tx_blog_post_' . $post->getUid());
         foreach ($post->getAuthors() as $author) {
             $this->addTagToPage('tx_blog_author_' . $author->getUid());
@@ -32,8 +40,10 @@ class CacheService
         foreach ($post->getTags() as $tag) {
             $this->addTagToPage('tx_blog_tag_' . $tag->getUid());
         }
-        foreach ($post->getActiveComments() as $comment) {
-            $this->addTagToPage('tx_blog_comment_' . $comment->getUid());
+        if (isset($settings['comments']['active']) && $settings['comments']['active']) {
+            foreach ($post->getActiveComments() as $comment) {
+                $this->addTagToPage('tx_blog_comment_' . $comment->getUid());
+            }
         }
     }
 
@@ -54,7 +64,7 @@ class CacheService
 
     public function flushCacheByTags(array $tags): void
     {
-        GeneralUtility::makeInstance(CacheManager::class)
+        $this->cacheManager
             ->getCache('pages')
             ->flushByTags($tags);
     }
@@ -62,5 +72,13 @@ class CacheService
     protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
+    }
+
+    protected function getSettings(): array
+    {
+        return $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            'blog'
+        );
     }
 }
