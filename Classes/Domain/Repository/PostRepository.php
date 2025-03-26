@@ -57,8 +57,6 @@ class PostRepository extends Repository
                 $query->equals('l18n_cfg', 0),
                 $query->equals('l18n_cfg', 2)
             );
-        } else {
-            $this->defaultConstraints[] = $query->lessThan('l18n_cfg', 2);
         }
 
         $this->defaultOrderings = [
@@ -270,7 +268,9 @@ class PostRepository extends Repository
     protected function getPostWithLanguage(int $pageId, int $languageId): ?Post
     {
         $query = $this->createQuery();
-        $constraints = $this->defaultConstraints;
+        $constraints = [
+            $query->equals('doktype', Constants::DOKTYPE_BLOG_POST)
+        ];
 
         if ($languageId > 0) {
             $constraints[] = $query->equals('l10n_parent', $pageId);
