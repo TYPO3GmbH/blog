@@ -12,6 +12,7 @@ namespace T3G\AgencyPack\Blog\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use T3G\AgencyPack\Blog\Domain\Factory\PostFilterFactory;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
@@ -27,6 +28,7 @@ use T3G\AgencyPack\Blog\Service\MetaTagService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -248,6 +250,29 @@ class PostController extends ActionController
         } else {
             $this->view->assign('tags', $this->tagRepository->findAll());
         }
+        return $this->htmlResponse();
+    }
+
+    /**
+     * Show a list of posts by given filter.
+     */
+    public function listPostsByFilterAction(int $currentPage = 1): ResponseInterface
+    {
+        $factory = GeneralUtility::makeInstance(PostFilterFactory::class, $this->categoryRepository, $this->tagRepository);
+        $filter = $factory->getFilterFromRequest($this->request);
+        $posts = $this->postRepository->findAllByFilter($filter);
+        $pagination = $this->getPagination($posts, $currentPage);
+
+        $this->view->assign('type', 'byfilter');
+        $this->view->assign('posts', $posts);
+        $this->view->assign('pagination', $pagination);
+        $this->view->assign('filter', $filter);
+        $this->view->assign('categories', $this->categoryRepository->findAll());
+        $this->view->assign('tags', $this->tagRepository->findAll());
+
+        MetaTagService::set(MetaTagService::META_TITLE, $filter->getTitle());
+        MetaTagService::set(MetaTagService::META_DESCRIPTION, $filter->getDescription());
+
         return $this->htmlResponse();
     }
 
