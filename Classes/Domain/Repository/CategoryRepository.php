@@ -26,14 +26,14 @@ class CategoryRepository extends Repository
     public function initializeObject(): void
     {
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
-        $this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'blog');
+        $this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
         $querySettings = GeneralUtility::makeInstance(
             Typo3QuerySettings::class,
             GeneralUtility::makeInstance(Context::class),
             $configurationManager
         );
-        $querySettings->setStoragePageIds(GeneralUtility::intExplode(',', $this->settings['persistence']['storagePid']));
+        $querySettings->setStoragePageIds(GeneralUtility::intExplode(',', $this->settings['storagePid']));
         $this->setDefaultQuerySettings($querySettings);
 
         $this->defaultOrderings = [
