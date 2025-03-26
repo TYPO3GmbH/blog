@@ -418,7 +418,7 @@ class PostRepository extends Repository
 
     protected function getStoragePidsFromTypoScript(): array
     {
-        return GeneralUtility::intExplode(',', $this->settings['persistence']['storagePid']);
+        return GeneralUtility::intExplode(',', (string)$this->settings['persistence']['storagePid']);
     }
 
     /**
