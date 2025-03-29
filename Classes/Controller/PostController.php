@@ -256,7 +256,7 @@ class PostController extends ActionController
      */
     public function sidebarAction(): ResponseInterface
     {
-        return $this->htmlResponse();
+        return $this->htmlResponse('');
     }
 
     /**
