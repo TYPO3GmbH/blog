@@ -85,7 +85,7 @@ class BackendController extends ActionController
         return $view->renderResponse('Backend/SetupWizard');
     }
 
-    public function postsAction(int $blogSetup = null): ResponseInterface
+    public function postsAction(?int $blogSetup = null): ResponseInterface
     {
         $query = $this->postRepository->createQuery();
         $querySettings = $query->getQuerySettings();
@@ -102,7 +102,7 @@ class BackendController extends ActionController
         return $view->renderResponse('Backend/Posts');
     }
 
-    public function commentsAction(string $filter = null, int $blogSetup = null): ResponseInterface
+    public function commentsAction(?string $filter = null, ?int $blogSetup = null): ResponseInterface
     {
         $view = $this->moduleTemplateFactory->create($this->request);
         $view->assignMultiple([
@@ -122,7 +122,7 @@ class BackendController extends ActionController
         return $view->renderResponse('Backend/Comments');
     }
 
-    public function updateCommentStatusAction(string $status, string $filter = null, int $blogSetup = null, array $comments = [], int $comment = null): ResponseInterface
+    public function updateCommentStatusAction(string $status, ?string $filter = null, ?int $blogSetup = null, array $comments = [], ?int $comment = null): ResponseInterface
     {
         if ($comment !== null) {
             $comments['__identity'][] = $comment;
@@ -155,7 +155,7 @@ class BackendController extends ActionController
         return new RedirectResponse($this->uriBuilder->reset()->uriFor('comments', ['filter' => $filter, 'blogSetup' => $blogSetup]));
     }
 
-    public function createBlogAction(array $data = null): ResponseInterface
+    public function createBlogAction(?array $data = null): ResponseInterface
     {
         if ($data !== null && $this->setupService->createBlogSetup($data)) {
             $this->addFlashMessage('Your blog setup has been created.', 'Congratulation');
