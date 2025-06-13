@@ -56,7 +56,7 @@ class CommentRepository extends Repository
         return $result;
     }
 
-    public function findAllByFilter(?string $filter = null,?int $blogSetup = null): QueryResultInterface
+    public function findAllByFilter(?string $filter = null, ?int $blogSetup = null): QueryResultInterface
     {
         $query = $this->createQuery();
         $querySettings = $query->getQuerySettings();
