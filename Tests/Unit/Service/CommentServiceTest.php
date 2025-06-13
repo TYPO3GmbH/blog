@@ -18,7 +18,6 @@ use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\CommentService;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class CommentServiceTest extends UnitTestCase
@@ -31,7 +30,6 @@ class CommentServiceTest extends UnitTestCase
 
     public function initialize(): void
     {
-        $GLOBALS['TSFE'] =  $this->getMockBuilder(TypoScriptFrontendController::class)->disableOriginalConstructor()->getMock();
         $this->postRepositoryMock = $this->getMockBuilder(PostRepository::class)->disableOriginalConstructor()->getMock();
         $this->commentRepositoryMock = $this->getMockBuilder(CommentRepository::class)->disableOriginalConstructor()->getMock();
         $this->persistenceManagerMock = $this->getMockBuilder(PersistenceManager::class)->disableOriginalConstructor()->getMock();

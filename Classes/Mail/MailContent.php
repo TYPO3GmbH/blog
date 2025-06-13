@@ -10,30 +10,39 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Mail;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
+use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 
 class MailContent
 {
-    public function render(string $template, array $arguments): string
-    {
-        $view = $this->getFluidTemplateObject($template);
-        $view->assignMultiple($arguments);
-        return $view->render();
+    public function __construct(
+        protected readonly ConfigurationManagerInterface $configurationManager,
+        protected readonly ViewFactoryInterface $viewFactory
+    ) {
     }
 
-    protected function getFluidTemplateObject(string $template): StandaloneView
+    public function render(string $template, array $arguments): string
     {
-        $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
+        $view = $this->getTemplateObject(new ServerRequest());
+        $view->assignMultiple($arguments);
+
+        return $view->render($template);
+    }
+
+    protected function getTemplateObject(ServerRequestInterface $request): ViewInterface
+    {
+        $settings = $this->configurationManager
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'blog');
 
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setLayoutRootPaths($settings['view']['emails']['layoutRootPaths']);
-        $view->setPartialRootPaths($settings['view']['emails']['partialRootPaths']);
-        $view->setTemplateRootPaths($settings['view']['emails']['templateRootPaths']);
-        $view->setTemplate($template);
-
-        return $view;
+        return $this->viewFactory->create(new ViewFactoryData(
+            templateRootPaths: $settings['view']['emails']['templateRootPaths'] ?? [],
+            partialRootPaths: $settings['view']['emails']['partialRootPaths'] ?? [],
+            layoutRootPaths: $settings['view']['emails']['layoutRootPaths'] ?? [],
+            request: $request,
+        ));
     }
 }

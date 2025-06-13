@@ -15,14 +15,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        typo3: ['^12', '^13']
-        php: ['8.1', '8.2', '8.3']
-        mysql: ['5.7', '8.0', '8.4']
-        exclude:
-          - typo3: '^13'
-            mysql: '5.7'
-          - typo3: '^13'
-            php: '8.1'
+        typo3: ['^13', '14.0.x-dev']
+        php: ['8.2', '8.3', '8.4']
+        mysql: ['8.0']
     steps:
       - id: checkout
         name: Checkout Code
@@ -69,11 +64,11 @@ jobs:
         name: Lint
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
-          composer t3g:test:php:lint
+          composer test:php:lint
 
       - id: cgl
         name: CGL
-        if: ${{ always() && steps.install.conclusion == 'success' }}
+        if: ${{ always() && steps.install.conclusion == 'success' && matrix.php != '8.4' }}
         run: |
           php-cs-fixer fix --dry-run --verbose
 
@@ -82,19 +77,19 @@ jobs:
         continue-on-error: true
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
-          composer t3g:test:php:phpstan -- --error-format=github
+          composer phpstan -- --error-format=github
 
       - id: tests_unit
         name: Unit Tests
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
-          composer t3g:test:php:unit
+          composer test:php:unit
 
       - id: tests_functional
         name: Functional Tests
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
-          composer t3g:test:php:functional
+          composer test:php:functional
         env:
           COMPOSER_PROCESS_TIMEOUT: 1200
           typo3DatabaseHost: 127.0.0.1

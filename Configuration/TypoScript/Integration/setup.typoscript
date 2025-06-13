@@ -1,8 +1,8 @@
 ######################
 #### DEPENDENCIES ####
 ######################
-@import "EXT:blog/Configuration/TypoScript/Static/setup.typoscript"
-@import "EXT:blog/Configuration/TypoScript/Shared/setup.typoscript"
+@import "EXT:blog/Configuration/Sets/Static/setup.typoscript"
+@import "EXT:blog/Configuration/Sets/Shared/setup.typoscript"
 
 ###################
 #### BLOG POST ####

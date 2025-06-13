@@ -169,9 +169,9 @@ class PostController extends ActionController
                 '###MONTH_NAME###',
                 '###YEAR###',
             ], [
-                $month,
+                (string) $month,
                 $dateTime->format('F'),
-                $year,
+                (string) $year,
             ], (string) LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
             MetaTagService::set(MetaTagService::META_TITLE, (string) $title);
             MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
@@ -267,7 +267,7 @@ class PostController extends ActionController
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
-            $this->blogCacheService->addTagsForPost($post);
+            $this->blogCacheService->addTagsForPost($this->request, $post);
         }
         return $this->htmlResponse();
     }
@@ -280,7 +280,7 @@ class PostController extends ActionController
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
-            $this->blogCacheService->addTagsForPost($post);
+            $this->blogCacheService->addTagsForPost($this->request, $post);
         }
         return $this->htmlResponse();
     }
@@ -293,7 +293,7 @@ class PostController extends ActionController
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
-            $this->blogCacheService->addTagsForPost($post);
+            $this->blogCacheService->addTagsForPost($this->request, $post);
         }
         return $this->htmlResponse();
     }

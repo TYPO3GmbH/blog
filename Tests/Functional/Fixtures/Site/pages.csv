@@ -1,13 +1,8 @@
-pages,,,,,,,,
-,uid,pid,doktype,title,slug,is_siteroot,module,TSconfig
-,1,0,138,Blog,/,1,,"TCEFORM.pages.tags.PAGE_TSCONFIG_ID = 2
-TCEFORM.pages.authors.PAGE_TSCONFIG_ID = 2
-TCEFORM.pages.categories.PAGE_TSCONFIG_ID = 2
-TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.authors.PAGE_TSCONFIG_ID = 2
-TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.tags.PAGE_TSCONFIG_ID = 2
-TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.categories.PAGE_TSCONFIG_ID = 2"
-,2,1,254,Data,/data,0,blog,
-,3,1,138,Category,/category,0,,
-,4,1,138,Tag,/tag,0,,
-,5,1,138,Author,/author,0,,
-,6,1,138,Archive,/archive,0,,
+pages,,,,,,,
+,uid,pid,doktype,title,slug,is_siteroot,module
+,1,0,138,Blog,/,1,
+,2,1,254,Data,/data,0,blog
+,3,1,138,Category,/category,0,
+,4,1,138,Tag,/tag,0,
+,5,1,138,Author,/author,0,
+,6,1,138,Archive,/archive,0,

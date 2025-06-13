@@ -20,8 +20,8 @@ use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
 use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
-use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use TYPO3Fluid\Fluid\View\TemplateView;
 
 final class AvatarViewHelperTest extends FunctionalTestCase
 {

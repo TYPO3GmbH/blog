@@ -33,7 +33,7 @@ class AdminNotificationProcessor implements ProcessorInterface
         $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
 
-        if ((int)$settings['notifications'][$notificationId]['admin']['_typoScriptNodeValue'] === 1) {
+        if ((int)$settings['notifications'][$notificationId]['admin']['enable'] === 1) {
             $emailAddresses = GeneralUtility::trimExplode(',', $settings['notifications'][$notificationId]['admin']['email']);
             $mail = GeneralUtility::makeInstance(MailMessage::class);
             $mail

@@ -18,13 +18,7 @@ $data['pages']['NEW_blogRoot'] = [
     'hidden' => 1,
     'title' => 'Blog',
     'doktype' => Constants::DOKTYPE_BLOG_PAGE,
-    'is_siteroot' => 1,
-    'TSconfig' => 'TCEFORM.pages.tags.PAGE_TSCONFIG_ID = NEW_blogFolder
-TCEFORM.pages.authors.PAGE_TSCONFIG_ID = NEW_blogFolder
-TCEFORM.pages.categories.PAGE_TSCONFIG_ID = NEW_blogFolder
-TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.authors.PAGE_TSCONFIG_ID = NEW_blogFolder
-TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.tags.PAGE_TSCONFIG_ID = NEW_blogFolder
-TCEFORM.tt_content.pi_flexform.blog_demandedposts.sDEF.settings\.demand\.categories.PAGE_TSCONFIG_ID = NEW_blogFolder',
+    'is_siteroot' => 1
 ];
 $data['pages']['NEW_blogFolder'] = [
     'pid' => 'NEW_blogRoot',
@@ -65,48 +59,26 @@ $data['pages']['NEW_firstBlogPostPage'] = [
     'abstract' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut consectetur quam. Ut rutrum augue libero, non rhoncus libero imperdiet vel. Pellentesque libero orci, porttitor sed dui vel, tempus sodales ex. Sed placerat lobortis tellus at tempus.'
 ];
 
-// Template
-$data['sys_template']['NEW_SysTemplate'] = [
-    'pid' => 'NEW_blogRoot',
-    'title' => 'Blog',
-    'root' => 1,
-    'clear' => 3,
-    'include_static_file' => 'EXT:blog/Configuration/TypoScript/Standalone/',
-    'constants' => 'plugin.tx_blog.settings.blogUid = NEW_blogRoot
-plugin.tx_blog.settings.categoryUid = NEW_blogCategoryPage
-plugin.tx_blog.settings.tagUid = NEW_blogTagPage
-plugin.tx_blog.settings.authorUid = NEW_blogAuthorPage
-plugin.tx_blog.settings.archiveUid = NEW_blogArchivePage
-plugin.tx_blog.settings.storagePid = NEW_blogFolder',
-    'config' => '',
-    'description' => 'This is your blog template',
-];
-
 // Content elements
 $data['tt_content']['NEW_ListOfPosts'] = [
     'pid' => 'NEW_blogRoot',
-    'CType' => 'list',
-    'list_type' => 'blog_posts',
+    'CType' => 'blog_posts',
 ];
 $data['tt_content']['NEW_ListByCategory'] = [
     'pid' => 'NEW_blogCategoryPage',
-    'CType' => 'list',
-    'list_type' => 'blog_category',
+    'CType' => 'blog_category',
 ];
 $data['tt_content']['NEW_ListByTag'] = [
     'pid' => 'NEW_blogTagPage',
-    'CType' => 'list',
-    'list_type' => 'blog_tag',
+    'CType' => 'blog_tag',
 ];
 $data['tt_content']['NEW_ListByAuthor'] = [
     'pid' => 'NEW_blogAuthorPage',
-    'CType' => 'list',
-    'list_type' => 'blog_authorposts',
+    'CType' => 'blog_authorposts',
 ];
 $data['tt_content']['NEW_ListByDate'] = [
     'pid' => 'NEW_blogArchivePage',
-    'CType' => 'list',
-    'list_type' => 'blog_archive',
+    'CType' => 'blog_archive',
 ];
 
 // Content
