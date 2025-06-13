@@ -169,9 +169,9 @@ class PostController extends ActionController
                 '###MONTH_NAME###',
                 '###YEAR###',
             ], [
-                $month,
+                (string) $month,
                 $dateTime->format('F'),
-                $year,
+                (string) $year,
             ], (string) LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
             MetaTagService::set(MetaTagService::META_TITLE, (string) $title);
             MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
