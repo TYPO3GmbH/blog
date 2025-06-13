@@ -48,7 +48,7 @@ class CommentController extends ActionController
         if ($post instanceof Post) {
             $comments = $this->commentService->getCommentsByPost($post);
             foreach ($comments as $comment) {
-                $this->cacheService->addTagToPage('tx_blog_comment_' . $comment->getUid());
+                $this->cacheService->addTagToPage($this->request, 'tx_blog_comment_' . $comment->getUid());
             }
             $this->view->assign('comments', $comments);
             $this->view->assign('post', $post);

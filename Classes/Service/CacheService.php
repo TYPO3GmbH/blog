@@ -10,8 +10,10 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Service;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -26,35 +28,37 @@ class CacheService
     ) {
     }
 
-    public function addTagsForPost(Post $post): void
+    public function addTagsForPost(ServerRequestInterface $request, Post $post): void
     {
         $settings = $this->getSettings();
 
-        $this->addTagToPage('tx_blog_post_' . $post->getUid());
+        $this->addTagToPage($request, 'tx_blog_post_' . $post->getUid());
         foreach ($post->getAuthors() as $author) {
-            $this->addTagToPage('tx_blog_author_' . $author->getUid());
+            $this->addTagToPage($request, 'tx_blog_author_' . $author->getUid());
         }
         foreach ($post->getCategories() as $category) {
-            $this->addTagToPage('tx_blog_category_' . $category->getUid());
+            $this->addTagToPage($request, 'tx_blog_category_' . $category->getUid());
         }
         foreach ($post->getTags() as $tag) {
-            $this->addTagToPage('tx_blog_tag_' . $tag->getUid());
+            $this->addTagToPage($request, 'tx_blog_tag_' . $tag->getUid());
         }
         if (isset($settings['comments']['active']) && $settings['comments']['active']) {
             foreach ($post->getActiveComments() as $comment) {
-                $this->addTagToPage('tx_blog_comment_' . $comment->getUid());
+                $this->addTagToPage($request, 'tx_blog_comment_' . $comment->getUid());
             }
         }
     }
 
-    public function addTagToPage(string $tag): void
+    public function addTagToPage(ServerRequestInterface $request, string $tag): void
     {
-        $this->addTagsToPage([$tag]);
+        $this->addTagsToPage($request, [$tag]);
     }
 
-    public function addTagsToPage(array $tags): void
+    public function addTagsToPage(ServerRequestInterface $request, array $tags): void
     {
-        $this->getTypoScriptFrontendController()->addCacheTags($tags);
+        $request->getAttribute('frontend.cache.collector')->addCacheTags(
+            ...array_map(fn(string $tag) => new CacheTag($tag), $tags)
+        );
     }
 
     public function flushCacheByTag(string $tag): void
@@ -67,11 +71,6 @@ class CacheService
         $this->cacheManager
             ->getCache('pages')
             ->flushByTags($tags);
-    }
-
-    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'];
     }
 
     protected function getSettings(): array
