@@ -13,6 +13,7 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
@@ -36,13 +37,14 @@ class PostViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
+        $request = $this->getRequest();
+
         /** @var Post $post */
         $post = $this->arguments['post'];
         $section = $this->arguments['section'] ?? '';
         $pageUid = (int) $post->getUid();
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
-        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
         $uri = $uriBuilder->reset()
             ->setRequest($request)
             ->setTargetPageUid($pageUid)
@@ -62,5 +64,22 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         }
 
         return $result;
+    }
+
+    protected function getRequest(): RequestInterface
+    {
+        $request = null;
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+
+        if ($request === null || !$request instanceof RequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.post can be used only in extbase context and needs a request implementing extbase RequestInterface.',
+                1749630724
+            );
+        }
+
+        return $request;
     }
 }

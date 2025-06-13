@@ -15,7 +15,6 @@ use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class CacheService
@@ -57,7 +56,7 @@ class CacheService
     public function addTagsToPage(ServerRequestInterface $request, array $tags): void
     {
         $request->getAttribute('frontend.cache.collector')->addCacheTags(
-            ...array_map(fn(string $tag) => new CacheTag($tag), $tags)
+            ...array_map(fn (string $tag) => new CacheTag($tag), $tags)
         );
     }
 

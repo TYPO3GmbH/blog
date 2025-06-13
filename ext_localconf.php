@@ -18,7 +18,6 @@ use T3G\AgencyPack\Blog\Notification\Processor\AdminNotificationProcessor;
 use T3G\AgencyPack\Blog\Notification\Processor\AuthorNotificationProcessor;
 use T3G\AgencyPack\Blog\Routing\Aspect\StaticDatabaseMapper;
 use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew;
-use TYPO3\CMS\Core\Hooks\CreateSiteConfiguration;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 if (!defined('TYPO3')) {
@@ -34,8 +33,8 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRe
     'after' => [DatabaseRowInitializeNew::class],
 ];
 
-// Overwrite create site configuration hook to include blog pages
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][CreateSiteConfiguration::class]
+// Register site configuration hook
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][CreateSiteConfigurationHook::class]
     = CreateSiteConfigurationHook::class;
 
 ExtensionUtility::configurePlugin(

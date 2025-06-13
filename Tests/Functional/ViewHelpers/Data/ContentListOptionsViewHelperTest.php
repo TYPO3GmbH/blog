@@ -17,10 +17,6 @@ use T3G\AgencyPack\Blog\Tests\Functional\SiteBasedTestCase;
 
 final class ContentListOptionsViewHelperTest extends SiteBasedTestCase
 {
-    protected array $coreExtensionsToLoad = [
-        'form'
-    ];
-
     #[Test]
     public function render(): void
     {
