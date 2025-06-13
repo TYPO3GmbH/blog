@@ -50,13 +50,13 @@
         }
     },
     "scripts": {
-        "t3g:test:php:lint": [
+        "test:php:lint": [
             "phplint"
         ],
-        "t3g:test:php:unit": [
+        "test:php:unit": [
             "phpunit -c Build/UnitTests.xml"
         ],
-        "t3g:test:php:functional": [
+        "test:php:functional": [
             "phpunit -c Build/FunctionalTests.xml"
         ],
         "phpstan": [
@@ -65,11 +65,11 @@
         "phpstan:baseline": [
             "phpstan analyze --configuration Build/phpstan.neon --generate-baseline Build/phpstan-baseline.neon"
         ],
-        "t3g:test": [
-            "@t3g:test:php:lint",
+        "test": [
+            "@test:php:lint",
             "@phpstan",
-            "@t3g:test:php:unit",
-            "@t3g:test:php:functional"
+            "@test:php:unit",
+            "@test:php:functional"
         ],
         "cgl": [
             "php-cs-fixer --diff -v fix"
@@ -99,7 +99,7 @@
         "bk2k/bootstrap-package": "^15.0",
         "bk2k/extension-helper": "^2.0",
         "friendsofphp/php-cs-fixer": "^3.75",
-        "overtrue/phplint": "^3.4 || ^9.0",
+        "overtrue/phplint": "^9.6",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
