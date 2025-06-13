@@ -59,77 +59,64 @@ class SetupService
         return $setups;
     }
 
-    public function createBlogSetup(array $data = []): bool
+    public function createBlogSetup(array $data = []): void
     {
         $title = array_key_exists('title', $data) ? (string)$data['title'] : null;
-        $blogSetup = GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRecords.php');
         $recordUidArray = [];
 
-        $result = false;
-        if (file_exists($blogSetup)) {
-            $blogSetup = require $blogSetup;
-            if ($title !== null) {
-                $blogSetup['pages']['NEW_blogRoot']['title'] = $title;
-            }
-            $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
-            $dataHandler->start($blogSetup, []);
-            $result = $dataHandler->process_datamap();
-            $recordUidArray = array_merge_recursive($recordUidArray, $dataHandler->substNEWwithIDs);
-            if ($result !== false) {
-                $result = true;
-                // Update page id in PageTSConfig
-                $blogRootUid = (int)$recordUidArray['NEW_blogRoot'];
-                $blogFolderUid = (int)$recordUidArray['NEW_blogFolder'];
-                $queryBuilder = $this->getQueryBuilderForTable('pages');
-                $queryBuilder->getRestrictions()->removeAll();
-                $record = $queryBuilder
-                    ->select('TSconfig')
-                    ->from('pages')
-                    ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogRootUid, Connection::PARAM_INT)))
-                    ->executeQuery()
-                    ->fetchAssociative();
-                $queryBuilder->update('pages')
-                    ->set('TSconfig', str_replace('NEW_blogFolder', (string)$blogFolderUid, $record['TSconfig'] ?? ''))
-                    ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogRootUid, Connection::PARAM_INT)))
-                    ->executeStatement();
-
-                $blogSetupRelations = GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRelations.php');
-                if (file_exists($blogSetupRelations)) {
-                    $blogSetupRelations = require $blogSetupRelations;
-                    $blogSetupRelations = $this->replaceNewUids($blogSetupRelations, $recordUidArray);
-                    $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
-                    $dataHandler->start($blogSetupRelations, []);
-                    $resultRelations = $dataHandler->process_datamap();
-                    $recordUidArray = array_merge_recursive($recordUidArray, $dataHandler->substNEWwithIDs);
-                    if ($resultRelations !== false) {
-                        $result = true;
-                    }
-                }
-            }
-            if ($result === true) {
-                // Replace UIDs in constants
-                $sysTemplateUid = (int)$recordUidArray['NEW_SysTemplate'];
-                $queryBuilder = $this->getQueryBuilderForTable('sys_template');
-                $record = $queryBuilder
-                    ->select('constants')
-                    ->from('sys_template')
-                    ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($sysTemplateUid, Connection::PARAM_INT)))
-                    ->executeQuery()
-                    ->fetchAssociative();
-                $queryBuilder
-                    ->update('sys_template')
-                    ->set('constants', str_replace(
-                        array_keys($recordUidArray),
-                        $recordUidArray,
-                        $record['constants'] ?? ''
-                    ))
-                    ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($sysTemplateUid, Connection::PARAM_INT)))
-                    ->executeStatement();
-            }
+        $blogSetup = require GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRecords.php');
+        if ($title !== null) {
+            $blogSetup['pages']['NEW_blogRoot']['title'] = $title;
         }
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $dataHandler->start($blogSetup, []);
+        $dataHandler->process_datamap();
+        $recordUidArray = array_merge_recursive($recordUidArray, $dataHandler->substNEWwithIDs);
+
+        // Update page id in PageTSConfig
+        $blogRootUid = (int)$recordUidArray['NEW_blogRoot'];
+        $blogFolderUid = (int)$recordUidArray['NEW_blogFolder'];
+        $queryBuilder = $this->getQueryBuilderForTable('pages');
+        $queryBuilder->getRestrictions()->removeAll();
+        $record = $queryBuilder
+            ->select('TSconfig')
+            ->from('pages')
+            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogRootUid, Connection::PARAM_INT)))
+            ->executeQuery()
+            ->fetchAssociative();
+        $queryBuilder->update('pages')
+            ->set('TSconfig', str_replace('NEW_blogFolder', (string)$blogFolderUid, $record['TSconfig'] ?? ''))
+            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogRootUid, Connection::PARAM_INT)))
+            ->executeStatement();
+
+        // Relations
+        $blogSetupRelations = require GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRelations.php');
+        $blogSetupRelations = $this->replaceNewUids($blogSetupRelations, $recordUidArray);
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $dataHandler->start($blogSetupRelations, []);
+        $dataHandler->process_datamap();
+        $recordUidArray = array_merge_recursive($recordUidArray, $dataHandler->substNEWwithIDs);
+
+        // Replace UIDs in constants
+        $sysTemplateUid = (int)$recordUidArray['NEW_SysTemplate'];
+        $queryBuilder = $this->getQueryBuilderForTable('sys_template');
+        $record = $queryBuilder
+            ->select('constants')
+            ->from('sys_template')
+            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($sysTemplateUid, Connection::PARAM_INT)))
+            ->executeQuery()
+            ->fetchAssociative();
+        $queryBuilder
+            ->update('sys_template')
+            ->set('constants', str_replace(
+                array_keys($recordUidArray),
+                $recordUidArray,
+                $record['constants'] ?? ''
+            ))
+            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($sysTemplateUid, Connection::PARAM_INT)))
+            ->executeStatement();
 
         BackendUtility::setUpdateSignal('updatePageTree');
-        return $result;
     }
 
     protected function replaceNewUids(array $setup, array $recordUidArray): array
