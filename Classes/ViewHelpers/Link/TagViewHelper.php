@@ -46,9 +46,10 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         $arguments = [
             'tag' => $tag->getUid(),
         ];
+        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
-            ->setRequest($this->renderingContext->getRequest())
+            ->setRequest($request)
             ->setTargetPageUid($pageUid);
         if ($rssFormat) {
             $rssTypeNum = (int)(
