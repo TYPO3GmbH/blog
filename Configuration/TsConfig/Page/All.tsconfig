@@ -1,4 +1,0 @@
-##################
-#### TsConfig ####
-##################
-@import "EXT:blog/Configuration/TsConfig/Page/Wizards.tsconfig"
