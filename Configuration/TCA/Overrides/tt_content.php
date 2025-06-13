@@ -7,11 +7,14 @@
  * LICENSE file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 if (!defined('TYPO3')) {
     die('Access denied.');
 }
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'Posts',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_posts.title',
@@ -19,9 +22,14 @@ if (!defined('TYPO3')) {
     pluginIcon: 'plugin-blog-posts',
     group: 'blog',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_posts'] = 'select_key';
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin, pages, recursive',
+    'blog_posts',
+    'after:palette:headers'
+);
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'LatestPosts',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_latestposts.title',
@@ -29,8 +37,14 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_pos
     pluginIcon: 'plugin-blog-posts',
     group: 'blog',
 );
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin, pages, recursive',
+    'blog_latestposts',
+    'after:palette:headers'
+);
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'Category',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_category.title',
@@ -38,9 +52,14 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_pos
     pluginIcon: 'plugin-blog-category',
     group: 'blog',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_category'] = 'select_key';
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin, pages, recursive',
+    'blog_category',
+    'after:palette:headers'
+);
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'AuthorPosts',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authorposts.title',
@@ -48,8 +67,14 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_cat
     pluginIcon: 'plugin-blog-authorposts',
     group: 'blog',
 );
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin, pages, recursive',
+    'blog_authorposts',
+    'after:palette:headers'
+);
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'Tag',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_tag.title',
@@ -57,9 +82,14 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_cat
     pluginIcon: 'plugin-blog-tag',
     group: 'blog',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_tag'] = 'select_key';
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin, pages, recursive',
+    'blog_tag',
+    'after:palette:headers'
+);
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'Archive',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_archive.title',
@@ -67,9 +97,14 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_tag
     pluginIcon: 'plugin-blog-archive',
     group: 'blog',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_archive'] = 'select_key';
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin, pages, recursive',
+    'blog_archive',
+    'after:palette:headers'
+);
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'Sidebar',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_sidebar.title',
@@ -77,9 +112,8 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_arc
     pluginIcon: 'plugin-blog-sidebar',
     group: 'blog',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_sidebar'] = 'recursive,select_key,pages';
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'CommentForm',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_commentform.title',
@@ -87,9 +121,8 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_sid
     pluginIcon: 'plugin-blog-sidebar',
     group: 'blog',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_commentform'] = 'recursive,select_key,pages';
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'Comments',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_comments.title',
@@ -97,9 +130,8 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_com
     pluginIcon: 'plugin-blog-comments',
     group: 'blog',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_comments'] = 'recursive,select_key,pages';
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'Authors',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_authors.title',
@@ -108,7 +140,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_com
     group: 'blog',
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'DemandedPosts',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_demandedposts.title',
@@ -116,13 +148,19 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blog_com
     pluginIcon: 'plugin-blog-demandedposts',
     group: 'blog',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['blog_demandedposts'] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin, pi_flexform, pages, recursive',
     'blog_demandedposts',
-    'FILE:EXT:blog/Configuration/FlexForms/Demand.xml'
+    'after:palette:headers'
+);
+ExtensionManagementUtility::addPiFlexFormValue(
+    '*',
+    'FILE:EXT:blog/Configuration/FlexForms/Demand.xml',
+    'blog_demandedposts'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'RelatedPosts',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_relatedposts.title',
@@ -131,7 +169,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['blog_demande
     group: 'blog',
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'Header',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_header.title',
@@ -140,7 +178,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['blog_demande
     group: 'blog',
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'Footer',
     pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_footer.title',
