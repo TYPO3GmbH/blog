@@ -42,7 +42,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "13.0.x-dev"
+            "dev-master": "14.0.x-dev"
         },
         "typo3/cms": {
             "extension-key": "blog",
@@ -86,15 +86,14 @@
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
         "psr/http-message": "^1.1 || ^2.0",
-        "typo3/cms-backend": "^12.4 || ^13.4",
-        "typo3/cms-core": "^12.4 || ^13.4",
-        "typo3/cms-extbase": "^12.4 || ^13.4",
-        "typo3/cms-extensionmanager": "^12.4 || ^13.4",
-        "typo3/cms-fluid": "^12.4 || ^13.4",
-        "typo3/cms-form": "^12.4 || ^13.4",
-        "typo3/cms-frontend": "^12.4 || ^13.4",
-        "typo3/cms-install": "^12.4 || ^13.4",
-        "typo3fluid/fluid": "^2.15 || ^4.0"
+        "typo3/cms-backend": "^13.4 || 14.*.*@dev",
+        "typo3/cms-core": "^13.4 || 14.*.*@dev",
+        "typo3/cms-extbase": "^13.4 || 14.*.*@dev",
+        "typo3/cms-extensionmanager": "^13.4 || 14.*.*@dev",
+        "typo3/cms-fluid": "^13.4 || 14.*.*@dev",
+        "typo3/cms-form": "^13.4 || 14.*.*@dev",
+        "typo3/cms-frontend": "^13.4 || 14.*.*@dev",
+        "typo3/cms-install": "^13.4 || 14.*.*@dev"
     },
     "require-dev": {
         "bk2k/bootstrap-package": "^15.0",
@@ -106,15 +105,15 @@
         "phpstan/phpstan-deprecation-rules": "^1.1",
         "phpstan/phpstan-phpunit": "^1.3",
         "phpstan/phpstan-strict-rules": "^1.5",
-        "typo3/cms-belog": "^12.4 || ^13.4",
-        "typo3/cms-beuser": "^12.4 || ^13.4",
-        "typo3/cms-filelist": "^12.4 || ^13.4",
-        "typo3/cms-fluid-styled-content": "^12.4 || ^13.4",
-        "typo3/cms-lowlevel": "^12.4 || ^13.4",
-        "typo3/cms-rte-ckeditor": "^12.4 || ^13.4",
-        "typo3/cms-seo": "^12.4 || ^13.4",
-        "typo3/cms-setup": "^12.4 || ^13.4",
-        "typo3/cms-tstemplate": "^12.4 || ^13.4",
+        "typo3/cms-belog": "^13.4 || 14.*.*@dev",
+        "typo3/cms-beuser": "^13.4 || 14.*.*@dev",
+        "typo3/cms-filelist": "^13.4 || 14.*.*@dev",
+        "typo3/cms-fluid-styled-content": "^13.4 || 14.*.*@dev",
+        "typo3/cms-lowlevel": "^13.4 || 14.*.*@dev",
+        "typo3/cms-rte-ckeditor": "^13.4 || 14.*.*@dev",
+        "typo3/cms-seo": "^13.4 || 14.*.*@dev",
+        "typo3/cms-setup": "^13.4 || 14.*.*@dev",
+        "typo3/cms-tstemplate": "^13.4 || 14.*.*@dev",
         "typo3/testing-framework": "^8.0 || ^9.0"
     }
 }
