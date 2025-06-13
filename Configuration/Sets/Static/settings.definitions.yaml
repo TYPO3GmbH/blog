@@ -770,7 +770,7 @@ settings:
     type: string
     default: '%B %e, %Y'
 
-  plugin.tx_blog.settings.comments.disqus:
+  plugin.tx_blog.settings.comments.disqus.enable:
     label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.disqus
     category: Blog.comments.disqus
     type: bool
@@ -782,9 +782,9 @@ settings:
     type: string
     default: ''
 
-  plugin.tx_blog.settings.comments.google_recaptcha:
+  plugin.tx_blog.settings.comments.google_recaptcha.enable:
     label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.google_recaptcha
-    category: Blog.comments.disqus
+    category: Blog.comments.googleRecaptcha
     type: bool
     default: false
 
@@ -841,7 +841,7 @@ settings:
     type: bool
     default: true
 
-  plugin.tx_blog.settings.notifications.CommentAddedNotification.admin:
+  plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.enable:
     label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.admin
     category: Blog.notifications
     type: bool

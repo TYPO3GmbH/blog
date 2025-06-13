@@ -4,7 +4,7 @@
     <f:if condition="{settings.comments.active}">
         <div class="postcomments">
             <h3 class="postcomments__title" id="comments"><f:translate key="headline.comments"/></h3>
-            <f:if condition="{settings.comments.disqus._typoScriptNodeValue} !== '1'">
+            <f:if condition="{settings.comments.disqus.enable} !== '1'">
                 <f:if condition="{comments}">
                     <f:then>
                         <div class="postcomments__list">
