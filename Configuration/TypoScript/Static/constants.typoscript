@@ -36,9 +36,9 @@ plugin {
         view {
             # cat=blog/blog_110_templates; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.templateRootPath
             templateRootPaths = EXT:blog/Resources/Private/Templates/
-            # cat=blog/blog_110_templates; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.partialRootPaths
+            # cat=blog/blog_110_templates; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.partialRootPath
             partialRootPaths = EXT:blog/Resources/Private/Partials/
-            # cat=blog/blog_110_templates; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.layoutRootPaths
+            # cat=blog/blog_110_templates; type=string; label= LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.layoutRootPath
             layoutRootPaths = EXT:blog/Resources/Private/Layouts/
 
             emails {

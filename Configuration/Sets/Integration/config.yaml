@@ -1,0 +1,5 @@
+name: blog/integration
+label: 'Blog: Integration'
+dependencies:
+  - blog/static
+  - blog/shared

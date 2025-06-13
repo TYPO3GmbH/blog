@@ -341,17 +341,38 @@
             <trans-unit id="constantEditor.customcategory.standalone" xml:space="preserve">
                 <source>TYPO3 Blog: Standalone</source>
             </trans-unit>
+            <trans-unit id="constantEditor.customcategory.standalone.templates" xml:space="preserve">
+                <source>Templates</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.customcategory.standalone.copyright" xml:space="preserve">
+                <source>Copyright</source>
+            </trans-unit>
             <trans-unit id="constantEditor.blog_100_uids" xml:space="preserve">
                 <source>Page ID settings</source>
             </trans-unit>
             <trans-unit id="constantEditor.blog_110_templates" xml:space="preserve">
                 <source>Templates</source>
             </trans-unit>
+            <trans-unit id="constantEditor.blog_110_templates_frontend" xml:space="preserve">
+                <source>Frontend</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_110_templates_email" xml:space="preserve">
+                <source>Email</source>
+            </trans-unit>
             <trans-unit id="constantEditor.blog_120_lists" xml:space="preserve">
                 <source>Listings</source>
             </trans-unit>
+            <trans-unit id="constantEditor.blog_120_lists_pagination" xml:space="preserve">
+                <source>Listings: Pagination</source>
+            </trans-unit>
             <trans-unit id="constantEditor.blog_120_lists_archive" xml:space="preserve">
                 <source>Listings: Archive</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_120_lists_relatedPosts" xml:space="preserve">
+                <source>Listings: Related Posts</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_120_lists_latestPosts" xml:space="preserve">
+                <source>Listings: Latest Posts</source>
             </trans-unit>
             <trans-unit id="constantEditor.customsubcategory.post" xml:space="preserve">
                 <source>Post</source>
@@ -403,6 +424,12 @@
             <trans-unit id="constantEditor.blog_140_comments" xml:space="preserve">
                 <source>Comments</source>
             </trans-unit>
+            <trans-unit id="constantEditor.blog_140_comments_disqus" xml:space="preserve">
+                <source>Disqus</source>
+            </trans-unit>
+            <trans-unit id="constantEditor.blog_140_comments_googleRecaptcha" xml:space="preserve">
+                <source>Google Recaptcha</source>
+            </trans-unit>
             <trans-unit id="constantEditor.blog_150_authors" xml:space="preserve">
                 <source>Authors</source>
             </trans-unit>
@@ -412,10 +439,10 @@
             <trans-unit id="constantEditor.view.templateRootPath" xml:space="preserve">
                 <source>Template Root Path: Path to templates folder</source>
             </trans-unit>
-            <trans-unit id="constantEditor.view.partialRootPaths" xml:space="preserve">
+            <trans-unit id="constantEditor.view.partialRootPath" xml:space="preserve">
                 <source>Partial Root Path: Path to partial folder</source>
             </trans-unit>
-            <trans-unit id="constantEditor.view.layoutRootPaths" xml:space="preserve">
+            <trans-unit id="constantEditor.view.layoutRootPath" xml:space="preserve">
                 <source>Layout Root Path: Path to layout folder</source>
             </trans-unit>
             <trans-unit id="constantEditor.view.widget.templateRootPath" xml:space="preserve">
