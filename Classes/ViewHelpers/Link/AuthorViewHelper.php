@@ -68,9 +68,10 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
 
     protected function getUriBuilder(int $pageUid, array $additionalParams, bool $rssFormat): UriBuilder
     {
+        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
-            ->setRequest($this->renderingContext->getRequest())
+            ->setRequest($request)
             ->setTargetPageUid($pageUid)
             ->setArguments($additionalParams);
         if ($rssFormat) {
