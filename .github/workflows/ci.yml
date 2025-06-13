@@ -68,7 +68,7 @@ jobs:
 
       - id: cgl
         name: CGL
-        if: ${{ always() && steps.install.conclusion == 'success' }}
+        if: ${{ always() && steps.install.conclusion == 'success' && matrix.php != '8.4' }}
         run: |
           php-cs-fixer fix --dry-run --verbose
 
