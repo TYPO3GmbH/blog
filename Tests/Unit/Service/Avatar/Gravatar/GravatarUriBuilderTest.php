@@ -10,6 +10,8 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Tests\Unit\Service\Avatar\Gravatar;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use T3G\AgencyPack\Blog\Service\Avatar\Gravatar\GravatarUriBuilder;
 use TYPO3\CMS\Core\Http\UriFactory;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -28,15 +30,9 @@ class GravatarUriBuilderTest extends UnitTestCase
         $this->gravatarUriBuilder = new GravatarUriBuilder(new UriFactory());
     }
 
-    /**
-     * @dataProvider testGetUriDataProvider
-     * @param string $expectedUriString
-     * @param string $email
-     * @param int|null $size
-     * @param string|null $rating
-     * @param string|null $default
-     */
-    public function testGetUri(string $expectedUriString, string $email, ?int $size, ?string $rating, ?string $default): void
+    #[Test]
+    #[DataProvider('getUriDataProvider')]
+    public function getUri(string $expectedUriString, string $email, ?int $size, ?string $rating, ?string $default): void
     {
         self::assertSame(
             $expectedUriString,
@@ -44,7 +40,7 @@ class GravatarUriBuilderTest extends UnitTestCase
         );
     }
 
-    public static function testGetUriDataProvider(): \Generator
+    public static function getUriDataProvider(): \Generator
     {
         $email = 'name@host.tld';
         yield ['https://www.gravatar.com/avatar/71803b16fcdb8ac77611d0a977b20164', $email, null, null, null];
