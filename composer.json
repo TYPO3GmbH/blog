@@ -59,15 +59,15 @@
         "t3g:test:php:functional": [
             "phpunit -c Build/FunctionalTests.xml"
         ],
-        "t3g:test:php:phpstan": [
+        "phpstan": [
             "phpstan analyze --configuration Build/phpstan.neon"
         ],
-        "t3g:test:php:phpstan:baseline": [
+        "phpstan:baseline": [
             "phpstan analyze --configuration Build/phpstan.neon --generate-baseline Build/phpstan-baseline.neon"
         ],
         "t3g:test": [
             "@t3g:test:php:lint",
-            "@t3g:test:php:phpstan",
+            "@phpstan",
             "@t3g:test:php:unit",
             "@t3g:test:php:functional"
         ],
@@ -99,12 +99,11 @@
         "bk2k/bootstrap-package": "^15.0",
         "bk2k/extension-helper": "^2.0",
         "friendsofphp/php-cs-fixer": "^3.14",
-        "friendsoftypo3/phpstan-typo3": "^0.9.0",
         "overtrue/phplint": "^3.4 || ^9.0",
-        "phpstan/phpstan": "^1.10",
-        "phpstan/phpstan-deprecation-rules": "^1.1",
-        "phpstan/phpstan-phpunit": "^1.3",
-        "phpstan/phpstan-strict-rules": "^1.5",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
         "typo3/cms-belog": "^13.4 || 14.*.*@dev",
         "typo3/cms-beuser": "^13.4 || 14.*.*@dev",
         "typo3/cms-filelist": "^13.4 || 14.*.*@dev",
