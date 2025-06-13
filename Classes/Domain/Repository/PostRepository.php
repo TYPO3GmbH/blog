@@ -226,7 +226,7 @@ class PostRepository extends Repository
         return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
-    public function findByMonthAndYear(int $year, int $month = null): QueryResultInterface
+    public function findByMonthAndYear(int $year, ?int $month = null): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
