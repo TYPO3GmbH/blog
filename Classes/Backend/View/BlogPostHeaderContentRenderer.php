@@ -20,19 +20,17 @@ use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Type\Bitmask\Permission;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
+use TYPO3\CMS\Core\View\ViewInterface;
 
 class BlogPostHeaderContentRenderer implements SingletonInterface
 {
-    protected ExtensionConfiguration $extensionConfiguration;
-    protected PostRepository $postRepository;
-
     public function __construct(
-        ExtensionConfiguration $extensionConfiguration,
-        PostRepository $postRepository
+        protected readonly ExtensionConfiguration $extensionConfiguration,
+        protected readonly PostRepository $postRepository,
+        protected readonly ViewFactoryInterface $viewFactory
     ) {
-        $this->extensionConfiguration = $extensionConfiguration;
-        $this->postRepository = $postRepository;
     }
 
     public function render(ServerRequestInterface $request): string
@@ -57,16 +55,24 @@ class BlogPostHeaderContentRenderer implements SingletonInterface
         $this->postRepository->setDefaultQuerySettings($querySettings);
         $post = $this->postRepository->findByUidRespectQuerySettings($pageUid);
 
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->getRenderingContext()->getTemplatePaths()->setTemplateRootPaths(['EXT:blog/Resources/Private/Templates']);
-        $view->setTemplate('PageLayout/Header');
+        // Template
+        $view = $this->getTemplateObject($request);
         $view->assignMultiple([
             'pageUid' => $pageUid,
             'pageInfo' => $pageInfo,
             'post' => $post,
         ]);
 
-        $content = $view->render();
-        return $content;
+        return $view->render('PageLayout/Header');
+    }
+
+    protected function getTemplateObject(ServerRequestInterface $request): ViewInterface
+    {
+        return $this->viewFactory->create(new ViewFactoryData(
+            templateRootPaths: [GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Templates')],
+            partialRootPaths: [GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Partials')],
+            layoutRootPaths: [GeneralUtility::getFileAbsFileName('EXT:blog/Resources/Private/Layouts')],
+            request: $request,
+        ));
     }
 }
