@@ -64,7 +64,7 @@ jobs:
         name: Lint
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
-          composer t3g:test:php:lint
+          composer test:php:lint
 
       - id: cgl
         name: CGL
@@ -83,13 +83,13 @@ jobs:
         name: Unit Tests
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
-          composer t3g:test:php:unit
+          composer test:php:unit
 
       - id: tests_functional
         name: Functional Tests
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
-          composer t3g:test:php:functional
+          composer test:php:functional
         env:
           COMPOSER_PROCESS_TIMEOUT: 1200
           typo3DatabaseHost: 127.0.0.1
