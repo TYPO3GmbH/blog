@@ -22,11 +22,12 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 final class SetupServiceTest extends FunctionalTestCase
 {
     protected array $coreExtensionsToLoad = [
-        'form'
+        'form',
+        'fluid_styled_content'
     ];
 
     protected array $testExtensionsToLoad = [
-        'typo3conf/ext/blog'
+        'blog'
     ];
 
     protected function setUp(): void

@@ -1,8 +1,3 @@
 sys_template,,,,,,,,
-,uid,pid,title,constants,config,clear,root,include_static_file
-,1,1,Blog,"plugin.tx_blog.settings.blogUid = 1
-plugin.tx_blog.settings.categoryUid = 3
-plugin.tx_blog.settings.tagUid = 4
-plugin.tx_blog.settings.authorUid = 5
-plugin.tx_blog.settings.archiveUid = 6
-plugin.tx_blog.settings.storagePid = 2",,3,1,EXT:blog/Configuration/TypoScript/Standalone/
+,uid,pid,title,constants,config,clear,root
+,1,1,Blog,,,0,1

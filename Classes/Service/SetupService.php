@@ -12,15 +12,23 @@ namespace T3G\AgencyPack\Blog\Service;
 
 use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Configuration\SiteWriter;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 
 class SetupService
 {
+    public function __construct(
+        private readonly SiteFinder $siteFinder,
+        private readonly SiteWriter $siteWriter
+    ) {
+    }
+
     public function determineBlogSetups(): array
     {
         $setups = [];
@@ -76,18 +84,42 @@ class SetupService
         // Update page id in PageTSConfig
         $blogRootUid = (int)$recordUidArray['NEW_blogRoot'];
         $blogFolderUid = (int)$recordUidArray['NEW_blogFolder'];
-        $queryBuilder = $this->getQueryBuilderForTable('pages');
-        $queryBuilder->getRestrictions()->removeAll();
-        $record = $queryBuilder
-            ->select('TSconfig')
-            ->from('pages')
-            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogRootUid, Connection::PARAM_INT)))
-            ->executeQuery()
-            ->fetchAssociative();
-        $queryBuilder->update('pages')
-            ->set('TSconfig', str_replace('NEW_blogFolder', (string)$blogFolderUid, $record['TSconfig'] ?? ''))
-            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogRootUid, Connection::PARAM_INT)))
-            ->executeStatement();
+
+        // Site Modifications
+        $site = $this->siteFinder->getSiteByRootPageId($blogRootUid);
+        $siteIdentifier = $site->getIdentifier();
+        $siteConfiguration = $site->getConfiguration();
+        $basicSiteConfiguration = [
+            'imports' => [
+                [
+                    'resource' => 'EXT:blog/Configuration/Routes/Default.yaml'
+                ]
+            ],
+            'dependencies' => [
+                'blog/standalone',
+            ]
+        ];
+        $this->siteWriter->write(
+            $siteIdentifier,
+            array_merge_recursive($siteConfiguration, $basicSiteConfiguration)
+        );
+        $this->siteWriter->writeSettings(
+            $siteIdentifier,
+            [
+                'plugin' => [
+                    'tx_blog' => [
+                        'settings' => [
+                            'blogUid' => (int) $recordUidArray['NEW_blogRoot'],
+                            'categoryUid' => (int) $recordUidArray['NEW_blogCategoryPage'],
+                            'tagUid' => (int) $recordUidArray['NEW_blogTagPage'],
+                            'authorUid' => (int) $recordUidArray['NEW_blogAuthorPage'],
+                            'archiveUid' => (int) $recordUidArray['NEW_blogArchivePage'],
+                            'storagePid' => (int) $recordUidArray['NEW_blogFolder'],
+                        ]
+                    ]
+                ]
+            ]
+        );
 
         // Relations
         $blogSetupRelations = require GeneralUtility::getFileAbsFileName('EXT:blog/Configuration/DataHandler/BlogSetupRelations.php');
@@ -96,25 +128,6 @@ class SetupService
         $dataHandler->start($blogSetupRelations, []);
         $dataHandler->process_datamap();
         $recordUidArray = array_merge_recursive($recordUidArray, $dataHandler->substNEWwithIDs);
-
-        // Replace UIDs in constants
-        $sysTemplateUid = (int)$recordUidArray['NEW_SysTemplate'];
-        $queryBuilder = $this->getQueryBuilderForTable('sys_template');
-        $record = $queryBuilder
-            ->select('constants')
-            ->from('sys_template')
-            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($sysTemplateUid, Connection::PARAM_INT)))
-            ->executeQuery()
-            ->fetchAssociative();
-        $queryBuilder
-            ->update('sys_template')
-            ->set('constants', str_replace(
-                array_keys($recordUidArray),
-                $recordUidArray,
-                $record['constants'] ?? ''
-            ))
-            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($sysTemplateUid, Connection::PARAM_INT)))
-            ->executeStatement();
 
         BackendUtility::setUpdateSignal('updatePageTree');
     }

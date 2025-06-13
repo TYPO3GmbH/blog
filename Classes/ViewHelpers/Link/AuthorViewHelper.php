@@ -13,6 +13,7 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
@@ -53,13 +54,12 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
 
     protected function buildUriFromDefaultPage(Author $author, bool $rssFormat): string
     {
-        $settings = $this->getRequest()->getAttribute('frontend.typoscript')->getSetupTree()
-            ->getChildByName('plugin')
-            ?->getChildByName('tx_blog')
-            ?->getChildByName('settings')
-            ?->toArray() ?? [];
-        $authorUid = (int)($settings['authorUid'] ?? 0);
-        $uriBuilder = $this->getUriBuilder($authorUid, [], $rssFormat);
+        $request = $this->getRequest();
+        $pageUid = $request
+            ->getAttribute('site')
+            ->getSettings()
+            ->get('plugin.tx_blog.settings.authorUid') ?? 0;
+        $uriBuilder = $this->getUriBuilder($pageUid, [], $rssFormat);
         $arguments = [
             'author' => $author->getUid(),
         ];
@@ -68,7 +68,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
 
     protected function getUriBuilder(int $pageUid, array $additionalParams, bool $rssFormat): UriBuilder
     {
-        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        $request = $this->getRequest();
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
             ->setRequest($request)
@@ -76,7 +76,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
             ->setArguments($additionalParams);
         if ($rssFormat) {
             $rssTypeNum = (int)(
-                $this->getRequest()->getAttribute('frontend.typoscript')->getSetupTree()
+                $request->getAttribute('frontend.typoscript')->getSetupTree()
                 ->getChildByName('blog_rss_author')
                 ?->getChildByName('typeNum')
                 ?->getValue() ?? 0
@@ -100,19 +100,20 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         return $this->renderChildren();
     }
 
-    protected function getRequest(): ServerRequestInterface
+    protected function getRequest(): RequestInterface
     {
         $request = null;
         if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
             $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
         }
-        $request ??= $GLOBALS['TYPO3_REQUEST'] ?? null;
-        if (!$request instanceof ServerRequestInterface) {
+
+        if ($request === null || !$request instanceof RequestInterface) {
             throw new \RuntimeException(
-                'ViewHelper blogvh:link.author needs a request implementing ServerRequestInterface.',
+                'ViewHelper blogvh:link.author can be used only in extbase context and needs a request implementing extbase RequestInterface.',
                 1729082934
             );
         }
+
         return $request;
     }
 }

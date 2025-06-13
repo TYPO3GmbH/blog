@@ -9,10 +9,8 @@
 
 namespace T3G\AgencyPack\Blog\Tests\Functional;
 
-use TYPO3\CMS\Core\Configuration\SiteConfiguration;
 use TYPO3\CMS\Core\Configuration\SiteWriter;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -24,11 +22,12 @@ abstract class SiteBasedTestCase extends FunctionalTestCase
     const STORAGE_UID = 2;
 
     protected array $coreExtensionsToLoad = [
+        'form',
         'fluid_styled_content'
     ];
 
     protected array $testExtensionsToLoad = [
-        'typo3conf/ext/blog'
+        'blog'
     ];
 
     protected function createTestSite(): void
@@ -61,17 +60,32 @@ abstract class SiteBasedTestCase extends FunctionalTestCase
                 [
                     'resource' => 'EXT:blog/Configuration/Routes/Default.yaml'
                 ]
-            ]
+            ],
+            'dependencies' => [
+                'blog/standalone',
+            ],
         ];
 
         GeneralUtility::rmdir($this->instancePath . '/typo3conf/sites/' . $identifier, true);
-        if ((new Typo3Version())->getMajorVersion() >= 13) {
-            /** @phpstan-ignore-next-line */
-            $this->get(SiteWriter::class)->write($identifier, $configuration);
-        } else {
-            /** @phpstan-ignore-next-line */
-            $this->get(SiteConfiguration::class)->write($identifier, $configuration);
-        }
+        $siteWriter = $this->get(SiteWriter::class);
+        $siteWriter->write($identifier, $configuration);
+        $siteWriter->writeSettings(
+            $identifier,
+            [
+                'plugin' => [
+                    'tx_blog' => [
+                        'settings' => [
+                            'blogUid' => 1,
+                            'categoryUid' => 3,
+                            'tagUid' => 4,
+                            'authorUid' => 5,
+                            'archiveUid' => 6,
+                            'storagePid' => 2,
+                        ]
+                    ]
+                ]
+            ]
+        );
     }
 
     protected function renderFluidTemplateInTestSite(string $template, array $instructions = []): string

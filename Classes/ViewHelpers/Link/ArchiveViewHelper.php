@@ -12,6 +12,7 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
@@ -34,19 +35,17 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
+        $request = $this->getRequest();
         $rssFormat = (bool)$this->arguments['rss'];
         $year = (int)$this->arguments['year'];
         $month = (int)$this->arguments['month'];
-        // @todo migrate to site settings
-        $pageUid = (int)($this->getRequest()->getAttribute('frontend.typoscript')->getSetupTree()
-            ->getChildByName('plugin')
-            ?->getChildByName('tx_blog')
-            ?->getChildByName('settings')
-            ?->getChildByName('archiveUid')
-            ?->getValue() ?? 0);
+        $pageUid = $request
+            ->getAttribute('site')
+            ->getSettings()
+            ->get('plugin.tx_blog.settings.archiveUid') ?? 0;
 
         $rssTypeNum = (int)(
-            $this->getRequest()->getAttribute('frontend.typoscript')->getSetupTree()
+            $request->getAttribute('frontend.typoscript')->getSetupTree()
             ->getChildByName('blog_rss_archive')
             ?->getChildByName('typeNum')
             ?->getValue() ?? 0
@@ -58,7 +57,6 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         if ($month > 0) {
             $arguments['month'] = $month;
         }
-        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
             ->setRequest($request)
@@ -80,19 +78,20 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
         return (string)$result;
     }
 
-    protected function getRequest(): ServerRequestInterface
+    protected function getRequest(): RequestInterface
     {
         $request = null;
         if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
             $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
         }
-        $request ??= $GLOBALS['TYPO3_REQUEST'] ?? null;
-        if (!$request instanceof ServerRequestInterface) {
+
+        if ($request === null || !$request instanceof RequestInterface) {
             throw new \RuntimeException(
-                'ViewHelper blogvh:link.archive needs a request implementing ServerRequestInterface.',
+                'ViewHelper blogvh:link.archive can be used only in extbase context and needs a request implementing extbase RequestInterface.',
                 1729082933
             );
         }
+
         return $request;
     }
 }
