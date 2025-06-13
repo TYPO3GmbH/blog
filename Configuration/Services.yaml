@@ -15,11 +15,6 @@ services:
       - name: event.listener
         identifier: 't3g/blog/render-additional-content-to-record-list'
 
-  T3G\AgencyPack\Blog\Listener\RenderAdditionalContentToRecordListV11:
-    tags:
-      - name: event.listener
-        identifier: 't3g/blog/render-additional-content-to-record-list-v11'
-
   T3G\AgencyPack\Blog\Listener\ModifyPageLayoutContent:
     tags:
       - name: event.listener
