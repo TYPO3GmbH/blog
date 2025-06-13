@@ -12,7 +12,7 @@ mod.wizards.newContentElement.wizardItems {
     }
 }
 
-TCEFORM.tt_content.list_type {
+TCEFORM.tt_content.CType {
     removeItems := addToList(blog_authors)
     removeItems := addToList(blog_commentform)
     removeItems := addToList(blog_comments)

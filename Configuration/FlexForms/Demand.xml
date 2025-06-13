@@ -1,163 +1,146 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
     <sheets>
         <sDEF>
             <ROOT>
-                <TCEforms>
-                    <sheetTitle>sheetTitle</sheetTitle>
-                </TCEforms>
+                <sheetTitle>sheetTitle</sheetTitle>
                 <type>array</type>
                 <el>
                     <settings.demand.posts>
-                        <TCEforms>
-                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.posts</label>
-                            <description>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.posts.description</description>
-                            <config>
-                                <type>group</type>
-                                <allowed>pages</allowed>
-                                <size>10</size>
-                                <suggestOptions>
-                                    <default>
-                                        <addWhere> AND pages.doktype = 137</addWhere>
-                                    </default>
-                                </suggestOptions>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.posts</label>
+                        <description>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.posts.description</description>
+                        <config>
+                            <type>group</type>
+                            <allowed>pages</allowed>
+                            <size>10</size>
+                            <suggestOptions>
+                                <default>
+                                    <addWhere> AND pages.doktype = 137</addWhere>
+                                </default>
+                            </suggestOptions>
+                        </config>
                     </settings.demand.posts>
 
                     <settings.demand.categories>
-                        <TCEforms>
-                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categories</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectTree</renderType>
-                                <foreign_table>sys_category</foreign_table>
-                                <foreign_table_where>AND ({#sys_category}.{#sys_language_uid} = 0 OR {#sys_category}.{#l10n_parent} = 0) AND {#sys_category}.{#pid} = ###PAGE_TSCONFIG_ID###</foreign_table_where>
-                                <size>20</size>
-                                <treeConfig>
-                                    <parentField>parent</parentField>
-                                    <appearance>
-                                        <expandAll>1</expandAll>
-                                        <showHeader>1</showHeader>
-                                    </appearance>
-                                </treeConfig>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categories</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectTree</renderType>
+                            <foreign_table>sys_category</foreign_table>
+                            <foreign_table_where>AND ({#sys_category}.{#sys_language_uid} = 0 OR {#sys_category}.{#l10n_parent} = 0) AND {#sys_category}.{#pid} = ###PAGE_TSCONFIG_ID###</foreign_table_where>
+                            <size>20</size>
+                            <treeConfig>
+                                <parentField>parent</parentField>
+                                <appearance>
+                                    <expandAll>1</expandAll>
+                                    <showHeader>1</showHeader>
+                                </appearance>
+                            </treeConfig>
+                        </config>
                     </settings.demand.categories>
 
                     <settings.demand.categoriesConjunction>
-                        <TCEforms>
-                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categoriesConjunction</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectSingle</renderType>
-                                <items type="array">
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categoriesConjunction.AND</numIndex>
-                                        <numIndex index="1">AND</numIndex>
-                                    </numIndex>
-                                    <numIndex index="1" type="array">
-                                        <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categoriesConjunction.OR</numIndex>
-                                        <numIndex index="1">OR</numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categoriesConjunction</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categoriesConjunction.AND</numIndex>
+                                    <numIndex index="1">AND</numIndex>
+                                </numIndex>
+                                <numIndex index="1" type="array">
+                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categoriesConjunction.OR</numIndex>
+                                    <numIndex index="1">OR</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.demand.categoriesConjunction>
 
                     <settings.demand.tags>
-                        <TCEforms>
-                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tags</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectMultipleSideBySide</renderType>
-                                <foreign_table>tx_blog_domain_model_tag</foreign_table>
-                                <foreign_table_where>AND ({#tx_blog_domain_model_tag}.{#sys_language_uid} = 0 OR {#tx_blog_domain_model_tag}.{#l18n_parent} = 0) AND {#tx_blog_domain_model_tag}.{#pid} = ###PAGE_TSCONFIG_ID###</foreign_table_where>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tags</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectMultipleSideBySide</renderType>
+                            <foreign_table>tx_blog_domain_model_tag</foreign_table>
+                            <foreign_table_where>AND ({#tx_blog_domain_model_tag}.{#sys_language_uid} = 0 OR {#tx_blog_domain_model_tag}.{#l18n_parent} = 0) AND {#tx_blog_domain_model_tag}.{#pid} = ###PAGE_TSCONFIG_ID###</foreign_table_where>
+                        </config>
                     </settings.demand.tags>
 
                     <settings.demand.tagsConjunction>
-                        <TCEforms>
-                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectSingle</renderType>
-                                <items type="array">
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction.AND</numIndex>
-                                        <numIndex index="1">AND</numIndex>
-                                    </numIndex>
-                                    <numIndex index="1" type="array">
-                                        <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction.OR</numIndex>
-                                        <numIndex index="1">OR</numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction.AND</numIndex>
+                                    <numIndex index="1">AND</numIndex>
+                                </numIndex>
+                                <numIndex index="1" type="array">
+                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction.OR</numIndex>
+                                    <numIndex index="1">OR</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.demand.tagsConjunction>
 
                     <settings.demand.sortBy>
-                        <TCEforms>
-                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortBy</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectSingle</renderType>
-                                <items type="array">
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:pages.publish_date</numIndex>
-                                        <numIndex index="1">publish_date</numIndex>
-                                    </numIndex>
-                                    <numIndex index="1" type="array">
-                                        <numIndex index="0">LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.title_formlabel</numIndex>
-                                        <numIndex index="1">title</numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortBy</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:pages.publish_date</numIndex>
+                                    <numIndex index="1">publish_date</numIndex>
+                                </numIndex>
+                                <numIndex index="1" type="array">
+                                    <numIndex index="0">LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.title_formlabel</numIndex>
+                                    <numIndex index="1">title</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.demand.sortBy>
 
                     <settings.demand.sortDirection>
-                        <TCEforms>
-                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortDirection</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectSingle</renderType>
-                                <items type="array">
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortDirection.ASC</numIndex>
-                                        <numIndex index="1">ASC</numIndex>
-                                    </numIndex>
-                                    <numIndex index="1" type="array">
-                                        <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortDirection.DESC</numIndex>
-                                        <numIndex index="1">DESC</numIndex>
-                                    </numIndex>
-                                </items>
-                                <default>DESC</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortDirection</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortDirection.ASC</numIndex>
+                                    <numIndex index="1">ASC</numIndex>
+                                </numIndex>
+                                <numIndex index="1" type="array">
+                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortDirection.DESC</numIndex>
+                                    <numIndex index="1">DESC</numIndex>
+                                </numIndex>
+                            </items>
+                            <default>DESC</default>
+                        </config>
                     </settings.demand.sortDirection>
 
                     <settings.demand.limit>
-                        <TCEforms>
-                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.limit</label>
-                            <config>
-                                <type>input</type>
-                                <eval>int+</eval>
-                                <default>4</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.limit</label>
+                        <config>
+                            <type>input</type>
+                            <eval>int+</eval>
+                            <default>4</default>
+                        </config>
                     </settings.demand.limit>
 
                     <settings._noTranslationHintMessage>
-                        <TCEforms>
-                            <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.noTranslationHintMessage.title</label>
-                            <description>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.noTranslationHintMessage.description</description>
-                            <displayCond>FIELD:parentRec.sys_language_uid:!=:0</displayCond>
-                            <config>
-                                <type>none</type>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.noTranslationHintMessage.title</label>
+                        <description>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.noTranslationHintMessage.description</description>
+                        <displayCond>FIELD:parentRec.sys_language_uid:!=:0</displayCond>
+                        <config>
+                            <type>none</type>
+                        </config>
                     </settings._noTranslationHintMessage>
 
                 </el>
