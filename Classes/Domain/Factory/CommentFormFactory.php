@@ -51,7 +51,7 @@ class CommentFormFactory extends AbstractFormFactory
         $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
         $captcha = [];
-        $captcha['enable'] = (bool) ($settings['comments']['google_recaptcha']['_typoScriptNodeValue'] ?? false);
+        $captcha['enable'] = (bool) ($settings['comments']['google_recaptcha']['enable'] ?? false);
         $captcha['sitekey'] = (string) trim($settings['comments']['google_recaptcha']['website_key'] ?? '');
         $captcha['secret'] = (string) trim($settings['comments']['google_recaptcha']['secret_key'] ?? '');
 

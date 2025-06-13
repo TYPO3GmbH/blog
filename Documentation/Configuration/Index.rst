@@ -665,7 +665,7 @@ plugin.tx_blog.settings.comments.features.urls_                  boolean        
 plugin.tx_blog.settings.comments.moderation_                     options[0,1,2]     0
 plugin.tx_blog.settings.comments.respectPostLanguageId_          options[0,1,-1]    1
 plugin.tx_blog.settings.comments.date.format_                    string             %B %e, %Y
-plugin.tx_blog.settings.comments.disqus_                         boolean            0
+plugin.tx_blog.settings.comments.disqus.enable_                  boolean            0
 plugin.tx_blog.settings.comments.disqus.shortname_               string
 plugin.tx_blog.settings.comments.google_recaptcha_               boolean            0
 plugin.tx_blog.settings.comments.google_recaptcha.website_key_   string
@@ -747,13 +747,13 @@ plugin.tx_blog.settings.comments.date.format
      **Date format:**
      The format for the comments (default: %B %e, %Y).
 
-plugin.tx_blog.settings.comments.disqus
-"""""""""""""""""""""""""""""""""""""""
+plugin.tx_blog.settings.comments.disqus.enable
+""""""""""""""""""""""""""""""""""""""""""""""
 
 .. container:: table-row
 
    Property
-     plugin.tx_blog.settings.comments.disqus
+     plugin.tx_blog.settings.comments.disqus.enable
    Data type
      boolean
    Default

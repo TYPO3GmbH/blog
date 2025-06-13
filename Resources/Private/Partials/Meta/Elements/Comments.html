@@ -5,7 +5,7 @@
 
 <f:if condition="{settings.comments.active} && {post.commentsActive}">
     <f:variable name="commentCount" value="{post.activeComments -> f:count()}" />
-    <f:if condition="{settings.comments.disqus._typoScriptNodeValue} != 1">
+    <f:if condition="{settings.comments.disqus.enable} != 1">
         <f:if condition="{commentCount} == 0">
             <f:variable name="prefix"><f:translate key="meta.comments.start_conversation"/></f:variable>
             <f:variable name="text"><f:translate key="meta.comments.has_comments" arguments="{0: commentCount}"/></f:variable>

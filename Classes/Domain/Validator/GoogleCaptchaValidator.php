@@ -38,7 +38,7 @@ class GoogleCaptchaValidator extends AbstractValidator
             && (!(bool)($requestData['action'] ?? null) && $requestData['action'] === $action)
             && (!(bool)($requestData['controller'] ?? null) && $requestData['controller'] === $controller)
             // check if google re-captcha is active, else we don't need a validation
-            && (int) $settings['comments']['google_recaptcha']['_typoScriptNodeValue'] === 1
+            && (int) $settings['comments']['google_recaptcha']['enable'] === 1
         ) {
             $additionalOptions = [
                 'headers' => ['Content-type' => 'application/x-www-form-urlencoded'],
