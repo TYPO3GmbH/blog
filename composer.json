@@ -71,7 +71,7 @@
             "@t3g:test:php:unit",
             "@t3g:test:php:functional"
         ],
-        "t3g:cgl": [
+        "cgl": [
             "php-cs-fixer --diff -v fix"
         ]
     },
@@ -98,7 +98,7 @@
     "require-dev": {
         "bk2k/bootstrap-package": "^15.0",
         "bk2k/extension-helper": "^2.0",
-        "friendsofphp/php-cs-fixer": "^3.14",
+        "friendsofphp/php-cs-fixer": "^3.75",
         "overtrue/phplint": "^3.4 || ^9.0",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
