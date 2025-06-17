@@ -94,42 +94,42 @@ categories:
 
 settings:
 
-  plugin.tx_blog.view.templateRootPaths:
+  plugin.tx_blog.view.templateRootPath:
     label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.templateRootPath
     category: Blog.templates.frontend
     type: string
     default: 'EXT:blog/Resources/Private/Templates/'
 
-  plugin.tx_blog.view.partialRootPaths:
+  plugin.tx_blog.view.partialRootPath:
     label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.partialRootPath
     category: Blog.templates.frontend
     type: string
     default: 'EXT:blog/Resources/Private/Partials/'
 
-  plugin.tx_blog.view.layoutRootPaths:
+  plugin.tx_blog.view.layoutRootPath:
     label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.layoutRootPath
     category: Blog.templates.frontend
     type: string
     default: 'EXT:blog/Resources/Private/Layouts/'
 
 
-  plugin.tx_blog.view.emails.templateRootPaths:
+  plugin.tx_blog.view.emails.templateRootPath:
     label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.emails.templateRootPath
     category: Blog.templates.email
     type: string
-    default: 'EXT:blog/Resources/Private/Templates/'
+    default: 'EXT:blog/Resources/Private/Mails/Templates/'
 
-  plugin.tx_blog.view.emails.partialRootPaths:
+  plugin.tx_blog.view.emails.partialRootPath:
     label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.emails.partialRootPaths
     category: Blog.templates.email
     type: string
-    default: 'EXT:blog/Resources/Private/Partials/'
+    default: 'EXT:blog/Resources/Private/Mails/Partials/'
 
-  plugin.tx_blog.view.emails.layoutRootPaths:
+  plugin.tx_blog.view.emails.layoutRootPath:
     label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.emails.layoutRootPaths
     category: Blog.templates.email
     type: string
-    default: 'EXT:blog/Resources/Private/Layouts/'
+    default: 'EXT:blog/Resources/Private/Mails/Layouts/'
 
 
   plugin.tx_blog.settings.blogUid:
@@ -835,7 +835,7 @@ settings:
     type: string
     default: 'no-reply@example.com'
 
-  plugin.tx_blog.settings.notifications.CommentAddedNotification.author:
+  plugin.tx_blog.settings.notifications.CommentAddedNotification.author.enable:
     label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.author
     category: Blog.notifications
     type: bool

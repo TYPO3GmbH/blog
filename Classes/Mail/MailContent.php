@@ -11,23 +11,20 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Mail;
 
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\View\ViewFactoryData;
 use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Core\View\ViewInterface;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class MailContent
 {
     public function __construct(
-        protected readonly ConfigurationManagerInterface $configurationManager,
         protected readonly ViewFactoryInterface $viewFactory
     ) {
     }
 
-    public function render(string $template, array $arguments): string
+    public function render(ServerRequestInterface $request, string $template, array $arguments): string
     {
-        $view = $this->getTemplateObject(new ServerRequest());
+        $view = $this->getTemplateObject($request);
         $view->assignMultiple($arguments);
 
         return $view->render($template);
@@ -35,13 +32,22 @@ class MailContent
 
     protected function getTemplateObject(ServerRequestInterface $request): ViewInterface
     {
-        $settings = $this->configurationManager
-            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'blog');
+        $settings = $request->getAttribute('site')->getSettings();
 
         return $this->viewFactory->create(new ViewFactoryData(
-            templateRootPaths: $settings['view']['emails']['templateRootPaths'] ?? [],
-            partialRootPaths: $settings['view']['emails']['partialRootPaths'] ?? [],
-            layoutRootPaths: $settings['view']['emails']['layoutRootPaths'] ?? [],
+            templateRootPaths: [
+                'EXT:blog/Resources/Private/Mails/Templates/',
+                $settings->get('plugin.tx_blog.view.emails.templateRootPath')
+            ],
+            partialRootPaths: [
+                'EXT:blog/Resources/Private/Mails/Partials/',
+                $settings->get('plugin.tx_blog.view.emails.partialRootPath')
+
+            ],
+            layoutRootPaths: [
+                'EXT:blog/Resources/Private/Mails/Layouts/',
+                $settings->get('plugin.tx_blog.view.emails.layoutRootPath')
+            ],
             request: $request,
         ));
     }

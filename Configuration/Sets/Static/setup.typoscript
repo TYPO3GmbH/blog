@@ -8,31 +8,15 @@ plugin.tx_blog {
     view {
         templateRootPaths {
             0 = EXT:blog/Resources/Private/Templates/
-            1 = {$plugin.tx_blog.view.templateRootPaths}
+            1 = {$plugin.tx_blog.view.templateRootPath}
         }
         partialRootPaths {
             0 = EXT:blog/Resources/Private/Partials/
-            1 = {$plugin.tx_blog.view.partialRootPaths}
+            1 = {$plugin.tx_blog.view.partialRootPath}
         }
         layoutRootPaths {
             0 = EXT:blog/Resources/Private/Layouts/
-            1 = {$plugin.tx_blog.view.layoutRootPaths}
-        }
-
-        # Emails
-        emails {
-            templateRootPaths {
-                0 = EXT:blog/Resources/Private/Mails/Templates/
-                1 = {$plugin.tx_blog.view.emails.templateRootPaths}
-            }
-            partialRootPaths {
-                0 = EXT:blog/Resources/Private/Mails/Partials/
-                1 = {$plugin.tx_blog.view.emails.partialRootPaths}
-            }
-            layoutRootPaths {
-                0 = EXT:blog/Resources/Private/Mails/Layouts/
-                1 = {$plugin.tx_blog.view.emails.layoutRootPaths}
-            }
+            1 = {$plugin.tx_blog.view.layoutRootPath}
         }
     }
     settings {
@@ -43,12 +27,12 @@ plugin.tx_blog {
         archiveUid = {$plugin.tx_blog.settings.archiveUid}
         storagePid = {$plugin.tx_blog.settings.storagePid}
         sidebarWidgets {
-            10 = tt_content.list.20.blog_recentpostswidget
-            20 = tt_content.list.20.blog_categorywidget
-            30 = tt_content.list.20.blog_tagwidget
-            40 = tt_content.list.20.blog_commentswidget
-            50 = tt_content.list.20.blog_archivewidget
-            60 = tt_content.list.20.blog_feedwidget
+            10 = tt_content.blog_recentpostswidget.20
+            20 = tt_content.blog_categorywidget.20
+            30 = tt_content.blog_tagwidget.20
+            40 = tt_content.blog_commentswidget.20
+            50 = tt_content.blog_archivewidget.20
+            60 = tt_content.blog_feedwidget.20
         }
         # Post View
         meta {
@@ -333,20 +317,6 @@ plugin.tx_blog {
                 }
             }
         }
-
-        # Notifications
-        notifications {
-            email {
-                senderName = {$plugin.tx_blog.settings.notifications.email.senderName}
-                senderMail = {$plugin.tx_blog.settings.notifications.email.senderMail}
-            }
-            T3G\AgencyPack\Blog\Notification\CommentAddedNotification {
-                admin = {$plugin.tx_blog.settings.notifications.CommentAddedNotification.admin}
-                admin.email = {$plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.email}
-
-                author = {$plugin.tx_blog.settings.notifications.CommentAddedNotification.author}
-            }
-        }
     }
 
     pageInfo.title = TEXT
@@ -395,7 +365,7 @@ lib.blog.contentElementRendering {
 blog_rss_posts = PAGE
 blog_rss_posts {
     typeNum = 200
-    10 < tt_content.list.20.blog_posts
+    10 < tt_content.blog_posts.20
     10.format = rss
 
     config {
@@ -412,25 +382,25 @@ blog_rss_posts {
 
 blog_rss_category < blog_rss_posts
 blog_rss_category.typeNum = 210
-blog_rss_category.10 < tt_content.list.20.blog_category
+blog_rss_category.10 < tt_content.blog_category.20
 blog_rss_category.10.format = rss
 
 blog_rss_tag < blog_rss_posts
 blog_rss_tag.typeNum = 220
-blog_rss_tag.10 < tt_content.list.20.blog_tag
+blog_rss_tag.10 < tt_content.blog_tag.20
 blog_rss_tag.10.format = rss
 
 blog_rss_archive < blog_rss_posts
 blog_rss_archive.typeNum = 230
-blog_rss_archive.10 < tt_content.list.20.blog_archive
+blog_rss_archive.10 < tt_content.blog_archive.20
 blog_rss_archive.10.format = rss
 
 blog_rss_comments < blog_rss_posts
 blog_rss_comments.typeNum = 240
-blog_rss_comments.10 < tt_content.list.20.blog_comments
+blog_rss_comments.10 < tt_content.blog_comments.20
 blog_rss_comments.10.format = rss
 
 blog_rss_author < blog_rss_posts
 blog_rss_author.typeNum = 250
-blog_rss_author.10 < tt_content.list.20.blog_authorposts
+blog_rss_author.10 < tt_content.blog_authorposts.20
 blog_rss_author.10.format = rss

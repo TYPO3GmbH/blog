@@ -20,6 +20,9 @@ services:
       - name: event.listener
         identifier: 't3g/blog/modify-page-module-content'
 
+  T3G\AgencyPack\Blog\Mail\MailContent:
+    public: true
+
   T3G\AgencyPack\Blog\Service\CacheService:
     public: true
 
