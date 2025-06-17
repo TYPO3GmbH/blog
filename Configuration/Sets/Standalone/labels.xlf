@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" datatype="plaintext" original="EXT:blog/Configuration/Sets/Standalone/labels.xlf" date="2025-06-17T08:00:00Z" product-name="blog">
+        <header/>
+        <body>
+
+            <trans-unit id="categories.blog_standalone" xml:space="preserve">
+                <source>TYPO3 Blog: Standalone</source>
+            </trans-unit>
+            <trans-unit id="categories.blog_standalone.templates" xml:space="preserve">
+                <source>Templates</source>
+            </trans-unit>
+            <trans-unit id="categories.blog_standalone.copyright" xml:space="preserve">
+                <source>Copyright</source>
+            </trans-unit>
+
+             <trans-unit id="settings.page.fluidtemplate.templateRootPath" xml:space="preserve">
+                <source>Template Root Path</source>
+            </trans-unit>
+            <trans-unit id="settings.description.page.fluidtemplate.templateRootPath" xml:space="preserve">
+                <source>Path to template folder</source>
+            </trans-unit>
+            <trans-unit id="settings.page.fluidtemplate.partialRootPath" xml:space="preserve">
+                <source>Partial Root Path</source>
+            </trans-unit>
+            <trans-unit id="settings.description.page.fluidtemplate.partialRootPath" xml:space="preserve">
+                <source>Path to partial folder</source>
+            </trans-unit>
+            <trans-unit id="settings.page.fluidtemplate.layoutRootPath" xml:space="preserve">
+                <source>Layout Root Path</source>
+            </trans-unit>
+            <trans-unit id="settings.description.page.fluidtemplate.layoutRootPath" xml:space="preserve">
+                <source>Path to layout folder</source>
+            </trans-unit>
+
+            <trans-unit id="settings.page.theme.copyright.text" xml:space="preserve">
+                <source>Copyright Text</source>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>

@@ -1,182 +1,151 @@
 categories:
-  Blog:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog
-  Blog.uids:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_100_uids
-    parent: Blog
-  Blog.templates:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_110_templates
-    parent: Blog
-  Blog.templates.frontend:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_110_templates_frontend
-    parent: Blog.templates
-  Blog.templates.email:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_110_templates_email
-    parent: Blog.templates
-  Blog.lists:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_120_lists
-    parent: Blog
-  Blog.lists.pagination:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_120_lists_pagination
-    parent: Blog.lists
-  Blog.lists.archive:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_120_lists_archive
-    parent: Blog.lists
-  Blog.lists.relatedPosts:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_120_lists_relatedPosts
-    parent: Blog.lists
-  Blog.lists.latestPosts:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_120_lists_latestPosts
-    parent: Blog.lists
-  Blog.widgets:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_130_widgets
-    parent: Blog
-  Blog.widgets.comments:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_131_widgets_comments
-    parent: Blog.widgets
-  Blog.widgets.recent_posts:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_132_widgets_recent_posts
-    parent: Blog.widgets
-  Blog.widgets.tags:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_133_widgets_tags
-    parent: Blog.widgets
-  Blog.widgets.archive:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_134_widgets_archive
-    parent: Blog.widgets
-  Blog.comments:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_140_comments
-    parent: Blog
-  Blog.comments.disqus:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_140_comments_disqus
-    parent: Blog.comments
-  Blog.comments.googleRecaptcha:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_140_comments_googleRecaptcha
-    parent: Blog.comments
-  Blog.authors:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_150_authors
-    parent: Blog
-  Blog.notifications:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blog_160_notifications
-    parent: Blog
+  blog:
+  blog.uids:
+    parent: blog
+  blog.templates:
+    parent: blog
+  blog.templates.frontend:
+    parent: blog.templates
+  blog.templates.email:
+    parent: blog.templates
+  blog.lists:
+    parent: blog
+  blog.lists.pagination:
+    parent: blog.lists
+  blog.lists.archive:
+    parent: blog.lists
+  blog.lists.relatedPosts:
+    parent: blog.lists
+  blog.lists.latestPosts:
+    parent: blog.lists
+  blog.widgets:
+    parent: blog
+  blog.widgets.comments:
+    parent: blog.widgets
+  blog.widgets.recent_posts:
+    parent: blog.widgets
+  blog.widgets.tags:
+    parent: blog.widgets
+  blog.widgets.archive:
+    parent: blog.widgets
+  blog.comments:
+    parent: blog
+  blog.comments.disqus:
+    parent: blog.comments
+  blog.comments.googleRecaptcha:
+    parent: blog.comments
+  blog.authors:
+    parent: blog
+  blog.notifications:
+    parent: blog
 
-  BlogPost:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.post
-  BlogPost.featuredimage:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.post.featuredimage
-    parent: BlogPost
-  BlogPost.header:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.post.header
-    parent: BlogPost
-  BlogPost.footer:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.post.footer
-    parent: BlogPost
+  blog_post:
+  blog_post.featuredimage:
+    parent: blog_post
+  blog_post.header:
+    parent: blog_post
+  blog_post.footer:
+    parent: blog_post
 
-  BlogList:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.list
-  BlogList.featuredimage:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.featuredimage
-    parent: BlogList
-  BlogList.elementHeader:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.element.header
-    parent: BlogList
-  BlogList.elementFooter:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.list.element.footer
-    parent: BlogList
+  blog_list:
+  blog_list.featuredimage:
+    parent: blog_list
+  blog_list.elementHeader:
+    parent: blog_list
+  blog_list.elementFooter:
+    parent: blog_list
 
-  BlogTeaser:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.teaser
-  BlogTeaser.element.header:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.teaser.element.header
-    parent: BlogTeaser
-  BlogTeaser.element.footer:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customsubcategory.teaser.element.footer
-    parent: BlogTeaser
+  blog_teaser:
+  blog_teaser.element.header:
+    parent: blog_teaser
+  blog_teaser.element.footer:
+    parent: blog_teaser
 
 settings:
 
   plugin.tx_blog.view.templateRootPath:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.templateRootPath
-    category: Blog.templates.frontend
+    category: blog.templates.frontend
     type: string
     default: 'EXT:blog/Resources/Private/Templates/'
 
   plugin.tx_blog.view.partialRootPath:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.partialRootPath
-    category: Blog.templates.frontend
+    category: blog.templates.frontend
     type: string
     default: 'EXT:blog/Resources/Private/Partials/'
 
   plugin.tx_blog.view.layoutRootPath:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.layoutRootPath
-    category: Blog.templates.frontend
+    category: blog.templates.frontend
     type: string
     default: 'EXT:blog/Resources/Private/Layouts/'
 
-
   plugin.tx_blog.view.emails.templateRootPath:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.emails.templateRootPath
-    category: Blog.templates.email
+    category: blog.templates.email
     type: string
     default: 'EXT:blog/Resources/Private/Mails/Templates/'
 
   plugin.tx_blog.view.emails.partialRootPath:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.emails.partialRootPaths
-    category: Blog.templates.email
+    category: blog.templates.email
     type: string
     default: 'EXT:blog/Resources/Private/Mails/Partials/'
 
   plugin.tx_blog.view.emails.layoutRootPath:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.emails.layoutRootPaths
-    category: Blog.templates.email
+    category: blog.templates.email
     type: string
     default: 'EXT:blog/Resources/Private/Mails/Layouts/'
 
 
+
+
   plugin.tx_blog.settings.blogUid:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.blogUid
-    category: Blog.uids
+    category: blog.uids
     type: int
     default: 0
 
   plugin.tx_blog.settings.authorUid:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authorUid
-    category: Blog.uids
+    category: blog.uids
     type: int
     default: 0
 
   plugin.tx_blog.settings.categoryUid:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.categoryUid
-    category: Blog.uids
+    category: blog.uids
     type: int
     default: 0
 
   plugin.tx_blog.settings.tagUid:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.tagUid
-    category: Blog.uids
+    category: blog.uids
     type: int
     default: 0
 
   plugin.tx_blog.settings.archiveUid:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.archiveUid
-    category: Blog.uids
+    category: blog.uids
     type: int
     default: 0
 
   plugin.tx_blog.settings.storagePid:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.storagePid
-    category: Blog.uids
+    category: blog.uids
     type: int
     default: 0
 
+
+
+
+  plugin.tx_blog.settings.post.featuredImage.width:
+    category: blog_post.featuredimage
+    type: string
+    default: '1140'
+
+  plugin.tx_blog.settings.post.featuredImage.height:
+    category: blog_post.featuredimage
+    type: string
+    default: '400c'
+
   plugin.tx_blog.settings.meta.postheader.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
-    category: BlogPost.header
+    category: blog_post.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postheader.modifier:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
-    category: BlogPost.header
+    category: blog_post.header
     type: string
     default: simple
     enum:
@@ -186,62 +155,52 @@ settings:
       modern: modern
 
   plugin.tx_blog.settings.meta.postheader.elements.authors.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
-    category: BlogPost.header
+    category: blog_post.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.enable
-    category: BlogPost.header
+    category: blog_post.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.size:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.size
-    category: BlogPost.header
+    category: blog_post.header
     type: int
     default: 20
 
   plugin.tx_blog.settings.meta.postheader.elements.categories.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
-    category: BlogPost.header
+    category: blog_post.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postheader.elements.tags.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
-    category: BlogPost.header
+    category: blog_post.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postheader.elements.published.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
-    category: BlogPost.header
+    category: blog_post.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postheader.elements.published.format:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
-    category: BlogPost.header
+    category: blog_post.header
     type: string
     default: '%d.%m.%Y'
 
   plugin.tx_blog.settings.meta.postheader.elements.comments.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
-    category: BlogPost.header
+    category: blog_post.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postfooter.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
-    category: BlogPost.footer
+    category: blog_post.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postfooter.modifier:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
-    category: BlogPost.footer
+    category: blog_post.footer
     type: string
     default: simple
     enum:
@@ -251,62 +210,65 @@ settings:
       modern: modern
 
   plugin.tx_blog.settings.meta.postfooter.elements.authors.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
-    category: BlogPost.footer
+    category: blog_post.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.enable
-    category: BlogPost.footer
+    category: blog_post.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.size:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.size
-    category: BlogPost.footer
+    category: blog_post.footer
     type: int
     default: 20
 
   plugin.tx_blog.settings.meta.postfooter.elements.categories.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
-    category: BlogPost.footer
+    category: blog_post.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postfooter.elements.tags.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
-    category: BlogPost.footer
+    category: blog_post.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postfooter.elements.published.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
-    category: BlogPost.footer
+    category: blog_post.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.postfooter.elements.published.format:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
-    category: BlogPost.footer
+    category: blog_post.footer
     type: string
     default: '%d.%m.%Y'
 
   plugin.tx_blog.settings.meta.postfooter.elements.comments.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
-    category: BlogPost.footer
+    category: blog_post.footer
     type: bool
     default: true
 
+
+
+
+  plugin.tx_blog.settings.lists.featuredImage.width:
+    category: blog_list.featuredimage
+    type: string
+    default: '1140'
+
+  plugin.tx_blog.settings.lists.featuredImage.height:
+    category: blog_list.featuredimage
+    type: string
+    default: '400c'
+
   plugin.tx_blog.settings.meta.listheader.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
-    category: BlogList.elementHeader
+    category: blog_list.elementHeader
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listheader.modifier:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
-    category: BlogList.elementHeader
+    category: blog_list.elementHeader
     type: string
     default: simple
     enum:
@@ -316,62 +278,52 @@ settings:
       modern: modern
 
   plugin.tx_blog.settings.meta.listheader.elements.authors.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
-    category: BlogList.elementHeader
+    category: blog_list.elementHeader
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.enable
-    category: BlogList.elementHeader
+    category: blog_list.elementHeader
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.size:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.size
-    category: BlogList.elementHeader
+    category: blog_list.elementHeader
     type: int
     default: 20
 
   plugin.tx_blog.settings.meta.listheader.elements.categories.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
-    category: BlogList.elementHeader
+    category: blog_list.elementHeader
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listheader.elements.tags.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
-    category: BlogList.elementHeader
+    category: blog_list.elementHeader
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listheader.elements.published.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
-    category: BlogList.elementHeader
+    category: blog_list.elementHeader
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listheader.elements.published.format:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
-    category: BlogList.elementHeader
+    category: blog_list.elementHeader
     type: string
     default: '%d.%m.%Y'
 
   plugin.tx_blog.settings.meta.listheader.elements.comments.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
-    category: BlogList.elementHeader
+    category: blog_list.elementHeader
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listfooter.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
-    category: BlogList.elementFooter
+    category: blog_list.elementFooter
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listfooter.modifier:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
-    category: BlogList.elementFooter
+    category: blog_list.elementFooter
     type: string
     default: simple
     enum:
@@ -381,62 +333,55 @@ settings:
       modern: modern
 
   plugin.tx_blog.settings.meta.listfooter.elements.authors.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
-    category: BlogList.elementFooter
+    category: blog_list.elementFooter
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.enable
-    category: BlogList.elementFooter
+    category: blog_list.elementFooter
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.size:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.size
-    category: BlogList.elementFooter
+    category: blog_list.elementFooter
     type: int
     default: 20
 
   plugin.tx_blog.settings.meta.listfooter.elements.categories.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
-    category: BlogList.elementFooter
+    category: blog_list.elementFooter
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listfooter.elements.tags.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
-    category: BlogList.elementFooter
+    category: blog_list.elementFooter
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listfooter.elements.published.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
-    category: BlogList.elementFooter
+    category: blog_list.elementFooter
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.listfooter.elements.published.format:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
-    category: BlogList.elementFooter
+    category: blog_list.elementFooter
     type: string
     default: '%d.%m.%Y'
 
   plugin.tx_blog.settings.meta.listfooter.elements.comments.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
-    category: BlogList.elementFooter
+    category: blog_list.elementFooter
     type: bool
     default: true
 
+
+
+
   plugin.tx_blog.settings.meta.teaserheader.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
-    category: BlogTeaser.element.header
+    category: blog_teaser.element.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserheader.modifier:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
-    category: BlogTeaser.element.header
+    category: blog_teaser.element.header
     type: string
     default: simple
     enum:
@@ -446,62 +391,52 @@ settings:
       modern: modern
 
   plugin.tx_blog.settings.meta.teaserheader.elements.authors.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
-    category: BlogTeaser.element.header
+    category: blog_teaser.element.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserheader.elements.authors.avatar.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.enable
-    category: BlogTeaser.element.header
+    category: blog_teaser.element.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserheader.elements.authors.avatar.size:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.size
-    category: BlogTeaser.element.header
+    category: blog_teaser.element.header
     type: int
     default: 20
 
   plugin.tx_blog.settings.meta.teaserheader.elements.categories.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
-    category: BlogTeaser.element.header
+    category: blog_teaser.element.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserheader.elements.tags.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
-    category: BlogTeaser.element.header
+    category: blog_teaser.element.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserheader.elements.published.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
-    category: BlogTeaser.element.header
+    category: blog_teaser.element.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserheader.elements.published.format:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
-    category: BlogTeaser.element.header
+    category: blog_teaser.element.header
     type: string
     default: '%d.%m.%Y'
 
   plugin.tx_blog.settings.meta.teaserheader.elements.comments.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
-    category: BlogTeaser.element.header
+    category: blog_teaser.element.header
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserfooter.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.header.enable
-    category: BlogTeaser.element.footer
+    category: blog_teaser.element.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserfooter.modifier:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.modifier
-    category: BlogTeaser.element.footer
+    category: blog_teaser.element.footer
     type: string
     default: simple
     enum:
@@ -511,242 +446,206 @@ settings:
       modern: modern
 
   plugin.tx_blog.settings.meta.teaserfooter.elements.authors.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.enable
-    category: BlogTeaser.element.footer
+    category: blog_teaser.element.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserfooter.elements.authors.avatar.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.enable
-    category: BlogTeaser.element.footer
+    category: blog_teaser.element.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserfooter.elements.authors.avatar.size:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.authors.avatar.size
-    category: BlogTeaser.element.footer
+    category: blog_teaser.element.footer
     type: int
     default: 20
 
   plugin.tx_blog.settings.meta.teaserfooter.elements.categories.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.categories.enable
-    category: BlogTeaser.element.footer
+    category: blog_teaser.element.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserfooter.elements.tags.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.tags.enable
-    category: BlogTeaser.element.footer
+    category: blog_teaser.element.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserfooter.elements.published.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.enable
-    category: BlogTeaser.element.footer
+    category: blog_teaser.element.footer
     type: bool
     default: true
 
   plugin.tx_blog.settings.meta.teaserfooter.elements.published.format:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.published.format
-    category: BlogTeaser.element.footer
+    category: blog_teaser.element.footer
     type: string
     default: '%d.%m.%Y'
 
   plugin.tx_blog.settings.meta.teaserfooter.elements.comments.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.meta.elements.comments.enable
-    category: BlogTeaser.element.footer
+    category: blog_teaser.element.footer
     type: bool
     default: true
 
-  plugin.tx_blog.settings.post.featuredImage.width:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.post.featuredImage.width
-    category: BlogPost.featuredimage
-    type: string
-    default: '1140'
 
-  plugin.tx_blog.settings.post.featuredImage.height:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.post.featuredImage.height
-    category: BlogPost.featuredimage
-    type: string
-    default: '400c'
 
-  plugin.tx_blog.settings.lists.featuredImage.width:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.width
-    category: BlogList.featuredimage
-    type: string
-    default: '1140'
-
-  plugin.tx_blog.settings.lists.featuredImage.height:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.featuredImage.height
-    category: BlogList.featuredimage
-    type: string
-    default: '400c'
-
-  plugin.tx_blog.settings.lists.pagination.itemsPerPage:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.pagination.itemsPerPage
-    category: Blog.lists.pagination
-    type: int
-    default: 10
-
-  plugin.tx_blog.settings.lists.pagination.insertAbove:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.pagination.insertAbove
-    category: Blog.lists.pagination
-    type: bool
-    default: false
-
-  plugin.tx_blog.settings.lists.pagination.insertBelow:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.pagination.insertBelow
-    category: Blog.lists.pagination
-    type: bool
-    default: true
-
-  plugin.tx_blog.settings.lists.pagination.maximumNumberOfLinks:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.pagination.maximumNumberOfLinks
-    category: Blog.lists.pagination
-    type: int
-    default: 10
 
   plugin.tx_blog.settings.lists.posts.maximumDisplayedItems:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.maximumDisplayedItems
-    category: Blog.lists
+    category: blog.lists
     type: int
     default: 10
 
   plugin.tx_blog.settings.lists.posts.dateFormat:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.lists.posts.dateFormat
-    category: Blog.lists
+    category: blog.lists
     type: string
     default: '%d.%m.%Y'
 
-  plugin.tx_blog.settings.teaser.featuredImage.width:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.teaser.featuredImage.width
-    category: BlogTeaser
-    type: string
-    default: '1140'
 
-  plugin.tx_blog.settings.teaser.featuredImage.height:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.teaser.featuredImage.height
-    category: BlogTeaser
-    type: string
-    default: '400c'
+
+
+  plugin.tx_blog.settings.lists.pagination.itemsPerPage:
+    category: blog.lists.pagination
+    type: int
+    default: 10
+
+  plugin.tx_blog.settings.lists.pagination.insertAbove:
+    category: blog.lists.pagination
+    type: bool
+    default: false
+
+  plugin.tx_blog.settings.lists.pagination.insertBelow:
+    category: blog.lists.pagination
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.lists.pagination.maximumNumberOfLinks:
+    category: blog.lists.pagination
+    type: int
+    default: 10
+
+
+
 
   plugin.tx_blog.settings.archive.showCounter:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.archive.showCounter
-    category: Blog.lists.archive
+    category: blog.lists.archive
     type: bool
     default: true
 
   plugin.tx_blog.settings.archive.yearDateFormat:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.archive.yearDateFormat
-    category: Blog.lists.archive
+    category: blog.lists.archive
     type: string
     default: '%Y'
 
   plugin.tx_blog.settings.archive.monthDateFormat:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.archive.monthDateFormat
-    category: Blog.lists.archive
+    category: blog.lists.archive
     type: string
     default: '%B'
 
-  plugin.tx_blog.settings.latestPosts.limit:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.latestPosts.limit
-    category: Blog.lists.latestPosts
-    type: int
-    default: 3
+
+
 
   plugin.tx_blog.settings.relatedPosts.limit:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.relatedPosts.limit
-    category: Blog.lists.relatedPosts
+    category: blog.lists.relatedPosts
     type: int
     default: 4
 
   plugin.tx_blog.settings.relatedPosts.categoryMultiplier:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.relatedPosts.categoryMultiplier
-    category: Blog.lists.relatedPosts
+    category: blog.lists.relatedPosts
     type: int
     default: 1
 
   plugin.tx_blog.settings.relatedPosts.tagMultiplier:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.relatedPosts.tagMultiplier
-    category: Blog.lists.relatedPosts
+    category: blog.lists.relatedPosts
     type: int
     default: 1
 
+
+
+
+  plugin.tx_blog.settings.latestPosts.limit:
+    category: blog.lists.latestPosts
+    type: int
+    default: 3
+
+
+
+
+  plugin.tx_blog.settings.teaser.featuredImage.width:
+    category: blog_teaser
+    type: string
+    default: '1140'
+
+  plugin.tx_blog.settings.teaser.featuredImage.height:
+    category: blog_teaser
+    type: string
+    default: '400c'
+
+
+
+
   plugin.tx_blog.settings.widgets.comments.limit:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.comments.limit
-    category: Blog.widgets.comments
+    category: blog.widgets.comments
     type: int
     default: 5
 
   plugin.tx_blog.settings.widgets.recentposts.limit:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.recentposts.limit
-    category: Blog.widgets.recent_posts
+    category: blog.widgets.recent_posts
     type: int
     default: 5
 
   plugin.tx_blog.settings.widgets.tags.limit:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.tags.limit
-    category: Blog.widgets.tags
+    category: blog.widgets.tags
     type: int
     default: 5
 
   plugin.tx_blog.settings.widgets.minSize.limit:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.tags.minSize
-    category: Blog.widgets.tags
+    category: blog.widgets.tags
     type: int
     default: 100
 
   plugin.tx_blog.settings.widgets.maxSize.limit:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.tags.maxSize
-    category: Blog.widgets.tags
+    category: blog.widgets.tags
     type: int
     default: 100
 
   plugin.tx_blog.settings.widgets.archive.showCounter:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.showCounter
-    category: Blog.widgets.archive
+    category: blog.widgets.archive
     type: bool
     default: true
 
   plugin.tx_blog.settings.widgets.archive.groupByYear:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.groupByYear
-    category: Blog.widgets.archive
+    category: blog.widgets.archive
     type: bool
     default: true
 
   plugin.tx_blog.settings.widgets.archive.groupByMonth:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.groupByMonth
-    category: Blog.widgets.archive
+    category: blog.widgets.archive
     type: bool
     default: true
 
   plugin.tx_blog.settings.widgets.archive.yearDateFormat:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.yearDateFormat
-    category: Blog.widgets.archive
+    category: blog.widgets.archive
     type: string
     default: '%Y'
 
   plugin.tx_blog.settings.widgets.archive.monthDateFormat:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.widgets.archive.monthDateFormat
-    category: Blog.widgets.archive
+    category: blog.widgets.archive
     type: string
     default: '%B'
 
+
+
+
   plugin.tx_blog.settings.comments.active:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.active
-    category: Blog.comments
+    category: blog.comments
     type: bool
     default: true
 
   plugin.tx_blog.settings.comments.features.urls:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.features.urls
-    category: Blog.comments
+    category: blog.comments
     type: bool
     default: true
 
   plugin.tx_blog.settings.comments.moderation:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.moderation
-    category: Blog.comments
+    category: blog.comments
     type: int
     default: 0
     enum:
@@ -755,8 +654,7 @@ settings:
       2: 2
 
   plugin.tx_blog.settings.comments.respectPostLanguageId:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.respectPostLanguageId
-    category: Blog.comments
+    category: blog.comments
     type: int
     default: 0
     enum:
@@ -765,56 +663,50 @@ settings:
       -1: -1
 
   plugin.tx_blog.settings.comments.date.format:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.date.format
-    category: Blog.comments
+    category: blog.comments
     type: string
     default: '%B %e, %Y'
 
   plugin.tx_blog.settings.comments.disqus.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.disqus
-    category: Blog.comments.disqus
+    category: blog.comments.disqus
     type: bool
     default: false
 
   plugin.tx_blog.settings.comments.disqus.shortname:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.disqus.shortname
-    category: Blog.comments.disqus
+    category: blog.comments.disqus
     type: string
     default: ''
 
   plugin.tx_blog.settings.comments.google_recaptcha.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.google_recaptcha
-    category: Blog.comments.googleRecaptcha
+    category: blog.comments.googleRecaptcha
     type: bool
     default: false
 
   plugin.tx_blog.settings.comments.google_recaptcha.website_key:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.google_recaptcha.website_key
-    category: Blog.comments.googleRecaptcha
+    category: blog.comments.googleRecaptcha
     type: string
     default: ''
 
   plugin.tx_blog.settings.comments.google_recaptcha.secret_key:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.comments.google_recaptcha.secret_key
-    category: Blog.comments.googleRecaptcha
+    category: blog.comments.googleRecaptcha
     type: string
     default: ''
 
+
+
+
   plugin.tx_blog.settings.authors.avatar.provider.size:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.size
-    category: Blog.authors
+    category: blog.authors
     type: int
     default: 72
 
   plugin.tx_blog.settings.authors.avatar.provider.default:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.default
-    category: Blog.authors
+    category: blog.authors
     type: string
     default: 'mm'
 
   plugin.tx_blog.settings.authors.avatar.provider.rating:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.authors.avatar.provider.rating
-    category: Blog.authors
+    category: blog.authors
     type: string
     default: 'g'
     enum:
@@ -823,32 +715,30 @@ settings:
       r: r
       x: x
 
+
+
+
   plugin.tx_blog.settings.notifications.email.senderName:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.senderName
-    category: Blog.notifications
+    category: blog.notifications
     type: string
     default: 'TYPO3 Blog'
 
   plugin.tx_blog.settings.notifications.email.senderMail:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.senderMail
-    category: Blog.notifications
+    category: blog.notifications
     type: string
     default: 'no-reply@example.com'
 
   plugin.tx_blog.settings.notifications.CommentAddedNotification.author.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.author
-    category: Blog.notifications
+    category: blog.notifications
     type: bool
     default: true
 
   plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.enable:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.admin
-    category: Blog.notifications
+    category: blog.notifications
     type: bool
     default: true
 
   plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.email:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.CommentAddedNotification.admin.email
-    category: Blog.notifications
+    category: blog.notifications
     type: string
     default: 'admin@example.com'
