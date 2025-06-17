@@ -1,35 +1,28 @@
 categories:
-  BlogStandalone:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.standalone
-  BlogStandalone.templates:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.standalone.templates
-    parent: BlogStandalone
-  BlogStandalone.copyright:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.customcategory.standalone.copyright
-    parent: BlogStandalone
+  blog_standalone:
+  blog_standalone.templates:
+    parent: blog_standalone
+  blog_standalone.copyright:
+    parent: blog_standalone
 
 settings:
 
   page.fluidtemplate.layoutRootPath:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.layoutRootPath
-    category: BlogStandalone.templates
+    category: blog_standalone.templates
     type: string
     default: 'EXT:blog/Resources/Private/Layouts/Page/'
 
   page.fluidtemplate.partialRootPath:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.partialRootPath
-    category: BlogStandalone.templates
+    category: blog_standalone.templates
     type: string
     default: 'EXT:blog/Resources/Private/Partials/Page/'
 
   page.fluidtemplate.templateRootPath:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.templateRootPath
-    category: BlogStandalone.templates
+    category: blog_standalone.templates
     type: string
     default: 'EXT:blog/Resources/Private/Templates/Page/'
 
   page.theme.copyright.text:
-    label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.partialRootPath
-    category: BlogStandalone.copyright
+    category: blog_standalone.copyright
     type: string
     default: 'Running with <a href="http://www.typo3.org" rel="noopener" target="_blank">TYPO3</a> and <a href="https://github.com/typo3gmbh/blog" rel="noopener" target="_blank">TYPO3 Blog</a>.'
