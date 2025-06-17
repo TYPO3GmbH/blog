@@ -22,7 +22,7 @@ settings:
     type: string
     default: 'EXT:blog/Resources/Private/Partials/Page/'
 
-  page.fluidtemplate.templateRootPaths:
+  page.fluidtemplate.templateRootPath:
     label: LLL:EXT:blog/Resources/Private/Language/locallang.xlf:constantEditor.view.templateRootPath
     category: BlogStandalone.templates
     type: string

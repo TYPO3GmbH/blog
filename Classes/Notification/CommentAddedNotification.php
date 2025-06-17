@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Notification;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Mail\MailContent;
@@ -34,9 +35,18 @@ class CommentAddedNotification extends AbstractNotification
         $post = $this->data['post'];
 
         $mailContent = GeneralUtility::makeInstance(MailContent::class);
-        return $mailContent->render('CommentAdded', [
-            'comment' => $comment,
-            'post' => $post
-        ]);
+        return $mailContent->render(
+            $this->getRequest(),
+            'CommentAdded',
+            [
+                'comment' => $comment,
+                'post' => $post
+            ]
+        );
+    }
+
+    private function getRequest(): ServerRequestInterface
+    {
+        return $GLOBALS['TYPO3_REQUEST'];
     }
 }

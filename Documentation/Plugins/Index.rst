@@ -46,7 +46,7 @@ Example:
    <f:section name="renderPlugin">
 
       {blogvh:data.contentListOptions(listType: listType)}
-      <f:cObject typoscriptObjectPath="tt_content.list" data="{contentObjectData}" table="tt_content"/>
+      <f:cObject typoscriptObjectPath="tt_content" data="{contentObjectData}" table="tt_content"/>
 
    </f:section>
 
@@ -126,7 +126,7 @@ Example:
    <f:section name="renderPlugin">
 
       {blogvh:data.contentListOptions(listType: listType)}
-      <f:cObject typoscriptObjectPath="tt_content.list" data="{contentObjectData}" table="tt_content"/>
+      <f:cObject typoscriptObjectPath="tt_content" data="{contentObjectData}" table="tt_content"/>
 
    </f:section>
 

@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Notification;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Notification\Processor\ProcessorInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -30,7 +31,7 @@ class NotificationManager
         }
     }
 
-    public function notify(NotificationInterface $notification): void
+    public function notify(ServerRequestInterface $request, NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
         if (\is_array($this->visitorsRegistry[$notificationId] ?? null)) {
@@ -38,7 +39,7 @@ class NotificationManager
                 /** @var class-string<object> $visitorClassName */
                 $instance = GeneralUtility::makeInstance($visitorClassName);
                 if ($instance instanceof ProcessorInterface) {
-                    $instance->process($notification);
+                    $instance->process($request, $notification);
                 }
             }
         }
