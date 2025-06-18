@@ -21,6 +21,9 @@ $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
 ];
 $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-folder-contains-blog';
 
+// Add doctype group label
+$GLOBALS['TCA']['pages']['columns']['doktype']['config']['itemGroups']['blog'] = 'Blog';
+
 // Add new page types as possible select item:
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
     'pages',
@@ -29,6 +32,7 @@ $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-
         'label' => 'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
         'value' => (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
         'icon' => 'record-blog-post',
+        'group' => 'blog',
     ],
     '1',
     'after'
@@ -40,6 +44,7 @@ $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-
         'label' => 'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-page',
         'value' => (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE,
         'icon' => 'record-blog-page',
+        'group' => 'blog',
     ],
     (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
     'after'
