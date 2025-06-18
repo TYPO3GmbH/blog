@@ -8,17 +8,13 @@
  */
 
 use T3G\AgencyPack\Blog\Constants;
+use TYPO3\CMS\Core\DataHandling\PageDoktypeRegistry;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 if (!defined('TYPO3')) {
     die('Access denied.');
 }
 
-// Add new page type:
-$GLOBALS['PAGES_TYPES'][Constants::DOKTYPE_BLOG_POST] = [
-    'type' => 'web',
-    'allowedTables' => '*',
-];
-$GLOBALS['PAGES_TYPES'][Constants::DOKTYPE_BLOG_PAGE] = [
-    'type' => 'web',
-    'allowedTables' => '*',
-];
+$dokTypeRegistry = GeneralUtility::makeInstance(PageDoktypeRegistry::class);
+$dokTypeRegistry->add(Constants::DOKTYPE_BLOG_POST, ['allowedTables' => '*']);
+$dokTypeRegistry->add(Constants::DOKTYPE_BLOG_PAGE, ['allowedTables' => '*']);
