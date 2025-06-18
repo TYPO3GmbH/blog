@@ -1,4 +1,5 @@
 name: blog/static
 label: 'Blog: Static'
+hidden: true
 dependencies:
   - typo3/form
