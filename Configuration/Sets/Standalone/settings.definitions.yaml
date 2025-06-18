@@ -1,0 +1,28 @@
+categories:
+  blog_standalone:
+  blog_standalone.templates:
+    parent: blog_standalone
+  blog_standalone.copyright:
+    parent: blog_standalone
+
+settings:
+
+  page.fluidtemplate.layoutRootPath:
+    category: blog_standalone.templates
+    type: string
+    default: 'EXT:blog/Resources/Private/Layouts/Page/'
+
+  page.fluidtemplate.partialRootPath:
+    category: blog_standalone.templates
+    type: string
+    default: 'EXT:blog/Resources/Private/Partials/Page/'
+
+  page.fluidtemplate.templateRootPath:
+    category: blog_standalone.templates
+    type: string
+    default: 'EXT:blog/Resources/Private/Templates/Page/'
+
+  page.theme.copyright.text:
+    category: blog_standalone.copyright
+    type: string
+    default: 'Running with <a href="http://www.typo3.org" rel="noopener" target="_blank">TYPO3</a> and <a href="https://github.com/typo3gmbh/blog" rel="noopener" target="_blank">TYPO3 Blog</a>.'

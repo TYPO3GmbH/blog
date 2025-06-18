@@ -21,7 +21,7 @@ class BlogVariableProvider
     {
         $page = $GLOBALS['TSFE']->page ?? [];
         if (isset($page['doktype'])) {
-            return $page['doktype'] == Constants::DOKTYPE_BLOG_POST;
+            return (int)$page['doktype'] === Constants::DOKTYPE_BLOG_POST;
         }
         return false;
     }
@@ -30,7 +30,7 @@ class BlogVariableProvider
     {
         $page = $GLOBALS['TSFE']->page ?? [];
         if (isset($page['doktype'])) {
-            return $page['doktype'] == Constants::DOKTYPE_BLOG_PAGE;
+            return (int)$page['doktype'] === Constants::DOKTYPE_BLOG_PAGE;
         }
         return false;
     }

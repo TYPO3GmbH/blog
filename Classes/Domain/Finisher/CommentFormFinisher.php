@@ -92,10 +92,13 @@ class CommentFormFinisher extends AbstractFinisher
         if ($state !== CommentService::STATE_ERROR) {
             $comment->setCrdate(new \DateTime());
             GeneralUtility::makeInstance(NotificationManager::class)
-                ->notify(GeneralUtility::makeInstance(CommentAddedNotification::class, '', '', [
-                    'comment' => $comment,
-                    'post' => $post,
-                ]));
+                ->notify(
+                    $this->finisherContext->getRequest(),
+                    GeneralUtility::makeInstance(CommentAddedNotification::class, '', '', [
+                        'comment' => $comment,
+                        'post' => $post,
+                    ])
+                );
             $cacheService->flushCacheByTag('tx_blog_post_' . $post->getUid());
         }
 

@@ -4,7 +4,7 @@
     <f:if condition="{post} && {settings.comments.active}">
         <div class="postcommentsform" id="postcommentform-{post.uid}">
             <f:variable name="formName" value="Local" />
-            <f:if condition="{settings.comments.disqus._typoScriptNodeValue}"><f:variable name="formName" value="Disqus" /></f:if>
+            <f:if condition="{settings.comments.disqus.enable}"><f:variable name="formName" value="Disqus" /></f:if>
             <f:if condition="{post.commentsActive}"><f:else><f:variable name="formName" value="Closed" /></f:else></f:if>
             <f:render partial="Comments/Form/{formName}" arguments="{_all}" />
         </div>

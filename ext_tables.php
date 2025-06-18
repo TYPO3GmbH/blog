@@ -8,26 +8,13 @@
  */
 
 use T3G\AgencyPack\Blog\Constants;
-use TYPO3\CMS\Core\Information\Typo3Version;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\DataHandling\PageDoktypeRegistry;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 if (!defined('TYPO3')) {
     die('Access denied.');
 }
 
-// Add new page type:
-$GLOBALS['PAGES_TYPES'][Constants::DOKTYPE_BLOG_POST] = [
-    'type' => 'web',
-    'allowedTables' => '*',
-];
-$GLOBALS['PAGES_TYPES'][Constants::DOKTYPE_BLOG_PAGE] = [
-    'type' => 'web',
-    'allowedTables' => '*',
-];
-
-// Replaced with Configuration/user.tsconfig in v13
-if ((new Typo3Version())->getMajorVersion() < 13) {
-    ExtensionManagementUtility::addUserTSConfig('
-        options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . Constants::DOKTYPE_BLOG_POST . ')
-    ');
-}
+$dokTypeRegistry = GeneralUtility::makeInstance(PageDoktypeRegistry::class);
+$dokTypeRegistry->add(Constants::DOKTYPE_BLOG_POST, ['allowedTables' => '*']);
+$dokTypeRegistry->add(Constants::DOKTYPE_BLOG_PAGE, ['allowedTables' => '*']);

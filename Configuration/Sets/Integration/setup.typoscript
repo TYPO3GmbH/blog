@@ -1,0 +1,25 @@
+###################
+#### BLOG POST ####
+###################
+[blog.isPost() || blog.isPage()]
+page {
+    10 {
+        templateName >
+        templateName = BlogList
+        layoutRootPaths {
+            -1579272243 = EXT:blog/Resources/Private/Layouts/Page/
+        }
+        templateRootPaths {
+            -1579272243 = EXT:blog/Resources/Private/Templates/Page/
+        }
+    }
+}
+[end]
+
+[blog.isPost()]
+page {
+    10 {
+        templateName = BlogPost
+    }
+}
+[end]

@@ -1,0 +1,744 @@
+categories:
+  blog:
+  blog.uids:
+    parent: blog
+  blog.templates:
+    parent: blog
+  blog.templates.frontend:
+    parent: blog.templates
+  blog.templates.email:
+    parent: blog.templates
+  blog.lists:
+    parent: blog
+  blog.lists.pagination:
+    parent: blog.lists
+  blog.lists.archive:
+    parent: blog.lists
+  blog.lists.relatedPosts:
+    parent: blog.lists
+  blog.lists.latestPosts:
+    parent: blog.lists
+  blog.widgets:
+    parent: blog
+  blog.widgets.comments:
+    parent: blog.widgets
+  blog.widgets.recent_posts:
+    parent: blog.widgets
+  blog.widgets.tags:
+    parent: blog.widgets
+  blog.widgets.archive:
+    parent: blog.widgets
+  blog.comments:
+    parent: blog
+  blog.comments.disqus:
+    parent: blog.comments
+  blog.comments.googleRecaptcha:
+    parent: blog.comments
+  blog.authors:
+    parent: blog
+  blog.notifications:
+    parent: blog
+
+  blog_post:
+  blog_post.featuredimage:
+    parent: blog_post
+  blog_post.header:
+    parent: blog_post
+  blog_post.footer:
+    parent: blog_post
+
+  blog_list:
+  blog_list.featuredimage:
+    parent: blog_list
+  blog_list.elementHeader:
+    parent: blog_list
+  blog_list.elementFooter:
+    parent: blog_list
+
+  blog_teaser:
+  blog_teaser.element.header:
+    parent: blog_teaser
+  blog_teaser.element.footer:
+    parent: blog_teaser
+
+settings:
+
+  plugin.tx_blog.view.templateRootPath:
+    category: blog.templates.frontend
+    type: string
+    default: 'EXT:blog/Resources/Private/Templates/'
+
+  plugin.tx_blog.view.partialRootPath:
+    category: blog.templates.frontend
+    type: string
+    default: 'EXT:blog/Resources/Private/Partials/'
+
+  plugin.tx_blog.view.layoutRootPath:
+    category: blog.templates.frontend
+    type: string
+    default: 'EXT:blog/Resources/Private/Layouts/'
+
+  plugin.tx_blog.view.emails.templateRootPath:
+    category: blog.templates.email
+    type: string
+    default: 'EXT:blog/Resources/Private/Mails/Templates/'
+
+  plugin.tx_blog.view.emails.partialRootPath:
+    category: blog.templates.email
+    type: string
+    default: 'EXT:blog/Resources/Private/Mails/Partials/'
+
+  plugin.tx_blog.view.emails.layoutRootPath:
+    category: blog.templates.email
+    type: string
+    default: 'EXT:blog/Resources/Private/Mails/Layouts/'
+
+
+
+
+  plugin.tx_blog.settings.blogUid:
+    category: blog.uids
+    type: int
+    default: 0
+
+  plugin.tx_blog.settings.authorUid:
+    category: blog.uids
+    type: int
+    default: 0
+
+  plugin.tx_blog.settings.categoryUid:
+    category: blog.uids
+    type: int
+    default: 0
+
+  plugin.tx_blog.settings.tagUid:
+    category: blog.uids
+    type: int
+    default: 0
+
+  plugin.tx_blog.settings.archiveUid:
+    category: blog.uids
+    type: int
+    default: 0
+
+  plugin.tx_blog.settings.storagePid:
+    category: blog.uids
+    type: int
+    default: 0
+
+
+
+
+  plugin.tx_blog.settings.post.featuredImage.width:
+    category: blog_post.featuredimage
+    type: string
+    default: '1140'
+
+  plugin.tx_blog.settings.post.featuredImage.height:
+    category: blog_post.featuredimage
+    type: string
+    default: '400c'
+
+  plugin.tx_blog.settings.meta.postheader.enable:
+    category: blog_post.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postheader.modifier:
+    category: blog_post.header
+    type: string
+    default: simple
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+
+  plugin.tx_blog.settings.meta.postheader.elements.authors.enable:
+    category: blog_post.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.enable:
+    category: blog_post.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.size:
+    category: blog_post.header
+    type: int
+    default: 20
+
+  plugin.tx_blog.settings.meta.postheader.elements.categories.enable:
+    category: blog_post.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postheader.elements.tags.enable:
+    category: blog_post.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postheader.elements.published.enable:
+    category: blog_post.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postheader.elements.published.format:
+    category: blog_post.header
+    type: string
+    default: '%d.%m.%Y'
+
+  plugin.tx_blog.settings.meta.postheader.elements.comments.enable:
+    category: blog_post.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postfooter.enable:
+    category: blog_post.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postfooter.modifier:
+    category: blog_post.footer
+    type: string
+    default: simple
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+
+  plugin.tx_blog.settings.meta.postfooter.elements.authors.enable:
+    category: blog_post.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.enable:
+    category: blog_post.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.size:
+    category: blog_post.footer
+    type: int
+    default: 20
+
+  plugin.tx_blog.settings.meta.postfooter.elements.categories.enable:
+    category: blog_post.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postfooter.elements.tags.enable:
+    category: blog_post.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postfooter.elements.published.enable:
+    category: blog_post.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.postfooter.elements.published.format:
+    category: blog_post.footer
+    type: string
+    default: '%d.%m.%Y'
+
+  plugin.tx_blog.settings.meta.postfooter.elements.comments.enable:
+    category: blog_post.footer
+    type: bool
+    default: true
+
+
+
+
+  plugin.tx_blog.settings.lists.featuredImage.width:
+    category: blog_list.featuredimage
+    type: string
+    default: '1140'
+
+  plugin.tx_blog.settings.lists.featuredImage.height:
+    category: blog_list.featuredimage
+    type: string
+    default: '400c'
+
+  plugin.tx_blog.settings.meta.listheader.enable:
+    category: blog_list.elementHeader
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listheader.modifier:
+    category: blog_list.elementHeader
+    type: string
+    default: simple
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+
+  plugin.tx_blog.settings.meta.listheader.elements.authors.enable:
+    category: blog_list.elementHeader
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.enable:
+    category: blog_list.elementHeader
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.size:
+    category: blog_list.elementHeader
+    type: int
+    default: 20
+
+  plugin.tx_blog.settings.meta.listheader.elements.categories.enable:
+    category: blog_list.elementHeader
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listheader.elements.tags.enable:
+    category: blog_list.elementHeader
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listheader.elements.published.enable:
+    category: blog_list.elementHeader
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listheader.elements.published.format:
+    category: blog_list.elementHeader
+    type: string
+    default: '%d.%m.%Y'
+
+  plugin.tx_blog.settings.meta.listheader.elements.comments.enable:
+    category: blog_list.elementHeader
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listfooter.enable:
+    category: blog_list.elementFooter
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listfooter.modifier:
+    category: blog_list.elementFooter
+    type: string
+    default: simple
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+
+  plugin.tx_blog.settings.meta.listfooter.elements.authors.enable:
+    category: blog_list.elementFooter
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.enable:
+    category: blog_list.elementFooter
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.size:
+    category: blog_list.elementFooter
+    type: int
+    default: 20
+
+  plugin.tx_blog.settings.meta.listfooter.elements.categories.enable:
+    category: blog_list.elementFooter
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listfooter.elements.tags.enable:
+    category: blog_list.elementFooter
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listfooter.elements.published.enable:
+    category: blog_list.elementFooter
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.listfooter.elements.published.format:
+    category: blog_list.elementFooter
+    type: string
+    default: '%d.%m.%Y'
+
+  plugin.tx_blog.settings.meta.listfooter.elements.comments.enable:
+    category: blog_list.elementFooter
+    type: bool
+    default: true
+
+
+
+
+  plugin.tx_blog.settings.meta.teaserheader.enable:
+    category: blog_teaser.element.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserheader.modifier:
+    category: blog_teaser.element.header
+    type: string
+    default: simple
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+
+  plugin.tx_blog.settings.meta.teaserheader.elements.authors.enable:
+    category: blog_teaser.element.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserheader.elements.authors.avatar.enable:
+    category: blog_teaser.element.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserheader.elements.authors.avatar.size:
+    category: blog_teaser.element.header
+    type: int
+    default: 20
+
+  plugin.tx_blog.settings.meta.teaserheader.elements.categories.enable:
+    category: blog_teaser.element.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserheader.elements.tags.enable:
+    category: blog_teaser.element.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserheader.elements.published.enable:
+    category: blog_teaser.element.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserheader.elements.published.format:
+    category: blog_teaser.element.header
+    type: string
+    default: '%d.%m.%Y'
+
+  plugin.tx_blog.settings.meta.teaserheader.elements.comments.enable:
+    category: blog_teaser.element.header
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserfooter.enable:
+    category: blog_teaser.element.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserfooter.modifier:
+    category: blog_teaser.element.footer
+    type: string
+    default: simple
+    enum:
+      simple: simple
+      condensed: condensed
+      extended: extended
+      modern: modern
+
+  plugin.tx_blog.settings.meta.teaserfooter.elements.authors.enable:
+    category: blog_teaser.element.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserfooter.elements.authors.avatar.enable:
+    category: blog_teaser.element.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserfooter.elements.authors.avatar.size:
+    category: blog_teaser.element.footer
+    type: int
+    default: 20
+
+  plugin.tx_blog.settings.meta.teaserfooter.elements.categories.enable:
+    category: blog_teaser.element.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserfooter.elements.tags.enable:
+    category: blog_teaser.element.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserfooter.elements.published.enable:
+    category: blog_teaser.element.footer
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.meta.teaserfooter.elements.published.format:
+    category: blog_teaser.element.footer
+    type: string
+    default: '%d.%m.%Y'
+
+  plugin.tx_blog.settings.meta.teaserfooter.elements.comments.enable:
+    category: blog_teaser.element.footer
+    type: bool
+    default: true
+
+
+
+
+  plugin.tx_blog.settings.lists.posts.maximumDisplayedItems:
+    category: blog.lists
+    type: int
+    default: 10
+
+  plugin.tx_blog.settings.lists.posts.dateFormat:
+    category: blog.lists
+    type: string
+    default: '%d.%m.%Y'
+
+
+
+
+  plugin.tx_blog.settings.lists.pagination.itemsPerPage:
+    category: blog.lists.pagination
+    type: int
+    default: 10
+
+  plugin.tx_blog.settings.lists.pagination.insertAbove:
+    category: blog.lists.pagination
+    type: bool
+    default: false
+
+  plugin.tx_blog.settings.lists.pagination.insertBelow:
+    category: blog.lists.pagination
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.lists.pagination.maximumNumberOfLinks:
+    category: blog.lists.pagination
+    type: int
+    default: 10
+
+
+
+
+  plugin.tx_blog.settings.archive.showCounter:
+    category: blog.lists.archive
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.archive.yearDateFormat:
+    category: blog.lists.archive
+    type: string
+    default: '%Y'
+
+  plugin.tx_blog.settings.archive.monthDateFormat:
+    category: blog.lists.archive
+    type: string
+    default: '%B'
+
+
+
+
+  plugin.tx_blog.settings.relatedPosts.limit:
+    category: blog.lists.relatedPosts
+    type: int
+    default: 4
+
+  plugin.tx_blog.settings.relatedPosts.categoryMultiplier:
+    category: blog.lists.relatedPosts
+    type: int
+    default: 1
+
+  plugin.tx_blog.settings.relatedPosts.tagMultiplier:
+    category: blog.lists.relatedPosts
+    type: int
+    default: 1
+
+
+
+
+  plugin.tx_blog.settings.latestPosts.limit:
+    category: blog.lists.latestPosts
+    type: int
+    default: 3
+
+
+
+
+  plugin.tx_blog.settings.teaser.featuredImage.width:
+    category: blog_teaser
+    type: string
+    default: '1140'
+
+  plugin.tx_blog.settings.teaser.featuredImage.height:
+    category: blog_teaser
+    type: string
+    default: '400c'
+
+
+
+
+  plugin.tx_blog.settings.widgets.comments.limit:
+    category: blog.widgets.comments
+    type: int
+    default: 5
+
+  plugin.tx_blog.settings.widgets.recentposts.limit:
+    category: blog.widgets.recent_posts
+    type: int
+    default: 5
+
+  plugin.tx_blog.settings.widgets.tags.limit:
+    category: blog.widgets.tags
+    type: int
+    default: 5
+
+  plugin.tx_blog.settings.widgets.minSize.limit:
+    category: blog.widgets.tags
+    type: int
+    default: 100
+
+  plugin.tx_blog.settings.widgets.maxSize.limit:
+    category: blog.widgets.tags
+    type: int
+    default: 100
+
+  plugin.tx_blog.settings.widgets.archive.showCounter:
+    category: blog.widgets.archive
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.widgets.archive.groupByYear:
+    category: blog.widgets.archive
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.widgets.archive.groupByMonth:
+    category: blog.widgets.archive
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.widgets.archive.yearDateFormat:
+    category: blog.widgets.archive
+    type: string
+    default: '%Y'
+
+  plugin.tx_blog.settings.widgets.archive.monthDateFormat:
+    category: blog.widgets.archive
+    type: string
+    default: '%B'
+
+
+
+
+  plugin.tx_blog.settings.comments.active:
+    category: blog.comments
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.comments.features.urls:
+    category: blog.comments
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.comments.moderation:
+    category: blog.comments
+    type: int
+    default: 0
+    enum:
+      0: 0
+      1: 1
+      2: 2
+
+  plugin.tx_blog.settings.comments.respectPostLanguageId:
+    category: blog.comments
+    type: int
+    default: 0
+    enum:
+      0: 0
+      1: 1
+      -1: -1
+
+  plugin.tx_blog.settings.comments.date.format:
+    category: blog.comments
+    type: string
+    default: '%B %e, %Y'
+
+  plugin.tx_blog.settings.comments.disqus.enable:
+    category: blog.comments.disqus
+    type: bool
+    default: false
+
+  plugin.tx_blog.settings.comments.disqus.shortname:
+    category: blog.comments.disqus
+    type: string
+    default: ''
+
+  plugin.tx_blog.settings.comments.google_recaptcha.enable:
+    category: blog.comments.googleRecaptcha
+    type: bool
+    default: false
+
+  plugin.tx_blog.settings.comments.google_recaptcha.website_key:
+    category: blog.comments.googleRecaptcha
+    type: string
+    default: ''
+
+  plugin.tx_blog.settings.comments.google_recaptcha.secret_key:
+    category: blog.comments.googleRecaptcha
+    type: string
+    default: ''
+
+
+
+
+  plugin.tx_blog.settings.authors.avatar.provider.size:
+    category: blog.authors
+    type: int
+    default: 72
+
+  plugin.tx_blog.settings.authors.avatar.provider.default:
+    category: blog.authors
+    type: string
+    default: 'mm'
+
+  plugin.tx_blog.settings.authors.avatar.provider.rating:
+    category: blog.authors
+    type: string
+    default: 'g'
+    enum:
+      g: g
+      pg: pg
+      r: r
+      x: x
+
+
+
+
+  plugin.tx_blog.settings.notifications.email.senderName:
+    category: blog.notifications
+    type: string
+    default: 'TYPO3 Blog'
+
+  plugin.tx_blog.settings.notifications.email.senderMail:
+    category: blog.notifications
+    type: string
+    default: 'no-reply@example.com'
+
+  plugin.tx_blog.settings.notifications.CommentAddedNotification.author.enable:
+    category: blog.notifications
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.enable:
+    category: blog.notifications
+    type: bool
+    default: true
+
+  plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.email:
+    category: blog.notifications
+    type: string
+    default: 'admin@example.com'

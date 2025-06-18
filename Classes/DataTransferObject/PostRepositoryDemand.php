@@ -53,7 +53,7 @@ class PostRepositoryDemand
      */
     public function setPosts(array $posts): self
     {
-        $this->posts = array_filter(array_map('intval', array_unique($posts)));
+        $this->posts = array_filter(array_map('intval', array_unique($posts)), static fn (int $v): bool => $v !== 0);
 
         return $this;
     }

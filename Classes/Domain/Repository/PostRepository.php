@@ -22,7 +22,6 @@ use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ComparisonInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
@@ -30,7 +29,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class PostRepository extends Repository
 {
@@ -250,12 +248,12 @@ class PostRepository extends Repository
 
     public function findCurrentPost(): ?Post
     {
-        $typoScriptFrontendController = $this->getTypoScriptFrontendController();
-        if ($typoScriptFrontendController === null) {
+        $pageInformation = $this->getRequest()->getAttribute('frontend.page.information', null);
+        if ($pageInformation === null) {
             return null;
         }
 
-        $pageId = (int) $typoScriptFrontendController->id;
+        $pageId = $pageInformation->getId();
         $currentLanguageId = GeneralUtility::makeInstance(Context::class)
             ->getPropertyFromAspect('language', 'id', 0);
 
@@ -308,10 +306,10 @@ class PostRepository extends Repository
 
     protected function getCurrentSite(): ?Site
     {
-        if ($GLOBALS['TYPO3_REQUEST'] instanceof ServerRequestInterface
-            && $GLOBALS['TYPO3_REQUEST']->getAttribute('site') instanceof Site) {
-            return $GLOBALS['TYPO3_REQUEST']->getAttribute('site');
+        if ($this->getRequest()->getAttribute('site') instanceof Site) {
+            return $this->getRequest()->getAttribute('site');
         }
+
         return null;
     }
 
@@ -426,7 +424,7 @@ class PostRepository extends Repository
      */
     protected function getStoragePidConstraint(): ?ComparisonInterface
     {
-        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend()) {
+        if (ApplicationType::fromRequest($this->getRequest())->isFrontend()) {
             $pids = $this->getPidsForConstraints();
             $query = $this->createQuery();
             return $query->in('pid', $pids);
@@ -441,8 +439,8 @@ class PostRepository extends Repository
             return $value !== '' && (int) $value !== 0;
         });
 
-        if (count($pids) === 0 && $this->getTypoScriptFrontendController() !== null) {
-            $rootLine = GeneralUtility::makeInstance(RootlineUtility::class, $this->getTypoScriptFrontendController()->id)->get();
+        if (count($pids) === 0 && $this->getRequest()->getAttribute('frontend.page.information') !== null) {
+            $rootLine = $this->getRequest()->getAttribute('frontend.page.information')->getLocalRootLine();
             foreach ($rootLine as $value) {
                 $pids[] = (int) $value['uid'];
             }
@@ -451,8 +449,8 @@ class PostRepository extends Repository
         return $pids;
     }
 
-    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    private function getRequest(): ServerRequestInterface
     {
-        return $GLOBALS['TSFE'] ?? null;
+        return $GLOBALS['TYPO3_REQUEST'];
     }
 }

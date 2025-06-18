@@ -37,7 +37,7 @@ class Constants
      *
      * EXAMPLE:
      * {blogvh:data.contentListOptions(listType: 'blog_sidebar')}
-     * <f:cObject typoscriptObjectPath="tt_content.list" data="{contentObjectData}" table="tt_content"/>
+     * <f:cObject typoscriptObjectPath="tt_content" data="{contentObjectData}" table="tt_content"/>
      *
      * USAGE:
      * Resources/Private/Templates/Page/BlogList.html
