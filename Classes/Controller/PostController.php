@@ -204,7 +204,10 @@ class PostController extends ActionController
             $this->view->assign('pagination', $pagination);
             $this->view->assign('category', $category);
             MetaTagService::set(MetaTagService::META_TITLE, (string) $category->getTitle());
-            MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $category->getDescription());
+
+            if (!empty($categoryDescription = (string) $category->getDescription())) {
+                MetaTagService::set(MetaTagService::META_DESCRIPTION, $categoryDescription);
+            }
         } else {
             $this->view->assign('categories', $this->categoryRepository->findAll());
         }
@@ -224,7 +227,10 @@ class PostController extends ActionController
             $this->view->assign('pagination', $pagination);
             $this->view->assign('author', $author);
             MetaTagService::set(MetaTagService::META_TITLE, (string) $author->getName());
-            MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $author->getBio());
+
+            if (!empty($authorBio = (string) $author->getBio())) {
+                MetaTagService::set(MetaTagService::META_DESCRIPTION, $authorBio);
+            }
         } else {
             $this->view->assign('authors', $this->authorRepository->findAll());
         }
@@ -244,7 +250,10 @@ class PostController extends ActionController
             $this->view->assign('pagination', $pagination);
             $this->view->assign('tag', $tag);
             MetaTagService::set(MetaTagService::META_TITLE, (string) $tag->getTitle());
-            MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $tag->getDescription());
+
+            if (!empty($tagDescription = (string) $tag->getDescription())) {
+                MetaTagService::set(MetaTagService::META_DESCRIPTION, $tagDescription);
+            }
         } else {
             $this->view->assign('tags', $this->tagRepository->findAll());
         }
