@@ -95,37 +95,35 @@ settings:
 
 
 
-
   plugin.tx_blog.settings.blogUid:
     category: blog.uids
-    type: int
+    type: page
     default: 0
 
   plugin.tx_blog.settings.authorUid:
     category: blog.uids
-    type: int
+    type: page
     default: 0
 
   plugin.tx_blog.settings.categoryUid:
     category: blog.uids
-    type: int
+    type: page
     default: 0
 
   plugin.tx_blog.settings.tagUid:
     category: blog.uids
-    type: int
+    type: page
     default: 0
 
   plugin.tx_blog.settings.archiveUid:
     category: blog.uids
-    type: int
+    type: page
     default: 0
 
   plugin.tx_blog.settings.storagePid:
     category: blog.uids
-    type: int
+    type: page
     default: 0
-
 
 
 
@@ -251,7 +249,6 @@ settings:
 
 
 
-
   plugin.tx_blog.settings.lists.featuredImage.width:
     category: blog_list.featuredimage
     type: string
@@ -374,7 +371,6 @@ settings:
 
 
 
-
   plugin.tx_blog.settings.meta.teaserheader.enable:
     category: blog_teaser.element.header
     type: bool
@@ -487,7 +483,6 @@ settings:
 
 
 
-
   plugin.tx_blog.settings.lists.posts.maximumDisplayedItems:
     category: blog.lists
     type: int
@@ -497,7 +492,6 @@ settings:
     category: blog.lists
     type: string
     default: '%d.%m.%Y'
-
 
 
 
@@ -523,7 +517,6 @@ settings:
 
 
 
-
   plugin.tx_blog.settings.archive.showCounter:
     category: blog.lists.archive
     type: bool
@@ -538,7 +531,6 @@ settings:
     category: blog.lists.archive
     type: string
     default: '%B'
-
 
 
 
@@ -559,12 +551,10 @@ settings:
 
 
 
-
   plugin.tx_blog.settings.latestPosts.limit:
     category: blog.lists.latestPosts
     type: int
     default: 3
-
 
 
 
@@ -577,7 +567,6 @@ settings:
     category: blog_teaser
     type: string
     default: '400c'
-
 
 
 
@@ -630,7 +619,6 @@ settings:
     category: blog.widgets.archive
     type: string
     default: '%B'
-
 
 
 
@@ -694,7 +682,6 @@ settings:
 
 
 
-
   plugin.tx_blog.settings.authors.avatar.provider.size:
     category: blog.authors
     type: int
@@ -714,7 +701,6 @@ settings:
       pg: pg
       r: r
       x: x
-
 
 
 
