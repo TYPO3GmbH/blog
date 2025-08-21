@@ -1,3 +1,15 @@
+# 12.0.3
+
+## TASK
+
+- 66866c0 [TASK] Allow psr/http-message 1.1 and 2.0
+- 8a46930 [TASK] Provide EXT:form in functional tests
+
+## Contributors
+
+- Benjamin Franzke
+- Lina Wolf
+
 # 12.0.2
 
 ## TASK
@@ -982,4 +994,3 @@
 - Jan Helke
 - Mark Houben
 - Susanne Moog
-
