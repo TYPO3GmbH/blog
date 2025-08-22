@@ -19,11 +19,11 @@ Prerequisites:
 
    1. Edit your existing site your existing site configuration
 
-      .. image:: manual-1.png
+      .. figure:: manual-1.png
 
    2. Add the "Blog: Integration" set to your site.
 
-      .. image:: manual-2.png
+      .. figure:: manual-2.png
 
       .. tip::
 
@@ -40,13 +40,13 @@ Prerequisites:
 
    3. Create Blog Pages
 
-      .. image:: manual-3.png
+      .. figure:: manual-3.png
 
       1. Right click the page you want the Blog to list below
       2. Select "More options"
       3. Select "Create multiple pages"
 
-      .. image:: manual-4.png
+      .. figure:: manual-4.png
 
       Create the following Pages, make sure they have the correct **Type**
 
@@ -66,7 +66,7 @@ Prerequisites:
       | Data        | Folder      |
       +-------------+-------------+
 
-      .. image:: manual-5.png
+      .. figure:: manual-5.png
 
       Edit the newly generated Data folder to contain the "Blog"
 
@@ -74,7 +74,7 @@ Prerequisites:
       5. Select "Blog" at "Contains Plugin"
       6. Save the Page
 
-      .. image:: manual-6.png
+      .. figure:: manual-6.png
 
       Sort the pages like the following screenshot
 
@@ -93,10 +93,10 @@ Prerequisites:
                   archiveUid:    ID_of_Page_Archive
                   storagePid:    ID_of_Page_Data
 
-      .. image:: manual-7.png
-      .. image:: manual-8.png
-      .. image:: manual-9.png
-      .. image:: manual-10.png
+      .. figure:: manual-7.png
+      .. figure:: manual-8.png
+      .. figure:: manual-9.png
+      .. figure:: manual-10.png
 
    6. Frontend Routing
 
@@ -121,12 +121,12 @@ Prerequisites:
       2. Select the Blog page
       3. Click the Button to add content
 
-      .. image:: manual-11.png
+      .. figure:: manual-11.png
 
       4. Select the "Blog" tab
       5. Add plugin "Blog: List of posts"
 
-      .. image:: manual-12.png
+      .. figure:: manual-12.png
 
       +------------+------------------------+
       | Page       | Plugin                 |
@@ -146,4 +146,4 @@ Prerequisites:
 
       Your blog is now ready, please read on in the capters about "how to add a blog post" and learn more about configuration options.
 
-      .. image:: manual-13.png
+      .. figure:: manual-13.png
