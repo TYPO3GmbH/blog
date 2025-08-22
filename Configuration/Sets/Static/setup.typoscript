@@ -288,8 +288,8 @@ plugin.tx_blog {
                 format = {$plugin.tx_blog.settings.comments.date.format}
             }
             # Google Re-Captcha
-            google_recaptcha = {$plugin.tx_blog.settings.comments.google_recaptcha}
             google_recaptcha {
+                enable = {$plugin.tx_blog.settings.comments.google_recaptcha.enable}
                 # Get the keys from https://www.google.com/recaptcha/admin#list
                 website_key = {$plugin.tx_blog.settings.comments.google_recaptcha.website_key}
                 secret_key = {$plugin.tx_blog.settings.comments.google_recaptcha.secret_key}
