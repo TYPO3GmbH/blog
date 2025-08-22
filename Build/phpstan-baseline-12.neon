@@ -1,0 +1,430 @@
+parameters:
+	ignoreErrors:
+		-
+			message: """
+				#^Call to deprecated method fillDefaultsByPackageName\\(\\) of class TYPO3Fluid\\\\Fluid\\\\View\\\\TemplatePaths\\:
+				will be removed with Fluid v5; appropriate setters \\(like setTemplateRootPaths\\(\\)\\)
+				            should be called instead$#
+			"""
+			count: 1
+			path: ../Classes/Backend/View/BlogPostHeaderContentRenderer.php
+
+		-
+			message: "#^Cannot access offset 'id' on array\\|object\\.$#"
+			count: 1
+			path: ../Classes/Backend/View/BlogPostHeaderContentRenderer.php
+
+		-
+			message: """
+				#^Call to deprecated method loadRequireJsModule\\(\\) of class TYPO3\\\\CMS\\\\Core\\\\Page\\\\PageRenderer\\:
+				will be removed in TYPO3 v13\\.0\\. Use loadJavaScriptModule\\(\\) instead, available since TYPO3 v12\\.0\\.$#
+			"""
+			count: 4
+			path: ../Classes/Controller/BackendController.php
+
+		-
+			message: """
+				#^Call to deprecated method renderContent\\(\\) of class TYPO3\\\\CMS\\\\Backend\\\\Template\\\\ModuleTemplate\\:
+				since v12, will be removed in v13\\. Remove together with \\$legacyView property and Templates/Module\\.html\\.$#
+			"""
+			count: 3
+			path: ../Classes/Controller/BackendController.php
+
+		-
+			message: """
+				#^Call to deprecated method setContent\\(\\) of class TYPO3\\\\CMS\\\\Backend\\\\Template\\\\ModuleTemplate\\:
+				since v12, will be removed in v13\\.$#
+			"""
+			count: 3
+			path: ../Classes/Controller/BackendController.php
+
+		-
+			message: """
+				#^Fetching deprecated class constant ERROR of class TYPO3\\\\CMS\\\\Core\\\\Messaging\\\\FlashMessage\\:
+				Use \\\\TYPO3\\\\CMS\\\\Core\\\\Type\\\\ContextualFeedbackSeverity\\:\\:ERROR instead$#
+			"""
+			count: 1
+			path: ../Classes/Controller/BackendController.php
+
+		-
+			message: """
+				#^Call to deprecated method getContentObject\\(\\) of interface TYPO3\\\\CMS\\\\Extbase\\\\Configuration\\\\ConfigurationManagerInterface\\:
+				since v12\\. Remove in v13\\.$#
+			"""
+			count: 2
+			path: ../Classes/Controller/PostController.php
+
+		-
+			message: """
+				#^Call to deprecated method getTwoLetterIsoCode\\(\\) of class TYPO3\\\\CMS\\\\Core\\\\Site\\\\Entity\\\\SiteLanguage\\:
+				not needed anymore, use \\$this\\-\\>getLocale\\(\\)\\-\\>getLanguageCode\\(\\) instead\\.$#
+			"""
+			count: 1
+			path: ../Classes/Controller/PostController.php
+
+		-
+			message: "#^Parameter \\$view of method T3G\\\\AgencyPack\\\\Blog\\\\Controller\\\\PostController\\:\\:initializeView\\(\\) has invalid type TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\View\\\\ViewInterface\\.$#"
+			count: 1
+			path: ../Classes/Controller/PostController.php
+
+		-
+			message: """
+				#^Call to deprecated method _GP\\(\\) of class TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:
+				since TYPO3 v12\\.3\\. will be removed in TYPO3 v13\\.0\\.$#
+			"""
+			count: 2
+			path: ../Classes/Controller/WidgetController.php
+
+		-
+			message: """
+				#^Fetching deprecated class constant ERROR of class TYPO3\\\\CMS\\\\Core\\\\Messaging\\\\AbstractMessage\\:
+				Use \\\\TYPO3\\\\CMS\\\\Core\\\\Type\\\\ContextualFeedbackSeverity\\:\\:ERROR instead$#
+			"""
+			count: 1
+			path: ../Classes/Domain/Finisher/CommentFormFinisher.php
+
+		-
+			message: """
+				#^Fetching deprecated class constant INFO of class TYPO3\\\\CMS\\\\Core\\\\Messaging\\\\AbstractMessage\\:
+				Use \\\\TYPO3\\\\CMS\\\\Core\\\\Type\\\\ContextualFeedbackSeverity\\:\\:INFO instead$#
+			"""
+			count: 1
+			path: ../Classes/Domain/Finisher/CommentFormFinisher.php
+
+		-
+			message: """
+				#^Fetching deprecated class constant OK of class TYPO3\\\\CMS\\\\Core\\\\Messaging\\\\AbstractMessage\\:
+				Use \\\\TYPO3\\\\CMS\\\\Core\\\\Type\\\\ContextualFeedbackSeverity\\:\\:OK instead$#
+			"""
+			count: 1
+			path: ../Classes/Domain/Finisher/CommentFormFinisher.php
+
+		-
+			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
+			count: 1
+			path: ../Classes/Domain/Model/Author.php
+
+		-
+			message: "#^Unable to resolve the template type T in call to method static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\)$#"
+			count: 1
+			path: ../Classes/Domain/Model/Author.php
+
+		-
+			message: "#^Parameter \\#1 \\$object of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<object\\>\\:\\:attach\\(\\) expects object, TYPO3\\\\CMS\\\\Extbase\\\\DomainObject\\\\DomainObjectInterface\\|null given\\.$#"
+			count: 1
+			path: ../Classes/Domain/Repository/PostRepository.php
+
+		-
+			message: "#^Return type \\(TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryResultInterface\\) of method T3G\\\\AgencyPack\\\\Blog\\\\Domain\\\\Repository\\\\PostRepository\\:\\:findAll\\(\\) should be covariant with return type \\(iterable\\<object\\>\\) of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\RepositoryInterface\\<object\\>\\:\\:findAll\\(\\)$#"
+			count: 1
+			path: ../Classes/Domain/Repository/PostRepository.php
+
+		-
+			message: """
+				#^Call to deprecated method _GP\\(\\) of class TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:
+				since TYPO3 v12\\.3\\. will be removed in TYPO3 v13\\.0\\.$#
+			"""
+			count: 1
+			path: ../Classes/Domain/Validator/GoogleCaptchaValidator.php
+
+		-
+			message: """
+				#^Call to deprecated method _GPmerged\\(\\) of class TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:
+				since TYPO3 v12\\.2\\. will be removed in TYPO3 v13\\.0\\.$#
+			"""
+			count: 1
+			path: ../Classes/Domain/Validator/GoogleCaptchaValidator.php
+
+		-
+			message: "#^Method T3G\\\\AgencyPack\\\\Blog\\\\Domain\\\\Validator\\\\GoogleCaptchaValidator\\:\\:isValid\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../Classes/Domain/Validator/GoogleCaptchaValidator.php
+
+		-
+			message: "#^Method T3G\\\\AgencyPack\\\\Blog\\\\Listener\\\\ModifyPageLayoutContent\\:\\:__invoke\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../Classes/Listener/ModifyPageLayoutContent.php
+
+		-
+			message: "#^Unable to resolve the template type T in call to method static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\)$#"
+			count: 1
+			path: ../Classes/Notification/NotificationManager.php
+
+		-
+			message: """
+				#^Fetching deprecated class constant PARAM_STR_ARRAY of class TYPO3\\\\CMS\\\\Core\\\\Database\\\\Connection\\:
+				Use \\{@see ArrayParameterType\\:\\:STRING\\} instead\\.$#
+			"""
+			count: 1
+			path: ../Classes/Updates/Criteria/InCriteria.php
+
+		-
+			message: """
+				#^Usage of deprecated trait TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\Traits\\\\CompileWithContentArgumentAndRenderStatic in class T3G\\\\AgencyPack\\\\Blog\\\\ViewHelpers\\\\Data\\\\ContentListOptionsViewHelper\\:
+				Will be removed in v5\\. No longer necessary since getContentArgumentName\\(\\) has been
+				            integrated into AbstractViewHelper with v2\\.15\\. Name has to be specified explicitly
+				            by overriding the method, implicit definition \\(\\= first optional argument\\) is no
+				            longer supported\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Data/ContentListOptionsViewHelper.php
+
+		-
+			message: """
+				#^Usage of deprecated trait TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\Traits\\\\CompileWithContentArgumentAndRenderStatic in class T3G\\\\AgencyPack\\\\Blog\\\\ViewHelpers\\\\Format\\\\Nl2pViewHelper\\:
+				Will be removed in v5\\. No longer necessary since getContentArgumentName\\(\\) has been
+				            integrated into AbstractViewHelper with v2\\.15\\. Name has to be specified explicitly
+				            by overriding the method, implicit definition \\(\\= first optional argument\\) is no
+				            longer supported\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Format/Nl2pViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerTagAttribute\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/GravatarViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerUniversalTagAttributes\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/GravatarViewHelper.php
+
+		-
+			message: """
+				#^Access to deprecated property \\$tmpl of class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
+				\\: TemplateService is kept for b/w compat in v12 but will be removed in v13\\.$#
+			"""
+			count: 2
+			path: ../Classes/ViewHelpers/Link/ArchiveViewHelper.php
+
+		-
+			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
+			count: 1
+			path: ../Classes/ViewHelpers/Link/ArchiveViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerTagAttribute\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 2
+			path: ../Classes/ViewHelpers/Link/ArchiveViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerUniversalTagAttributes\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Link/ArchiveViewHelper.php
+
+		-
+			message: """
+				#^Access to deprecated property \\$tmpl of class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
+				\\: TemplateService is kept for b/w compat in v12 but will be removed in v13\\.$#
+			"""
+			count: 2
+			path: ../Classes/ViewHelpers/Link/AuthorViewHelper.php
+
+		-
+			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
+			count: 1
+			path: ../Classes/ViewHelpers/Link/AuthorViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerTagAttribute\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 2
+			path: ../Classes/ViewHelpers/Link/AuthorViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerUniversalTagAttributes\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Link/AuthorViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerTagAttribute\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 3
+			path: ../Classes/ViewHelpers/Link/Be/AuthorViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerUniversalTagAttributes\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Link/Be/AuthorViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerTagAttribute\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 3
+			path: ../Classes/ViewHelpers/Link/Be/CategoryViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerUniversalTagAttributes\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Link/Be/CategoryViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerTagAttribute\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 3
+			path: ../Classes/ViewHelpers/Link/Be/CommentViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerUniversalTagAttributes\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Link/Be/CommentViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerTagAttribute\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 3
+			path: ../Classes/ViewHelpers/Link/Be/PostViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerUniversalTagAttributes\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Link/Be/PostViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerTagAttribute\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 3
+			path: ../Classes/ViewHelpers/Link/Be/TagViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerUniversalTagAttributes\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Link/Be/TagViewHelper.php
+
+		-
+			message: """
+				#^Access to deprecated property \\$tmpl of class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
+				\\: TemplateService is kept for b/w compat in v12 but will be removed in v13\\.$#
+			"""
+			count: 2
+			path: ../Classes/ViewHelpers/Link/CategoryViewHelper.php
+
+		-
+			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
+			count: 1
+			path: ../Classes/ViewHelpers/Link/CategoryViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerTagAttribute\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 2
+			path: ../Classes/ViewHelpers/Link/CategoryViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerUniversalTagAttributes\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Link/CategoryViewHelper.php
+
+		-
+			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
+			count: 1
+			path: ../Classes/ViewHelpers/Link/PostViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerTagAttribute\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 3
+			path: ../Classes/ViewHelpers/Link/PostViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerUniversalTagAttributes\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Link/PostViewHelper.php
+
+		-
+			message: """
+				#^Access to deprecated property \\$tmpl of class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
+				\\: TemplateService is kept for b/w compat in v12 but will be removed in v13\\.$#
+			"""
+			count: 2
+			path: ../Classes/ViewHelpers/Link/TagViewHelper.php
+
+		-
+			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
+			count: 1
+			path: ../Classes/ViewHelpers/Link/TagViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerTagAttribute\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 2
+			path: ../Classes/ViewHelpers/Link/TagViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method registerUniversalTagAttributes\\(\\) of class TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractTagBasedViewHelper\\:
+				Will log deprecation in v4, will be removed in v5\\. No longer necessary since arbitrary arguments are allowed\\.$#
+			"""
+			count: 1
+			path: ../Classes/ViewHelpers/Link/TagViewHelper.php
+
+		-
+			message: """
+				#^Call to deprecated method getFileFieldTCAConfig\\(\\) of class TYPO3\\\\CMS\\\\Core\\\\Utility\\\\ExtensionManagementUtility\\:
+				since TYPO3 v12\\.0\\. Use the TCA type "file" directly$#
+			"""
+			count: 1
+			path: ../Configuration/TCA/Overrides/pages.php
+
+		-
+			message: """
+				#^Call to deprecated method getFileFieldTCAConfig\\(\\) of class TYPO3\\\\CMS\\\\Core\\\\Utility\\\\ExtensionManagementUtility\\:
+				since TYPO3 v12\\.0\\. Use the TCA type "file" directly$#
+			"""
+			count: 1
+			path: ../Configuration/TCA/tx_blog_domain_model_author.php

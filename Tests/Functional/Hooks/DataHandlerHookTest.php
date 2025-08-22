@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog\Tests\Functional\Service;
+namespace T3G\AgencyPack\Blog\Tests\Functional\Hooks;
 
 use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
