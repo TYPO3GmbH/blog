@@ -29,7 +29,7 @@ class GravatarUriBuilderTest extends UnitTestCase
     }
 
     /**
-     * @dataProvider testGetUriDataProvider
+     * @dataProvider getUriDataProvider
      * @param string $expectedUriString
      * @param string $email
      * @param int|null $size
@@ -44,7 +44,7 @@ class GravatarUriBuilderTest extends UnitTestCase
         );
     }
 
-    public static function testGetUriDataProvider(): \Generator
+    public static function getUriDataProvider(): \Generator
     {
         $email = 'name@host.tld';
         yield ['https://www.gravatar.com/avatar/71803b16fcdb8ac77611d0a977b20164', $email, null, null, null];
