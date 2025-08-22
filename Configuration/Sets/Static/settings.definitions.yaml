@@ -585,12 +585,12 @@ settings:
     type: int
     default: 5
 
-  plugin.tx_blog.settings.widgets.minSize.limit:
+  plugin.tx_blog.settings.widgets.tags.minSize:
     category: blog.widgets.tags
     type: int
     default: 100
 
-  plugin.tx_blog.settings.widgets.maxSize.limit:
+  plugin.tx_blog.settings.widgets.tags.maxSize:
     category: blog.widgets.tags
     type: int
     default: 100
