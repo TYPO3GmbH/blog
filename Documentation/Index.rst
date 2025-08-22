@@ -23,8 +23,6 @@ TYPO3 Blog Extension
    Installation/Index
    Setup/Index
    Guides/Index
-   Configuration/Index
    Plugins/Index
    Extending/Index
    FAQ/Index
-   Changelog/Index
