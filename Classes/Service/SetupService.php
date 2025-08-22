@@ -17,6 +17,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
@@ -34,32 +35,43 @@ class SetupService
         $setups = [];
         $queryBuilder = $this->getQueryBuilderForTable('pages');
         $blogRootPages = $queryBuilder
-            ->select('pid')
-            ->addSelectLiteral($queryBuilder->expr()->count('pid', 'cnt'))
+            ->select('uid', 'title')
             ->from('pages')
-            ->where($queryBuilder->expr()->eq('doktype', $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, Connection::PARAM_INT)))
-            ->groupBy('pid')
+            ->where(
+                $queryBuilder->expr()->eq('doktype', $queryBuilder->createNamedParameter(PageRepository::DOKTYPE_SYSFOLDER, Connection::PARAM_INT)),
+                $queryBuilder->expr()->eq('module', $queryBuilder->createNamedParameter('blog', Connection::PARAM_STR)),
+                $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)),
+            )
+            ->groupBy('uid')
             ->executeQuery()
             ->fetchAllAssociative();
+
         foreach ($blogRootPages as $blogRootPage) {
-            $blogUid = $blogRootPage['pid'];
+            $blogUid = (int) $blogRootPage['uid'];
+            $blogTitle = (string) $blogRootPage['title'];
             if (!array_key_exists($blogUid, $setups)) {
+                $rootline = array_reverse(GeneralUtility::makeInstance(RootlineUtility::class, $blogUid)->get());
+
                 $queryBuilder = $this->getQueryBuilderForTable('pages');
-                $title = $queryBuilder
-                    ->select('title')
+                $articleCount = $queryBuilder
+                    ->count('*')
                     ->from('pages')
-                    ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($blogUid, Connection::PARAM_INT)))
+                    ->where(
+                        $queryBuilder->expr()->eq('doktype', $queryBuilder->createNamedParameter(Constants::DOKTYPE_BLOG_POST, Connection::PARAM_INT)),
+                        $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($blogUid, Connection::PARAM_INT)),
+                        $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)),
+                    )
                     ->executeQuery()
                     ->fetchOne();
-                $rootline = array_reverse(GeneralUtility::makeInstance(RootlineUtility::class, $blogUid)->get());
+
                 $setups[$blogUid] = [
                     'uid' => $blogUid,
-                    'title' => $title,
+                    'title' => $blogTitle,
                     'path' => implode(' / ', array_map(function ($page) {
                         return $page['title'];
                     }, $rootline)),
                     'rootline' => $rootline,
-                    'articleCount' => $blogRootPage['cnt'],
+                    'articleCount' => (int) $articleCount,
                 ];
             }
         }
