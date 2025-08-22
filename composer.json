@@ -96,7 +96,7 @@
         "typo3/cms-install": "^13.4.15 || 14.*.*@dev"
     },
     "require-dev": {
-        "bk2k/bootstrap-package": "^15.0",
+        "bk2k/bootstrap-package": "^15.0 || 16.*.*@dev",
         "bk2k/extension-helper": "^2.0",
         "friendsofphp/php-cs-fixer": "^3.75",
         "overtrue/phplint": "^9.6",
