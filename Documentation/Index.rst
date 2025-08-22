@@ -28,4 +28,3 @@ TYPO3 Blog Extension
    Extending/Index
    FAQ/Index
    Changelog/Index
-   Migration/Index
