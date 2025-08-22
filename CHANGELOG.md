@@ -1,3 +1,18 @@
+# 12.0.4
+
+## TASK
+
+- 67b2982 [TASK] Rename dataprovider
+- 9bea445 [TASK] Run publish on ubuntu latest
+
+## BUGFIX
+
+- fecc9e1 [BUGFIX] Correct autoloading and phpstan
+
+## Contributors
+
+- Benjamin Kott
+
 # 12.0.3
 
 ## TASK
