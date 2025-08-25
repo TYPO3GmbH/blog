@@ -1,3 +1,24 @@
+# 13.0.1
+
+## TASK
+
+- fc46275 [TASK] Run publish on ubuntu-latest
+- 083e8c1 [TASK] Add v13 deprecation notices to phpstan baseline
+- 51633e8 [TASK] Drop Header Content fallback for v11
+- 2dc9dbc [TASK] Update ddev config
+- 015ddbb [TASK] Declare nullable types as nullable explicitly (#332)
+- 66d0000 [TASK] Improve performance with disabled comments (#326)
+- 758593b [TASK] Allow psr/http-message 1.1 and 2.0
+- e5c6df8 [TASK] Remove stray comment
+
+## Contributors
+
+- Benjamin Franzke
+- Benjamin Kott
+- Julian Hofmann
+- Marvin Buchmann
+- lina.wolf
+
 # 13.0.0
 
 ## TASK
