@@ -1,6 +1,157 @@
 parameters:
 	ignoreErrors:
 		-
+			message: """
+				#^Fetching class constant class of deprecated class TYPO3\\\\CMS\\\\Fluid\\\\View\\\\StandaloneView\\:
+				\\: since TYPO3 v13, will be removed in v14\\. Use ext\\:core ViewFactoryInterface instead\\.$#
+			"""
+			count: 1
+			path: ../Classes/Backend/View/BlogPostHeaderContentRenderer.php
+
+		-
+			message: """
+				#^Return type of method T3G\\\\AgencyPack\\\\Blog\\\\Domain\\\\Factory\\\\CommentFormFactory\\:\\:getTypoScriptFrontendController\\(\\) has typehint with deprecated class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
+				since TYPO3 v13, will vanish during v14 development\\. There are some
+				            remaining internal usages that can be adapted without further \\.rst
+				            files\\. The class should vanish together with \\$GLOBALS\\['TSFE'\\] in v14\\.$#
+			"""
+			count: 1
+			path: ../Classes/Domain/Factory/CommentFormFactory.php
+
+		-
 			message: "#^Return type \\(TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryResultInterface\\) of method T3G\\\\AgencyPack\\\\Blog\\\\Domain\\\\Repository\\\\PostRepository\\:\\:findAll\\(\\) should be covariant with return type \\(iterable\\<object\\>\\) of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\RepositoryInterface\\<object\\>\\:\\:findAll\\(\\)$#"
 			count: 1
 			path: ../Classes/Domain/Repository/PostRepository.php
+
+		-
+			message: """
+				#^Return type of method T3G\\\\AgencyPack\\\\Blog\\\\Domain\\\\Repository\\\\PostRepository\\:\\:getTypoScriptFrontendController\\(\\) has typehint with deprecated class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
+				since TYPO3 v13, will vanish during v14 development\\. There are some
+				            remaining internal usages that can be adapted without further \\.rst
+				            files\\. The class should vanish together with \\$GLOBALS\\['TSFE'\\] in v14\\.$#
+			"""
+			count: 1
+			path: ../Classes/Domain/Repository/PostRepository.php
+
+		-
+			message: """
+				#^Fetching class constant class of deprecated class TYPO3\\\\CMS\\\\Fluid\\\\View\\\\StandaloneView\\:
+				\\: since TYPO3 v13, will be removed in v14\\. Use ext\\:core ViewFactoryInterface instead\\.$#
+			"""
+			count: 1
+			path: ../Classes/Mail/MailContent.php
+
+		-
+			message: """
+				#^Return type of method T3G\\\\AgencyPack\\\\Blog\\\\Mail\\\\MailContent\\:\\:getFluidTemplateObject\\(\\) has typehint with deprecated class TYPO3\\\\CMS\\\\Fluid\\\\View\\\\StandaloneView\\:
+				\\: since TYPO3 v13, will be removed in v14\\. Use ext\\:core ViewFactoryInterface instead\\.$#
+			"""
+			count: 1
+			path: ../Classes/Mail/MailContent.php
+
+		-
+			message: """
+				#^Call to deprecated method addCacheTags\\(\\) of class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
+				since TYPO3 v13, will be removed in TYPO3 v14\\. Use \\$request\\-\\>getAttribute\\('frontend\\.cache\\.collector'\\)\\-\\>addCacheTags\\(new CacheTag\\(\\$tag, \\$lifetime\\)\\) instead\\.$#
+			"""
+			count: 1
+			path: ../Classes/Service/CacheService.php
+
+		-
+			message: """
+				#^Return type of method T3G\\\\AgencyPack\\\\Blog\\\\Service\\\\CacheService\\:\\:getTypoScriptFrontendController\\(\\) has typehint with deprecated class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
+				since TYPO3 v13, will vanish during v14 development\\. There are some
+				            remaining internal usages that can be adapted without further \\.rst
+				            files\\. The class should vanish together with \\$GLOBALS\\['TSFE'\\] in v14\\.$#
+			"""
+			count: 1
+			path: ../Classes/Service/CacheService.php
+
+		-
+			message: "#^Result of method TYPO3\\\\CMS\\\\Core\\\\DataHandling\\\\DataHandler\\:\\:process_datamap\\(\\) \\(void\\) is used\\.$#"
+			count: 2
+			path: ../Classes/Service/SetupService.php
+
+		-
+			message: "#^Strict comparison using \\!\\=\\= between null and false will always evaluate to true\\.$#"
+			count: 2
+			path: ../Classes/Service/SetupService.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between true and true will always evaluate to true\\.$#"
+			count: 1
+			path: ../Classes/Service/SetupService.php
+
+		-
+			message: """
+				#^Fetching deprecated class constant FILETYPE_IMAGE of class TYPO3\\\\CMS\\\\Core\\\\Resource\\\\File\\:
+				will be removed in TYPO3 v14, use TYPO3\\\\CMS\\\\Core\\\\Resource\\\\FileType\\:\\:IMAGE instead$#
+			"""
+			count: 1
+			path: ../Configuration/TCA/tx_blog_domain_model_author.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class TYPO3\\\\CMS\\\\Fluid\\\\View\\\\TemplateView\\:
+				\\: since TYPO3 v13, will be removed in v14\\. Use ext\\:core ViewFactoryInterface instead\\.$#
+			"""
+			count: 1
+			path: ../Tests/Functional/ViewHelpers/GravatarViewHelperTest.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class TYPO3\\\\CMS\\\\Fluid\\\\View\\\\TemplateView\\:
+				\\: since TYPO3 v13, will be removed in v14\\. Use ext\\:core ViewFactoryInterface instead\\.$#
+			"""
+			count: 1
+			path: ../Tests/Functional/ViewHelpers/Link/Be/AuthorViewHelperTest.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class TYPO3\\\\CMS\\\\Fluid\\\\View\\\\TemplateView\\:
+				\\: since TYPO3 v13, will be removed in v14\\. Use ext\\:core ViewFactoryInterface instead\\.$#
+			"""
+			count: 1
+			path: ../Tests/Functional/ViewHelpers/Link/Be/CategoryViewHelperTest.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class TYPO3\\\\CMS\\\\Fluid\\\\View\\\\TemplateView\\:
+				\\: since TYPO3 v13, will be removed in v14\\. Use ext\\:core ViewFactoryInterface instead\\.$#
+			"""
+			count: 1
+			path: ../Tests/Functional/ViewHelpers/Link/Be/CommentViewHelperTest.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class TYPO3\\\\CMS\\\\Fluid\\\\View\\\\TemplateView\\:
+				\\: since TYPO3 v13, will be removed in v14\\. Use ext\\:core ViewFactoryInterface instead\\.$#
+			"""
+			count: 1
+			path: ../Tests/Functional/ViewHelpers/Link/Be/PostViewHelperTest.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class TYPO3\\\\CMS\\\\Fluid\\\\View\\\\TemplateView\\:
+				\\: since TYPO3 v13, will be removed in v14\\. Use ext\\:core ViewFactoryInterface instead\\.$#
+			"""
+			count: 1
+			path: ../Tests/Functional/ViewHelpers/Link/Be/TagViewHelperTest.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class TYPO3\\\\CMS\\\\Fluid\\\\View\\\\TemplateView\\:
+				\\: since TYPO3 v13, will be removed in v14\\. Use ext\\:core ViewFactoryInterface instead\\.$#
+			"""
+			count: 1
+			path: ../Tests/Functional/ViewHelpers/Uri/AvatarViewHelperTest.php
+
+		-
+			message: """
+				#^Fetching class constant class of deprecated class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
+				since TYPO3 v13, will vanish during v14 development\\. There are some
+				            remaining internal usages that can be adapted without further \\.rst
+				            files\\. The class should vanish together with \\$GLOBALS\\['TSFE'\\] in v14\\.$#
+			"""
+			count: 1
+			path: ../Tests/Unit/Service/CommentServiceTest.php
