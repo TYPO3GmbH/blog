@@ -44,6 +44,14 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
             ->getAttribute('site')
             ->getSettings()
             ->get('plugin.tx_blog.settings.categoryUid') ?? 0;
+        if ($pageUid === 0) {
+            $pageUid = (int)($request->getAttribute('frontend.typoscript')->getSetupTree()
+                ->getChildByName('plugin')
+                ?->getChildByName('tx_blog')
+                ?->getChildByName('settings')
+                ?->getChildByName('categoryUid')
+                ?->getValue() ?? 0);
+        }
         $arguments = [
             'category' => $category->getUid(),
         ];
