@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-	 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
-<polygon fill="#5BA34F" points="6,16 0,10 9,1 15,1 15,7 "/>
-<path fill="#3F7437" d="M14,2v4.6l-8,8L1.4,10l8-8H14 M15,1H9l-9,9l6,6l9-9V1L15,1z"/>
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 16 16">
+  <path fill="#5ba34f" d="m6 16-6-6 9-9h6v6z"/>
+    <path fill="#3f7437" d="M14 2v4.6l-8 8L1.4 10l8-8zm1-1H9l-9 9 6 6 9-9z"/>
 </svg>

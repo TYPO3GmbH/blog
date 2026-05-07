@@ -1,13 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-	 viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
-<rect x="17" y="11" fill="#FFFFFF" width="4" height="1"/>
-<rect x="17" y="13" fill="#FFFFFF" width="4" height="1"/>
-<rect x="17" y="15" fill="#FFFFFF" width="4" height="1"/>
-<rect x="12" y="17" fill="#FFFFFF" width="9" height="1"/>
-<rect x="12" y="19" fill="#FFFFFF" width="9" height="1"/>
-<rect x="12" y="11" fill="#FFFFFF" width="4" height="5"/>
-<path opacity="0.75" fill="#FFFFFF" d="M10,21H9v-9h1v-1H8.5C8.2,11,8,11.2,8,11.5v10C8,21.8,8.2,22,8.5,22H10V21z"/>
-<path fill="#FFFFFF" d="M22.5,9h-12C10.2,9,10,9.2,10,9.5V11v1v9v1h12.5c0.3,0,0.5-0.2,0.5-0.5v-12C23,9.2,22.8,9,22.5,9z M22,21H11
-	V10h11V21z"/>
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" fill="currentColor" viewBox="0 0 32 32">
+  <path d="M17 11h4v1h-4zm0 2h4v1h-4zm0 2h4v1h-4zm-5 2h9v1h-9zm0 2h9v1h-9zm0-8h4v5h-4z"/>
+    <path d="M10 21H9v-9h1v-1H8.5q-.5 0-.5.5v10q0 .5.5.5H10z" opacity=".8"/>
+    <path d="M22.5 9h-12q-.5 0-.5.5V22h12.5q.5 0 .5-.5v-12q0-.5-.5-.5M22 21H11V10h11z"/>
 </svg>
