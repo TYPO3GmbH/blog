@@ -38,6 +38,8 @@ categories:
     parent: blog
   blog.notifications:
     parent: blog
+  blog.rss:
+    parent: blog
 
   blog_post:
   blog_post.featuredimage:
@@ -728,3 +730,20 @@ settings:
     category: blog.notifications
     type: string
     default: 'admin@example.com'
+
+
+
+  plugin.tx_blog.settings.rss.title:
+    category: blog.rss
+    type: string
+    default: ''
+
+  plugin.tx_blog.settings.rss.description:
+    category: blog.rss
+    type: string
+    default: ''
+
+  plugin.tx_blog.settings.rss.maximumDisplayedItems:
+    category: blog.rss
+    type: int
+    default: 10

@@ -187,6 +187,11 @@ class PostRepository extends Repository
 
     public function findAllByAuthor(Author $author): QueryResultInterface
     {
+        return $this->findAllByAuthorWithLimit($author);
+    }
+
+    public function findAllByAuthorWithLimit(Author $author, int $limit = 0): QueryResultInterface
+    {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
         $storagePidConstraint = $this->getStoragePidConstraint();
@@ -194,11 +199,19 @@ class PostRepository extends Repository
             $constraints[] = $storagePidConstraint;
         }
         $constraints[] = $query->contains('authors', $author);
+        if ($limit > 0) {
+            $query->setLimit($limit);
+        }
 
         return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     public function findAllByCategory(Category $category): QueryResultInterface
+    {
+        return $this->findAllByCategoryWithLimit($category);
+    }
+
+    public function findAllByCategoryWithLimit(Category $category, int $limit = 0): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
@@ -207,11 +220,19 @@ class PostRepository extends Repository
         if ($storagePidConstraint instanceof ComparisonInterface) {
             $constraints[] = $storagePidConstraint;
         }
+        if ($limit > 0) {
+            $query->setLimit($limit);
+        }
 
         return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     public function findAllByTag(Tag $tag): QueryResultInterface
+    {
+        return $this->findAllByTagWithLimit($tag);
+    }
+
+    public function findAllByTagWithLimit(Tag $tag, int $limit = 0): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
@@ -220,11 +241,19 @@ class PostRepository extends Repository
         if ($storagePidConstraint instanceof ComparisonInterface) {
             $constraints[] = $storagePidConstraint;
         }
+        if ($limit > 0) {
+            $query->setLimit($limit);
+        }
 
         return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     public function findByMonthAndYear(int $year, ?int $month = null): QueryResultInterface
+    {
+        return $this->findByMonthAndYearWithLimit($year, $month);
+    }
+
+    public function findByMonthAndYearWithLimit(int $year, ?int $month = null, int $limit = 0): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = $this->defaultConstraints;
@@ -242,6 +271,9 @@ class PostRepository extends Repository
         }
         $constraints[] = $query->greaterThanOrEqual('publish_date', $startDate->getTimestamp());
         $constraints[] = $query->lessThanOrEqual('publish_date', $endDate->getTimestamp());
+        if ($limit > 0) {
+            $query->setLimit($limit);
+        }
 
         return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
