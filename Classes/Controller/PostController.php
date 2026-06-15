@@ -91,9 +91,16 @@ class PostController extends ActionController
                 default:
             }
 
+            $title = '' !== ($this->settings['rss']['title'] ?? '')
+                ? $this->settings['rss']['title']
+                : LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments);
+            $description = '' !== ($this->settings['rss']['description'] ?? '')
+                ? $this->settings['rss']['description']
+                : LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments);
+
             $feedData = [
-                'title' => ($this->settings['rss']['title'] ?? false) ?: LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
-                'description' => ($this->settings['rss']['description'] ?? false) ?: LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
+                'title' => $title,
+                'description' => $description,
                 'language' => $this->getSiteLanguage()->getLocale()->getLanguageCode(),
                 'link' => $this->getRequestUrl(),
                 'date' => date('r'),
