@@ -61,39 +61,39 @@ final class AuthorViewHelperTest extends FunctionalTestCase
 
     public static function renderDataProvider(): array
     {
-        $expectedReturnUrl = '/';
-        if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
-            $expectedReturnUrl = '%2F';
+        $expectedBase = '';
+        if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 14) {
+            $expectedBase = '/';
         }
 
         return [
             'simple' => [
                 '<blogvh:link.be.author author="{author}" />',
-                '<a href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Info</a>',
+                '<a href="' . $expectedBase . 'typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=/">Info</a>',
             ],
             'target' => [
                 '<blogvh:link.be.author author="{author}" target="_blank" />',
-                '<a target="_blank" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Info</a>',
+                '<a target="_blank" href="' . $expectedBase . 'typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=/">Info</a>',
             ],
             'itemprop' => [
                 '<blogvh:link.be.author author="{author}" itemprop="name" />',
-                '<a itemprop="name" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Info</a>',
+                '<a itemprop="name" href="' . $expectedBase . 'typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=/">Info</a>',
             ],
             'rel' => [
                 '<blogvh:link.be.author author="{author}" rel="noreferrer" />',
-                '<a rel="noreferrer" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Info</a>',
+                '<a rel="noreferrer" href="' . $expectedBase . 'typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=/">Info</a>',
             ],
             'returnUri' => [
                 '<blogvh:link.be.author author="{author}" returnUri="1" />',
-                '/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl,
+                $expectedBase . 'typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=/',
             ],
             'content' => [
                 '<blogvh:link.be.author author="{author}">Hello</blogvh:link.be.author>',
-                '<a href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Hello</a>',
+                '<a href="' . $expectedBase . 'typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=/">Hello</a>',
             ],
             'class' => [
                 '<blogvh:link.be.author author="{author}" class="class" />',
-                '<a class="class" href="/typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=' . $expectedReturnUrl . '">Info</a>',
+                '<a class="class" href="' . $expectedBase . 'typo3/record/edit?token=dummyToken&amp;edit%5Btx_blog_domain_model_author%5D%5B123%5D=edit&amp;returnUrl=/">Info</a>',
             ],
         ];
     }
