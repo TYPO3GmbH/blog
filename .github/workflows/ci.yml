@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        typo3: ['^13', '14.0.x-dev']
+        typo3: ['^13', '^14.3']
         php: ['8.2', '8.3', '8.4']
         mysql: ['8.0']
     steps:
