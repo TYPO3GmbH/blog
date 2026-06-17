@@ -317,6 +317,13 @@ plugin.tx_blog {
                 }
             }
         }
+
+        # RSS related settings
+        rss {
+            title = {$plugin.tx_blog.settings.rss.title}
+            description = {$plugin.tx_blog.settings.rss.description}
+            maximumDisplayedItems = {$plugin.tx_blog.settings.rss.maximumDisplayedItems}
+        }
     }
 
     pageInfo.title = TEXT
