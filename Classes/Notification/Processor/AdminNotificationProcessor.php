@@ -11,13 +11,19 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Notification\Processor;
 
 use Psr\Http\Message\ServerRequestInterface;
-use T3G\AgencyPack\Blog\Mail\MailMessage;
+use Symfony\Component\Mime\Part\TextPart;
 use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
 use T3G\AgencyPack\Blog\Notification\NotificationInterface;
+use TYPO3\CMS\Core\Mail\MailerInterface;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class AdminNotificationProcessor implements ProcessorInterface
+readonly class AdminNotificationProcessor implements ProcessorInterface
 {
+    public function __construct(private MailerInterface $mailer)
+    {
+    }
+
     public function process(ServerRequestInterface $request, NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
@@ -36,10 +42,10 @@ class AdminNotificationProcessor implements ProcessorInterface
             $mail = GeneralUtility::makeInstance(MailMessage::class);
             $mail
                 ->setSubject($notification->getTitle())
-                ->setBody($notification->getMessage())
+                ->setBody(new TextPart($notification->getMessage(), 'utf-8', 'html'))
                 ->setFrom([$settings->get('plugin.tx_blog.settings.notifications.email.senderMail')])
-                ->setTo($emailAddresses)
-                ->send();
+                ->setTo($emailAddresses);
+            $this->mailer->send($mail);
         }
     }
 }

@@ -68,6 +68,9 @@ class PostViewHelper extends AbstractTagBasedViewHelper
 
     protected function getRequest(): RequestInterface
     {
+        if (null === $this->renderingContext) {
+            throw new \RuntimeException('ViewHelper blogvh:link.post requires an existing rendering context.', 1781701013);
+        }
         $request = null;
         if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
             $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);

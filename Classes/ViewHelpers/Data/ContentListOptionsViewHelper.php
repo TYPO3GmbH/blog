@@ -26,6 +26,9 @@ class ContentListOptionsViewHelper extends AbstractViewHelper
 
     public function render(): string
     {
+        if (null === $this->renderingContext) {
+            throw new \RuntimeException('CacheViewHelper requires an existing rendering context.', 1781701009);
+        }
         $arguments = $this->arguments;
         $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');

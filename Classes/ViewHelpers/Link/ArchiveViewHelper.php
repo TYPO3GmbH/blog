@@ -80,6 +80,9 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
 
     protected function getRequest(): RequestInterface
     {
+        if (null === $this->renderingContext) {
+            throw new \RuntimeException('CacheViewHelper requires an existing rendering context.', 1781701010);
+        }
         $request = null;
         if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
             $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);

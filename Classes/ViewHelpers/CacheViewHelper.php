@@ -25,6 +25,9 @@ class CacheViewHelper extends AbstractViewHelper
 
     public function render(): string
     {
+        if (null === $this->renderingContext) {
+            throw new \RuntimeException('CacheViewHelper requires an existing rendering context.', 1781701008);
+        }
         $post = $this->arguments['post'];
         $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
         GeneralUtility::makeInstance(CacheService::class)->addTagsForPost($request, $post);
