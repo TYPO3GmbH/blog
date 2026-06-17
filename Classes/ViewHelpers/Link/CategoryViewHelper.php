@@ -76,6 +76,9 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
 
     protected function getRequest(): RequestInterface
     {
+        if (null === $this->renderingContext) {
+            throw new \RuntimeException('Viewhelper blogvh:link.category requires an existing rendering context.', 1781701012);
+        }
         $request = null;
         if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
             $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
