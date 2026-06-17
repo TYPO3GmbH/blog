@@ -138,6 +138,9 @@ class PostRepository extends Repository
         return $result;
     }
 
+    /**
+     * @return QueryResultInterface<Post>
+     */
     public function findAll(): QueryResultInterface
     {
         return $this->getFindAllQuery()->execute();
