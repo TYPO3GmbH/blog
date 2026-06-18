@@ -1,6 +1,10 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Return type \\(TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryResultInterface\\) of method T3G\\\\AgencyPack\\\\Blog\\\\Domain\\\\Repository\\\\PostRepository\\:\\:findAll\\(\\) should be covariant with return type \\(iterable\\<object\\>\\) of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\RepositoryInterface\\<object\\>\\:\\:findAll\\(\\)$#"
+			message: '''
+				#^Call to deprecated method addPiFlexFormValue\(\) of class TYPO3\\CMS\\Core\\Utility\\ExtensionManagementUtility\:
+				Will be removed in TYPO3 v15$#
+			'''
+			identifier: staticMethod.deprecated
 			count: 1
-			path: ../Classes/Domain/Repository/PostRepository.php
+			path: ../Configuration/TCA/Overrides/tt_content.php

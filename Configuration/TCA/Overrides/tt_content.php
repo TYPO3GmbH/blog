@@ -7,7 +7,9 @@
  * LICENSE file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 if (!defined('TYPO3')) {
@@ -140,15 +142,32 @@ ExtensionUtility::registerPlugin(
     group: 'blog',
 );
 
-ExtensionUtility::registerPlugin(
-    extensionName: 'Blog',
-    pluginName: 'DemandedPosts',
-    pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_demandedposts.title',
-    pluginDescription: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_demandedposts.description',
-    pluginIcon: 'plugin-blog-demandedposts',
-    group: 'blog',
-    flexForm: 'FILE:EXT:blog/Configuration/FlexForms/Demand.xml',
-);
+if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 14) {
+    ExtensionUtility::registerPlugin(
+        extensionName: 'Blog',
+        pluginName: 'DemandedPosts',
+        pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_demandedposts.title',
+        pluginDescription: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_demandedposts.description',
+        pluginIcon: 'plugin-blog-demandedposts',
+        group: 'blog',
+    );
+    ExtensionManagementUtility::addPiFlexFormValue(
+        '*',
+        'FILE:EXT:blog/Configuration/FlexForms/Demand.xml',
+        'blog_demandedposts'
+    );
+} else {
+    ExtensionUtility::registerPlugin(
+        extensionName: 'Blog',
+        pluginName: 'DemandedPosts',
+        pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_demandedposts.title',
+        pluginDescription: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_demandedposts.description',
+        pluginIcon: 'plugin-blog-demandedposts',
+        group: 'blog',
+        flexForm: 'FILE:EXT:blog/Configuration/FlexForms/Demand.xml',
+    );
+}
+
 ExtensionManagementUtility::addToAllTCAtypes(
     'tt_content',
     '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin, pi_flexform, pages, recursive',
