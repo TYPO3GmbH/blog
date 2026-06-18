@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Validator;
 
+use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -40,12 +41,14 @@ class GoogleCaptchaValidator extends AbstractValidator
             // check if google re-captcha is active, else we don't need a validation
             && (int) $settings['comments']['google_recaptcha']['enable'] === 1
         ) {
+            /** @var ?NormalizedParams $normalizedParams */
+            $normalizedParams = $request->getAttribute('normalizedParams');
             $additionalOptions = [
                 'headers' => ['Content-type' => 'application/x-www-form-urlencoded'],
                 'query' => [
                     'secret' => $settings['comments']['google_recaptcha']['secret_key'],
                     'response' => $bodyData['g-recaptcha-response'] ?? '',
-                    'remoteip' => GeneralUtility::getIndpEnv('REMOTE_ADDR')
+                    'remoteip' => $normalizedParams?->getRemoteAddress()
                 ]
             ];
             $response = GeneralUtility::makeInstance(RequestFactory::class)

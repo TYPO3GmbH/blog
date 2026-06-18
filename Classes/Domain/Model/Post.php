@@ -239,6 +239,9 @@ class Post extends AbstractEntity
         return $this->comments;
     }
 
+    /**
+     * @return QueryResultInterface<Comment>
+     */
     public function getActiveComments(): QueryResultInterface
     {
         return GeneralUtility::makeInstance(CommentRepository::class)

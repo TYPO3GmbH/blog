@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Updates;
 
+use Doctrine\DBAL\Schema\Name\OptionallyQualifiedName;
 use T3G\AgencyPack\Blog\Updates\Criteria\CriteriaInterface;
 use T3G\AgencyPack\Blog\Updates\Criteria\EqualIntCriteria;
 use T3G\AgencyPack\Blog\Updates\Criteria\EqualStringCriteria;
@@ -76,8 +77,11 @@ abstract class AbstractUpdate
 
     protected function tableHasColumn(string $table, string $column): bool
     {
+        if ('' === $table) {
+            return false;
+        }
         $schemaManager = $this->getConnection($table)->createSchemaManager();
-        $tableColumns = $schemaManager->listTableColumns($table);
+        $tableColumns = $schemaManager->introspectTableColumns(OptionallyQualifiedName::unquoted($table));
 
         if (array_key_exists($column, $tableColumns)) {
             return true;
