@@ -10,11 +10,11 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Updates;
 
-use TYPO3\CMS\Core\Attribute\UpgradeWizard;
 use TYPO3\CMS\Core\DataHandling\Model\RecordStateFactory;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
-use TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Install\Attribute\UpgradeWizard;
+use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 #[UpgradeWizard(TagSlugUpdate::class)]
 final class TagSlugUpdate extends AbstractUpdate implements UpgradeWizardInterface

@@ -1,0 +1,177 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '''
+				#^Call to deprecated method addPiFlexFormValue\(\) of class TYPO3\\CMS\\Core\\Utility\\ExtensionManagementUtility\:
+				Will be removed in TYPO3 v15$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: ../Configuration/TCA/Overrides/tt_content.php
+		-
+			message: '''
+				#^Access to constant on deprecated class TYPO3\\CMS\\Install\\Updates\\DatabaseUpdatedPrerequisite\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\DatabaseUpdatedPrerequisite instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: ../Classes/Updates/AbstractUpdate.php
+
+		-
+			message: '#^Attribute class TYPO3\\CMS\\Install\\Attribute\\UpgradeWizard is deprecated\: since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Attribute\\UpgradeWizard instead\.$#'
+			identifier: attribute.deprecated
+			count: 1
+			path: ../Classes/Updates/AuthorSlugUpdate.php
+
+		-
+			message: '''
+				#^Class T3G\\AgencyPack\\Blog\\Updates\\AuthorSlugUpdate implements deprecated interface TYPO3\\CMS\\Install\\Updates\\UpgradeWizardInterface\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\UpgradeWizardInterface instead\.$#
+			'''
+			identifier: class.implementsDeprecatedInterface
+			count: 1
+			path: ../Classes/Updates/AuthorSlugUpdate.php
+
+		-
+			message: '#^Attribute class TYPO3\\CMS\\Install\\Attribute\\UpgradeWizard is deprecated\: since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Attribute\\UpgradeWizard instead\.$#'
+			identifier: attribute.deprecated
+			count: 1
+			path: ../Classes/Updates/AvatarProviderUpdate.php
+
+		-
+			message: '''
+				#^Class T3G\\AgencyPack\\Blog\\Updates\\AvatarProviderUpdate implements deprecated interface TYPO3\\CMS\\Install\\Updates\\UpgradeWizardInterface\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\UpgradeWizardInterface instead\.$#
+			'''
+			identifier: class.implementsDeprecatedInterface
+			count: 1
+			path: ../Classes/Updates/AvatarProviderUpdate.php
+
+		-
+			message: '#^Attribute class TYPO3\\CMS\\Install\\Attribute\\UpgradeWizard is deprecated\: since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Attribute\\UpgradeWizard instead\.$#'
+			identifier: attribute.deprecated
+			count: 1
+			path: ../Classes/Updates/CategorySlugUpdate.php
+
+		-
+			message: '''
+				#^Class T3G\\AgencyPack\\Blog\\Updates\\CategorySlugUpdate implements deprecated interface TYPO3\\CMS\\Install\\Updates\\UpgradeWizardInterface\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\UpgradeWizardInterface instead\.$#
+			'''
+			identifier: class.implementsDeprecatedInterface
+			count: 1
+			path: ../Classes/Updates/CategorySlugUpdate.php
+
+		-
+			message: '#^Attribute class TYPO3\\CMS\\Install\\Attribute\\UpgradeWizard is deprecated\: since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Attribute\\UpgradeWizard instead\.$#'
+			identifier: attribute.deprecated
+			count: 1
+			path: ../Classes/Updates/CategoryTypeUpdate.php
+
+		-
+			message: '''
+				#^Class T3G\\AgencyPack\\Blog\\Updates\\CategoryTypeUpdate implements deprecated interface TYPO3\\CMS\\Install\\Updates\\UpgradeWizardInterface\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\UpgradeWizardInterface instead\.$#
+			'''
+			identifier: class.implementsDeprecatedInterface
+			count: 1
+			path: ../Classes/Updates/CategoryTypeUpdate.php
+
+		-
+			message: '#^Attribute class TYPO3\\CMS\\Install\\Attribute\\UpgradeWizard is deprecated\: since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Attribute\\UpgradeWizard instead\.$#'
+			identifier: attribute.deprecated
+			count: 1
+			path: ../Classes/Updates/CommentStatusUpdate.php
+
+		-
+			message: '''
+				#^Class T3G\\AgencyPack\\Blog\\Updates\\CommentStatusUpdate implements deprecated interface TYPO3\\CMS\\Install\\Updates\\UpgradeWizardInterface\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\UpgradeWizardInterface instead\.$#
+			'''
+			identifier: class.implementsDeprecatedInterface
+			count: 1
+			path: ../Classes/Updates/CommentStatusUpdate.php
+
+		-
+			message: '#^Attribute class TYPO3\\CMS\\Install\\Attribute\\UpgradeWizard is deprecated\: since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Attribute\\UpgradeWizard instead\.$#'
+			identifier: attribute.deprecated
+			count: 1
+			path: ../Classes/Updates/DatabaseMonthYearUpdate.php
+
+		-
+			message: '''
+				#^Class T3G\\AgencyPack\\Blog\\Updates\\DatabaseMonthYearUpdate implements deprecated interface TYPO3\\CMS\\Install\\Updates\\UpgradeWizardInterface\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\UpgradeWizardInterface instead\.$#
+			'''
+			identifier: class.implementsDeprecatedInterface
+			count: 1
+			path: ../Classes/Updates/DatabaseMonthYearUpdate.php
+
+		-
+			message: '#^Attribute class TYPO3\\CMS\\Install\\Attribute\\UpgradeWizard is deprecated\: since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Attribute\\UpgradeWizard instead\.$#'
+			identifier: attribute.deprecated
+			count: 1
+			path: ../Classes/Updates/DatabasePublishDateUpdate.php
+
+		-
+			message: '''
+				#^Class T3G\\AgencyPack\\Blog\\Updates\\DatabasePublishDateUpdate implements deprecated interface TYPO3\\CMS\\Install\\Updates\\UpgradeWizardInterface\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\UpgradeWizardInterface instead\.$#
+			'''
+			identifier: class.implementsDeprecatedInterface
+			count: 1
+			path: ../Classes/Updates/DatabasePublishDateUpdate.php
+
+		-
+			message: '#^Attribute class TYPO3\\CMS\\Install\\Attribute\\UpgradeWizard is deprecated\: since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Attribute\\UpgradeWizard instead\.$#'
+			identifier: attribute.deprecated
+			count: 1
+			path: ../Classes/Updates/FeaturedImageUpdate.php
+
+		-
+			message: '''
+				#^Class T3G\\AgencyPack\\Blog\\Updates\\FeaturedImageUpdate implements deprecated interface TYPO3\\CMS\\Install\\Updates\\RepeatableInterface\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\RepeatableInterface instead\.$#
+			'''
+			identifier: class.implementsDeprecatedInterface
+			count: 1
+			path: ../Classes/Updates/FeaturedImageUpdate.php
+
+		-
+			message: '''
+				#^Class T3G\\AgencyPack\\Blog\\Updates\\FeaturedImageUpdate implements deprecated interface TYPO3\\CMS\\Install\\Updates\\UpgradeWizardInterface\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\UpgradeWizardInterface instead\.$#
+			'''
+			identifier: class.implementsDeprecatedInterface
+			count: 1
+			path: ../Classes/Updates/FeaturedImageUpdate.php
+
+		-
+			message: '#^Attribute class TYPO3\\CMS\\Install\\Attribute\\UpgradeWizard is deprecated\: since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Attribute\\UpgradeWizard instead\.$#'
+			identifier: attribute.deprecated
+			count: 1
+			path: ../Classes/Updates/ListTypeMigration.php
+
+		-
+			message: '''
+				#^Class T3G\\AgencyPack\\Blog\\Updates\\ListTypeMigration extends deprecated class TYPO3\\CMS\\Install\\Updates\\AbstractListTypeToCTypeUpdate\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\AbstractListTypeToCTypeUpdate instead\.$#
+			'''
+			identifier: class.extendsDeprecatedClass
+			count: 1
+			path: ../Classes/Updates/ListTypeMigration.php
+
+		-
+			message: '#^Attribute class TYPO3\\CMS\\Install\\Attribute\\UpgradeWizard is deprecated\: since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Attribute\\UpgradeWizard instead\.$#'
+			identifier: attribute.deprecated
+			count: 1
+			path: ../Classes/Updates/TagSlugUpdate.php
+
+		-
+			message: '''
+				#^Class T3G\\AgencyPack\\Blog\\Updates\\TagSlugUpdate implements deprecated interface TYPO3\\CMS\\Install\\Updates\\UpgradeWizardInterface\:
+				since v14\.0, will be removed in TYPO3 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\UpgradeWizardInterface instead\.$#
+			'''
+			identifier: class.implementsDeprecatedInterface
+			count: 1
+			path: ../Classes/Updates/TagSlugUpdate.php
