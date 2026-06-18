@@ -10,11 +10,12 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
+use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * Class AuthorRepository.
+ * @extends Repository<Author>
  */
 class AuthorRepository extends Repository
 {

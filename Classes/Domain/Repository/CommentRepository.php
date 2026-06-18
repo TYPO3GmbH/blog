@@ -22,6 +22,9 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<Comment>
+ */
 class CommentRepository extends Repository
 {
     protected array $settings = [];
@@ -44,6 +47,9 @@ class CommentRepository extends Repository
         ];
     }
 
+    /**
+     * @return QueryResultInterface<Comment>
+     */
     public function findAllByPost(Post $post): QueryResultInterface
     {
         $query = $this->createQuery();
@@ -93,6 +99,9 @@ class CommentRepository extends Repository
         return $this->createQuery()->execute();
     }
 
+    /**
+     * @return QueryResultInterface<Comment>
+     */
     public function findActiveComments(?int $limit = null, ?int $blogSetup = null): QueryResultInterface
     {
         $query = $this->createQuery();

@@ -100,6 +100,9 @@ class CommentService
         )->execute()->count() > 0;
     }
 
+    /**
+     * @return QueryResultInterface<Comment>
+     */
     public function getCommentsByPost(Post $post): QueryResultInterface
     {
         return $this->commentRepository->findAllByPost($post);

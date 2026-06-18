@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
+use T3G\AgencyPack\Blog\Domain\Model\Category;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -19,6 +20,9 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<Category>
+ */
 class CategoryRepository extends Repository
 {
     protected array $settings = [];
@@ -41,6 +45,9 @@ class CategoryRepository extends Repository
         ];
     }
 
+    /**
+     * @return QueryResultInterface<Category>
+     */
     public function findByUids(array $uids): QueryResultInterface
     {
         $query = $this->createQuery();

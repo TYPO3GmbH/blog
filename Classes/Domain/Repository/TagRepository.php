@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Domain\Repository;
 
+use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -17,6 +18,9 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<Tag>
+ */
 class TagRepository extends Repository
 {
     protected array $settings = [];
@@ -31,6 +35,9 @@ class TagRepository extends Repository
         ];
     }
 
+    /**
+     * @return QueryResultInterface<Tag>
+     */
     public function findByUids(array $uids): QueryResultInterface
     {
         $query = $this->createQuery();
