@@ -78,14 +78,6 @@ class PostRepository extends Repository
     }
 
     /**
-     * @return QueryResultInterface<Post>
-     */
-    public function findAll(): QueryResultInterface
-    {
-        return $this->getFindAllQuery()->execute();
-    }
-
-    /**
      * @return Post[]
      */
     public function findByRepositoryDemand(PostRepositoryDemand $repositoryDemand): array
@@ -147,6 +139,14 @@ class PostRepository extends Repository
         }
 
         return $result;
+    }
+
+    /**
+     * @return QueryResultInterface<Post>
+     */
+    public function findAll(): QueryResultInterface
+    {
+        return $this->getFindAllQuery()->execute();
     }
 
     public function findAllByPid(?int $blogSetup = null): QueryResultInterface
