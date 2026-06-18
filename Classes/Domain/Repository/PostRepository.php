@@ -30,6 +30,9 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<Post>
+ */
 class PostRepository extends Repository
 {
     protected array $settings = [];
@@ -72,6 +75,14 @@ class PostRepository extends Repository
         $result = $query->execute()->getFirst();
 
         return $result;
+    }
+
+    /**
+     * @return QueryResultInterface<Post>
+     */
+    public function findAll(): QueryResultInterface
+    {
+        return $this->getFindAllQuery()->execute();
     }
 
     /**
@@ -138,11 +149,6 @@ class PostRepository extends Repository
         return $result;
     }
 
-    public function findAll(): QueryResultInterface
-    {
-        return $this->getFindAllQuery()->execute();
-    }
-
     public function findAllByPid(?int $blogSetup = null): QueryResultInterface
     {
         $query = $this->getFindAllQuery();
@@ -159,6 +165,9 @@ class PostRepository extends Repository
         return $query->execute();
     }
 
+    /**
+     * @return QueryResultInterface<Post>
+     */
     public function findAllWithLimit(int $limit): QueryResultInterface
     {
         $query = $this->getFindAllQuery();
@@ -167,6 +176,9 @@ class PostRepository extends Repository
         return $query->execute();
     }
 
+    /**
+     * @return QueryInterface<Post>
+     */
     protected function getFindAllQuery(): QueryInterface
     {
         $query = $this->createQuery();
