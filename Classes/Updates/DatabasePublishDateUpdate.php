@@ -11,8 +11,8 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Updates;
 
 use T3G\AgencyPack\Blog\Constants;
-use TYPO3\CMS\Core\Attribute\UpgradeWizard;
-use TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface;
+use TYPO3\CMS\Install\Attribute\UpgradeWizard;
+use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 #[UpgradeWizard(DatabasePublishDateUpdate::class)]
 final class DatabasePublishDateUpdate extends AbstractUpdate implements UpgradeWizardInterface

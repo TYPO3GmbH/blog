@@ -10,8 +10,8 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Updates;
 
-use TYPO3\CMS\Core\Attribute\UpgradeWizard;
-use TYPO3\CMS\Core\Upgrades\AbstractListTypeToCTypeUpdate;
+use TYPO3\CMS\Install\Attribute\UpgradeWizard;
+use TYPO3\CMS\Install\Updates\AbstractListTypeToCTypeUpdate;
 
 #[UpgradeWizard(ListTypeMigration::class)]
 final class ListTypeMigration extends AbstractListTypeToCTypeUpdate
