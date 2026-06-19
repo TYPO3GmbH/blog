@@ -43,7 +43,14 @@ class ArchiveViewHelper extends AbstractTagBasedViewHelper
             ->getAttribute('site')
             ->getSettings()
             ->get('plugin.tx_blog.settings.archiveUid') ?? 0;
-
+        if ($pageUid === 0) {
+            $pageUid = (int)($request->getAttribute('frontend.typoscript')->getSetupTree()
+                ->getChildByName('plugin')
+                ?->getChildByName('tx_blog')
+                ?->getChildByName('settings')
+                ?->getChildByName('archiveUid')
+                ?->getValue() ?? 0);
+        }
         $rssTypeNum = (int)(
             $request->getAttribute('frontend.typoscript')->getSetupTree()
             ->getChildByName('blog_rss_archive')

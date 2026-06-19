@@ -59,6 +59,14 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
             ->getAttribute('site')
             ->getSettings()
             ->get('plugin.tx_blog.settings.authorUid') ?? 0;
+        if ($pageUid === 0) {
+            $pageUid = (int)($request->getAttribute('frontend.typoscript')->getSetupTree()
+                ->getChildByName('plugin')
+                ?->getChildByName('tx_blog')
+                ?->getChildByName('settings')
+                ?->getChildByName('authorUid')
+                ?->getValue() ?? 0);
+        }
         $uriBuilder = $this->getUriBuilder($pageUid, [], $rssFormat);
         $arguments = [
             'author' => $author->getUid(),
