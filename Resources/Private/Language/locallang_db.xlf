@@ -277,6 +277,18 @@
             <trans-unit id="flexform.latestPosts.limit" xml:space="preserve">
                 <source>Amount of items to show in overview of latest posts</source>
             </trans-unit>
+            <trans-unit id="settings.lists.posts.layout" xml:space="preserve">
+                <source>Layout</source>
+            </trans-unit>
+            <trans-unit id="settings.lists.posts.layout.default" xml:space="preserve">
+                <source>Default list</source>
+            </trans-unit>
+            <trans-unit id="settings.lists.posts.showImages" xml:space="preserve">
+                <source>Show images</source>
+            </trans-unit>
+            <trans-unit id="settings.lists.posts.showImages.description" xml:space="preserve">
+                <source>When enabled, post images are displayed in the post list.</source>
+            </trans-unit>
 
             <!-- Settings -->
             <trans-unit id="settings.demand.posts" xml:space="preserve">

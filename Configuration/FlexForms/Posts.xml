@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <sheetTitle>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:flexform.sheet_general</sheetTitle>
+                <type>array</type>
+                <el>
+                    <settings.lists.posts.layout>
+                        <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.lists.posts.layout</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.lists.posts.layout.default</numIndex>
+                                    <numIndex index="1">default</numIndex>
+                                </numIndex>
+                            </items>
+                            <default>default</default>
+                        </config>
+                    </settings.lists.posts.layout>
+
+                    <settings.lists.posts.showImages>
+                        <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.lists.posts.showImages</label>
+                        <description>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.lists.posts.showImages.description</description>
+                        <config>
+                            <type>check</type>
+                            <renderType>checkboxToggle</renderType>
+                            <default>1</default>
+                        </config>
+                    </settings.lists.posts.showImages>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

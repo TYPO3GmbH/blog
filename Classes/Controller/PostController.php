@@ -129,7 +129,10 @@ class PostController extends ActionController
             $pagination = $this->getPagination($posts, $currentPage);
         }
 
+        $postListLayout = (string)($this->settings['lists']['posts']['layout'] ?? 'default');
         $this->view->assign('type', 'recent');
+        $this->view->assign('postListLayout', $postListLayout);
+        $this->view->assign('showImages', (bool)($this->settings['lists']['posts']['showImages'] ?? true));
         $this->view->assign('posts', $posts);
         $this->view->assign('pagination', $pagination ?? null);
         return $this->htmlResponse();

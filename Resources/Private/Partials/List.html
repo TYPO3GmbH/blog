@@ -1,4 +1,4 @@
-<div class="postlist{f:if(condition: type, then: ' postlist--{type}')}">
+<div class="postlist{f:if(condition: type, then: ' postlist--{type}')}{f:if(condition: postListLayout, then: ' postlist--layout-{postListLayout}')}">
 
     <f:if condition="{pagination} && {pagination.paginatedItems}">
         <f:then>
