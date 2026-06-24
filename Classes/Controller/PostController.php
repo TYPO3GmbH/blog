@@ -101,6 +101,12 @@ class PostController extends ActionController
             $this->view->assign('feed', $feedData);
         }
 
+        $postListLayout = (string)($this->settings['lists']['posts']['layout'] ?? 'default');
+        $postListLayoutClass = preg_replace('/[^a-zA-Z0-9_-]/', '-', $postListLayout) ?: 'default';
+        $this->view->assign('postListLayout', $postListLayout);
+        $this->view->assign('postListLayoutClass', $postListLayoutClass);
+        $this->view->assign('showImages', (bool)($this->settings['lists']['posts']['showImages'] ?? true));
+
         $contentObject = $this->request->getAttribute('currentContentObject');
         $this->view->assign('data', $contentObject !== null ? $contentObject->data : null);
     }
@@ -116,10 +122,7 @@ class PostController extends ActionController
             : $this->postRepository->findAllWithLimit($maximumItems);
         $pagination = $this->getPagination($posts, $currentPage);
 
-        $postListLayout = (string)($this->settings['lists']['posts']['layout'] ?? 'default');
         $this->view->assign('type', 'recent');
-        $this->view->assign('postListLayout', $postListLayout);
-        $this->view->assign('showImages', (bool)($this->settings['lists']['posts']['showImages'] ?? true));
         $this->view->assign('posts', $posts);
         $this->view->assign('pagination', $pagination);
         return $this->htmlResponse();
