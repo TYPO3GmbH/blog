@@ -24,9 +24,14 @@ ExtensionUtility::registerPlugin(
 );
 ExtensionManagementUtility::addToAllTCAtypes(
     'tt_content',
-    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin, pages, recursive',
+    '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin, pi_flexform, pages, recursive',
     'blog_posts',
     'after:palette:headers'
+);
+ExtensionManagementUtility::addPiFlexFormValue(
+    '*',
+    'FILE:EXT:blog/Configuration/FlexForms/Posts.xml',
+    'blog_posts'
 );
 
 ExtensionUtility::registerPlugin(
