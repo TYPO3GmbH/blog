@@ -58,6 +58,9 @@
             <trans-unit id="headline.rssfeed" xml:space="preserve">
                 <source>RSS-Feeds</source>
             </trans-unit>
+            <trans-unit id="headline.filter" xml:space="preserve">
+                <source>Filter</source>
+            </trans-unit>
 
             <!-- Form -->
             <trans-unit id="form.comment.name" xml:space="preserve">
@@ -208,6 +211,14 @@
             </trans-unit>
             <trans-unit id="list.show.archive" xml:space="preserve">
                 <source>Show Archive</source>
+            </trans-unit>
+
+            <!-- Filter -->
+            <trans-unit id="filter.category.all" xml:space="preserve">
+                <source>All categories</source>
+            </trans-unit>
+            <trans-unit id="filter.tag.all" xml:space="preserve">
+                <source>All tags</source>
             </trans-unit>
 
             <!-- Backend -->

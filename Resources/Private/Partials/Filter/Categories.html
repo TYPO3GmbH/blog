@@ -1,0 +1,28 @@
+<ul class="blogfilter blogfilter__categories">
+    <f:if condition="{filter.category}">
+        <f:then>
+            <li class="blogfilter__category all">
+                <f:link.action action="listPostsByFilter" arguments="{tag: filter.tag}">
+                    <f:translate key="filter.category.all"/>
+                </f:link.action>
+            </li>
+        </f:then>
+        <f:else>
+            <li class="blogfilter__category all active">
+                <f:translate key="filter.category.all"/>
+            </li>
+        </f:else>
+    </f:if>
+    <f:for each="{categories}" as="category">
+        <f:if condition="{category.uid} == {filter.category.uid}">
+            <f:then>
+                <li class="blogfilter__category one active">{category.title}</li>
+            </f:then>
+            <f:else>
+                <li class="blogfilter__category one">
+                    <f:link.action action="listPostsByFilter" arguments="{category: category, tag: filter.tag}">{category.title}</f:link.action>
+                </li>
+            </f:else>
+        </f:if>
+    </f:for>
+</ul>

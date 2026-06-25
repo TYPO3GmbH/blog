@@ -104,6 +104,15 @@ ExtensionManagementUtility::addToAllTCAtypes(
     'after:palette:headers'
 );
 
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    extensionName: 'Blog',
+    pluginName: 'Filter',
+    pluginTitle: 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:plugin.blog_filter.title',
+    pluginDescription: 'plugin-blog-filter',
+    pluginIcon: 'plugin-blog-demandedposts',
+    group: 'blog',
+);
+
 ExtensionUtility::registerPlugin(
     extensionName: 'Blog',
     pluginName: 'Sidebar',
