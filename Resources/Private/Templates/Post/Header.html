@@ -2,6 +2,7 @@
 <f:section name="Content">
 
     <header class="postheader">
+        <script type="application/ld+json"><blogvh:schema.blogPosting post="{post}" url="{blogvh:link.post(post: post, createAbsoluteUri: 1, returnUri: 1)}" /></script>
         <f:if condition="{post.featuredImage}">
             <div class="postheader__featuredimage">
                 <f:render partial="General/FeaturedImage" arguments="{image: post.featuredImage, settings: settings.post.featuredImage}" />

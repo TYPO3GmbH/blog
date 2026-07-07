@@ -31,6 +31,7 @@ class Post extends AbstractEntity
     protected string $abstract = '';
     protected string $description = '';
     protected bool $commentsActive = true;
+    protected int $tstamp = 0;
     protected int $archiveDate = 0;
     protected int $publishDate = 0;
     protected \DateTime $crdate;
@@ -228,6 +229,17 @@ class Post extends AbstractEntity
     public function setCommentsActive(bool $commentsActive): self
     {
         $this->commentsActive = $commentsActive;
+        return $this;
+    }
+
+    public function getTstamp(): int
+    {
+        return $this->tstamp;
+    }
+
+    public function setTstamp(int $tstamp): self
+    {
+        $this->tstamp = $tstamp;
         return $this;
     }
 

@@ -31,6 +31,8 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
 
         $this->registerArgument('author', Author::class, 'The author to link to', true);
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
+        $this->registerArgument('createAbsoluteUri', 'bool', 'Create absolute uri', false, false);
+        $this->registerArgument('returnUri', 'bool', 'Return only uri', false, false);
     }
 
     public function render(): string
@@ -40,19 +42,20 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         $rssFormat = (bool)$this->arguments['rss'];
 
         if ((int)$author->getDetailsPage() > 0 && !$rssFormat) {
-            return $this->buildUriFromDetailsPage($author, $rssFormat);
+            return $this->buildUriFromDetailsPage($author, $rssFormat, (bool)$this->arguments['createAbsoluteUri']);
         }
 
-        return $this->buildUriFromDefaultPage($author, $rssFormat);
+        return $this->buildUriFromDefaultPage($author, $rssFormat, (bool)$this->arguments['createAbsoluteUri']);
     }
 
-    protected function buildUriFromDetailsPage(Author $author, bool $rssFormat): string
+    protected function buildUriFromDetailsPage(Author $author, bool $rssFormat, bool $createAbsoluteUri = false): string
     {
         $uriBuilder = $this->getUriBuilder((int) $author->getDetailsPage(), [], $rssFormat);
+        $uriBuilder->setCreateAbsoluteUri($createAbsoluteUri);
         return $this->buildAnchorTag($uriBuilder->build(), $author);
     }
 
-    protected function buildUriFromDefaultPage(Author $author, bool $rssFormat): string
+    protected function buildUriFromDefaultPage(Author $author, bool $rssFormat, bool $createAbsoluteUri = false): string
     {
         $request = $this->getRequest();
         $pageUid = $request
@@ -63,6 +66,7 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         $arguments = [
             'author' => $author->getUid(),
         ];
+        $uriBuilder->setCreateAbsoluteUri($createAbsoluteUri);
         return $this->buildAnchorTag($uriBuilder->uriFor('listPostsByAuthor', $arguments, 'Post', 'Blog', 'AuthorPosts'), $author);
     }
 
@@ -91,6 +95,9 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
     protected function buildAnchorTag(string $uri, Author $author): string
     {
         if ($uri !== '') {
+            if ((bool)$this->arguments['returnUri']) {
+                return htmlspecialchars($uri, ENT_QUOTES | ENT_HTML5);
+            }
             $linkText = $this->renderChildren() ?? $author->getName();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
