@@ -28,11 +28,8 @@ ExtensionManagementUtility::addToAllTCAtypes(
     'blog_posts',
     'after:palette:headers'
 );
-ExtensionManagementUtility::addPiFlexFormValue(
-    '*',
-    'FILE:EXT:blog/Configuration/FlexForms/Posts.xml',
-    'blog_posts'
-);
+$GLOBALS['TCA']['tt_content']['types']['blog_posts']['columnsOverrides']['pi_flexform']['config']['ds']['*']
+    = 'FILE:EXT:blog/Configuration/FlexForms/Posts.xml';
 
 ExtensionUtility::registerPlugin(
     extensionName: 'Blog',

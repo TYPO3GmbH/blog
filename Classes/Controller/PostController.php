@@ -109,7 +109,10 @@ class PostController extends ActionController
         }
 
         $postListLayout = (string)($this->settings['lists']['posts']['layout'] ?? 'default');
-        $postListLayoutClass = preg_replace('/[^a-zA-Z0-9_-]/', '-', $postListLayout) ?: 'default';
+        $postListLayoutClass = preg_replace('/[^a-zA-Z0-9_-]/', '-', $postListLayout);
+        if ($postListLayoutClass === null || $postListLayoutClass === '') {
+            $postListLayoutClass = 'default';
+        }
         $this->view->assign('postListLayout', $postListLayout);
         $this->view->assign('postListLayoutClass', $postListLayoutClass);
         $this->view->assign('showImages', (bool)($this->settings['lists']['posts']['showImages'] ?? true));
