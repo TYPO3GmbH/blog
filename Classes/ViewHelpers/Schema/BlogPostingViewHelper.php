@@ -10,9 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Schema;
 
-use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
-use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -67,9 +65,6 @@ class BlogPostingViewHelper extends AbstractViewHelper
         }
 
         $publisherName = trim((string)($this->arguments['publisherName'] ?? ''));
-        if ($publisherName === '') {
-            $publisherName = $this->getPublisherNameFromSiteSettings();
-        }
         $publisherLogoUrl = trim((string)($this->arguments['publisherLogoUrl'] ?? ''));
         if ($publisherName !== '') {
             $data['publisher'] = [
@@ -108,20 +103,5 @@ class BlogPostingViewHelper extends AbstractViewHelper
         }
 
         return GeneralUtility::locationHeaderUrl($publicUrl);
-    }
-
-    private function getPublisherNameFromSiteSettings(): string
-    {
-        $request = $GLOBALS['TYPO3_REQUEST'] ?? null;
-        if (!$request instanceof ServerRequestInterface) {
-            return '';
-        }
-
-        $site = $request->getAttribute('site');
-        if (!$site instanceof Site) {
-            return '';
-        }
-
-        return trim((string)($site->getSettings()->get('page.theme.contact.data.title') ?? ''));
     }
 }

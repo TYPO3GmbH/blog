@@ -11,6 +11,7 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\ViewHelpers\Schema;
 
 use T3G\AgencyPack\Blog\Domain\Model\Author;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class PersonViewHelper extends AbstractViewHelper
@@ -40,6 +41,7 @@ class PersonViewHelper extends AbstractViewHelper
         $url = $profile !== '' ? $profile : self::normalizeUrl((string)$authorPageUrl);
 
         $data = [
+            '@context' => 'https://schema.org',
             '@type' => 'Person',
             'name' => $author->getName(),
         ];
@@ -60,6 +62,11 @@ class PersonViewHelper extends AbstractViewHelper
         }
         if (trim($author->getBio()) !== '') {
             $data['description'] = trim(strip_tags($author->getBio()));
+        }
+
+        $imageUrl = self::getImageUrl($author);
+        if ($imageUrl !== '') {
+            $data['image'] = $imageUrl;
         }
 
         $sameAs = array_values(array_unique(array_filter([
@@ -103,5 +110,20 @@ class PersonViewHelper extends AbstractViewHelper
             return 'https:' . $url;
         }
         return 'https://' . $url;
+    }
+
+    private static function getImageUrl(Author $author): string
+    {
+        $image = $author->getImage();
+        if ($image === null) {
+            return '';
+        }
+
+        $publicUrl = $image->getOriginalResource()->getPublicUrl();
+        if ($publicUrl === null) {
+            return '';
+        }
+
+        return GeneralUtility::locationHeaderUrl($publicUrl);
     }
 }

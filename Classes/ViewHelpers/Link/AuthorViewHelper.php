@@ -31,7 +31,6 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
 
         $this->registerArgument('author', Author::class, 'The author to link to', true);
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
-        $this->registerArgument('createAbsoluteUri', 'bool', 'Create absolute uri', false, false);
         $this->registerArgument('returnUri', 'bool', 'Return only uri', false, false);
     }
 
@@ -40,12 +39,13 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         /** @var Author $author */
         $author = $this->arguments['author'];
         $rssFormat = (bool)$this->arguments['rss'];
+        $createAbsoluteUri = (bool)$this->arguments['returnUri'];
 
         if ((int)$author->getDetailsPage() > 0 && !$rssFormat) {
-            return $this->buildUriFromDetailsPage($author, $rssFormat, (bool)$this->arguments['createAbsoluteUri']);
+            return $this->buildUriFromDetailsPage($author, $rssFormat, $createAbsoluteUri);
         }
 
-        return $this->buildUriFromDefaultPage($author, $rssFormat, (bool)$this->arguments['createAbsoluteUri']);
+        return $this->buildUriFromDefaultPage($author, $rssFormat, $createAbsoluteUri);
     }
 
     protected function buildUriFromDetailsPage(Author $author, bool $rssFormat, bool $createAbsoluteUri = false): string
