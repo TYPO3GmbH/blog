@@ -32,6 +32,7 @@ class Author extends AbstractEntity
     protected string $linkedin = '';
     protected string $xing = '';
     protected string $instagram = '';
+    protected string $mastodon = '';
     protected string $profile = '';
     protected string $bio = '';
     protected int $detailsPage = 0;
@@ -204,6 +205,56 @@ class Author extends AbstractEntity
     {
         $this->instagram = $instagram;
         return $this;
+    }
+
+    public function getMastodon(): string
+    {
+        return $this->mastodon;
+    }
+
+    public function setMastodon(string $mastodon): self
+    {
+        $this->mastodon = $mastodon;
+        return $this;
+    }
+
+    public function getMastodonProfileUrl(): string
+    {
+        $mastodon = trim($this->mastodon);
+        if ($mastodon === '') {
+            return '';
+        }
+        if (str_starts_with($mastodon, 'http://') || str_starts_with($mastodon, 'https://')) {
+            return $mastodon;
+        }
+        if (str_starts_with($mastodon, '@') && substr_count($mastodon, '@') === 2) {
+            [$username, $host] = explode('@', ltrim($mastodon, '@'), 2);
+            return 'https://' . $host . '/@' . $username;
+        }
+        return '';
+    }
+
+    public function getMastodonHandle(): string
+    {
+        $mastodon = trim($this->mastodon);
+        if ($mastodon === '') {
+            return '';
+        }
+        if (str_starts_with($mastodon, '@') && substr_count($mastodon, '@') === 2) {
+            return $mastodon;
+        }
+
+        $parts = parse_url($mastodon);
+        if (!is_array($parts) || ($parts['host'] ?? '') === '' || ($parts['path'] ?? '') === '') {
+            return '';
+        }
+
+        $username = trim((string)$parts['path'], '/');
+        if (!str_starts_with($username, '@') || str_contains($username, '/')) {
+            return '';
+        }
+
+        return $username . '@' . $parts['host'];
     }
 
     public function getProfile(): string

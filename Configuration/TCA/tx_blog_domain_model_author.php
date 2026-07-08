@@ -206,6 +206,15 @@ return [
             ],
             'l10n_mode' => 'exclude',
         ],
+        'mastodon' => [
+            'label' => $ll . 'tx_blog_domain_model_author.mastodon',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => '',
+            ],
+            'l10n_mode' => 'exclude',
+        ],
         'profile' => [
             'label' => $ll . 'tx_blog_domain_model_author.profile',
             'config' => [
@@ -291,6 +300,7 @@ return [
                     linkedin,
                     xing,
                     instagram,
+                    mastodon,
                     profile,
                 --div--;' . $ll . 'tx_blog_domain_model_author.tab_blog,
                     posts,

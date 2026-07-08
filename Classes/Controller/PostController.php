@@ -305,6 +305,7 @@ class PostController extends ActionController
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
             $this->blogCacheService->addTagsForPost($this->request, $post);
+            $this->setFediverseCreatorMetaTag($post);
         }
         return $this->htmlResponse();
     }
@@ -367,6 +368,17 @@ class PostController extends ActionController
         /** @var NormalizedParams $normalizedParams */
         $normalizedParams = $this->getRequest()->getAttribute('normalizedParams');
         return $normalizedParams->getRequestUrl();
+    }
+
+    private function setFediverseCreatorMetaTag(Post $post): void
+    {
+        foreach ($post->getAuthors() as $author) {
+            $mastodonHandle = $author->getMastodonHandle();
+            if ($mastodonHandle !== '') {
+                MetaTagService::set(MetaTagService::META_FEDIVERSE_CREATOR, $mastodonHandle);
+                return;
+            }
+        }
     }
 
     protected function getPagination(QueryResultInterface $objects, int $currentPage = 1): ?BlogPagination
