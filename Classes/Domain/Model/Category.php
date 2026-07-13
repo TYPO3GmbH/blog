@@ -13,6 +13,7 @@ namespace T3G\AgencyPack\Blog\Domain\Model;
 use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Category extends AbstractEntity
@@ -88,6 +89,9 @@ class Category extends AbstractEntity
 
     public function getParent(): ?self
     {
+        if ($this->parent instanceof LazyLoadingProxy) {
+            $this->parent->_loadRealInstance();
+        }
         return $this->parent;
     }
 
