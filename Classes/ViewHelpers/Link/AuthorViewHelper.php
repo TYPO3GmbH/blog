@@ -43,17 +43,29 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
 
         if ((int)$author->getDetailsPage() > 0 && !$rssFormat) {
-            return $this->buildUriFromDetailsPage($author, $rssFormat, $createAbsoluteUri);
+            $uri = $this->buildUriFromDetailsPage($author, $rssFormat, $createAbsoluteUri);
+        } else {
+            $uri = $this->buildUriFromDefaultPage($author, $rssFormat, $createAbsoluteUri);
         }
 
-        return $this->buildUriFromDefaultPage($author, $rssFormat, $createAbsoluteUri);
+        if ($uri !== '') {
+            if (isset($this->arguments['returnUri']) && $this->arguments['returnUri'] === true) {
+                return htmlspecialchars($uri, ENT_QUOTES | ENT_HTML5);
+            }
+            $linkText = $this->renderChildren() ?? $author->getName();
+            $this->tag->addAttribute('href', $uri);
+            $this->tag->setContent($linkText);
+            return $this->tag->render();
+        }
+
+        return $this->renderChildren();
     }
 
     protected function buildUriFromDetailsPage(Author $author, bool $rssFormat, bool $createAbsoluteUri = false): string
     {
-        $uriBuilder = $this->getUriBuilder((int) $author->getDetailsPage(), [], $rssFormat);
-        $uriBuilder->setCreateAbsoluteUri($createAbsoluteUri);
-        return $this->buildAnchorTag($uriBuilder->build(), $author);
+        return $this->getUriBuilder((int) $author->getDetailsPage(), [], $rssFormat)
+            ->setCreateAbsoluteUri($createAbsoluteUri)
+            ->build();
     }
 
     protected function buildUriFromDefaultPage(Author $author, bool $rssFormat, bool $createAbsoluteUri = false): string
@@ -63,12 +75,12 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
             ->getAttribute('site')
             ->getSettings()
             ->get('plugin.tx_blog.settings.authorUid') ?? 0;
-        $uriBuilder = $this->getUriBuilder($pageUid, [], $rssFormat);
         $arguments = [
             'author' => $author->getUid(),
         ];
-        $uriBuilder->setCreateAbsoluteUri($createAbsoluteUri);
-        return $this->buildAnchorTag($uriBuilder->uriFor('listPostsByAuthor', $arguments, 'Post', 'Blog', 'AuthorPosts'), $author);
+        return $this->getUriBuilder($pageUid, [], $rssFormat)
+            ->setCreateAbsoluteUri($createAbsoluteUri)
+            ->uriFor('listPostsByAuthor', $arguments, 'Post', 'Blog', 'AuthorPosts');
     }
 
     protected function getUriBuilder(int $pageUid, array $additionalParams, bool $rssFormat): UriBuilder
@@ -91,21 +103,6 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         }
 
         return $uriBuilder;
-    }
-
-    protected function buildAnchorTag(string $uri, Author $author): string
-    {
-        if ($uri !== '') {
-            if ((bool)$this->arguments['returnUri']) {
-                return htmlspecialchars($uri, ENT_QUOTES | ENT_HTML5);
-            }
-            $linkText = $this->renderChildren() ?? $author->getName();
-            $this->tag->addAttribute('href', $uri);
-            $this->tag->setContent($linkText);
-            return $this->tag->render();
-        }
-
-        return $this->renderChildren();
     }
 
     protected function getRequest(): RequestInterface
