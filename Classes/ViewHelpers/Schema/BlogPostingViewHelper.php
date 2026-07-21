@@ -10,8 +10,12 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Schema;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
+use T3G\AgencyPack\Blog\Utility\SchemaUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class BlogPostingViewHelper extends AbstractViewHelper
@@ -22,31 +26,32 @@ class BlogPostingViewHelper extends AbstractViewHelper
     {
         parent::initializeArguments();
         $this->registerArgument('post', Post::class, 'The blog post', true);
-        $this->registerArgument('url', 'string', 'The absolute post URL', true);
-        $this->registerArgument('publisherName', 'string', 'The publisher organization name');
-        $this->registerArgument('publisherLogoUrl', 'string', 'The absolute publisher logo URL');
     }
 
     public function render(): string
     {
+        $request = $this->getRequest();
         /** @var Post $post */
         $post = $this->arguments['post'];
-        $url = trim((string)$this->arguments['url']);
+        $uri = GeneralUtility::makeInstance(UriBuilder::class)->reset()
+            ->setRequest($request)
+            ->setTargetPageUid((int)$post->getUid())
+            ->setCreateAbsoluteUri(true)
+            ->build();
 
         $data = [
             '@context' => 'https://schema.org',
             '@type' => 'BlogPosting',
-            '@id' => $url,
             'headline' => $post->getTitle(),
             'mainEntityOfPage' => [
                 '@type' => 'WebPage',
-                '@id' => $url,
+                '@id' => $uri,
             ],
         ];
 
         $description = trim($post->getDescription()) !== '' ? $post->getDescription() : $post->getAbstract();
         if (trim($description) !== '') {
-            $data['description'] = trim(strip_tags($description));
+            $data['description'] = trim(htmlspecialchars(strip_tags($description)));
         }
 
         if ($post->getPublishDate() > 0) {
@@ -64,24 +69,9 @@ class BlogPostingViewHelper extends AbstractViewHelper
             ];
         }
 
-        $publisherName = trim((string)($this->arguments['publisherName'] ?? ''));
-        $publisherLogoUrl = trim((string)($this->arguments['publisherLogoUrl'] ?? ''));
-        if ($publisherName !== '') {
-            $data['publisher'] = [
-                '@type' => 'Organization',
-                'name' => $publisherName,
-            ];
-            if ($publisherLogoUrl !== '') {
-                $data['publisher']['logo'] = [
-                    '@type' => 'ImageObject',
-                    'url' => $publisherLogoUrl,
-                ];
-            }
-        }
-
         $authors = [];
         foreach ($post->getAuthors() as $author) {
-            $authors[] = PersonViewHelper::buildPersonData($author);
+            $authors[] = SchemaUtility::buildPersonData($author);
         }
         if ($authors !== []) {
             $data['author'] = count($authors) === 1 ? $authors[0] : $authors;
@@ -103,5 +93,25 @@ class BlogPostingViewHelper extends AbstractViewHelper
         }
 
         return GeneralUtility::locationHeaderUrl($publicUrl);
+    }
+
+    protected function getRequest(): RequestInterface
+    {
+        if (null === $this->renderingContext) {
+            throw new \RuntimeException('ViewHelper blogvh:schema.blogPosting requires an existing rendering context.', 1784623876);
+        }
+        $request = null;
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+
+        if (!$request instanceof RequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:schema.blogPosting can be used only in extbase context and needs a request implementing extbase RequestInterface.',
+                1784623877
+            );
+        }
+
+        return $request;
     }
 }
