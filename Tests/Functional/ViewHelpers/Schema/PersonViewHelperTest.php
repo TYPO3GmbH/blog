@@ -13,33 +13,19 @@ namespace T3G\AgencyPack\Blog\Tests\Functional\ViewHelpers\Schema;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Tests\Functional\SiteBasedTestCase;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-final class BlogPostingViewHelperTest extends SiteBasedTestCase
+final class PersonViewHelperTest extends SiteBasedTestCase
 {
     #[Test]
     #[DataProvider('renderDataProvider')]
     public function render(string $template, string $expected): void
     {
         $this->createTestSite();
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
 
-        $connectionPool->getConnectionForTable('pages')->insert(
-            'pages',
-            [
-                'uid' => 100,
-                'pid' => self::STORAGE_UID,
-                'doktype' => Constants::DOKTYPE_BLOG_POST,
-                'title' => 'First blog post',
-                'slug' => '/first-blog-post',
-                'authors' => 1,
-            ]
-        );
-
-        $connectionPool->getConnectionForTable('tx_blog_domain_model_author')->insert(
+        (new ConnectionPool())->getConnectionForTable('tx_blog_domain_model_author')->insert(
             'tx_blog_domain_model_author',
             [
                 'uid' => 100,
@@ -51,21 +37,11 @@ final class BlogPostingViewHelperTest extends SiteBasedTestCase
             ]
         );
 
-        $connectionPool->getConnectionForTable('tx_blog_post_author_mm')->insert(
-            'tx_blog_post_author_mm',
-            [
-                'uid_local' => 100,
-                'uid_foreign' => 100,
-                'sorting' => 1,
-                'sorting_foreign' => 1,
-            ]
-        );
-
         $instructions = [
             [
-                'type' => 'post',
+                'type' => 'author',
                 'uid' => 100,
-                'as' => 'post',
+                'as' => 'author',
             ]
         ];
 
@@ -79,8 +55,8 @@ final class BlogPostingViewHelperTest extends SiteBasedTestCase
     {
         return [
             'simple' => [
-                '<blogvh:schema.blogPosting post="{test.post}" />',
-                '{"@context":"https://schema.org","@type":"BlogPosting","headline":"First blog post","mainEntityOfPage":{"@type":"WebPage","@id":"https://test.typo3.com/first-blog-post"},"author":{"@context":"https://schema.org","@type":"Person","name":"TYPO3 Inc Team","url":"https://my.typo3.org/u/typo3-inc-team","sameAs":["https://my.typo3.org/u/typo3-inc-team"]}}',
+                '<blogvh:schema.person author="{test.author}" />',
+                '{"@context":"https://schema.org","@type":"Person","name":"TYPO3 Inc Team","@id":"https://my.typo3.org/u/typo3-inc-team/#Person","url":"https://my.typo3.org/u/typo3-inc-team","sameAs":["https://my.typo3.org/u/typo3-inc-team"]}',
             ],
         ];
     }
