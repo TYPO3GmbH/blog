@@ -50,7 +50,6 @@ $GLOBALS['TCA']['sys_category']['types'][(string) \T3G\AgencyPack\Blog\Constants
 $GLOBALS['TCA']['sys_category']['types'][\T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_BLOG]['columnsOverrides'] = [
     'parent' => [
         'config' => [
-            'relationship' => 'oneToOne',
             'foreign_table_where' => '' .
                 ' AND sys_category.record_type = ' . (string) \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_BLOG . ' ' .
                 ' AND sys_category.pid = ###CURRENT_PID### ' .
