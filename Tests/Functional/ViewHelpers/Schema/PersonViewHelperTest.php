@@ -80,7 +80,7 @@ final class BlogPostingViewHelperTest extends SiteBasedTestCase
         return [
             'simple' => [
                 '<blogvh:schema.blogPosting post="{test.post}" />',
-                '{"@context":"https://schema.org","@type":"BlogPosting","headline":"First blog post","mainEntityOfPage":{"@type":"WebPage","@id":"https://test.typo3.com/first-blog-post"},"author":{"@context":"https://schema.org","@type":"Person","name":"TYPO3 Inc Team","@id":"https://my.typo3.org/u/typo3-inc-team/#Person","url":"https://my.typo3.org/u/typo3-inc-team","sameAs":["https://my.typo3.org/u/typo3-inc-team"]}}',
+                '{"@context":"https://schema.org","@type":"BlogPosting","headline":"First blog post","mainEntityOfPage":{"@type":"WebPage","@id":"https://test.typo3.com/first-blog-post"},"author":{"@context":"https://schema.org","@type":"Person","name":"TYPO3 Inc Team","url":"https://my.typo3.org/u/typo3-inc-team","sameAs":["https://my.typo3.org/u/typo3-inc-team"]}}',
             ],
         ];
     }
