@@ -71,7 +71,15 @@ class BlogPostingViewHelper extends AbstractViewHelper
 
         $authors = [];
         foreach ($post->getAuthors() as $author) {
-            $authors[] = SchemaUtility::buildPersonData($author);
+            $authorData = SchemaUtility::buildPersonData($author);
+            if ($author->getDetailsPage() > 0) {
+                $authorData['sameAs'][] = GeneralUtility::makeInstance(UriBuilder::class)->reset()
+                    ->setRequest($request)
+                    ->setTargetPageUid($author->getDetailsPage())
+                    ->setCreateAbsoluteUri(true)
+                    ->build();
+            }
+            $authors[] = $authorData;
         }
         if ($authors !== []) {
             $data['author'] = count($authors) === 1 ? $authors[0] : $authors;
