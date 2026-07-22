@@ -281,7 +281,7 @@
                 <source>Layout</source>
             </trans-unit>
             <trans-unit id="settings.lists.posts.layout.default" xml:space="preserve">
-                <source>Default list</source>
+                <source>Default</source>
             </trans-unit>
             <trans-unit id="settings.lists.posts.showImages" xml:space="preserve">
                 <source>Show images</source>

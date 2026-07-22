@@ -28,7 +28,6 @@ ExtensionManagementUtility::addToAllTCAtypes(
     'blog_posts',
     'after:palette:headers'
 );
-
 ExtensionManagementUtility::addPiFlexFormValue(
     '*',
     'FILE:EXT:blog/Configuration/FlexForms/Posts.xml',

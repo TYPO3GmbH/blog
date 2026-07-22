@@ -4,7 +4,7 @@
         <langDisable>1</langDisable>
     </meta>
     <sheets>
-        <sDEF>
+        <layoutOptions>
             <ROOT>
                 <sheetTitle>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:flexform.sheet_general</sheetTitle>
                 <type>array</type>
@@ -35,6 +35,6 @@
                     </settings.lists.posts.showImages>
                 </el>
             </ROOT>
-        </sDEF>
+        </layoutOptions>
     </sheets>
 </T3DataStructure>
