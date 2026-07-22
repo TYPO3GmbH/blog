@@ -30,6 +30,7 @@ class SchemaUtility
         ];
 
         if ($url !== '') {
+            $data['@id'] = sprintf('%s/#Person', rtrim($url, '/'));
             $data['url'] = $url;
             $sameAs[] = $url;
         }
