@@ -11,7 +11,7 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Controller;
 
 use Psr\Http\Message\ResponseInterface;
-use T3G\AgencyPack\Blog\Domain\Model\Comment;
+use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
@@ -51,7 +51,7 @@ class WidgetController extends ActionController
         if (($requestParameters['category'] ?? null) !== null) {
             $currentCategory = (int)$requestParameters['category'];
         }
-        /** @var QueryResultInterface<Comment> $categories */
+        /** @var QueryResultInterface<Category> $categories */
         $categories = $this->categoryRepository->findAll();
         $this->view->assign('categories', $categories);
         $this->view->assign('currentCategory', $currentCategory);

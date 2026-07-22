@@ -142,7 +142,7 @@ class PostRepository extends Repository
     }
 
     /**
-     * @return QueryResultInterface<Post>
+     * @return QueryResultInterface<int, Post>
      */
     public function findAll(): QueryResultInterface
     {
