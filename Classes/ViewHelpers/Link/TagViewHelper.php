@@ -44,6 +44,14 @@ class TagViewHelper extends AbstractTagBasedViewHelper
             ->getAttribute('site')
             ->getSettings()
             ->get('plugin.tx_blog.settings.tagUid') ?? 0;
+        if ($pageUid === 0) {
+            $pageUid = (int)($request->getAttribute('frontend.typoscript')->getSetupTree()
+                ->getChildByName('plugin')
+                ?->getChildByName('tx_blog')
+                ?->getChildByName('settings')
+                ?->getChildByName('tagUid')
+                ?->getValue() ?? 0);
+        }
         $arguments = [
             'tag' => $tag->getUid(),
         ];
