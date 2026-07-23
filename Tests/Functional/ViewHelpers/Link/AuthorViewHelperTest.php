@@ -67,6 +67,14 @@ final class AuthorViewHelperTest extends SiteBasedTestCase
                 '<blogvh:link.author author="{test.author}" rss="true" />',
                 '<a href="/author/author/typo3-inc-team/blog.author.xml">TYPO3 Inc Team</a>',
             ],
+            'createAbsoluteUri' => [
+                '<blogvh:link.author author="{test.author}" createAbsoluteUri="1" />',
+                '<a href="https://test.typo3.com/author/author/typo3-inc-team">TYPO3 Inc Team</a>',
+            ],
+            'returnUri' => [
+                '<blogvh:link.author author="{test.author}" returnUri="1" />',
+                '/author/author/typo3-inc-team',
+            ],
             'content' => [
                 '<blogvh:link.author author="{test.author}">Hello</blogvh:link.author>',
                 '<a href="/author/author/typo3-inc-team">Hello</a>',
@@ -78,10 +86,8 @@ final class AuthorViewHelperTest extends SiteBasedTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider renderDetailPageDataProvider
-     */
+    #[Test]
+    #[DataProvider('renderDetailPageDataProvider')]
     public function renderDetailPage(string $template, string $expected): void
     {
         $this->createTestSite();
@@ -140,6 +146,14 @@ final class AuthorViewHelperTest extends SiteBasedTestCase
             'rss' => [
                 '<blogvh:link.author author="{test.author}" rss="true" />',
                 '<a href="/author/author/typo3-inc-team/blog.author.xml">TYPO3 Inc Team</a>',
+            ],
+            'createAbsoluteUri' => [
+                '<blogvh:link.author author="{test.author}" createAbsoluteUri="1" />',
+                '<a href="https://test.typo3.com/detail-typo3-inc-team">TYPO3 Inc Team</a>',
+            ],
+            'returnUri' => [
+                '<blogvh:link.author author="{test.author}" returnUri="1" />',
+                '/detail-typo3-inc-team',
             ],
             'content' => [
                 '<blogvh:link.author author="{test.author}">Hello</blogvh:link.author>',
