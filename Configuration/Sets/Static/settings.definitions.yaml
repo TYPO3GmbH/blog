@@ -495,7 +495,15 @@ settings:
     type: string
     default: '%d.%m.%Y'
 
+  plugin.tx_blog.settings.lists.posts.layout:
+    category: blog.lists
+    type: string
+    default: 'default'
 
+  plugin.tx_blog.settings.lists.posts.showImages:
+    category: blog.lists
+    type: bool
+    default: true
 
   plugin.tx_blog.settings.lists.pagination.itemsPerPage:
     category: blog.lists.pagination

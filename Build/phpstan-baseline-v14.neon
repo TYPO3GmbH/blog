@@ -6,7 +6,7 @@ parameters:
 				Will be removed in TYPO3 v15$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 1
+			count: 2
 			path: ../Configuration/TCA/Overrides/tt_content.php
 		-
 			message: '''

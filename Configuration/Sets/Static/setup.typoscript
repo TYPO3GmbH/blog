@@ -218,6 +218,8 @@ plugin.tx_blog {
             posts {
                 maximumDisplayedItems = {$plugin.tx_blog.settings.lists.posts.maximumDisplayedItems}
                 dateFormat = {$plugin.tx_blog.settings.lists.posts.dateFormat}
+                layout = {$plugin.tx_blog.settings.lists.posts.layout}
+                showImages = {$plugin.tx_blog.settings.lists.posts.showImages}
             }
         }
 
