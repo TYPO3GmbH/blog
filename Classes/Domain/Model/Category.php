@@ -27,7 +27,7 @@ class Category extends AbstractEntity
     protected int $recordType = Constants::CATEGORY_TYPE_BLOG;
 
     /**
-     * @var \T3G\AgencyPack\Blog\Domain\Model\Category
+     * @var \T3G\AgencyPack\Blog\Domain\Model\Category|LazyLoadingProxy
      * @Extbase\ORM\Lazy
      */
     protected $parent;
@@ -90,7 +90,9 @@ class Category extends AbstractEntity
     public function getParent(): ?self
     {
         if ($this->parent instanceof LazyLoadingProxy) {
-            $this->parent = $this->parent->_loadRealInstance();
+            /** @var self $parentCategory */
+            $parentCategory = $this->parent->_loadRealInstance();
+            $this->parent = $parentCategory;
         }
         return $this->parent;
     }
