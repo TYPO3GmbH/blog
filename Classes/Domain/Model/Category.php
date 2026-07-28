@@ -87,8 +87,11 @@ class Category extends AbstractEntity
         return $this;
     }
 
-    public function getParent(): null|self|LazyLoadingProxy
+    public function getParent(): ?self
     {
+        if ($this->parent instanceof LazyLoadingProxy) {
+            $this->parent = $this->parent->_loadRealInstance();
+        }
         return $this->parent;
     }
 
