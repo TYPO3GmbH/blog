@@ -68,6 +68,9 @@ class SchemaUtility
         if ($author->getInstagram() !== '') {
             $sameAs[] = GeneralUtility::locationHeaderUrl($author->getInstagram());
         }
+        if ($author->getMastodonProfileUrl() !== '') {
+            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getMastodonProfileUrl());
+        }
 
         if ($sameAs !== []) {
             $data['sameAs'] = array_unique($sameAs);
