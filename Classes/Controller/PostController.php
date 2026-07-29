@@ -376,7 +376,6 @@ class PostController extends ActionController
             $mastodonHandle = $author->getMastodonHandle();
             if ($mastodonHandle !== '') {
                 MetaTagService::set(MetaTagService::META_FEDIVERSE_CREATOR, $mastodonHandle);
-                return;
             }
         }
     }
