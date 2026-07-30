@@ -60,8 +60,8 @@
                             <span class="postauthor__sociallinklabel"><f:translate key="author.social.xing" /></span>
                         </a>
                     </f:if>
-                    <f:if condition="{author.mastodonProfileUrl}">
-                        <a href="{author.mastodonProfileUrl}" class="postauthor__sociallink postauthor__sociallink--mastodon" target="_blank" rel="me" itemprop="sameAs">
+                    <f:if condition="{author.mastodon}">
+                        <a href="{blogvh:link.socials.mastodon(mastodon: author.mastodon, returnUri: 1)}" class="postauthor__sociallink postauthor__sociallink--mastodon" target="_blank" rel="me" itemprop="sameAs">
                             <span class="postauthor__sociallinkicon postauthor__sociallinkicon--mastodon">
                                 <span class="blogicon"><f:render partial="General/SocialIcons" section="Mastodon" optional="true" /></span>
                             </span>

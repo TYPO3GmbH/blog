@@ -7,14 +7,13 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog\Tests\Unit\Domain\Model;
+namespace T3G\AgencyPack\Blog\Tests\Unit\Utility\Socials;
 
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
-use T3G\AgencyPack\Blog\Domain\Model\Author;
+use T3G\AgencyPack\Blog\Utility\Socials\MastodonUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-class AuthorTest extends UnitTestCase
+class MastodonUtilityTest extends UnitTestCase
 {
     /**
      * @return array<string, array{string, string}>
@@ -22,7 +21,7 @@ class AuthorTest extends UnitTestCase
     public static function mastodonHandleDataProvider(): array
     {
         return [
-            'profile url' => ['https://norden.social/@neoblack', '@neoblack@norden.social'],
+            'profile url' => ['https://typo3.social/@typo3blog', '@typo3blog@typo3.social'],
             'profile url with trailing slash' => ['https://typo3.social/@username/', '@username@typo3.social'],
             'handle' => ['@username@typo3.social', '@username@typo3.social'],
             'empty value' => ['', ''],
@@ -31,33 +30,27 @@ class AuthorTest extends UnitTestCase
     }
 
     #[DataProvider('mastodonHandleDataProvider')]
-    #[Test]
-    public function getMastodonHandleReturnsFediverseHandle(string $mastodon, string $expected): void
+    public function testGetMastodonHandle(string $mastodon, string $expected): void
     {
-        $author = (new Author())->setMastodon($mastodon);
-
-        self::assertSame($expected, $author->getMastodonHandle());
+        self::assertSame($expected, MastodonUtility::getMastodonHandle($mastodon));
     }
 
     /**
      * @return array<string, array{string, string}>
      */
-    public static function mastodonProfileUrlDataProvider(): array
+    public static function mastodonUrlDataProvider(): array
     {
         return [
-            'profile url' => ['https://norden.social/@neoblack', 'https://norden.social/@neoblack'],
+            'profile url' => ['https://typo3.social/@typo3blog', 'https://typo3.social/@typo3blog'],
             'handle' => ['@username@typo3.social', 'https://typo3.social/@username'],
             'empty value' => ['', ''],
             'unsupported value' => ['username', ''],
         ];
     }
 
-    #[DataProvider('mastodonProfileUrlDataProvider')]
-    #[Test]
-    public function getMastodonProfileUrlReturnsProfileUrl(string $mastodon, string $expected): void
+    #[DataProvider('mastodonUrlDataProvider')]
+    public function testGetMastodonUrl(string $mastodon, string $expected): void
     {
-        $author = (new Author())->setMastodon($mastodon);
-
-        self::assertSame($expected, $author->getMastodonProfileUrl());
+        self::assertSame($expected, MastodonUtility::getMastodonUrl($mastodon));
     }
 }

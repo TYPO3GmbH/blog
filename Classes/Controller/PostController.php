@@ -25,6 +25,7 @@ use T3G\AgencyPack\Blog\Pagination\BlogPagination;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\MetaTagService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
+use T3G\AgencyPack\Blog\Utility\Socials\MastodonUtility;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -373,7 +374,7 @@ class PostController extends ActionController
     private function setFediverseCreatorMetaTag(Post $post): void
     {
         foreach ($post->getAuthors() as $author) {
-            $mastodonHandle = $author->getMastodonHandle();
+            $mastodonHandle = MastodonUtility::getMastodonHandle($author->getMastodon());
             if ($mastodonHandle !== '') {
                 MetaTagService::set(MetaTagService::META_FEDIVERSE_CREATOR, $mastodonHandle);
             }
