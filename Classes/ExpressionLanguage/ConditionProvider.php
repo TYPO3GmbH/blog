@@ -11,7 +11,6 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\ExpressionLanguage;
 
 use TYPO3\CMS\Core\ExpressionLanguage\AbstractProvider;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * ConditionProvider
@@ -20,8 +19,6 @@ class ConditionProvider extends AbstractProvider
 {
     public function __construct()
     {
-        $this->expressionLanguageVariables = [
-            'blog' => GeneralUtility::makeInstance(BlogVariableProvider::class)
-        ];
+        $this->expressionLanguageProviders[] = BlogFunctionsProvider::class;
     }
 }
