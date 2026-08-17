@@ -25,6 +25,7 @@ use T3G\AgencyPack\Blog\Pagination\BlogPagination;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\MetaTagService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
+use T3G\AgencyPack\Blog\Utility\Socials\MastodonUtility;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -305,6 +306,7 @@ class PostController extends ActionController
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
             $this->blogCacheService->addTagsForPost($this->request, $post);
+            $this->setFediverseCreatorMetaTag($post);
         }
         return $this->htmlResponse();
     }
@@ -367,6 +369,16 @@ class PostController extends ActionController
         /** @var NormalizedParams $normalizedParams */
         $normalizedParams = $this->getRequest()->getAttribute('normalizedParams');
         return $normalizedParams->getRequestUrl();
+    }
+
+    private function setFediverseCreatorMetaTag(Post $post): void
+    {
+        foreach ($post->getAuthors() as $author) {
+            $mastodonHandle = MastodonUtility::getMastodonHandle($author->getMastodon());
+            if ($mastodonHandle !== '') {
+                MetaTagService::set(MetaTagService::META_FEDIVERSE_CREATOR, $mastodonHandle);
+            }
+        }
     }
 
     protected function getPagination(QueryResultInterface $objects, int $currentPage = 1): ?BlogPagination

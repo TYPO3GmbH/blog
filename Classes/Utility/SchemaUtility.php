@@ -11,6 +11,8 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Utility;
 
 use T3G\AgencyPack\Blog\Domain\Model\Author;
+use T3G\AgencyPack\Blog\Utility\Socials\MastodonUtility;
+use T3G\AgencyPack\Blog\Utility\Socials\TwitterXUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class SchemaUtility
@@ -56,8 +58,9 @@ class SchemaUtility
         if ($author->getWebsite() !== '') {
             $sameAs[] = GeneralUtility::locationHeaderUrl($author->getWebsite());
         }
-        if ($author->getTwitter() !== '') {
-            $sameAs[] = self::getXUrl($author->getTwitter());
+        $twitterUrl = TwitterXUtility::getXUrl($author->getTwitter());
+        if ($twitterUrl !== '') {
+            $sameAs[] = $twitterUrl;
         }
         if ($author->getLinkedin() !== '') {
             $sameAs[] = GeneralUtility::locationHeaderUrl($author->getLinkedin());
@@ -67,6 +70,10 @@ class SchemaUtility
         }
         if ($author->getInstagram() !== '') {
             $sameAs[] = GeneralUtility::locationHeaderUrl($author->getInstagram());
+        }
+        $mastodonUrl = MastodonUtility::getMastodonUrl($author->getMastodon());
+        if ($mastodonUrl !== '') {
+            $sameAs[] = $mastodonUrl;
         }
 
         if ($sameAs !== []) {
@@ -89,24 +96,5 @@ class SchemaUtility
         }
 
         return GeneralUtility::locationHeaderUrl($publicUrl);
-    }
-
-    private static function getXUrl(string $twitterXProfile): string
-    {
-        $twitterXProfile = trim($twitterXProfile);
-        if ($twitterXProfile === '') {
-            return '';
-        }
-        // url
-        if (str_starts_with($twitterXProfile, 'http://') || str_starts_with($twitterXProfile, 'https://')) {
-            $url = str_replace(['http://', 'twitter.com'], ['https://', 'x.com'], $twitterXProfile);
-            if (!in_array(parse_url($url, PHP_URL_HOST), ['x.com', 'www.x.com'], true)) {
-                // prevent other domains from passing
-                return '';
-            }
-            return $url;
-        }
-        // username/handle
-        return 'https://x.com/' . ltrim($twitterXProfile, '@');
     }
 }

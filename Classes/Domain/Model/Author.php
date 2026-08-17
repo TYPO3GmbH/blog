@@ -32,6 +32,7 @@ class Author extends AbstractEntity
     protected string $linkedin = '';
     protected string $xing = '';
     protected string $instagram = '';
+    protected string $mastodon = '';
     protected string $profile = '';
     protected string $bio = '';
     protected int $detailsPage = 0;
@@ -203,6 +204,17 @@ class Author extends AbstractEntity
     public function setInstagram(string $instagram): self
     {
         $this->instagram = $instagram;
+        return $this;
+    }
+
+    public function getMastodon(): string
+    {
+        return $this->mastodon;
+    }
+
+    public function setMastodon(string $mastodon): self
+    {
+        $this->mastodon = $mastodon;
         return $this;
     }
 

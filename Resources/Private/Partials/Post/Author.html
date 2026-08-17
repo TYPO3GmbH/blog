@@ -18,7 +18,7 @@
                     <f:if condition="{author.location}"><span class="postauthor__location" itemprop="homeLocation">{author.location}</span></f:if>
                 </div>
             </f:if>
-            <f:if condition="{author.website} || {author.twitter} || {author.instagram} || {author.linkedin} || {author.xing}">
+            <f:if condition="{author.website} || {author.twitter} || {author.instagram} || {author.linkedin} || {author.xing} || {author.mastodon}">
                 <div class="postauthor__social">
                     <f:if condition="{author.website}">
                         <a href="{author.website}" class="postauthor__sociallink postauthor__sociallink--website" target="_blank" itemprop="sameAs">
@@ -58,6 +58,14 @@
                                 <span class="blogicon"><f:render partial="General/SocialIcons" section="Xing" optional="true" /></span>
                             </span>
                             <span class="postauthor__sociallinklabel"><f:translate key="author.social.xing" /></span>
+                        </a>
+                    </f:if>
+                    <f:if condition="{author.mastodon}">
+                        <a href="{blogvh:link.socials.mastodon(mastodon: author.mastodon, returnUri: 1)}" class="postauthor__sociallink postauthor__sociallink--mastodon" target="_blank" rel="me" itemprop="sameAs">
+                            <span class="postauthor__sociallinkicon postauthor__sociallinkicon--mastodon">
+                                <span class="blogicon"><f:render partial="General/SocialIcons" section="Mastodon" optional="true" /></span>
+                            </span>
+                            <span class="postauthor__sociallinklabel"><f:translate key="author.social.mastodon" /></span>
                         </a>
                     </f:if>
                 </div>
