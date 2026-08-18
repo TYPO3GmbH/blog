@@ -16,6 +16,7 @@ use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
+use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -50,6 +51,35 @@ final class SetupServiceTest extends FunctionalTestCase
         self::assertEquals($rootPage['title'], 'Blog');
         self::assertEquals($rootPage['doktype'], Constants::DOKTYPE_BLOG_PAGE);
         self::assertEquals($rootPage['is_siteroot'], 1);
+        self::assertEquals($rootPage['hidden'], 0);
+    }
+
+    #[Test]
+    public function createReturnsSiteBaseOnRootPath(): void
+    {
+        $setupService = GeneralUtility::makeInstance(SetupService::class);
+
+        self::assertSame('/', $setupService->createBlogSetup());
+    }
+
+    #[Test]
+    public function createNamesTheSiteAfterTheBlog(): void
+    {
+        $setupService = GeneralUtility::makeInstance(SetupService::class);
+        $setupService->createBlogSetup(['title' => 'My Blog']);
+
+        $site = $this->get(SiteFinder::class)->getSiteByRootPageId(1);
+        self::assertSame('my-blog', $site->getIdentifier());
+        self::assertSame('blog/standalone', $site->getConfiguration()['dependencies'][0]);
+    }
+
+    #[Test]
+    public function createPutsASecondBlogOnItsOwnPath(): void
+    {
+        $setupService = GeneralUtility::makeInstance(SetupService::class);
+        $setupService->createBlogSetup(['title' => 'First']);
+
+        self::assertSame('/second', $setupService->createBlogSetup(['title' => 'Second']));
     }
 
     #[Test]

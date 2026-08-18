@@ -158,8 +158,11 @@ class BackendController extends ActionController
     public function createBlogAction(?array $data = null): ResponseInterface
     {
         if ($data !== null) {
-            $this->setupService->createBlogSetup($data);
-            $this->addFlashMessage('Your blog setup has been created.', 'Congratulation');
+            $base = $this->setupService->createBlogSetup($data);
+            $this->addFlashMessage(
+                sprintf('Your blog setup has been created and is available at "%s".', $base),
+                'Congratulation'
+            );
         } else {
             $this->addFlashMessage('Sorry, your blog setup could not be created.', 'An error occurred', ContextualFeedbackSeverity::ERROR);
         }

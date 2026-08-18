@@ -15,7 +15,7 @@ $data = [];
 // Pages
 $data['pages']['NEW_blogRoot'] = [
     'pid' => 0,
-    'hidden' => 1,
+    'hidden' => 0,
     'title' => 'Blog',
     'doktype' => Constants::DOKTYPE_BLOG_PAGE,
     'is_siteroot' => 1
