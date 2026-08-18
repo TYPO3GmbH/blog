@@ -36,6 +36,7 @@
         "optimize-autoloader": true,
         "vendor-dir": ".build/vendor",
         "allow-plugins": {
+            "a9f/fractor-extension-installer": true,
             "typo3/class-alias-loader": true,
             "typo3/cms-composer-installers": true
         }
@@ -96,6 +97,7 @@
         "typo3/cms-install": "^13.4.15 || ^14.3 || 15.*.*@dev"
     },
     "require-dev": {
+        "a9f/typo3-fractor": "^1.0",
         "bk2k/bootstrap-package": "^15.0 || 16.*.*@dev",
         "bk2k/extension-helper": "^2.0",
         "friendsofphp/php-cs-fixer": "^3.75",
