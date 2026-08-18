@@ -42,7 +42,6 @@ class SetupService
                 $queryBuilder->expr()->eq('module', $queryBuilder->createNamedParameter('blog', Connection::PARAM_STR)),
                 $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)),
             )
-            ->groupBy('uid')
             ->executeQuery()
             ->fetchAllAssociative();
 
