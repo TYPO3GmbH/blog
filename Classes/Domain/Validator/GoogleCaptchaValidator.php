@@ -14,6 +14,7 @@ use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 class GoogleCaptchaValidator extends AbstractValidator
@@ -27,19 +28,19 @@ class GoogleCaptchaValidator extends AbstractValidator
         $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
         $request = $this->request ?? $GLOBALS['TYPO3_REQUEST'];
-        $queryArguments = $request->getQueryParams();
         $bodyData = $request->getParsedBody();
-        $requestData = $queryArguments['tx_blog_commentform'] ?? [];
+        $extbaseParameters = $request->getAttribute('extbase');
 
         if (
             // this validator is called multiple times, if the first success,
             // the global variable is set, else validate the re-captcha
             ($GLOBALS['google_recaptcha'] ?? null) === null
             // check if we create a new comment, else we don't need a validation
-            && (!(bool)($requestData['action'] ?? null) && $requestData['action'] === $action)
-            && (!(bool)($requestData['controller'] ?? null) && $requestData['controller'] === $controller)
+            && $extbaseParameters instanceof ExtbaseRequestParameters
+            && $extbaseParameters->getControllerName() === $controller
+            && $extbaseParameters->getControllerActionName() === $action
             // check if google re-captcha is active, else we don't need a validation
-            && (int) $settings['comments']['google_recaptcha']['enable'] === 1
+            && (int) ($settings['comments']['google_recaptcha']['enable'] ?? 0) === 1
         ) {
             /** @var ?NormalizedParams $normalizedParams */
             $normalizedParams = $request->getAttribute('normalizedParams');
