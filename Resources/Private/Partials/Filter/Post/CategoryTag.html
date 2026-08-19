@@ -1,0 +1,21 @@
+<header class="blogarchiveheader blogarchiveheader--filter">
+    <h1 class="blogarchiveheader__title">
+        <span class="blogarchiveheader__titletext">
+            <f:translate key="headline.filter" />
+        </span>
+    </h1>
+
+    <h2 class="blogarchiveheader__title">
+        <span class="blogarchiveheader__titletext">
+            <f:translate key="headline.categories" />
+        </span>
+    </h2>
+    <f:render partial="Filter/Categories" arguments="{_all}"/>
+
+    <h2 class="blogarchiveheader__title">
+        <span class="blogarchiveheader__titletext">
+            <f:translate key="headline.tags" />
+        </span>
+    </h2>
+    <f:render partial="Filter/Tags" arguments="{_all}"/>
+</header>
