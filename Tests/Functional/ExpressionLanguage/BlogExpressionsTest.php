@@ -21,6 +21,28 @@ class BlogExpressionsTest extends SiteBasedTestCase
     private const BLOG_POST_UID = 8;
     private const STRING_TO_TEST = 'expression is true';
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->createTestSite();
+    }
+
+    #[DataProvider('typoScriptDataProvider')]
+    public function testTypoScriptConditions(int $pid, string $typoScript, bool $expectConditionToBeMet): void
+    {
+        $this->appendTypoScriptToPage($typoScript, $pid);
+
+        $response = (string)$this->executeFrontendSubRequest((new InternalRequest(SiteBasedTestCase::BASE_URL))
+            ->withPageId($pid))
+            ->getBody();
+
+        if ($expectConditionToBeMet) {
+            self::assertStringContainsString(self::STRING_TO_TEST, $response);
+        } else {
+            self::assertStringNotContainsString(self::STRING_TO_TEST, $response);
+        }
+    }
+
     public static function typoScriptDataProvider(): array
     {
         $suffix = sprintf("\npage.10.value = %s\n[end]", self::STRING_TO_TEST);
@@ -72,14 +94,7 @@ class BlogExpressionsTest extends SiteBasedTestCase
         ];
     }
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->createTestSite();
-    }
-
-    #[DataProvider('typoScriptDataProvider')]
-    public function testTypScriptConditions(int $pid, string $typoScript, bool $expectConditionToBeMet): void
+    private function appendTypoScriptToPage(string $typoScript, int $pid): void
     {
         $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('sys_template');
         $affectedRows = $queryBuilder
@@ -99,16 +114,6 @@ class BlogExpressionsTest extends SiteBasedTestCase
 
         if ($affectedRows !== 1) {
             throw new \RuntimeException('Unexpected fixture state.', 1787143116);
-        }
-
-        $response = (string)$this->executeFrontendSubRequest((new InternalRequest(SiteBasedTestCase::BASE_URL))
-            ->withPageId($pid))
-            ->getBody();
-
-        if ($expectConditionToBeMet) {
-            self::assertStringContainsString(self::STRING_TO_TEST, $response);
-        } else {
-            self::assertStringNotContainsString(self::STRING_TO_TEST, $response);
         }
     }
 }
