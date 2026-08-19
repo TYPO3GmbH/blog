@@ -2,7 +2,7 @@
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 
-    .sorting {
+    thead th {
         .form-select {
             min-width: 120px;
         }
@@ -19,8 +19,7 @@
     box-sizing: content-box;
     padding-right: 0 !important;
 
-    &:after,
-    &:before {
+    .dt-column-order {
         display: none !important;
     }
 }

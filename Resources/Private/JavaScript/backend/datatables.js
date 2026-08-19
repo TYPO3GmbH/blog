@@ -4,24 +4,26 @@
 import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 import '../../Scss/backend/datatables.scss'
 
-import $ from 'jquery';
 import DataTable from 'datatables.net-bs5';
+
+// Keeps the table horizontally scrollable inside the backend module.
+DataTable.ext.classes.layout.tableRow += ' table-fit';
 
 const datatables = document.querySelectorAll('.dataTables');
 datatables.forEach((datatable) => {
 
     const columnConfig = JSON.parse(datatable.dataset.columns);
     new DataTable(datatable, {
-        dom:
-            "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
-            "<'table-fit'tr>" +
-            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
         pageLength: 25,
         columns: columnConfig,
         initComplete: function () {
             this.api().columns().every(function () {
                 const column = this;
                 if (column.header().dataset.filter === 'true') {
+
+                    // DataTables wraps the header text, the filter replaces
+                    // that wrapper and leaves the order indicator in place.
+                    const title = column.header().querySelector('.dt-column-title') ?? column.header();
 
                     const select = document.createElement('select');
                     select.classList.add('form-select', 'form-select-sm');
@@ -36,7 +38,7 @@ datatables.forEach((datatable) => {
 
                     const defaultOption = document.createElement('option');
                     defaultOption.value = '';
-                    defaultOption.innerText = column.header().innerText;
+                    defaultOption.innerText = title.innerText;
                     select.appendChild(defaultOption);
 
                     let values = [];
@@ -57,8 +59,8 @@ datatables.forEach((datatable) => {
                         select.append(option);
                     });
 
-                    column.header().innerHTML = '';
-                    column.header().append(select);
+                    title.innerHTML = '';
+                    title.append(select);
 
                 }
             });
