@@ -54,14 +54,16 @@ class GoogleCaptchaValidator extends AbstractValidator
             ];
             $response = GeneralUtility::makeInstance(RequestFactory::class)
                 ->request('https://www.google.com/recaptcha/api/siteverify', 'POST', $additionalOptions);
-            if ($response->getStatusCode() === 200) {
-                $result = json_decode($response->getBody()->getContents());
-                if (!$result->success) {
-                    $this->addError('The re-captcha failed', 1501341100);
-                } else {
-                    $GLOBALS['google_recaptcha'] = true;
-                }
+            if ($response->getStatusCode() !== 200) {
+                $this->addError('The re-captcha could not be verified', 1787128468);
+                return;
             }
+            $result = json_decode((string)$response->getBody()->getContents(), true);
+            if (!is_array($result) || ($result['success'] ?? false) !== true) {
+                $this->addError('The re-captcha failed', 1501341100);
+                return;
+            }
+            $GLOBALS['google_recaptcha'] = true;
         }
     }
 }

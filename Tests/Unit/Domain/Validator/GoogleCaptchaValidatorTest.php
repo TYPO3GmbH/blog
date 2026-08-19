@@ -57,6 +57,33 @@ class GoogleCaptchaValidatorTest extends UnitTestCase
     }
 
     #[Test]
+    public function unreachableVerificationServiceIsAnError(): void
+    {
+        $this->registerSettings(1);
+        $this->registerResponse(500, '');
+
+        self::assertTrue($this->validate()->hasErrors());
+    }
+
+    #[Test]
+    public function unparsableVerificationResponseIsAnError(): void
+    {
+        $this->registerSettings(1);
+        $this->registerResponse(200, 'not json');
+
+        self::assertTrue($this->validate()->hasErrors());
+    }
+
+    #[Test]
+    public function verificationResponseWithoutSuccessKeyIsAnError(): void
+    {
+        $this->registerSettings(1);
+        $this->registerResponse(200, '{"error-codes":["timeout-or-duplicate"]}');
+
+        self::assertTrue($this->validate()->hasErrors());
+    }
+
+    #[Test]
     public function disabledCaptchaIsNotVerifiedAtAll(): void
     {
         $this->registerSettings(0);
