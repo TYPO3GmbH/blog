@@ -15,10 +15,10 @@ use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Frontend\Event\AfterPageAndLanguageIsResolvedEvent;
 
 #[AsEventListener(identifier: 't3g/blog/provide-current-page-to-conditions')]
-class ProvideCurrentPageToConditions
+readonly class ProvideCurrentPageToConditions
 {
     public function __construct(
-        protected readonly CurrentPageProvider $currentPageProvider
+        protected CurrentPageProvider $currentPageProvider
     ) {
     }
 

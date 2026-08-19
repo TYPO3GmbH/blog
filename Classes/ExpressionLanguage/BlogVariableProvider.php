@@ -12,25 +12,43 @@ namespace T3G\AgencyPack\Blog\ExpressionLanguage;
 
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use T3G\AgencyPack\Blog\Constants;
+use T3G\AgencyPack\Blog\Fractor\V14\MigrateTypoScriptBlogIsPageExpressionFractor;
+use T3G\AgencyPack\Blog\Fractor\V14\MigrateTypoScriptBlogIsPostExpressionFractor;
 
 /**
  * BlogVariableProvider
  */
 #[Autoconfigure(public: true)]
-class BlogVariableProvider
+readonly class BlogVariableProvider
 {
     public function __construct(
-        protected readonly CurrentPageProvider $currentPageProvider
+        protected CurrentPageProvider $currentPageProvider
     ) {
     }
 
     public function isPost(): bool
     {
+        trigger_error(
+            sprintf(
+                'Using the old TypoScript condition blog.isPost() is deprecated. Please migrate to isBlogPost(). There is a typo3-fractor rule available at %s.',
+                MigrateTypoScriptBlogIsPostExpressionFractor::class
+            ),
+            E_USER_DEPRECATED
+        );
+
         return $this->isDoktype(Constants::DOKTYPE_BLOG_POST);
     }
 
     public function isPage(): bool
     {
+        trigger_error(
+            sprintf(
+                'Using the old TypoScript condition blog.isPage() is deprecated. Please migrate to isBlogPage(). There is a typo3-fractor rule available at %s.',
+                MigrateTypoScriptBlogIsPageExpressionFractor::class
+            ),
+            E_USER_DEPRECATED
+        );
+
         return $this->isDoktype(Constants::DOKTYPE_BLOG_PAGE);
     }
 

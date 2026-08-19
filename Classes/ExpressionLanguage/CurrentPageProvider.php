@@ -13,10 +13,8 @@ namespace T3G\AgencyPack\Blog\ExpressionLanguage;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
- * Keeps the resolved frontend page record accessible for TypoScript conditions.
- *
- * TypoScript is compiled while the request is still travelling through the
- * middleware stack, so no request object is available to the condition provider.
+ * The page record is no longer available in expressionLanguageVariables v14.
+ * This class is used to still provide it until migrated to expressionLanguageProviders.
  */
 class CurrentPageProvider implements SingletonInterface
 {
