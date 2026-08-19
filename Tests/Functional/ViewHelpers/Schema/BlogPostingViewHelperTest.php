@@ -75,6 +75,39 @@ final class BlogPostingViewHelperTest extends SiteBasedTestCase
         );
     }
 
+    #[Test]
+    public function markupInAPostTitleCannotEscapeTheScriptElement(): void
+    {
+        $this->createTestSite();
+
+        GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages')->insert(
+            'pages',
+            [
+                'uid' => 100,
+                'pid' => self::STORAGE_UID,
+                'doktype' => Constants::DOKTYPE_BLOG_POST,
+                'title' => 'Mallory</script><img src=x onerror=alert(1)>',
+                'slug' => '/hostile-blog-post',
+            ]
+        );
+
+        $rendered = $this->renderFluidTemplateInTestSite(
+            '<blogvh:schema.blogPosting post="{test.post}" />',
+            [
+                [
+                    'type' => 'post',
+                    'uid' => 100,
+                    'as' => 'post',
+                ]
+            ]
+        );
+
+        // The value survives, so the assertions below are not met by a dropped field.
+        self::assertStringContainsString('Mallory', $rendered);
+        self::assertStringNotContainsString('</script>', $rendered);
+        self::assertStringNotContainsString('<img', $rendered);
+    }
+
     public static function renderDataProvider(): array
     {
         return [

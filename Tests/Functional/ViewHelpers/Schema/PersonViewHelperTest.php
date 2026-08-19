@@ -50,6 +50,39 @@ final class PersonViewHelperTest extends SiteBasedTestCase
         );
     }
 
+    #[Test]
+    public function markupInAuthorDataCannotEscapeTheScriptElement(): void
+    {
+        $this->createTestSite();
+
+        (new ConnectionPool())->getConnectionForTable('tx_blog_domain_model_author')->insert(
+            'tx_blog_domain_model_author',
+            [
+                'uid' => 100,
+                'pid' => self::STORAGE_UID,
+                'name' => 'Mallory</script><img src=x onerror=alert(1)>',
+                'slug' => 'mallory',
+                'posts' => 1,
+            ]
+        );
+
+        $rendered = $this->renderFluidTemplateInTestSite(
+            '<blogvh:schema.person author="{test.author}" />',
+            [
+                [
+                    'type' => 'author',
+                    'uid' => 100,
+                    'as' => 'author',
+                ]
+            ]
+        );
+
+        // The value survives, so the assertions above are not met by a dropped field.
+        self::assertStringContainsString('Mallory', $rendered);
+        self::assertStringNotContainsString('</script>', $rendered);
+        self::assertStringNotContainsString('<img', $rendered);
+    }
+
     public static function renderDataProvider(): array
     {
         return [
