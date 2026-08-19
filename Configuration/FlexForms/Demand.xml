@@ -49,12 +49,12 @@
                             <renderType>selectSingle</renderType>
                             <items type="array">
                                 <numIndex index="0" type="array">
-                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categoriesConjunction.AND</numIndex>
-                                    <numIndex index="1">AND</numIndex>
+                                    <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categoriesConjunction.AND</label>
+                                    <value>AND</value>
                                 </numIndex>
                                 <numIndex index="1" type="array">
-                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categoriesConjunction.OR</numIndex>
-                                    <numIndex index="1">OR</numIndex>
+                                    <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.categoriesConjunction.OR</label>
+                                    <value>OR</value>
                                 </numIndex>
                             </items>
                         </config>
@@ -77,12 +77,12 @@
                             <renderType>selectSingle</renderType>
                             <items type="array">
                                 <numIndex index="0" type="array">
-                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction.AND</numIndex>
-                                    <numIndex index="1">AND</numIndex>
+                                    <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction.AND</label>
+                                    <value>AND</value>
                                 </numIndex>
                                 <numIndex index="1" type="array">
-                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction.OR</numIndex>
-                                    <numIndex index="1">OR</numIndex>
+                                    <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.tagsConjunction.OR</label>
+                                    <value>OR</value>
                                 </numIndex>
                             </items>
                         </config>
@@ -95,12 +95,12 @@
                             <renderType>selectSingle</renderType>
                             <items type="array">
                                 <numIndex index="0" type="array">
-                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:pages.publish_date</numIndex>
-                                    <numIndex index="1">publish_date</numIndex>
+                                    <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:pages.publish_date</label>
+                                    <value>publish_date</value>
                                 </numIndex>
                                 <numIndex index="1" type="array">
-                                    <numIndex index="0">LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.title_formlabel</numIndex>
-                                    <numIndex index="1">title</numIndex>
+                                    <label>LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.title_formlabel</label>
+                                    <value>title</value>
                                 </numIndex>
                             </items>
                         </config>
@@ -113,12 +113,12 @@
                             <renderType>selectSingle</renderType>
                             <items type="array">
                                 <numIndex index="0" type="array">
-                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortDirection.ASC</numIndex>
-                                    <numIndex index="1">ASC</numIndex>
+                                    <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortDirection.ASC</label>
+                                    <value>ASC</value>
                                 </numIndex>
                                 <numIndex index="1" type="array">
-                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortDirection.DESC</numIndex>
-                                    <numIndex index="1">DESC</numIndex>
+                                    <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.demand.sortDirection.DESC</label>
+                                    <value>DESC</value>
                                 </numIndex>
                             </items>
                             <default>DESC</default>

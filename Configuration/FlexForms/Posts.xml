@@ -16,8 +16,8 @@
                             <renderType>selectSingle</renderType>
                             <items type="array">
                                 <numIndex index="0" type="array">
-                                    <numIndex index="0">LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.lists.posts.layout.default</numIndex>
-                                    <numIndex index="1">default</numIndex>
+                                    <label>LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:settings.lists.posts.layout.default</label>
+                                    <value>default</value>
                                 </numIndex>
                             </items>
                             <default>default</default>
