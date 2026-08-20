@@ -1,3 +1,56 @@
+# 14.0.1
+
+## FEATURE
+
+- 827f6aa [FEATURE] Add Mastodon support to blog author profiles (#359)
+- db8e599 [FEATURE] Add post list display options (#356)
+- fa0841a [FEATURE] Add schema.org JSON-LD for blog posts and authors (#358)
+- 733db3a [FEATURE] Add dedicated RSS settings (#352)
+
+## TASK
+
+- 39e8ef3 [TASK] Use associative keys in FlexForm items (#367)
+- 909b288 [TASK] Update the frontend build to current dependencies
+- c992d37 [TASK] Exclude mcp
+- dc05748 [TASK] Update phpstan configuration
+- 8c9efe1 [TASK] Update TYPO3 CMS dependencies (#354)
+
+## BUGFIX
+
+- 1a8ebfc [BUGFIX] Check for correct settings uid (#306)
+- 348084e [BUGFIX] Comment form and reCAPTCHA validation (#365)
+- 25f996d [BUGFIX] Escape markup in the JSON-LD output (#366)
+- 66243fc [BUGFIX] Update TypoScript conditions for v14 (#363)
+- 8e37b2c [BUGFIX] Deliver a usable site from the blog setup
+- b9f2cc2 [BUGFIX] Drop redundant GROUP BY in setup lookup
+- bbe5f72 [BUGFIX] Complete synthetic tt_content plugin row
+- 81e2835 [BUGFIX] Cast index in DataHandlerHook to string on array
+- 8c69c2b [BUGFIX] Always return real category parent instance for Fluid access (#362)
+- 85cd59a [BUGFIX] Allow category getParent() to return LazyLoadingProxy object (#361)
+- 57ac883 [BUGFIX] Phpstan/CI
+- 1bff821 [BUGFIX] Remove duplicated Datatables CSS (#357)
+- 28ebd10 [BUGFIX] Test URLs in BE ViewHelper tests for v14 (#353)
+
+## MISC
+
+- ec98423 Move method back to original place to reduce diff
+- f39ab13 Fix cgl
+- 9c7cbb8 Create separate baselines for versions
+- 9b6453b Re-add v13 flexform compatibility
+- e4dbe4c Remove always true expectations that cause phpstan issues
+- 1f1b606 Fix phpstan issues with newer version
+- 2b60f76 Fix existing phpstan issues
+- 62dffa6 Fail on phpstan errors
+
+## Contributors
+
+- Alexander Hahn
+- Andreas Kienast
+- Benjamin Kott
+- Henrik Elsner
+- Marvin Buchmann
+- Marvin Buchmann
+
 # 14.0.0
 
 ## TASK
