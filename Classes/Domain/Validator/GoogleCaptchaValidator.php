@@ -22,24 +22,26 @@ class GoogleCaptchaValidator extends AbstractValidator
 
     public function isValid(mixed $value): void
     {
-        $action = 'form';
-        $controller = 'Comment';
         $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
         $request = $this->request ?? $GLOBALS['TYPO3_REQUEST'];
-        $queryArguments = $request->getQueryParams();
         $bodyData = $request->getParsedBody();
-        $requestData = $queryArguments['tx_blog_commentform'] ?? [];
 
+        // This validator is attached exclusively to the captcha field of the
+        // comment form (see CommentFormFactory) and is only invoked by the form
+        // framework while it validates an actual submission of that form. The
+        // controller/action the request resolves to is therefore not available
+        // here — extbase does not expose its request to a form-framework
+        // validator — and it is not needed either: reaching this point already
+        // means the comment form is being submitted. We only guard against
+        // re-verifying a response that already succeeded within this request,
+        // and against running when reCAPTCHA is switched off.
         if (
-            // this validator is called multiple times, if the first success,
-            // the global variable is set, else validate the re-captcha
+            // the global is set once the response verified, so any further call
+            // of the validator in the same request skips the remote round-trip
             ($GLOBALS['google_recaptcha'] ?? null) === null
-            // check if we create a new comment, else we don't need a validation
-            && (!(bool)($requestData['action'] ?? null) && $requestData['action'] === $action)
-            && (!(bool)($requestData['controller'] ?? null) && $requestData['controller'] === $controller)
             // check if google re-captcha is active, else we don't need a validation
-            && (int) $settings['comments']['google_recaptcha']['enable'] === 1
+            && (int) ($settings['comments']['google_recaptcha']['enable'] ?? 0) === 1
         ) {
             /** @var ?NormalizedParams $normalizedParams */
             $normalizedParams = $request->getAttribute('normalizedParams');
@@ -53,14 +55,16 @@ class GoogleCaptchaValidator extends AbstractValidator
             ];
             $response = GeneralUtility::makeInstance(RequestFactory::class)
                 ->request('https://www.google.com/recaptcha/api/siteverify', 'POST', $additionalOptions);
-            if ($response->getStatusCode() === 200) {
-                $result = json_decode($response->getBody()->getContents());
-                if (!$result->success) {
-                    $this->addError('The re-captcha failed', 1501341100);
-                } else {
-                    $GLOBALS['google_recaptcha'] = true;
-                }
+            if ($response->getStatusCode() !== 200) {
+                $this->addError('The re-captcha could not be verified', 1787128468);
+                return;
             }
+            $result = json_decode((string)$response->getBody()->getContents(), true);
+            if (!is_array($result) || ($result['success'] ?? false) !== true) {
+                $this->addError('The re-captcha failed', 1501341100);
+                return;
+            }
+            $GLOBALS['google_recaptcha'] = true;
         }
     }
 }
