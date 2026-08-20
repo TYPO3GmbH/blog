@@ -90,7 +90,7 @@ page {
     }
 }
 
-[blog.isPost()]
+[isBlogPost()]
 page {
     10 {
         templateName = BlogPost

@@ -1,7 +1,7 @@
 ###################
 #### BLOG POST ####
 ###################
-[blog.isPost() || blog.isPage()]
+[isBlogPost() || isBlogPage()]
 page {
     10 {
         templateName >
@@ -16,7 +16,7 @@ page {
 }
 [end]
 
-[blog.isPost()]
+[isBlogPost()]
 page {
     10 {
         templateName = BlogPost
