@@ -41,10 +41,7 @@ class PersonViewHelper extends AbstractViewHelper
                 ->build();
         }
 
-        return (string)json_encode(
-            $authorData,
-            JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
-        );
+        return (string)json_encode($authorData, SchemaUtility::JSON_ENCODE_OPTIONS);
     }
 
     protected function getRequest(): RequestInterface

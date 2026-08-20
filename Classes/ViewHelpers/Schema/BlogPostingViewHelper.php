@@ -85,7 +85,7 @@ class BlogPostingViewHelper extends AbstractViewHelper
             $data['author'] = count($authors) === 1 ? $authors[0] : $authors;
         }
 
-        return (string)json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        return (string)json_encode($data, SchemaUtility::JSON_ENCODE_OPTIONS);
     }
 
     private function getFeaturedImageUrl(Post $post): string
