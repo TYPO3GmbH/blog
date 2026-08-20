@@ -19,7 +19,6 @@ use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Error\Result;
-use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class GoogleCaptchaValidatorTest extends UnitTestCase
@@ -103,45 +102,30 @@ class GoogleCaptchaValidatorTest extends UnitTestCase
     }
 
     #[Test]
-    public function requestRoutedToAnotherActionIsNotVerified(): void
+    public function enabledCaptchaIsVerifiedEvenWithoutExtbaseParameters(): void
     {
+        // The validator is attached exclusively to the comment form's captcha
+        // field and is only invoked while that submission is validated. The
+        // form framework does not expose the resolved controller/action to it,
+        // so verification must not depend on those being present on the
+        // request — an empty token still has to be rejected.
         $this->registerSettings(1);
-        // No RequestFactory is registered: verifying here would fail the test.
-
-        self::assertFalse($this->validate('Comment', 'comments')->hasErrors());
-    }
-
-    #[Test]
-    public function requestRoutedToAnotherControllerIsNotVerified(): void
-    {
-        $this->registerSettings(1);
-        // No RequestFactory is registered: verifying here would fail the test.
-
-        self::assertFalse($this->validate('Post', 'form')->hasErrors());
-    }
-
-    #[Test]
-    public function requestWithoutExtbaseParametersIsNotVerified(): void
-    {
-        $this->registerSettings(1);
-        // No RequestFactory is registered: verifying here would fail the test.
-
-        $validator = new GoogleCaptchaValidator();
-        $validator->setRequest(new ServerRequest('https://example.com/', 'POST'));
-
-        self::assertFalse($validator->validate('a-token')->hasErrors());
-    }
-
-    protected function validate(string $controller = 'Comment', string $action = 'form'): Result
-    {
-        $extbaseParameters = new ExtbaseRequestParameters();
-        $extbaseParameters->setControllerName($controller);
-        $extbaseParameters->setControllerActionName($action);
+        $this->registerResponse(200, '{"success":false}');
 
         $validator = new GoogleCaptchaValidator();
         $validator->setRequest(
             (new ServerRequest('https://example.com/', 'POST'))
-                ->withAttribute('extbase', $extbaseParameters)
+                ->withParsedBody(['g-recaptcha-response' => ''])
+        );
+
+        self::assertTrue($validator->validate('')->hasErrors());
+    }
+
+    protected function validate(): Result
+    {
+        $validator = new GoogleCaptchaValidator();
+        $validator->setRequest(
+            (new ServerRequest('https://example.com/', 'POST'))
                 ->withParsedBody(['g-recaptcha-response' => 'a-token'])
         );
 

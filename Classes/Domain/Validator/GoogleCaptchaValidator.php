@@ -14,7 +14,6 @@ use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 class GoogleCaptchaValidator extends AbstractValidator
@@ -23,22 +22,24 @@ class GoogleCaptchaValidator extends AbstractValidator
 
     public function isValid(mixed $value): void
     {
-        $action = 'form';
-        $controller = 'Comment';
         $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
         $request = $this->request ?? $GLOBALS['TYPO3_REQUEST'];
         $bodyData = $request->getParsedBody();
-        $extbaseParameters = $request->getAttribute('extbase');
 
+        // This validator is attached exclusively to the captcha field of the
+        // comment form (see CommentFormFactory) and is only invoked by the form
+        // framework while it validates an actual submission of that form. The
+        // controller/action the request resolves to is therefore not available
+        // here — extbase does not expose its request to a form-framework
+        // validator — and it is not needed either: reaching this point already
+        // means the comment form is being submitted. We only guard against
+        // re-verifying a response that already succeeded within this request,
+        // and against running when reCAPTCHA is switched off.
         if (
-            // this validator is called multiple times, if the first success,
-            // the global variable is set, else validate the re-captcha
+            // the global is set once the response verified, so any further call
+            // of the validator in the same request skips the remote round-trip
             ($GLOBALS['google_recaptcha'] ?? null) === null
-            // check if we create a new comment, else we don't need a validation
-            && $extbaseParameters instanceof ExtbaseRequestParameters
-            && $extbaseParameters->getControllerName() === $controller
-            && $extbaseParameters->getControllerActionName() === $action
             // check if google re-captcha is active, else we don't need a validation
             && (int) ($settings['comments']['google_recaptcha']['enable'] ?? 0) === 1
         ) {
