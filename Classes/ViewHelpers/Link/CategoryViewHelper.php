@@ -12,6 +12,7 @@ namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
 use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
+use T3G\AgencyPack\Blog\Service\CategoryTargetPageResolver;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
@@ -44,13 +45,16 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
             ->getAttribute('site')
             ->getSettings()
             ->get('plugin.tx_blog.settings.categoryUid') ?? 0;
-        $arguments = [
-            'category' => $category->getUid(),
-        ];
+
+        // Feeds are always delivered by the automatically generated category page.
+        $targetPageUid = $rssFormat
+            ? null
+            : GeneralUtility::makeInstance(CategoryTargetPageResolver::class)->resolve((int)$category->getUid());
+
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
             ->setRequest($request)
-            ->setTargetPageUid($pageUid);
+            ->setTargetPageUid($targetPageUid ?? $pageUid);
         if ($rssFormat) {
             $rssTypeNum = (int)(
                 $request->getAttribute('frontend.typoscript')->getSetupTree()
@@ -60,7 +64,18 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
             );
             $uriBuilder->setTargetPageType($rssTypeNum);
         }
-        $uri = $uriBuilder->uriFor('listPostsByCategory', $arguments, 'Post', 'Blog', 'Category');
+
+        if ($targetPageUid !== null) {
+            $uri = $uriBuilder->build();
+        } else {
+            $uri = $uriBuilder->uriFor(
+                'listPostsByCategory',
+                ['category' => $category->getUid()],
+                'Post',
+                'Blog',
+                'Category'
+            );
+        }
 
         if ($uri !== '') {
             $linkText = $this->renderChildren() ?? $category->getTitle();

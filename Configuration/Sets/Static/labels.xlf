@@ -172,6 +172,12 @@
              <trans-unit id="settings.description.plugin.tx_blog.settings.categoryUid" xml:space="preserve">
                 <source>Location of the "Blog: List by category" plugin. Shows all posts from one category.</source>
             </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.categoryOverviewUid" xml:space="preserve">
+                <source>Category overview UID</source>
+            </trans-unit>
+             <trans-unit id="settings.description.plugin.tx_blog.settings.categoryOverviewUid" xml:space="preserve">
+                <source>Page the category overview redirects to, for setups that maintain their own overview of all categories. Leave empty to keep the automatically generated overview.</source>
+            </trans-unit>
             <trans-unit id="settings.plugin.tx_blog.settings.tagUid" xml:space="preserve">
                 <source>List by tags UID</source>
             </trans-unit>

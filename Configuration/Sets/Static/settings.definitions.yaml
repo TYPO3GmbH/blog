@@ -112,6 +112,11 @@ settings:
     type: page
     default: 0
 
+  plugin.tx_blog.settings.categoryOverviewUid:
+    category: blog.uids
+    type: page
+    default: 0
+
   plugin.tx_blog.settings.tagUid:
     category: blog.uids
     type: page
