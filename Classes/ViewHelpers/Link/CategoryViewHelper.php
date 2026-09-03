@@ -44,9 +44,14 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
             ->getAttribute('site')
             ->getSettings()
             ->get('plugin.tx_blog.settings.categoryUid') ?? 0;
-        $arguments = [
-            'category' => $category->getUid(),
-        ];
+
+        // Feeds are always delivered by the automatically generated category page.
+        $targetPageUid = $rssFormat
+            ? null
+            : $category->getBlogTargetPage();
+        if ($targetPageUid > 0) {
+            $pageUid = $targetPageUid;
+        }
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
             ->setRequest($request)
@@ -60,7 +65,18 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
             );
             $uriBuilder->setTargetPageType($rssTypeNum);
         }
-        $uri = $uriBuilder->uriFor('listPostsByCategory', $arguments, 'Post', 'Blog', 'Category');
+
+        if ($targetPageUid > 0) {
+            $uri = $uriBuilder->build();
+        } else {
+            $uri = $uriBuilder->uriFor(
+                'listPostsByCategory',
+                ['category' => $category->getUid()],
+                'Post',
+                'Blog',
+                'Category'
+            );
+        }
 
         if ($uri !== '') {
             $linkText = $this->renderChildren() ?? $category->getTitle();

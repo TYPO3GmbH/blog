@@ -25,6 +25,7 @@ class Category extends AbstractEntity
     protected string $slug = '';
     protected string $description = '';
     protected int $recordType = Constants::CATEGORY_TYPE_BLOG;
+    protected int $blogTargetPage;
 
     /**
      * @var \T3G\AgencyPack\Blog\Domain\Model\Category|LazyLoadingProxy
@@ -84,6 +85,17 @@ class Category extends AbstractEntity
     public function setDescription(string $description): self
     {
         $this->description = $description;
+        return $this;
+    }
+
+    public function getBlogTargetPage(): int
+    {
+        return $this->blogTargetPage;
+    }
+
+    public function setBlogTargetPage(int $blogTargetPage): self
+    {
+        $this->blogTargetPage = $blogTargetPage;
         return $this;
     }
 
