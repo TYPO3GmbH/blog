@@ -9,7 +9,6 @@
 
 namespace T3G\AgencyPack\Blog\Tests\Functional;
 
-use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Configuration\SiteWriter;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -31,10 +30,7 @@ abstract class SiteBasedTestCase extends FunctionalTestCase
         'blog'
     ];
 
-    /**
-     * @param array<string, mixed> $additionalBlogSettings
-     */
-    protected function createTestSite(array $additionalBlogSettings = []): void
+    protected function createTestSite(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/Site/pages.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/Site/sys_template.csv');
@@ -85,14 +81,11 @@ abstract class SiteBasedTestCase extends FunctionalTestCase
                             'authorUid' => 5,
                             'archiveUid' => 6,
                             'storagePid' => 2,
-                        ] + $additionalBlogSettings
+                        ]
                     ]
                 ]
             ]
         );
-
-        // Site configuration and settings are cached, test cases must not see the site of a previous test case.
-        $this->get(CacheManager::class)->getCache('core')->flush();
     }
 
     protected function renderFluidTemplateInTestSite(string $template, array $instructions = []): string

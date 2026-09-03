@@ -106,7 +106,6 @@ $GLOBALS['TCA']['sys_category']['columns'] = array_replace_recursive(
             'label' => $ll . 'sys_category.blog_target_page',
             'description' => $ll . 'sys_category.blog_target_page.description',
             'exclude' => true,
-            // Translations always use the page of their default language category.
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'config' => [

@@ -97,22 +97,6 @@ final class CategoryViewHelperTest extends SiteBasedTestCase
         );
     }
 
-    #[Test]
-    public function renderLinksToTheGeneratedCategoryPageIfTheAssignedPageIsHidden(): void
-    {
-        $this->createTestSite();
-        $this->createCategoryPage(true);
-        $this->createCategory(self::CATEGORY_PAGE_UID);
-
-        self::assertSame(
-            '<a href="/category/category/blog">Blog</a>',
-            $this->renderFluidTemplateInTestSite(
-                '<blogvh:link.category category="{test.category}" />',
-                self::categoryInstructions()
-            )
-        );
-    }
-
     private function createCategory(int $targetPageUid = 0): void
     {
         (new ConnectionPool())->getConnectionForTable('sys_category')->insert(
@@ -128,7 +112,7 @@ final class CategoryViewHelperTest extends SiteBasedTestCase
         );
     }
 
-    private function createCategoryPage(bool $hidden = false): void
+    private function createCategoryPage(): void
     {
         (new ConnectionPool())->getConnectionForTable('pages')->insert(
             'pages',
@@ -138,7 +122,6 @@ final class CategoryViewHelperTest extends SiteBasedTestCase
                 'doktype' => 1,
                 'title' => 'Category Page',
                 'slug' => '/category-page',
-                'hidden' => (int)$hidden,
             ]
         );
     }

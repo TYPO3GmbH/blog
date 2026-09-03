@@ -44,15 +44,3 @@ From now on
 
 Categories without an assigned page are not affected and keep using the
 automatically generated category page.
-
-If the overview of all categories is maintained as an own page as well, set
-the page id in the site settings. The automatically generated overview then
-redirects to that page:
-
-.. code-block:: yaml
-   :linenos:
-
-   plugin:
-      tx_blog:
-         settings:
-            categoryOverviewUid: ID_of_Page_Category_Overview

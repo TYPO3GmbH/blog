@@ -23,7 +23,6 @@ plugin.tx_blog {
         blogUid = {$plugin.tx_blog.settings.blogUid}
         authorUid  = {$plugin.tx_blog.settings.authorUid}
         categoryUid  = {$plugin.tx_blog.settings.categoryUid}
-        categoryOverviewUid = {$plugin.tx_blog.settings.categoryOverviewUid}
         tagUid  = {$plugin.tx_blog.settings.tagUid}
         archiveUid = {$plugin.tx_blog.settings.archiveUid}
         storagePid = {$plugin.tx_blog.settings.storagePid}
