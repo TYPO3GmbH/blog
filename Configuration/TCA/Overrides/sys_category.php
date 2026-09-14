@@ -102,6 +102,20 @@ $GLOBALS['TCA']['sys_category']['columns'] = array_replace_recursive(
                 'richtextConfiguration' => 'default'
             ],
         ],
+        'blog_target_page' => [
+            'label' => $ll . 'sys_category.blog_target_page',
+            'description' => $ll . 'sys_category.blog_target_page.description',
+            'exclude' => true,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
+            'config' => [
+                'type' => 'group',
+                'allowed' => 'pages',
+                'size' => 1,
+                'maxitems' => 1,
+                'default' => 0,
+            ],
+        ],
         'posts' => [
             'label' => $ll . 'sys_category.posts',
             'config' => [
@@ -135,6 +149,7 @@ $GLOBALS['TCA']['sys_category']['columns'] = array_replace_recursive(
         --div--;' . $ll . 'sys_category.tabs.seo,
             content,
         --div--;' . $ll . 'sys_category.tabs.blog,
+            blog_target_page,
             posts
     ',
     (string) \T3G\AgencyPack\Blog\Constants::CATEGORY_TYPE_BLOG
