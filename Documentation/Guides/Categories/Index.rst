@@ -37,10 +37,12 @@ category, a regular page can be used instead.
 From now on
 
 *  every link to that category points to the assigned page,
-*  the automatically generated category URL redirects to the assigned page
-   with a permanent redirect,
 *  the RSS feed of the category is still delivered by the automatically
    generated category page.
 
 Categories without an assigned page are not affected and keep using the
 automatically generated category page.
+
+The automatically generated category URL keeps working and delivers the same
+posts as the assigned page. To avoid two URLs for the same listing, redirect
+it to the assigned page, for example with a redirect record of EXT:redirects.
