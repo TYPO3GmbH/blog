@@ -25,7 +25,7 @@ class Category extends AbstractEntity
     protected string $slug = '';
     protected string $description = '';
     protected int $recordType = Constants::CATEGORY_TYPE_BLOG;
-    protected int $blogTargetPage;
+    protected int $blogTargetPage = 0;
 
     /**
      * @var \T3G\AgencyPack\Blog\Domain\Model\Category|LazyLoadingProxy
