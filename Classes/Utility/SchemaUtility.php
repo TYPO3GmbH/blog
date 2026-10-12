@@ -31,7 +31,7 @@ class SchemaUtility
         $url = '';
         $sameAs = [];
         if ($author->getProfile() !== '') {
-            $url = GeneralUtility::locationHeaderUrl($author->getProfile());
+            $url = self::getAbsoluteUrl($author->getProfile());
         }
 
         $data = [
@@ -65,20 +65,20 @@ class SchemaUtility
         }
 
         if ($author->getWebsite() !== '') {
-            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getWebsite());
+            $sameAs[] = self::getAbsoluteUrl($author->getWebsite());
         }
         $twitterUrl = TwitterXUtility::getXUrl($author->getTwitter());
         if ($twitterUrl !== '') {
             $sameAs[] = $twitterUrl;
         }
         if ($author->getLinkedin() !== '') {
-            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getLinkedin());
+            $sameAs[] = self::getAbsoluteUrl($author->getLinkedin());
         }
         if ($author->getXing() !== '') {
-            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getXing());
+            $sameAs[] = self::getAbsoluteUrl($author->getXing());
         }
         if ($author->getInstagram() !== '') {
-            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getInstagram());
+            $sameAs[] = self::getAbsoluteUrl($author->getInstagram());
         }
         $mastodonUrl = MastodonUtility::getMastodonUrl($author->getMastodon());
         if ($mastodonUrl !== '') {
@@ -90,6 +90,22 @@ class SchemaUtility
         }
 
         return $data;
+    }
+
+    /**
+     * Author fields are plain input, and the website field even validates as a
+     * domain name, so "www.example.com" is a common value. Resolving it against
+     * the current page would point sameAs to the own site, so a missing scheme
+     * becomes https instead, as f:uri.external does in the templates.
+     */
+    private static function getAbsoluteUrl(string $url): string
+    {
+        $url = trim($url);
+        if ($url !== '' && !str_starts_with($url, '/') && parse_url($url, PHP_URL_SCHEME) === null) {
+            return 'https://' . $url;
+        }
+
+        return GeneralUtility::locationHeaderUrl($url);
     }
 
     private static function getImageUrl(Author $author): string
