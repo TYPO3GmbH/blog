@@ -51,6 +51,41 @@ final class PersonViewHelperTest extends SiteBasedTestCase
     }
 
     #[Test]
+    public function urlsWithoutSchemeBecomeHttpsUrls(): void
+    {
+        $this->createTestSite();
+
+        (new ConnectionPool())->getConnectionForTable('tx_blog_domain_model_author')->insert(
+            'tx_blog_domain_model_author',
+            [
+                'uid' => 100,
+                'pid' => self::STORAGE_UID,
+                'name' => 'TYPO3 Inc Team',
+                'slug' => 'typo3-inc-team',
+                'posts' => 1,
+                'profile' => 'my.typo3.org/u/typo3-inc-team',
+                'website' => 'www.typo3.com',
+                'linkedin' => 'www.linkedin.com/company/typo3',
+                'xing' => 'https://www.xing.com/pages/typo3',
+            ]
+        );
+
+        self::assertSame(
+            '{"@context":"https://schema.org","@type":"Person","name":"TYPO3 Inc Team","@id":"https://my.typo3.org/u/typo3-inc-team/#Person","url":"https://my.typo3.org/u/typo3-inc-team","sameAs":["https://my.typo3.org/u/typo3-inc-team","https://www.typo3.com","https://www.linkedin.com/company/typo3","https://www.xing.com/pages/typo3"]}',
+            $this->renderFluidTemplateInTestSite(
+                '<blogvh:schema.person author="{test.author}" />',
+                [
+                    [
+                        'type' => 'author',
+                        'uid' => 100,
+                        'as' => 'author',
+                    ]
+                ]
+            )
+        );
+    }
+
+    #[Test]
     public function markupInAuthorDataCannotEscapeTheScriptElement(): void
     {
         $this->createTestSite();
