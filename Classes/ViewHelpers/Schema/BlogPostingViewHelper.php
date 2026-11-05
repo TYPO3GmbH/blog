@@ -61,7 +61,7 @@ class BlogPostingViewHelper extends AbstractViewHelper
             $data['dateModified'] = date(DATE_ATOM, $post->getTstamp());
         }
 
-        $imageUrl = $this->getFeaturedImageUrl($post);
+        $imageUrl = $this->getFeaturedImageUrl($post, $request);
         if ($imageUrl !== '') {
             $data['image'] = [
                 '@type' => 'ImageObject',
@@ -71,7 +71,7 @@ class BlogPostingViewHelper extends AbstractViewHelper
 
         $authors = [];
         foreach ($post->getAuthors() as $author) {
-            $authorData = SchemaUtility::buildPersonData($author);
+            $authorData = SchemaUtility::buildPersonData($author, $request);
             if ($author->getDetailsPage() > 0) {
                 $authorData['sameAs'][] = GeneralUtility::makeInstance(UriBuilder::class)->reset()
                     ->setRequest($request)
@@ -88,7 +88,7 @@ class BlogPostingViewHelper extends AbstractViewHelper
         return (string)json_encode($data, SchemaUtility::JSON_ENCODE_OPTIONS);
     }
 
-    private function getFeaturedImageUrl(Post $post): string
+    private function getFeaturedImageUrl(Post $post, ServerRequestInterface $request): string
     {
         $featuredImage = $post->getFeaturedImage();
         if ($featuredImage === null) {
@@ -100,7 +100,7 @@ class BlogPostingViewHelper extends AbstractViewHelper
             return '';
         }
 
-        return GeneralUtility::locationHeaderUrl($publicUrl);
+        return GeneralUtility::locationHeaderUrl($publicUrl, $request);
     }
 
     protected function getRequest(): RequestInterface

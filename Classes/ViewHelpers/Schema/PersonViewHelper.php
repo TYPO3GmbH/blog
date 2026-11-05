@@ -30,12 +30,13 @@ class PersonViewHelper extends AbstractViewHelper
 
     public function render(): string
     {
+        $request = $this->getRequest();
         /** @var Author $author */
         $author = $this->arguments['author'];
-        $authorData = SchemaUtility::buildPersonData($author);
+        $authorData = SchemaUtility::buildPersonData($author, $request);
         if ($author->getDetailsPage() > 0) {
             $authorData['sameAs'][] = GeneralUtility::makeInstance(UriBuilder::class)->reset()
-                ->setRequest($this->getRequest())
+                ->setRequest($request)
                 ->setTargetPageUid($author->getDetailsPage())
                 ->setCreateAbsoluteUri(true)
                 ->build();

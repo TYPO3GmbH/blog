@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Utility;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Utility\Socials\MastodonUtility;
 use T3G\AgencyPack\Blog\Utility\Socials\TwitterXUtility;
@@ -26,12 +27,12 @@ class SchemaUtility
         | JSON_HEX_APOS
         | JSON_HEX_QUOT;
 
-    public static function buildPersonData(Author $author): array
+    public static function buildPersonData(Author $author, ServerRequestInterface $request): array
     {
         $url = '';
         $sameAs = [];
         if ($author->getProfile() !== '') {
-            $url = GeneralUtility::locationHeaderUrl($author->getProfile());
+            $url = GeneralUtility::locationHeaderUrl($author->getProfile(), $request);
         }
 
         $data = [
@@ -59,26 +60,26 @@ class SchemaUtility
             $data['description'] = strip_tags($author->getBio());
         }
 
-        $imageUrl = self::getImageUrl($author);
+        $imageUrl = self::getImageUrl($author, $request);
         if ($imageUrl !== '') {
             $data['image'] = $imageUrl;
         }
 
         if ($author->getWebsite() !== '') {
-            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getWebsite());
+            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getWebsite(), $request);
         }
         $twitterUrl = TwitterXUtility::getXUrl($author->getTwitter());
         if ($twitterUrl !== '') {
             $sameAs[] = $twitterUrl;
         }
         if ($author->getLinkedin() !== '') {
-            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getLinkedin());
+            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getLinkedin(), $request);
         }
         if ($author->getXing() !== '') {
-            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getXing());
+            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getXing(), $request);
         }
         if ($author->getInstagram() !== '') {
-            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getInstagram());
+            $sameAs[] = GeneralUtility::locationHeaderUrl($author->getInstagram(), $request);
         }
         $mastodonUrl = MastodonUtility::getMastodonUrl($author->getMastodon());
         if ($mastodonUrl !== '') {
@@ -92,7 +93,7 @@ class SchemaUtility
         return $data;
     }
 
-    private static function getImageUrl(Author $author): string
+    private static function getImageUrl(Author $author, ServerRequestInterface $request): string
     {
         $image = $author->getImage();
         if ($image === null) {
@@ -104,6 +105,6 @@ class SchemaUtility
             return '';
         }
 
-        return GeneralUtility::locationHeaderUrl($publicUrl);
+        return GeneralUtility::locationHeaderUrl($publicUrl, $request);
     }
 }
