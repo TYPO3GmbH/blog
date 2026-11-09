@@ -21,7 +21,7 @@
             <f:if condition="{author.website} || {author.twitter} || {author.instagram} || {author.linkedin} || {author.xing} || {author.mastodon}">
                 <div class="postauthor__social">
                     <f:if condition="{author.website}">
-                        <a href="{author.website}" class="postauthor__sociallink postauthor__sociallink--website" target="_blank" itemprop="sameAs">
+                        <a href="{f:uri.external(uri: author.website)}" class="postauthor__sociallink postauthor__sociallink--website" target="_blank" itemprop="sameAs">
                             <span class="postauthor__sociallinkicon postauthor__sociallinkicon--website">
                                 <span class="blogicon"><f:render partial="General/SocialIcons" section="Website" optional="true" /></span>
                             </span>
@@ -37,7 +37,7 @@
                         </a>
                     </f:if>
                     <f:if condition="{author.instagram}">
-                        <a href="{author.instagram}" class="postauthor__sociallink postauthor__sociallink--instagram" target="_blank" itemprop="sameAs">
+                        <a href="{f:uri.external(uri: author.instagram)}" class="postauthor__sociallink postauthor__sociallink--instagram" target="_blank" itemprop="sameAs">
                             <span class="postauthor__sociallinkicon postauthor__sociallinkicon--instagram">
                                 <span class="blogicon"><f:render partial="General/SocialIcons" section="Instagram" optional="true" /></span>
                             </span>
@@ -45,7 +45,7 @@
                         </a>
                     </f:if>
                     <f:if condition="{author.linkedin}">
-                        <a href="{author.linkedin}" class="postauthor__sociallink postauthor__sociallink--linkedin" target="_blank" itemprop="sameAs">
+                        <a href="{f:uri.external(uri: author.linkedin)}" class="postauthor__sociallink postauthor__sociallink--linkedin" target="_blank" itemprop="sameAs">
                             <span class="postauthor__sociallinkicon postauthor__sociallinkicon--linkedin">
                                 <span class="blogicon"><f:render partial="General/SocialIcons" section="LinkedIn" optional="true" /></span>
                             </span>
@@ -53,7 +53,7 @@
                         </a>
                     </f:if>
                     <f:if condition="{author.xing}">
-                        <a href="{author.xing}" class="postauthor__sociallink postauthor__sociallink--xing" target="_blank" itemprop="sameAs">
+                        <a href="{f:uri.external(uri: author.xing)}" class="postauthor__sociallink postauthor__sociallink--xing" target="_blank" itemprop="sameAs">
                             <span class="postauthor__sociallinkicon postauthor__sociallinkicon--xing">
                                 <span class="blogicon"><f:render partial="General/SocialIcons" section="Xing" optional="true" /></span>
                             </span>
