@@ -15,7 +15,8 @@ CREATE TABLE sys_category (
   record_type int(11) unsigned DEFAULT '1' NOT NULL,
   slug varchar(2048) DEFAULT '' NOT NULL,
   content text,
-  posts int(11) DEFAULT '0' NOT NULL
+  posts int(11) DEFAULT '0' NOT NULL,
+  blog_target_page int(11) unsigned DEFAULT '0' NOT NULL
 );
 
 #
@@ -86,6 +87,7 @@ CREATE TABLE tx_blog_domain_model_author (
   linkedin varchar(255) DEFAULT '' NOT NULL,
   xing varchar(255) DEFAULT '' NOT NULL,
   instagram varchar(255) DEFAULT '' NOT NULL,
+  mastodon varchar(255) DEFAULT '' NOT NULL,
   profile varchar(255) DEFAULT '' NOT NULL,
   bio text,
   posts text,

@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" datatype="plaintext" original="EXT:blog/Configuration/Sets/Static/labels.xlf" date="2025-06-17T08:00:00Z" product-name="blog">
+        <header/>
+        <body>
+
+            <trans-unit id="categories.blog" xml:space="preserve">
+                <source>TYPO3 Blog</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.uids" xml:space="preserve">
+                <source>Page ID settings</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.templates">
+                <source>Templates</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.templates.frontend">
+                <source>Frontend</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.templates.email">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.lists">
+                <source>Listings</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.lists.pagination">
+                <source>Pagination</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.lists.archive">
+                <source>Archive</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.lists.relatedPosts">
+                <source>Related Posts</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.lists.latestPosts">
+                <source>Latest Posts</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.widgets">
+                <source>Widgets</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.widgets.comments" xml:space="preserve">
+                <source>Comment</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.widgets.recent_posts" xml:space="preserve">
+                <source>Recent posts</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.widgets.tags" xml:space="preserve">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.widgets.archive" xml:space="preserve">
+                <source>Archive</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.comments" xml:space="preserve">
+                <source>Comments</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.comments.disqus" xml:space="preserve">
+                <source>Disqus</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.comments.googleRecaptcha" xml:space="preserve">
+                <source>Google Recaptcha</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.authors" xml:space="preserve">
+                <source>Authors</source>
+            </trans-unit>
+            <trans-unit id="categories.blog.notifications" xml:space="preserve">
+                <source>Notifications</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="categories.blog_post" xml:space="preserve">
+                <source>TYPO3 Blog: Post</source>
+            </trans-unit>
+            <trans-unit id="categories.blog_post.featuredimage" xml:space="preserve">
+                <source>Featured Image</source>
+            </trans-unit>
+            <trans-unit id="categories.blog_post.header" xml:space="preserve">
+                <source>Post Header</source>
+            </trans-unit>
+            <trans-unit id="categories.blog_post.footer" xml:space="preserve">
+                <source>Post Footer</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="categories.blog_list" xml:space="preserve">
+                <source>TYPO3 Blog: List</source>
+            </trans-unit>
+            <trans-unit id="categories.blog_list.featuredimage" xml:space="preserve">
+                <source>Featured Image</source>
+            </trans-unit>
+            <trans-unit id="categories.blog_list.elementHeader" xml:space="preserve">
+                <source>Element Header</source>
+            </trans-unit>
+            <trans-unit id="categories.blog_list.elementFooter" xml:space="preserve">
+                <source>Element Footer</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="categories.blog_teaser" xml:space="preserve">
+                <source>TYPO3 Blog: Teaser</source>
+            </trans-unit>
+            <trans-unit id="categories.blog_teaser.element.header" xml:space="preserve">
+                <source>Element Header</source>
+            </trans-unit>
+            <trans-unit id="categories.blog_teaser.element.footer" xml:space="preserve">
+                <source>Element Footer</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.view.templateRootPath" xml:space="preserve">
+                <source>Template Root Path</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.view.templateRootPath" xml:space="preserve">
+                <source>Path to template folder</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.view.partialRootPath" xml:space="preserve">
+                <source>Partial Root Path</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.view.partialRootPath" xml:space="preserve">
+                <source>Path to partial folder</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.view.layoutRootPath" xml:space="preserve">
+                <source>Layout Root Path</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.view.layoutRootPath" xml:space="preserve">
+                <source>Path to layout folder</source>
+            </trans-unit>
+
+            <trans-unit id="settings.plugin.tx_blog.view.emails.templateRootPath" xml:space="preserve">
+                <source>Email-Template Root Path</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.view.emails.templateRootPath" xml:space="preserve">
+                <source>Path to template folder</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.view.emails.partialRootPath" xml:space="preserve">
+                <source>Email-Partial Root Path</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.view.emails.partialRootPath" xml:space="preserve">
+                <source>Path to partial folder</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.view.emails.layoutRootPath" xml:space="preserve">
+                <source>Email-Layout Root Path</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.view.emails.layoutRootPath" xml:space="preserve">
+                <source>Path to layout folder</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.blogUid" xml:space="preserve">
+                <source>List posts UID</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.blogUid" xml:space="preserve">
+                <source>Location of the "Blog: List of posts" plugin. This page UID is the root page for the blog. All blog post pages are located below this page.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.authorUid" xml:space="preserve">
+                <source>Author UID</source>
+            </trans-unit>
+             <trans-unit id="settings.description.plugin.tx_blog.settings.authorUid" xml:space="preserve">
+                <source>Location of the "Blog: Author" plugin. Shows posts by author.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.categoryUid" xml:space="preserve">
+                <source>List by category UID</source>
+            </trans-unit>
+             <trans-unit id="settings.description.plugin.tx_blog.settings.categoryUid" xml:space="preserve">
+                <source>Location of the "Blog: List by category" plugin. Shows all posts from one category.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.tagUid" xml:space="preserve">
+                <source>List by tags UID</source>
+            </trans-unit>
+             <trans-unit id="settings.description.plugin.tx_blog.settings.tagUid" xml:space="preserve">
+                <source>Location of the "Blog: List by tags" plugin. Shows all posts from one tag.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.archiveUid" xml:space="preserve">
+                <source>Archive UID</source>
+            </trans-unit>
+             <trans-unit id="settings.description.plugin.tx_blog.settings.archiveUid" xml:space="preserve">
+                <source>Location of the "Blog: Archive" plugin. Shows archived posts.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.storagePid" xml:space="preserve">
+                <source>Storage folder</source>
+            </trans-unit>
+             <trans-unit id="settings.description.plugin.tx_blog.settings.storagePid" xml:space="preserve">
+                <source>Storage folder of all categories and tags for this blog.</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.post.featuredImage.width" xml:space="preserve">
+                <source>Width</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.post.featuredImage.height" xml:space="preserve">
+                <source>Height</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.enable" xml:space="preserve">
+                <source>Display meta information in the header</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.modifier" xml:space="preserve">
+                <source>Meta information display style</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.modifier.condensed" xml:space="preserve">
+                <source>Condensed</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.modifier.extended" xml:space="preserve">
+                <source>Extended</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.modifier.simple" xml:space="preserve">
+                <source>Simple</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.modifier.modern" xml:space="preserve">
+                <source>Modern</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.elements.authors.enable" xml:space="preserve">
+                <source>Show authors in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.enable" xml:space="preserve">
+                <source>Enable author avatars in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.size" xml:space="preserve">
+                <source>Size of the author avatars</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.meta.postheader.elements.authors.avatar.size" xml:space="preserve">
+                <source>The size in px for the author avatar</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.elements.categories.enable" xml:space="preserve">
+                <source>Show categories in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.elements.tags.enable" xml:space="preserve">
+                <source>Show tags in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.elements.published.enable" xml:space="preserve">
+                <source>Show the publish date in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.elements.published.format" xml:space="preserve">
+                <source>Published date format.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postheader.elements.comments.enable" xml:space="preserve">
+                <source>Show comments in the meta section</source>
+            </trans-unit>
+
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.enable" xml:space="preserve">
+                <source>Display meta information in the footer</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.modifier" xml:space="preserve">
+                <source>Meta information display style</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.modifier.condensed" xml:space="preserve">
+                <source>Condensed</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.modifier.extended" xml:space="preserve">
+                <source>Extended</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.modifier.simple" xml:space="preserve">
+                <source>Simple</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.modifier.modern" xml:space="preserve">
+                <source>Modern</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.elements.authors.enable" xml:space="preserve">
+                <source>Show authors in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.enable" xml:space="preserve">
+                <source>Enable author avatars in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.size" xml:space="preserve">
+                <source>Size of the author avatars</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.meta.postfooter.elements.authors.avatar.size" xml:space="preserve">
+                <source>The size in px for the author avatar</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.elements.categories.enable" xml:space="preserve">
+                <source>Show categories in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.elements.tags.enable" xml:space="preserve">
+                <source>Show tags in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.elements.published.enable" xml:space="preserve">
+                <source>Show the publish date in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.elements.published.format" xml:space="preserve">
+                <source>Published date format.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.postfooter.elements.comments.enable" xml:space="preserve">
+                <source>Show comments in the meta section</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.lists.featuredImage.width" xml:space="preserve">
+                <source>Width</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.lists.featuredImage.height" xml:space="preserve">
+                <source>Height</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.enable" xml:space="preserve">
+                <source>Display meta information in the header</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.modifier" xml:space="preserve">
+                <source>Meta information display style</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.modifier.condensed" xml:space="preserve">
+                <source>Condensed</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.modifier.extended" xml:space="preserve">
+                <source>Extended</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.modifier.simple" xml:space="preserve">
+                <source>Simple</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.modifier.modern" xml:space="preserve">
+                <source>Modern</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.elements.authors.enable" xml:space="preserve">
+                <source>Show authors in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.enable" xml:space="preserve">
+                <source>Enable author avatars in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.size" xml:space="preserve">
+                <source>Size of the author avatars</source>
+            </trans-unit>
+            <trans-unit id="settings.descriprion.plugin.tx_blog.settings.meta.listheader.elements.authors.avatar.size" xml:space="preserve">
+                <source>The size in px for the author avatar</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.elements.categories.enable" xml:space="preserve">
+                <source>Show categories in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.elements.tags.enable" xml:space="preserve">
+                <source>Show tags in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.elements.published.enable" xml:space="preserve">
+                <source>Show the publish date in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.elements.published.format" xml:space="preserve">
+                <source>Published date format.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listheader.elements.comments.enable" xml:space="preserve">
+                <source>Show comments in the meta section</source>
+            </trans-unit>
+
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.enable" xml:space="preserve">
+                <source>Display meta information in the footer</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.modifier" xml:space="preserve">
+                <source>Meta information display style</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.modifier.condensed" xml:space="preserve">
+                <source>Condensed</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.modifier.extended" xml:space="preserve">
+                <source>Extended</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.modifier.simple" xml:space="preserve">
+                <source>Simple</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.modifier.modern" xml:space="preserve">
+                <source>Modern</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.elements.authors.enable" xml:space="preserve">
+                <source>Show authors in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.enable" xml:space="preserve">
+                <source>Enable author avatars in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.size" xml:space="preserve">
+                <source>Size of the author avatars</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.meta.listfooter.elements.authors.avatar.size" xml:space="preserve">
+                <source>The size in px for the author avatar</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.elements.categories.enable" xml:space="preserve">
+                <source>Show categories in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.elements.tags.enable" xml:space="preserve">
+                <source>Show tags in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.elements.published.enable" xml:space="preserve">
+                <source>Show the publish date in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.elements.published.format" xml:space="preserve">
+                <source>Published date format.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.listfooter.elements.comments.enable" xml:space="preserve">
+                <source>Show comments in the meta section</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.enable" xml:space="preserve">
+                <source>Display meta information in the header</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.modifier" xml:space="preserve">
+                <source>Meta information display style</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.modifier.condensed" xml:space="preserve">
+                <source>Condensed</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.modifier.extended" xml:space="preserve">
+                <source>Extended</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.modifier.simple" xml:space="preserve">
+                <source>Simple</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.modifier.modern" xml:space="preserve">
+                <source>Modern</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.elements.authors.enable" xml:space="preserve">
+                <source>Show authors in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.elements.authors.avatar.enable" xml:space="preserve">
+                <source>Enable author avatars in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.elements.authors.avatar.size" xml:space="preserve">
+                <source>Size of the author avatars</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.meta.teaserheader.elements.authors.avatar.size" xml:space="preserve">
+                <source>The size in px for the author avatar</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.elements.categories.enable" xml:space="preserve">
+                <source>Show categories in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.elements.tags.enable" xml:space="preserve">
+                <source>Show tags in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.elements.published.enable" xml:space="preserve">
+                <source>Show the publish date in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.elements.published.format" xml:space="preserve">
+                <source>Published date format</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserheader.elements.comments.enable" xml:space="preserve">
+                <source>Show comments in the meta section</source>
+            </trans-unit>
+
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.enable" xml:space="preserve">
+                <source>Display meta information in the header</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.modifier" xml:space="preserve">
+                <source>Meta information display style</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.modifier.condensed" xml:space="preserve">
+                <source>Condensed</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.modifier.extended" xml:space="preserve">
+                <source>Extended</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.modifier.simple" xml:space="preserve">
+                <source>Simple</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.modifier.modern" xml:space="preserve">
+                <source>Modern</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.elements.authors.enable" xml:space="preserve">
+                <source>Show authors in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.elements.authors.avatar.enable" xml:space="preserve">
+                <source>Enable author avatars in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.elements.authors.avatar.size" xml:space="preserve">
+                <source>Size of the author avatars</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.meta.teaserfooter.elements.authors.avatar.size" xml:space="preserve">
+                <source>The size in px for the author avatar</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.elements.categories.enable" xml:space="preserve">
+                <source>Show categories in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.elements.tags.enable" xml:space="preserve">
+                <source>Show tags in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.elements.published.enable" xml:space="preserve">
+                <source>Show the publish date in the meta section</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.elements.published.format" xml:space="preserve">
+                <source>Published date format.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.meta.teaserfooter.elements.comments.enable" xml:space="preserve">
+                <source>Show comments in the meta section</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.lists.posts.maximumDisplayedItems" xml:space="preserve">
+                <source>Maximum displayed items</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.lists.posts.maximumDisplayedItems" xml:space="preserve">
+                <source>Maximum number of posts to be displayed (0 = no limit).</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.lists.posts.dateFormat" xml:space="preserve">
+                <source>Date format</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.lists.posts.dateFormat" xml:space="preserve">
+                <source>The format for the list items.</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.lists.pagination.itemsPerPage" xml:space="preserve">
+                <source>Number of post that should be displayed per page</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.lists.pagination.insertAbove" xml:space="preserve">
+                <source>Show the pagination above the posts</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.lists.pagination.insertBelow" xml:space="preserve">
+                <source>Show the pagination below the posts</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.lists.pagination.maximumNumberOfLinks" xml:space="preserve">
+                <source>Maximum number of links in the pagination</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.teaser.featuredImage.width" xml:space="preserve">
+                <source>Width</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.teaser.featuredImage.height" xml:space="preserve">
+                <source>Height</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.archive.showCounter" xml:space="preserve">
+                <source>Show counter</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.archive.showCounter" xml:space="preserve">
+                <source>If enabled, the count of posts is visible.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.archive.yearDateFormat" xml:space="preserve">
+                <source>Year format</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.archive.yearDateFormat" xml:space="preserve">
+                <source>The format of the year.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.archive.monthDateFormat" xml:space="preserve">
+                <source>Month format</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.archive.monthDateFormat" xml:space="preserve">
+                <source>The format of the month.</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.relatedPosts.limit" xml:space="preserve">
+                <source>Limit</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.relatedPosts.limit" xml:space="preserve">
+                <source>The limit of displayed items.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.relatedPosts.categoryMultiplier" xml:space="preserve">
+                <source>Category Multiplier</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.relatedPosts.categoryMultiplier" xml:space="preserve">
+                <source>The multiplier for categories.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.relatedPosts.tagMultiplier" xml:space="preserve">
+                <source>Tag Multiplier</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.relatedPosts.tagMultiplier" xml:space="preserve">
+                <source>The multiplier for tags.</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.latestPosts.limit" xml:space="preserve">
+                <source>Limit</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.latestPosts.limit" xml:space="preserve">
+                <source>The limit of displayed items.</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.widgets.comments.limit" xml:space="preserve">
+                <source>Limit</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.widgets.comments.limit" xml:space="preserve">
+                <source>The limit of displayed items.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.widgets.recentposts.limit" xml:space="preserve">
+                <source>Limit</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.widgets.recentposts.limit" xml:space="preserve">
+                <source>The limit of displayed items.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.widgets.tags.limit" xml:space="preserve">
+                <source>Limit</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.widgets.tags.limit" xml:space="preserve">
+                <source>The limit of displayed items.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.widgets.minSize.limit" xml:space="preserve">
+                <source>Minimum size</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.widgets.minSize.limit" xml:space="preserve">
+                <source>The minimum size of the font.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.widgets.maxSize.limit" xml:space="preserve">
+                <source>Maximum size</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.widgets.maxSize.limit" xml:space="preserve">
+                <source>The maximum size of the font.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.widgets.archive.showCounter" xml:space="preserve">
+                <source>Show counter</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.widgets.archive.showCounter" xml:space="preserve">
+                <source>If enabled, the count of posts is visible.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.widgets.archive.groupByYear" xml:space="preserve">
+                <source>Group by year</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.widgets.archive.groupByYear" xml:space="preserve">
+                <source>If enabled, the posts are grouped by year.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.widgets.archive.groupByMonth" xml:space="preserve">
+                <source>Group by month</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.widgets.archive.groupByMonth" xml:space="preserve">
+                <source>If enabled, the posts are grouped by year and month.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.widgets.archive.yearDateFormat" xml:space="preserve">
+                <source>Year format</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.widgets.archive.yearDateFormat" xml:space="preserve">
+                <source>The format of the year.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.widgets.archive.monthDateFormat" xml:space="preserve">
+                <source>Month format</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.widgets.archive.monthDateFormat" xml:space="preserve">
+                <source>The format of the month.</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.comments.active" xml:space="preserve">
+                <source>Enable Comments</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.comments.active" xml:space="preserve">
+                <source>Activate comments as a general feature</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.comments.features.urls" xml:space="preserve">
+                <source>Enable Urls</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.comments.features.urls" xml:space="preserve">
+                <source>Activate the url field in the comment form and output the submitted url</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.comments.moderation" xml:space="preserve">
+                <source>Comments moderation mode</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.comments.moderation" xml:space="preserve">
+                <source>
+- 0: no moderation
+- 1: moderation active
+- 2: moderation only on first comment
+                </source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.comments.respectPostLanguageId" xml:space="preserve">
+                <source>Respect post_language_id</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.comments.respectPostLanguageId" xml:space="preserve">
+                <source>
+- 0: show all comments also on translated posts
+- 1: show only comments written in current language or language all (-1)
+                </source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.comments.date.format" xml:space="preserve">
+                <source>Date format</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.comments.date.format" xml:space="preserve">
+                <source>The format for the comments.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.comments.disqus.enable" xml:space="preserve">
+                <source>Enable Disqus</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.comments.disqus.enable" xml:space="preserve">
+                <source>Use disqus instead of internal comments?</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.comments.disqus.shortname" xml:space="preserve">
+                <source>Disqus shortname</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.comments.disqus.shortname" xml:space="preserve">
+                <source>The shortname / forum id of your disqus setup.</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.comments.google_recaptcha.enable" xml:space="preserve">
+                <source>Google Recaptcha v2</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.comments.google_recaptcha.enable" xml:space="preserve">
+                <source>Enable google recaptcha for comments?</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.comments.google_recaptcha.website_key" xml:space="preserve">
+                <source>Google Recaptcha Website-Key</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.comments.google_recaptcha.secret_key" xml:space="preserve">
+                <source>Google Recaptcha Secret-Key</source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.authors.avatar.provider.size" xml:space="preserve">
+                <source>Author Avatar Size</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.authors.avatar.provider.size" xml:space="preserve">
+                <source>The size in px for the author avatar</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.authors.avatar.provider.default" xml:space="preserve">
+                <source>Author Avatar Default</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.authors.avatar.provider.default" xml:space="preserve">
+                <source>The default image for an author avatar</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.authors.avatar.provider.rating" xml:space="preserve">
+                <source>Define the gravatar rating for images</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.authors.avatar.provider.rating" xml:space="preserve">
+                <source>
+- g: suitable for display on all websites with any audience type
+- pg: may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence
+- r: contain such things as harsh profanity, intense violence, nudity, or hard drug use
+- x: may contain hardcore sexual imagery or extremely disturbing violence.The default image for an author avatar
+                </source>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="settings.plugin.tx_blog.settings.notifications.email.senderName" xml:space="preserve">
+                <source>Sender name</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.notifications.email.senderName" xml:space="preserve">
+                <source>Global sender name for notifications</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.notifications.email.senderMail" xml:space="preserve">
+                <source>Sender mail</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.notifications.email.senderMail" xml:space="preserve">
+                <source>Global sender email address for notifications</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.notifications.CommentAddedNotification.author.enable" xml:space="preserve">
+                <source>Author notifications</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.notifications.CommentAddedNotification.author.enable" xml:space="preserve">
+                <source>Send notification to author of a blog post</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.enable" xml:space="preserve">
+                <source>Admin notifications</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.enable" xml:space="preserve">
+                <source>Send notification to admin of the blog</source>
+            </trans-unit>
+            <trans-unit id="settings.plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.email" xml:space="preserve">
+                <source>Admin mail</source>
+            </trans-unit>
+            <trans-unit id="settings.description.plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.email" xml:space="preserve">
+                <source>Global admin (receiver) email address for notifications</source>
+            </trans-unit>
+
+       </body>
+    </file>
+</xliff>

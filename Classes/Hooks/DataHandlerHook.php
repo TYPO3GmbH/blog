@@ -34,7 +34,7 @@ class DataHandlerHook
     {
         if ($table === self::TABLE_PAGES) {
             if (!MathUtility::canBeInterpretedAsInteger($id)) {
-                $id = $dataHandler->substNEWwithIDs[$id];
+                $id = $dataHandler->substNEWwithIDs[(string)$id];
             }
 
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)

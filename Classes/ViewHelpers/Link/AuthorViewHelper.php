@@ -10,10 +10,11 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class AuthorViewHelper extends AbstractTagBasedViewHelper
@@ -27,12 +28,11 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link');
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('author', Author::class, 'The author to link to', true);
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
+        $this->registerArgument('createAbsoluteUri', 'bool', 'Create an absolute URI', false, false);
+        $this->registerArgument('returnUri', 'bool', 'Return only uri', false, false);
     }
 
     public function render(): string
@@ -40,47 +40,18 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         /** @var Author $author */
         $author = $this->arguments['author'];
         $rssFormat = (bool)$this->arguments['rss'];
+        $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
 
         if ((int)$author->getDetailsPage() > 0 && !$rssFormat) {
-            return $this->buildUriFromDetailsPage($author, $rssFormat);
+            $uri = $this->buildUriFromDetailsPage($author, $rssFormat, $createAbsoluteUri);
+        } else {
+            $uri = $this->buildUriFromDefaultPage($author, $rssFormat, $createAbsoluteUri);
         }
 
-        return $this->buildUriFromDefaultPage($author, $rssFormat);
-    }
-
-    protected function buildUriFromDetailsPage(Author $author, bool $rssFormat): string
-    {
-        $uriBuilder = $this->getUriBuilder((int) $author->getDetailsPage(), [], $rssFormat);
-        return $this->buildAnchorTag($uriBuilder->build(), $author);
-    }
-
-    protected function buildUriFromDefaultPage(Author $author, bool $rssFormat): string
-    {
-        $uriBuilder = $this->getUriBuilder((int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['authorUid'], [], $rssFormat);
-        $arguments = [
-            'author' => $author->getUid(),
-        ];
-        return $this->buildAnchorTag($uriBuilder->uriFor('listPostsByAuthor', $arguments, 'Post', 'Blog', 'AuthorPosts'), $author);
-    }
-
-    protected function getUriBuilder(int $pageUid, array $additionalParams, bool $rssFormat): UriBuilder
-    {
-        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $uriBuilder->reset()
-            ->setRequest($this->renderingContext->getRequest())
-            ->setTargetPageUid($pageUid)
-            ->setArguments($additionalParams);
-        if ($rssFormat) {
-            $uriBuilder
-                ->setTargetPageType((int)$this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_author.']['typeNum']);
-        }
-
-        return $uriBuilder;
-    }
-
-    protected function buildAnchorTag(string $uri, Author $author): string
-    {
         if ($uri !== '') {
+            if (isset($this->arguments['returnUri']) && $this->arguments['returnUri'] === true) {
+                return htmlspecialchars($uri, ENT_QUOTES | ENT_HTML5);
+            }
             $linkText = $this->renderChildren() ?? $author->getName();
             $this->tag->addAttribute('href', $uri);
             $this->tag->setContent($linkText);
@@ -90,8 +61,67 @@ class AuthorViewHelper extends AbstractTagBasedViewHelper
         return $this->renderChildren();
     }
 
-    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
+    protected function buildUriFromDetailsPage(Author $author, bool $rssFormat, bool $createAbsoluteUri = false): string
     {
-        return $GLOBALS['TSFE'];
+        return $this->getUriBuilder((int) $author->getDetailsPage(), [], $rssFormat)
+            ->setCreateAbsoluteUri($createAbsoluteUri)
+            ->build();
+    }
+
+    protected function buildUriFromDefaultPage(Author $author, bool $rssFormat, bool $createAbsoluteUri = false): string
+    {
+        $request = $this->getRequest();
+        $pageUid = $request
+            ->getAttribute('site')
+            ->getSettings()
+            ->get('plugin.tx_blog.settings.authorUid') ?? 0;
+        $arguments = [
+            'author' => $author->getUid(),
+        ];
+        return $this->getUriBuilder($pageUid, [], $rssFormat)
+            ->setCreateAbsoluteUri($createAbsoluteUri)
+            ->uriFor('listPostsByAuthor', $arguments, 'Post', 'Blog', 'AuthorPosts');
+    }
+
+    protected function getUriBuilder(int $pageUid, array $additionalParams, bool $rssFormat): UriBuilder
+    {
+        $request = $this->getRequest();
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        $uriBuilder->reset()
+            ->setRequest($request)
+            ->setTargetPageUid($pageUid)
+            ->setArguments($additionalParams);
+        if ($rssFormat) {
+            $rssTypeNum = (int)(
+                $request->getAttribute('frontend.typoscript')->getSetupTree()
+                ->getChildByName('blog_rss_author')
+                ?->getChildByName('typeNum')
+                ?->getValue() ?? 0
+            );
+            $uriBuilder
+                ->setTargetPageType($rssTypeNum);
+        }
+
+        return $uriBuilder;
+    }
+
+    protected function getRequest(): RequestInterface
+    {
+        if (null === $this->renderingContext) {
+            throw new \RuntimeException('ViewHelper blogvh:link.author requires an existing rendering context.', 1781701011);
+        }
+        $request = null;
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+
+        if ($request === null || !$request instanceof RequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.author can be used only in extbase context and needs a request implementing extbase RequestInterface.',
+                1729082934
+            );
+        }
+
+        return $request;
     }
 }

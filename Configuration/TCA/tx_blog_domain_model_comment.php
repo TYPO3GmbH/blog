@@ -21,7 +21,6 @@ return [
         'label_alt_force' => 1,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'default_sortby' => 'ORDER BY crdate DESC',
         'delete' => 'deleted',
         'enablecolumns' => [
@@ -80,9 +79,8 @@ return [
         'email' => [
             'label' => $ll . 'tx_blog_domain_model_comment.email',
             'config' => [
-                'type' => 'input',
+                'type' => 'email',
                 'size' => 30,
-                'eval' => 'email',
             ],
         ],
         'comment' => [
@@ -105,10 +103,10 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [$ll . 'tx_blog_domain_model_comment.status.pending', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_PENDING],
-                    [$ll . 'tx_blog_domain_model_comment.status.approved', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_APPROVED],
-                    [$ll . 'tx_blog_domain_model_comment.status.declined', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DECLINED],
-                    [$ll . 'tx_blog_domain_model_comment.status.deleted', \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DELETED],
+                    ['label' => $ll . 'tx_blog_domain_model_comment.status.pending', 'value' => \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_PENDING],
+                    ['label' => $ll . 'tx_blog_domain_model_comment.status.approved', 'value' => \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_APPROVED],
+                    ['label' => $ll . 'tx_blog_domain_model_comment.status.declined', 'value' => \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DECLINED],
+                    ['label' => $ll . 'tx_blog_domain_model_comment.status.deleted', 'value' => \T3G\AgencyPack\Blog\Domain\Model\Comment::STATUS_DELETED],
                 ],
             ],
         ],

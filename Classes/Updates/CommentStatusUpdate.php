@@ -10,8 +10,10 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Updates;
 
+use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
+#[UpgradeWizard(CommentStatusUpdate::class)]
 final class CommentStatusUpdate extends AbstractUpdate implements UpgradeWizardInterface
 {
     protected string $title = 'EXT:blog: Migrate Comment Status';

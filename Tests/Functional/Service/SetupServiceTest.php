@@ -11,17 +11,24 @@ declare(strict_types=1);
 
 namespace T3G\AgencyPack\Blog\Tests\Functional\Service;
 
+use PHPUnit\Framework\Attributes\Test;
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Service\SetupService;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Core\Bootstrap;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
+use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class SetupServiceTest extends FunctionalTestCase
 {
+    protected array $coreExtensionsToLoad = [
+        'form',
+        'fluid_styled_content'
+    ];
+
     protected array $testExtensionsToLoad = [
-        'typo3conf/ext/blog'
+        'blog'
     ];
 
     protected function setUp(): void
@@ -29,13 +36,11 @@ final class SetupServiceTest extends FunctionalTestCase
         parent::setUp();
 
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/DataHandler/be_users.csv');
-        $this->setUpBackendUser(1);
-        Bootstrap::initializeLanguageObject();
+        $backendUser = $this->setUpBackendUser(1);
+        $GLOBALS['LANG'] = $this->get(LanguageServiceFactory::class)->createFromUserPreferences($backendUser);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function create(): void
     {
         $setupService = GeneralUtility::makeInstance(SetupService::class);
@@ -46,11 +51,38 @@ final class SetupServiceTest extends FunctionalTestCase
         self::assertEquals($rootPage['title'], 'Blog');
         self::assertEquals($rootPage['doktype'], Constants::DOKTYPE_BLOG_PAGE);
         self::assertEquals($rootPage['is_siteroot'], 1);
+        self::assertEquals($rootPage['hidden'], 0);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
+    public function createReturnsSiteBaseOnRootPath(): void
+    {
+        $setupService = GeneralUtility::makeInstance(SetupService::class);
+
+        self::assertSame('/', $setupService->createBlogSetup());
+    }
+
+    #[Test]
+    public function createNamesTheSiteAfterTheBlog(): void
+    {
+        $setupService = GeneralUtility::makeInstance(SetupService::class);
+        $setupService->createBlogSetup(['title' => 'My Blog']);
+
+        $site = $this->get(SiteFinder::class)->getSiteByRootPageId(1);
+        self::assertSame('my-blog', $site->getIdentifier());
+        self::assertSame('blog/standalone', $site->getConfiguration()['dependencies'][0]);
+    }
+
+    #[Test]
+    public function createPutsASecondBlogOnItsOwnPath(): void
+    {
+        $setupService = GeneralUtility::makeInstance(SetupService::class);
+        $setupService->createBlogSetup(['title' => 'First']);
+
+        self::assertSame('/second', $setupService->createBlogSetup(['title' => 'Second']));
+    }
+
+    #[Test]
     public function createWithName(): void
     {
         $setupService = GeneralUtility::makeInstance(SetupService::class);
@@ -63,9 +95,7 @@ final class SetupServiceTest extends FunctionalTestCase
         self::assertEquals($rootPage['is_siteroot'], 1);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function determineBlogSetups(): void
     {
         $setupService = GeneralUtility::makeInstance(SetupService::class);

@@ -25,6 +25,7 @@ use T3G\AgencyPack\Blog\Pagination\BlogPagination;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Service\MetaTagService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
+use T3G\AgencyPack\Blog\Utility\Socials\MastodonUtility;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -59,7 +60,7 @@ class PostController extends ActionController
     }
 
     /**
-     * @param ViewInterface|\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
+     * @param ViewInterface $view
      */
     protected function initializeView($view): void
     {
@@ -91,17 +92,24 @@ class PostController extends ActionController
                 default:
             }
 
+            $title = '' !== ($this->settings['rss']['title'] ?? '')
+                ? $this->settings['rss']['title']
+                : LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments);
+            $description = '' !== ($this->settings['rss']['description'] ?? '')
+                ? $this->settings['rss']['description']
+                : LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments);
+
             $feedData = [
-                'title' => LocalizationUtility::translate('feed.title' . $action, 'blog', $arguments),
-                'description' => LocalizationUtility::translate('feed.description' . $action, 'blog', $arguments),
-                'language' => $this->getSiteLanguage()->getTwoLetterIsoCode(),
+                'title' => $title,
+                'description' => $description,
+                'language' => $this->getSiteLanguage()->getLocale()->getLanguageCode(),
                 'link' => $this->getRequestUrl(),
                 'date' => date('r'),
             ];
             $this->view->assign('feed', $feedData);
         }
 
-        $contentObject = $this->configurationManager->getContentObject();
+        $contentObject = $this->request->getAttribute('currentContentObject');
         $this->view->assign('data', $contentObject !== null ? $contentObject->data : null);
     }
 
@@ -110,15 +118,21 @@ class PostController extends ActionController
      */
     public function listRecentPostsAction(int $currentPage = 1): ResponseInterface
     {
-        $maximumItems = (int) ($this->settings['lists']['posts']['maximumDisplayedItems'] ?? 0);
+        if ($this->request->getFormat() === 'rss') {
+            $maximumItems = (int) ($this->settings['rss']['maximumDisplayedItems'] ?? 10);
+        } else {
+            $maximumItems = (int) ($this->settings['lists']['posts']['maximumDisplayedItems'] ?? 0);
+        }
         $posts = (0 === $maximumItems)
             ? $this->postRepository->findAll()
             : $this->postRepository->findAllWithLimit($maximumItems);
-        $pagination = $this->getPagination($posts, $currentPage);
+        if ($this->request->getFormat() !== 'rss') {
+            $pagination = $this->getPagination($posts, $currentPage);
+        }
 
         $this->view->assign('type', 'recent');
         $this->view->assign('posts', $posts);
-        $this->view->assign('pagination', $pagination);
+        $this->view->assign('pagination', $pagination ?? null);
         return $this->htmlResponse();
     }
 
@@ -141,7 +155,11 @@ class PostController extends ActionController
      */
     public function listLatestPostsAction(): ResponseInterface
     {
-        $maximumItems = (int) ($this->settings['latestPosts']['limit'] ?? 3);
+        if ($this->request->getFormat() === 'rss') {
+            $maximumItems = (int) ($this->settings['rss']['maximumDisplayedItems'] ?? 10);
+        } else {
+            $maximumItems = (int) ($this->settings['latestPosts']['limit'] ?? 3);
+        }
         $posts = $this->postRepository->findAllWithLimit($maximumItems);
 
         $this->view->assign('type', 'latest');
@@ -156,22 +174,27 @@ class PostController extends ActionController
             $this->view->assign('archiveData', ArchiveUtility::extractDataFromPosts($posts));
         } else {
             $dateTime = new \DateTimeImmutable(sprintf('%d-%d-1', $year, $month ?? 1));
-            $posts = $this->postRepository->findByMonthAndYear($year, $month);
-            $pagination = $this->getPagination($posts, $currentPage);
+            if ($this->request->getFormat() === 'rss') {
+                $maximumItems = (int) ($this->settings['rss']['maximumDisplayedItems'] ?? 10);
+            }
+            $posts = $this->postRepository->findByMonthAndYearWithLimit($year, $month, $maximumItems ?? 0);
+            if ($this->request->getFormat() !== 'rss') {
+                $pagination = $this->getPagination($posts, $currentPage);
+            }
             $this->view->assign('type', 'bydate');
             $this->view->assign('month', $month);
             $this->view->assign('year', $year);
             $this->view->assign('timestamp', $dateTime->getTimestamp());
             $this->view->assign('posts', $posts);
-            $this->view->assign('pagination', $pagination);
+            $this->view->assign('pagination', $pagination ?? null);
             $title = str_replace([
                 '###MONTH###',
                 '###MONTH_NAME###',
                 '###YEAR###',
             ], [
-                $month,
+                (string) $month,
                 $dateTime->format('F'),
-                $year,
+                (string) $year,
             ], (string) LocalizationUtility::translate('meta.title.listPostsByDate', 'blog'));
             MetaTagService::set(MetaTagService::META_TITLE, (string) $title);
             MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) LocalizationUtility::translate('meta.description.listPostsByDate', 'blog'));
@@ -185,7 +208,7 @@ class PostController extends ActionController
     public function listPostsByCategoryAction(?Category $category = null, int $currentPage = 1): ResponseInterface
     {
         if ($category === null) {
-            $contentObject = $this->configurationManager->getContentObject();
+            $contentObject = $this->request->getAttribute('currentContentObject');
             $referenceUid = $contentObject !== null ? (int) $contentObject->data['uid'] : null;
             if ($referenceUid !== null) {
                 $categories = $this->categoryRepository->getByReference('tt_content', $referenceUid);
@@ -197,11 +220,16 @@ class PostController extends ActionController
         }
 
         if ($category !== null) {
-            $posts = $this->postRepository->findAllByCategory($category);
-            $pagination = $this->getPagination($posts, $currentPage);
+            if ($this->request->getFormat() === 'rss') {
+                $maximumItems = (int) ($this->settings['rss']['maximumDisplayedItems'] ?? 10);
+            }
+            $posts = $this->postRepository->findAllByCategoryWithLimit($category, $maximumItems ?? 0);
+            if ($this->request->getFormat() !== 'rss') {
+                $pagination = $this->getPagination($posts, $currentPage);
+            }
             $this->view->assign('type', 'bycategory');
             $this->view->assign('posts', $posts);
-            $this->view->assign('pagination', $pagination);
+            $this->view->assign('pagination', $pagination ?? null);
             $this->view->assign('category', $category);
             MetaTagService::set(MetaTagService::META_TITLE, (string) $category->getTitle());
             MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $category->getDescription());
@@ -217,11 +245,16 @@ class PostController extends ActionController
     public function listPostsByAuthorAction(?Author $author = null, int $currentPage = 1): ResponseInterface
     {
         if ($author !== null) {
-            $posts = $this->postRepository->findAllByAuthor($author);
-            $pagination = $this->getPagination($posts, $currentPage);
+            if ($this->request->getFormat() === 'rss') {
+                $maximumItems = (int) ($this->settings['rss']['maximumDisplayedItems'] ?? 10);
+            }
+            $posts = $this->postRepository->findAllByAuthorWithLimit($author, $maximumItems ?? 0);
+            if ($this->request->getFormat() !== 'rss') {
+                $pagination = $this->getPagination($posts, $currentPage);
+            }
             $this->view->assign('type', 'byauthor');
             $this->view->assign('posts', $posts);
-            $this->view->assign('pagination', $pagination);
+            $this->view->assign('pagination', $pagination ?? null);
             $this->view->assign('author', $author);
             MetaTagService::set(MetaTagService::META_TITLE, (string) $author->getName());
             MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $author->getBio());
@@ -237,11 +270,16 @@ class PostController extends ActionController
     public function listPostsByTagAction(?Tag $tag = null, int $currentPage = 1): ResponseInterface
     {
         if ($tag !== null) {
-            $posts = $this->postRepository->findAllByTag($tag);
-            $pagination = $this->getPagination($posts, $currentPage);
+            if ($this->request->getFormat() === 'rss') {
+                $maximumItems = (int) ($this->settings['rss']['maximumDisplayedItems'] ?? 10);
+            }
+            $posts = $this->postRepository->findAllByTagWithLimit($tag, $maximumItems ?? 0);
+            if ($this->request->getFormat() !== 'rss') {
+                $pagination = $this->getPagination($posts, $currentPage);
+            }
             $this->view->assign('type', 'bytag');
             $this->view->assign('posts', $posts);
-            $this->view->assign('pagination', $pagination);
+            $this->view->assign('pagination', $pagination ?? null);
             $this->view->assign('tag', $tag);
             MetaTagService::set(MetaTagService::META_TITLE, (string) $tag->getTitle());
             MetaTagService::set(MetaTagService::META_DESCRIPTION, (string) $tag->getDescription());
@@ -267,7 +305,8 @@ class PostController extends ActionController
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
-            $this->blogCacheService->addTagsForPost($post);
+            $this->blogCacheService->addTagsForPost($this->request, $post);
+            $this->setFediverseCreatorMetaTag($post);
         }
         return $this->htmlResponse();
     }
@@ -280,7 +319,7 @@ class PostController extends ActionController
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
-            $this->blogCacheService->addTagsForPost($post);
+            $this->blogCacheService->addTagsForPost($this->request, $post);
         }
         return $this->htmlResponse();
     }
@@ -293,7 +332,7 @@ class PostController extends ActionController
         $post = $this->postRepository->findCurrentPost();
         $this->view->assign('post', $post);
         if ($post instanceof Post) {
-            $this->blogCacheService->addTagsForPost($post);
+            $this->blogCacheService->addTagsForPost($this->request, $post);
         }
         return $this->htmlResponse();
     }
@@ -330,6 +369,16 @@ class PostController extends ActionController
         /** @var NormalizedParams $normalizedParams */
         $normalizedParams = $this->getRequest()->getAttribute('normalizedParams');
         return $normalizedParams->getRequestUrl();
+    }
+
+    private function setFediverseCreatorMetaTag(Post $post): void
+    {
+        foreach ($post->getAuthors() as $author) {
+            $mastodonHandle = MastodonUtility::getMastodonHandle($author->getMastodon());
+            if ($mastodonHandle !== '') {
+                MetaTagService::set(MetaTagService::META_FEDIVERSE_CREATOR, $mastodonHandle);
+            }
+        }
     }
 
     protected function getPagination(QueryResultInterface $objects, int $currentPage = 1): ?BlogPagination

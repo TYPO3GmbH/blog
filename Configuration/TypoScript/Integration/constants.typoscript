@@ -1,4 +1,4 @@
 ######################
 #### DEPENDENCIES ####
 ######################
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Static/constants.typoscript">
+@import "EXT:blog/Configuration/TypoScript/Static/constants.typoscript"

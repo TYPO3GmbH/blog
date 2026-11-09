@@ -15,20 +15,24 @@ $ll = 'LLL:EXT:blog/Resources/Private/Language/locallang_db.xlf:';
 
 // Add folder configuration
 $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
-    0 => $ll . 'blog-folder',
-    1 => 'blog',
-    2 => 'record-folder-contains-blog',
+    'label' => $ll . 'blog-folder',
+    'value' => 'blog',
+    'icon' => 'record-folder-contains-blog',
 ];
 $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-folder-contains-blog';
+
+// Add doctype group label
+$GLOBALS['TCA']['pages']['columns']['doktype']['config']['itemGroups']['blog'] = 'Blog';
 
 // Add new page types as possible select item:
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
     'pages',
     'doktype',
     [
-        'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
-        (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
-        'record-blog-post',
+        'label' => 'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-post',
+        'value' => (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
+        'icon' => 'record-blog-post',
+        'group' => 'blog',
     ],
     '1',
     'after'
@@ -37,9 +41,10 @@ $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-blog'] = 'record-
     'pages',
     'doktype',
     [
-        'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-page',
-        (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE,
-        'record-blog-page',
+        'label' => 'LLL:EXT:blog/Resources/Private/Language/locallang_tca.xlf:pages.doktype.blog-page',
+        'value' => (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_PAGE,
+        'icon' => 'record-blog-page',
+        'group' => 'blog',
     ],
     (string) \T3G\AgencyPack\Blog\Constants::DOKTYPE_BLOG_POST,
     'after'
@@ -135,10 +140,8 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
         'archive_date' => [
             'label' => $ll . 'pages.archive_date',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => '13',
-                'eval' => 'datetime',
                 'default' => '0',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
@@ -148,10 +151,8 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
         'publish_date' => [
             'label' => $ll . 'pages.publish_date',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => '13',
-                'eval' => 'datetime',
                 'default' => '0',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
@@ -194,17 +195,15 @@ $GLOBALS['TCA']['pages']['columns'] = array_replace_recursive(
         ],
         'featured_image' => [
             'label' => $ll . 'pages.featured_image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'featured_image',
-                [
-                    'minitems' => 0,
-                    'maxitems' => 1,
-                    'behaviour' => [
-                        'allowLanguageSynchronization' => true
-                    ]
-                ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
+            'config' => [
+                'type' => 'file',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'allowed' => 'common-image-types',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
+            ],
         ],
         'categories' => [
             'config' => [

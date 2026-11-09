@@ -27,10 +27,6 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link');
-        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute');
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('post', Post::class, 'The post to link to', true);
         $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);

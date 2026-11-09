@@ -223,6 +223,9 @@
             <trans-unit id="tx_blog_domain_model_author.instagram" xml:space="preserve">
                 <source>Instagram profile URL</source>
             </trans-unit>
+            <trans-unit id="tx_blog_domain_model_author.mastodon" xml:space="preserve">
+                <source>Mastodon profile URL or handle</source>
+            </trans-unit>
             <trans-unit id="tx_blog_domain_model_author.profile" xml:space="preserve">
                 <source>Author profile URL (used for schema.org markup)</source>
             </trans-unit>
@@ -267,6 +270,12 @@
             <trans-unit id="sys_category.tabs.blog" xml:space="preserve">
                 <source>Blog</source>
             </trans-unit>
+            <trans-unit id="sys_category.blog_target_page" xml:space="preserve">
+                <source>Category page</source>
+            </trans-unit>
+            <trans-unit id="sys_category.blog_target_page.description" xml:space="preserve">
+                <source>Page that shows the posts of this category. Links to the category point to this page and the automatically generated category page redirects to it. Leave empty to use the automatically generated category page.</source>
+            </trans-unit>
             <trans-unit id="sys_category.posts" xml:space="preserve">
                 <source>Posts</source>
             </trans-unit>
@@ -276,6 +285,18 @@
             </trans-unit>
             <trans-unit id="flexform.latestPosts.limit" xml:space="preserve">
                 <source>Amount of items to show in overview of latest posts</source>
+            </trans-unit>
+            <trans-unit id="settings.lists.posts.layout" xml:space="preserve">
+                <source>Layout</source>
+            </trans-unit>
+            <trans-unit id="settings.lists.posts.layout.default" xml:space="preserve">
+                <source>Default</source>
+            </trans-unit>
+            <trans-unit id="settings.lists.posts.showImages" xml:space="preserve">
+                <source>Show images</source>
+            </trans-unit>
+            <trans-unit id="settings.lists.posts.showImages.description" xml:space="preserve">
+                <source>When enabled, post images are displayed in the post list.</source>
             </trans-unit>
 
             <!-- Settings -->

@@ -9,6 +9,7 @@
 
 namespace T3G\AgencyPack\Blog\Tests\Unit\Domain\Model;
 
+use PHPUnit\Framework\Attributes\Test;
 use T3G\AgencyPack\Blog\Constants;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -19,9 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class PostTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function doktypeEqualsConstant(): void
     {
         $post = new Post();

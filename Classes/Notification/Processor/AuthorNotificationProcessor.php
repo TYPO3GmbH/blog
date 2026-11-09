@@ -10,43 +10,49 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Notification\Processor;
 
+use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
+use Symfony\Component\Mime\Part\TextPart;
 use T3G\AgencyPack\Blog\Domain\Model\Author;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
-use T3G\AgencyPack\Blog\Mail\MailMessage;
 use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
 use T3G\AgencyPack\Blog\Notification\NotificationInterface;
+use TYPO3\CMS\Core\Mail\MailerInterface;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
-class AuthorNotificationProcessor implements ProcessorInterface
+#[Autoconfigure(public: true)]
+readonly class AuthorNotificationProcessor implements ProcessorInterface
 {
-    public function process(NotificationInterface $notification): void
+    public function __construct(private MailerInterface $mailer)
+    {
+    }
+
+    public function process(ServerRequestInterface $request, NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
 
         if ($notificationId === CommentAddedNotification::class) {
-            $this->processCommentAddNotification($notification);
+            $this->processCommentAddNotification($request, $notification);
         }
     }
 
-    protected function processCommentAddNotification(NotificationInterface $notification): void
+    protected function processCommentAddNotification(ServerRequestInterface $request, NotificationInterface $notification): void
     {
-        $notificationId = $notification->getNotificationId();
-        $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
-            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+        $settings = $request->getAttribute('site')->getSettings();
 
         /** @var Post $post */
         $post = $notification->getData()['post'];
-        if ((int)$settings['notifications'][$notificationId]['author'] === 1) {
+        if ($settings->get('plugin.tx_blog.settings.notifications.CommentAddedNotification.author.enable') ?? false) {
             /** @var Author $author */
             foreach ($post->getAuthors() as $author) {
                 $mail = GeneralUtility::makeInstance(MailMessage::class);
                 $mail
                     ->setSubject($notification->getTitle())
-                    ->setBody($notification->getMessage())
-                    ->setFrom([$settings['notifications']['email']['senderMail'] => $settings['notifications']['email']['senderName']])
-                    ->setTo([$author->getEmail()])
-                    ->send();
+                    ->setBody(new TextPart($notification->getMessage(), 'utf-8', 'html'))
+                    ->setFrom([$settings->get('plugin.tx_blog.settings.notifications.email.senderMail')])
+                    ->setTo([$author->getEmail()]);
+                $this->mailer->send($mail);
             }
         }
     }

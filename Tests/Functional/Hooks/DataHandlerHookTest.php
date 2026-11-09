@@ -9,17 +9,22 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace T3G\AgencyPack\Blog\Tests\Functional\Service;
+namespace T3G\AgencyPack\Blog\Tests\Functional\Hooks;
 
+use PHPUnit\Framework\Attributes\Test;
 use T3G\AgencyPack\Blog\Constants;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class DataHandlerHookTest extends FunctionalTestCase
 {
+    protected array $coreExtensionsToLoad = [
+        'form'
+    ];
+
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/blog'
     ];
@@ -29,13 +34,11 @@ final class DataHandlerHookTest extends FunctionalTestCase
         parent::setUp();
 
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/DataHandler/be_users.csv');
-        $this->setUpBackendUser(1);
-        Bootstrap::initializeLanguageObject();
+        $backendUser = $this->setUpBackendUser(1);
+        $GLOBALS['LANG'] = $this->get(LanguageServiceFactory::class)->createFromUserPreferences($backendUser);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function create(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/BlogBasePages.csv');
@@ -82,9 +85,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         self::assertEquals($page['crdate_year'], 2023);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function update(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/BlogBasePages.csv');

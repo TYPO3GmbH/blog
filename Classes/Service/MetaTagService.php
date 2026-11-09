@@ -21,6 +21,7 @@ class MetaTagService
 {
     public const META_TITLE = 'title';
     public const META_DESCRIPTION = 'description';
+    public const META_FEDIVERSE_CREATOR = 'fediverse:creator';
 
     public static function set(string $type, string $value): void
     {
@@ -30,6 +31,9 @@ class MetaTagService
                 break;
             case self::META_DESCRIPTION:
                 self::setDescription($value);
+                break;
+            case self::META_FEDIVERSE_CREATOR:
+                self::setFediverseCreator($value);
                 break;
             default:
                 throw new \InvalidArgumentException('The type "' . $type . '" is not supported.', 1562020008);
@@ -54,5 +58,11 @@ class MetaTagService
         $ogDescriptionManager->addProperty('og:description', $value);
         $twitterDescriptionManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)->getManagerForProperty('twitter:description');
         $twitterDescriptionManager->addProperty('twitter:description', $value);
+    }
+
+    protected static function setFediverseCreator(string $value): void
+    {
+        $fediverseCreatorManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)->getManagerForProperty(self::META_FEDIVERSE_CREATOR);
+        $fediverseCreatorManager->addProperty(self::META_FEDIVERSE_CREATOR, $value);
     }
 }

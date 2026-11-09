@@ -1,13 +1,13 @@
 ######################
 #### DEPENDENCIES ####
 ######################
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Static/setup.typoscript">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:blog/Configuration/TypoScript/Shared/setup.typoscript">
+@import "EXT:blog/Configuration/Sets/Static/setup.typoscript"
+@import "EXT:blog/Configuration/Sets/Shared/setup.typoscript"
 
 ###################
 #### BLOG POST ####
 ###################
-[blog.isPost() || blog.isPage()]
+[isBlogPost() || isBlogPage()]
 page {
     10 {
         templateName >
@@ -22,7 +22,7 @@ page {
 }
 [end]
 
-[blog.isPost()]
+[isBlogPost()]
 page {
     10 {
         templateName = BlogPost

@@ -15,22 +15,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        typo3: ['^11', '^12']
-        php: ['7.4', '8.0', '8.1', '8.2']
-        mysql: ['5.7', '8.0']
-        exclude:
-          - typo3: '^11'
-            mysql: '8.0'
-          - typo3: '^12'
-            mysql: '5.7'
-          - typo3: '^12'
-            php: '7.4'
-          - typo3: '^12'
-            php: '8.0'
+        typo3: ['^13', '^14.3']
+        php: ['8.2', '8.3', '8.4']
+        mysql: ['8.0']
     steps:
       - id: checkout
         name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - id: setup_mysql
         name: Set up MySQL ${{ matrix.mysql }}
@@ -54,7 +45,7 @@ jobs:
 
       - id: composer-cache-dependencies
         name: Cache Composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache-vars.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ matrix.php }}-${{ matrix.typo3 }}-${{ steps.composer-cache-vars.outputs.timestamp }}
@@ -73,32 +64,31 @@ jobs:
         name: Lint
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
-          composer t3g:test:php:lint
+          composer test:php:lint
 
       - id: cgl
         name: CGL
-        if: ${{ always() && steps.install.conclusion == 'success' }}
+        if: ${{ always() && steps.install.conclusion == 'success' && matrix.php != '8.4' }}
         run: |
           php-cs-fixer fix --dry-run --verbose
 
       - id: phpstan
         name: PHPStan
-        continue-on-error: true
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
-          composer t3g:test:php:phpstan -- --error-format=github
+          composer phpstan -- --error-format=github
 
       - id: tests_unit
         name: Unit Tests
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
-          composer t3g:test:php:unit
+          composer test:php:unit
 
       - id: tests_functional
         name: Functional Tests
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
-          composer t3g:test:php:functional
+          composer test:php:functional
         env:
           COMPOSER_PROCESS_TIMEOUT: 1200
           typo3DatabaseHost: 127.0.0.1

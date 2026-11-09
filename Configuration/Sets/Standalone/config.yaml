@@ -1,0 +1,6 @@
+name: blog/standalone
+label: 'Blog: Standalone'
+dependencies:
+  - typo3/fluid-styled-content
+  - blog/static
+  - blog/shared

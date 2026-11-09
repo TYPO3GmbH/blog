@@ -11,14 +11,15 @@ declare(strict_types = 1);
 namespace T3G\AgencyPack\Blog\Controller;
 
 use Psr\Http\Message\ResponseInterface;
+use T3G\AgencyPack\Blog\Domain\Model\Category;
 use T3G\AgencyPack\Blog\Domain\Repository\CategoryRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\TagRepository;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use T3G\AgencyPack\Blog\Utility\ArchiveUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 class WidgetController extends ActionController
 {
@@ -44,23 +45,26 @@ class WidgetController extends ActionController
 
     public function categoriesAction(): ResponseInterface
     {
-        $requestParameters = GeneralUtility::_GP('tx_blog_category');
+        // @todo allow post?
+        $requestParameters = $this->request->getQueryParams()['tx_blog_category'] ?? [];
         $currentCategory = 0;
         if (($requestParameters['category'] ?? null) !== null) {
             $currentCategory = (int)$requestParameters['category'];
         }
+        /** @var QueryResultInterface<Category> $categories */
         $categories = $this->categoryRepository->findAll();
         $this->view->assign('categories', $categories);
         $this->view->assign('currentCategory', $currentCategory);
         foreach ($categories as $category) {
-            $this->cacheService->addTagToPage('tx_blog_category_' . $category->getUid());
+            $this->cacheService->addTagToPage($this->request, 'tx_blog_category_' . $category->getUid());
         }
         return $this->htmlResponse();
     }
 
     public function tagsAction(): ResponseInterface
     {
-        $requestParameters = GeneralUtility::_GP('tx_blog_tag');
+        // @todo allow post?
+        $requestParameters = $this->request->getQueryParams()['tx_blog_tag'] ?? [];
         $currentTag = 0;
         if (($requestParameters['tag'] ?? null) !== null) {
             $currentTag = (int)$requestParameters['tag'];
@@ -91,7 +95,7 @@ class WidgetController extends ActionController
         }
         unset($tagReference);
         foreach ($tags as $tag) {
-            $this->cacheService->addTagToPage('tx_blog_tag_' . (int)$tag['uid']);
+            $this->cacheService->addTagToPage($this->request, 'tx_blog_tag_' . (int)$tag['uid']);
         }
         $this->view->assign('tags', $tags);
         $this->view->assign('currentTag', $currentTag);
@@ -107,7 +111,7 @@ class WidgetController extends ActionController
             : $this->postRepository->findAll();
 
         foreach ($posts as $post) {
-            $this->cacheService->addTagsForPost($post);
+            $this->cacheService->addTagsForPost($this->request, $post);
         }
         $this->view->assign('posts', $posts);
         return $this->htmlResponse();
@@ -120,7 +124,7 @@ class WidgetController extends ActionController
         $comments = $this->commentRepository->findActiveComments($limit, $blogSetup);
         $this->view->assign('comments', $comments);
         foreach ($comments as $comment) {
-            $this->cacheService->addTagToPage('tx_blog_comment_' . $comment->getUid());
+            $this->cacheService->addTagToPage($this->request, 'tx_blog_comment_' . $comment->getUid());
         }
         return $this->htmlResponse();
     }

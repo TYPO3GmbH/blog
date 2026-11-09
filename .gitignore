@@ -25,3 +25,6 @@ var/
 # Cache
 .php-cs-fixer.cache
 .phplint.cache
+
+# AI
+.mcp.json

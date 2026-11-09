@@ -31,6 +31,7 @@ class Post extends AbstractEntity
     protected string $abstract = '';
     protected string $description = '';
     protected bool $commentsActive = true;
+    protected int $tstamp = 0;
     protected int $archiveDate = 0;
     protected int $publishDate = 0;
     protected \DateTime $crdate;
@@ -231,6 +232,17 @@ class Post extends AbstractEntity
         return $this;
     }
 
+    public function getTstamp(): int
+    {
+        return $this->tstamp;
+    }
+
+    public function setTstamp(int $tstamp): self
+    {
+        $this->tstamp = $tstamp;
+        return $this;
+    }
+
     /**
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3G\AgencyPack\Blog\Domain\Model\Comment>
      */
@@ -239,6 +251,9 @@ class Post extends AbstractEntity
         return $this->comments;
     }
 
+    /**
+     * @return QueryResultInterface<Comment>
+     */
     public function getActiveComments(): QueryResultInterface
     {
         return GeneralUtility::makeInstance(CommentRepository::class)

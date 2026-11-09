@@ -23,7 +23,7 @@ class ModifyPageLayoutContent
         $this->blogPostHeaderContentRenderer = $blogPostHeaderContentRenderer;
     }
 
-    public function __invoke(ModifyPageLayoutContentEvent $event)
+    public function __invoke(ModifyPageLayoutContentEvent $event): void
     {
         $request = $event->getRequest();
         $content = $this->blogPostHeaderContentRenderer->render($request);

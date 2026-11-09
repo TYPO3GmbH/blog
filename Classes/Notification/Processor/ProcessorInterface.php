@@ -10,9 +10,10 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Notification\Processor;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Notification\NotificationInterface;
 
 interface ProcessorInterface
 {
-    public function process(NotificationInterface $notification): void;
+    public function process(ServerRequestInterface $request, NotificationInterface $notification): void;
 }

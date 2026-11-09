@@ -10,6 +10,7 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use T3G\AgencyPack\Blog\Domain\Model\Comment;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
@@ -17,7 +18,6 @@ use T3G\AgencyPack\Blog\Domain\Repository\CommentRepository;
 use T3G\AgencyPack\Blog\Domain\Repository\PostRepository;
 use T3G\AgencyPack\Blog\Service\CommentService;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class CommentServiceTest extends UnitTestCase
@@ -30,7 +30,6 @@ class CommentServiceTest extends UnitTestCase
 
     public function initialize(): void
     {
-        $GLOBALS['TSFE'] =  $this->getMockBuilder(TypoScriptFrontendController::class)->disableOriginalConstructor()->getMock();
         $this->postRepositoryMock = $this->getMockBuilder(PostRepository::class)->disableOriginalConstructor()->getMock();
         $this->commentRepositoryMock = $this->getMockBuilder(CommentRepository::class)->disableOriginalConstructor()->getMock();
         $this->persistenceManagerMock = $this->getMockBuilder(PersistenceManager::class)->disableOriginalConstructor()->getMock();
@@ -42,9 +41,7 @@ class CommentServiceTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function inactiveCommentsReturnErrorOnAdd(): void
     {
         $this->initialize();
@@ -57,9 +54,7 @@ class CommentServiceTest extends UnitTestCase
         self::assertSame(CommentService::STATE_ERROR, $result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function activeCommentsWithoutModerationReturnSuccessOnAdd(): void
     {
         $this->initialize();
@@ -75,9 +70,7 @@ class CommentServiceTest extends UnitTestCase
         self::assertSame(CommentService::STATE_SUCCESS, $result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function activeCommentsWithModerationReturnModerationOnAdd(): void
     {
         $this->initialize();
@@ -93,9 +86,7 @@ class CommentServiceTest extends UnitTestCase
         self::assertSame(CommentService::STATE_MODERATION, $result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function commentGetsAddedToPost(): void
     {
         $this->initialize();
@@ -110,9 +101,7 @@ class CommentServiceTest extends UnitTestCase
         self::assertSame($comment, $post->getComments()->current());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function postGetsUpdatedInDatabase(): void
     {
         $this->initialize();

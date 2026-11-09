@@ -20,7 +20,6 @@ return [
         'label_alt_force' => 0,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'default_sortby' => 'ORDER BY title',
         'delete' => 'deleted',
         'enablecolumns' => [
@@ -76,7 +75,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'required',
+                'required' => true,
             ],
             'l10n_display' => 'defaultAsReadonly',
             'l10n_mode' => 'exclude',
@@ -105,9 +104,9 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['Please choose one avatar provider', '--div--'],
-                    ['Gravatar', \T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider::class],
-                    ['Image', \T3G\AgencyPack\Blog\AvatarProvider\ImageProvider::class],
+                    ['label' => 'Please choose one avatar provider', 'value' => '--div--'],
+                    ['label' => 'Gravatar', 'value' => \T3G\AgencyPack\Blog\AvatarProvider\GravatarProvider::class],
+                    ['label' => 'Image', 'value' => \T3G\AgencyPack\Blog\AvatarProvider\ImageProvider::class],
                 ],
             ],
             'l10n_mode' => 'exclude',
@@ -115,27 +114,25 @@ return [
         'image' => [
             'label' => $ll . 'tx_blog_domain_model_author.image',
             'displayCond' => 'FIELD:avatar_provider:=:T3G\AgencyPack\Blog\AvatarProvider\ImageProvider',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'image',
-                [
-                    'appearance' => [
-                        'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
-                    ],
-                    'overrideChildTca' => [
-                        'types' => [
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                    crop,
-                                    --palette--;;filePalette
-                                '
-                            ],
+            'config' => [
+                'type' => 'file',
+                'appearance' => [
+                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
+                ],
+                'overrideChildTca' => [
+                    'types' => [
+                        \TYPO3\CMS\Core\Resource\FileType::IMAGE->value => [
+                            'showitem' => '
+                                crop,
+                                --palette--;;filePalette
+                            '
                         ],
                     ],
-                    'minitems' => 0,
-                    'maxitems' => 1,
                 ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
+                'minitems' => 0,
+                'maxitems' => 1,
+                'allowed' => 'common-image-types',
+            ],
             'l10n_mode' => 'exclude',
         ],
         'title' => [
@@ -158,9 +155,9 @@ return [
         'email' => [
             'label' => $ll . 'tx_blog_domain_model_author.email',
             'config' => [
-                'type' => 'input',
+                'type' => 'email',
                 'size' => 30,
-                'eval' => 'required,email',
+                'required' => true,
             ],
             'l10n_mode' => 'exclude',
         ],
@@ -202,6 +199,15 @@ return [
         ],
         'instagram' => [
             'label' => $ll . 'tx_blog_domain_model_author.instagram',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => '',
+            ],
+            'l10n_mode' => 'exclude',
+        ],
+        'mastodon' => [
+            'label' => $ll . 'tx_blog_domain_model_author.mastodon',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -294,6 +300,7 @@ return [
                     linkedin,
                     xing,
                     instagram,
+                    mastodon,
                     profile,
                 --div--;' . $ll . 'tx_blog_domain_model_author.tab_blog,
                     posts,

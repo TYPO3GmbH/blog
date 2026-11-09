@@ -10,10 +10,11 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Category;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class CategoryViewHelper extends AbstractTagBasedViewHelper
@@ -27,9 +28,6 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link');
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('category', Category::class, 'The category to link to', true);
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
@@ -37,22 +35,48 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
+        $request = $this->getRequest();
+
         $rssFormat = (bool)$this->arguments['rss'];
         /** @var Category $category */
         $category = $this->arguments['category'];
-        $pageUid = (int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['categoryUid'];
-        $arguments = [
-            'category' => $category->getUid(),
-        ];
+        $pageUid = $request
+            ->getAttribute('site')
+            ->getSettings()
+            ->get('plugin.tx_blog.settings.categoryUid') ?? 0;
+
+        // Feeds are always delivered by the automatically generated category page.
+        $targetPageUid = $rssFormat
+            ? null
+            : $category->getBlogTargetPage();
+        if ($targetPageUid > 0) {
+            $pageUid = $targetPageUid;
+        }
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
-            ->setRequest($this->renderingContext->getRequest())
+            ->setRequest($request)
             ->setTargetPageUid($pageUid);
         if ($rssFormat) {
-            $uriBuilder
-                ->setTargetPageType((int)$this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_category.']['typeNum']);
+            $rssTypeNum = (int)(
+                $request->getAttribute('frontend.typoscript')->getSetupTree()
+                ->getChildByName('blog_rss_category')
+                ?->getChildByName('typeNum')
+                ?->getValue() ?? 0
+            );
+            $uriBuilder->setTargetPageType($rssTypeNum);
         }
-        $uri = $uriBuilder->uriFor('listPostsByCategory', $arguments, 'Post', 'Blog', 'Category');
+
+        if ($targetPageUid > 0) {
+            $uri = $uriBuilder->build();
+        } else {
+            $uri = $uriBuilder->uriFor(
+                'listPostsByCategory',
+                ['category' => $category->getUid()],
+                'Post',
+                'Blog',
+                'Category'
+            );
+        }
 
         if ($uri !== '') {
             $linkText = $this->renderChildren() ?? $category->getTitle();
@@ -66,8 +90,23 @@ class CategoryViewHelper extends AbstractTagBasedViewHelper
         return (string)$result;
     }
 
-    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
+    protected function getRequest(): RequestInterface
     {
-        return $GLOBALS['TSFE'];
+        if (null === $this->renderingContext) {
+            throw new \RuntimeException('Viewhelper blogvh:link.category requires an existing rendering context.', 1781701012);
+        }
+        $request = null;
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+
+        if ($request === null || !$request instanceof RequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.category can be used only in extbase context and needs a request implementing extbase RequestInterface.',
+                1729082935
+            );
+        }
+
+        return $request;
     }
 }

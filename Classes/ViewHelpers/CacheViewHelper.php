@@ -10,10 +10,10 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use T3G\AgencyPack\Blog\Service\CacheService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class CacheViewHelper extends AbstractViewHelper
@@ -23,10 +23,14 @@ class CacheViewHelper extends AbstractViewHelper
         $this->registerArgument('post', Post::class, 'the post to tag', true);
     }
 
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
+    public function render(): string
     {
-        $post = $arguments['post'];
-        GeneralUtility::makeInstance(CacheService::class)->addTagsForPost($post);
+        if (null === $this->renderingContext) {
+            throw new \RuntimeException('CacheViewHelper requires an existing rendering context.', 1781701008);
+        }
+        $post = $this->arguments['post'];
+        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        GeneralUtility::makeInstance(CacheService::class)->addTagsForPost($request, $post);
 
         return '';
     }

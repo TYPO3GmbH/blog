@@ -21,7 +21,7 @@
             </f:for>
         </span>
     </f:if>
-    <f:if condition="{settings.comments.disqus._typoScriptNodeValue} !== '1'">
+    <f:if condition="{settings.comments.disqus.enable} !== '1'">
         <f:then>
             <f:alias map="{commentCount: '{f:count(subject: \'{post.activeComments}\')}'}">
                 <span class="sep">·</span>

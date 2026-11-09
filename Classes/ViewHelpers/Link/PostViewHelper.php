@@ -10,8 +10,10 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Post;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
@@ -26,10 +28,6 @@ class PostViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link');
-        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute');
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('post', Post::class, 'The post to link to');
         $this->registerArgument('section', 'string', 'the anchor to be added to the URI');
@@ -39,6 +37,8 @@ class PostViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
+        $request = $this->getRequest();
+
         /** @var Post $post */
         $post = $this->arguments['post'];
         $section = $this->arguments['section'] ?? '';
@@ -46,7 +46,7 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $createAbsoluteUri = (bool)$this->arguments['createAbsoluteUri'];
         $uri = $uriBuilder->reset()
-            ->setRequest($this->renderingContext->getRequest())
+            ->setRequest($request)
             ->setTargetPageUid($pageUid)
             ->setSection($section)
             ->setCreateAbsoluteUri($createAbsoluteUri)
@@ -64,5 +64,25 @@ class PostViewHelper extends AbstractTagBasedViewHelper
         }
 
         return $result;
+    }
+
+    protected function getRequest(): RequestInterface
+    {
+        if (null === $this->renderingContext) {
+            throw new \RuntimeException('ViewHelper blogvh:link.post requires an existing rendering context.', 1781701013);
+        }
+        $request = null;
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+
+        if ($request === null || !$request instanceof RequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.post can be used only in extbase context and needs a request implementing extbase RequestInterface.',
+                1749630724
+            );
+        }
+
+        return $request;
     }
 }

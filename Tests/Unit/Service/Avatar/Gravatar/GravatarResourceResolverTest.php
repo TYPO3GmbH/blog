@@ -23,18 +23,18 @@ class GravatarResourceResolverTest extends UnitTestCase
     public function testResolveReturnsProperResponse(): void
     {
         $response = $this->getMockBuilder(ResponseInterface::class)->getMock();
-        $response->expects(self::any())
+        $response
             ->method('getStatusCode')
             ->willReturn(200);
-        $response->expects(self::any())
+        $response
             ->method('getBody')
             ->willReturn(new Stream('php://temp'));
-        $response->expects(self::any())
+        $response
             ->method('getHeaderLine')
             ->willReturn('image/jpeg');
 
         $client = $this->getMockBuilder(ClientInterface::class)->getMock();
-        $client->expects(self::any())
+        $client
             ->method('sendRequest')
             ->willReturn($response);
 
@@ -56,15 +56,15 @@ class GravatarResourceResolverTest extends UnitTestCase
         $this->expectException(\RuntimeException::class);
 
         $response = $this->getMockBuilder(ResponseInterface::class)->getMock();
-        $response->expects(self::any())
+        $response
             ->method('getStatusCode')
             ->willReturn(404);
-        $response->expects(self::any())
+        $response
             ->method('getReasonPhrase')
             ->willReturn('Not Found');
 
         $client = $this->getMockBuilder(ClientInterface::class)->getMock();
-        $client->expects(self::any())
+        $client
             ->method('sendRequest')
             ->willReturn($response);
 
@@ -80,18 +80,18 @@ class GravatarResourceResolverTest extends UnitTestCase
     public function testResolveReturnsResponseWithEmptyContentTypeHeader(): void
     {
         $response = $this->getMockBuilder(ResponseInterface::class)->getMock();
-        $response->expects(self::any())
+        $response
             ->method('getStatusCode')
             ->willReturn(200);
-        $response->expects(self::any())
+        $response
             ->method('getBody')
             ->willReturn(new Stream('php://temp'));
-        $response->expects(self::any())
+        $response
             ->method('getHeaderLine')
             ->willReturn('');
 
         $client = $this->getMockBuilder(ClientInterface::class)->getMock();
-        $client->expects(self::any())
+        $client
             ->method('sendRequest')
             ->willReturn($response);
 

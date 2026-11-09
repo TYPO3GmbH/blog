@@ -16,3 +16,33 @@ Create a new Category
    3. Click on the "new record" button on the top and choose category
    4. Enter a title for the category and choose a possible parent
    5. Click "Save"
+
+.. _GuideCategoriesTargetPage:
+
+Use an own page for a category
+------------------------------
+
+By default the blog renders every category on the automatically generated
+category page, for example :file:`/blog/category/my-category`. If editors
+should be able to arrange additional content around the post listing of a
+category, a regular page can be used instead.
+
+.. rst-class:: bignums
+
+   1. Create a page and add the "Blog: List by category" plugin to it
+   2. Assign the category to that plugin (field "Categories")
+   3. Open the category record and select the page in the field "Category page"
+   4. Click "Save"
+
+From now on
+
+*  every link to that category points to the assigned page,
+*  the RSS feed of the category is still delivered by the automatically
+   generated category page.
+
+Categories without an assigned page are not affected and keep using the
+automatically generated category page.
+
+The automatically generated category URL keeps working and delivers the same
+posts as the assigned page. To avoid two URLs for the same listing, redirect
+it to the assigned page, for example with a redirect record of EXT:redirects.

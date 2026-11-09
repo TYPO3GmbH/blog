@@ -10,10 +10,11 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\ViewHelpers\Link;
 
+use Psr\Http\Message\ServerRequestInterface;
 use T3G\AgencyPack\Blog\Domain\Model\Tag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 class TagViewHelper extends AbstractTagBasedViewHelper
@@ -27,9 +28,6 @@ class TagViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link');
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
 
         $this->registerArgument('tag', Tag::class, 'The tag to link to', true);
         $this->registerArgument('rss', 'bool', 'Link to rss version', false, false);
@@ -37,20 +35,30 @@ class TagViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
+        $request = $this->getRequest();
+
         $rssFormat = (bool)$this->arguments['rss'];
         /** @var Tag $tag */
         $tag = $this->arguments['tag'];
-        $pageUid = (int)$this->getTypoScriptFrontendController()->tmpl->setup['plugin.']['tx_blog.']['settings.']['tagUid'];
+        $pageUid = $request
+            ->getAttribute('site')
+            ->getSettings()
+            ->get('plugin.tx_blog.settings.tagUid') ?? 0;
         $arguments = [
             'tag' => $tag->getUid(),
         ];
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uriBuilder->reset()
-            ->setRequest($this->renderingContext->getRequest())
+            ->setRequest($request)
             ->setTargetPageUid($pageUid);
         if ($rssFormat) {
-            $uriBuilder
-                ->setTargetPageType((int)$this->getTypoScriptFrontendController()->tmpl->setup['blog_rss_tag.']['typeNum']);
+            $rssTypeNum = (int)(
+                $request->getAttribute('frontend.typoscript')->getSetupTree()
+                ->getChildByName('blog_rss_tag')
+                ?->getChildByName('typeNum')
+                ?->getValue() ?? 0
+            );
+            $uriBuilder->setTargetPageType($rssTypeNum);
         }
         $uri = $uriBuilder->uriFor('listPostsByTag', $arguments, 'Post', 'Blog', 'Tag');
         if ($uri !== '') {
@@ -65,8 +73,23 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         return (string)$result;
     }
 
-    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
+    protected function getRequest(): RequestInterface
     {
-        return $GLOBALS['TSFE'];
+        if (null === $this->renderingContext) {
+            throw new \RuntimeException('ViewHelper blogvh:link.tag requires an existing rendering context.', 1781701014);
+        }
+        $request = null;
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+
+        if ($request === null || !$request instanceof RequestInterface) {
+            throw new \RuntimeException(
+                'ViewHelper blogvh:link.tag can be used only in extbase context and needs a request implementing extbase RequestInterface.',
+                1729082936
+            );
+        }
+
+        return $request;
     }
 }

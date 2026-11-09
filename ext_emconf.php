@@ -14,11 +14,11 @@ $EM_CONF[$_EXTKEY] = [
     'state' => 'stable',
     'author' => 'TYPO3 GmbH',
     'author_email' => 'info@typo3.com',
-    'version' => '12.0.2',
+    'version' => '14.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '11.5.0-12.4.99',
-            'form' => '11.5.0-12.4.99',
+            'typo3' => '13.4.15-14.3.99',
+            'form' => '13.4.15-14.3.99',
         ],
         'conflicts' => [],
         'suggests' => [],

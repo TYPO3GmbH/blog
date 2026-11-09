@@ -10,38 +10,44 @@ declare(strict_types = 1);
 
 namespace T3G\AgencyPack\Blog\Notification\Processor;
 
-use T3G\AgencyPack\Blog\Mail\MailMessage;
+use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
+use Symfony\Component\Mime\Part\TextPart;
 use T3G\AgencyPack\Blog\Notification\CommentAddedNotification;
 use T3G\AgencyPack\Blog\Notification\NotificationInterface;
+use TYPO3\CMS\Core\Mail\MailerInterface;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
-class AdminNotificationProcessor implements ProcessorInterface
+#[Autoconfigure(public: true)]
+readonly class AdminNotificationProcessor implements ProcessorInterface
 {
-    public function process(NotificationInterface $notification): void
+    public function __construct(private MailerInterface $mailer)
+    {
+    }
+
+    public function process(ServerRequestInterface $request, NotificationInterface $notification): void
     {
         $notificationId = $notification->getNotificationId();
 
         if ($notificationId === CommentAddedNotification::class) {
-            $this->processCommentAddNotification($notification);
+            $this->processCommentAddNotification($request, $notification);
         }
     }
 
-    protected function processCommentAddNotification(NotificationInterface $notification): void
+    protected function processCommentAddNotification(ServerRequestInterface $request, NotificationInterface $notification): void
     {
-        $notificationId = $notification->getNotificationId();
-        $settings = GeneralUtility::makeInstance(ConfigurationManagerInterface::class)
-            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'blog');
+        $settings = $request->getAttribute('site')->getSettings();
 
-        if ((int)$settings['notifications'][$notificationId]['admin']['_typoScriptNodeValue'] === 1) {
-            $emailAddresses = GeneralUtility::trimExplode(',', $settings['notifications'][$notificationId]['admin']['email']);
+        if ($settings->get('plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.enable') ?? false) {
+            $emailAddresses = GeneralUtility::trimExplode(',', $settings->get('plugin.tx_blog.settings.notifications.CommentAddedNotification.admin.email'));
             $mail = GeneralUtility::makeInstance(MailMessage::class);
             $mail
                 ->setSubject($notification->getTitle())
-                ->setBody($notification->getMessage())
-                ->setFrom([$settings['notifications']['email']['senderMail'] => $settings['notifications']['email']['senderName']])
-                ->setTo($emailAddresses)
-                ->send();
+                ->setBody(new TextPart($notification->getMessage(), 'utf-8', 'html'))
+                ->setFrom([$settings->get('plugin.tx_blog.settings.notifications.email.senderMail')])
+                ->setTo($emailAddresses);
+            $this->mailer->send($mail);
         }
     }
 }

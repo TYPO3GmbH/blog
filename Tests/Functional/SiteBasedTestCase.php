@@ -9,10 +9,8 @@
 
 namespace T3G\AgencyPack\Blog\Tests\Functional;
 
-use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\Configuration\SiteConfiguration;
+use TYPO3\CMS\Core\Configuration\SiteWriter;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -24,11 +22,12 @@ abstract class SiteBasedTestCase extends FunctionalTestCase
     const STORAGE_UID = 2;
 
     protected array $coreExtensionsToLoad = [
+        'form',
         'fluid_styled_content'
     ];
 
     protected array $testExtensionsToLoad = [
-        'typo3conf/ext/blog'
+        'blog'
     ];
 
     protected function createTestSite(): void
@@ -38,14 +37,6 @@ abstract class SiteBasedTestCase extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/Site/tt_content.csv');
 
         $identifier = 'test';
-        $arguments = [];
-        $arguments[] = $this->instancePath . '/typo3conf/sites/';
-        if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() >= 12) {
-            $arguments[] = $this->get(EventDispatcherInterface::class);
-        }
-        $arguments[] = $this->get('cache.core');
-        $siteConfiguration = new SiteConfiguration(...$arguments);
-
         $configuration = [
             'websiteTitle' => 'Simple Test Site',
             'rootPageId' => '1',
@@ -69,11 +60,32 @@ abstract class SiteBasedTestCase extends FunctionalTestCase
                 [
                     'resource' => 'EXT:blog/Configuration/Routes/Default.yaml'
                 ]
-            ]
+            ],
+            'dependencies' => [
+                'blog/standalone',
+            ],
         ];
 
         GeneralUtility::rmdir($this->instancePath . '/typo3conf/sites/' . $identifier, true);
-        $siteConfiguration->write($identifier, $configuration);
+        $siteWriter = $this->get(SiteWriter::class);
+        $siteWriter->write($identifier, $configuration);
+        $siteWriter->writeSettings(
+            $identifier,
+            [
+                'plugin' => [
+                    'tx_blog' => [
+                        'settings' => [
+                            'blogUid' => 1,
+                            'categoryUid' => 3,
+                            'tagUid' => 4,
+                            'authorUid' => 5,
+                            'archiveUid' => 6,
+                            'storagePid' => 2,
+                        ]
+                    ]
+                ]
+            ]
+        );
     }
 
     protected function renderFluidTemplateInTestSite(string $template, array $instructions = []): string

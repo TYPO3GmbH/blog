@@ -1,12 +1,5 @@
-<f:if condition="{pagination} && {pagination.paginatedItems}">
-    <f:then>
-        <f:for each="{pagination.paginatedItems}" iteration="iterator" as="post">
-            <f:render partial="List/Post" arguments="{_all}" />
-        </f:for>
-    </f:then>
-    <f:else if="{posts}">
-        <f:for each="{posts}" iteration="iterator" as="post">
-            <f:render partial="List/Post" arguments="{_all}" />
-        </f:for>
-    </f:else>
+<f:if condition="{posts}">
+    <f:for each="{posts}" iteration="iterator" as="post">
+        <f:render partial="List/Post" arguments="{_all}" />
+    </f:for>
 </f:if>
