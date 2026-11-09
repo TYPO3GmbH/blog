@@ -86,6 +86,39 @@ final class PersonViewHelperTest extends SiteBasedTestCase
     }
 
     #[Test]
+    public function pathsResolveAgainstTheHost(): void
+    {
+        $this->createTestSite();
+
+        (new ConnectionPool())->getConnectionForTable('tx_blog_domain_model_author')->insert(
+            'tx_blog_domain_model_author',
+            [
+                'uid' => 100,
+                'pid' => self::STORAGE_UID,
+                'name' => 'TYPO3 Inc Team',
+                'slug' => 'typo3-inc-team',
+                'posts' => 1,
+                'profile' => '/authors/typo3-inc-team',
+                'website' => '/about',
+            ]
+        );
+
+        self::assertSame(
+            '{"@context":"https://schema.org","@type":"Person","name":"TYPO3 Inc Team","@id":"http://test.typo3.com/authors/typo3-inc-team/#Person","url":"http://test.typo3.com/authors/typo3-inc-team","sameAs":["http://test.typo3.com/authors/typo3-inc-team","http://test.typo3.com/about"]}',
+            $this->renderFluidTemplateInTestSite(
+                '<blogvh:schema.person author="{test.author}" />',
+                [
+                    [
+                        'type' => 'author',
+                        'uid' => 100,
+                        'as' => 'author',
+                    ]
+                ]
+            )
+        );
+    }
+
+    #[Test]
     public function markupInAuthorDataCannotEscapeTheScriptElement(): void
     {
         $this->createTestSite();
