@@ -12,6 +12,11 @@
             <dc:creator>{author.name}</dc:creator>
         </f:for>
     </f:if>
+    <f:if condition="{post.categories}">
+        <f:for each="{post.categories}" as="category">
+            <category>{category.title}</category>
+        </f:for>
+    </f:if>
     <guid><blogvh:link.post post="{post}" returnUri="true" createAbsoluteUri="true" /></guid>
     <description><f:if condition="{post.abstract}"><f:then>{post.abstract}</f:then><f:else>{post.description}</f:else></f:if></description>
     <f:if condition="{post.featuredImage}">
